@@ -17,6 +17,11 @@
 		EC813F432599A42700BBCE25 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F422599A42700BBCE25 /* APIConstants.swift */; };
 		EC813F462599A44F00BBCE25 /* GenericResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F452599A44F00BBCE25 /* GenericResponse.swift */; };
 		EC813F492599A59500BBCE25 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F482599A59500BBCE25 /* NetworkResult.swift */; };
+		EC813F502599E46500BBCE25 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC813F4F2599E46500BBCE25 /* Home.storyboard */; };
+		EC813F532599E47900BBCE25 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F522599E47900BBCE25 /* HomeVC.swift */; };
+		EC813F562599F22C00BBCE25 /* PastCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F552599F22C00BBCE25 /* PastCardCVC.swift */; };
+		EC813F592599F24000BBCE25 /* NewCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F582599F24000BBCE25 /* NewCardCVC.swift */; };
+		EC813F5C2599F25300BBCE25 /* AddCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F5B2599F25300BBCE25 /* AddCardCVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +38,11 @@
 		EC813F422599A42700BBCE25 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		EC813F452599A44F00BBCE25 /* GenericResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResponse.swift; sourceTree = "<group>"; };
 		EC813F482599A59500BBCE25 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		EC813F4F2599E46500BBCE25 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
+		EC813F522599E47900BBCE25 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		EC813F552599F22C00BBCE25 /* PastCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastCardCVC.swift; sourceTree = "<group>"; };
+		EC813F582599F24000BBCE25 /* NewCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardCVC.swift; sourceTree = "<group>"; };
+		EC813F5B2599F25300BBCE25 /* AddCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardCVC.swift; sourceTree = "<group>"; };
 		FE9DABE27D9C7D77517D82AB /* Pods_BeMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -86,6 +96,7 @@
 		EC813F222599A15100BBCE25 /* BeMe */ = {
 			isa = PBXGroup;
 			children = (
+				EC813F4B2599E43200BBCE25 /* Home */,
 				EC813F232599A15100BBCE25 /* AppDelegate.swift */,
 				EC813F252599A15100BBCE25 /* SceneDelegate.swift */,
 				EC813F272599A15100BBCE25 /* ViewController.swift */,
@@ -98,6 +109,42 @@
 				EC813F482599A59500BBCE25 /* NetworkResult.swift */,
 			);
 			path = BeMe;
+			sourceTree = "<group>";
+		};
+		EC813F4B2599E43200BBCE25 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				EC813F4C2599E43D00BBCE25 /* Storyboards */,
+				EC813F4D2599E44600BBCE25 /* VCs */,
+				EC813F4E2599E44C00BBCE25 /* Cells */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		EC813F4C2599E43D00BBCE25 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				EC813F4F2599E46500BBCE25 /* Home.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		EC813F4D2599E44600BBCE25 /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				EC813F522599E47900BBCE25 /* HomeVC.swift */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
+		EC813F4E2599E44C00BBCE25 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				EC813F552599F22C00BBCE25 /* PastCardCVC.swift */,
+				EC813F582599F24000BBCE25 /* NewCardCVC.swift */,
+				EC813F5B2599F25300BBCE25 /* AddCardCVC.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,6 +209,7 @@
 				EC813F302599A15200BBCE25 /* LaunchScreen.storyboard in Resources */,
 				EC813F2D2599A15200BBCE25 /* Assets.xcassets in Resources */,
 				EC813F2B2599A15100BBCE25 /* Main.storyboard in Resources */,
+				EC813F502599E46500BBCE25 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,6 +263,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC813F462599A44F00BBCE25 /* GenericResponse.swift in Sources */,
+				EC813F532599E47900BBCE25 /* HomeVC.swift in Sources */,
+				EC813F5C2599F25300BBCE25 /* AddCardCVC.swift in Sources */,
+				EC813F562599F22C00BBCE25 /* PastCardCVC.swift in Sources */,
+				EC813F592599F24000BBCE25 /* NewCardCVC.swift in Sources */,
 				EC813F432599A42700BBCE25 /* APIConstants.swift in Sources */,
 				EC813F282599A15100BBCE25 /* ViewController.swift in Sources */,
 				EC813F492599A59500BBCE25 /* NetworkResult.swift in Sources */,
