@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="Qc9-ze-j0r">
+            <objects>
+                <viewController id="rL3-Sq-lzl" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RbC-aU-Q4R">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eoJ-XV-IBo">
+                                <rect key="frame" x="30" y="118" width="229" height="43"/>
+                                <string key="text">이번 주말을 후회 없이
+보낼 수 있는 방법은 무엇인가요?</string>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[ 미래에 관한 2번째 질문 ]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0h7-HA-j0l">
+                                <rect key="frame" x="30" y="186" width="177" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020. 12. 24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDA-1g-lTt">
+                                <rect key="frame" x="30" y="217" width="95" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Jx-lf-hkX">
+                                <rect key="frame" x="760" y="258" width="32" height="552"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="답변을 해주세요..." minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Y0e-BG-rnY">
+                                <rect key="frame" x="0.0" y="258" width="390" height="552"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Gas-lz-5Ds"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="EDA-1g-lTt" firstAttribute="leading" secondItem="Gas-lz-5Ds" secondAttribute="leading" constant="30" id="4Nu-5K-iLc"/>
+                            <constraint firstItem="Y0e-BG-rnY" firstAttribute="leading" secondItem="Gas-lz-5Ds" secondAttribute="leading" id="86F-pf-kor"/>
+                            <constraint firstItem="eoJ-XV-IBo" firstAttribute="leading" secondItem="Gas-lz-5Ds" secondAttribute="leading" constant="30" id="BHH-N4-AcH"/>
+                            <constraint firstItem="eoJ-XV-IBo" firstAttribute="top" secondItem="Gas-lz-5Ds" secondAttribute="top" constant="30" id="I3n-Ql-CnE"/>
+                            <constraint firstItem="EDA-1g-lTt" firstAttribute="top" secondItem="0h7-HA-j0l" secondAttribute="bottom" constant="10" id="O4I-kc-Frw"/>
+                            <constraint firstItem="Gas-lz-5Ds" firstAttribute="bottom" secondItem="4Jx-lf-hkX" secondAttribute="bottom" id="YtG-nF-dx5"/>
+                            <constraint firstItem="0h7-HA-j0l" firstAttribute="leading" secondItem="Gas-lz-5Ds" secondAttribute="leading" constant="30" id="bpc-jI-7At"/>
+                            <constraint firstItem="4Jx-lf-hkX" firstAttribute="top" secondItem="EDA-1g-lTt" secondAttribute="bottom" constant="20" id="gls-A3-bIO"/>
+                            <constraint firstItem="0h7-HA-j0l" firstAttribute="top" secondItem="eoJ-XV-IBo" secondAttribute="bottom" constant="25" id="hI2-Ou-U8z"/>
+                            <constraint firstItem="4Jx-lf-hkX" firstAttribute="leading" secondItem="Gas-lz-5Ds" secondAttribute="leading" constant="760" id="hVo-nF-iXa"/>
+                            <constraint firstItem="Gas-lz-5Ds" firstAttribute="bottom" secondItem="Y0e-BG-rnY" secondAttribute="bottom" id="leQ-oC-cCt"/>
+                            <constraint firstItem="Y0e-BG-rnY" firstAttribute="top" secondItem="EDA-1g-lTt" secondAttribute="bottom" constant="20" id="o2O-OH-MvC"/>
+                            <constraint firstItem="Gas-lz-5Ds" firstAttribute="trailing" secondItem="Y0e-BG-rnY" secondAttribute="trailing" id="q3I-0w-mXC"/>
+                            <constraint firstItem="Gas-lz-5Ds" firstAttribute="trailing" secondItem="4Jx-lf-hkX" secondAttribute="trailing" id="qER-bj-IWh"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="u5e-5q-Wfk"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QUy-cB-T8s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="886.15384615384608" y="150"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Gzx-Yd-zaX">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Wqa-9O-z1C" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="F59-S5-glB">
+                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="rL3-Sq-lzl" kind="relationship" relationship="rootViewController" id="17k-OF-aN8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I7g-Ej-bPG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-43.076923076923073" y="150"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
