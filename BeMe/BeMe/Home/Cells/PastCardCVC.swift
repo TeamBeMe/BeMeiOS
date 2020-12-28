@@ -19,10 +19,7 @@ class PastCardCVC: UICollectionViewCell {
 
 
 extension PastCardCVC {
-//    var lockButton = UIButton().then{
-//            
-//        
-//    }
+//    var lockButton = UIButton()
     
     
     
