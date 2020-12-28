@@ -8,5 +8,12 @@
 import UIKit
 
 class AddCardCVC: UICollectionViewCell {
+    static let identifier : String = "AddCardCVC"
+    
+    override func awakeFromNib() {
+        
+       
+        
+    }
     
 }
