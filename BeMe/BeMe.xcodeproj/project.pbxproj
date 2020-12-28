@@ -17,6 +17,8 @@
 		EC813F432599A42700BBCE25 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F422599A42700BBCE25 /* APIConstants.swift */; };
 		EC813F462599A44F00BBCE25 /* GenericResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F452599A44F00BBCE25 /* GenericResponse.swift */; };
 		EC813F492599A59500BBCE25 /* NetworkResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F482599A59500BBCE25 /* NetworkResult.swift */; };
+		EC813F612599F3E900BBCE25 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F602599F3E900BBCE25 /* UIColor+Extensions.swift */; };
+		EC813F652599F40800BBCE25 /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F642599F40800BBCE25 /* UIView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		EC813F422599A42700BBCE25 /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		EC813F452599A44F00BBCE25 /* GenericResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericResponse.swift; sourceTree = "<group>"; };
 		EC813F482599A59500BBCE25 /* NetworkResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResult.swift; sourceTree = "<group>"; };
+		EC813F602599F3E900BBCE25 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
+		EC813F642599F40800BBCE25 /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		FE9DABE27D9C7D77517D82AB /* Pods_BeMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -86,6 +90,7 @@
 		EC813F222599A15100BBCE25 /* BeMe */ = {
 			isa = PBXGroup;
 			children = (
+				EC813F5F2599F3C700BBCE25 /* Extensions */,
 				EC813F232599A15100BBCE25 /* AppDelegate.swift */,
 				EC813F252599A15100BBCE25 /* SceneDelegate.swift */,
 				EC813F272599A15100BBCE25 /* ViewController.swift */,
@@ -98,6 +103,15 @@
 				EC813F482599A59500BBCE25 /* NetworkResult.swift */,
 			);
 			path = BeMe;
+			sourceTree = "<group>";
+		};
+		EC813F5F2599F3C700BBCE25 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EC813F602599F3E900BBCE25 /* UIColor+Extensions.swift */,
+				EC813F642599F40800BBCE25 /* UIView+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,7 +232,9 @@
 				EC813F432599A42700BBCE25 /* APIConstants.swift in Sources */,
 				EC813F282599A15100BBCE25 /* ViewController.swift in Sources */,
 				EC813F492599A59500BBCE25 /* NetworkResult.swift in Sources */,
+				EC813F612599F3E900BBCE25 /* UIColor+Extensions.swift in Sources */,
 				EC813F242599A15100BBCE25 /* AppDelegate.swift in Sources */,
+				EC813F652599F40800BBCE25 /* UIView+Extensions.swift in Sources */,
 				EC813F262599A15100BBCE25 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
