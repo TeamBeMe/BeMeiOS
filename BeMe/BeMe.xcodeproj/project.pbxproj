@@ -10,6 +10,20 @@
 		3FDD35238DF8F48142B9F9F1 /* Pods_BeMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9DABE27D9C7D77517D82AB /* Pods_BeMe.framework */; };
 		EC7C1601259B469D00A5BA4C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1600259B469D00A5BA4C /* UIViewController+Extensions.swift */; };
 		EC7C1605259B485D00A5BA4C /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1604259B485D00A5BA4C /* CustomAlertView.swift */; };
+		EC7C160F259B8B8100A5BA4C /* Following.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC7C160E259B8B8100A5BA4C /* Following.storyboard */; };
+		EC7C1612259B8BA100A5BA4C /* FollowingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1611259B8BA100A5BA4C /* FollowingVC.swift */; };
+		EC7C1615259B925A00A5BA4C /* FollowingPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1614259B925A00A5BA4C /* FollowingPVC.swift */; };
+		EC7C1618259B933F00A5BA4C /* FollowInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC7C1617259B933F00A5BA4C /* FollowInfo.storyboard */; };
+		EC7C161B259B9A9200A5BA4C /* FollowingInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C161A259B9A9200A5BA4C /* FollowingInfoVC.swift */; };
+		EC7C161E259B9B0F00A5BA4C /* FollowingPeopleCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C161D259B9B0F00A5BA4C /* FollowingPeopleCVC.swift */; };
+		EC7C1621259B9B8800A5BA4C /* FollowingPersonCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1620259B9B8800A5BA4C /* FollowingPersonCVC.swift */; };
+		EC7C1624259B9CA500A5BA4C /* FollowingHeaderCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1623259B9CA500A5BA4C /* FollowingHeaderCVC.swift */; };
+		EC7C1627259B9CE200A5BA4C /* FollowingCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1626259B9CE200A5BA4C /* FollowingCardCVC.swift */; };
+		EC7C162A259BA01200A5BA4C /* FollowerInfoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1629259BA01200A5BA4C /* FollowerInfoVC.swift */; };
+		EC7C1631259BACF100A5BA4C /* FollowerPeopleCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1630259BACF100A5BA4C /* FollowerPeopleCVC.swift */; };
+		EC7C1634259BAD0600A5BA4C /* FollowerPersonCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1633259BAD0600A5BA4C /* FollowerPersonCVC.swift */; };
+		EC7C1637259BAD1A00A5BA4C /* FollowerHeaderCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1636259BAD1A00A5BA4C /* FollowerHeaderCVC.swift */; };
+		EC7C163A259BAD2D00A5BA4C /* FollowerCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1639259BAD2D00A5BA4C /* FollowerCardCVC.swift */; };
 		EC813F242599A15100BBCE25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F232599A15100BBCE25 /* AppDelegate.swift */; };
 		EC813F262599A15100BBCE25 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F252599A15100BBCE25 /* SceneDelegate.swift */; };
 		EC813F282599A15100BBCE25 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F272599A15100BBCE25 /* ViewController.swift */; };
@@ -33,6 +47,20 @@
 		81614202856C8826262057FD /* Pods-BeMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.release.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.release.xcconfig"; sourceTree = "<group>"; };
 		EC7C1600259B469D00A5BA4C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		EC7C1604259B485D00A5BA4C /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
+		EC7C160E259B8B8100A5BA4C /* Following.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Following.storyboard; sourceTree = "<group>"; };
+		EC7C1611259B8BA100A5BA4C /* FollowingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingVC.swift; sourceTree = "<group>"; };
+		EC7C1614259B925A00A5BA4C /* FollowingPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingPVC.swift; sourceTree = "<group>"; };
+		EC7C1617259B933F00A5BA4C /* FollowInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FollowInfo.storyboard; sourceTree = "<group>"; };
+		EC7C161A259B9A9200A5BA4C /* FollowingInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingInfoVC.swift; sourceTree = "<group>"; };
+		EC7C161D259B9B0F00A5BA4C /* FollowingPeopleCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingPeopleCVC.swift; sourceTree = "<group>"; };
+		EC7C1620259B9B8800A5BA4C /* FollowingPersonCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingPersonCVC.swift; sourceTree = "<group>"; };
+		EC7C1623259B9CA500A5BA4C /* FollowingHeaderCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingHeaderCVC.swift; sourceTree = "<group>"; };
+		EC7C1626259B9CE200A5BA4C /* FollowingCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingCardCVC.swift; sourceTree = "<group>"; };
+		EC7C1629259BA01200A5BA4C /* FollowerInfoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerInfoVC.swift; sourceTree = "<group>"; };
+		EC7C1630259BACF100A5BA4C /* FollowerPeopleCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerPeopleCVC.swift; sourceTree = "<group>"; };
+		EC7C1633259BAD0600A5BA4C /* FollowerPersonCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerPersonCVC.swift; sourceTree = "<group>"; };
+		EC7C1636259BAD1A00A5BA4C /* FollowerHeaderCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerHeaderCVC.swift; sourceTree = "<group>"; };
+		EC7C1639259BAD2D00A5BA4C /* FollowerCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCardCVC.swift; sourceTree = "<group>"; };
 		EC813F202599A15100BBCE25 /* BeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC813F232599A15100BBCE25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC813F252599A15100BBCE25 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -91,6 +119,51 @@
 			path = CustomViews;
 			sourceTree = "<group>";
 		};
+		EC7C160A259B8B1700A5BA4C /* Following */ = {
+			isa = PBXGroup;
+			children = (
+				EC7C160B259B8B5300A5BA4C /* Storyboards */,
+				EC7C160C259B8B6300A5BA4C /* VCs */,
+				EC7C160D259B8B6700A5BA4C /* Cells */,
+			);
+			path = Following;
+			sourceTree = "<group>";
+		};
+		EC7C160B259B8B5300A5BA4C /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				EC7C160E259B8B8100A5BA4C /* Following.storyboard */,
+				EC7C1617259B933F00A5BA4C /* FollowInfo.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		EC7C160C259B8B6300A5BA4C /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				EC7C1611259B8BA100A5BA4C /* FollowingVC.swift */,
+				EC7C1614259B925A00A5BA4C /* FollowingPVC.swift */,
+				EC7C161A259B9A9200A5BA4C /* FollowingInfoVC.swift */,
+				EC7C1629259BA01200A5BA4C /* FollowerInfoVC.swift */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
+		EC7C160D259B8B6700A5BA4C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				EC7C161D259B9B0F00A5BA4C /* FollowingPeopleCVC.swift */,
+				EC7C1620259B9B8800A5BA4C /* FollowingPersonCVC.swift */,
+				EC7C1623259B9CA500A5BA4C /* FollowingHeaderCVC.swift */,
+				EC7C1626259B9CE200A5BA4C /* FollowingCardCVC.swift */,
+				EC7C1630259BACF100A5BA4C /* FollowerPeopleCVC.swift */,
+				EC7C1633259BAD0600A5BA4C /* FollowerPersonCVC.swift */,
+				EC7C1636259BAD1A00A5BA4C /* FollowerHeaderCVC.swift */,
+				EC7C1639259BAD2D00A5BA4C /* FollowerCardCVC.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		EC813F172599A15100BBCE25 = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +185,7 @@
 		EC813F222599A15100BBCE25 /* BeMe */ = {
 			isa = PBXGroup;
 			children = (
+				EC7C160A259B8B1700A5BA4C /* Following */,
 				EC7C1603259B483F00A5BA4C /* CustomViews */,
 				EC813F6E2599F82D00BBCE25 /* Home */,
 				EC813F5F2599F3C700BBCE25 /* Extensions */,
@@ -234,6 +308,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC7C160F259B8B8100A5BA4C /* Following.storyboard in Resources */,
+				EC7C1618259B933F00A5BA4C /* FollowInfo.storyboard in Resources */,
 				EC813F302599A15200BBCE25 /* LaunchScreen.storyboard in Resources */,
 				EC813F2D2599A15200BBCE25 /* Assets.xcassets in Resources */,
 				EC813F2B2599A15100BBCE25 /* Main.storyboard in Resources */,
@@ -291,19 +367,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				EC813F462599A44F00BBCE25 /* GenericResponse.swift in Sources */,
+				EC7C1624259B9CA500A5BA4C /* FollowingHeaderCVC.swift in Sources */,
+				EC7C163A259BAD2D00A5BA4C /* FollowerCardCVC.swift in Sources */,
 				EC813F7E2599F89A00BBCE25 /* NewCardCVC.swift in Sources */,
 				EC7C1601259B469D00A5BA4C /* UIViewController+Extensions.swift in Sources */,
 				EC813F432599A42700BBCE25 /* APIConstants.swift in Sources */,
 				EC813F7B2599F88D00BBCE25 /* PastCardCVC.swift in Sources */,
+				EC7C1612259B8BA100A5BA4C /* FollowingVC.swift in Sources */,
+				EC7C1631259BACF100A5BA4C /* FollowerPeopleCVC.swift in Sources */,
 				EC813F282599A15100BBCE25 /* ViewController.swift in Sources */,
+				EC7C1615259B925A00A5BA4C /* FollowingPVC.swift in Sources */,
 				EC813F772599F86900BBCE25 /* HomeVC.swift in Sources */,
 				EC813F812599F8A800BBCE25 /* AddCardCVC.swift in Sources */,
+				EC7C1627259B9CE200A5BA4C /* FollowingCardCVC.swift in Sources */,
 				EC7C1605259B485D00A5BA4C /* CustomAlertView.swift in Sources */,
+				EC7C1637259BAD1A00A5BA4C /* FollowerHeaderCVC.swift in Sources */,
+				EC7C1621259B9B8800A5BA4C /* FollowingPersonCVC.swift in Sources */,
+				EC7C162A259BA01200A5BA4C /* FollowerInfoVC.swift in Sources */,
+				EC7C161B259B9A9200A5BA4C /* FollowingInfoVC.swift in Sources */,
 				EC813F492599A59500BBCE25 /* NetworkResult.swift in Sources */,
+				EC7C161E259B9B0F00A5BA4C /* FollowingPeopleCVC.swift in Sources */,
 				EC813F612599F3E900BBCE25 /* UIColor+Extensions.swift in Sources */,
 				EC813F242599A15100BBCE25 /* AppDelegate.swift in Sources */,
 				EC813F652599F40800BBCE25 /* UIView+Extensions.swift in Sources */,
 				EC813F262599A15100BBCE25 /* SceneDelegate.swift in Sources */,
+				EC7C1634259BAD0600A5BA4C /* FollowerPersonCVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
