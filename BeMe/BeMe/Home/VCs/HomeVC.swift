@@ -6,14 +6,21 @@
 //
 
 import UIKit
+import Then
+import SnapKit
 
 class HomeVC: UIViewController {
     //MARK:- IBOutlets
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var cardCollectionView: UICollectionView!
-    let blurView = UIView().then{
-        $0.backgroundColor = UIColor(cgColor: CGColor(red: 0, green: 0, blue: 0, alpha: 0.6))
+
+    
+    let alertHorizontalSeperator = UIView().then{
+        $0.backgroundColor = .gray
         
+    }
+    let alertVerticalSeperator = UIView().then {
+        $0.backgroundColor = .gray
     }
     
     //MARK:- User Define Variables
@@ -24,9 +31,16 @@ class HomeVC: UIViewController {
     private var initialScrolled = false
     var nowPos = CGPoint(x: -1.0, y: 0)
     
+    var locks = [false,false,false,false,false,false,false,false,]
+
     
-    //MARK:- LifeCycle Methods
     
+    
+}
+
+
+//MARK:- LifeCycle Methods
+extension HomeVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         pastCards = 3
@@ -58,10 +72,6 @@ class HomeVC: UIViewController {
     
     
     
-    
-    
-    
-    
 }
 
 
@@ -82,7 +92,7 @@ extension HomeVC : UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: PastCardCVC.identifier,
                     for: indexPath) as? PastCardCVC else {return UICollectionViewCell()}
-            
+            cell.setLock(after: locks[indexPath.item])
             cell.changePublicDelegate = self
             return cell
         }
@@ -103,6 +113,29 @@ extension HomeVC : UICollectionViewDataSource {
                         numberOfItemsInSection section: Int) -> Int {
         return pastCards + todayCards + 1
     }
+    
+    
+}
+
+//MARK:- User Define functions
+extension HomeVC {
+    
+    @objc func cancelButtonAction(){
+        print("called")
+        
+    }
+    
+    @objc func okayButtonAction(){
+        print("called")
+        
+    }
+    
+    func changeLock(){
+        locks[currentCardIdx] = !locks[currentCardIdx]
+        cardCollectionView.reloadData()
+            
+    }
+    
     
     
 }
@@ -217,11 +250,36 @@ extension HomeVC : ChangePublicDelegate{
     
     
     func showAlert(now : Bool){
-        view.addSubview(blurView)
-        blurView.snp.makeConstraints{
-            $0.top.bottom.leading.trailing.equalToSuperview()
+        let blurView = UIView(frame: .zero).then{
+            $0.backgroundColor = UIColor(cgColor: CGColor(red: 0, green: 0, blue: 0, alpha: 0.6))
+            
         }
         
+        let alertView = CustomAlertView(frame: .zero)
+        
+        self.view.addSubview(blurView)
+        self.view.addSubview(alertView)
+        
+        blurView.snp.makeConstraints {
+            $0.top.leading.trailing.bottom.equalToSuperview()
+        }
+        
+        alertView.snp.makeConstraints {
+            $0.width.equalTo(270)
+            $0.height.equalTo(122)
+            $0.centerX.centerY.equalToSuperview()
+        }
+        
+        alertView.leftButtonClicked = { [weak self] in
+            blurView.removeFromSuperview()
+            alertView.removeFromSuperview()
+            
+        }
+        alertView.rightButtonClicked = { [weak self] in
+            self?.changeLock()
+            blurView.removeFromSuperview()
+            alertView.removeFromSuperview()
+        }
         
         
     }

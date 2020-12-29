@@ -12,7 +12,7 @@ class PastCardCVC: UICollectionViewCell {
     
     //MARK:- IBOutlets
     var lockButton = UIButton().then {
-        $0.setTitle("Locked", for: .normal)
+        $0.setTitle("L", for: .normal)
         $0.setTitleColor(.white, for: .normal)
     }
     
@@ -140,7 +140,15 @@ extension PastCardCVC {
         
     }
     
-    
+    func setLock(after : Bool){
+        if after == true {
+            lockButton.setTitle("U", for: .normal)
+        }
+        else{
+            lockButton.setTitle("L", for: .normal)
+        }
+        
+    }
     
     
     
