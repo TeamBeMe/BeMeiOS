@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rL3-Sq-lzl">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--AnswerVC-->
         <scene sceneID="Qc9-ze-j0r">
             <objects>
-                <viewController id="rL3-Sq-lzl" sceneMemberID="viewController">
+                <viewController id="rL3-Sq-lzl" customClass="AnswerVC" customModule="BeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RbC-aU-Q4R">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -36,11 +36,6 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Jx-lf-hkX">
-                                <rect key="frame" x="760" y="256.66666666666669" width="32" height="553.33333333333326"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tfh-7Q-tZ2">
                                 <rect key="frame" x="0.0" y="251.66666666666666" width="390" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray2Color"/>
@@ -49,12 +44,12 @@
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tk6-Cu-58d">
-                                <rect key="frame" x="0.0" y="252.66666666666666" width="390" height="496.33333333333337"/>
+                                <rect key="frame" x="30" y="260.66666666666674" width="330" height="488.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="192" translatesAutoresizingMaskIntoConstraints="NO" id="NBv-Sy-myB">
                                 <rect key="frame" x="30" y="768" width="330" height="31"/>
@@ -94,23 +89,26 @@
                             <constraint firstItem="tfh-7Q-tZ2" firstAttribute="leading" secondItem="Gas-lz-5Ds" secondAttribute="leading" id="LgO-sA-x2T"/>
                             <constraint firstItem="tfh-7Q-tZ2" firstAttribute="top" secondItem="EDA-1g-lTt" secondAttribute="bottom" constant="15" id="MUT-iT-la9"/>
                             <constraint firstItem="EDA-1g-lTt" firstAttribute="top" secondItem="0h7-HA-j0l" secondAttribute="bottom" constant="10" id="O4I-kc-Frw"/>
-                            <constraint firstItem="tk6-Cu-58d" firstAttribute="leading" secondItem="Gas-lz-5Ds" secondAttribute="leading" id="OWe-yk-2RI"/>
-                            <constraint firstItem="tk6-Cu-58d" firstAttribute="top" secondItem="tfh-7Q-tZ2" secondAttribute="bottom" id="Q0t-26-eCz"/>
+                            <constraint firstItem="tk6-Cu-58d" firstAttribute="leading" secondItem="Gas-lz-5Ds" secondAttribute="leading" constant="30" id="OWe-yk-2RI"/>
+                            <constraint firstItem="tk6-Cu-58d" firstAttribute="top" secondItem="tfh-7Q-tZ2" secondAttribute="bottom" constant="8" symbolic="YES" id="Q0t-26-eCz"/>
                             <constraint firstItem="NBv-Sy-myB" firstAttribute="top" secondItem="1DV-4C-Aen" secondAttribute="bottom" constant="18" id="QXw-pB-1Vq"/>
-                            <constraint firstItem="Gas-lz-5Ds" firstAttribute="bottom" secondItem="4Jx-lf-hkX" secondAttribute="bottom" id="YtG-nF-dx5"/>
                             <constraint firstItem="0h7-HA-j0l" firstAttribute="leading" secondItem="Gas-lz-5Ds" secondAttribute="leading" constant="30" id="bpc-jI-7At"/>
                             <constraint firstItem="Gas-lz-5Ds" firstAttribute="trailing" secondItem="tfh-7Q-tZ2" secondAttribute="trailing" id="f7J-sh-8Kq"/>
-                            <constraint firstItem="4Jx-lf-hkX" firstAttribute="top" secondItem="EDA-1g-lTt" secondAttribute="bottom" constant="20" id="gls-A3-bIO"/>
                             <constraint firstItem="0h7-HA-j0l" firstAttribute="top" secondItem="eoJ-XV-IBo" secondAttribute="bottom" constant="25" id="hI2-Ou-U8z"/>
-                            <constraint firstItem="4Jx-lf-hkX" firstAttribute="leading" secondItem="Gas-lz-5Ds" secondAttribute="leading" constant="760" id="hVo-nF-iXa"/>
                             <constraint firstItem="NBv-Sy-myB" firstAttribute="leading" secondItem="Gas-lz-5Ds" secondAttribute="leading" constant="30" id="hlJ-oM-S3X"/>
-                            <constraint firstItem="Gas-lz-5Ds" firstAttribute="trailing" secondItem="tk6-Cu-58d" secondAttribute="trailing" id="py5-Zz-ecP"/>
-                            <constraint firstItem="Gas-lz-5Ds" firstAttribute="trailing" secondItem="4Jx-lf-hkX" secondAttribute="trailing" id="qER-bj-IWh"/>
+                            <constraint firstItem="Gas-lz-5Ds" firstAttribute="trailing" secondItem="tk6-Cu-58d" secondAttribute="trailing" constant="30" id="py5-Zz-ecP"/>
                             <constraint firstItem="1DV-4C-Aen" firstAttribute="top" secondItem="tk6-Cu-58d" secondAttribute="bottom" id="uYw-jJ-T0C"/>
                             <constraint firstItem="1DV-4C-Aen" firstAttribute="leading" secondItem="RbC-aU-Q4R" secondAttribute="leading" id="uwO-6P-umO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="u5e-5q-Wfk"/>
+                    <connections>
+                        <outlet property="answerDateLabel" destination="EDA-1g-lTt" id="kzF-dT-HRS"/>
+                        <outlet property="answerOpenSwith" destination="3zi-Co-HHx" id="hVj-yt-Rft"/>
+                        <outlet property="answerTextView" destination="tk6-Cu-58d" id="6Up-Pt-I9W"/>
+                        <outlet property="questionInfoLabel" destination="0h7-HA-j0l" id="i8x-0J-ngy"/>
+                        <outlet property="questionLabel" destination="eoJ-XV-IBo" id="gB3-0t-iSQ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QUy-cB-T8s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
