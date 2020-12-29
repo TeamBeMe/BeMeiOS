@@ -42,7 +42,8 @@ class PastCardCVC: UICollectionViewCell {
 //        $0.isEditable = false
         $0.font = UIFont.systemFont(ofSize: 14)
         $0.textAlignment = .center
-        $0.backgroundColor = .gray
+        $0.backgroundColor = UIColor(cgColor: CGColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0))
+            
     }
     
 
@@ -61,6 +62,7 @@ extension PastCardCVC {
         makeQuestionLabel()
         makeAnswerTextView()
         self.makeRounded(cornerRadius: 6)
+        self.contentView.backgroundColor = UIColor(cgColor: CGColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0))
     }
     
     

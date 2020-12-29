@@ -12,18 +12,49 @@ class HomeVC: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var cardCollectionView: UICollectionView!
     
+    //MARK:- User Define Variables
+    private var cardWidth = 0
+    private var pastCards = 0
+    private var todayCards = 0
+    private var currentCardIdx = 0
+    private var initialScrolled = false
+    var nowPos = CGPoint(x: -1.0, y: 0)
+    
     
     //MARK:- LifeCycle Methods
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        pastCards = 3
+        todayCards = 1
         cardCollectionView.delegate = self
         cardCollectionView.dataSource = self
-       
+        //        cardCollectionView.reloadData()
+        
+        
     }
     
-
-
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        if initialScrolled == false {
+            cardCollectionView.scrollToItem(at: IndexPath(item: pastCards, section: 0),
+                                            at: .centeredHorizontally,
+                                            animated: false)
+            initialScrolled = true
+            currentCardIdx = pastCards + todayCards - 1
+        }
+        
+        
+    }
+    
+    
+    
+    
+    
     
     
     
@@ -31,23 +62,44 @@ class HomeVC: UIViewController {
 
 
 extension HomeVC : UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PastCardCVC.identifier, for: indexPath) as? PastCardCVC else {return UICollectionViewCell()}
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        if indexPath.item >= pastCards && indexPath.item <= pastCards + todayCards - 1{
+            
+            guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: NewCardCVC.identifier,
+                    for: indexPath) as? NewCardCVC else {return UICollectionViewCell()}
+            
+            return cell
+        }
         
-        
-        if indexPath.item == 1 {
-            cardCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+        else if indexPath.item < pastCards {
+            guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: PastCardCVC.identifier,
+                    for: indexPath) as? PastCardCVC else {return UICollectionViewCell()}
+            
+            
+            return cell
+        }
+        else{
+            guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: AddCardCVC.identifier,
+                    for: indexPath) as? AddCardCVC else {return UICollectionViewCell()}
+            
+            cell.addDelegate = self
+            return cell
             
         }
-        return cell
+        
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+    func collectionView(_ collectionView: UICollectionView,
+                        numberOfItemsInSection section: Int) -> Int {
+        return pastCards + todayCards + 1
     }
-
+    
     
 }
 
@@ -55,14 +107,19 @@ extension HomeVC : UICollectionViewDataSource {
 extension HomeVC : UICollectionViewDelegateFlowLayout {
     
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        
-        return CGSize(width: collectionView.frame.width - 70 , height: collectionView.frame.height)
+        cardWidth = Int(collectionView.frame.width)
+        return CGSize(width: 315.0 ,
+                      height: collectionView.frame.height)
     }
     
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 20, bottom: 0, right:20)
     }
     
@@ -85,15 +142,60 @@ extension HomeVC : UICollectionViewDelegateFlowLayout {
 extension HomeVC : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let curPos = scrollView.contentOffset
-        if curPos.x < 150 {
+        if Int(curPos.x) < (pastCards-1)*cardWidth {
             timeLabel.text = "과거의 질문"
         }
         else{
             timeLabel.text = "오늘의 질문"
             
         }
+        
+        if initialScrolled == true{
+            
+            if Int(curPos.x) < 325 + 335*(currentCardIdx-1) - 200 {
+                cardCollectionView.scrollToItem(at: IndexPath(item: currentCardIdx-1, section: 0),
+                                                at: .centeredHorizontally,
+                                                animated: true)
+                currentCardIdx = currentCardIdx-1
+               
+            }
+            else if Int(curPos.x) > 325 + 335*(currentCardIdx-1) + 200{
+                cardCollectionView.scrollToItem(at: IndexPath(item: currentCardIdx+1, section: 0),
+                                                at: .centeredHorizontally,
+                                                animated: true)
+                currentCardIdx = currentCardIdx+1
+                
+                
+            }
+           
+        }
+      
+     
+    
+        
+        
     }
     
+    
+    
+    
+}
+
+extension HomeVC : AddQuestionDelegate {
+    func addQuestion() {
+        todayCards = todayCards + 1
+        cardCollectionView.reloadData()
+        
+    }
+    
+}
+    
+
+
+
+protocol AddQuestionDelegate{
+    
+    func addQuestion()
     
     
 }

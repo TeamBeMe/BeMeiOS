@@ -39,7 +39,20 @@ class NewCardCVC: UICollectionViewCell {
         $0.numberOfLines = 0
     }
 
+    var replyButton = UIButton().then {
+        $0.setTitle("답변하기", for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        $0.backgroundColor = .white
+        $0.makeRounded(cornerRadius: 6)
+        $0.setTitleColor(.black, for: .normal)
+    }
     
+    var changeButton = UIButton().then {
+        $0.setTitle("질문 변경하기", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        
+    }
 
     
     
@@ -54,6 +67,9 @@ extension NewCardCVC {
         makeQuestionInfoLabel()
         makeDateLabel()
         makeQuestionLabel()
+        makeReplyButton()
+        makeChangeButton()
+        self.contentView.backgroundColor = UIColor(cgColor: CGColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0))
         self.makeRounded(cornerRadius: 6)
     }
     
@@ -99,10 +115,24 @@ extension NewCardCVC {
             $0.top.equalToSuperview().offset(162)
         }
     }
+    func makeReplyButton(){
+        self.addSubview(replyButton)
+        replyButton.snp.makeConstraints{
+            $0.leading.equalToSuperview().offset(32)
+            $0.trailing.equalToSuperview().offset(-32)
+            $0.top.equalToSuperview().offset(379)
+            $0.height.equalTo(50)
+        }
+    }
     
+    func makeChangeButton(){
+        self.addSubview(changeButton)
+        changeButton.snp.makeConstraints{
+            $0.width.equalTo(80)
+            $0.bottom.equalToSuperview().offset(-25)
+            $0.centerX.equalToSuperview()
+        }
+        
+    }
 
-    
-    
-    
-    
 }
