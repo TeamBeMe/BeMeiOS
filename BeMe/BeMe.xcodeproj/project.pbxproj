@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3FDD35238DF8F48142B9F9F1 /* Pods_BeMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9DABE27D9C7D77517D82AB /* Pods_BeMe.framework */; };
+		EC7C1601259B469D00A5BA4C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1600259B469D00A5BA4C /* UIViewController+Extensions.swift */; };
+		EC7C1605259B485D00A5BA4C /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1604259B485D00A5BA4C /* CustomAlertView.swift */; };
 		EC813F242599A15100BBCE25 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F232599A15100BBCE25 /* AppDelegate.swift */; };
 		EC813F262599A15100BBCE25 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F252599A15100BBCE25 /* SceneDelegate.swift */; };
 		EC813F282599A15100BBCE25 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F272599A15100BBCE25 /* ViewController.swift */; };
@@ -29,6 +31,8 @@
 /* Begin PBXFileReference section */
 		3A09AD0A5B04C9B6819B2606 /* Pods-BeMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.debug.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.debug.xcconfig"; sourceTree = "<group>"; };
 		81614202856C8826262057FD /* Pods-BeMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.release.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.release.xcconfig"; sourceTree = "<group>"; };
+		EC7C1600259B469D00A5BA4C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		EC7C1604259B485D00A5BA4C /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		EC813F202599A15100BBCE25 /* BeMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BeMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC813F232599A15100BBCE25 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EC813F252599A15100BBCE25 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,6 +83,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		EC7C1603259B483F00A5BA4C /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				EC7C1604259B485D00A5BA4C /* CustomAlertView.swift */,
+			);
+			path = CustomViews;
+			sourceTree = "<group>";
+		};
 		EC813F172599A15100BBCE25 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +112,7 @@
 		EC813F222599A15100BBCE25 /* BeMe */ = {
 			isa = PBXGroup;
 			children = (
+				EC7C1603259B483F00A5BA4C /* CustomViews */,
 				EC813F6E2599F82D00BBCE25 /* Home */,
 				EC813F5F2599F3C700BBCE25 /* Extensions */,
 				EC813F232599A15100BBCE25 /* AppDelegate.swift */,
@@ -121,6 +134,7 @@
 			children = (
 				EC813F602599F3E900BBCE25 /* UIColor+Extensions.swift */,
 				EC813F642599F40800BBCE25 /* UIView+Extensions.swift */,
+				EC7C1600259B469D00A5BA4C /* UIViewController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -278,11 +292,13 @@
 			files = (
 				EC813F462599A44F00BBCE25 /* GenericResponse.swift in Sources */,
 				EC813F7E2599F89A00BBCE25 /* NewCardCVC.swift in Sources */,
+				EC7C1601259B469D00A5BA4C /* UIViewController+Extensions.swift in Sources */,
 				EC813F432599A42700BBCE25 /* APIConstants.swift in Sources */,
 				EC813F7B2599F88D00BBCE25 /* PastCardCVC.swift in Sources */,
 				EC813F282599A15100BBCE25 /* ViewController.swift in Sources */,
 				EC813F772599F86900BBCE25 /* HomeVC.swift in Sources */,
 				EC813F812599F8A800BBCE25 /* AddCardCVC.swift in Sources */,
+				EC7C1605259B485D00A5BA4C /* CustomAlertView.swift in Sources */,
 				EC813F492599A59500BBCE25 /* NetworkResult.swift in Sources */,
 				EC813F612599F3E900BBCE25 /* UIColor+Extensions.swift in Sources */,
 				EC813F242599A15100BBCE25 /* AppDelegate.swift in Sources */,
