@@ -46,6 +46,12 @@ class PastCardCVC: UICollectionViewCell {
             
     }
     
+    
+    
+    //MARK:- User Define Variables
+    
+    var isPublic = false
+    var changePublicDelegate : ChangePublicDelegate?
 
     
     
@@ -63,6 +69,8 @@ extension PastCardCVC {
         makeAnswerTextView()
         self.makeRounded(cornerRadius: 6)
         self.contentView.backgroundColor = UIColor(cgColor: CGColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0))
+        lockButton.addTarget(self, action: #selector(changePublic), for: .touchUpInside)
+        
     }
     
     
@@ -117,6 +125,22 @@ extension PastCardCVC {
             $0.height.equalTo(160)
         }
     }
+    
+    
+    
+    
+}
+
+//MARK:- User Define functions
+extension PastCardCVC {
+    
+    @objc func changePublic(){
+
+        changePublicDelegate?.changePublic(now: isPublic)
+        
+    }
+    
+    
     
     
     

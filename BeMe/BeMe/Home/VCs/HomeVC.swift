@@ -11,6 +11,10 @@ class HomeVC: UIViewController {
     //MARK:- IBOutlets
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var cardCollectionView: UICollectionView!
+    let blurView = UIView().then{
+        $0.backgroundColor = UIColor(cgColor: CGColor(red: 0, green: 0, blue: 0, alpha: 0.6))
+        
+    }
     
     //MARK:- User Define Variables
     private var cardWidth = 0
@@ -79,7 +83,7 @@ extension HomeVC : UICollectionViewDataSource {
                     withReuseIdentifier: PastCardCVC.identifier,
                     for: indexPath) as? PastCardCVC else {return UICollectionViewCell()}
             
-            
+            cell.changePublicDelegate = self
             return cell
         }
         else{
@@ -183,13 +187,47 @@ extension HomeVC : UIScrollViewDelegate {
 
 extension HomeVC : AddQuestionDelegate {
     func addQuestion() {
-        todayCards = todayCards + 1
-        cardCollectionView.reloadData()
+        UIView.animate(withDuration: 0.3, animations: {
+            self.todayCards = self.todayCards + 1
+
+            self.cardCollectionView.alpha = 0
+
+        }, completion: { finished in
+            self.cardCollectionView.reloadData()
+            UIView.animate(withDuration: 0.3, animations: {
+                self.cardCollectionView.alpha = 1
+            })
+
+        })
+
+        
         
     }
     
 }
     
+
+extension HomeVC : ChangePublicDelegate{
+    func changePublic(now: Bool) {
+        
+        showAlert(now: now)
+        
+        
+    }
+    
+    
+    func showAlert(now : Bool){
+        view.addSubview(blurView)
+        blurView.snp.makeConstraints{
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
+        
+        
+        
+    }
+    
+    
+}
 
 
 
@@ -197,5 +235,11 @@ protocol AddQuestionDelegate{
     
     func addQuestion()
     
+    
+}
+
+protocol ChangePublicDelegate{
+    
+    func changePublic(now : Bool)
     
 }
