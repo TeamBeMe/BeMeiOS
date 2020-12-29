@@ -14,7 +14,7 @@ class NewCardCVC: UICollectionViewCell {
     
     //MARK:- IBOutlets
     var lockButton = UIButton().then {
-        $0.setTitle("Locked", for: .normal)
+        $0.setTitle("L", for: .normal)
         $0.setTitleColor(.white, for: .normal)
     }
     
@@ -53,8 +53,9 @@ class NewCardCVC: UICollectionViewCell {
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         
     }
-
     
+    var isPublic = false
+    var changePublicDelegate : ChangePublicDelegate?
     
 }
 
@@ -71,6 +72,7 @@ extension NewCardCVC {
         makeChangeButton()
         self.contentView.backgroundColor = UIColor(cgColor: CGColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0))
         self.makeRounded(cornerRadius: 6)
+        lockButton.addTarget(self, action: #selector(changePublic), for: .touchUpInside)
     }
     
     
@@ -135,4 +137,33 @@ extension NewCardCVC {
         
     }
 
+}
+
+
+
+//MARK:- User Define Function
+
+extension NewCardCVC {
+    @objc func changePublic(){
+
+        changePublicDelegate?.changePublic(now: isPublic)
+        
+    }
+    
+    
+    func setLock(after : Bool){
+        if after == true {
+            lockButton.setTitle("U", for: .normal)
+            lockButton.setImage(UIImage(systemName: "lock.slash"), for: .normal)
+            lockButton.tintColor = .white
+        }
+        else{
+            lockButton.setTitle("L", for: .normal)
+            lockButton.setImage(UIImage(systemName: "lock"), for: .normal)
+            lockButton.tintColor = .white
+        }
+        
+    }
+    
+    
 }

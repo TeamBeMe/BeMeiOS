@@ -143,9 +143,13 @@ extension PastCardCVC {
     func setLock(after : Bool){
         if after == true {
             lockButton.setTitle("U", for: .normal)
+            lockButton.setImage(UIImage(systemName: "lock.slash"), for: .normal)
+            lockButton.tintColor = .white
         }
         else{
             lockButton.setTitle("L", for: .normal)
+            lockButton.setImage(UIImage(systemName: "lock"), for: .normal)
+            lockButton.tintColor = .white
         }
         
     }

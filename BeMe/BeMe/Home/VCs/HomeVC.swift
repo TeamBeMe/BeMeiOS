@@ -73,7 +73,37 @@ extension HomeVC {
     
     
 }
-
+//MARK:- User Define functions
+extension HomeVC {
+    
+    @objc func cancelButtonAction(){
+        print("called")
+        
+    }
+    
+    @objc func okayButtonAction(){
+        print("called")
+        
+    }
+    
+    func changeLock(){
+        locks[currentCardIdx] = !locks[currentCardIdx]
+        cardCollectionView.reloadData()
+            
+    }
+    
+    func makeAlertTitle() -> String {
+        if locks[currentCardIdx] == false {
+            return "공개 질문으로 전환하시겠어요?"
+        }
+        else{
+            return "비공개 질문으로 전환하시겠어요?"
+        }
+        
+    }
+    
+    
+}
 
 extension HomeVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
@@ -84,7 +114,8 @@ extension HomeVC : UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: NewCardCVC.identifier,
                     for: indexPath) as? NewCardCVC else {return UICollectionViewCell()}
-            
+            cell.setLock(after: locks[indexPath.item])
+            cell.changePublicDelegate = self
             return cell
         }
         
@@ -117,28 +148,7 @@ extension HomeVC : UICollectionViewDataSource {
     
 }
 
-//MARK:- User Define functions
-extension HomeVC {
-    
-    @objc func cancelButtonAction(){
-        print("called")
-        
-    }
-    
-    @objc func okayButtonAction(){
-        print("called")
-        
-    }
-    
-    func changeLock(){
-        locks[currentCardIdx] = !locks[currentCardIdx]
-        cardCollectionView.reloadData()
-            
-    }
-    
-    
-    
-}
+
 
 
 extension HomeVC : UICollectionViewDelegateFlowLayout {
@@ -220,14 +230,14 @@ extension HomeVC : UIScrollViewDelegate {
 
 extension HomeVC : AddQuestionDelegate {
     func addQuestion() {
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.todayCards = self.todayCards + 1
 
             self.cardCollectionView.alpha = 0
 
         }, completion: { finished in
             self.cardCollectionView.reloadData()
-            UIView.animate(withDuration: 0.3, animations: {
+            UIView.animate(withDuration: 0.5, animations: {
                 self.cardCollectionView.alpha = 1
             })
 
@@ -259,6 +269,11 @@ extension HomeVC : ChangePublicDelegate{
         
         self.view.addSubview(blurView)
         self.view.addSubview(alertView)
+        
+        alertView.setTitles(titleLabel: makeAlertTitle(),
+                            leftButtonTitle: "취소",
+                            rightButtonTitle: "확인")
+        
         
         blurView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview()
