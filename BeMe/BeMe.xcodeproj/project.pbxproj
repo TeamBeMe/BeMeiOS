@@ -54,6 +54,8 @@
 		EC89E328259C378300DBAFE5 /* FollowHeaderCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E327259C378300DBAFE5 /* FollowHeaderCVC.swift */; };
 		EC89E32B259C378F00DBAFE5 /* FollowCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E32A259C378F00DBAFE5 /* FollowCardCVC.swift */; };
 		EC89E32E259C496C00DBAFE5 /* FollowMoreButtonCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E32D259C496C00DBAFE5 /* FollowMoreButtonCVC.swift */; };
+		EC89E336259C4E7400DBAFE5 /* UnderTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC89E335259C4E7400DBAFE5 /* UnderTab.storyboard */; };
+		EC89E339259C507300DBAFE5 /* UnderTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E338259C507300DBAFE5 /* UnderTabBarController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +109,8 @@
 		EC89E327259C378300DBAFE5 /* FollowHeaderCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowHeaderCVC.swift; sourceTree = "<group>"; };
 		EC89E32A259C378F00DBAFE5 /* FollowCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowCardCVC.swift; sourceTree = "<group>"; };
 		EC89E32D259C496C00DBAFE5 /* FollowMoreButtonCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowMoreButtonCVC.swift; sourceTree = "<group>"; };
+		EC89E335259C4E7400DBAFE5 /* UnderTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UnderTab.storyboard; sourceTree = "<group>"; };
+		EC89E338259C507300DBAFE5 /* UnderTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderTabBarController.swift; sourceTree = "<group>"; };
 		FE9DABE27D9C7D77517D82AB /* Pods_BeMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -227,6 +231,7 @@
 		EC813F222599A15100BBCE25 /* BeMe */ = {
 			isa = PBXGroup;
 			children = (
+				EC89E332259C4E2800DBAFE5 /* UnderTab */,
 				EC7C160A259B8B1700A5BA4C /* Following */,
 				EC7C1603259B483F00A5BA4C /* CustomViews */,
 				EC813F6E2599F82D00BBCE25 /* Home */,
@@ -289,6 +294,31 @@
 				EC813F802599F8A800BBCE25 /* AddCardCVC.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		EC89E332259C4E2800DBAFE5 /* UnderTab */ = {
+			isa = PBXGroup;
+			children = (
+				EC89E334259C4E4100DBAFE5 /* VCs */,
+				EC89E333259C4E3000DBAFE5 /* Storyboards */,
+			);
+			path = UnderTab;
+			sourceTree = "<group>";
+		};
+		EC89E333259C4E3000DBAFE5 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				EC89E335259C4E7400DBAFE5 /* UnderTab.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		EC89E334259C4E4100DBAFE5 /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				EC89E338259C507300DBAFE5 /* UnderTabBarController.swift */,
+			);
+			path = VCs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -357,6 +387,7 @@
 				EC813F2D2599A15200BBCE25 /* Assets.xcassets in Resources */,
 				EC813F2B2599A15100BBCE25 /* Main.storyboard in Resources */,
 				EC813F732599F84F00BBCE25 /* Home.storyboard in Resources */,
+				EC89E336259C4E7400DBAFE5 /* UnderTab.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +452,7 @@
 				EC7C1612259B8BA100A5BA4C /* FollowingVC.swift in Sources */,
 				EC7C1631259BACF100A5BA4C /* FollowerPeopleCVC.swift in Sources */,
 				EC89E32E259C496C00DBAFE5 /* FollowMoreButtonCVC.swift in Sources */,
+				EC89E339259C507300DBAFE5 /* UnderTabBarController.swift in Sources */,
 				EC813F282599A15100BBCE25 /* ViewController.swift in Sources */,
 				EC7C1615259B925A00A5BA4C /* FollowingPVC.swift in Sources */,
 				EC813F772599F86900BBCE25 /* HomeVC.swift in Sources */,
