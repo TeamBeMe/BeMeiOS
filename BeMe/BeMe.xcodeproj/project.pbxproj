@@ -40,6 +40,20 @@
 		EC813F7B2599F88D00BBCE25 /* PastCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F7A2599F88D00BBCE25 /* PastCardCVC.swift */; };
 		EC813F7E2599F89A00BBCE25 /* NewCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F7D2599F89A00BBCE25 /* NewCardCVC.swift */; };
 		EC813F812599F8A800BBCE25 /* AddCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F802599F8A800BBCE25 /* AddCardCVC.swift */; };
+		EC89E306259C1CA600DBAFE5 /* FollowSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC89E305259C1CA600DBAFE5 /* FollowSearch.storyboard */; };
+		EC89E309259C1CC700DBAFE5 /* FollowSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E308259C1CC700DBAFE5 /* FollowSearchVC.swift */; };
+		EC89E30C259C273400DBAFE5 /* FollowingSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E30B259C273400DBAFE5 /* FollowingSearchVC.swift */; };
+		EC89E30F259C274200DBAFE5 /* FollowerSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E30E259C274200DBAFE5 /* FollowerSearchVC.swift */; };
+		EC89E313259C27DF00DBAFE5 /* FollowingSearchCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E312259C27DF00DBAFE5 /* FollowingSearchCVC.swift */; };
+		EC89E316259C280200DBAFE5 /* FollowingListCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E315259C280200DBAFE5 /* FollowingListCVC.swift */; };
+		EC89E319259C281100DBAFE5 /* FollowerSearchCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E318259C281100DBAFE5 /* FollowerSearchCVC.swift */; };
+		EC89E31C259C281F00DBAFE5 /* FollowerListCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E31B259C281F00DBAFE5 /* FollowerListCVC.swift */; };
+		EC89E31F259C2B0800DBAFE5 /* FollowingSearchPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E31E259C2B0800DBAFE5 /* FollowingSearchPVC.swift */; };
+		EC89E322259C376500DBAFE5 /* FollowPeopleCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E321259C376500DBAFE5 /* FollowPeopleCVC.swift */; };
+		EC89E325259C377400DBAFE5 /* FollowPersonCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E324259C377400DBAFE5 /* FollowPersonCVC.swift */; };
+		EC89E328259C378300DBAFE5 /* FollowHeaderCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E327259C378300DBAFE5 /* FollowHeaderCVC.swift */; };
+		EC89E32B259C378F00DBAFE5 /* FollowCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E32A259C378F00DBAFE5 /* FollowCardCVC.swift */; };
+		EC89E32E259C496C00DBAFE5 /* FollowMoreButtonCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E32D259C496C00DBAFE5 /* FollowMoreButtonCVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,6 +93,20 @@
 		EC813F7A2599F88D00BBCE25 /* PastCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastCardCVC.swift; sourceTree = "<group>"; };
 		EC813F7D2599F89A00BBCE25 /* NewCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardCVC.swift; sourceTree = "<group>"; };
 		EC813F802599F8A800BBCE25 /* AddCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardCVC.swift; sourceTree = "<group>"; };
+		EC89E305259C1CA600DBAFE5 /* FollowSearch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FollowSearch.storyboard; sourceTree = "<group>"; };
+		EC89E308259C1CC700DBAFE5 /* FollowSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowSearchVC.swift; sourceTree = "<group>"; };
+		EC89E30B259C273400DBAFE5 /* FollowingSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingSearchVC.swift; sourceTree = "<group>"; };
+		EC89E30E259C274200DBAFE5 /* FollowerSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerSearchVC.swift; sourceTree = "<group>"; };
+		EC89E312259C27DF00DBAFE5 /* FollowingSearchCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingSearchCVC.swift; sourceTree = "<group>"; };
+		EC89E315259C280200DBAFE5 /* FollowingListCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingListCVC.swift; sourceTree = "<group>"; };
+		EC89E318259C281100DBAFE5 /* FollowerSearchCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerSearchCVC.swift; sourceTree = "<group>"; };
+		EC89E31B259C281F00DBAFE5 /* FollowerListCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerListCVC.swift; sourceTree = "<group>"; };
+		EC89E31E259C2B0800DBAFE5 /* FollowingSearchPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingSearchPVC.swift; sourceTree = "<group>"; };
+		EC89E321259C376500DBAFE5 /* FollowPeopleCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowPeopleCVC.swift; sourceTree = "<group>"; };
+		EC89E324259C377400DBAFE5 /* FollowPersonCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowPersonCVC.swift; sourceTree = "<group>"; };
+		EC89E327259C378300DBAFE5 /* FollowHeaderCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowHeaderCVC.swift; sourceTree = "<group>"; };
+		EC89E32A259C378F00DBAFE5 /* FollowCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowCardCVC.swift; sourceTree = "<group>"; };
+		EC89E32D259C496C00DBAFE5 /* FollowMoreButtonCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowMoreButtonCVC.swift; sourceTree = "<group>"; };
 		FE9DABE27D9C7D77517D82AB /* Pods_BeMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -134,6 +162,7 @@
 			children = (
 				EC7C160E259B8B8100A5BA4C /* Following.storyboard */,
 				EC7C1617259B933F00A5BA4C /* FollowInfo.storyboard */,
+				EC89E305259C1CA600DBAFE5 /* FollowSearch.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -145,6 +174,10 @@
 				EC7C1614259B925A00A5BA4C /* FollowingPVC.swift */,
 				EC7C161A259B9A9200A5BA4C /* FollowingInfoVC.swift */,
 				EC7C1629259BA01200A5BA4C /* FollowerInfoVC.swift */,
+				EC89E308259C1CC700DBAFE5 /* FollowSearchVC.swift */,
+				EC89E30B259C273400DBAFE5 /* FollowingSearchVC.swift */,
+				EC89E30E259C274200DBAFE5 /* FollowerSearchVC.swift */,
+				EC89E31E259C2B0800DBAFE5 /* FollowingSearchPVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -160,6 +193,15 @@
 				EC7C1633259BAD0600A5BA4C /* FollowerPersonCVC.swift */,
 				EC7C1636259BAD1A00A5BA4C /* FollowerHeaderCVC.swift */,
 				EC7C1639259BAD2D00A5BA4C /* FollowerCardCVC.swift */,
+				EC89E312259C27DF00DBAFE5 /* FollowingSearchCVC.swift */,
+				EC89E315259C280200DBAFE5 /* FollowingListCVC.swift */,
+				EC89E318259C281100DBAFE5 /* FollowerSearchCVC.swift */,
+				EC89E31B259C281F00DBAFE5 /* FollowerListCVC.swift */,
+				EC89E321259C376500DBAFE5 /* FollowPeopleCVC.swift */,
+				EC89E324259C377400DBAFE5 /* FollowPersonCVC.swift */,
+				EC89E327259C378300DBAFE5 /* FollowHeaderCVC.swift */,
+				EC89E32A259C378F00DBAFE5 /* FollowCardCVC.swift */,
+				EC89E32D259C496C00DBAFE5 /* FollowMoreButtonCVC.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -308,6 +350,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC89E306259C1CA600DBAFE5 /* FollowSearch.storyboard in Resources */,
 				EC7C160F259B8B8100A5BA4C /* Following.storyboard in Resources */,
 				EC7C1618259B933F00A5BA4C /* FollowInfo.storyboard in Resources */,
 				EC813F302599A15200BBCE25 /* LaunchScreen.storyboard in Resources */,
@@ -366,8 +409,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EC89E313259C27DF00DBAFE5 /* FollowingSearchCVC.swift in Sources */,
 				EC813F462599A44F00BBCE25 /* GenericResponse.swift in Sources */,
 				EC7C1624259B9CA500A5BA4C /* FollowingHeaderCVC.swift in Sources */,
+				EC89E31C259C281F00DBAFE5 /* FollowerListCVC.swift in Sources */,
 				EC7C163A259BAD2D00A5BA4C /* FollowerCardCVC.swift in Sources */,
 				EC813F7E2599F89A00BBCE25 /* NewCardCVC.swift in Sources */,
 				EC7C1601259B469D00A5BA4C /* UIViewController+Extensions.swift in Sources */,
@@ -375,22 +420,33 @@
 				EC813F7B2599F88D00BBCE25 /* PastCardCVC.swift in Sources */,
 				EC7C1612259B8BA100A5BA4C /* FollowingVC.swift in Sources */,
 				EC7C1631259BACF100A5BA4C /* FollowerPeopleCVC.swift in Sources */,
+				EC89E32E259C496C00DBAFE5 /* FollowMoreButtonCVC.swift in Sources */,
 				EC813F282599A15100BBCE25 /* ViewController.swift in Sources */,
 				EC7C1615259B925A00A5BA4C /* FollowingPVC.swift in Sources */,
 				EC813F772599F86900BBCE25 /* HomeVC.swift in Sources */,
 				EC813F812599F8A800BBCE25 /* AddCardCVC.swift in Sources */,
+				EC89E319259C281100DBAFE5 /* FollowerSearchCVC.swift in Sources */,
 				EC7C1627259B9CE200A5BA4C /* FollowingCardCVC.swift in Sources */,
+				EC89E30C259C273400DBAFE5 /* FollowingSearchVC.swift in Sources */,
 				EC7C1605259B485D00A5BA4C /* CustomAlertView.swift in Sources */,
+				EC89E316259C280200DBAFE5 /* FollowingListCVC.swift in Sources */,
 				EC7C1637259BAD1A00A5BA4C /* FollowerHeaderCVC.swift in Sources */,
+				EC89E31F259C2B0800DBAFE5 /* FollowingSearchPVC.swift in Sources */,
 				EC7C1621259B9B8800A5BA4C /* FollowingPersonCVC.swift in Sources */,
 				EC7C162A259BA01200A5BA4C /* FollowerInfoVC.swift in Sources */,
+				EC89E322259C376500DBAFE5 /* FollowPeopleCVC.swift in Sources */,
 				EC7C161B259B9A9200A5BA4C /* FollowingInfoVC.swift in Sources */,
+				EC89E325259C377400DBAFE5 /* FollowPersonCVC.swift in Sources */,
 				EC813F492599A59500BBCE25 /* NetworkResult.swift in Sources */,
 				EC7C161E259B9B0F00A5BA4C /* FollowingPeopleCVC.swift in Sources */,
 				EC813F612599F3E900BBCE25 /* UIColor+Extensions.swift in Sources */,
 				EC813F242599A15100BBCE25 /* AppDelegate.swift in Sources */,
+				EC89E32B259C378F00DBAFE5 /* FollowCardCVC.swift in Sources */,
 				EC813F652599F40800BBCE25 /* UIView+Extensions.swift in Sources */,
+				EC89E309259C1CC700DBAFE5 /* FollowSearchVC.swift in Sources */,
+				EC89E328259C378300DBAFE5 /* FollowHeaderCVC.swift in Sources */,
 				EC813F262599A15100BBCE25 /* SceneDelegate.swift in Sources */,
+				EC89E30F259C274200DBAFE5 /* FollowerSearchVC.swift in Sources */,
 				EC7C1634259BAD0600A5BA4C /* FollowerPersonCVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
