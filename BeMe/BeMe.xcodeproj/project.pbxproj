@@ -56,6 +56,7 @@
 		EC89E32E259C496C00DBAFE5 /* FollowMoreButtonCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E32D259C496C00DBAFE5 /* FollowMoreButtonCVC.swift */; };
 		EC89E336259C4E7400DBAFE5 /* UnderTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC89E335259C4E7400DBAFE5 /* UnderTab.storyboard */; };
 		EC89E339259C507300DBAFE5 /* UnderTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E338259C507300DBAFE5 /* UnderTabBarController.swift */; };
+		EC89E33F259C5EBB00DBAFE5 /* HomeCardCustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E33E259C5EBB00DBAFE5 /* HomeCardCustomFlowLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -111,6 +112,7 @@
 		EC89E32D259C496C00DBAFE5 /* FollowMoreButtonCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowMoreButtonCVC.swift; sourceTree = "<group>"; };
 		EC89E335259C4E7400DBAFE5 /* UnderTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UnderTab.storyboard; sourceTree = "<group>"; };
 		EC89E338259C507300DBAFE5 /* UnderTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderTabBarController.swift; sourceTree = "<group>"; };
+		EC89E33E259C5EBB00DBAFE5 /* HomeCardCustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardCustomFlowLayout.swift; sourceTree = "<group>"; };
 		FE9DABE27D9C7D77517D82AB /* Pods_BeMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -263,6 +265,7 @@
 		EC813F6E2599F82D00BBCE25 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				EC89E33D259C5E9D00DBAFE5 /* FlowLayouts */,
 				EC813F6F2599F83300BBCE25 /* Storyboards */,
 				EC813F702599F83900BBCE25 /* VCs */,
 				EC813F712599F83D00BBCE25 /* Cells */,
@@ -319,6 +322,14 @@
 				EC89E338259C507300DBAFE5 /* UnderTabBarController.swift */,
 			);
 			path = VCs;
+			sourceTree = "<group>";
+		};
+		EC89E33D259C5E9D00DBAFE5 /* FlowLayouts */ = {
+			isa = PBXGroup;
+			children = (
+				EC89E33E259C5EBB00DBAFE5 /* HomeCardCustomFlowLayout.swift */,
+			);
+			path = FlowLayouts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -453,6 +464,7 @@
 				EC7C1631259BACF100A5BA4C /* FollowerPeopleCVC.swift in Sources */,
 				EC89E32E259C496C00DBAFE5 /* FollowMoreButtonCVC.swift in Sources */,
 				EC89E339259C507300DBAFE5 /* UnderTabBarController.swift in Sources */,
+				EC89E33F259C5EBB00DBAFE5 /* HomeCardCustomFlowLayout.swift in Sources */,
 				EC813F282599A15100BBCE25 /* ViewController.swift in Sources */,
 				EC7C1615259B925A00A5BA4C /* FollowingPVC.swift in Sources */,
 				EC813F772599F86900BBCE25 /* HomeVC.swift in Sources */,

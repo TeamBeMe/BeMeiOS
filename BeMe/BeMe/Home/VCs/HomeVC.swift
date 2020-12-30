@@ -47,6 +47,8 @@ extension HomeVC {
         todayCards = 1
         cardCollectionView.delegate = self
         cardCollectionView.dataSource = self
+        let customLayout = HomeCardCustomFlowLayout()
+        cardCollectionView.collectionViewLayout = customLayout
         //        cardCollectionView.reloadData()
         
         
@@ -204,6 +206,7 @@ extension HomeVC : UIScrollViewDelegate {
                                                 at: .centeredHorizontally,
                                                 animated: true)
                 currentCardIdx = currentCardIdx-1
+                
                
             }
             else if Int(curPos.x) > 325 + 335*(currentCardIdx-1) + 200{
@@ -230,19 +233,40 @@ extension HomeVC : UIScrollViewDelegate {
 
 extension HomeVC : AddQuestionDelegate {
     func addQuestion() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.todayCards = self.todayCards + 1
+//        UIView.animate(withDuration: 0.5, animations: {
+//            self.todayCards = self.todayCards + 1
+//
+//            self.cardCollectionView.alpha = 0
+//
+//        }, completion: { finished in
+//            self.cardCollectionView.reloadData()
+//            UIView.animate(withDuration: 0.5, animations: {
+//                self.cardCollectionView.alpha = 1
+//            })
+//
+//        })
+//
+        todayCards = todayCards+1
+        cardCollectionView.reloadData()
+        self.cardCollectionView.scrollToItem(at: IndexPath(item: self.currentCardIdx+1, section: 0),
+                                        at: .centeredHorizontally,
+                                        animated: false)
+        UIView.animate(withDuration: 0.0, animations: {
 
-            self.cardCollectionView.alpha = 0
-
+            
         }, completion: { finished in
-            self.cardCollectionView.reloadData()
             UIView.animate(withDuration: 0.5, animations: {
-                self.cardCollectionView.alpha = 1
+                
+                let move = CGPoint(x:  325 + 335*(self.currentCardIdx-1)-250, y: 0)
+                self.cardCollectionView.setContentOffset(move, animated: false)
+               
+               
+                
             })
-
+            
         })
-
+       
+        
         
         
     }
