@@ -9,4 +9,5 @@ import UIKit
 
 class CategoryCVC: UICollectionViewCell {
     static let identifier: String = "CategoryCVC"
+    
 }

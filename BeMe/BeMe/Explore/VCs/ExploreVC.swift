@@ -100,7 +100,7 @@ extension ExploreVC: UIScrollViewDelegate {
 extension ExploreVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 28, bottom: 0, right: 30)
+        return UIEdgeInsets(top: 10, left: 28, bottom: 10, right: 30)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

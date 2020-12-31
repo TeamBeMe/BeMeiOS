@@ -283,18 +283,18 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="390" height="54"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iVh-kE-hbm">
+                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iVh-kE-hbm">
                                                             <rect key="frame" x="0.0" y="0.0" width="390" height="54"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                            <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cne-lg-nhe">
+                                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cne-lg-nhe">
                                                                 <size key="itemSize" width="154" height="46"/>
                                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                                                 <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                             </collectionViewFlowLayout>
                                                             <cells>
-                                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="87I-Mo-ilT">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="154" height="46"/>
+                                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CategoryCVC" id="87I-Mo-ilT" customClass="CategoryCVC" customModule="BeMe" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="4" width="154" height="46"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cuY-BS-Tyq">
                                                                         <rect key="frame" x="0.0" y="0.0" width="154" height="46"/>
@@ -326,6 +326,9 @@
                                                         <constraint firstAttribute="trailing" secondItem="iVh-kE-hbm" secondAttribute="trailing" id="Ywu-7U-5KJ"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="categoryCollectionView" destination="iVh-kE-hbm" id="QeM-jO-YG1"/>
+                                                </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArticleTVC" rowHeight="200" id="u2E-Bl-yoj" customClass="ArticleTVC" customModule="BeMe" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="82" width="390" height="200"/>
