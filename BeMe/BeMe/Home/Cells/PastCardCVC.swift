@@ -42,7 +42,8 @@ class PastCardCVC: UICollectionViewCell {
 //        $0.isEditable = false
         $0.font = UIFont.systemFont(ofSize: 14)
         $0.textAlignment = .center
-        $0.backgroundColor = UIColor(cgColor: CGColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0))
+        $0.backgroundColor = UIColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0)
+
             
     }
     
@@ -63,13 +64,15 @@ extension PastCardCVC {
     
     override func awakeFromNib() {
         makeLockButton()
-        makeQuestionInfoLabel()
+        makeQuestionInfoLabel() 
         makeDateLabel()
         makeQuestionLabel()
         makeAnswerTextView()
         self.makeRounded(cornerRadius: 6)
-        self.contentView.backgroundColor = UIColor(cgColor: CGColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0))
+        self.backgroundColor = UIColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0)
+        self.contentView.backgroundColor = UIColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0)
         lockButton.addTarget(self, action: #selector(changePublic), for: .touchUpInside)
+        self.setBorder(borderColor: UIColor(red: 142/255, green: 142/255, blue: 147/255, alpha: 1.0), borderWidth: 1.0)
         
     }
     

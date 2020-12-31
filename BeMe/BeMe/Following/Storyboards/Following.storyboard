@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jha-QA-2zS">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Rzg-bm-n02">
                                     <size key="itemSize" width="410" height="141"/>
@@ -346,7 +346,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c75-yX-tul">
-                                                    <rect key="frame" x="30" y="0.0" width="350" height="141"/>
+                                                    <rect key="frame" x="30" y="0.0" width="350" height="121"/>
                                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <state key="normal" title="더보기">
@@ -358,7 +358,7 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="c75-yX-tul" secondAttribute="bottom" id="fkh-7e-O1x"/>
+                                                <constraint firstAttribute="bottom" secondItem="c75-yX-tul" secondAttribute="bottom" constant="20" id="fkh-7e-O1x"/>
                                                 <constraint firstAttribute="trailing" secondItem="c75-yX-tul" secondAttribute="trailing" constant="30" id="lNB-QM-IMF"/>
                                                 <constraint firstItem="c75-yX-tul" firstAttribute="leading" secondItem="M94-Ek-FbS" secondAttribute="leading" constant="30" id="njq-07-pn8"/>
                                                 <constraint firstItem="c75-yX-tul" firstAttribute="top" secondItem="M94-Ek-FbS" secondAttribute="top" id="zqs-59-Jxm"/>
@@ -376,7 +376,7 @@
                         <constraints>
                             <constraint firstItem="35p-Go-XH5" firstAttribute="trailing" secondItem="jha-QA-2zS" secondAttribute="trailing" id="AQu-uV-W7w"/>
                             <constraint firstAttribute="bottom" secondItem="jha-QA-2zS" secondAttribute="bottom" id="P5Y-yI-yr5"/>
-                            <constraint firstItem="jha-QA-2zS" firstAttribute="top" secondItem="TNk-WH-s5V" secondAttribute="top" id="aPz-EK-Fga"/>
+                            <constraint firstItem="jha-QA-2zS" firstAttribute="top" secondItem="35p-Go-XH5" secondAttribute="top" id="aPz-EK-Fga"/>
                             <constraint firstItem="jha-QA-2zS" firstAttribute="leading" secondItem="35p-Go-XH5" secondAttribute="leading" id="d9T-iv-fmf"/>
                         </constraints>
                     </view>

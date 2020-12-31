@@ -59,9 +59,10 @@ class CustomTodayCardView: UIView {
         makeQuestionLabel()
         makeReplyButton()
         makeChangeButton()
-        self.backgroundColor = UIColor(cgColor: CGColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0))
+        self.backgroundColor = UIColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0)
         self.makeRounded(cornerRadius: 6)
-        
+        self.setBorder(borderColor: UIColor(red: 142/255, green: 142/255, blue: 147/255, alpha: 1.0), borderWidth: 1.0)
+
     }
     
     required init?(coder: NSCoder) {

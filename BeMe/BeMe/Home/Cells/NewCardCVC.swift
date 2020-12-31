@@ -70,9 +70,11 @@ extension NewCardCVC {
         makeQuestionLabel()
         makeReplyButton()
         makeChangeButton()
-        self.contentView.backgroundColor = UIColor(cgColor: CGColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0))
+        self.backgroundColor = UIColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0)
+        self.contentView.backgroundColor = UIColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0)
         self.makeRounded(cornerRadius: 6)
         lockButton.addTarget(self, action: #selector(changePublic), for: .touchUpInside)
+        self.setBorder(borderColor: UIColor(red: 142/255, green: 142/255, blue: 147/255, alpha: 1.0), borderWidth: 1.0)
     }
     
     

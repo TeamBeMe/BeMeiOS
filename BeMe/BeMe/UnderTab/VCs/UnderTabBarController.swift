@@ -16,7 +16,14 @@ class UnderTabBarController: UITabBarController {
         // Do any additional setup after loading the view.
     }
     
-
+    override func viewDidLayoutSubviews() {
+        self.delegate = self
+        super.viewDidLayoutSubviews()
+        tabBar.frame.size.height = 83
+        tabBar.frame.origin.y = view.frame.height - 83
+    }
+    
+    var homeTabBarDelegate : HomeTabBarDelegate?
 }
 
 
@@ -38,7 +45,7 @@ extension UnderTabBarController {
                 return
         }
         
-        
+        homeTabBarDelegate = homeVC
         guard let exploreVC = UIStoryboard(name:"Home",bundle:nil)
                 .instantiateViewController(identifier: "HomeVC") as? HomeVC else {
             return
@@ -94,6 +101,23 @@ extension UnderTabBarController {
     
     
     
+    
+    
+}
+
+extension UnderTabBarController : UITabBarControllerDelegate {
+    // UITabBarDelegate
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        
+    }
+
+
+    // UITabBarControllerDelegate
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if viewController == self.viewControllers![0] {
+            homeTabBarDelegate?.homeButtonTapped()
+        }
+    }
     
     
 }

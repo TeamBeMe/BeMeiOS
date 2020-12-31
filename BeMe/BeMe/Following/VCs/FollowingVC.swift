@@ -186,7 +186,7 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
             return CGSize(width: collectionView.frame.width , height: 80)
         }
         else if indexPath.item == totalCell-1 {
-            return CGSize(width: collectionView.frame.width , height: 50)
+            return CGSize(width: collectionView.frame.width , height: 70)
             
         }
         else {

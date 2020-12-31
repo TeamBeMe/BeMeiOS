@@ -8,6 +8,7 @@
 import UIKit
 import Then
 import SnapKit
+import UserNotifications
 
 class HomeVC: UIViewController {
     //MARK:- IBOutlets
@@ -40,8 +41,8 @@ class HomeVC: UIViewController {
     let deviceBound = UIScreen.main.bounds.height/812.0
     let deviceWidthBound = UIScreen.main.bounds.width/375.0
     var locks = [false,false,false,false,false,false,false,false,]
-    
-    
+    let userNotificationCenter = UNUserNotificationCenter.current()
+    private var flexible = false
     
     
 }
@@ -70,6 +71,10 @@ extension HomeVC {
             cardHeight = Double(491*deviceBound)
             cardWidth = 315*deviceBound
         }
+//        userNotificationCenter.delegate = self
+        requestNotificationAuthorization()
+        sendNotification()
+        
         
     }
     
@@ -121,6 +126,43 @@ extension HomeVC {
             return "비공개 질문으로 전환하시겠어요?"
         }
         
+    }
+    
+    func requestNotificationAuthorization() {
+        let authOptions = UNAuthorizationOptions(arrayLiteral: .alert, .badge, .sound)
+
+        userNotificationCenter.requestAuthorization(options: authOptions) { success, error in
+            if let error = error {
+                print("Error: \(error)")
+            }
+        }
+    }
+
+    func sendNotification() {
+        let notificationContent = UNMutableNotificationContent()
+
+        notificationContent.title = "오늘의 질문이 도착했어요"
+        notificationContent.body = "질문을 보러가려면 눌러주세요"
+
+        
+        
+       
+        
+        var date = DateComponents()
+        date.hour = 22
+        date.minute = 00
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: "testNotification",
+                                            content: notificationContent,
+                                            trigger: trigger)
+
+        userNotificationCenter.add(request) { error in
+            if let error = error {
+                print("Notification Error: ", error)
+            }
+        }
     }
     
     
@@ -218,7 +260,14 @@ extension HomeVC : UIScrollViewDelegate {
             
         }
         
-        if initialScrolled == true{
+        if flexible {
+            if Int(curPos.x) > Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) - 200
+                && Int(curPos.x) < Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) + 200 {
+                flexible = !flexible
+            }
+        }
+        
+        if initialScrolled == true && !flexible{
 
             if Int(curPos.x) < Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) - 200 {
                 cardCollectionView.scrollToItem(at: IndexPath(item: currentCardIdx-1, section: 0),
@@ -238,37 +287,15 @@ extension HomeVC : UIScrollViewDelegate {
             }
 
         }
-        
-        
-            
-        
-        
-        
-        
+
         
     }
-    
-    
-    
-    
+
 }
 
 extension HomeVC : AddQuestionDelegate {
     func addQuestion() {
-        //        UIView.animate(withDuration: 0.5, animations: {
-        //            self.todayCards = self.todayCards + 1
-        //
-        //            self.cardCollectionView.alpha = 0
-        //
-        //        }, completion: { finished in
-        //            self.cardCollectionView.reloadData()
-        //            UIView.animate(withDuration: 0.5, animations: {
-        //                self.cardCollectionView.alpha = 1
-        //            })
-        //
-        //        })
-        //
-        
+
         
         let customCard = CustomTodayCardView(frame: .zero)
         let customAddCard = CustomAddCardView(frame: .zero)
@@ -288,10 +315,6 @@ extension HomeVC : AddQuestionDelegate {
             $0.leading.equalToSuperview().offset(40)
             
         }
-        
-        
-        
-        
         UIView.transition(from: customAddCard,
                           to: customCard,
                           duration: 1.5,
@@ -305,48 +328,6 @@ extension HomeVC : AddQuestionDelegate {
                                                             animated: true)
                             
                           })
-        
-        
-        //        UIView.animate(withDuration: 0.5, animations: {
-        //            customCard.alpha = 1
-        //
-        //        }, completion: { finished in
-        //            self.todayCards = self.todayCards+1
-        //            self.cardCollectionView.reloadData()
-        //            UIView.animate(withDuration: 0.5, animations: {
-        //                customCard.removeFromSuperview()
-        //
-        //            })
-        //
-        //
-        //
-        //        })
-        
-        
-        
-        //
-        //        todayCards = todayCards+1
-        //        cardCollectionView.reloadData()
-        //        self.cardCollectionView.scrollToItem(at: IndexPath(item: self.currentCardIdx+1, section: 0),
-        //                                        at: .centeredHorizontally,
-        //                                        animated: false)
-        //        UIView.animate(withDuration: 0.0, animations: {
-        //
-        //
-        //        }, completion: { finished in
-        //            UIView.animate(withDuration: 0.5, animations: {
-        //
-        //                let move = CGPoint(x:  325 + 335*(self.currentCardIdx-1)-250, y: 0)
-        //                self.cardCollectionView.setContentOffset(move, animated: false)
-        //
-        //
-        //
-        //            })
-        //
-        //        })
-        
-        
-        
         
     }
     
@@ -406,6 +387,35 @@ extension HomeVC : ChangePublicDelegate{
 }
 
 
+extension HomeVC: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
+    }
+}
+
+extension HomeVC : HomeTabBarDelegate{
+    func homeButtonTapped() {
+        flexible = true
+
+        self.cardCollectionView.scrollToItem(at: IndexPath(item: self.pastCards, section: 0),
+                                        at: .centeredHorizontally,
+                                        animated: true)
+        
+        currentCardIdx = pastCards
+    
+        
+    
+        
+    }
+}
 
 protocol AddQuestionDelegate{
     
@@ -417,5 +427,12 @@ protocol AddQuestionDelegate{
 protocol ChangePublicDelegate{
     
     func changePublic(now : Bool)
+    
+}
+
+
+
+protocol HomeTabBarDelegate {
+    func homeButtonTapped()
     
 }
