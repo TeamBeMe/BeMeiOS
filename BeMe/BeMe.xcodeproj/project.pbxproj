@@ -88,7 +88,6 @@
 			children = (
 				A5AF7DBB259A09D3003C42B5 /* Storyboards */,
 				A5AF7DBC259A09DF003C42B5 /* VCs */,
-				A5AF7DBD259A09E4003C42B5 /* Cells */,
 			);
 			path = Answer;
 			sourceTree = "<group>";
@@ -107,13 +106,6 @@
 				A5A55F73259A1B8300242864 /* AnswerVC.swift */,
 			);
 			path = VCs;
-			sourceTree = "<group>";
-		};
-		A5AF7DBD259A09E4003C42B5 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cells;
 			sourceTree = "<group>";
 		};
 		EC813F172599A15100BBCE25 = {

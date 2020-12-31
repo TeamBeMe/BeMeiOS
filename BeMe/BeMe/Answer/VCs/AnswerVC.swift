@@ -25,12 +25,24 @@ class AnswerVC: UIViewController {
     
     @IBOutlet weak var answerOpenSwith: UISwitch!
     
+    @IBOutlet weak var finishButton: UIButton!
+    
+    @IBOutlet weak var backButton: UIButton!
+    
     
     //MARK:**- Variable Part**
     
     /// 뷰컨에 필요한 변수들을 선언합니다  // 변수명 lowerCamelCase 사용
     
     /// ex)  var imageViewList : [UIImageView] = []
+    
+    var question: String?
+    var questionInfo: String?
+    var answerData: String?
+    var answer: String?
+    var isAnswerPublic: Bool = false
+    var isCommentPublic: Bool = false
+    
     
     //MARK:**- Constraint Part**
     
