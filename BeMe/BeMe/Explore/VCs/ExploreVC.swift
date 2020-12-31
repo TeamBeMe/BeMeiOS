@@ -144,7 +144,7 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
                     .dequeueReusableCell(withIdentifier: CategoryTVC.identifier, for: indexPath)
                     as? CategoryTVC else { return UITableViewCell() }
             return header
-        } else if indexPath.row == 20 {
+        } else if indexPath.row == 11 {
             guard let more = tableView
                     .dequeueReusableCell(withIdentifier: MoreTVC.identifier, for: indexPath)
                     as? MoreTVC else { return UITableViewCell() }

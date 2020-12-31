@@ -270,7 +270,7 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5i8-hf-lv2">
-                                        <rect key="frame" x="0.0" y="573" width="390" height="2000"/>
+                                        <rect key="frame" x="0.0" y="581" width="390" height="2000"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2000" id="G8J-iJ-BeC"/>
@@ -282,6 +282,49 @@
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jfl-mZ-seb" id="78s-SC-O5R">
                                                     <rect key="frame" x="0.0" y="0.0" width="390" height="54"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iVh-kE-hbm">
+                                                            <rect key="frame" x="0.0" y="0.0" width="390" height="54"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cne-lg-nhe">
+                                                                <size key="itemSize" width="154" height="46"/>
+                                                                <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                            </collectionViewFlowLayout>
+                                                            <cells>
+                                                                <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="87I-Mo-ilT">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="154" height="46"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cuY-BS-Tyq">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="154" height="46"/>
+                                                                        <autoresizingMask key="autoresizingMask"/>
+                                                                        <subviews>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가치관" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qhe-Te-dAb">
+                                                                                <rect key="frame" x="14" y="11" width="126" height="24"/>
+                                                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="12"/>
+                                                                                <nil key="textColor"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="bottom" secondItem="Qhe-Te-dAb" secondAttribute="bottom" constant="11" id="Nua-ZO-bup"/>
+                                                                            <constraint firstItem="Qhe-Te-dAb" firstAttribute="top" secondItem="cuY-BS-Tyq" secondAttribute="top" constant="11" id="RnS-1A-Hoz"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="Qhe-Te-dAb" secondAttribute="trailing" constant="14" id="dKv-pi-BXZ"/>
+                                                                            <constraint firstItem="Qhe-Te-dAb" firstAttribute="leading" secondItem="cuY-BS-Tyq" secondAttribute="leading" constant="14" id="oMw-5E-wM6"/>
+                                                                        </constraints>
+                                                                    </collectionViewCellContentView>
+                                                                    <size key="customSize" width="154" height="46"/>
+                                                                </collectionViewCell>
+                                                            </cells>
+                                                        </collectionView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="iVh-kE-hbm" secondAttribute="bottom" id="4Lf-hq-gOK"/>
+                                                        <constraint firstItem="iVh-kE-hbm" firstAttribute="top" secondItem="78s-SC-O5R" secondAttribute="top" id="CG3-rZ-lJC"/>
+                                                        <constraint firstItem="iVh-kE-hbm" firstAttribute="leading" secondItem="78s-SC-O5R" secondAttribute="leading" id="DUW-TJ-LUz"/>
+                                                        <constraint firstAttribute="trailing" secondItem="iVh-kE-hbm" secondAttribute="trailing" id="Ywu-7U-5KJ"/>
+                                                    </constraints>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArticleTVC" rowHeight="200" id="u2E-Bl-yoj" customClass="ArticleTVC" customModule="BeMe" customModuleProvider="target">
@@ -346,7 +389,7 @@
                                     <constraint firstItem="n7G-SY-HFF" firstAttribute="bottom" secondItem="dw9-p0-hOx" secondAttribute="bottom" id="4jY-uv-B2g"/>
                                     <constraint firstItem="1uw-9s-YLF" firstAttribute="top" secondItem="h1s-u1-hNF" secondAttribute="top" id="Aad-nH-UoJ"/>
                                     <constraint firstItem="dw9-p0-hOx" firstAttribute="leading" secondItem="h1s-u1-hNF" secondAttribute="leading" id="Byy-Wf-C14"/>
-                                    <constraint firstItem="5i8-hf-lv2" firstAttribute="top" secondItem="dw9-p0-hOx" secondAttribute="bottom" id="CBd-eb-WDf"/>
+                                    <constraint firstItem="5i8-hf-lv2" firstAttribute="top" secondItem="dw9-p0-hOx" secondAttribute="bottom" constant="8" id="CBd-eb-WDf"/>
                                     <constraint firstItem="dw9-p0-hOx" firstAttribute="top" secondItem="4Mk-7h-aMo" secondAttribute="bottom" id="FIF-kj-r02"/>
                                     <constraint firstAttribute="trailing" secondItem="4Mk-7h-aMo" secondAttribute="trailing" id="Kb6-T1-P2V"/>
                                     <constraint firstItem="4Mk-7h-aMo" firstAttribute="leading" secondItem="h1s-u1-hNF" secondAttribute="leading" id="Tmc-pz-tc0"/>
