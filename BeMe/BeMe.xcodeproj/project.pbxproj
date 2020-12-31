@@ -10,6 +10,7 @@
 		3FDD35238DF8F48142B9F9F1 /* Pods_BeMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9DABE27D9C7D77517D82AB /* Pods_BeMe.framework */; };
 		D4F01026259C7A4000AA3EE8 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4F01025259C7A4000AA3EE8 /* Explore.storyboard */; };
 		D4F01029259C7A8000AA3EE8 /* ExploreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01028259C7A8000AA3EE8 /* ExploreVC.swift */; };
+		D4F0102C259E002400AA3EE8 /* DiffThoughtCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F0102B259E002400AA3EE8 /* DiffThoughtCVC.swift */; };
 		EC7C1601259B469D00A5BA4C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1600259B469D00A5BA4C /* UIViewController+Extensions.swift */; };
 		EC7C1605259B485D00A5BA4C /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1604259B485D00A5BA4C /* CustomAlertView.swift */; };
 		EC7C160F259B8B8100A5BA4C /* Following.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC7C160E259B8B8100A5BA4C /* Following.storyboard */; };
@@ -65,6 +66,7 @@
 		81614202856C8826262057FD /* Pods-BeMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.release.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.release.xcconfig"; sourceTree = "<group>"; };
 		D4F01025259C7A4000AA3EE8 /* Explore.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Explore.storyboard; sourceTree = "<group>"; };
 		D4F01028259C7A8000AA3EE8 /* ExploreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreVC.swift; sourceTree = "<group>"; };
+		D4F0102B259E002400AA3EE8 /* DiffThoughtCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffThoughtCVC.swift; sourceTree = "<group>"; };
 		EC7C1600259B469D00A5BA4C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		EC7C1604259B485D00A5BA4C /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		EC7C160E259B8B8100A5BA4C /* Following.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Following.storyboard; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 		D4DCD598259C66F1008DB300 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				D4F0102B259E002400AA3EE8 /* DiffThoughtCVC.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				EC813F7B2599F88D00BBCE25 /* PastCardCVC.swift in Sources */,
 				EC7C1612259B8BA100A5BA4C /* FollowingVC.swift in Sources */,
 				EC7C1631259BACF100A5BA4C /* FollowerPeopleCVC.swift in Sources */,
+				D4F0102C259E002400AA3EE8 /* DiffThoughtCVC.swift in Sources */,
 				EC89E32E259C496C00DBAFE5 /* FollowMoreButtonCVC.swift in Sources */,
 				EC89E339259C507300DBAFE5 /* UnderTabBarController.swift in Sources */,
 				EC813F282599A15100BBCE25 /* ViewController.swift in Sources */,
