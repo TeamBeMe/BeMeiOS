@@ -23,7 +23,8 @@ class UnderTabBarController: UITabBarController {
         tabBar.frame.origin.y = view.frame.height - 83
     }
     
-    var homeTabBarDelegate : HomeTabBarDelegate?
+    var homeTabBarDelegate: HomeTabBarDelegate?
+    var followingTabBarDelegate: FollowingTabBarDelegate?
 }
 
 
@@ -55,15 +56,16 @@ extension UnderTabBarController {
         
         guard let followingVC = UIStoryboard(name: "Following",
                                         bundle: nil).instantiateViewController(
-                                            withIdentifier: "FollowingVC") as? UINavigationController
+                                            withIdentifier: "FollowingVC") as? FollowingVC
             else{
             
             return
         }
+        followingTabBarDelegate = followingVC
         
         guard let myPageVC = UIStoryboard(name: "Following",
                                         bundle: nil).instantiateViewController(
-                                            withIdentifier: "FollowingVC") as? UINavigationController
+                                            withIdentifier: "FollowingVC") as? FollowingVC
             else{
             
             return
@@ -116,6 +118,9 @@ extension UnderTabBarController : UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if viewController == self.viewControllers![0] {
             homeTabBarDelegate?.homeButtonTapped()
+        }
+        else if viewController == self.viewControllers![2]{
+            followingTabBarDelegate?.followButtonTapped()
         }
     }
     

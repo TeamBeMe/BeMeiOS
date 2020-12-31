@@ -256,6 +256,24 @@ extension FollowingVC : FollowPeopleCollectionViewDelegate{
     }
 }
 
+extension FollowingVC : FollowingTabBarDelegate{
+    func followButtonTapped() {
+       
+
+        self.wholeCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0),
+                                              at: .top,
+                                        animated: true)
+     
+    
+        
+    }
+}
+
+protocol FollowingTabBarDelegate{
+    func followButtonTapped()
+    
+}
+
 protocol FollowingPeopleCollectionViewDelegate{
     func followingPeopleUpdate()
     
