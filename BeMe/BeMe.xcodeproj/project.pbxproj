@@ -10,6 +10,7 @@
 		3FDD35238DF8F48142B9F9F1 /* Pods_BeMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9DABE27D9C7D77517D82AB /* Pods_BeMe.framework */; };
 		EC737F19259D867A0035207F /* CustomTodayCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F18259D867A0035207F /* CustomTodayCardView.swift */; };
 		EC737F1C259D8B9E0035207F /* CustomAddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */; };
+		EC737F21259DB2C40035207F /* FollowUpperCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F20259DB2C40035207F /* FollowUpperCVC.swift */; };
 		EC7C1601259B469D00A5BA4C /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1600259B469D00A5BA4C /* UIViewController+Extensions.swift */; };
 		EC7C1605259B485D00A5BA4C /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1604259B485D00A5BA4C /* CustomAlertView.swift */; };
 		EC7C160F259B8B8100A5BA4C /* Following.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC7C160E259B8B8100A5BA4C /* Following.storyboard */; };
@@ -66,6 +67,7 @@
 		81614202856C8826262057FD /* Pods-BeMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.release.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.release.xcconfig"; sourceTree = "<group>"; };
 		EC737F18259D867A0035207F /* CustomTodayCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTodayCardView.swift; sourceTree = "<group>"; };
 		EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAddCardView.swift; sourceTree = "<group>"; };
+		EC737F20259DB2C40035207F /* FollowUpperCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUpperCVC.swift; sourceTree = "<group>"; };
 		EC7C1600259B469D00A5BA4C /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		EC7C1604259B485D00A5BA4C /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		EC7C160E259B8B8100A5BA4C /* Following.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Following.storyboard; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 				EC89E327259C378300DBAFE5 /* FollowHeaderCVC.swift */,
 				EC89E32A259C378F00DBAFE5 /* FollowCardCVC.swift */,
 				EC89E32D259C496C00DBAFE5 /* FollowMoreButtonCVC.swift */,
+				EC737F20259DB2C40035207F /* FollowUpperCVC.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -483,6 +486,7 @@
 				EC7C1605259B485D00A5BA4C /* CustomAlertView.swift in Sources */,
 				EC89E316259C280200DBAFE5 /* FollowingListCVC.swift in Sources */,
 				EC7C1637259BAD1A00A5BA4C /* FollowerHeaderCVC.swift in Sources */,
+				EC737F21259DB2C40035207F /* FollowUpperCVC.swift in Sources */,
 				EC89E31F259C2B0800DBAFE5 /* FollowingSearchPVC.swift in Sources */,
 				EC7C1621259B9B8800A5BA4C /* FollowingPersonCVC.swift in Sources */,
 				EC7C162A259BA01200A5BA4C /* FollowerInfoVC.swift in Sources */,
