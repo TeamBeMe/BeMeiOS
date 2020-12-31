@@ -12,6 +12,7 @@
 		D4E5FD26259E3F0000C57950 /* CategoryCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E5FD25259E3F0000C57950 /* CategoryCVC.swift */; };
 		D4E5FD2A259E3F2000C57950 /* CategoryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E5FD29259E3F2000C57950 /* CategoryTVC.swift */; };
 		D4E5FD34259E6D8B00C57950 /* MoreTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E5FD33259E6D8B00C57950 /* MoreTVC.swift */; };
+		D4E5FD37259E710200C57950 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E5FD36259E710200C57950 /* UIButton+Extensions.swift */; };
 		D4F01026259C7A4000AA3EE8 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4F01025259C7A4000AA3EE8 /* Explore.storyboard */; };
 		D4F01029259C7A8000AA3EE8 /* ExploreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01028259C7A8000AA3EE8 /* ExploreVC.swift */; };
 		D4F0102C259E002400AA3EE8 /* DiffThoughtCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F0102B259E002400AA3EE8 /* DiffThoughtCVC.swift */; };
@@ -72,6 +73,7 @@
 		D4E5FD25259E3F0000C57950 /* CategoryCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCVC.swift; sourceTree = "<group>"; };
 		D4E5FD29259E3F2000C57950 /* CategoryTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTVC.swift; sourceTree = "<group>"; };
 		D4E5FD33259E6D8B00C57950 /* MoreTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreTVC.swift; sourceTree = "<group>"; };
+		D4E5FD36259E710200C57950 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		D4F01025259C7A4000AA3EE8 /* Explore.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Explore.storyboard; sourceTree = "<group>"; };
 		D4F01028259C7A8000AA3EE8 /* ExploreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreVC.swift; sourceTree = "<group>"; };
 		D4F0102B259E002400AA3EE8 /* DiffThoughtCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffThoughtCVC.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 				EC813F602599F3E900BBCE25 /* UIColor+Extensions.swift */,
 				EC813F642599F40800BBCE25 /* UIView+Extensions.swift */,
 				EC7C1600259B469D00A5BA4C /* UIViewController+Extensions.swift */,
+				D4E5FD36259E710200C57950 /* UIButton+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 				EC89E31F259C2B0800DBAFE5 /* FollowingSearchPVC.swift in Sources */,
 				EC7C1621259B9B8800A5BA4C /* FollowingPersonCVC.swift in Sources */,
 				EC7C162A259BA01200A5BA4C /* FollowerInfoVC.swift in Sources */,
+				D4E5FD37259E710200C57950 /* UIButton+Extensions.swift in Sources */,
 				EC89E322259C376500DBAFE5 /* FollowPeopleCVC.swift in Sources */,
 				EC7C161B259B9A9200A5BA4C /* FollowingInfoVC.swift in Sources */,
 				EC89E325259C377400DBAFE5 /* FollowPersonCVC.swift in Sources */,

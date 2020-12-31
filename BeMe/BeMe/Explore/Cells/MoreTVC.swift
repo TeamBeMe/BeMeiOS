@@ -10,15 +10,10 @@ import UIKit
 class MoreTVC: UITableViewCell {
     static let identifier: String = "MoreTVC"
     
+    @IBOutlet weak var moreButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        moreButton.makeRound(to: 6)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

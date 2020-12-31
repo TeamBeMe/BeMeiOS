@@ -329,6 +329,9 @@
                                                         <constraint firstItem="wkJ-kZ-nwp" firstAttribute="top" secondItem="7R1-lM-mz9" secondAttribute="topMargin" constant="24" id="uEk-Gz-jdW"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="moreButton" destination="wkJ-kZ-nwp" id="IGy-cd-9aQ"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                         <connections>
