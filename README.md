@@ -18,4 +18,4 @@
 - [Git-Management](/GitManage.md)
 
   
--  Kanban Board  :  깃헙 프로젝트 사용
+- [Kanban Board](https://github.com/TeamBeMe/BeMeiOS/projects/1)
