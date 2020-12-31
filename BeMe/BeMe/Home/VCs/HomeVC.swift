@@ -13,7 +13,7 @@ class HomeVC: UIViewController {
     //MARK:- IBOutlets
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var cardCollectionView: UICollectionView!
-
+    
     
     let alertHorizontalSeperator = UIView().then{
         $0.backgroundColor = .gray
@@ -22,17 +22,25 @@ class HomeVC: UIViewController {
     let alertVerticalSeperator = UIView().then {
         $0.backgroundColor = .gray
     }
+    @IBOutlet weak var timeLabelTopConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var collectionViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
+    
     
     //MARK:- User Define Variables
-    private var cardWidth = 0
+    private var collectionViewWidth = 0
+    private var cardWidth : CGFloat = 0.0
     private var pastCards = 0
     private var todayCards = 0
     private var currentCardIdx = 0
     private var initialScrolled = false
+    private var cardHeight = 0.0
     var nowPos = CGPoint(x: -1.0, y: 0)
-    
+    let deviceBound = UIScreen.main.bounds.height/812.0
+    let deviceWidthBound = UIScreen.main.bounds.width/375.0
     var locks = [false,false,false,false,false,false,false,false,]
-
+    
     
     
     
@@ -47,8 +55,21 @@ extension HomeVC {
         todayCards = 1
         cardCollectionView.delegate = self
         cardCollectionView.dataSource = self
+        let customLayout = HomeCardCustomFlowLayout()
+        cardCollectionView.collectionViewLayout = customLayout
         //        cardCollectionView.reloadData()
-        
+        timeLabelTopConstraint.constant = 103 * deviceBound
+        collectionViewTopConstraint.constant = 150 * deviceBound
+        if deviceBound < 1 {
+            collectionViewHeightConstraint.constant = 450
+            cardHeight = 450
+            cardWidth = 315
+        }
+        else {
+            collectionViewHeightConstraint.constant = 491*deviceBound
+            cardHeight = Double(491*deviceBound)
+            cardWidth = 315*deviceBound
+        }
         
     }
     
@@ -89,7 +110,7 @@ extension HomeVC {
     func changeLock(){
         locks[currentCardIdx] = !locks[currentCardIdx]
         cardCollectionView.reloadData()
-            
+        
     }
     
     func makeAlertTitle() -> String {
@@ -158,8 +179,8 @@ extension HomeVC : UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        cardWidth = Int(collectionView.frame.width)
-        return CGSize(width: 315.0 ,
+        collectionViewWidth = Int(collectionView.frame.width)
+        return CGSize(width: cardWidth ,
                       height: collectionView.frame.height)
     }
     
@@ -189,7 +210,7 @@ extension HomeVC : UICollectionViewDelegateFlowLayout {
 extension HomeVC : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let curPos = scrollView.contentOffset
-        if Int(curPos.x) < (pastCards-1)*cardWidth {
+        if Int(curPos.x) < (pastCards-1)*collectionViewWidth {
             timeLabel.text = "과거의 질문"
         }
         else{
@@ -198,27 +219,31 @@ extension HomeVC : UIScrollViewDelegate {
         }
         
         if initialScrolled == true{
-            
-            if Int(curPos.x) < 325 + 335*(currentCardIdx-1) - 200 {
+
+            if Int(curPos.x) < Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) - 200 {
                 cardCollectionView.scrollToItem(at: IndexPath(item: currentCardIdx-1, section: 0),
                                                 at: .centeredHorizontally,
                                                 animated: true)
                 currentCardIdx = currentCardIdx-1
-               
+
+
             }
-            else if Int(curPos.x) > 325 + 335*(currentCardIdx-1) + 200{
+            else if Int(curPos.x) > Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) + 200 {
                 cardCollectionView.scrollToItem(at: IndexPath(item: currentCardIdx+1, section: 0),
                                                 at: .centeredHorizontally,
                                                 animated: true)
                 currentCardIdx = currentCardIdx+1
-                
-                
+
+
             }
-           
+
         }
-      
-     
-    
+        
+        
+            
+        
+        
+        
         
         
     }
@@ -230,25 +255,103 @@ extension HomeVC : UIScrollViewDelegate {
 
 extension HomeVC : AddQuestionDelegate {
     func addQuestion() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.todayCards = self.todayCards + 1
-
-            self.cardCollectionView.alpha = 0
-
-        }, completion: { finished in
-            self.cardCollectionView.reloadData()
-            UIView.animate(withDuration: 0.5, animations: {
-                self.cardCollectionView.alpha = 1
-            })
-
-        })
-
+        //        UIView.animate(withDuration: 0.5, animations: {
+        //            self.todayCards = self.todayCards + 1
+        //
+        //            self.cardCollectionView.alpha = 0
+        //
+        //        }, completion: { finished in
+        //            self.cardCollectionView.reloadData()
+        //            UIView.animate(withDuration: 0.5, animations: {
+        //                self.cardCollectionView.alpha = 1
+        //            })
+        //
+        //        })
+        //
+        
+        
+        let customCard = CustomTodayCardView(frame: .zero)
+        let customAddCard = CustomAddCardView(frame: .zero)
+        self.view.addSubview(customCard)
+        self.view.addSubview(customAddCard)
+        customCard.snp.makeConstraints{
+            $0.width.equalTo(cardWidth)
+            $0.height.equalTo(cardHeight)
+            $0.top.equalToSuperview().offset(150*deviceBound)
+            $0.leading.equalToSuperview().offset(40)
+            
+        }
+        customAddCard.snp.makeConstraints{
+            $0.width.equalTo(cardWidth)
+            $0.height.equalTo(cardHeight)
+            $0.top.equalToSuperview().offset(150*deviceBound)
+            $0.leading.equalToSuperview().offset(40)
+            
+        }
+        
+        
+        
+        
+        UIView.transition(from: customAddCard,
+                          to: customCard,
+                          duration: 1.5,
+                          options: .transitionCurlUp,
+                          completion: { f in
+                            customCard.removeFromSuperview()
+                            self.todayCards = self.todayCards+1
+                            self.cardCollectionView.reloadData()
+                            self.cardCollectionView.scrollToItem(at: IndexPath(item: self.currentCardIdx, section: 0),
+                                                            at: .centeredHorizontally,
+                                                            animated: true)
+                            
+                          })
+        
+        
+        //        UIView.animate(withDuration: 0.5, animations: {
+        //            customCard.alpha = 1
+        //
+        //        }, completion: { finished in
+        //            self.todayCards = self.todayCards+1
+        //            self.cardCollectionView.reloadData()
+        //            UIView.animate(withDuration: 0.5, animations: {
+        //                customCard.removeFromSuperview()
+        //
+        //            })
+        //
+        //
+        //
+        //        })
+        
+        
+        
+        //
+        //        todayCards = todayCards+1
+        //        cardCollectionView.reloadData()
+        //        self.cardCollectionView.scrollToItem(at: IndexPath(item: self.currentCardIdx+1, section: 0),
+        //                                        at: .centeredHorizontally,
+        //                                        animated: false)
+        //        UIView.animate(withDuration: 0.0, animations: {
+        //
+        //
+        //        }, completion: { finished in
+        //            UIView.animate(withDuration: 0.5, animations: {
+        //
+        //                let move = CGPoint(x:  325 + 335*(self.currentCardIdx-1)-250, y: 0)
+        //                self.cardCollectionView.setContentOffset(move, animated: false)
+        //
+        //
+        //
+        //            })
+        //
+        //        })
+        
+        
         
         
     }
     
 }
-    
+
 
 extension HomeVC : ChangePublicDelegate{
     func changePublic(now: Bool) {

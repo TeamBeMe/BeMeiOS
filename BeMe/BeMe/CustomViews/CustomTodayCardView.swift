@@ -1,21 +1,18 @@
 //
-//  NewCardCVC.swift
+//  CustomTodayCardView.swift
 //  BeMe
 //
-//  Created by Yunjae Kim on 2020/12/28.
+//  Created by Yunjae Kim on 2020/12/31.
 //
 
 import UIKit
-import Then
-import SnapKit
 
-class NewCardCVC: UICollectionViewCell {
-    static let identifier : String = "NewCardCVC"
-    
-    //MARK:- IBOutlets
+class CustomTodayCardView: UIView {
+
     var lockButton = UIButton().then {
-        $0.setTitle("L", for: .normal)
+        $0.setImage(UIImage(systemName: "lock"), for: .normal)
         $0.setTitleColor(.white, for: .normal)
+        $0.tintColor = .white
     }
     
     var questionInfoLabel = UILabel().then {
@@ -54,34 +51,29 @@ class NewCardCVC: UICollectionViewCell {
         
     }
     
-    var isPublic = false
-    var changePublicDelegate : ChangePublicDelegate?
-    let deviceBound = UIScreen.main.bounds.height/812.0
-}
-
-
-//MARK:- LifeCycle Methods
-extension NewCardCVC {
-    
-    override func awakeFromNib() {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         makeLockButton()
         makeQuestionInfoLabel()
         makeDateLabel()
         makeQuestionLabel()
         makeReplyButton()
         makeChangeButton()
-        self.contentView.backgroundColor = UIColor(cgColor: CGColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0))
+        self.backgroundColor = UIColor(cgColor: CGColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0))
         self.makeRounded(cornerRadius: 6)
-        lockButton.addTarget(self, action: #selector(changePublic), for: .touchUpInside)
+        
     }
     
-    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
 }
 
 
+
 //MARK:- Setting AutoLayout
-extension NewCardCVC {
+extension CustomTodayCardView {
     
     func makeLockButton(){
         self.addSubview(lockButton)
@@ -141,29 +133,4 @@ extension NewCardCVC {
 
 
 
-//MARK:- User Define Function
 
-extension NewCardCVC {
-    @objc func changePublic(){
-
-        changePublicDelegate?.changePublic(now: isPublic)
-        
-    }
-    
-    
-    func setLock(after : Bool){
-        if after == true {
-            lockButton.setTitle("U", for: .normal)
-            lockButton.setImage(UIImage(systemName: "lock.slash"), for: .normal)
-            lockButton.tintColor = .white
-        }
-        else{
-            lockButton.setTitle("L", for: .normal)
-            lockButton.setImage(UIImage(systemName: "lock"), for: .normal)
-            lockButton.tintColor = .white
-        }
-        
-    }
-    
-    
-}
