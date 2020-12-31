@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3FDD35238DF8F48142B9F9F1 /* Pods_BeMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9DABE27D9C7D77517D82AB /* Pods_BeMe.framework */; };
-		A578D4D5259E70BD00F69908 /* Storyboards in Resources */ = {isa = PBXBuildFile; fileRef = A578D4D3259E70BD00F69908 /* Storyboards */; };
-		A578D4D6259E70BD00F69908 /* VCs in Resources */ = {isa = PBXBuildFile; fileRef = A578D4D4259E70BD00F69908 /* VCs */; };
+		A578D4E1259E727C00F69908 /* Answer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A578D4E0259E727C00F69908 /* Answer.storyboard */; };
+		A578D4E4259E728500F69908 /* AnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A578D4E3259E728500F69908 /* AnswerVC.swift */; };
 		EC737F19259D867A0035207F /* CustomTodayCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F18259D867A0035207F /* CustomTodayCardView.swift */; };
 		EC737F1C259D8B9E0035207F /* CustomAddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */; };
 		EC737F21259DB2C40035207F /* FollowUpperCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F20259DB2C40035207F /* FollowUpperCVC.swift */; };
@@ -67,8 +67,8 @@
 /* Begin PBXFileReference section */
 		3A09AD0A5B04C9B6819B2606 /* Pods-BeMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.debug.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.debug.xcconfig"; sourceTree = "<group>"; };
 		81614202856C8826262057FD /* Pods-BeMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.release.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.release.xcconfig"; sourceTree = "<group>"; };
-		A578D4D3259E70BD00F69908 /* Storyboards */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Storyboards; sourceTree = "<group>"; };
-		A578D4D4259E70BD00F69908 /* VCs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = VCs; sourceTree = "<group>"; };
+		A578D4E0259E727C00F69908 /* Answer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Answer.storyboard; path = BeMe/Answer/s/Answer.storyboard; sourceTree = SOURCE_ROOT; };
+		A578D4E3259E728500F69908 /* AnswerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnswerVC.swift; path = BeMe/Answer/ss/AnswerVC.swift; sourceTree = SOURCE_ROOT; };
 		EC737F18259D867A0035207F /* CustomTodayCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTodayCardView.swift; sourceTree = "<group>"; };
 		EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAddCardView.swift; sourceTree = "<group>"; };
 		EC737F20259DB2C40035207F /* FollowUpperCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUpperCVC.swift; sourceTree = "<group>"; };
@@ -155,11 +155,27 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A578D4DD259E724500F69908 /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				A578D4E3259E728500F69908 /* AnswerVC.swift */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
+		A578D4DF259E725F00F69908 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				A578D4E0259E727C00F69908 /* Answer.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		A5AF7DBA259A0971003C42B5 /* Answer */ = {
 			isa = PBXGroup;
 			children = (
-				A578D4D3259E70BD00F69908 /* Storyboards */,
-				A578D4D4259E70BD00F69908 /* VCs */,
+				A578D4DF259E725F00F69908 /* Storyboards */,
+				A578D4DD259E724500F69908 /* VCs */,
 			);
 			path = Answer;
 			sourceTree = "<group>";
@@ -416,14 +432,13 @@
 			files = (
 				EC89E306259C1CA600DBAFE5 /* FollowSearch.storyboard in Resources */,
 				EC7C160F259B8B8100A5BA4C /* Following.storyboard in Resources */,
+				A578D4E1259E727C00F69908 /* Answer.storyboard in Resources */,
 				EC7C1618259B933F00A5BA4C /* FollowInfo.storyboard in Resources */,
-				A578D4D6259E70BD00F69908 /* VCs in Resources */,
 				EC813F302599A15200BBCE25 /* LaunchScreen.storyboard in Resources */,
 				EC813F2D2599A15200BBCE25 /* Assets.xcassets in Resources */,
 				EC813F2B2599A15100BBCE25 /* Main.storyboard in Resources */,
 				EC813F732599F84F00BBCE25 /* Home.storyboard in Resources */,
 				EC89E336259C4E7400DBAFE5 /* UnderTab.storyboard in Resources */,
-				A578D4D5259E70BD00F69908 /* Storyboards in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,6 +503,7 @@
 				EC813F7B2599F88D00BBCE25 /* PastCardCVC.swift in Sources */,
 				EC7C1612259B8BA100A5BA4C /* FollowingVC.swift in Sources */,
 				EC737F1C259D8B9E0035207F /* CustomAddCardView.swift in Sources */,
+				A578D4E4259E728500F69908 /* AnswerVC.swift in Sources */,
 				EC7C1631259BACF100A5BA4C /* FollowerPeopleCVC.swift in Sources */,
 				EC89E32E259C496C00DBAFE5 /* FollowMoreButtonCVC.swift in Sources */,
 				EC89E339259C507300DBAFE5 /* UnderTabBarController.swift in Sources */,
