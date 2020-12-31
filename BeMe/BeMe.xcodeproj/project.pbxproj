@@ -168,6 +168,8 @@
 			isa = PBXGroup;
 			children = (
 				A5AF7DBE259A0A33003C42B5 /* Answer.storyboard */,
+			);
+		}
 		EC7C1603259B483F00A5BA4C /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +204,8 @@
 			isa = PBXGroup;
 			children = (
 				A5A55F73259A1B8300242864 /* AnswerVC.swift */,
+				);
+		}
 		EC7C160C259B8B6300A5BA4C /* VCs */ = {
 			isa = PBXGroup;
 			children = (
