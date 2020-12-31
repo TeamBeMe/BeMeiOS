@@ -24,7 +24,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Lfi-kI-kCJ">
-                                <rect key="frame" x="0.0" y="155" width="414" height="491"/>
+                                <rect key="frame" x="0.0" y="150" width="414" height="491"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="491" id="WjD-Ds-Xco"/>
@@ -71,7 +71,7 @@
                         <viewLayoutGuide key="safeArea" id="SWe-XR-eOg"/>
                         <color key="backgroundColor" systemColor="labelColor"/>
                         <constraints>
-                            <constraint firstItem="Lfi-kI-kCJ" firstAttribute="top" secondItem="aak-E7-520" secondAttribute="bottom" constant="25" id="7JJ-pp-boL"/>
+                            <constraint firstItem="Lfi-kI-kCJ" firstAttribute="top" secondItem="3vT-cb-pud" secondAttribute="top" constant="150" id="7JJ-pp-boL"/>
                             <constraint firstItem="Lfi-kI-kCJ" firstAttribute="leading" secondItem="SWe-XR-eOg" secondAttribute="leading" id="84J-qw-LCh"/>
                             <constraint firstItem="SWe-XR-eOg" firstAttribute="trailing" secondItem="Lfi-kI-kCJ" secondAttribute="trailing" id="9Zm-l1-U07"/>
                             <constraint firstItem="aak-E7-520" firstAttribute="top" secondItem="3vT-cb-pud" secondAttribute="top" constant="103" id="TDk-KB-gsa"/>
@@ -80,7 +80,10 @@
                     </view>
                     <connections>
                         <outlet property="cardCollectionView" destination="Lfi-kI-kCJ" id="w4n-mX-ty8"/>
+                        <outlet property="collectionViewHeightConstraint" destination="WjD-Ds-Xco" id="EXJ-WI-hZ4"/>
+                        <outlet property="collectionViewTopConstraint" destination="7JJ-pp-boL" id="2vI-Og-BHa"/>
                         <outlet property="timeLabel" destination="aak-E7-520" id="CsX-tP-ADG"/>
+                        <outlet property="timeLabelTopConstraint" destination="TDk-KB-gsa" id="xAs-gR-tLF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HRS-KR-N2y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

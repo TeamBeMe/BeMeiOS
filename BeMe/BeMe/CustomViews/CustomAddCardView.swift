@@ -1,17 +1,14 @@
 //
-//  AddCardCVC.swift
+//  CustomAddCardView.swift
 //  BeMe
 //
-//  Created by Yunjae Kim on 2020/12/28.
+//  Created by Yunjae Kim on 2020/12/31.
 //
 
 import UIKit
 
-class AddCardCVC: UICollectionViewCell {
-    static let identifier : String = "AddCardCVC"
-    
-    //MARK:- IBOutlets
-    
+class CustomAddCardView: UIView {
+
     var questionLabel = UILabel().then {
         $0.text = "송현님, 나를 더 알아보기\n위한 다른 질문이 준비되어 있어요."
         $0.font = UIFont.systemFont(ofSize: 18)
@@ -29,30 +26,19 @@ class AddCardCVC: UICollectionViewCell {
         //        $0.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
     }
     
-    var addDelegate : AddQuestionDelegate?
-    
-}
-
-//MARK:- LifeCycle Methods
-extension AddCardCVC {
-    
-    override func awakeFromNib() {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         makeQuestionLabel()
         makeAddButton()
-        self.contentView.backgroundColor = UIColor(cgColor: CGColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0))
+        self.backgroundColor = UIColor(cgColor: CGColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0))
         self.makeRounded(cornerRadius: 6)
-        addButton.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
+      
         
     }
     
-    
-    
-}
-
-
-//MARK:- Setting AutoLayout
-extension AddCardCVC {
-    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     func makeQuestionLabel(){
         self.addSubview(questionLabel)
@@ -70,22 +56,5 @@ extension AddCardCVC {
             $0.height.equalTo(50)
         }
     }
-    
-}
-
-
-//MARK:- User Define Functions
-extension AddCardCVC {
-    
-    @objc func addButtonAction(){
-
-        
-        addDelegate?.addQuestion()
-        
-        
-        
-    }
-    
-    
     
 }
