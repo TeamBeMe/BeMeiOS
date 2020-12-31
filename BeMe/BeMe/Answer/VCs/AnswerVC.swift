@@ -43,6 +43,10 @@ class AnswerVC: UIViewController {
     var isAnswerPublic: Bool = false
     var isCommentPublic: Bool = false
     
+    var isInitial: Bool = true
+    var inputText: String = ""
+    var initialText: String = ""
+    
     
     //MARK:**- Constraint Part**
     
@@ -59,14 +63,20 @@ class AnswerVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+//        answerTextView.becomeFirstResponder()
+        
+        
         
     }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
+        answerTextView.delegate = self
+        textViewSetting(answerTextView)
+
     }
+    
+
     
     //MARK:**- IBAction Part**
     
@@ -86,6 +96,26 @@ class AnswerVC: UIViewController {
     
     ///    }
     
+    // 다른 화면을 터치하면 키보드가 내려옴
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+        answerTextView.resignFirstResponder()
+        
+    }
+    
+    // placeholder 및 커서 작업
+    func textViewSetting(_ textView: UITextView){
+        textView.text = "답변을 입력해주세요."
+        
+        let position = textView.beginningOfDocument
+        textView.selectedTextRange = textView.textRange(from:position, to:position)
+
+        textView.beginFloatingCursor(at: CGPoint(x: 0, y: 0))
+        textView.textColor = .lightGray
+    }
+    
+
+    
     //MARK:**- Function Part**
     
     /// 로직을 구현 하는 함수 부분입니다. // 함수명 lowerCamelCase 사용
@@ -97,13 +127,65 @@ class AnswerVC: UIViewController {
     ///         myTableView.datasource = self
     
     ///    }
+    
+}
+
+//MARK:**- extension 부분**
+
+/// UICollectionViewDelegate 부분 처럼 외부 프로토콜을 채택하는 경우나, 외부 클래스 확장 할 때,  extension을 작성하는 부분입니다
+
+/// ex) extension ViewController : UICollectionViewDelegate { }
+
+extension AnswerVC: UITextViewDelegate {
 
     
-    //MARK:**- extension 부분**
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+
+        if isInitial {
+            textView.text = ""
+            initialText = text
+            textView.textColor = .black
+        }
+
+        answer = textView.text
+
+        // 리턴키로 키보드 내림
+        if (text as NSString).rangeOfCharacter(from: CharacterSet.newlines).location == NSNotFound {
+            return true
+        }
+        textView.resignFirstResponder()
+        return true
+    }
     
-    /// UICollectionViewDelegate 부분 처럼 외부 프로토콜을 채택하는 경우나, 외부 클래스 확장 할 때,  extension을 작성하는 부분입니다
+    func textViewDidChange(_ textView: UITextView) {
+
+        if isInitial {
+            textView.text = initialText
+            textView.textColor = .black
+        }
+        
+        inputText = textView.text
+        self.isInitial = false
+
+    }
     
-    /// ex) extension ViewController : UICollectionViewDelegate { }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        if self.isInitial {
+            textViewSetting(textView)
+        }
+        
+        // 값이 비어있으면, 다시 placeholder 설정 
+        if answerTextView.text == "" {
+            textViewSetting(textView)
+            isInitial = true
+        }
+
+    }
     
+    
+    
+    
+    
+
 }
 
