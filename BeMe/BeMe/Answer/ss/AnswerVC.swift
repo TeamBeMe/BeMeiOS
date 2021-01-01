@@ -105,13 +105,31 @@ class AnswerVC: UIViewController {
     
     // placeholder 및 커서 작업
     func textViewSetting(_ textView: UITextView){
-        textView.text = "답변을 입력해주세요."
         
-        let position = textView.beginningOfDocument
-        textView.selectedTextRange = textView.textRange(from:position, to:position)
+        let savedAnswer = UserDefaults.standard.string(forKey: "answer")
 
-        textView.beginFloatingCursor(at: CGPoint(x: 0, y: 0))
-        textView.textColor = .lightGray
+        if savedAnswer == "" || savedAnswer == nil {
+            textView.text = "답변을 입력해주세요."
+            textView.textColor = .lightGray
+            
+            let position = textView.beginningOfDocument
+            textView.selectedTextRange = textView.textRange(from:position, to:position)
+            textView.beginFloatingCursor(at: CGPoint(x: 0, y: 0))
+            
+        } else {
+            textView.text = savedAnswer
+//            initialText = savedAnswer!
+            let position = textView.endOfDocument
+            textView.textColor = .black
+            
+            textView.selectedTextRange = textView.textRange(from:position, to:position)
+            textView.endFloatingCursor()
+            
+            isInitial = false
+        }
+        
+        
+
     }
     
 
@@ -165,6 +183,7 @@ extension AnswerVC: UITextViewDelegate {
         }
         
         inputText = textView.text
+        UserDefaults.standard.set(textView.text, forKey: "answer")
         self.isInitial = false
 
     }
@@ -175,11 +194,10 @@ extension AnswerVC: UITextViewDelegate {
         }
         
         // 값이 비어있으면, 다시 placeholder 설정 
-        if answerTextView.text == "" {
+        if textView.text == "" {
             textViewSetting(textView)
             isInitial = true
         }
-
     }
     
     
