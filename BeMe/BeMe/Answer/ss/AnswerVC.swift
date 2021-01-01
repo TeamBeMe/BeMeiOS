@@ -75,8 +75,8 @@ class AnswerVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         answerTextView.delegate = self
-        settingTextView(answerTextView)
-        settingLabels(
+        setTextView(answerTextView)
+        setLabels(
             question: "이번 2021년도를 후회 없이 보낼 수 있는 방법은 무엇인가요?",
             questionInfo: "[ 비미에 관한 2번째 질문 ]",
             answerDate: "2021. 01. 01"
@@ -112,7 +112,7 @@ class AnswerVC: UIViewController {
     }
     
     // placeholder 및 커서 작업
-    func settingTextView(_ textView: UITextView){
+    func setTextView(_ textView: UITextView){
         
         let savedAnswer = UserDefaults.standard.string(forKey: "answer")
 
@@ -137,7 +137,7 @@ class AnswerVC: UIViewController {
     }
     
     // 질문 관련 데이터 init
-    func settingLabels(question: String, questionInfo: String, answerDate: String){
+    func setLabels(question: String, questionInfo: String, answerDate: String){
         questionLabel.text = question
         questionInfoLabel.text = questionInfo
         answerDateLabel.text = answerDate
@@ -201,12 +201,12 @@ extension AnswerVC: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if self.isInitial {
-            settingTextView(textView)
+            setTextView(textView)
         }
         
         // 값이 비어있으면, 다시 placeholder 설정 
         if textView.text == "" {
-            settingTextView(textView)
+            setTextView(textView)
             isInitial = true
         }
     }
