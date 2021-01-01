@@ -36,9 +36,12 @@ class AnswerVC: UIViewController {
     
     /// ex)  var imageViewList : [UIImageView] = []
     
+    //
     var question: String?
     var questionInfo: String?
-    var answerData: String?
+    var answerDate: String?
+    
+    // AnswerVC 에서 init
     var answer: String?
     var isAnswerPublic: Bool = false
     var isCommentPublic: Bool = false
@@ -72,7 +75,12 @@ class AnswerVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         answerTextView.delegate = self
-        textViewSetting(answerTextView)
+        settingTextView(answerTextView)
+        settingLabels(
+            question: "이번 2021년도를 후회 없이 보낼 수 있는 방법은 무엇인가요?",
+            questionInfo: "[ 비미에 관한 2번째 질문 ]",
+            answerDate: "2021. 01. 01"
+        )
 
     }
     
@@ -104,7 +112,7 @@ class AnswerVC: UIViewController {
     }
     
     // placeholder 및 커서 작업
-    func textViewSetting(_ textView: UITextView){
+    func settingTextView(_ textView: UITextView){
         
         let savedAnswer = UserDefaults.standard.string(forKey: "answer")
 
@@ -118,18 +126,21 @@ class AnswerVC: UIViewController {
             
         } else {
             textView.text = savedAnswer
-//            initialText = savedAnswer!
-            let position = textView.endOfDocument
             textView.textColor = .black
             
+            let position = textView.endOfDocument
             textView.selectedTextRange = textView.textRange(from:position, to:position)
             textView.endFloatingCursor()
             
             isInitial = false
         }
-        
-        
-
+    }
+    
+    // 질문 관련 데이터 init
+    func settingLabels(question: String, questionInfo: String, answerDate: String){
+        questionLabel.text = question
+        questionInfoLabel.text = questionInfo
+        answerDateLabel.text = answerDate
     }
     
 
@@ -190,12 +201,12 @@ extension AnswerVC: UITextViewDelegate {
     
     func textViewDidEndEditing(_ textView: UITextView) {
         if self.isInitial {
-            textViewSetting(textView)
+            settingTextView(textView)
         }
         
         // 값이 비어있으면, 다시 placeholder 설정 
         if textView.text == "" {
-            textViewSetting(textView)
+            settingTextView(textView)
             isInitial = true
         }
     }
