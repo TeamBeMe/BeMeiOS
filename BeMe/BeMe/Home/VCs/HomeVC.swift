@@ -8,12 +8,13 @@
 import UIKit
 import Then
 import SnapKit
+import UserNotifications
 
 class HomeVC: UIViewController {
     //MARK:- IBOutlets
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var cardCollectionView: UICollectionView!
-
+    
     
     let alertHorizontalSeperator = UIView().then{
         $0.backgroundColor = .gray
@@ -22,18 +23,26 @@ class HomeVC: UIViewController {
     let alertVerticalSeperator = UIView().then {
         $0.backgroundColor = .gray
     }
+    @IBOutlet weak var timeLabelTopConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var collectionViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
+    
     
     //MARK:- User Define Variables
-    private var cardWidth = 0
+    private var collectionViewWidth = 0
+    private var cardWidth : CGFloat = 0.0
     private var pastCards = 0
     private var todayCards = 0
     private var currentCardIdx = 0
     private var initialScrolled = false
+    private var cardHeight = 0.0
     var nowPos = CGPoint(x: -1.0, y: 0)
-    
+    let deviceBound = UIScreen.main.bounds.height/812.0
+    let deviceWidthBound = UIScreen.main.bounds.width/375.0
     var locks = [false,false,false,false,false,false,false,false,]
-
-    
+    let userNotificationCenter = UNUserNotificationCenter.current()
+    private var flexible = false
     
     
 }
@@ -47,7 +56,24 @@ extension HomeVC {
         todayCards = 1
         cardCollectionView.delegate = self
         cardCollectionView.dataSource = self
+        let customLayout = HomeCardCustomFlowLayout()
+        cardCollectionView.collectionViewLayout = customLayout
         //        cardCollectionView.reloadData()
+        timeLabelTopConstraint.constant = 103 * deviceBound
+        collectionViewTopConstraint.constant = 150 * deviceBound
+        if deviceBound < 1 {
+            collectionViewHeightConstraint.constant = 450
+            cardHeight = 450
+            cardWidth = 315
+        }
+        else {
+            collectionViewHeightConstraint.constant = 491*deviceBound
+            cardHeight = Double(491*deviceBound)
+            cardWidth = 315*deviceBound
+        }
+//        userNotificationCenter.delegate = self
+        requestNotificationAuthorization()
+        sendNotification()
         
         
     }
@@ -89,7 +115,7 @@ extension HomeVC {
     func changeLock(){
         locks[currentCardIdx] = !locks[currentCardIdx]
         cardCollectionView.reloadData()
-            
+        
     }
     
     func makeAlertTitle() -> String {
@@ -100,6 +126,43 @@ extension HomeVC {
             return "비공개 질문으로 전환하시겠어요?"
         }
         
+    }
+    
+    func requestNotificationAuthorization() {
+        let authOptions = UNAuthorizationOptions(arrayLiteral: .alert, .badge, .sound)
+
+        userNotificationCenter.requestAuthorization(options: authOptions) { success, error in
+            if let error = error {
+                print("Error: \(error)")
+            }
+        }
+    }
+
+    func sendNotification() {
+        let notificationContent = UNMutableNotificationContent()
+
+        notificationContent.title = "오늘의 질문이 도착했어요"
+        notificationContent.body = "질문을 보러가려면 눌러주세요"
+
+        
+        
+       
+        
+        var date = DateComponents()
+        date.hour = 22
+        date.minute = 00
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
+        
+        let request = UNNotificationRequest(identifier: "testNotification",
+                                            content: notificationContent,
+                                            trigger: trigger)
+
+        userNotificationCenter.add(request) { error in
+            if let error = error {
+                print("Notification Error: ", error)
+            }
+        }
     }
     
     
@@ -158,8 +221,8 @@ extension HomeVC : UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        cardWidth = Int(collectionView.frame.width)
-        return CGSize(width: 315.0 ,
+        collectionViewWidth = Int(collectionView.frame.width)
+        return CGSize(width: cardWidth ,
                       height: collectionView.frame.height)
     }
     
@@ -189,7 +252,7 @@ extension HomeVC : UICollectionViewDelegateFlowLayout {
 extension HomeVC : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let curPos = scrollView.contentOffset
-        if Int(curPos.x) < (pastCards-1)*cardWidth {
+        if Int(curPos.x) < (pastCards-1)*collectionViewWidth {
             timeLabel.text = "과거의 질문"
         }
         else{
@@ -197,58 +260,79 @@ extension HomeVC : UIScrollViewDelegate {
             
         }
         
-        if initialScrolled == true{
-            
-            if Int(curPos.x) < 325 + 335*(currentCardIdx-1) - 200 {
+        if flexible {
+            if Int(curPos.x) > Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) - 200
+                && Int(curPos.x) < Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) + 200 {
+                flexible = !flexible
+            }
+        }
+        
+        if initialScrolled == true && !flexible{
+
+            if Int(curPos.x) < Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) - 200 {
                 cardCollectionView.scrollToItem(at: IndexPath(item: currentCardIdx-1, section: 0),
                                                 at: .centeredHorizontally,
                                                 animated: true)
                 currentCardIdx = currentCardIdx-1
-               
+
+
             }
-            else if Int(curPos.x) > 325 + 335*(currentCardIdx-1) + 200{
+            else if Int(curPos.x) > Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) + 200 {
                 cardCollectionView.scrollToItem(at: IndexPath(item: currentCardIdx+1, section: 0),
                                                 at: .centeredHorizontally,
                                                 animated: true)
                 currentCardIdx = currentCardIdx+1
-                
-                
+
+
             }
-           
+
         }
-      
-     
-    
-        
+
         
     }
-    
-    
-    
-    
+
 }
 
 extension HomeVC : AddQuestionDelegate {
     func addQuestion() {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.todayCards = self.todayCards + 1
-
-            self.cardCollectionView.alpha = 0
-
-        }, completion: { finished in
-            self.cardCollectionView.reloadData()
-            UIView.animate(withDuration: 0.5, animations: {
-                self.cardCollectionView.alpha = 1
-            })
-
-        })
 
         
+        let customCard = CustomTodayCardView(frame: .zero)
+        let customAddCard = CustomAddCardView(frame: .zero)
+        self.view.addSubview(customCard)
+        self.view.addSubview(customAddCard)
+        customCard.snp.makeConstraints{
+            $0.width.equalTo(cardWidth)
+            $0.height.equalTo(cardHeight)
+            $0.top.equalToSuperview().offset(150*deviceBound)
+            $0.leading.equalToSuperview().offset(40)
+            
+        }
+        customAddCard.snp.makeConstraints{
+            $0.width.equalTo(cardWidth)
+            $0.height.equalTo(cardHeight)
+            $0.top.equalToSuperview().offset(150*deviceBound)
+            $0.leading.equalToSuperview().offset(40)
+            
+        }
+        UIView.transition(from: customAddCard,
+                          to: customCard,
+                          duration: 1.5,
+                          options: .transitionCurlUp,
+                          completion: { f in
+                            customCard.removeFromSuperview()
+                            self.todayCards = self.todayCards+1
+                            self.cardCollectionView.reloadData()
+                            self.cardCollectionView.scrollToItem(at: IndexPath(item: self.currentCardIdx, section: 0),
+                                                            at: .centeredHorizontally,
+                                                            animated: true)
+                            
+                          })
         
     }
     
 }
-    
+
 
 extension HomeVC : ChangePublicDelegate{
     func changePublic(now: Bool) {
@@ -303,6 +387,35 @@ extension HomeVC : ChangePublicDelegate{
 }
 
 
+extension HomeVC: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
+    }
+}
+
+extension HomeVC : HomeTabBarDelegate{
+    func homeButtonTapped() {
+        flexible = true
+
+        self.cardCollectionView.scrollToItem(at: IndexPath(item: self.pastCards, section: 0),
+                                        at: .centeredHorizontally,
+                                        animated: true)
+        
+        currentCardIdx = pastCards
+    
+        
+    
+        
+    }
+}
 
 protocol AddQuestionDelegate{
     
@@ -314,5 +427,12 @@ protocol AddQuestionDelegate{
 protocol ChangePublicDelegate{
     
     func changePublic(now : Bool)
+    
+}
+
+
+
+protocol HomeTabBarDelegate {
+    func homeButtonTapped()
     
 }

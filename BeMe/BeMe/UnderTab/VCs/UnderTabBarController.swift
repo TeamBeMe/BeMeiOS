@@ -16,7 +16,15 @@ class UnderTabBarController: UITabBarController {
         // Do any additional setup after loading the view.
     }
     
-
+    override func viewDidLayoutSubviews() {
+        self.delegate = self
+        super.viewDidLayoutSubviews()
+        tabBar.frame.size.height = 83
+        tabBar.frame.origin.y = view.frame.height - 83
+    }
+    
+    var homeTabBarDelegate: HomeTabBarDelegate?
+    var followingTabBarDelegate: FollowingTabBarDelegate?
 }
 
 
@@ -48,15 +56,16 @@ extension UnderTabBarController {
         
         guard let followingVC = UIStoryboard(name: "Following",
                                         bundle: nil).instantiateViewController(
-                                            withIdentifier: "FollowingVC") as? UINavigationController
+                                            withIdentifier: "FollowingVC") as? FollowingVC
             else{
             
             return
         }
+        followingTabBarDelegate = followingVC
         
         guard let myPageVC = UIStoryboard(name: "Following",
                                         bundle: nil).instantiateViewController(
-                                            withIdentifier: "FollowingVC") as? UINavigationController
+                                            withIdentifier: "FollowingVC") as? FollowingVC
             else{
             
             return
@@ -94,6 +103,26 @@ extension UnderTabBarController {
     
     
     
+    
+    
+}
+
+extension UnderTabBarController : UITabBarControllerDelegate {
+    // UITabBarDelegate
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        
+    }
+
+
+    // UITabBarControllerDelegate
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if viewController == self.viewControllers![0] {
+            homeTabBarDelegate?.homeButtonTapped()
+        }
+        else if viewController == self.viewControllers![2]{
+            followingTabBarDelegate?.followButtonTapped()
+        }
+    }
     
     
 }

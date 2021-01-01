@@ -18,6 +18,7 @@ class FollowPeopleCVC: UICollectionViewCell {
         peopleCollectionView.delegate = self
         peopleCollectionView.dataSource = self
         
+        
     }
     func changeFollow(){
         if isFollowing == true{
@@ -38,7 +39,6 @@ extension FollowPeopleCVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        print("called")
         guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: FollowPersonCVC.identifier,
                 for: indexPath) as? FollowPersonCVC else {return UICollectionViewCell()}
@@ -104,3 +104,50 @@ extension FollowPeopleCVC : UICollectionViewDelegateFlowLayout {
     
     
 }
+
+extension FollowPeopleCVC : FollowingFollowButtonDelegate{
+    func followButtonAction() {
+        if isFollowing{
+            isFollowing = false
+            UIView.animate(withDuration: 0.5, animations: {
+                self.alpha = 0
+               
+            }, completion: { finished in
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.peopleCollectionView.reloadData()
+                    self.alpha = 1
+                })
+                
+                
+            })
+            
+            
+        }
+
+    }
+}
+
+extension FollowPeopleCVC : FollowingFollowingButtonDelegate{
+    func followingButtonAction() {
+        if !isFollowing{
+            isFollowing = true
+            UIView.animate(withDuration: 0.5, animations: {
+                self.alpha = 0
+               
+            }, completion: { finished in
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.peopleCollectionView.reloadData()
+                    self.alpha = 1
+                })
+                
+                
+            })
+          
+  
+        }
+    }
+}
+
+
+
+

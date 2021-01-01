@@ -23,6 +23,9 @@ class FollowingVC: UIViewController {
     var isFollowing = true
     var followShouldBeChanged = false
     var totalCell = 13
+    var followingFollowButtonDelegate : FollowingFollowButtonDelegate?
+    var followingFollowingButtonDelegate : FollowingFollowingButtonDelegate?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setItems()
@@ -37,15 +40,8 @@ class FollowingVC: UIViewController {
 
         followerButton.tintColor = .black
         followingButton.tintColor = .lightGray
-        UIView.animate(withDuration: 0.3, animations: {
-            self.underLineView.transform = CGAffineTransform(translationX: 70, y: 0)
-            
-        })
-        if isFollowing{
-            isFollowing = false
-            followShouldBeChanged = true
-            wholeCollectionView.reloadData()
-        }
+       
+       
        
         
     }
@@ -71,16 +67,7 @@ class FollowingVC: UIViewController {
     
     
     @IBAction func barButtonAction(_ sender: Any) {
-        guard let vcName = UIStoryboard(name: "FollowSearch",
-                                        bundle: nil).instantiateViewController(
-                                            withIdentifier: "FollowSearchVC") as? FollowSearchVC
-            else{
-                
-                return
-        }
-        
-        vcName.modalPresentationStyle = .fullScreen
-        self.navigationController?.pushViewController(vcName, animated: true)
+      
         
         
     }
@@ -94,12 +81,7 @@ class FollowingVC: UIViewController {
 extension FollowingVC {
     
     func setItems(){
-        upperContainerView.setBorder(borderColor: .lightGray, borderWidth: 1.0)
-        addFriendButton.tintColor = .black
-        alarmButton.tintColor = .black
-        followingButton.tintColor = .black
-        followerButton.tintColor = .lightGray
-        barButton.tintColor = .black
+
         wholeCollectionView.dataSource = self
         wholeCollectionView.delegate = self
         
@@ -119,33 +101,31 @@ extension FollowingVC {
 extension FollowingVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         if indexPath.item == 0{
             guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: FollowPeopleCVC.identifier,
-                    for: indexPath) as? FollowPeopleCVC else {return UICollectionViewCell()}
-            if followShouldBeChanged == true {
-                cell.changeFollow()
-                
-                UIView.animate(withDuration: 0.3, animations: {
-                    cell.peopleCollectionView.reloadData()
-                    cell.alpha = 0
-                    
-                    
-                },completion: { finished in
-                    
-                    UIView.animate(withDuration: 0.3, animations: {
-                        cell.alpha = 1
-                        
-                    })
-                })
-                
-            }
+                    withReuseIdentifier: FollowUpperCVC.identifier,
+                    for: indexPath) as? FollowUpperCVC else {return UICollectionViewCell()}
+            cell.followingBarButtonDelegate = self
+            cell.followPeopleCollectionViewDelegate = self
+            cell.followingPeopleCollectionViewDelegate = self
             
             return cell
             
         }
+        
+        
         else if indexPath.item == 1{
+            guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: FollowPeopleCVC.identifier,
+                    for: indexPath) as? FollowPeopleCVC else {return UICollectionViewCell()}
+            followingFollowButtonDelegate = cell
+            followingFollowingButtonDelegate = cell
+
+            
+            return cell
+            
+        }
+        else if indexPath.item == 2{
             guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: FollowHeaderCVC.identifier,
                     for: indexPath) as? FollowHeaderCVC else {return UICollectionViewCell()}
@@ -194,15 +174,19 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.item == 0 {
+        if indexPath.item == 0{
+            return CGSize(width: collectionView.frame.width , height: 101)
+        }
+        
+        else if indexPath.item == 1 {
             return CGSize(width: collectionView.frame.width , height: 150)
             
         }
-        else if indexPath.item == 1{
+        else if indexPath.item == 2{
             return CGSize(width: collectionView.frame.width , height: 80)
         }
         else if indexPath.item == totalCell-1 {
-            return CGSize(width: collectionView.frame.width , height: 50)
+            return CGSize(width: collectionView.frame.width , height: 70)
             
         }
         else {
@@ -228,7 +212,7 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
+        return 0
         
     }
     
@@ -244,6 +228,64 @@ extension FollowingVC : FollowingMoreButtonDelegate {
     }
 }
 
+extension FollowingVC : FollowingBarButtonDelegate{
+    func barButtonAction() {
+        guard let vcName = UIStoryboard(name: "FollowSearch",
+                                        bundle: nil).instantiateViewController(
+                                            withIdentifier: "FollowSearchVC") as? FollowSearchVC
+            else{
+                
+                return
+        }
+        
+        vcName.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(vcName, animated: true)
+    }
+    
+}
+extension FollowingVC : FollowingPeopleCollectionViewDelegate{
+    func followingPeopleUpdate() {
+        followingFollowingButtonDelegate?.followingButtonAction()
+    }
+    
+}
+extension FollowingVC : FollowPeopleCollectionViewDelegate{
+    func followPeopleUpdate() {
+        followingFollowButtonDelegate?.followButtonAction()
+        
+    }
+}
+
+extension FollowingVC : FollowingTabBarDelegate{
+    func followButtonTapped() {
+       
+
+        self.wholeCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0),
+                                              at: .top,
+                                        animated: true)
+     
+    
+        
+    }
+}
+
+protocol FollowingTabBarDelegate{
+    func followButtonTapped()
+    
+}
+
+protocol FollowingPeopleCollectionViewDelegate{
+    func followingPeopleUpdate()
+    
+    
+    
+}
+protocol FollowPeopleCollectionViewDelegate{
+    func followPeopleUpdate()
+    
+    
+    
+}
 
 
 protocol FollowingMoreButtonDelegate{
@@ -251,3 +293,20 @@ protocol FollowingMoreButtonDelegate{
     
     
 }
+
+protocol FollowingBarButtonDelegate{
+    func barButtonAction()
+    
+    
+}
+
+protocol FollowingFollowButtonDelegate{
+    func followButtonAction()
+    
+}
+protocol FollowingFollowingButtonDelegate{
+    func followingButtonAction()
+    
+}
+
+
