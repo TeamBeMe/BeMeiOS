@@ -100,7 +100,7 @@ extension ExploreVC {
     }
     
     private func hideTabBarWhenScrollingUp() {
-        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveLinear], animations: {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveLinear], animations: {
             self.headerViewHeight.constant = self.minHeight
             self.headerView.alpha = 0.0
         }) { _ in
@@ -109,7 +109,8 @@ extension ExploreVC {
     }
     
     private func showTabBarWhenScrollingDown() {
-        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveLinear], animations: {
+        self.view.backgroundColor = UIColor.white
+        UIView.animate(withDuration: 0.3, delay: 0.3, options: [.curveLinear], animations: {
             self.headerViewHeight.constant = self.maxHeight
             self.headerView.alpha = 1.0
         }) { _ in
@@ -124,18 +125,23 @@ extension ExploreVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffset = exploreScrollView.contentOffset.y
         
-        // 432 + 69 + 32 +
+        
         if (currentOffset > 432 + 69 + 32) {
-            print("~~~> offset\(exploreScrollView.contentOffset)")
+            
+            // iphone safe area 문제 해결 코드
+            self.view.backgroundColor = UIColor.white
             
             if (lastContentOffset < currentOffset) {
                 // scroll up
                 hideTabBarWhenScrollingUp()
             } else {
                 // scroll down
+                
                 showTabBarWhenScrollingDown()
             }
             lastContentOffset = currentOffset
+        } else {
+            hideTabBarWhenScrollingUp()
         }
         
         
@@ -156,7 +162,7 @@ extension ExploreVC: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 320.0, height: collectionView.frame.height)
+        return CGSize(width: 320.0, height: 229.0)
     }
 }
 
@@ -171,7 +177,9 @@ extension ExploreVC: UICollectionViewDataSource {
                 for: indexPath) as? DiffThoughtCVC else {
             return UICollectionViewCell()
         }
-        cell.backgroundColor = .black
+        cell.layer.cornerRadius = 8
+        cell.setAnswer()
+        cell.backgroundColor = .white
         return cell
     }
     
@@ -201,17 +209,21 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
             guard let article = tableView
                     .dequeueReusableCell(withIdentifier: ArticleTVC.identifier, for: indexPath)
                     as? ArticleTVC else { return UITableViewCell() }
+            
+            
             return article
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return 54
+            return 62
         } else if indexPath.row == 20 {
             return 169 + 24
         } else {
             return 200
         }
     }
+    
+    
 }
