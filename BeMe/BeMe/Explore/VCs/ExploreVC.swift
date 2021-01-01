@@ -9,6 +9,10 @@ import UIKit
 
 class ExploreVC: UIViewController {
     
+    private var lastContentOffset: CGFloat = 0
+    private let maxHeight: CGFloat = 32.0
+    private let minHeight: CGFloat = 0.0
+    
     //MARK: - IBOulets
     @IBOutlet weak var exploreScrollView: UIScrollView!
     @IBOutlet weak var highLightBar: UIView!
@@ -16,6 +20,18 @@ class ExploreVC: UIViewController {
     @IBOutlet weak var diffThoughtCollectionView: UICollectionView!
     @IBOutlet weak var diffArticleTableView: UITableView!
     @IBOutlet weak var diffArticleTableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var headerView: UIView! {
+        didSet {
+            headerView.alpha = 0.0
+        }
+    }
+    @IBOutlet weak var headerViewHeight: NSLayoutConstraint! {
+        didSet {
+            
+            headerViewHeight.constant = minHeight
+            
+        }
+    }
     
     //MARK: - Life Cycles
     override func viewDidLoad() {
@@ -23,6 +39,12 @@ class ExploreVC: UIViewController {
         
         adjustScrollViewInset()
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.view.bringSubviewToFront(headerView)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,9 +64,13 @@ class ExploreVC: UIViewController {
     }
 }
 
-
+//MARK: - Private Method
 extension ExploreVC {
-    //MARK: - private Method
+    
+    private func setLayout() {
+        headerView.translatesAutoresizingMaskIntoConstraints = false
+
+    }
     
     private func setTableViewHeight() {
         diffArticleTableViewHeight.constant = diffArticleTableView.contentSize.height
@@ -74,11 +100,21 @@ extension ExploreVC {
     }
     
     private func hideTabBarWhenScrollingUp() {
-        
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveLinear], animations: {
+            self.headerViewHeight.constant = self.minHeight
+            self.headerView.alpha = 0.0
+        }) { _ in
+            
+        }
     }
     
     private func showTabBarWhenScrollingDown() {
-        
+        UIView.animate(withDuration: 0.5, delay: 0, options: [.curveLinear], animations: {
+            self.headerViewHeight.constant = self.maxHeight
+            self.headerView.alpha = 1.0
+        }) { _ in
+            
+        }
     }
 }
 
@@ -86,11 +122,23 @@ extension ExploreVC {
 extension ExploreVC: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = exploreScrollView.contentOffset.y
+        let currentOffset = exploreScrollView.contentOffset.y
+        
         // 432 + 69 + 32 +
-        if (offset > 432 + 69 + 32) {
+        if (currentOffset > 432 + 69 + 32) {
             print("~~~> offset\(exploreScrollView.contentOffset)")
+            
+            if (lastContentOffset < currentOffset) {
+                // scroll up
+                hideTabBarWhenScrollingUp()
+            } else {
+                // scroll down
+                showTabBarWhenScrollingDown()
+            }
+            lastContentOffset = currentOffset
         }
+        
+        
         
     }
     
