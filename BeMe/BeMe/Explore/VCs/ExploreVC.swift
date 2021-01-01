@@ -32,12 +32,15 @@ class ExploreVC: UIViewController {
             
         }
     }
+    @IBOutlet weak var safeAreaView: UIView!
     
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
         adjustScrollViewInset()
+        diffArticleTableView.rowHeight = UITableView.automaticDimension
+        diffArticleTableView.estimatedRowHeight = 200;
         
     }
     
@@ -109,7 +112,6 @@ extension ExploreVC {
     }
     
     private func showTabBarWhenScrollingDown() {
-        self.view.backgroundColor = UIColor.white
         UIView.animate(withDuration: 0.3, delay: 0.3, options: [.curveLinear], animations: {
             self.headerViewHeight.constant = self.maxHeight
             self.headerView.alpha = 1.0
@@ -125,18 +127,15 @@ extension ExploreVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffset = exploreScrollView.contentOffset.y
         
+        // iphone safe area 문제 해결 코드
+        self.view.backgroundColor = currentOffset > 388 ? .white : UIColor.init(named: "background")
         
         if (currentOffset > 432 + 69 + 32) {
-            
-            // iphone safe area 문제 해결 코드
-            self.view.backgroundColor = UIColor.white
-            
             if (lastContentOffset < currentOffset) {
                 // scroll up
                 hideTabBarWhenScrollingUp()
             } else {
                 // scroll down
-                
                 showTabBarWhenScrollingDown()
             }
             lastContentOffset = currentOffset
@@ -221,7 +220,7 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
         } else if indexPath.row == 20 {
             return 169 + 24
         } else {
-            return 200
+            return UITableView.automaticDimension
         }
     }
     

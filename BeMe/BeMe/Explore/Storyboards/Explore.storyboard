@@ -84,7 +84,7 @@
                                 <rect key="frame" x="0.0" y="44" width="390" height="766"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1uw-9s-YLF" userLabel="Diff Thought">
-                                        <rect key="frame" x="0.0" y="0.0" width="390" height="432"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="390" height="388"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgX-ax-BU7">
                                                 <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
@@ -141,7 +141,7 @@
                                                 </constraints>
                                             </view>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pQB-jD-5aD">
-                                                <rect key="frame" x="0.0" y="129" width="390" height="303"/>
+                                                <rect key="frame" x="0.0" y="129" width="390" height="229"/>
                                                 <color key="backgroundColor" red="0.92941802740000001" green="0.92940050360000004" blue="0.92941236500000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="5fy-2W-n5D">
                                                     <size key="itemSize" width="361" height="223"/>
@@ -151,7 +151,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DiffThoughtCVC" id="BpE-nu-Omz" customClass="DiffThoughtCVC" customModule="BeMe" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="40" width="361" height="223"/>
+                                                        <rect key="frame" x="0.0" y="3" width="361" height="223"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="189-gF-N6k">
                                                             <rect key="frame" x="0.0" y="0.0" width="361" height="223"/>
@@ -234,22 +234,22 @@
                                             <constraint firstItem="dgX-ax-BU7" firstAttribute="top" secondItem="1uw-9s-YLF" secondAttribute="top" id="oMv-Q7-bAn"/>
                                             <constraint firstAttribute="trailing" secondItem="pQB-jD-5aD" secondAttribute="trailing" id="oZm-na-gGE"/>
                                             <constraint firstAttribute="trailing" secondItem="Jaw-l5-756" secondAttribute="trailing" id="obW-uc-dfn"/>
-                                            <constraint firstAttribute="bottom" secondItem="pQB-jD-5aD" secondAttribute="bottom" id="s9l-FJ-NS0"/>
-                                            <constraint firstAttribute="height" constant="432" id="t6j-1i-ZYv"/>
+                                            <constraint firstAttribute="bottom" secondItem="pQB-jD-5aD" secondAttribute="bottom" constant="30" id="s9l-FJ-NS0"/>
+                                            <constraint firstAttribute="height" constant="388" id="t6j-1i-ZYv"/>
                                             <constraint firstItem="dgX-ax-BU7" firstAttribute="leading" secondItem="1uw-9s-YLF" secondAttribute="leading" id="vIz-Oz-LFm"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Mk-7h-aMo" userLabel="Diff Article">
-                                        <rect key="frame" x="0.0" y="472" width="390" height="69"/>
+                                        <rect key="frame" x="0.0" y="388" width="390" height="109"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="다른 글 둘러보기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4nO-8b-zpk">
-                                                <rect key="frame" x="30" y="16" width="130.33333333333334" height="24"/>
+                                                <rect key="frame" x="30" y="56" width="130.33333333333334" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나와 같은 질문에 다른 사람들은 이렇게 답했어요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bK3-0A-YBB">
-                                                <rect key="frame" x="29.999999999999986" y="50" width="245.66666666666663" height="15.666666666666671"/>
+                                                <rect key="frame" x="29.999999999999986" y="90" width="245.66666666666663" height="15.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -259,13 +259,13 @@
                                         <constraints>
                                             <constraint firstItem="bK3-0A-YBB" firstAttribute="leading" secondItem="4Mk-7h-aMo" secondAttribute="leading" constant="30" id="00N-Ma-gFg"/>
                                             <constraint firstItem="bK3-0A-YBB" firstAttribute="top" secondItem="4nO-8b-zpk" secondAttribute="bottom" constant="10" id="2Vo-vY-ICF"/>
-                                            <constraint firstItem="4nO-8b-zpk" firstAttribute="top" secondItem="4Mk-7h-aMo" secondAttribute="top" constant="16" id="DVP-l8-kW0"/>
+                                            <constraint firstItem="4nO-8b-zpk" firstAttribute="top" secondItem="4Mk-7h-aMo" secondAttribute="top" constant="56" id="DVP-l8-kW0"/>
                                             <constraint firstItem="4nO-8b-zpk" firstAttribute="leading" secondItem="4Mk-7h-aMo" secondAttribute="leading" constant="30" id="ELJ-Bj-b0a"/>
-                                            <constraint firstAttribute="height" constant="69" id="Rkc-R2-Ell"/>
+                                            <constraint firstAttribute="height" constant="109" id="Rkc-R2-Ell"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dw9-p0-hOx" userLabel="Slider">
-                                        <rect key="frame" x="0.0" y="541" width="390" height="32"/>
+                                        <rect key="frame" x="0.0" y="497" width="390" height="32"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="v6Y-nH-E1U">
                                                 <rect key="frame" x="30" y="0.0" width="133" height="32"/>
@@ -328,7 +328,7 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5i8-hf-lv2">
-                                        <rect key="frame" x="0.0" y="573" width="390" height="2000"/>
+                                        <rect key="frame" x="0.0" y="529" width="390" height="2000"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="2000" id="G8J-iJ-BeC"/>
@@ -509,7 +509,7 @@
                                     <constraint firstItem="4Mk-7h-aMo" firstAttribute="leading" secondItem="h1s-u1-hNF" secondAttribute="leading" id="Tmc-pz-tc0"/>
                                     <constraint firstItem="1uw-9s-YLF" firstAttribute="leading" secondItem="h1s-u1-hNF" secondAttribute="leading" id="bQl-g6-wDT"/>
                                     <constraint firstAttribute="trailing" secondItem="dw9-p0-hOx" secondAttribute="trailing" id="t3W-PT-imV"/>
-                                    <constraint firstItem="4Mk-7h-aMo" firstAttribute="top" secondItem="1uw-9s-YLF" secondAttribute="bottom" constant="40" id="ycz-K8-Lw0"/>
+                                    <constraint firstItem="4Mk-7h-aMo" firstAttribute="top" secondItem="1uw-9s-YLF" secondAttribute="bottom" id="ycz-K8-Lw0"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="khh-ZT-EFt" id="hi4-mb-tY0"/>
@@ -517,7 +517,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wu4-8B-NZy"/>
-                        <color key="backgroundColor" red="0.92941802740000001" green="0.92940050360000004" blue="0.92941236500000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.92941176470588238" green="0.92941176470588238" blue="0.92941176470588238" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="aoL-DS-o8G" firstAttribute="top" secondItem="wu4-8B-NZy" secondAttribute="top" id="4qN-cG-bjL"/>
                             <constraint firstItem="5i8-hf-lv2" firstAttribute="bottom" secondItem="h1s-u1-hNF" secondAttribute="bottom" id="68o-m9-LyM"/>
