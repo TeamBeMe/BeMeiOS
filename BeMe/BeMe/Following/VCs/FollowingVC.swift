@@ -20,6 +20,10 @@ class FollowingVC: UIViewController {
    
     @IBOutlet weak var wholeCollectionView: UICollectionView!
     
+    var myText = "저는 며칠 전 퇴사를 했어요. 수많은 고민 끝에 결국 저질렀습니다. 몇 년간 원해왔던 일이라 꿈만 같아요. 제가 스스로의 힘으로 하고 싶은 걸 해볼 수 있는 시간적 여유를 가지게 된 게 정말 만족스러워요. 앞으로 저에게는 정말 다양한 가능성들이 무궁무진하게 열려있어요. 앞으로 어떤 사람들과 만나게 될지, 어떤 프로젝트를 하게 될지 상상하면서 새해를 맞이하고 싶어요. 지금은 시국이 어떻게 풀릴지 확실하지 않지만 제 인생은 앞으로도 계속해서 나아가겠죠?"
+    
+    var myText2 = "저는 며칠 전 퇴사를 했어요. 수많은 고민 끝에 결국 저질렀습니다. 몇 년간 원해왔던 일이라 꿈만 같아요. 제가 스스로의 힘으로 하고 싶은 걸 해볼 수 있는 시간적 여유를 가지게 된 게 정말 만족스러워요. 앞으로 저에게는 정말 다양한 가능성들이 무궁무진하게 열려있어요. 앞으로 어떤 사람들과 만나게 될지, 어떤 프로젝트를 하게 될지 상상하면서 새해를 맞이하고 싶어요. 지금은 시국이 어떻게 풀릴지 확실하지 않지만 제 인생은 앞으로도 계속해서 나아가겠죠?저는 며칠 전 퇴사를 했어요. 수많은 고민 끝에 결국 저질렀습니다. 몇 년간 원해왔던 일이라 꿈만 같아요. 제가 스스로의 힘으로 하고 싶은 걸 해볼 수 있는 시간적 여유를 가지게 된 게 정말 만족스러워요. 앞으로 저에게는 정말 다양한 가능성들이 무궁무진하게 열려있어요. 앞으로 어떤 사람들과 만나게 될지, 어떤 프로젝트를 하게 될지 상상하면서 새해를 맞이하고 싶어요. 지금은 시국이 어떻게 풀릴지 확실하지 않지만 제 인생은 앞으로도 계속해서 나아가겠죠?"
+
     var isFollowing = true
     var followShouldBeChanged = false
     var totalCell = 13
@@ -30,7 +34,7 @@ class FollowingVC: UIViewController {
         super.viewDidLoad()
         setItems()
        
-        
+       
     }
     
     
@@ -150,6 +154,8 @@ extension FollowingVC : UICollectionViewDataSource {
                     for: indexPath) as? FollowCardCVC else {return UICollectionViewCell()}
             
             
+            cell.setAnswer(answer: myText)
+            
             return cell
             
         }
@@ -190,7 +196,37 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
             
         }
         else {
-            return CGSize(width: collectionView.frame.width  , height: 313)
+            let tmpTextView = UITextView().then{
+                $0.frame = CGRect(x: 0, y: 0, width: 275, height: 50)
+                $0.backgroundColor = .lightGray
+                $0.alpha = 0
+                $0.text = myText
+                $0.font = UIFont.systemFont(ofSize: 14)
+            }
+        
+            view.addSubview(tmpTextView)
+            tmpTextView.translatesAutoresizingMaskIntoConstraints = false
+            
+            tmpTextView.snp.makeConstraints{
+                $0.leading.equalToSuperview().offset(50)
+                $0.trailing.equalToSuperview().offset(-50)
+                $0.height.equalTo(50)
+                $0.top.equalToSuperview().offset(50)
+                
+            }
+            tmpTextView.delegate = self
+            tmpTextView.isScrollEnabled = false
+            textViewDidChange(tmpTextView)
+            var dynamicHeight : CGFloat?
+            tmpTextView.constraints.forEach { constraint in
+                if constraint.firstAttribute == .height {
+                    dynamicHeight = constraint.constant
+                   
+                }
+            }
+            tmpTextView.removeFromSuperview()
+            
+            return CGSize(width: collectionView.frame.width  , height: 112.0+CGFloat(dynamicHeight!))
             
         }
       
@@ -217,6 +253,26 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
     }
     
     
+    
+}
+
+extension FollowingVC : UITextViewDelegate{
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let size = CGSize(width: textView.frame.width,height: .infinity)
+        let estimatedSize = textView.sizeThatFits(size)
+        textView.constraints.forEach { constraint in
+            if constraint.firstAttribute == .height {
+                constraint.constant = estimatedSize.height
+                textView.snp.makeConstraints{
+                    $0.height.equalTo(estimatedSize.height)
+                }
+                print(estimatedSize.height)
+            }
+            
+            
+        }
+    }
     
 }
 

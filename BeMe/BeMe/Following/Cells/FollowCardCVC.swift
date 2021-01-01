@@ -12,13 +12,49 @@ class FollowCardCVC: UICollectionViewCell {
     
     @IBOutlet weak var containView: UIView!
     
+    @IBOutlet weak var questionInfoLabel: UILabel!
+    
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var answerTextView: UITextView!
+    @IBOutlet weak var moreButotn: UIButton!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var bookMarkButton: UIButton!
     
     override func awakeFromNib() {
         containView.setBorder(borderColor: .lightGray, borderWidth: 1.0)
         containView.makeRounded(cornerRadius: 6)
+        answerTextView.delegate = self
+        answerTextView.translatesAutoresizingMaskIntoConstraints = false
+        answerTextView.isScrollEnabled = false
+        
+    }
+    
+    func setAnswer(answer : String){
+        answerTextView.text = answer
         
     }
     
     
+    
+}
+
+extension FollowCardCVC : UITextViewDelegate{
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let size = CGSize(width: textView.frame.width,height: .infinity)
+        let estimatedSize = textView.sizeThatFits(size)
+        textView.constraints.forEach { constraint in
+            if constraint.firstAttribute == .height {
+                constraint.constant = estimatedSize.height
+                textView.snp.makeConstraints{
+                    $0.height.equalTo(estimatedSize.height)
+                }
+                print(estimatedSize.height)
+            }
+            
+            
+        }
+    }
     
 }
