@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rL3-Sq-lzl">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -16,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="characterWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eoJ-XV-IBo">
-                                <rect key="frame" x="30" y="132.33333333333334" width="229" height="43"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eoJ-XV-IBo">
+                                <rect key="frame" x="30" y="132.33333333333334" width="330" height="43"/>
                                 <string key="text">이번 주말을 후회 없이
 보낼 수 있는 방법은 무엇인가요?</string>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
@@ -27,13 +28,13 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[ 미래에 관한 2번째 질문 ]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0h7-HA-j0l">
                                 <rect key="frame" x="30" y="200.33333333333334" width="176.33333333333334" height="20.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020. 12. 24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EDA-1g-lTt">
                                 <rect key="frame" x="30.000000000000007" y="230.66666666666666" width="94.666666666666686" height="20.333333333333343"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tqk-3u-1jU">
@@ -67,6 +68,9 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="onTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="thumbTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="answerSwitchValueCanged:" destination="rL3-Sq-lzl" eventType="valueChanged" id="Um9-ua-XTt"/>
+                                                </connections>
                                             </switch>
                                         </subviews>
                                     </stackView>
@@ -84,6 +88,9 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="onTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <color key="thumbTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <action selector="commentSwitchValueCanged:" destination="rL3-Sq-lzl" eventType="valueChanged" id="PAd-bF-nPG"/>
+                                                </connections>
                                             </switch>
                                         </subviews>
                                     </stackView>
@@ -138,6 +145,7 @@
                             <constraint firstItem="iJn-kU-OfD" firstAttribute="leading" secondItem="Gas-lz-5Ds" secondAttribute="leading" id="OS7-Z8-SBJ"/>
                             <constraint firstAttribute="trailing" secondItem="Tqk-3u-1jU" secondAttribute="trailing" id="Op4-GY-G1z"/>
                             <constraint firstItem="R1X-My-dCQ" firstAttribute="leading" secondItem="Gas-lz-5Ds" secondAttribute="leading" constant="30" id="STJ-CS-nh7"/>
+                            <constraint firstItem="Gas-lz-5Ds" firstAttribute="trailing" secondItem="eoJ-XV-IBo" secondAttribute="trailing" constant="30" id="ZSj-dg-Iw6"/>
                             <constraint firstItem="0h7-HA-j0l" firstAttribute="leading" secondItem="Gas-lz-5Ds" secondAttribute="leading" constant="30" id="bpc-jI-7At"/>
                             <constraint firstItem="tk6-Cu-58d" firstAttribute="top" secondItem="tfh-7Q-tZ2" secondAttribute="bottom" constant="30" id="ejf-ex-Iha"/>
                             <constraint firstItem="Gas-lz-5Ds" firstAttribute="trailing" secondItem="tfh-7Q-tZ2" secondAttribute="trailing" id="f7J-sh-8Kq"/>
@@ -152,9 +160,10 @@
                     <navigationItem key="navigationItem" id="u5e-5q-Wfk"/>
                     <connections>
                         <outlet property="answerDateLabel" destination="EDA-1g-lTt" id="kzF-dT-HRS"/>
-                        <outlet property="answerOpenSwith" destination="3zi-Co-HHx" id="hVj-yt-Rft"/>
+                        <outlet property="answerSwitch" destination="Hot-aL-fF2" id="gZj-Vs-sOw"/>
                         <outlet property="answerTextView" destination="tk6-Cu-58d" id="6Up-Pt-I9W"/>
                         <outlet property="backButton" destination="aMI-RH-y5S" id="Vod-QU-0BY"/>
+                        <outlet property="commentSwitch" destination="3zi-Co-HHx" id="90s-aR-nkL"/>
                         <outlet property="finishButton" destination="cwF-ah-mvH" id="9az-Zs-M5d"/>
                         <outlet property="questionInfoLabel" destination="0h7-HA-j0l" id="i8x-0J-ngy"/>
                         <outlet property="questionLabel" destination="eoJ-XV-IBo" id="gB3-0t-iSQ"/>
@@ -163,23 +172,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QUy-cB-T8s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="840" y="150"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Gzx-Yd-zaX">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="Wqa-9O-z1C" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="F59-S5-glB">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="rL3-Sq-lzl" kind="relationship" relationship="rootViewController" id="17k-OF-aN8"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="I7g-Ej-bPG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-43.076923076923073" y="150"/>
         </scene>
     </scenes>
     <resources>
