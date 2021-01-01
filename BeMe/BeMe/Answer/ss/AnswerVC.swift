@@ -23,12 +23,13 @@ class AnswerVC: UIViewController {
     
     @IBOutlet weak var answerTextView: UITextView!
     
-    @IBOutlet weak var answerOpenSwith: UISwitch!
-    
     @IBOutlet weak var finishButton: UIButton!
     
     @IBOutlet weak var backButton: UIButton!
     
+    @IBOutlet weak var answerSwitch: UISwitch!
+    
+    @IBOutlet weak var commentSwitch: UISwitch!
     
     //MARK:**- Variable Part**
     
@@ -43,8 +44,8 @@ class AnswerVC: UIViewController {
     
     // AnswerVC 에서 init
     var answer: String?
-    var isAnswerPublic: Bool = false
-    var isCommentPublic: Bool = false
+    var isAnswerPublic: Bool = true
+    var isCommentPublic: Bool = true
     
     var isInitial: Bool = true
     var inputText: String = ""
@@ -78,7 +79,7 @@ class AnswerVC: UIViewController {
         setTextView(answerTextView)
         setLabels(
             question: "이번 2021년도를 후회 없이 보낼 수 있는 방법은 무엇인가요?",
-            questionInfo: "[ 비미에 관한 2번째 질문 ]",
+            questionInfo: "[ 비미에 관한 29999번째 질문 ]",
             answerDate: "2021. 01. 01"
         )
 
@@ -91,6 +92,29 @@ class AnswerVC: UIViewController {
     /// 버튼과 같은 동작을 선언하는 @IBAction 을 선언합니다 , IBAction 함수 명은 동사 형태로!!  // 함수명 lowerCamelCase 사용
     
     /// ex) @IBOutlet @IBAction func answerSelectedButtonClicked(_ sender: Any) { }
+    @IBAction func answerSwitchValueCanged(_ sender: Any) {
+        
+        if self.answerSwitch.isOn {
+            isAnswerPublic = true
+        } else {
+            isAnswerPublic = false
+        }
+        
+        print(isAnswerPublic)
+        
+    }
+    
+    
+    @IBAction func commentSwitchValueCanged(_ sender: Any) {
+        if self.commentSwitch.isOn {
+            isCommentPublic = true
+        } else {
+            isCommentPublic = false
+        }
+        print(isCommentPublic)
+        
+    }
+    
     
     //MARK:**- default Setting Function Part**
     
@@ -138,9 +162,16 @@ class AnswerVC: UIViewController {
     
     // 질문 관련 데이터 init
     func setLabels(question: String, questionInfo: String, answerDate: String){
+
         questionLabel.text = question
         questionInfoLabel.text = questionInfo
         answerDateLabel.text = answerDate
+        let attributedString = NSMutableAttributedString(string: questionInfoLabel.text!)
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor,
+                                      value: UIColor.black,
+                                      range: (questionInfo as NSString).range(of: #"[0-9]*번째"#,
+                                                                              options: .regularExpression))
+        questionInfoLabel.attributedText = attributedString
     }
     
 
@@ -210,10 +241,6 @@ extension AnswerVC: UITextViewDelegate {
             isInitial = true
         }
     }
-    
-    
-    
-    
     
 
 }
