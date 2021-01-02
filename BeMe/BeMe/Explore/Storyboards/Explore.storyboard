@@ -708,7 +708,7 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cra-ah-TPP">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cra-ah-TPP" userLabel="Scrap Button">
                                                             <rect key="frame" x="286" y="226.66666666666666" width="32" height="31.999999999999972"/>
                                                             <state key="normal" image="btnScrapUnselected"/>
                                                             <state key="selected" image="btnScrapSelected"/>
@@ -719,6 +719,9 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GlK-TP-NFg">
                                                             <rect key="frame" x="286" y="15.333333333333332" width="24" height="23.999999999999996"/>
                                                             <state key="normal" image="btnMore24"/>
+                                                            <connections>
+                                                                <action selector="settingButtonTapped:" destination="Iei-1C-rFT" eventType="touchUpInside" id="wIz-MK-QVO"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -809,7 +812,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gAz-ud-aSC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1849.2307692307691" y="187.67772511848341"/>
+            <point key="canvasLocation" x="2174" y="188"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mdl-LQ-opT">

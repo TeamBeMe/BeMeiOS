@@ -35,4 +35,6 @@ class AnswerTVC: UITableViewCell {
             sender.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
         }
     }
+    @IBAction func settingButtonTapped(_ sender: UIButton) {
+    }
 }
