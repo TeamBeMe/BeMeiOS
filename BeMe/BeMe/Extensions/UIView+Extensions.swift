@@ -57,5 +57,17 @@ extension UIView {
             self.layer.borderWidth = 1.0
         }
     }
+    
+    // 테두리와 모서리 둥글게 만드는 method
+    func setBorderWithRadius(borderColor: UIColor?, borderWidth: CGFloat?, cornerRadius: CGFloat?) {
+        if let bc = borderColor, let bw = borderWidth {
+            self.layer.borderWidth = bw
+            self.layer.borderColor = bc.cgColor
+        }
+        
+        if let cr = cornerRadius {
+            self.layer.cornerRadius = cr
+        }
+    }
 }
 
