@@ -9,10 +9,11 @@ import UIKit
 
 class CustomActionSheet: UIViewController {
 
+    @IBOutlet weak var wrapper: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        
     }
     
 }
