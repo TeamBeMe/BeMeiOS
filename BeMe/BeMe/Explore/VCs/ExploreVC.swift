@@ -12,7 +12,7 @@ class ExploreVC: UIViewController {
     private var lastContentOffset: CGFloat = 0
     private let maxHeight: CGFloat = 32.0
     private let minHeight: CGFloat = 0.0
-    private var cellNumber: Int = 30
+    private var cellNumber: Int = 10
     
     //MARK: - IBOulets
     @IBOutlet weak var exploreScrollView: UIScrollView!
@@ -140,10 +140,9 @@ extension ExploreVC: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffset = exploreScrollView.contentOffset.y
-        lastContentOffset = currentOffset
+        
         // iphone safe area 문제 해결 코드
         self.view.backgroundColor = currentOffset > 388 ? .white : UIColor.init(named: "background")
-        
         
         if (currentOffset > 432 + 69 + 32) {
             if (lastContentOffset < currentOffset) {
@@ -157,6 +156,7 @@ extension ExploreVC: UIScrollViewDelegate {
             hideTabBarWhenScrollingUp()
         }
         
+        lastContentOffset = currentOffset
     }
     
 }
@@ -215,6 +215,7 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
             guard let more = tableView
                     .dequeueReusableCell(withIdentifier: MoreTVC.identifier, for: indexPath)
                     as? MoreTVC else { return UITableViewCell() }
+            
             more.isUserInteractionEnabled = false
             
             return more
