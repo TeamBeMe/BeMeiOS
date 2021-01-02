@@ -11,23 +11,23 @@ import SnapKit
 
 class NewCardCVC: UICollectionViewCell {
     static let identifier : String = "NewCardCVC"
-    
+    var answerData : AnswerDataForViewController?
+    var index : Int?
     //MARK:- IBOutlets
     var lockButton = UIButton().then {
-        $0.setTitle("L", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
+        $0.setImage(UIImage(named: "btnLock")?.withRenderingMode(.alwaysOriginal), for: .normal)
     }
     
     var questionInfoLabel = UILabel().then {
         $0.text = "[ 미래에 관한 2번째 질문 ] "
         $0.font = UIFont.systemFont(ofSize: 14)
-        $0.textColor = .white
+        $0.textColor = .slateGrey
         $0.textAlignment = .center
     }
     var dateLabel = UILabel().then {
         $0.text = "2020. 12. 24"
         $0.font = UIFont.systemFont(ofSize: 14)
-        $0.textColor = .white
+        $0.textColor = .slateGrey
         $0.textAlignment = .center
         
     }
@@ -45,36 +45,79 @@ class NewCardCVC: UICollectionViewCell {
         $0.backgroundColor = .white
         $0.makeRounded(cornerRadius: 6)
         $0.setTitleColor(.black, for: .normal)
-    }
-    
-    var changeButton = UIButton().then {
-        $0.setTitle("질문 변경하기", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        
         
     }
     
+    var changeButton = UIButton().then {
+
+        let yourAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 14),
+            .foregroundColor: UIColor.slateGrey,
+            .underlineStyle: NSUnderlineStyle.single.rawValue]
+        
+        let attributeString = NSMutableAttributedString(string: "질문 변경하기",
+                                                        attributes: yourAttributes)
+        $0.setAttributedTitle(attributeString, for: .normal)
+        
+    }
+    var answerTextView = UITextView().then {
+        $0.text = ""
+        $0.textColor = .white
+//        $0.isEditable = false
+        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.textAlignment = .center
+        $0.backgroundColor = .darkGrey
+        $0.isEditable = false
+            
+    }
+    
+    var fixButton = UIButton().then {
+        let yourAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 14),
+            .foregroundColor: UIColor.slateGrey,
+            .underlineStyle: NSUnderlineStyle.single.rawValue]
+        
+        let attributeString = NSMutableAttributedString(string: "편집",
+                                                        attributes: yourAttributes)
+        $0.setAttributedTitle(attributeString, for: .normal)
+    }
+
     var isPublic = false
     var changePublicDelegate : ChangePublicDelegate?
+    var homeAnswerButtonDelegate : HomeAnswerButtonDelegate?
+    var homeFixButtonDelegate : HomeFixButtonDelegate?
     let deviceBound = UIScreen.main.bounds.height/812.0
 }
 
 
 //MARK:- LifeCycle Methods
 extension NewCardCVC {
+
+    
     
     override func awakeFromNib() {
         makeLockButton()
         makeQuestionInfoLabel()
         makeDateLabel()
         makeQuestionLabel()
-        makeReplyButton()
-        makeChangeButton()
-        self.backgroundColor = UIColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0)
-        self.contentView.backgroundColor = UIColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0)
+
+        if answerData?.answer == nil{
+            makeReplyButton()
+            makeChangeButton()
+           
+        }
+        else{
+            makeAnswerTextView()
+            makeFixButton()
+        }
+        
+        
+        self.backgroundColor = .darkGrey
+        self.contentView.backgroundColor = .darkGrey
         self.makeRounded(cornerRadius: 6)
         lockButton.addTarget(self, action: #selector(changePublic), for: .touchUpInside)
-        self.setBorder(borderColor: UIColor(red: 142/255, green: 142/255, blue: 147/255, alpha: 1.0), borderWidth: 1.0)
+        self.setBorder(borderColor: .veryLightPink, borderWidth: 1.0)
     }
     
     
@@ -90,8 +133,8 @@ extension NewCardCVC {
         lockButton.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(40)
-            $0.width.equalTo(12.6)
-            $0.height.equalTo(18)
+            $0.width.equalTo(36)
+            $0.height.equalTo(36)
         }
     }
     
@@ -127,6 +170,7 @@ extension NewCardCVC {
             $0.bottom.equalToSuperview().offset(-62)
             $0.height.equalTo(50)
         }
+        replyButton.addTarget(self, action: #selector(replyButtonAction), for: .touchUpInside)
     }
     
     func makeChangeButton(){
@@ -138,7 +182,29 @@ extension NewCardCVC {
         }
         
     }
-
+    
+    
+    func makeAnswerTextView(){
+        self.addSubview(answerTextView)
+        answerTextView.snp.makeConstraints{
+            $0.leading.equalToSuperview().offset(40)
+            $0.trailing.equalToSuperview().offset(-40)
+            $0.top.equalToSuperview().offset(223)
+            $0.height.equalTo(160)
+        }
+    }
+    
+    func makeFixButton(){
+        self.addSubview(fixButton)
+        fixButton.snp.makeConstraints{
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-25)
+            
+        }
+        fixButton.addTarget(self, action: #selector(fixButtonAction), for: .touchUpInside)
+        
+    }
+   
 }
 
 
@@ -148,23 +214,70 @@ extension NewCardCVC {
 extension NewCardCVC {
     @objc func changePublic(){
 
-        changePublicDelegate?.changePublic(now: isPublic)
+        changePublicDelegate?.changePublic()
         
+    }
+    @objc func replyButtonAction(){
+        homeAnswerButtonDelegate?.answerButtonTapped(question: questionLabel.text!,
+                                                     questionInfo: questionInfoLabel.text!,
+                                                     answerDate: dateLabel.text!,
+                                                     index: index!
+        )
+    }
+    @objc func fixButtonAction(){
+        homeFixButtonDelegate?.fixButtonTapped()
     }
     
     
     func setLock(after : Bool){
         if after == true {
-            lockButton.setTitle("U", for: .normal)
-            lockButton.setImage(UIImage(systemName: "lock.slash"), for: .normal)
-            lockButton.tintColor = .white
+
+            lockButton.setImage(
+                UIImage(named: "btnUnlock")?.withRenderingMode(.alwaysOriginal), for: .normal)
+ 
         }
         else{
-            lockButton.setTitle("L", for: .normal)
-            lockButton.setImage(UIImage(systemName: "lock"), for: .normal)
-            lockButton.tintColor = .white
+
+            lockButton.setImage(
+                UIImage(named: "btnLock")?.withRenderingMode(.alwaysOriginal), for: .normal)
+
         }
         
+    }
+    
+    func setItems(){
+        if answerData?.lock == true{
+            lockButton.setImage(
+                UIImage(named: "btnLock")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        else{
+            lockButton.setImage(
+                UIImage(named: "btnUnlock")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        if answerData?.questionInfo!.first == "["{
+            questionInfoLabel.text = answerData?.questionInfo
+        }
+        else{
+            questionInfoLabel.text = "[ " + (answerData?.questionInfo)! + " ]"
+        }
+        
+        questionLabel.text = answerData?.question
+        dateLabel.text = answerData?.answerDate
+        answerTextView.text = answerData?.answer
+        
+        if answerData?.answer == ""{
+            answerTextView.removeFromSuperview()
+            fixButton.removeFromSuperview()
+            makeReplyButton()
+            makeChangeButton()
+           
+        }
+        else{
+            replyButton.removeFromSuperview()
+            changeButton.removeFromSuperview()
+            makeAnswerTextView()
+            makeFixButton()
+        }
     }
     
     

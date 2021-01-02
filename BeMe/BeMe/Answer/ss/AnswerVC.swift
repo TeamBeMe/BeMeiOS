@@ -50,7 +50,8 @@ class AnswerVC: UIViewController {
     var isInitial: Bool = true
     var inputText: String = ""
     var initialText: String = ""
-    
+    var answerDataDelegate: HomeGetDataFromAnswerDelegate?
+    var curCardIdx : Int?
     
     //MARK:**- Constraint Part**
     
@@ -66,7 +67,8 @@ class AnswerVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+        setLabels(question: question!, questionInfo: questionInfo!, answerDate: answerDate!)
+//        answerTextView.text = ""
 //        answerTextView.becomeFirstResponder()
         
         
@@ -82,6 +84,7 @@ class AnswerVC: UIViewController {
             questionInfo: "[ 비미에 관한 29999번째 질문 ]",
             answerDate: "2021. 01. 01"
         )
+        
 
     }
     
@@ -171,7 +174,11 @@ class AnswerVC: UIViewController {
                                       value: UIColor.black,
                                       range: (questionInfo as NSString).range(of: #"[0-9]*번째"#,
                                                                               options: .regularExpression))
-        questionInfoLabel.attributedText = attributedString
+//        questionInfoLabel.attributedText = attributedString
+
+        answerTextView.text = answer
+        textViewDidChange(answerTextView)
+        answerTextView.becomeFirstResponder()
     }
     
 
@@ -187,6 +194,26 @@ class AnswerVC: UIViewController {
     ///         myTableView.datasource = self
     
     ///    }
+    
+    
+    @IBAction func backButtonAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func finishButtonAction(_ sender: Any) {
+        let answerData = AnswerDataForViewController(lock: isAnswerPublic,
+                                                     questionInfo: questionInfo!,
+                                                     answerDate: answerDate!,
+                                                     question: question!,
+                                                     answer: answerTextView.text,
+                                                     index: curCardIdx!
+                                                     )
+        answerDataDelegate?.setNewAnswer(answerData: answerData)
+        self.navigationController?.popViewController(animated: true)
+        
+    }
+    
+    
     
 }
 
