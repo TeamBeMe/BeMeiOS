@@ -562,9 +562,10 @@
                         <outlet property="diffArticleTableViewHeight" destination="G8J-iJ-BeC" id="026-We-EcI"/>
                         <outlet property="diffThoughtCollectionView" destination="pQB-jD-5aD" id="knr-Qj-HVo"/>
                         <outlet property="exploreScrollView" destination="h1s-u1-hNF" id="vDd-WX-KLs"/>
+                        <outlet property="headerHighLightBar" destination="vzr-5o-9o8" id="ngp-8p-eVt"/>
                         <outlet property="headerView" destination="aoL-DS-o8G" id="YsX-02-epl"/>
                         <outlet property="headerViewHeight" destination="gVk-D0-MHo" id="ssC-To-pEZ"/>
-                        <outlet property="highLightBar" destination="uqd-j7-Krb" id="rzo-jZ-JvO"/>
+                        <outlet property="highLightBar" destination="uqd-j7-Krb" id="nQa-Me-mLh"/>
                         <outlet property="highLightBarLeading" destination="N0B-rs-xHb" id="QxD-et-Nv0"/>
                     </connections>
                 </viewController>

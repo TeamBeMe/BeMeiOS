@@ -17,6 +17,7 @@ class ExploreVC: UIViewController {
     //MARK: - IBOulets
     @IBOutlet weak var exploreScrollView: UIScrollView!
     @IBOutlet weak var highLightBar: UIView!
+    @IBOutlet weak var headerHighLightBar: UIView!
     @IBOutlet weak var highLightBarLeading: NSLayoutConstraint!
     @IBOutlet weak var diffThoughtCollectionView: UICollectionView!
     @IBOutlet weak var diffArticleTableView: UITableView!
@@ -30,10 +31,8 @@ class ExploreVC: UIViewController {
         didSet {
             
             headerViewHeight.constant = minHeight
-            
         }
     }
-    @IBOutlet weak var safeAreaView: UIView!
     
     //MARK: - Life Cycles
     override func viewDidLoad() {
@@ -71,9 +70,13 @@ class ExploreVC: UIViewController {
     
     @IBAction func recentButtonTapped(_ sender: UIButton) {
         moveHighLightBar(to: sender)
+        
+        diffArticleTableView.reloadData()
     }
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
         moveHighLightBar(to: sender)
+        
+        diffArticleTableView.reloadData()
     }
 }
 
@@ -95,7 +98,7 @@ extension ExploreVC {
             
             // Slide Animation
             self.highLightBar.frame.origin.x = 30 + button.frame.minX
-            
+            self.headerHighLightBar.frame.origin.x = 30 + button.frame.minX
             // FadeIn Animation
             //self.highLightBarLeading.constant = 30 + button.frame.minX
         }) { _ in
@@ -246,10 +249,29 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        cell.alpha = 0
-        UIView.animate(withDuration: 0.75) {
+        if indexPath.row == 0 {
+            // no animation
             
-            cell.alpha = 1.0
+        } else if indexPath.row == cellNumber - 1 {
+            // animation 2
+            cell.alpha = 0
+            UIView.animate(withDuration: 0.75) {
+                
+                cell.alpha = 1.0
+            }
+        } else {
+            // animation 1
+            let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 150, 0)
+            cell.layer.transform = rotationTransform
+            cell.alpha = 0.5
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                cell.layer.transform = CATransform3DIdentity
+                cell.alpha = 1.0
+            })
+            
+            
         }
+        
     }
 }
