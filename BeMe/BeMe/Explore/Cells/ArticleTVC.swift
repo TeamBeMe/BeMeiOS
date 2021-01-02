@@ -12,12 +12,16 @@ class ArticleTVC: UITableViewCell {
     
     lazy var isScrapped: Bool = false
     
-    @IBOutlet weak var cardView: UIView!
+    @IBOutlet weak var answerCardView: UIView!
+    @IBOutlet weak var answerTextView: UITextView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        cardView.layer.borderWidth = 1
-        cardView.layer.borderColor = UIColor.lightGray.cgColor
-        cardView.layer.cornerRadius = 8
+        
+        answerCardView.setBorderWithRadius(borderColor: .lightGray, borderWidth: 1, cornerRadius: 8)
+        
+        answerTextView.font = UIFont(name: "AppleSDGothicNeo-Light", size: 14.0)
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
