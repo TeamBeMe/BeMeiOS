@@ -95,14 +95,14 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="l7O-Dp-PLZ" secondAttribute="height" multiplier="1:1" id="NRi-4p-sF0"/>
                                                         </constraints>
-                                                        <state key="normal" image="pencil" catalog="system"/>
+                                                        <state key="normal" image="btnIdsearch"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDw-ZB-XdT">
                                                         <rect key="frame" x="281" y="0.0" width="44" height="44"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="BDw-ZB-XdT" secondAttribute="height" multiplier="1:1" id="7TX-5h-W0u"/>
                                                         </constraints>
-                                                        <state key="normal" image="alarm" catalog="system"/>
+                                                        <state key="normal" image="btnAlram"/>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.92941802740000001" green="0.92940050360000004" blue="0.92941236500000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -249,8 +249,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나와 같은 질문에 다른 사람들은 이렇게 답했어요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bK3-0A-YBB">
-                                                <rect key="frame" x="29.999999999999986" y="90" width="245.66666666666663" height="15.666666666666671"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내가 답한 질문에 대한 다른 사람들의 최신 답변이에요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bK3-0A-YBB">
+                                                <rect key="frame" x="30" y="90" width="271.33333333333331" height="15.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -345,7 +345,7 @@
                                                         <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iVh-kE-hbm">
                                                             <rect key="frame" x="0.0" y="8" width="390" height="46"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cne-lg-nhe">
+                                                            <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cne-lg-nhe">
                                                                 <size key="itemSize" width="154" height="46"/>
                                                                 <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                                 <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -374,6 +374,9 @@
                                                                         </constraints>
                                                                     </collectionViewCellContentView>
                                                                     <size key="customSize" width="154" height="46"/>
+                                                                    <connections>
+                                                                        <outlet property="name" destination="Qhe-Te-dAb" id="3aS-t1-iTr"/>
+                                                                    </connections>
                                                                 </collectionViewCell>
                                                             </cells>
                                                         </collectionView>
@@ -493,7 +496,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkJ-kZ-nwp">
-                                                            <rect key="frame" x="30" y="35" width="330" height="50"/>
+                                                            <rect key="frame" x="30" y="35" width="330" height="28"/>
                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="50" id="pib-8c-FmW"/>
@@ -507,6 +510,7 @@
                                                     <constraints>
                                                         <constraint firstItem="wkJ-kZ-nwp" firstAttribute="leading" secondItem="7R1-lM-mz9" secondAttribute="leading" constant="30" id="jMN-ZB-nsJ"/>
                                                         <constraint firstAttribute="trailing" secondItem="wkJ-kZ-nwp" secondAttribute="trailing" constant="30" id="sBd-CK-kfW"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="wkJ-kZ-nwp" secondAttribute="bottom" constant="119" id="sml-rj-OcJ"/>
                                                         <constraint firstItem="wkJ-kZ-nwp" firstAttribute="top" secondItem="7R1-lM-mz9" secondAttribute="topMargin" constant="24" id="uEk-Gz-jdW"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
@@ -557,13 +561,17 @@
                     </view>
                     <navigationItem key="navigationItem" id="0CN-c3-hQY"/>
                     <connections>
+                        <outlet property="diffArticleSubTitle" destination="bK3-0A-YBB" id="z0K-D9-xM9"/>
                         <outlet property="diffArticleTableView" destination="5i8-hf-lv2" id="NRI-Ui-buU"/>
                         <outlet property="diffArticleTableViewHeight" destination="G8J-iJ-BeC" id="026-We-EcI"/>
                         <outlet property="diffThoughtCollectionView" destination="pQB-jD-5aD" id="knr-Qj-HVo"/>
                         <outlet property="exploreScrollView" destination="h1s-u1-hNF" id="vDd-WX-KLs"/>
+                        <outlet property="headerHighLightBar" destination="vzr-5o-9o8" id="ngp-8p-eVt"/>
+                        <outlet property="headerHighLightBarConstraint" destination="79b-Db-NCl" id="z6v-FE-Kn8"/>
                         <outlet property="headerView" destination="aoL-DS-o8G" id="YsX-02-epl"/>
                         <outlet property="headerViewHeight" destination="gVk-D0-MHo" id="ssC-To-pEZ"/>
-                        <outlet property="highLightBar" destination="uqd-j7-Krb" id="rzo-jZ-JvO"/>
+                        <outlet property="headerViewTopContraint" destination="4qN-cG-bjL" id="MH3-RN-nJg"/>
+                        <outlet property="highLightBar" destination="uqd-j7-Krb" id="nQa-Me-mLh"/>
                         <outlet property="highLightBarLeading" destination="N0B-rs-xHb" id="QxD-et-Nv0"/>
                     </connections>
                 </viewController>
@@ -812,7 +820,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gAz-ud-aSC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2174" y="188"/>
+            <point key="canvasLocation" x="2854" y="188"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mdl-LQ-opT">
@@ -834,14 +842,14 @@
         </scene>
     </scenes>
     <resources>
-        <image name="alarm" catalog="system" width="124" height="128"/>
+        <image name="btnAlram" width="44" height="44"/>
         <image name="btnArrlowLeft" width="44" height="44"/>
         <image name="btnArrowNext" width="32" height="32"/>
+        <image name="btnIdsearch" width="44" height="44"/>
         <image name="btnMore24" width="24" height="24"/>
         <image name="btnScrapSelected" width="32" height="32"/>
         <image name="btnScrapUnselected" width="32" height="32"/>
         <image name="imgProfile" width="34" height="34"/>
-        <image name="pencil" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

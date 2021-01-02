@@ -12,12 +12,16 @@ class ExploreVC: UIViewController {
     private var lastContentOffset: CGFloat = 0
     private let maxHeight: CGFloat = 32.0
     private let minHeight: CGFloat = 0.0
-    private var cellNumber: Int = 30
-    
+    private var cellNumber: Int = 10
+    private var isRecentButtonPressed: Bool = true
+
     //MARK: - IBOulets
     @IBOutlet weak var exploreScrollView: UIScrollView!
     @IBOutlet weak var highLightBar: UIView!
+    @IBOutlet weak var headerHighLightBar: UIView!
+    @IBOutlet weak var headerHighLightBarConstraint: NSLayoutConstraint!
     @IBOutlet weak var highLightBarLeading: NSLayoutConstraint!
+    @IBOutlet weak var diffArticleSubTitle: UILabel!
     @IBOutlet weak var diffThoughtCollectionView: UICollectionView!
     @IBOutlet weak var diffArticleTableView: UITableView!
     @IBOutlet weak var diffArticleTableViewHeight: NSLayoutConstraint!
@@ -30,10 +34,11 @@ class ExploreVC: UIViewController {
         didSet {
             
             headerViewHeight.constant = minHeight
-            
         }
     }
-    @IBOutlet weak var safeAreaView: UIView!
+    
+    @IBOutlet weak var headerViewTopContraint: NSLayoutConstraint!
+    
     
     //MARK: - Life Cycles
     override func viewDidLoad() {
@@ -71,17 +76,36 @@ class ExploreVC: UIViewController {
     
     @IBAction func recentButtonTapped(_ sender: UIButton) {
         moveHighLightBar(to: sender)
+        isRecentButtonPressed = true
+        setLabel()
+        diffArticleTableView.reloadData()
     }
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
         moveHighLightBar(to: sender)
+        isRecentButtonPressed = false
+        setLabel()
+        diffArticleTableView.reloadData()
     }
 }
 
 //MARK: - Private Method
 extension ExploreVC {
     
+    private func setLabel() {
+        diffArticleSubTitle.alpha = 0.0
+        UIView.animate(withDuration: 0.6, animations: {
+            self.diffArticleSubTitle.alpha = 1.0
+            self.diffArticleSubTitle.text = self.isRecentButtonPressed ? "내가 답한 질문에 대한 다른 사람들의 최신 답변이에요" : "내가 관심있어 할 다른 사람들의 답변이에요"
+
+            
+        }) { (_) in
+            
+        }
+        
+    }
+    
     private func setLayout() {
-        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.center.y -= view.bounds.height
         
     }
     
@@ -94,10 +118,13 @@ extension ExploreVC {
         UIView.animate(withDuration: 0.2, delay: 0, options: [.curveLinear], animations: {
             
             // Slide Animation
-            self.highLightBar.frame.origin.x = 30 + button.frame.minX
+//            self.highLightBar.frame.origin.x = 30 + button.frame.minX
+//            self.headerHighLightBar.frame.origin.x = 30 + button.frame.minX
             
             // FadeIn Animation
-            //self.highLightBarLeading.constant = 30 + button.frame.minX
+            self.highLightBarLeading.constant = 30 + button.frame.minX
+            self.headerHighLightBarConstraint.constant = 30 + button.frame.minX
+            
         }) { _ in
             
         }
@@ -115,6 +142,7 @@ extension ExploreVC {
     private func hideTabBarWhenScrollingUp() {
         UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveLinear], animations: {
             self.headerViewHeight.constant = self.minHeight
+//            self.headerView.center.y = -self.headerView.frame.height
             self.headerView.alpha = 0.0
         }) { _ in
             
@@ -124,6 +152,7 @@ extension ExploreVC {
     private func showTabBarWhenScrollingDown() {
         UIView.animate(withDuration: 0.3, delay: 0.3, options: [.curveLinear], animations: {
             self.headerViewHeight.constant = self.maxHeight
+//            self.headerView.center.y = self.headerView.frame.height
             self.headerView.alpha = 1.0
         }) { _ in
             
@@ -140,10 +169,9 @@ extension ExploreVC: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffset = exploreScrollView.contentOffset.y
-        lastContentOffset = currentOffset
+        
         // iphone safe area 문제 해결 코드
         self.view.backgroundColor = currentOffset > 388 ? .white : UIColor.init(named: "background")
-        
         
         if (currentOffset > 432 + 69 + 32) {
             if (lastContentOffset < currentOffset) {
@@ -157,6 +185,7 @@ extension ExploreVC: UIScrollViewDelegate {
             hideTabBarWhenScrollingUp()
         }
         
+        lastContentOffset = currentOffset
     }
     
 }
@@ -207,14 +236,16 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-            guard let header = tableView
+            guard let category = tableView
                     .dequeueReusableCell(withIdentifier: CategoryTVC.identifier, for: indexPath)
                     as? CategoryTVC else { return UITableViewCell() }
-            return header
+            category.delegate = self
+            return category
         } else if indexPath.row == cellNumber - 1 {
             guard let more = tableView
                     .dequeueReusableCell(withIdentifier: MoreTVC.identifier, for: indexPath)
                     as? MoreTVC else { return UITableViewCell() }
+            
             more.isUserInteractionEnabled = false
             
             return more
@@ -245,10 +276,37 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        cell.alpha = 0
-        UIView.animate(withDuration: 0.75) {
+        if indexPath.row == 0 {
+            // no animation
             
-            cell.alpha = 1.0
+        } else if indexPath.row == cellNumber - 1 {
+            // animation 2
+            cell.alpha = 0
+            UIView.animate(withDuration: 0.75) {
+                
+                cell.alpha = 1.0
+            }
+        } else {
+            // animation 1
+            let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 150, 0)
+            cell.layer.transform = rotationTransform
+            cell.alpha = 0.5
+            
+            UIView.animate(withDuration: 0.5, animations: {
+                cell.layer.transform = CATransform3DIdentity
+                cell.alpha = 1.0
+            })
+            
+            
         }
+        
+    }
+}
+
+extension ExploreVC: CategoryButtonPressedDelegate {
+    func categoryButtonTapped(_ indexPath: IndexPath) {
+        
+        // indexPath 서버에 보내줘서 비동기 처리 (로딩화면)
+        diffArticleTableView.reloadData()
     }
 }
