@@ -12,6 +12,7 @@ class ExploreVC: UIViewController {
     private var lastContentOffset: CGFloat = 0
     private let maxHeight: CGFloat = 32.0
     private let minHeight: CGFloat = 0.0
+    private var cellNumber: Int = 30
     
     //MARK: - IBOulets
     @IBOutlet weak var exploreScrollView: UIScrollView!
@@ -39,8 +40,7 @@ class ExploreVC: UIViewController {
         super.viewDidLoad()
         
         adjustScrollViewInset()
-        diffArticleTableView.rowHeight = UITableView.automaticDimension
-        diffArticleTableView.estimatedRowHeight = 200;
+        diffArticleTableView.setDynamicCellHeight(to: 200)
         
     }
     
@@ -48,12 +48,22 @@ class ExploreVC: UIViewController {
         super.viewWillAppear(animated)
         
         self.view.bringSubviewToFront(headerView)
+        
+        navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        
+        navigationController?.navigationBar.isHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         setTableViewHeight()
+        
     }
     
     
@@ -72,7 +82,7 @@ extension ExploreVC {
     
     private func setLayout() {
         headerView.translatesAutoresizingMaskIntoConstraints = false
-
+        
     }
     
     private func setTableViewHeight() {
@@ -124,11 +134,16 @@ extension ExploreVC {
 //MARK: - ScrollViewDelegate
 extension ExploreVC: UIScrollViewDelegate {
     
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffset = exploreScrollView.contentOffset.y
-        
+        lastContentOffset = currentOffset
         // iphone safe area 문제 해결 코드
         self.view.backgroundColor = currentOffset > 388 ? .white : UIColor.init(named: "background")
+        
         
         if (currentOffset > 432 + 69 + 32) {
             if (lastContentOffset < currentOffset) {
@@ -138,12 +153,9 @@ extension ExploreVC: UIScrollViewDelegate {
                 // scroll down
                 showTabBarWhenScrollingDown()
             }
-            lastContentOffset = currentOffset
         } else {
             hideTabBarWhenScrollingUp()
         }
-        
-        
         
     }
     
@@ -189,7 +201,7 @@ extension ExploreVC: UICollectionViewDataSource {
 extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 12
+        return cellNumber
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -199,10 +211,12 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
                     .dequeueReusableCell(withIdentifier: CategoryTVC.identifier, for: indexPath)
                     as? CategoryTVC else { return UITableViewCell() }
             return header
-        } else if indexPath.row == 11 {
+        } else if indexPath.row == cellNumber - 1 {
             guard let more = tableView
                     .dequeueReusableCell(withIdentifier: MoreTVC.identifier, for: indexPath)
                     as? MoreTVC else { return UITableViewCell() }
+            more.isUserInteractionEnabled = false
+            
             return more
         } else {
             guard let article = tableView
@@ -217,12 +231,24 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
             return 62
-        } else if indexPath.row == 20 {
-            return 169 + 24
+        } else if indexPath.row == cellNumber - 1 {
+            return UITableView.automaticDimension
         } else {
             return UITableView.automaticDimension
         }
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        cell.alpha = 0
+        UIView.animate(withDuration: 0.75) {
+            
+            cell.alpha = 1.0
+        }
+    }
 }
