@@ -13,12 +13,15 @@ class ExploreVC: UIViewController {
     private let maxHeight: CGFloat = 32.0
     private let minHeight: CGFloat = 0.0
     private var cellNumber: Int = 10
-    
+    private var isRecentButtonPressed: Bool = true
+
     //MARK: - IBOulets
     @IBOutlet weak var exploreScrollView: UIScrollView!
     @IBOutlet weak var highLightBar: UIView!
     @IBOutlet weak var headerHighLightBar: UIView!
+    @IBOutlet weak var headerHighLightBarConstraint: NSLayoutConstraint!
     @IBOutlet weak var highLightBarLeading: NSLayoutConstraint!
+    @IBOutlet weak var diffArticleSubTitle: UILabel!
     @IBOutlet weak var diffThoughtCollectionView: UICollectionView!
     @IBOutlet weak var diffArticleTableView: UITableView!
     @IBOutlet weak var diffArticleTableViewHeight: NSLayoutConstraint!
@@ -33,6 +36,9 @@ class ExploreVC: UIViewController {
             headerViewHeight.constant = minHeight
         }
     }
+    
+    @IBOutlet weak var headerViewTopContraint: NSLayoutConstraint!
+    
     
     //MARK: - Life Cycles
     override func viewDidLoad() {
@@ -70,12 +76,14 @@ class ExploreVC: UIViewController {
     
     @IBAction func recentButtonTapped(_ sender: UIButton) {
         moveHighLightBar(to: sender)
-        
+        isRecentButtonPressed = true
+        setLabel()
         diffArticleTableView.reloadData()
     }
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
         moveHighLightBar(to: sender)
-        
+        isRecentButtonPressed = false
+        setLabel()
         diffArticleTableView.reloadData()
     }
 }
@@ -83,8 +91,21 @@ class ExploreVC: UIViewController {
 //MARK: - Private Method
 extension ExploreVC {
     
+    private func setLabel() {
+        diffArticleSubTitle.alpha = 0.0
+        UIView.animate(withDuration: 0.6, animations: {
+            self.diffArticleSubTitle.alpha = 1.0
+            self.diffArticleSubTitle.text = self.isRecentButtonPressed ? "내가 답한 질문에 대한 다른 사람들의 최신 답변이에요" : "내가 관심있어 할 다른 사람들의 답변이에요"
+
+            
+        }) { (_) in
+            
+        }
+        
+    }
+    
     private func setLayout() {
-        headerView.translatesAutoresizingMaskIntoConstraints = false
+        headerView.center.y -= view.bounds.height
         
     }
     
@@ -97,10 +118,13 @@ extension ExploreVC {
         UIView.animate(withDuration: 0.2, delay: 0, options: [.curveLinear], animations: {
             
             // Slide Animation
-            self.highLightBar.frame.origin.x = 30 + button.frame.minX
-            self.headerHighLightBar.frame.origin.x = 30 + button.frame.minX
+//            self.highLightBar.frame.origin.x = 30 + button.frame.minX
+//            self.headerHighLightBar.frame.origin.x = 30 + button.frame.minX
+            
             // FadeIn Animation
-            //self.highLightBarLeading.constant = 30 + button.frame.minX
+            self.highLightBarLeading.constant = 30 + button.frame.minX
+            self.headerHighLightBarConstraint.constant = 30 + button.frame.minX
+            
         }) { _ in
             
         }
@@ -117,7 +141,8 @@ extension ExploreVC {
     
     private func hideTabBarWhenScrollingUp() {
         UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveLinear], animations: {
-            self.headerViewHeight.constant = self.minHeight
+//            self.headerViewHeight.constant = self.minHeight
+            self.headerView.center.y = -self.headerView.frame.height
             self.headerView.alpha = 0.0
         }) { _ in
             
@@ -126,7 +151,7 @@ extension ExploreVC {
     
     private func showTabBarWhenScrollingDown() {
         UIView.animate(withDuration: 0.3, delay: 0.3, options: [.curveLinear], animations: {
-            self.headerViewHeight.constant = self.maxHeight
+            self.headerView.center.y = self.headerView.frame.height
             self.headerView.alpha = 1.0
         }) { _ in
             

@@ -249,8 +249,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나와 같은 질문에 다른 사람들은 이렇게 답했어요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bK3-0A-YBB">
-                                                <rect key="frame" x="29.999999999999986" y="90" width="245.66666666666663" height="15.666666666666671"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내가 답한 질문에 대한 다른 사람들의 최신 답변이에요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bK3-0A-YBB">
+                                                <rect key="frame" x="30" y="90" width="271.33333333333331" height="15.666666666666671"/>
                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
@@ -558,13 +558,16 @@
                     </view>
                     <navigationItem key="navigationItem" id="0CN-c3-hQY"/>
                     <connections>
+                        <outlet property="diffArticleSubTitle" destination="bK3-0A-YBB" id="z0K-D9-xM9"/>
                         <outlet property="diffArticleTableView" destination="5i8-hf-lv2" id="NRI-Ui-buU"/>
                         <outlet property="diffArticleTableViewHeight" destination="G8J-iJ-BeC" id="026-We-EcI"/>
                         <outlet property="diffThoughtCollectionView" destination="pQB-jD-5aD" id="knr-Qj-HVo"/>
                         <outlet property="exploreScrollView" destination="h1s-u1-hNF" id="vDd-WX-KLs"/>
                         <outlet property="headerHighLightBar" destination="vzr-5o-9o8" id="ngp-8p-eVt"/>
+                        <outlet property="headerHighLightBarConstraint" destination="79b-Db-NCl" id="z6v-FE-Kn8"/>
                         <outlet property="headerView" destination="aoL-DS-o8G" id="YsX-02-epl"/>
                         <outlet property="headerViewHeight" destination="gVk-D0-MHo" id="ssC-To-pEZ"/>
+                        <outlet property="headerViewTopContraint" destination="4qN-cG-bjL" id="MH3-RN-nJg"/>
                         <outlet property="highLightBar" destination="uqd-j7-Krb" id="nQa-Me-mLh"/>
                         <outlet property="highLightBarLeading" destination="N0B-rs-xHb" id="QxD-et-Nv0"/>
                     </connections>
