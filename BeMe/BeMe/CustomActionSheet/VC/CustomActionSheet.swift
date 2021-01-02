@@ -19,6 +19,10 @@ class CustomActionSheet: UIViewController {
         
     }
     
+    @IBAction func closeButtonTapped(_ sender: UIButton) {
+        NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil)
+        self.dismiss(animated: true, completion: nil)
+    }
 }
 
 extension CALayer {

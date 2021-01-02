@@ -35,7 +35,7 @@ class ExploreDetailVC: UIViewController {
         super.viewDidLoad()
         
         setPopupBackgroundView()
-        
+        setNotificationCenter()
     }
     
     //MARK: - IBAction
@@ -67,6 +67,14 @@ extension ExploreDetailVC {
         UIView.animate(withDuration: duration) {
             self.popupBackgroundView.alpha = alpha
         }
+    }
+    
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(closePopup), name: .init("closePopupNoti"), object: nil)
+    }
+    
+    @objc func closePopup() {
+        animatePopupBackground(false)
     }
 }
 

@@ -133,6 +133,9 @@
                                         <state key="normal" title="취소">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="closeButtonTapped:" destination="8MC-Fn-Thv" eventType="touchUpInside" id="r26-ZZ-c1l"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -146,12 +149,23 @@
                                     <constraint firstItem="QRI-I4-CVN" firstAttribute="leading" secondItem="32S-JJ-MRy" secondAttribute="leading" id="dCo-ae-Rlm"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9la-8Y-dXq">
+                                <rect key="frame" x="0.0" y="44" width="414" height="591"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="closeButtonTapped:" destination="8MC-Fn-Thv" eventType="touchUpInside" id="bZB-Bc-Qsa"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YKU-la-2K1"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="YKU-la-2K1" firstAttribute="trailing" secondItem="32S-JJ-MRy" secondAttribute="trailing" id="1hu-S1-ct7"/>
                             <constraint firstAttribute="bottom" secondItem="32S-JJ-MRy" secondAttribute="bottom" id="79c-ja-8bx"/>
+                            <constraint firstItem="32S-JJ-MRy" firstAttribute="top" secondItem="9la-8Y-dXq" secondAttribute="bottom" id="U4Q-Ap-Piy"/>
+                            <constraint firstItem="9la-8Y-dXq" firstAttribute="top" secondItem="YKU-la-2K1" secondAttribute="top" id="YuI-kj-SHB"/>
+                            <constraint firstItem="9la-8Y-dXq" firstAttribute="leading" secondItem="YKU-la-2K1" secondAttribute="leading" id="hcr-fb-HYr"/>
+                            <constraint firstItem="YKU-la-2K1" firstAttribute="trailing" secondItem="9la-8Y-dXq" secondAttribute="trailing" id="rOd-zq-Hlo"/>
                             <constraint firstItem="32S-JJ-MRy" firstAttribute="leading" secondItem="YKU-la-2K1" secondAttribute="leading" id="ySr-0Y-eg4"/>
                         </constraints>
                     </view>
