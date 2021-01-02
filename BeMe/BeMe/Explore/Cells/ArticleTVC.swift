@@ -10,6 +10,8 @@ import UIKit
 class ArticleTVC: UITableViewCell {
     static let identifier: String = "ArticleTVC"
     
+    lazy var isScrapped: Bool = false
+    
     @IBOutlet weak var cardView: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -24,4 +26,22 @@ class ArticleTVC: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    
+    
+    //MARK: - IBAction
+    @IBAction func scrapButtonTapped(_ sender: UIButton) {
+        
+        if isScrapped {
+            isScrapped = false
+            sender.setImage(UIImage.init(named: "btnScrapUnselected"), for: .normal)
+        } else {
+            isScrapped = true
+            sender.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
+        }
+        
+    }
+    
+    @IBAction func goToDetailExploreVC(_ sender: UIButton) {
+        
+    }
 }

@@ -128,11 +128,10 @@ extension ExploreVC {
 //MARK: - ScrollViewDelegate
 extension ExploreVC: UIScrollViewDelegate {
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let currentOffset = exploreScrollView.contentOffset.y
         
-        // iphone safe area 문제 해결 코드
-        self.view.backgroundColor = currentOffset > 388 ? .white : UIColor.init(named: "background")
+        print(decelerate)
         
         if (currentOffset > 432 + 69 + 32) {
             if (lastContentOffset < currentOffset) {
@@ -140,14 +139,20 @@ extension ExploreVC: UIScrollViewDelegate {
                 hideTabBarWhenScrollingUp()
             } else {
                 // scroll down
+//                print("출ㄹ")
                 showTabBarWhenScrollingDown()
             }
-            lastContentOffset = currentOffset
         } else {
             hideTabBarWhenScrollingUp()
         }
-        
-        
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentOffset = exploreScrollView.contentOffset.y
+        lastContentOffset = currentOffset
+        // iphone safe area 문제 해결 코드
+        self.view.backgroundColor = currentOffset > 388 ? .white : UIColor.init(named: "background")
+        hideTabBarWhenScrollingUp()
         
     }
     

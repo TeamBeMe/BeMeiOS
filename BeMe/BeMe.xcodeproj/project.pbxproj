@@ -11,6 +11,7 @@
 		A578D4E1259E727C00F69908 /* Answer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A578D4E0259E727C00F69908 /* Answer.storyboard */; };
 		A578D4E4259E728500F69908 /* AnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A578D4E3259E728500F69908 /* AnswerVC.swift */; };
 		D492E41A25A0A0DE0088A181 /* ExploreDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492E41925A0A0DE0088A181 /* ExploreDetailVC.swift */; };
+		D492E42F25A0CE5E0088A181 /* AnswerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492E42E25A0CE5E0088A181 /* AnswerTVC.swift */; };
 		D4E07CB9259F22C10075E616 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4E07CB2259F22C10075E616 /* Explore.storyboard */; };
 		D4E07CBA259F22C10075E616 /* MoreTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E07CB4259F22C10075E616 /* MoreTVC.swift */; };
 		D4E07CBB259F22C10075E616 /* CategoryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E07CB5259F22C10075E616 /* CategoryTVC.swift */; };
@@ -79,6 +80,7 @@
 		A578D4E0259E727C00F69908 /* Answer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Answer.storyboard; path = BeMe/Answer/s/Answer.storyboard; sourceTree = SOURCE_ROOT; };
 		A578D4E3259E728500F69908 /* AnswerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnswerVC.swift; path = BeMe/Answer/ss/AnswerVC.swift; sourceTree = SOURCE_ROOT; };
 		D492E41925A0A0DE0088A181 /* ExploreDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDetailVC.swift; sourceTree = "<group>"; };
+		D492E42E25A0CE5E0088A181 /* AnswerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerTVC.swift; sourceTree = "<group>"; };
 		D4E07CB2259F22C10075E616 /* Explore.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Explore.storyboard; sourceTree = "<group>"; };
 		D4E07CB4259F22C10075E616 /* MoreTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTVC.swift; sourceTree = "<group>"; };
 		D4E07CB5259F22C10075E616 /* CategoryTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTVC.swift; sourceTree = "<group>"; };
@@ -229,6 +231,7 @@
 			isa = PBXGroup;
 			children = (
 				D4E07CB4259F22C10075E616 /* MoreTVC.swift */,
+				D492E42E25A0CE5E0088A181 /* AnswerTVC.swift */,
 				D4E07CB5259F22C10075E616 /* CategoryTVC.swift */,
 				D4E07CB6259F22C10075E616 /* DiffThoughtCVC.swift */,
 				D4E07CB7259F22C10075E616 /* CategoryCVC.swift */,
@@ -564,6 +567,7 @@
 				EC813F432599A42700BBCE25 /* APIConstants.swift in Sources */,
 				EC813F7B2599F88D00BBCE25 /* PastCardCVC.swift in Sources */,
 				EC7C1612259B8BA100A5BA4C /* FollowingVC.swift in Sources */,
+				D492E42F25A0CE5E0088A181 /* AnswerTVC.swift in Sources */,
 				EC737F1C259D8B9E0035207F /* CustomAddCardView.swift in Sources */,
 				A578D4E4259E728500F69908 /* AnswerVC.swift in Sources */,
 				EC7C1631259BACF100A5BA4C /* FollowerPeopleCVC.swift in Sources */,
