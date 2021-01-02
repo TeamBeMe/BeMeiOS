@@ -95,14 +95,14 @@
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="l7O-Dp-PLZ" secondAttribute="height" multiplier="1:1" id="NRi-4p-sF0"/>
                                                         </constraints>
-                                                        <state key="normal" image="pencil" catalog="system"/>
+                                                        <state key="normal" image="btnIdsearch"/>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BDw-ZB-XdT">
                                                         <rect key="frame" x="281" y="0.0" width="44" height="44"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" secondItem="BDw-ZB-XdT" secondAttribute="height" multiplier="1:1" id="7TX-5h-W0u"/>
                                                         </constraints>
-                                                        <state key="normal" image="alarm" catalog="system"/>
+                                                        <state key="normal" image="btnAlram"/>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.92941802740000001" green="0.92940050360000004" blue="0.92941236500000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -812,7 +812,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gAz-ud-aSC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2174" y="188"/>
+            <point key="canvasLocation" x="2854" y="188"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mdl-LQ-opT">
@@ -834,14 +834,14 @@
         </scene>
     </scenes>
     <resources>
-        <image name="alarm" catalog="system" width="124" height="128"/>
+        <image name="btnAlram" width="44" height="44"/>
         <image name="btnArrlowLeft" width="44" height="44"/>
         <image name="btnArrowNext" width="32" height="32"/>
+        <image name="btnIdsearch" width="44" height="44"/>
         <image name="btnMore24" width="24" height="24"/>
         <image name="btnScrapSelected" width="32" height="32"/>
         <image name="btnScrapUnselected" width="32" height="32"/>
         <image name="imgProfile" width="34" height="34"/>
-        <image name="pencil" catalog="system" width="128" height="113"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
