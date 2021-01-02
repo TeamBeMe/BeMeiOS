@@ -48,12 +48,16 @@ class ExploreVC: UIViewController {
         super.viewWillAppear(animated)
         
         self.view.bringSubviewToFront(headerView)
+        
+        navigationController?.navigationBar.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         setTableViewHeight()
+        
+        navigationController?.navigationBar.isHidden = false
     }
     
     

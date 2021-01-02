@@ -10,6 +10,7 @@
 		3FDD35238DF8F48142B9F9F1 /* Pods_BeMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9DABE27D9C7D77517D82AB /* Pods_BeMe.framework */; };
 		A578D4E1259E727C00F69908 /* Answer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A578D4E0259E727C00F69908 /* Answer.storyboard */; };
 		A578D4E4259E728500F69908 /* AnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A578D4E3259E728500F69908 /* AnswerVC.swift */; };
+		D492E41A25A0A0DE0088A181 /* ExploreDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492E41925A0A0DE0088A181 /* ExploreDetailVC.swift */; };
 		D4E07CB9259F22C10075E616 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4E07CB2259F22C10075E616 /* Explore.storyboard */; };
 		D4E07CBA259F22C10075E616 /* MoreTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E07CB4259F22C10075E616 /* MoreTVC.swift */; };
 		D4E07CBB259F22C10075E616 /* CategoryTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E07CB5259F22C10075E616 /* CategoryTVC.swift */; };
@@ -77,6 +78,7 @@
 		81614202856C8826262057FD /* Pods-BeMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.release.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.release.xcconfig"; sourceTree = "<group>"; };
 		A578D4E0259E727C00F69908 /* Answer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Answer.storyboard; path = BeMe/Answer/s/Answer.storyboard; sourceTree = SOURCE_ROOT; };
 		A578D4E3259E728500F69908 /* AnswerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnswerVC.swift; path = BeMe/Answer/ss/AnswerVC.swift; sourceTree = SOURCE_ROOT; };
+		D492E41925A0A0DE0088A181 /* ExploreDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDetailVC.swift; sourceTree = "<group>"; };
 		D4E07CB2259F22C10075E616 /* Explore.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Explore.storyboard; sourceTree = "<group>"; };
 		D4E07CB4259F22C10075E616 /* MoreTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTVC.swift; sourceTree = "<group>"; };
 		D4E07CB5259F22C10075E616 /* CategoryTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryTVC.swift; sourceTree = "<group>"; };
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				D4F01028259C7A8000AA3EE8 /* ExploreVC.swift */,
+				D492E41925A0A0DE0088A181 /* ExploreDetailVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -593,6 +596,7 @@
 				EC813F612599F3E900BBCE25 /* UIColor+Extensions.swift in Sources */,
 				EC813F242599A15100BBCE25 /* AppDelegate.swift in Sources */,
 				D4E07CBA259F22C10075E616 /* MoreTVC.swift in Sources */,
+				D492E41A25A0A0DE0088A181 /* ExploreDetailVC.swift in Sources */,
 				EC89E32B259C378F00DBAFE5 /* FollowCardCVC.swift in Sources */,
 				EC813F652599F40800BBCE25 /* UIView+Extensions.swift in Sources */,
 				EC89E309259C1CC700DBAFE5 /* FollowSearchVC.swift in Sources */,

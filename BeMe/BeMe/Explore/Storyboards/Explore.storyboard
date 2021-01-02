@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -18,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aoL-DS-o8G" userLabel="Header">
-                                <rect key="frame" x="0.0" y="44" width="390" height="32"/>
+                                <rect key="frame" x="0.0" y="88" width="390" height="32"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="13" translatesAutoresizingMaskIntoConstraints="NO" id="G6f-98-4yI">
                                         <rect key="frame" x="30" y="0.0" width="133" height="32"/>
@@ -81,7 +82,7 @@
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h1s-u1-hNF">
-                                <rect key="frame" x="0.0" y="44" width="390" height="766"/>
+                                <rect key="frame" x="0.0" y="88" width="390" height="722"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1uw-9s-YLF" userLabel="Diff Thought">
                                         <rect key="frame" x="0.0" y="0.0" width="390" height="388"/>
@@ -414,7 +415,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSJ-gX-9oZ">
-                                                                    <rect key="frame" x="20" y="120.33333333333333" width="290" height="184.33333333333337"/>
+                                                                    <rect key="frame" x="20" y="120.33333333333333" width="290" height="167.33333333333337"/>
                                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                     <string key="text">저는 며칠 전 퇴사를 했어요. 수많은 고민 끝에 결국 저질렀습니다. 몇 년간 원해왔던 일이라 꿈만 같아요. 제가 스스로의 힘으로 하고 싶은 걸 해볼 수 있는 시간적 여유를 가지게 된 게 정말 만족스러워요. 앞으로 저에게는 정말 다양한 가능성들이 무궁무진하게 열려있어요. 앞으로 어떤 사람들과 만나게 될지, 어떤 프로젝트를 하게 될지 상상하면서 새해를 맞이하고 싶어요. 지금은 시국이 어떻게 풀릴지 확실하지 않지만 제 인생은 앞으로도 계속해서 나아가겠죠?  </string>
                                                                     <color key="textColor" systemColor="labelColor"/>
@@ -422,14 +423,14 @@
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 </textView>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="vZ2-0J-QpO">
-                                                                    <rect key="frame" x="19.999999999999993" y="304.66666666666669" width="124.33333333333331" height="58.333333333333314"/>
+                                                                    <rect key="frame" x="20.000000000000007" y="287.66666666666669" width="112.66666666666669" height="75.333333333333314"/>
                                                                     <subviews>
-                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="fu4-Oh-Asn">
-                                                                            <rect key="frame" x="0.0" y="12.333333333333314" width="34" height="34"/>
+                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgProfile" translatesAutoresizingMaskIntoConstraints="NO" id="fu4-Oh-Asn">
+                                                                            <rect key="frame" x="0.0" y="20.666666666666629" width="34" height="34"/>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="genie_self" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hws-8B-dMq">
-                                                                            <rect key="frame" x="45.999999999999993" y="19" width="78.333333333333314" height="20.333333333333329"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <rect key="frame" x="46.000000000000007" y="29.333333333333314" width="66.666666666666686" height="17"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
@@ -533,6 +534,7 @@
                             <constraint firstItem="aoL-DS-o8G" firstAttribute="leading" secondItem="wu4-8B-NZy" secondAttribute="leading" id="yus-Xd-xSv"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="0CN-c3-hQY"/>
                     <connections>
                         <outlet property="diffArticleTableView" destination="5i8-hf-lv2" id="NRI-Ui-buU"/>
                         <outlet property="diffArticleTableViewHeight" destination="G8J-iJ-BeC" id="026-We-EcI"/>
@@ -546,13 +548,46 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4yl-Hm-vOf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1100" y="187.67772511848341"/>
+        </scene>
+        <!--Explore DetailVC-->
+        <scene sceneID="LcZ-Gh-GZN">
+            <objects>
+                <viewController id="gMw-Ns-qHK" customClass="ExploreDetailVC" customModule="BeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="mma-ow-2e4">
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="J6l-9P-GFN"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gAz-ud-aSC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1849.2307692307691" y="187.67772511848341"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mdl-LQ-opT">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="5KM-pd-uoT" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oNk-mU-RYy">
+                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="khh-ZT-EFt" kind="relationship" relationship="rootViewController" id="sfI-n5-guF"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SOj-uH-s3c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
             <point key="canvasLocation" x="170.76923076923077" y="187.67772511848341"/>
         </scene>
     </scenes>
     <resources>
         <image name="alarm" catalog="system" width="124" height="128"/>
+        <image name="imgProfile" width="34" height="34"/>
         <image name="pencil" catalog="system" width="128" height="113"/>
-        <image name="profile" width="34" height="34"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
