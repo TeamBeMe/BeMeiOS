@@ -9,23 +9,24 @@ import UIKit
 
 class PastCardCVC: UICollectionViewCell {
     static let identifier : String = "PastCardCVC"
-    
+    var answerData : AnswerDataForViewController?
+    var index : Int?
     //MARK:- IBOutlets
     var lockButton = UIButton().then {
-        $0.setTitle("L", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
+        $0.setImage(UIImage(named: "btnLock")?.withRenderingMode(.alwaysOriginal), for: .normal)
+   
     }
     
     var questionInfoLabel = UILabel().then {
         $0.text = "[ 미래에 관한 2번째 질문 ] "
         $0.font = UIFont.systemFont(ofSize: 14)
-        $0.textColor = .white
+        $0.textColor = .slateGrey
         $0.textAlignment = .center
     }
     var dateLabel = UILabel().then {
         $0.text = "2020. 12. 24"
         $0.font = UIFont.systemFont(ofSize: 14)
-        $0.textColor = .white
+        $0.textColor = .slateGrey
         $0.textAlignment = .center
         
     }
@@ -42,13 +43,24 @@ class PastCardCVC: UICollectionViewCell {
 //        $0.isEditable = false
         $0.font = UIFont.systemFont(ofSize: 14)
         $0.textAlignment = .center
-        $0.backgroundColor = UIColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0)
-
+        $0.backgroundColor = .darkGrey
+        $0.isEditable = false
             
     }
     
+    var fixButton = UIButton().then {
+        let yourAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.systemFont(ofSize: 14),
+            .foregroundColor: UIColor.slateGrey,
+            .underlineStyle: NSUnderlineStyle.single.rawValue]
+        
+        let attributeString = NSMutableAttributedString(string: "편집",
+                                                        attributes: yourAttributes)
+        $0.setAttributedTitle(attributeString, for: .normal)
+    }
     
     
+    var homeFixButtonDelegate : HomeFixButtonDelegate?
     //MARK:- User Define Variables
     
     var isPublic = false
@@ -68,11 +80,12 @@ extension PastCardCVC {
         makeDateLabel()
         makeQuestionLabel()
         makeAnswerTextView()
+        makeFixButton()
         self.makeRounded(cornerRadius: 6)
-        self.backgroundColor = UIColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0)
-        self.contentView.backgroundColor = UIColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0)
+        self.backgroundColor = .darkGrey
+        self.contentView.backgroundColor = .darkGrey
         lockButton.addTarget(self, action: #selector(changePublic), for: .touchUpInside)
-        self.setBorder(borderColor: UIColor(red: 142/255, green: 142/255, blue: 147/255, alpha: 1.0), borderWidth: 1.0)
+//        self.setBorder(borderColor: .veryLightPink, borderWidth: 1.0)
         
     }
     
@@ -89,8 +102,8 @@ extension PastCardCVC {
         lockButton.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(40)
-            $0.width.equalTo(12.6)
-            $0.height.equalTo(18)
+            $0.width.equalTo(36)
+            $0.height.equalTo(36)
         }
     }
     
@@ -129,6 +142,17 @@ extension PastCardCVC {
         }
     }
     
+    func makeFixButton(){
+        self.addSubview(fixButton)
+        fixButton.snp.makeConstraints{
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview().offset(-25)
+            
+        }
+        fixButton.addTarget(self, action: #selector(fixButtonAction), for: .touchUpInside)
+        
+    }
+    
     
     
     
@@ -139,25 +163,42 @@ extension PastCardCVC {
     
     @objc func changePublic(){
 
-        changePublicDelegate?.changePublic(now: isPublic)
+        changePublicDelegate?.changePublic()
         
     }
     
     func setLock(after : Bool){
         if after == true {
-            lockButton.setTitle("U", for: .normal)
-            lockButton.setImage(UIImage(systemName: "lock.slash"), for: .normal)
-            lockButton.tintColor = .white
+            lockButton.setImage(
+                UIImage(named: "btnUnlock")?.withRenderingMode(.alwaysOriginal), for: .normal)
+ 
         }
         else{
-            lockButton.setTitle("L", for: .normal)
-            lockButton.setImage(UIImage(systemName: "lock"), for: .normal)
-            lockButton.tintColor = .white
+            lockButton.setImage(
+                UIImage(named: "btnLock")?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
         
     }
     
+    @objc func fixButtonAction(){
+        homeFixButtonDelegate?.fixButtonTapped()
+    }
     
+    func setItems(){
+        if answerData?.lock == true{
+            lockButton.setImage(
+                UIImage(named: "btnLock")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        else{
+            lockButton.setImage(
+                UIImage(named: "btnUnlock")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        questionInfoLabel.text = "[ " + (answerData?.questionInfo)! + " ]"
+        questionLabel.text = answerData?.question
+        dateLabel.text = answerData?.answerDate
+        answerTextView.text = answerData?.answer
+        
+    }
     
     
 }
