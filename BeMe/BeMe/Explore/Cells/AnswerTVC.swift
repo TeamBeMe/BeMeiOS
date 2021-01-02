@@ -7,10 +7,16 @@
 
 import UIKit
 
+protocol UITableViewButtonSelectedDelegate: class {
+    func settingButtonDidTapped()
+}
+
 class AnswerTVC: UITableViewCell {
     static let identifier: String = "AnswerTVC"
     
     private var isScrapped: Bool = false
+    
+    weak var delegate: UITableViewButtonSelectedDelegate?
     
     @IBOutlet weak var answerView: UIView!
     
@@ -35,6 +41,10 @@ class AnswerTVC: UITableViewCell {
             sender.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
         }
     }
+    
     @IBAction func settingButtonTapped(_ sender: UIButton) {
+        
+        print("hello")
+        delegate?.settingButtonDidTapped()
     }
 }

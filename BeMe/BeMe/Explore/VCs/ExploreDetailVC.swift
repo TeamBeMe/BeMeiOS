@@ -13,6 +13,8 @@ class ExploreDetailVC: UIViewController {
     private var lastContentOffset: CGFloat = 0.0
     private var scrollDirection: Bool = true
     
+    lazy var popupBackgroundView: UIView = UIView()
+    
     @IBOutlet weak var diffAnswerTableView: UITableView!
     
     //MARK: - Life Cycle
@@ -32,7 +34,8 @@ class ExploreDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        setPopupBackgroundView()
+        
     }
     
     //MARK: - IBAction
@@ -41,6 +44,32 @@ class ExploreDetailVC: UIViewController {
         navigationController?.popViewController(animated: true)
     }
 }
+
+//MARK: - Private Method
+extension ExploreDetailVC {
+    private func setPopupBackgroundView() {
+        popupBackgroundView.backgroundColor = .black
+        view.addSubview(popupBackgroundView)
+        popupBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        popupBackgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        popupBackgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        popupBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        popupBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        popupBackgroundView.isHidden = true
+        popupBackgroundView.alpha = 0
+        view.bringSubviewToFront(popupBackgroundView)
+    }
+    
+    private func animatePopupBackground(_ direction: Bool) {
+        let duration: TimeInterval = direction ? 0.35 : 0.15
+        let alpha: CGFloat = direction ? 0.40 : 0.0
+        self.popupBackgroundView.isHidden = !direction
+        UIView.animate(withDuration: duration) {
+            self.popupBackgroundView.alpha = alpha
+        }
+    }
+}
+
 
 extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
     
@@ -61,6 +90,7 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
                                                              for: indexPath) as? AnswerTVC else {
                 return UITableViewCell() }
             
+            answer.delegate = self
             return answer
         }
         
@@ -107,5 +137,19 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
             scrollDirection = false
         }
         lastContentOffset = currentContentOffset
+    }
+}
+
+//MARK: - UITableViewButtonSelectedDelegate
+extension ExploreDetailVC: UITableViewButtonSelectedDelegate {
+    
+    func settingButtonDidTapped() {
+        
+        animatePopupBackground(true)
+        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheet.identifier) as?
+                CustomActionSheet else { return }
+        
+        settingActionSheet.modalPresentationStyle = .overCurrentContext
+        self.present(settingActionSheet, animated: true, completion: nil)
     }
 }

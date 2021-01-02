@@ -9,6 +9,8 @@ import UIKit
 
 class CustomActionSheet: UIViewController {
 
+    static let identifier: String = "CustomActionSheet"
+    
     @IBOutlet weak var wrapper: UIView!
     @IBOutlet weak var stackView: UIStackView!
     override func viewDidLoad() {
