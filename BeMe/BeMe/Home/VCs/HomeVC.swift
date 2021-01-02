@@ -27,14 +27,56 @@ class HomeVC: UIViewController {
     
     @IBOutlet weak var collectionViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
+    var firstImage = UIImageView().then {
+        $0.image = UIImage(named: "icEdit")
+        
+    }
+    var firstLabel = UILabel().then {
+        $0.text = "수정하기"
+        $0.textColor = .white
+        $0.font = UIFont.systemFont(ofSize: 15)
+    }
     
+    var secondImage = UIImageView().then {
+        $0.image = UIImage(named: "icDelete")
+    }
+    var secondLabel = UILabel().then {
+        $0.text = "삭제하기"
+        $0.textColor = .grapefruit
+        $0.font = UIFont.systemFont(ofSize: 15)
+    }
+    var lineView = UIView().then {
+        $0.backgroundColor = .slateGrey
+    }
+    var cancelButton = UIButton().then {
+        $0.setTitle("", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+    }
+    var cancelLabel = UILabel().then {
+        $0.text = "취소"
+        $0.textColor = .white
+        $0.font = UIFont.systemFont(ofSize: 16)
+    }
+    var alertContainView = UIView().then {
+        $0.backgroundColor = .charcoalGrey
+    }
+    var blurView = UIView().then {
+        $0.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
+    }
+    var changeButton = UIButton().then {
+        $0.backgroundColor = .charcoalGrey
+    }
+    var removeButton = UIButton().then {
+        $0.backgroundColor = .charcoalGrey
+    }
     
     //MARK:- User Define Variables
     private var collectionViewWidth = 0
     private var cardWidth : CGFloat = 0.0
     private var pastCards = 0
     private var todayCards = 0
-    private var currentCardIdx = 0
+    var currentCardIdx = 0
     private var initialScrolled = false
     private var cardHeight = 0.0
     var nowPos = CGPoint(x: -1.0, y: 0)
@@ -43,8 +85,21 @@ class HomeVC: UIViewController {
     var locks = [false,false,false,false,false,false,false,false,]
     let userNotificationCenter = UNUserNotificationCenter.current()
     private var flexible = false
+    var answerDataList : [AnswerDataForViewController] = []
     
-    
+    let tmpPastData = AnswerDataForViewController(lock: true,
+                                              questionInfo: "미래에 관한 3번째 질문",
+                                              answerDate: "2020.12.24",
+                                              question: "이번 주말을 후회 없이\n보낼 수 있는 방법은 무엇인가요?"
+                                              , answer: "저는 몇일 전 퇴사를 했어요. 수많은 고민 끝에 결국 저질렀습니다. 몇 년간 원해 왔던 일이라 꿈만 같아요. 제가 스스로의 힘으로 하고 싶은 걸 해볼 수있는 시간적 여유를 가지게 된게 정말 만족스러워요.",
+                                              index: 0
+                                              )
+    let tmpNowData = AnswerDataForViewController(lock: true,
+                                                 questionInfo: "미래에 관한 3번째 질문",
+                                                 answerDate: "2020.12.24",
+                                                 question: "이번 주말을 후회 없이\n보낼 수 있는 방법은 무엇인가요?"
+                                                 , answer: "",
+                                                 index: 0)
 }
 
 
@@ -76,6 +131,14 @@ extension HomeVC {
         sendNotification()
         
         
+        for _ in 0..<pastCards{
+            answerDataList.append(tmpPastData)
+        }
+        for _ in 0..<todayCards{
+            answerDataList.append(tmpNowData)
+        }
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -102,18 +165,9 @@ extension HomeVC {
 //MARK:- User Define functions
 extension HomeVC {
     
-    @objc func cancelButtonAction(){
-        print("called")
-        
-    }
-    
-    @objc func okayButtonAction(){
-        print("called")
-        
-    }
-    
     func changeLock(){
         locks[currentCardIdx] = !locks[currentCardIdx]
+        answerDataList[currentCardIdx].lock!     = !answerDataList[currentCardIdx].lock!
         cardCollectionView.reloadData()
         
     }
@@ -177,8 +231,13 @@ extension HomeVC : UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: NewCardCVC.identifier,
                     for: indexPath) as? NewCardCVC else {return UICollectionViewCell()}
-            cell.setLock(after: locks[indexPath.item])
+            cell.index = indexPath.item
             cell.changePublicDelegate = self
+            cell.homeAnswerButtonDelegate = self
+            cell.answerData = answerDataList[indexPath.item]
+            cell.setItems()
+            
+            
             return cell
         }
         
@@ -186,8 +245,12 @@ extension HomeVC : UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: PastCardCVC.identifier,
                     for: indexPath) as? PastCardCVC else {return UICollectionViewCell()}
-            cell.setLock(after: locks[indexPath.item])
+            cell.index = indexPath.item
             cell.changePublicDelegate = self
+            cell.homeFixButtonDelegate = self
+            cell.answerData = answerDataList[indexPath.item]
+            
+            cell.setItems()
             return cell
         }
         else{
@@ -262,7 +325,7 @@ extension HomeVC : UIScrollViewDelegate {
         
         if flexible {
             if Int(curPos.x) > Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) - 200
-                && Int(curPos.x) < Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) + 200 {
+                && Int(curPos.x) < Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) + 200{
                 flexible = !flexible
             }
         }
@@ -277,7 +340,7 @@ extension HomeVC : UIScrollViewDelegate {
 
 
             }
-            else if Int(curPos.x) > Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) + 200 {
+            else if Int(curPos.x) > Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) + 200{
                 cardCollectionView.scrollToItem(at: IndexPath(item: currentCardIdx+1, section: 0),
                                                 at: .centeredHorizontally,
                                                 animated: true)
@@ -295,10 +358,20 @@ extension HomeVC : UIScrollViewDelegate {
 
 extension HomeVC : AddQuestionDelegate {
     func addQuestion() {
-
         
+        for i in pastCards..<pastCards+todayCards{
+            if answerDataList[i].answer == "" || answerDataList[i].answer == nil{
+                showAlert(titleLabel: "새로운 질문을 받기 위해\n오늘의 질문을 먼저 대답해주세요",
+                          leftButtonTitle: "취소",
+                          rightButtonTitle: "확인",
+                          topConstraint: 24)
+                return
+            }
+        }
+        answerDataList.append(tmpNowData)
         let customCard = CustomTodayCardView(frame: .zero)
         let customAddCard = CustomAddCardView(frame: .zero)
+
         self.view.addSubview(customCard)
         self.view.addSubview(customAddCard)
         customCard.snp.makeConstraints{
@@ -323,7 +396,9 @@ extension HomeVC : AddQuestionDelegate {
                             customCard.removeFromSuperview()
                             self.todayCards = self.todayCards+1
                             self.cardCollectionView.reloadData()
-                            self.cardCollectionView.scrollToItem(at: IndexPath(item: self.currentCardIdx, section: 0),
+                            self.cardCollectionView.scrollToItem(at: IndexPath(
+                                                                    item: self.currentCardIdx,
+                                                                    section: 0),
                                                             at: .centeredHorizontally,
                                                             animated: true)
                             
@@ -335,15 +410,16 @@ extension HomeVC : AddQuestionDelegate {
 
 
 extension HomeVC : ChangePublicDelegate{
-    func changePublic(now: Bool) {
+    func changePublic() {
         
-        showAlert(now: now)
+        showAlert(titleLabel: makeAlertTitle(),leftButtonTitle: "취소",
+                  rightButtonTitle: "확인",topConstraint: 30)
         
         
     }
     
     
-    func showAlert(now : Bool){
+    func showAlert(titleLabel: String,leftButtonTitle: String,rightButtonTitle: String,topConstraint: Int){
         let blurView = UIView(frame: .zero).then{
             $0.backgroundColor = UIColor(cgColor: CGColor(red: 0, green: 0, blue: 0, alpha: 0.6))
             
@@ -354,18 +430,25 @@ extension HomeVC : ChangePublicDelegate{
         self.view.addSubview(blurView)
         self.view.addSubview(alertView)
         
-        alertView.setTitles(titleLabel: makeAlertTitle(),
+        alertView.setTitles(titleLabel: titleLabel,
                             leftButtonTitle: "취소",
                             rightButtonTitle: "확인")
         
-        
+        alertView.setTopConstraint(top: topConstraint)
         blurView.snp.makeConstraints {
             $0.top.leading.trailing.bottom.equalToSuperview()
         }
         
+        
         alertView.snp.makeConstraints {
             $0.width.equalTo(270)
-            $0.height.equalTo(122)
+            if topConstraint < 30 {
+                $0.height.equalTo(128)
+            }
+            else{
+                $0.height.equalTo(122)
+            }
+            
             $0.centerX.centerY.equalToSuperview()
         }
         
@@ -375,7 +458,10 @@ extension HomeVC : ChangePublicDelegate{
             
         }
         alertView.rightButtonClicked = { [weak self] in
-            self?.changeLock()
+            if topConstraint == 30{
+                self?.changeLock()
+            }
+            
             blurView.removeFromSuperview()
             alertView.removeFromSuperview()
         }
@@ -405,34 +491,51 @@ extension HomeVC : HomeTabBarDelegate{
     func homeButtonTapped() {
         flexible = true
 
-        self.cardCollectionView.scrollToItem(at: IndexPath(item: self.pastCards, section: 0),
+        self.cardCollectionView.scrollToItem(at: IndexPath(item: self.pastCards+self.todayCards-1, section: 0),
                                         at: .centeredHorizontally,
                                         animated: true)
         
         currentCardIdx = pastCards
-    
+        
         
     
         
     }
 }
 
-protocol AddQuestionDelegate{
-    
-    func addQuestion()
-    
-    
+
+extension HomeVC : HomeFixButtonDelegate{
+    func fixButtonTapped() {
+        makeUnderAlertView()
+    }
 }
 
-protocol ChangePublicDelegate{
-    
-    func changePublic(now : Bool)
-    
+extension HomeVC : HomeAnswerButtonDelegate {
+    func answerButtonTapped(question: String, questionInfo: String, answerDate: String,index: Int) {
+        guard let answerVC = UIStoryboard(name: "Answer",
+                                          bundle: nil).instantiateViewController(
+                                              withIdentifier: "AnswerVC") as? AnswerVC
+              else{
+                  
+                  return
+          }
+        answerVC.answerDataDelegate = self
+        answerVC.curCardIdx = index
+        self.navigationController?.pushViewController(answerVC, animated: true)
+        answerVC.question = question
+        answerVC.questionInfo = questionInfo
+        answerVC.answerDate = answerDate
+
+    }
 }
 
-
-
-protocol HomeTabBarDelegate {
-    func homeButtonTapped()
+extension HomeVC : HomeGetDataFromAnswerDelegate {
+    func setNewAnswer(answerData: AnswerDataForViewController) {
+        print("called")
+        answerDataList[answerData.index!] = answerData
+        print(answerDataList[answerData.index!])
+        cardCollectionView.reloadData()
+    }
+    
     
 }

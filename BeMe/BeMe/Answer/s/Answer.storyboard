@@ -12,7 +12,7 @@
         <!--AnswerVC-->
         <scene sceneID="Qc9-ze-j0r">
             <objects>
-                <viewController id="rL3-Sq-lzl" customClass="AnswerVC" customModule="BeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AnswerVC" id="rL3-Sq-lzl" customClass="AnswerVC" customModule="BeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RbC-aU-Q4R">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -103,6 +103,9 @@
                                         <rect key="frame" x="30" y="33.333333333333329" width="66.666666666666671" height="22"/>
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button" image="chevron.backward" catalog="system"/>
+                                        <connections>
+                                            <action selector="backButtonAction:" destination="rL3-Sq-lzl" eventType="touchUpInside" id="Kjc-Oi-quG"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cwF-ah-mvH">
                                         <rect key="frame" x="330" y="28.333333333333329" width="30" height="32"/>
@@ -110,6 +113,9 @@
                                         <state key="normal" title="완료">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="finishButtonAction:" destination="rL3-Sq-lzl" eventType="touchUpInside" id="0eK-xI-7zv"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>

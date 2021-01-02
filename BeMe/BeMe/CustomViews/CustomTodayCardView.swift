@@ -10,21 +10,20 @@ import UIKit
 class CustomTodayCardView: UIView {
 
     var lockButton = UIButton().then {
-        $0.setImage(UIImage(systemName: "lock"), for: .normal)
-        $0.setTitleColor(.white, for: .normal)
+        $0.setImage(UIImage(named: "btnLock"), for: .normal)
         $0.tintColor = .white
     }
     
     var questionInfoLabel = UILabel().then {
         $0.text = "[ 미래에 관한 2번째 질문 ] "
         $0.font = UIFont.systemFont(ofSize: 14)
-        $0.textColor = .white
+        $0.textColor = .slateGrey
         $0.textAlignment = .center
     }
     var dateLabel = UILabel().then {
         $0.text = "2020. 12. 24"
         $0.font = UIFont.systemFont(ofSize: 14)
-        $0.textColor = .white
+        $0.textColor = .slateGrey
         $0.textAlignment = .center
         
     }
@@ -46,7 +45,7 @@ class CustomTodayCardView: UIView {
     
     var changeButton = UIButton().then {
         $0.setTitle("질문 변경하기", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
+        $0.setTitleColor(.slateGrey, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         
     }
@@ -59,9 +58,9 @@ class CustomTodayCardView: UIView {
         makeQuestionLabel()
         makeReplyButton()
         makeChangeButton()
-        self.backgroundColor = UIColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0)
+        self.backgroundColor = .darkGrey
         self.makeRounded(cornerRadius: 6)
-        self.setBorder(borderColor: UIColor(red: 142/255, green: 142/255, blue: 147/255, alpha: 1.0), borderWidth: 1.0)
+        self.setBorder(borderColor: .veryLightPink, borderWidth: 1.0)
 
     }
     
@@ -81,8 +80,8 @@ extension CustomTodayCardView {
         lockButton.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(40)
-            $0.width.equalTo(12.6)
-            $0.height.equalTo(18)
+            $0.width.equalTo(36)
+            $0.height.equalTo(36)
         }
     }
     
