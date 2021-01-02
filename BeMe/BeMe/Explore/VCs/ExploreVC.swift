@@ -141,8 +141,8 @@ extension ExploreVC {
     
     private func hideTabBarWhenScrollingUp() {
         UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveLinear], animations: {
-//            self.headerViewHeight.constant = self.minHeight
-            self.headerView.center.y = -self.headerView.frame.height
+            self.headerViewHeight.constant = self.minHeight
+//            self.headerView.center.y = -self.headerView.frame.height
             self.headerView.alpha = 0.0
         }) { _ in
             
@@ -151,7 +151,8 @@ extension ExploreVC {
     
     private func showTabBarWhenScrollingDown() {
         UIView.animate(withDuration: 0.3, delay: 0.3, options: [.curveLinear], animations: {
-            self.headerView.center.y = self.headerView.frame.height
+            self.headerViewHeight.constant = self.maxHeight
+//            self.headerView.center.y = self.headerView.frame.height
             self.headerView.alpha = 1.0
         }) { _ in
             
@@ -235,10 +236,11 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.row == 0 {
-            guard let header = tableView
+            guard let category = tableView
                     .dequeueReusableCell(withIdentifier: CategoryTVC.identifier, for: indexPath)
                     as? CategoryTVC else { return UITableViewCell() }
-            return header
+            category.delegate = self
+            return category
         } else if indexPath.row == cellNumber - 1 {
             guard let more = tableView
                     .dequeueReusableCell(withIdentifier: MoreTVC.identifier, for: indexPath)
@@ -298,5 +300,13 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
             
         }
         
+    }
+}
+
+extension ExploreVC: CategoryButtonPressedDelegate {
+    func categoryButtonTapped(_ indexPath: IndexPath) {
+        
+        // indexPath 서버에 보내줘서 비동기 처리 (로딩화면)
+        diffArticleTableView.reloadData()
     }
 }
