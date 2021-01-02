@@ -9,11 +9,12 @@ import UIKit
 
 class FollowPeopleCVC: UICollectionViewCell {
     static let identifier : String = "FollowPeopleCVC"
-    
+    var i = 0
+    var totalCell = 10
     @IBOutlet weak var peopleCollectionView: UICollectionView!
     
     var isFollowing = true
-    
+    var mTimer : Timer?
     override func awakeFromNib() {
         peopleCollectionView.delegate = self
         peopleCollectionView.dataSource = self
@@ -30,7 +31,20 @@ class FollowPeopleCVC: UICollectionViewCell {
         }
         
     }
-    
+    @objc func timerCallback(){
+        i = i + 1
+        self.peopleCollectionView.performBatchUpdates({
+            self.peopleCollectionView.reloadItems(at: [IndexPath(item: i-1, section: 0)])
+        }, completion: { finished in
+           
+        
+        })
+        if i>=totalCell {
+            mTimer?.invalidate()
+            i = 0
+        }
+        
+    }
 }
 
 
@@ -59,7 +73,7 @@ extension FollowPeopleCVC : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return 8
+        return totalCell
     }
     
     
@@ -109,40 +123,49 @@ extension FollowPeopleCVC : FollowingFollowButtonDelegate{
     func followButtonAction() {
         if isFollowing{
             isFollowing = false
-            UIView.animate(withDuration: 0.5, animations: {
-                self.alpha = 0
-               
-            }, completion: { finished in
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.peopleCollectionView.reloadData()
-                    self.alpha = 1
-                })
-                
-                
-            })
+//            UIView.animate(withDuration: 0.5, animations: {
+//                self.alpha = 0
+//
+//            }, completion: { finished in
+//                UIView.animate(withDuration: 0.5, animations: {
+//                    self.peopleCollectionView.reloadData()
+//                    self.alpha = 1
+//                })
+//
+//
+//            })
+           
+            mTimer = Timer.scheduledTimer(timeInterval: Double(1/Double(totalCell)), target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
             
+
+           
             
         }
 
     }
+    
+    
+   
+    
 }
 
 extension FollowPeopleCVC : FollowingFollowingButtonDelegate{
     func followingButtonAction() {
         if !isFollowing{
             isFollowing = true
-            UIView.animate(withDuration: 0.5, animations: {
-                self.alpha = 0
-               
-            }, completion: { finished in
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.peopleCollectionView.reloadData()
-                    self.alpha = 1
-                })
-                
-                
-            })
-          
+//            UIView.animate(withDuration: 0.5, animations: {
+//                self.alpha = 0
+//
+//            }, completion: { finished in
+//                UIView.animate(withDuration: 0.5, animations: {
+//                    self.peopleCollectionView.reloadData()
+//                    self.alpha = 1
+//                })
+//
+//
+//            })
+            mTimer = Timer.scheduledTimer(timeInterval: Double(1/Double(totalCell)), target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
+
   
         }
     }
