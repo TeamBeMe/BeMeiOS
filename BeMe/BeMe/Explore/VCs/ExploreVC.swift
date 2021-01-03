@@ -118,12 +118,12 @@ extension ExploreVC {
         UIView.animate(withDuration: 0.2, delay: 0, options: [.curveLinear], animations: {
             
             // Slide Animation
-//            self.highLightBar.frame.origin.x = 30 + button.frame.minX
-//            self.headerHighLightBar.frame.origin.x = 30 + button.frame.minX
+            self.highLightBar.frame.origin.x = 30 + button.frame.minX
+            self.headerHighLightBar.frame.origin.x = 30 + button.frame.minX
             
             // FadeIn Animation
-            self.highLightBarLeading.constant = 30 + button.frame.minX
-            self.headerHighLightBarConstraint.constant = 30 + button.frame.minX
+//            self.highLightBarLeading.constant = 30 + button.frame.minX
+//            self.headerHighLightBarConstraint.constant = 30 + button.frame.minX
             
         }) { _ in
             
@@ -288,15 +288,16 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
             }
         } else {
             // animation 1
-            let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 150, 0)
+            let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 320, 0)
             cell.layer.transform = rotationTransform
             cell.alpha = 0.5
             
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut], animations: {
                 cell.layer.transform = CATransform3DIdentity
                 cell.alpha = 1.0
-            })
-            
+            }) { (_) in
+                
+            }
             
         }
         
