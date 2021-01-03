@@ -461,6 +461,11 @@ extension HomeVC : ChangePublicDelegate{
             if topConstraint == 30{
                 self?.changeLock()
             }
+            else {
+//                self.cardCollectionView.scrollToItem(at: IndexPath(item: self.pastCards+self.todayCards-1, section: 0),
+//                                                at: .centeredHorizontally,
+//                                                animated: true)
+            }
             
             blurView.removeFromSuperview()
             alertView.removeFromSuperview()
