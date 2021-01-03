@@ -84,19 +84,19 @@ extension UnderTabBarController {
         let myTabBarItem3 = (self.tabBar.items?[2])! as UITabBarItem
         let myTabBarItem4 = (self.tabBar.items?[3])! as UITabBarItem
      
-        myTabBarItem1.image = UIImage(systemName: "house")
-        myTabBarItem1.selectedImage = UIImage(systemName: "house.fill")
+        myTabBarItem1.image = UIImage(named:"btnHomeUnselected")
+        myTabBarItem1.selectedImage = UIImage(named: "btnHomeSelected")
         
-        myTabBarItem2.image = UIImage(systemName: "square.grid.2x2")
-        myTabBarItem2.selectedImage = UIImage(systemName: "square.grid.2x2.fill")
+        myTabBarItem2.image = UIImage(named:"btnExploreUnselected")
+        myTabBarItem2.selectedImage = UIImage(named:"btnExploreSelected")
         
     
         
-        myTabBarItem3.image = UIImage(systemName: "heart")
-        myTabBarItem3.selectedImage = UIImage(systemName: "heart.fill")
+        myTabBarItem3.image = UIImage(named:"btnFollowingUnselected")
+        myTabBarItem3.selectedImage = UIImage(named:"btnFollowingSelected")
         
-        myTabBarItem4.image = UIImage(systemName: "person")
-        myTabBarItem4.selectedImage = UIImage(systemName: "person.fill")
+        myTabBarItem4.image = UIImage(named:"btnMypageUnselected")
+        myTabBarItem4.selectedImage = UIImage(named:"btnMypageSelected")
         
         
     }

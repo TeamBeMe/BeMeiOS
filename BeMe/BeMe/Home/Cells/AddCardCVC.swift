@@ -39,11 +39,11 @@ extension AddCardCVC {
     override func awakeFromNib() {
         makeQuestionLabel()
         makeAddButton()
-        self.backgroundColor = UIColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0)
-        self.contentView.backgroundColor = UIColor(red: 44/255, green: 44/255, blue: 46/255, alpha: 1.0)
+        self.backgroundColor = .darkGrey40
+        self.contentView.backgroundColor = .darkGrey40
         self.makeRounded(cornerRadius: 6)
         addButton.addTarget(self, action: #selector(addButtonAction), for: .touchUpInside)
-        self.setBorder(borderColor: UIColor(red: 142/255, green: 142/255, blue: 147/255, alpha: 1.0), borderWidth: 1.0)
+//        self.setBorder(borderColor: .veryLightPink, borderWidth: 1.0)
         
     }
     

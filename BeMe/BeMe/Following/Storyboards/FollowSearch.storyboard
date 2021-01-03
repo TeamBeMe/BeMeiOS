@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Hhe-Hr-d23">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -52,8 +53,12 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eG5-xj-3VL">
-                                        <rect key="frame" x="30" y="57" width="20.5" height="22"/>
-                                        <state key="normal" image="backward.frame" catalog="system"/>
+                                        <rect key="frame" x="14" y="44" width="44" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="44" id="BS7-43-8or"/>
+                                            <constraint firstAttribute="height" constant="44" id="Il4-2i-B1p"/>
+                                        </constraints>
+                                        <state key="normal" image="btnArrlowLeft"/>
                                         <connections>
                                             <action selector="backButtonAction:" destination="Hhe-Hr-d23" eventType="touchUpInside" id="ZHh-qm-pam"/>
                                         </connections>
@@ -62,9 +67,9 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="n7f-iu-rl2" secondAttribute="bottom" id="5Wq-KG-wiO"/>
-                                    <constraint firstItem="eG5-xj-3VL" firstAttribute="leading" secondItem="Uyy-t3-q7l" secondAttribute="leading" constant="30" id="HUH-Fd-RwE"/>
+                                    <constraint firstItem="eG5-xj-3VL" firstAttribute="leading" secondItem="Uyy-t3-q7l" secondAttribute="leading" constant="14" id="HUH-Fd-RwE"/>
                                     <constraint firstAttribute="height" constant="128" id="Mwt-hA-Vpx"/>
-                                    <constraint firstItem="eG5-xj-3VL" firstAttribute="top" secondItem="Uyy-t3-q7l" secondAttribute="top" constant="57" id="jPa-AO-jcW"/>
+                                    <constraint firstItem="eG5-xj-3VL" firstAttribute="top" secondItem="Uyy-t3-q7l" secondAttribute="top" constant="44" id="jPa-AO-jcW"/>
                                     <constraint firstItem="DJk-6R-w0P" firstAttribute="centerX" secondItem="Uyy-t3-q7l" secondAttribute="centerX" id="pC8-If-0Rf"/>
                                     <constraint firstItem="n7f-iu-rl2" firstAttribute="leading" secondItem="DJk-6R-w0P" secondAttribute="leading" id="vFv-sZ-tkw"/>
                                     <constraint firstAttribute="bottom" secondItem="DJk-6R-w0P" secondAttribute="bottom" id="x6Z-az-Cct"/>
@@ -158,8 +163,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="134"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Vok-wq-Wld">
-                                                    <rect key="frame" x="0.0" y="1.5" width="40" height="37"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgProfile" translatesAutoresizingMaskIntoConstraints="NO" id="Vok-wq-Wld">
+                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="4av-jD-wCH"/>
                                                         <constraint firstAttribute="width" constant="40" id="8RN-JD-tBJ"/>
@@ -270,8 +275,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="104"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="4ML-YQ-PrN">
-                                                    <rect key="frame" x="0.0" y="1.5" width="40" height="37"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgProfile" translatesAutoresizingMaskIntoConstraints="NO" id="4ML-YQ-PrN">
+                                                    <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="6NG-G4-GXF"/>
                                                         <constraint firstAttribute="width" constant="40" id="y9m-2j-Ble"/>
@@ -329,8 +334,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="backward.frame" catalog="system" width="128" height="99"/>
-        <image name="person.fill" catalog="system" width="128" height="120"/>
+        <image name="btnArrlowLeft" width="44" height="44"/>
+        <image name="imgProfile" width="34" height="34"/>
         <image name="text.justify" catalog="system" width="128" height="100"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

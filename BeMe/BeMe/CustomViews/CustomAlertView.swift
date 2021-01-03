@@ -15,6 +15,7 @@ class CustomAlertView: UIView {
         $0.textColor = .white
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.numberOfLines = 0
+        $0.textAlignment = .center
     }
     let alertLeftButton = UIButton().then {
         $0.setTitle("취소", for: .normal)
@@ -134,6 +135,13 @@ class CustomAlertView: UIView {
         
     }
     
+    func setTopConstraint(top: Int){
+        alertTitleLabel.snp.remakeConstraints{
+            $0.top.equalToSuperview().offset(top)
+            $0.centerX.equalToSuperview()
+        }
+        
+    }
     
     
     @objc func touchUpLeftButton() {

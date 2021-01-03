@@ -10,12 +10,18 @@ import UIKit
 class ArticleTVC: UITableViewCell {
     static let identifier: String = "ArticleTVC"
     
-    @IBOutlet weak var cardView: UIView!
+    lazy var isScrapped: Bool = false
+    
+    @IBOutlet weak var answerCardView: UIView!
+    @IBOutlet weak var answerTextView: UITextView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        cardView.layer.borderWidth = 1
-        cardView.layer.borderColor = UIColor.lightGray.cgColor
-        cardView.layer.cornerRadius = 8
+        
+        answerCardView.setBorderWithRadius(borderColor: .lightGray, borderWidth: 1, cornerRadius: 8)
+        
+        answerTextView.font = UIFont(name: "AppleSDGothicNeo-Light", size: 14.0)
+        
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -24,4 +30,22 @@ class ArticleTVC: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    
+    
+    //MARK: - IBAction
+    @IBAction func scrapButtonTapped(_ sender: UIButton) {
+        
+        if isScrapped {
+            isScrapped = false
+            sender.setImage(UIImage.init(named: "btnScrapUnselected"), for: .normal)
+        } else {
+            isScrapped = true
+            sender.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
+        }
+        
+    }
+    
+    @IBAction func goToDetailExploreVC(_ sender: UIButton) {
+        
+    }
 }
