@@ -51,4 +51,33 @@ extension UIColor {
       return UIColor(white: 235.0 / 255.0, alpha: 1.0)
     }
 
+    /*
+     Home은 독특해서 따로 빼둠
+     */
+    enum Home {
+        enum Button {
+            static let text: UIColor = { UIColor(white: 0.0, alpha: 1.0) }()
+            static let backgruond: UIColor = { UIColor(white: 1.0, alpha: 1.0) }()
+            
+            static let slateGray: UIColor = { UIColor(red: 99.0 / 255.0, green: 99.0 / 255.0, blue: 102.0 / 255.0, alpha: 1.0) }()
+        }
+        
+        enum Label {
+            static let darkGrey: UIColor = { UIColor(red: 142.0 / 255.0, green: 142.0 / 255.0, blue: 147.0 / 255.0, alpha: 1.0) }()
+            static let white: UIColor = { UIColor(white: 1.0, alpha: 1.0) }()
+            static let lightGrey: UIColor = { UIColor(white: 201.0 / 255.0, alpha: 1.0) }()
+        }
+        
+    }
+    
+    enum Background {
+        static let `default`: UIColor = .white
+        static let black: UIColor = .black
+    }
+    
+    enum Label {
+        static let slateGray: UIColor = { UIColor(red: 99.0 / 255.0, green: 99.0 / 255.0, blue: 102.0 / 255.0, alpha: 1.0) }()
+        static let black: UIColor = { UIColor(white: 0.0, alpha: 1.0) }()
+        static let text: UIColor = { UIColor(white: 1.0, alpha: 1.0) }()
+    }
 }
