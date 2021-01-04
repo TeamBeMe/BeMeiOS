@@ -15,6 +15,8 @@
 		A57F708925A1AC8F00152E89 /* MypageSearchTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F708825A1AC8F00152E89 /* MypageSearchTVC.swift */; };
 		A57F708C25A1ACB100152E89 /* MypageResultTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F708B25A1ACB100152E89 /* MypageResultTVC.swift */; };
 		A57F709025A1ACE400152E89 /* MypageProfileCRV.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F708F25A1ACE400152E89 /* MypageProfileCRV.swift */; };
+		A5CCCD9E25A334EA008A3125 /* MypageMyScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */; };
+		A5CCCDA125A33512008A3125 /* MypageOthersScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */; };
 		D492E41A25A0A0DE0088A181 /* ExploreDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492E41925A0A0DE0088A181 /* ExploreDetailVC.swift */; };
 		D492E42F25A0CE5E0088A181 /* AnswerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492E42E25A0CE5E0088A181 /* AnswerTVC.swift */; };
 		D492E43525A0E14C0088A181 /* CustomActionSheet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D492E43425A0E14C0088A181 /* CustomActionSheet.storyboard */; };
@@ -97,6 +99,8 @@
 		A57F708825A1AC8F00152E89 /* MypageSearchTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageSearchTVC.swift; sourceTree = "<group>"; };
 		A57F708B25A1ACB100152E89 /* MypageResultTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageResultTVC.swift; sourceTree = "<group>"; };
 		A57F708F25A1ACE400152E89 /* MypageProfileCRV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageProfileCRV.swift; sourceTree = "<group>"; };
+		A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageMyScrapTVC.swift; sourceTree = "<group>"; };
+		A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageOthersScrapTVC.swift; sourceTree = "<group>"; };
 		D492E41925A0A0DE0088A181 /* ExploreDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDetailVC.swift; sourceTree = "<group>"; };
 		D492E42E25A0CE5E0088A181 /* AnswerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerTVC.swift; sourceTree = "<group>"; };
 		D492E43425A0E14C0088A181 /* CustomActionSheet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomActionSheet.storyboard; sourceTree = "<group>"; };
@@ -249,6 +253,8 @@
 				A57F708825A1AC8F00152E89 /* MypageSearchTVC.swift */,
 				A57F708B25A1ACB100152E89 /* MypageResultTVC.swift */,
 				A57F708F25A1ACE400152E89 /* MypageProfileCRV.swift */,
+				A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */,
+				A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -698,9 +704,11 @@
 				D4E5FD37259E710200C57950 /* UIButton+Extensions.swift in Sources */,
 				EC89E322259C376500DBAFE5 /* FollowPeopleCVC.swift in Sources */,
 				EC7C161B259B9A9200A5BA4C /* FollowingInfoVC.swift in Sources */,
+				A5CCCDA125A33512008A3125 /* MypageOthersScrapTVC.swift in Sources */,
 				EC89E325259C377400DBAFE5 /* FollowPersonCVC.swift in Sources */,
 				EC813F492599A59500BBCE25 /* NetworkResult.swift in Sources */,
 				A57F708925A1AC8F00152E89 /* MypageSearchTVC.swift in Sources */,
+				A5CCCD9E25A334EA008A3125 /* MypageMyScrapTVC.swift in Sources */,
 				EC7F0EA925A057DF008EB88A /* HomeVC+UnderAlert.swift in Sources */,
 				EC7C161E259B9B0F00A5BA4C /* FollowingPeopleCVC.swift in Sources */,
 				EC813F612599F3E900BBCE25 /* UIColor+Extensions.swift in Sources */,
