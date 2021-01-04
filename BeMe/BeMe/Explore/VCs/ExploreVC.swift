@@ -194,34 +194,37 @@ extension ExploreVC: UIScrollViewDelegate {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>)
     {
-        let layout = self.diffThoughtCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
-        
-        var offset = targetContentOffset.pointee
-        let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
-        var roundedIndex = round(index)
-        
-        if scrollView.contentOffset.x > targetContentOffset.pointee.x {
-            roundedIndex = floor(index)
-        } else if scrollView.contentOffset.x < targetContentOffset.pointee.x {
-            roundedIndex = ceil(index)
-        } else {
-            roundedIndex = round(index)
-        }
-        
-        if isOneStepPaging {
-            if currentIndex > roundedIndex {
-                currentIndex -= 1
-                roundedIndex = currentIndex
-            } else if currentIndex < roundedIndex {
-                currentIndex += 1
-                roundedIndex = currentIndex
+        if scrollView == diffThoughtCollectionView {
+            let layout = self.diffThoughtCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+            let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
+            
+            var offset = targetContentOffset.pointee
+            let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
+            var roundedIndex = round(index)
+            
+            if scrollView.contentOffset.x > targetContentOffset.pointee.x {
+                roundedIndex = floor(index)
+            } else if scrollView.contentOffset.x < targetContentOffset.pointee.x {
+                roundedIndex = ceil(index)
+            } else {
+                roundedIndex = round(index)
             }
+            
+            if isOneStepPaging {
+                if currentIndex > roundedIndex {
+                    currentIndex -= 1
+                    roundedIndex = currentIndex
+                } else if currentIndex < roundedIndex {
+                    currentIndex += 1
+                    roundedIndex = currentIndex
+                }
+            }
+            
+            // 위 코드를 통해 페이징 될 좌표값을 targetContentOffset에 대입하면 된다.
+            offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
+            targetContentOffset.pointee = offset
         }
         
-        // 위 코드를 통해 페이징 될 좌표값을 targetContentOffset에 대입하면 된다.
-        offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
-        targetContentOffset.pointee = offset
     }
     
     
@@ -253,25 +256,7 @@ extension ExploreVC: UIScrollViewDelegate {
 }
 
 //MARK: - CollectionViewDelegate
-extension ExploreVC: UICollectionViewDelegateFlowLayout {
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        let insetX: CGFloat = (self.view.bounds.width - thoughtCellWidth) / 2.0
-//        return UIEdgeInsets(top: 0, left: insetX, bottom: 0, right: insetX)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return thoughtLineSpacing
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let width: CGFloat = thoughtCellWidth
-//        let height: CGFloat = thoughtCellWidth * 229.0 / 320.0
-//        return CGSize(width: width, height: height)
-//    }
-}
-
-extension ExploreVC: UICollectionViewDataSource {
+extension ExploreVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
