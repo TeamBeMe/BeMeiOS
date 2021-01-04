@@ -69,5 +69,12 @@ extension UIView {
             self.layer.cornerRadius = cr
         }
     }
+    
+    // 일부 모서리 테두리만 둥글게 만드는 method
+    func roundCorners(cornerRadius: Double) {
+        self.layer.cornerRadius = CGFloat(cornerRadius)
+        self.clipsToBounds = true
+        self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+    }
 }
 

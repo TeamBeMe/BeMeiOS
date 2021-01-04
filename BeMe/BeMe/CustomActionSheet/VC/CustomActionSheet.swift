@@ -8,7 +8,7 @@
 import UIKit
 
 class CustomActionSheet: UIViewController {
-
+    
     static let identifier: String = "CustomActionSheet"
     
     @IBOutlet weak var wrapper: UIView!
@@ -16,7 +16,7 @@ class CustomActionSheet: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         stackView.layer.addBorder([.bottom], color: .lightGray, width: 1.0)
-        
+        wrapper.roundCorners(cornerRadius: 10.0)
     }
     
     @IBAction func closeButtonTapped(_ sender: UIButton) {
@@ -50,4 +50,3 @@ extension CALayer {
         }
     }
 }
-
