@@ -20,6 +20,7 @@ class FollowUpperCVC: UICollectionViewCell {
     @IBOutlet weak var underLIneView: UIView!
     
     var followingBarButtonDelegate : FollowingBarButtonDelegate?
+    var buttonAble = true
 
     
     var followingPeopleCollectionViewDelegate : FollowingPeopleCollectionViewDelegate?

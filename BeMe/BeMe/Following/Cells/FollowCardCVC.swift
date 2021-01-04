@@ -14,6 +14,7 @@ class FollowCardCVC: UICollectionViewCell {
     
     @IBOutlet weak var questionInfoLabel: UILabel!
     
+    @IBOutlet weak var questionTextView: UITextView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var answerTextView: UITextView!
     @IBOutlet weak var moreButotn: UIButton!
@@ -21,19 +22,33 @@ class FollowCardCVC: UICollectionViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var bookMarkButton: UIButton!
     
+    
+    
     override func awakeFromNib() {
         containView.setBorder(borderColor: .lightGray, borderWidth: 1.0)
         containView.makeRounded(cornerRadius: 6)
         answerTextView.delegate = self
         answerTextView.translatesAutoresizingMaskIntoConstraints = false
         answerTextView.isScrollEnabled = false
+        questionTextView.delegate = self
+        questionTextView.translatesAutoresizingMaskIntoConstraints = false
+        questionTextView.isScrollEnabled = false
+        
+//        answerTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//        questionTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+//        
+        
         
     }
     
-    func setAnswer(answer : String){
+    func setItems(question: String,answer: String){
         answerTextView.text = answer
-        
+        questionTextView.text = question
+
+
     }
+    
+
     
     
     
@@ -50,7 +65,7 @@ extension FollowCardCVC : UITextViewDelegate{
                 textView.snp.makeConstraints{
                     $0.height.equalTo(estimatedSize.height)
                 }
-                print(estimatedSize.height)
+
             }
             
             
