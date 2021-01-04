@@ -9,12 +9,6 @@ import UIKit
 
 class ExploreVC: UIViewController {
     
-    private var lastContentOffset: CGFloat = 0
-    private let maxHeight: CGFloat = 32.0
-    private let minHeight: CGFloat = 0.0
-    private var cellNumber: Int = 10
-    private var isRecentButtonPressed: Bool = true
-
     //MARK: - IBOulets
     @IBOutlet weak var exploreScrollView: UIScrollView!
     @IBOutlet weak var highLightBar: UIView!
@@ -25,6 +19,7 @@ class ExploreVC: UIViewController {
     @IBOutlet weak var diffThoughtCollectionView: UICollectionView!
     @IBOutlet weak var diffArticleTableView: UITableView!
     @IBOutlet weak var diffArticleTableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var headerViewTopContraint: NSLayoutConstraint!
     @IBOutlet weak var headerView: UIView! {
         didSet {
             headerView.alpha = 0.0
@@ -36,15 +31,31 @@ class ExploreVC: UIViewController {
             headerViewHeight.constant = minHeight
         }
     }
+
+    private var lastContentOffset: CGFloat = 0
     
-    @IBOutlet weak var headerViewTopContraint: NSLayoutConstraint!
+    private let maxHeight: CGFloat = 32.0
     
+    private let minHeight: CGFloat = 0.0
+    
+    private var cellNumber: Int = 10
+    
+    private var isRecentButtonPressed: Bool = true
+    
+    private var currentIndex: CGFloat = 0
+    
+    private let thoughtLineSpacing: CGFloat = 12
+    
+    private var isOneStepPaging = true
+    
+    private var thoughtCellWidth: CGFloat = 320.0
     
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
         adjustScrollViewInset()
+        setThoughtCollectionView()
         diffArticleTableView.setDynamicCellHeight(to: 200)
         
     }
@@ -90,6 +101,13 @@ class ExploreVC: UIViewController {
 
 //MARK: - Private Method
 extension ExploreVC {
+    
+    private func setThoughtCollectionView() {
+        diffThoughtCollectionView.decelerationRate = UICollectionView.DecelerationRate.fast
+        diffThoughtCollectionView.delegate = self
+        diffThoughtCollectionView.dataSource = self
+        thoughtCellWidth =  self.view.frame.width - 55.0
+    }
     
     private func setLabel() {
         diffArticleSubTitle.alpha = 0.0
@@ -194,15 +212,18 @@ extension ExploreVC: UIScrollViewDelegate {
 extension ExploreVC: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 28, bottom: 10, right: 30)
+        let insetX: CGFloat = (self.view.bounds.width - thoughtCellWidth) / 2.0
+        return UIEdgeInsets(top: 0, left: insetX, bottom: 0, right: insetX)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 12
+        return thoughtLineSpacing
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 320.0, height: 229.0)
+        let width: CGFloat = thoughtCellWidth
+        let height: CGFloat = thoughtCellWidth * 229.0 / 320.0
+        return CGSize(width: width, height: height)
     }
 }
 
@@ -217,7 +238,8 @@ extension ExploreVC: UICollectionViewDataSource {
                 for: indexPath) as? DiffThoughtCVC else {
             return UICollectionViewCell()
         }
-        cell.layer.cornerRadius = 8
+        // border 계산 다시하기
+        cell.layer.cornerRadius = 10
         cell.setAnswer()
         cell.backgroundColor = .white
         return cell
