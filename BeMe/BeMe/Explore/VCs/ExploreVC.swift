@@ -31,7 +31,7 @@ class ExploreVC: UIViewController {
             headerViewHeight.constant = minHeight
         }
     }
-
+    
     private var lastContentOffset: CGFloat = 0
     
     private let maxHeight: CGFloat = 32.0
@@ -44,11 +44,7 @@ class ExploreVC: UIViewController {
     
     private var currentIndex: CGFloat = 0
     
-    private let thoughtLineSpacing: CGFloat = 12
-    
     private var isOneStepPaging = true
-    
-    private var thoughtCellWidth: CGFloat = 320.0
     
     //MARK: - Life Cycles
     override func viewDidLoad() {
@@ -103,10 +99,25 @@ class ExploreVC: UIViewController {
 extension ExploreVC {
     
     private func setThoughtCollectionView() {
-        diffThoughtCollectionView.decelerationRate = UICollectionView.DecelerationRate.fast
+        
+        let cellWidth: CGFloat = view.bounds.width - 55.0
+        let cellHeight: CGFloat = cellWidth * 229.0 / 320.0
+//        floor(view.frame.height * cellRatio)
+        
+        // 상하, 좌우 inset value 설정
+        let insetX: CGFloat = (view.bounds.width - cellWidth) / 2.0
+        let lineSpacing: CGFloat = 12.0
+        
+        let layout = diffThoughtCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
+        layout.minimumLineSpacing = lineSpacing
+        layout.scrollDirection = .horizontal
+        diffThoughtCollectionView.contentInset = UIEdgeInsets(top: 0, left: insetX, bottom: 0, right: insetX)
+
         diffThoughtCollectionView.delegate = self
         diffThoughtCollectionView.dataSource = self
-        thoughtCellWidth =  self.view.frame.width - 55.0
+        
+        diffThoughtCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
     }
     
     private func setLabel() {
@@ -114,7 +125,7 @@ extension ExploreVC {
         UIView.animate(withDuration: 0.6, animations: {
             self.diffArticleSubTitle.alpha = 1.0
             self.diffArticleSubTitle.text = self.isRecentButtonPressed ? "내가 답한 질문에 대한 다른 사람들의 최신 답변이에요" : "내가 관심있어 할 다른 사람들의 답변이에요"
-
+            
             
         }) { (_) in
             
@@ -140,8 +151,8 @@ extension ExploreVC {
             self.headerHighLightBar.frame.origin.x = 30 + button.frame.minX
             
             // FadeIn Animation
-//            self.highLightBarLeading.constant = 30 + button.frame.minX
-//            self.headerHighLightBarConstraint.constant = 30 + button.frame.minX
+//                        self.highLightBarLeading.constant = 30 + button.frame.minX
+//                        self.headerHighLightBarConstraint.constant = 30 + button.frame.minX
             
         }) { _ in
             
@@ -160,7 +171,7 @@ extension ExploreVC {
     private func hideTabBarWhenScrollingUp() {
         UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveLinear], animations: {
             self.headerViewHeight.constant = self.minHeight
-//            self.headerView.center.y = -self.headerView.frame.height
+            //            self.headerView.center.y = -self.headerView.frame.height
             self.headerView.alpha = 0.0
         }) { _ in
             
@@ -170,7 +181,7 @@ extension ExploreVC {
     private func showTabBarWhenScrollingDown() {
         UIView.animate(withDuration: 0.3, delay: 0.3, options: [.curveLinear], animations: {
             self.headerViewHeight.constant = self.maxHeight
-//            self.headerView.center.y = self.headerView.frame.height
+            //            self.headerView.center.y = self.headerView.frame.height
             self.headerView.alpha = 1.0
         }) { _ in
             
@@ -180,6 +191,39 @@ extension ExploreVC {
 
 //MARK: - ScrollViewDelegate
 extension ExploreVC: UIScrollViewDelegate {
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>)
+    {
+        let layout = self.diffThoughtCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        let cellWidthIncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
+        
+        var offset = targetContentOffset.pointee
+        let index = (offset.x + scrollView.contentInset.left) / cellWidthIncludingSpacing
+        var roundedIndex = round(index)
+        
+        if scrollView.contentOffset.x > targetContentOffset.pointee.x {
+            roundedIndex = floor(index)
+        } else if scrollView.contentOffset.x < targetContentOffset.pointee.x {
+            roundedIndex = ceil(index)
+        } else {
+            roundedIndex = round(index)
+        }
+        
+        if isOneStepPaging {
+            if currentIndex > roundedIndex {
+                currentIndex -= 1
+                roundedIndex = currentIndex
+            } else if currentIndex < roundedIndex {
+                currentIndex += 1
+                roundedIndex = currentIndex
+            }
+        }
+        
+        // 위 코드를 통해 페이징 될 좌표값을 targetContentOffset에 대입하면 된다.
+        offset = CGPoint(x: roundedIndex * cellWidthIncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
+        targetContentOffset.pointee = offset
+    }
+    
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
@@ -211,20 +255,20 @@ extension ExploreVC: UIScrollViewDelegate {
 //MARK: - CollectionViewDelegate
 extension ExploreVC: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        let insetX: CGFloat = (self.view.bounds.width - thoughtCellWidth) / 2.0
-        return UIEdgeInsets(top: 0, left: insetX, bottom: 0, right: insetX)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return thoughtLineSpacing
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width: CGFloat = thoughtCellWidth
-        let height: CGFloat = thoughtCellWidth * 229.0 / 320.0
-        return CGSize(width: width, height: height)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+//        let insetX: CGFloat = (self.view.bounds.width - thoughtCellWidth) / 2.0
+//        return UIEdgeInsets(top: 0, left: insetX, bottom: 0, right: insetX)
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return thoughtLineSpacing
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let width: CGFloat = thoughtCellWidth
+//        let height: CGFloat = thoughtCellWidth * 229.0 / 320.0
+//        return CGSize(width: width, height: height)
+//    }
 }
 
 extension ExploreVC: UICollectionViewDataSource {
