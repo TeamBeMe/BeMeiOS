@@ -837,6 +837,9 @@
                                                                 <constraint firstAttribute="width" secondItem="6we-Dq-nGR" secondAttribute="height" id="tS8-85-nsO"/>
                                                             </constraints>
                                                             <state key="normal" image="btnScrapSelected"/>
+                                                            <connections>
+                                                                <action selector="scrappedButtonTapped:" destination="guo-LQ-SmO" eventType="touchUpInside" id="U6x-aH-qA2"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="linkColor"/>
@@ -862,11 +865,13 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="answerDate" destination="NGW-t3-SqZ" id="Mqu-hI-9C9"/>
-                                            <outlet property="answerDateLabel" destination="NGW-t3-SqZ" id="Ktc-oi-a0T"/>
-                                            <outlet property="cardView" destination="MWg-dh-Fql" id="WxZ-jZ-bCP"/>
-                                            <outlet property="questionInfoLabel" destination="d4e-LJ-Yye" id="ecY-IE-7SL"/>
-                                            <outlet property="questionLabel" destination="GnL-20-7QI" id="EzV-G4-e9d"/>
+                                            <outlet property="answerDateLabel" destination="NGW-t3-SqZ" id="qkv-kk-8OB"/>
+                                            <outlet property="cardView" destination="MWg-dh-Fql" id="FZ7-r5-GrO"/>
+                                            <outlet property="questionInfoLabel" destination="d4e-LJ-Yye" id="Cxo-HS-9B5"/>
+                                            <outlet property="questionLabel" destination="GnL-20-7QI" id="Fhc-EX-5jn"/>
+                                            <outlet property="scrapButton" destination="6we-Dq-nGR" id="1pH-rb-xid"/>
+                                            <outlet property="writerImageView" destination="Sn8-Dd-TYt" id="7H8-Fr-pvq"/>
+                                            <outlet property="writerLabel" destination="bTT-hb-Rp8" id="oEW-bu-TE8"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
