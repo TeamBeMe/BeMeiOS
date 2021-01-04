@@ -116,14 +116,17 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
         
         print(scrollDirection)
         if (scrollDirection) {
-            let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 200, 0)
+            let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 350, 0)
             cell.layer.transform = rotationTransform
             cell.alpha = 0.5
             
-            UIView.animate(withDuration: 0.5, animations: {
+            
+            UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut], animations: {
                 cell.layer.transform = CATransform3DIdentity
                 cell.alpha = 1.0
-            })
+            }) { (_) in
+                
+            }
         } else {
             
             cell.alpha = 0.2
