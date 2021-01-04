@@ -699,14 +699,14 @@
                                                             <rect key="frame" x="309" y="64" width="32" height="32"/>
                                                             <state key="normal" image="btnScrapSelected"/>
                                                             <connections>
-                                                                <action selector="lockButtonTapped:" destination="5DJ-XR-Fhn" eventType="touchUpInside" id="K3T-vJ-gxg"/>
+                                                                <action selector="scrappedButtonTapped:" destination="5DJ-XR-Fhn" eventType="touchUpInside" id="iEH-Wd-Ub1"/>
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x2h-pb-sAu">
                                                             <rect key="frame" x="273" y="62" width="36" height="36"/>
                                                             <state key="normal" image="btnLickBlack"/>
                                                             <connections>
-                                                                <action selector="lockButtonTapped:" destination="5DJ-XR-Fhn" eventType="touchUpInside" id="ItR-lO-kQQ"/>
+                                                                <action selector="lockButtonTapped:" destination="5DJ-XR-Fhn" eventType="touchUpInside" id="CeT-W7-BnE"/>
                                                             </connections>
                                                         </button>
                                                     </subviews>
@@ -733,12 +733,12 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="answerDate" destination="eJb-hR-RvK" id="8x2-ts-GDe"/>
                                             <outlet property="answerDateLabel" destination="eJb-hR-RvK" id="6NZ-ty-gXE"/>
                                             <outlet property="cardView" destination="nbw-WD-Nl4" id="QS7-2x-Gnc"/>
-                                            <outlet property="lockButton" destination="KUz-vn-7FI" id="kfW-RV-bS7"/>
+                                            <outlet property="lockButton" destination="x2h-pb-sAu" id="XFL-3l-R7H"/>
                                             <outlet property="questionInfoLabel" destination="lEf-Ru-xRG" id="QSy-vB-ox8"/>
                                             <outlet property="questionLabel" destination="e8E-Af-JnC" id="0Th-pz-6WW"/>
+                                            <outlet property="scrapButton" destination="KUz-vn-7FI" id="9XO-c4-8vT"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
