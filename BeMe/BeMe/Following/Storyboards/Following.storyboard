@@ -45,6 +45,9 @@
                                                                 <constraint firstAttribute="width" constant="44" id="c85-Rs-igQ"/>
                                                             </constraints>
                                                             <state key="normal" image="btnIdsearch"/>
+                                                            <connections>
+                                                                <action selector="plusButtonAction:" destination="vYJ-2M-xda" eventType="touchUpInside" id="TKV-em-qWW"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3id-Ar-Yvj">
                                                             <rect key="frame" x="307" y="11" width="44" height="44"/>
