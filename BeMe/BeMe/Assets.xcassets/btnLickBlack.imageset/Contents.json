@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "scale" : "1x",
-      "filename" : "btnUnlock.png",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "filename" : "btnLickBlack.png",
+      "scale" : "1x"
     },
     {
-      "filename" : "btnUnlock@2x.png",
       "scale" : "2x",
+      "filename" : "btnLickBlack@2x.png",
       "idiom" : "universal"
     },
     {
-      "filename" : "btnUnlock@3x.png",
+      "filename" : "btnLickBlack@3x.png",
       "scale" : "3x",
       "idiom" : "universal"
     }

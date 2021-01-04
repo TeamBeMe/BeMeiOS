@@ -10,7 +10,8 @@ import UIKit
 class MypageSearchTVC: UITableViewCell {
     
     //MARK:**- IBOutlet Part**
-    @IBOutlet weak var searchView: UIView!
+    
+    @IBOutlet weak var searchButton: UIButton!
     
     @IBOutlet weak var keywordLabel: UILabel!
     
@@ -26,7 +27,7 @@ class MypageSearchTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        setSearhView(view: searchView)
+        setSearhButton(view: searchButton)
         setKeywordLabel(label: keywordLabel)
         
     }
@@ -39,6 +40,9 @@ class MypageSearchTVC: UITableViewCell {
     
     //MARK:**- IBAction Part**
     
+    @IBAction func searchButtonTapped(_ sender: Any) {
+    }
+    
     @IBAction func deleteButtonTapped(_ sender: Any) {
     }
     
@@ -49,7 +53,7 @@ class MypageSearchTVC: UITableViewCell {
     //MARK:**- default Setting Function Part**
     
     
-    func setSearhView(view: UIView) {
+    func setSearhButton(view: UIButton) {
         view.setBorderWithRadius(borderColor: .veryLightPinkTwo, borderWidth: 1, cornerRadius: 6)
         view.backgroundColor = UIColor.veryLightPinkTwo
     }

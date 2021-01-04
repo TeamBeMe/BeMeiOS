@@ -331,14 +331,13 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="TxG-y5-WqV" userLabel="dd">
                                                             <rect key="frame" x="30" y="23" width="365" height="44"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3F5-WE-W1O">
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5s-yI-DmT">
                                                                     <rect key="frame" x="0.0" y="0.0" width="311" height="44"/>
                                                                     <color key="backgroundColor" systemColor="systemBlueColor"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="36" id="178-r5-NyO"/>
-                                                                        <constraint firstAttribute="width" secondItem="3F5-WE-W1O" secondAttribute="height" multiplier="311:44" id="DDI-rV-Znt"/>
-                                                                    </constraints>
-                                                                </view>
+                                                                    <connections>
+                                                                        <action selector="searchButtonTapped:" destination="Rbz-xC-hzd" eventType="touchUpInside" id="mzU-J5-HKF"/>
+                                                                    </connections>
+                                                                </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4dN-u1-Chi">
                                                                     <rect key="frame" x="321" y="0.0" width="44" height="44"/>
                                                                     <constraints>
@@ -412,8 +411,8 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="keywordLabel" destination="xqc-Yr-Hgg" id="JTA-5P-4B1"/>
+                                            <outlet property="searchButton" destination="x5s-yI-DmT" id="HK4-xs-Kc5"/>
                                             <outlet property="searchButtonTapped" destination="S3w-6A-JMW" id="mzB-qU-epP"/>
-                                            <outlet property="searchView" destination="3F5-WE-W1O" id="UtI-Ma-raL"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -488,8 +487,11 @@
                                                             </subviews>
                                                         </stackView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtG-jt-FUe">
-                                                            <rect key="frame" x="310" y="64" width="31" height="32"/>
-                                                            <state key="normal" image="icBlock"/>
+                                                            <rect key="frame" x="305" y="62" width="36" height="36"/>
+                                                            <state key="normal" image="btnLickBlack"/>
+                                                            <connections>
+                                                                <action selector="lockButtonTapped:" destination="fyg-8D-Vz2" eventType="touchUpInside" id="5Ga-RD-jPK"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="linkColor"/>
@@ -512,6 +514,14 @@
                                                 <constraint firstAttribute="bottom" secondItem="Qfc-cj-1uj" secondAttribute="bottom" constant="12" id="vmO-7d-Nb7"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="answerDate" destination="Hb2-y9-qbS" id="gMM-Pc-FX9"/>
+                                            <outlet property="answerDateLabel" destination="Hb2-y9-qbS" id="eMd-SK-s1W"/>
+                                            <outlet property="cardView" destination="Qfc-cj-1uj" id="BWr-Pe-n9a"/>
+                                            <outlet property="lockButton" destination="rtG-jt-FUe" id="5b9-wl-MsT"/>
+                                            <outlet property="questionInfoLabel" destination="pkH-mE-kM2" id="ONv-tQ-MZI"/>
+                                            <outlet property="questionLabel" destination="nbX-hB-FRC" id="ann-XQ-Kt2"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -631,12 +641,130 @@
             </objects>
             <point key="canvasLocation" x="2790" y="-361"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="dVF-i1-MD6">
+            <objects>
+                <viewController id="IeT-ip-ju7" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="PC3-bh-LYz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9bf-D2-PhK">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="116" id="5DJ-XR-Fhn" customClass="MypageResultTVC" customModule="BeMe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="116"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5DJ-XR-Fhn" id="Xu3-qZ-K0s">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="116"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nbw-WD-Nl4">
+                                                    <rect key="frame" x="30" y="0.0" width="354" height="104"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8E-Af-JnC">
+                                                            <rect key="frame" x="20" y="15" width="294" height="47"/>
+                                                            <string key="text">요즘 내 삶에서
+가장 만족스러운 것은 무엇인가요?
+요즘 내 삶에서</string>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Pbl-36-bg4">
+                                                            <rect key="frame" x="20" y="71" width="194.5" height="18"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[ 미래에 관한 2번째 질문 ]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lEf-Ru-xRG">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="127" height="18"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="·" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ehF-QC-1AU">
+                                                                    <rect key="frame" x="132" y="0.0" width="5" height="18"/>
+                                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020.12.12" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJb-hR-RvK">
+                                                                    <rect key="frame" x="142" y="0.0" width="52.5" height="18"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KUz-vn-7FI">
+                                                            <rect key="frame" x="309" y="64" width="32" height="32"/>
+                                                            <state key="normal" image="btnScrapSelected"/>
+                                                            <connections>
+                                                                <action selector="lockButtonTapped:" destination="5DJ-XR-Fhn" eventType="touchUpInside" id="K3T-vJ-gxg"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x2h-pb-sAu">
+                                                            <rect key="frame" x="273" y="62" width="36" height="36"/>
+                                                            <state key="normal" image="btnLickBlack"/>
+                                                            <connections>
+                                                                <action selector="lockButtonTapped:" destination="5DJ-XR-Fhn" eventType="touchUpInside" id="ItR-lO-kQQ"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="linkColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="x2h-pb-sAu" firstAttribute="centerY" secondItem="Pbl-36-bg4" secondAttribute="centerY" id="3a7-ru-TmS"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Pbl-36-bg4" secondAttribute="bottom" constant="15" id="7fo-8f-Jil"/>
+                                                        <constraint firstItem="KUz-vn-7FI" firstAttribute="leading" secondItem="x2h-pb-sAu" secondAttribute="trailing" id="Axo-YM-hgW"/>
+                                                        <constraint firstItem="e8E-Af-JnC" firstAttribute="top" secondItem="nbw-WD-Nl4" secondAttribute="top" constant="15" id="Ene-mv-FhR"/>
+                                                        <constraint firstItem="KUz-vn-7FI" firstAttribute="centerY" secondItem="Pbl-36-bg4" secondAttribute="centerY" id="SKq-0i-R3d"/>
+                                                        <constraint firstAttribute="trailing" secondItem="e8E-Af-JnC" secondAttribute="trailing" constant="40" id="UIn-7U-rTw"/>
+                                                        <constraint firstItem="e8E-Af-JnC" firstAttribute="leading" secondItem="nbw-WD-Nl4" secondAttribute="leading" constant="20" id="kpz-jz-OSB"/>
+                                                        <constraint firstItem="Pbl-36-bg4" firstAttribute="leading" secondItem="e8E-Af-JnC" secondAttribute="leading" id="paK-It-ald"/>
+                                                        <constraint firstItem="Pbl-36-bg4" firstAttribute="top" secondItem="e8E-Af-JnC" secondAttribute="bottom" constant="9" id="rKc-ge-6dk"/>
+                                                        <constraint firstAttribute="trailing" secondItem="KUz-vn-7FI" secondAttribute="trailing" constant="13" id="vpD-jc-7w4"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="nbw-WD-Nl4" secondAttribute="bottom" constant="12" id="Qdv-M4-VRP"/>
+                                                <constraint firstAttribute="trailing" secondItem="nbw-WD-Nl4" secondAttribute="trailing" constant="30" id="Tha-u8-B3p"/>
+                                                <constraint firstItem="nbw-WD-Nl4" firstAttribute="top" secondItem="Xu3-qZ-K0s" secondAttribute="top" id="Yvy-Nk-L7b"/>
+                                                <constraint firstItem="nbw-WD-Nl4" firstAttribute="leading" secondItem="Xu3-qZ-K0s" secondAttribute="leading" constant="30" id="e2f-S8-WXx"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="answerDate" destination="eJb-hR-RvK" id="8x2-ts-GDe"/>
+                                            <outlet property="answerDateLabel" destination="eJb-hR-RvK" id="6NZ-ty-gXE"/>
+                                            <outlet property="cardView" destination="nbw-WD-Nl4" id="QS7-2x-Gnc"/>
+                                            <outlet property="lockButton" destination="KUz-vn-7FI" id="kfW-RV-bS7"/>
+                                            <outlet property="questionInfoLabel" destination="lEf-Ru-xRG" id="QSy-vB-ox8"/>
+                                            <outlet property="questionLabel" destination="e8E-Af-JnC" id="0Th-pz-6WW"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vne-gV-pDg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vne-gV-pDg" firstAttribute="bottom" secondItem="9bf-D2-PhK" secondAttribute="bottom" id="1eg-Xm-AvV"/>
+                            <constraint firstItem="vne-gV-pDg" firstAttribute="trailing" secondItem="9bf-D2-PhK" secondAttribute="trailing" id="63j-nY-EWd"/>
+                            <constraint firstItem="9bf-D2-PhK" firstAttribute="leading" secondItem="vne-gV-pDg" secondAttribute="leading" id="jdz-r2-GBR"/>
+                            <constraint firstItem="9bf-D2-PhK" firstAttribute="top" secondItem="vne-gV-pDg" secondAttribute="top" id="wnd-G6-ZWf"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6sh-rr-Bgp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="871" y="615"/>
+        </scene>
     </scenes>
     <resources>
         <image name="btnDeleteMypage" width="36" height="36"/>
         <image name="btnFilter" width="38" height="38"/>
+        <image name="btnLickBlack" width="36" height="36"/>
+        <image name="btnScrapSelected" width="32" height="32"/>
         <image name="btnSettings" width="44" height="44"/>
-        <image name="icBlock" width="31" height="32"/>
         <image name="icSearch" width="17" height="17"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

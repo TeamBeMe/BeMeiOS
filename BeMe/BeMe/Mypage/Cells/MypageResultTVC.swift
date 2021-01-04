@@ -10,62 +10,82 @@ import UIKit
 class MypageResultTVC: UITableViewCell {
     
     //MARK:**- IBOutlet Part**
-
-    /// Label, ColelctionView, TextField, ImageView 등 @IBOutlet 변수들을 선언합니다.  // 변수명 lowerCamelCase 사용
-
-    /// ex)  @IBOutlet weak var qnaTextBoxBackgroundImage: UIImageView!
-
+    
+    @IBOutlet weak var cardView: UIView!
+    @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var questionInfoLabel: UILabel!
+    @IBOutlet weak var answerDateLabel: UILabel!
+    @IBOutlet weak var lockButton: UIButton!
+    
     //MARK:**- Variable Part**
-
-    /// 뷰컨에 필요한 변수들을 선언합니다  // 변수명 lowerCamelCase 사용
-
-    /// ex)  var imageViewList : [UIImageView] = []
+    private var isLocked = false
+    
     
     //MARK:**- Life Cycle Part**
-
-    /// 앱의 Life Cycle 부분을 선언합니다
-
-    /// ex) override func viewWillAppear() { }
-
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        setCardView(question: "dbnd`", questionInfo: "아요 1번째 경험", answerDate: "202020202", isLocked: true)
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
+    
     //MARK:**- IBAction Part**
-
-    /// 버튼과 같은 동작을 선언하는 @IBAction 을 선언합니다 , IBAction 함수 명은 동사 형태로!!  // 함수명 lowerCamelCase 사용
-
-    /// ex) @IBOutlet @IBAction func answerSelectedButtonClicked(_ sender: Any) { }
-
+    
+    @IBAction func lockButtonTapped(_ sender: UIButton) {
+        if isLocked {
+            isLocked = false
+            sender.setImage(UIImage.init(named: "btnLickBlack"), for: .normal)
+            
+        } else {
+            isLocked = true
+            sender.setImage(UIImage.init(named: "btnUnlockExplore"), for: .normal)
+            
+        }
+    }
+    
     //MARK:**- default Setting Function Part**
-
-    /// 기본적인 세팅을 위한 함수 부분입니다 // 함수명 lowerCamelCase 사용
-
-    /// ex) func tableViewSetting() {
-
-    ///         myTableView.delegate = self
-
-    ///         myTableView.datasource = self
-
-    ///    }
-
+    
+    func setCardView(question: String, questionInfo: String, answerDate: String, isLocked: Bool){
+        
+        // text init
+        questionLabel.text = question
+        questionInfoLabel.text = questionInfo
+        answerDateLabel.text = answerDate
+        
+        // button image init
+        if isLocked {
+            lockButton.setImage(UIImage.init(named: "btnLickBlack"), for: .normal)
+            
+        } else {
+            lockButton.setImage(UIImage.init(named: "btnUnlockExplore"), for: .normal)
+            
+        }
+        
+        
+        // color
+        questionLabel.textColor = .black
+        questionInfoLabel.textColor = .slateGrey
+        answerDateLabel.textColor = .rgb3A3A3C
+        
+        // 하이라이팅
+        let attributedString = NSMutableAttributedString(string: questionInfoLabel.text!)
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor,
+                                      value: UIColor.rgb1C1C1E,
+                                      range: (questionInfoLabel.text! as NSString).range(of: #"[0-9]*번째"#,
+                                                                                         options: .regularExpression))
+        // cardview init
+        cardView.backgroundColor = .white
+        cardView.setBorderWithRadius(borderColor: .rgbededed, borderWidth: 1, cornerRadius: 6)
+        
+    }
+    
     //MARK:**- Function Part**
-
-    /// 로직을 구현 하는 함수 부분입니다. // 함수명 lowerCamelCase 사용
-
-    /// ex) func tableViewSetting() {
-
-    ///         myTableView.delegate = self
-
-    ///         myTableView.datasource = self
-
-    ///    }
-
+    
+    
 }
