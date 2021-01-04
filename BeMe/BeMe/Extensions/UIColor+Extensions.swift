@@ -31,5 +31,24 @@ extension UIColor {
       return UIColor(red: 1.0, green: 81.0 / 255.0, blue: 81.0 / 255.0, alpha: 1.0)
     }
 
+    @nonobjc class var rgb8E8E93: UIColor {
+      return UIColor(red: 142.0 / 255.0, green: 142.0 / 255.0, blue: 147.0 / 255.0, alpha: 1.0)
+    }
+
+    @nonobjc class var rgbededed: UIColor {
+      return UIColor(white: 237.0 / 255.0, alpha: 1.0)
+    }
+
+    @nonobjc class var rgb3A3A3C: UIColor {
+      return UIColor(red: 58.0 / 255.0, green: 58.0 / 255.0, blue: 60.0 / 255.0, alpha: 1.0)
+    }
+
+    @nonobjc class var rgb1C1C1E: UIColor {
+      return UIColor(red: 28.0 / 255.0, green: 28.0 / 255.0, blue: 30.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var veryLightPinkTwo: UIColor {
+      return UIColor(white: 235.0 / 255.0, alpha: 1.0)
+    }
 
 }

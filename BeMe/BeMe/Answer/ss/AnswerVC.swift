@@ -174,7 +174,6 @@ class AnswerVC: UIViewController {
                                       value: UIColor.black,
                                       range: (questionInfo as NSString).range(of: #"[0-9]*번째"#,
                                                                               options: .regularExpression))
-//        questionInfoLabel.attributedText = attributedString
 
         answerTextView.text = answer
         textViewDidChange(answerTextView)

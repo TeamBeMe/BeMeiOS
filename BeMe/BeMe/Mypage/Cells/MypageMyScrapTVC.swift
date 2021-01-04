@@ -1,13 +1,13 @@
 //
-//  MypageResultTVC.swift
+//  MypageMyScrapTVC.swift
 //  BeMe
 //
-//  Created by 박세란 on 2021/01/03.
+//  Created by 박세란 on 2021/01/04.
 //
 
 import UIKit
 
-class MypageResultTVC: UITableViewCell {
+class MypageMyScrapTVC: UITableViewCell {
     
     //MARK:**- IBOutlet Part**
     
@@ -16,8 +16,11 @@ class MypageResultTVC: UITableViewCell {
     @IBOutlet weak var questionInfoLabel: UILabel!
     @IBOutlet weak var answerDateLabel: UILabel!
     @IBOutlet weak var lockButton: UIButton!
+    @IBOutlet weak var scrapButton: UIButton!
+    
     
     //MARK:**- Variable Part**
+    private var isScrapped = false
     private var isLocked = false
     
     
@@ -26,7 +29,7 @@ class MypageResultTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        setCardView(question: "dbnd`", questionInfo: "아요 1번째 경험", answerDate: "202020202", isLocked: true)
+        setCardView(question: "dbnd`", questionInfo: "아요 1번째 경험", answerDate: "202020202", isLocked:true ,isScrapped: true)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -36,6 +39,18 @@ class MypageResultTVC: UITableViewCell {
     }
     
     //MARK:**- IBAction Part**
+    @IBAction func scrappedButtonTapped(_ sender: UIButton) {
+        if isScrapped {
+            isScrapped = false
+            sender.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
+            
+        } else {
+            isScrapped = true
+            sender.setImage(UIImage.init(named: "btnScrapUnselected"), for: .normal)
+            
+        }
+    }
+    
     
     @IBAction func lockButtonTapped(_ sender: UIButton) {
         if isLocked {
@@ -50,8 +65,7 @@ class MypageResultTVC: UITableViewCell {
     }
     
     //MARK:**- default Setting Function Part**
-    
-    func setCardView(question: String, questionInfo: String, answerDate: String, isLocked: Bool){
+    func setCardView(question: String, questionInfo: String, answerDate: String, isLocked: Bool, isScrapped: Bool){
         
         // text init
         questionLabel.text = question
@@ -59,6 +73,14 @@ class MypageResultTVC: UITableViewCell {
         answerDateLabel.text = answerDate
         
         // button image init
+        if isScrapped {
+            scrapButton.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
+            
+        } else {
+            scrapButton.setImage(UIImage.init(named: "btnScrapUnselected"), for: .normal)
+            
+        }
+        
         if isLocked {
             lockButton.setImage(UIImage.init(named: "btnLickBlack"), for: .normal)
             
@@ -66,8 +88,7 @@ class MypageResultTVC: UITableViewCell {
             lockButton.setImage(UIImage.init(named: "btnUnlockExplore"), for: .normal)
             
         }
-        
-        
+
         // color
         questionLabel.textColor = .black
         questionInfoLabel.textColor = .slateGrey
@@ -84,8 +105,6 @@ class MypageResultTVC: UITableViewCell {
         cardView.setBorderWithRadius(borderColor: .rgbededed, borderWidth: 1, cornerRadius: 6)
         
     }
-    
     //MARK:**- Function Part**
-    
     
 }
