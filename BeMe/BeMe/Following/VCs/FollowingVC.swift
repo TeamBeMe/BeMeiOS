@@ -115,7 +115,7 @@ extension FollowingVC : UICollectionViewDataSource {
             cell.followingBarButtonDelegate = self
             cell.followPeopleCollectionViewDelegate = self
             cell.followingPeopleCollectionViewDelegate = self
-            
+            cell.followPlusButtonDelegate = self
             return cell
             
         }
@@ -429,6 +429,25 @@ extension FollowingVC : FollowingTabBarDelegate{
     }
 }
 
+extension FollowingVC: FollowPlusButtonDelegate{
+    func plusButtonAction(){
+        guard let vcName = UIStoryboard(name: "Search",
+                                        bundle: nil).instantiateViewController(
+                                            withIdentifier: "SearchVC") as? SearchVC
+        else{
+            
+            return
+        }
+        
+        vcName.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(vcName, animated: true)
+    
+    }
+    
+}
+
+
+
 protocol FollowingTabBarDelegate{
     func followButtonTapped()
     
@@ -470,3 +489,7 @@ protocol FollowingFollowingButtonDelegate{
 }
 
 
+protocol FollowPlusButtonDelegate{
+    func plusButtonAction()
+    
+}
