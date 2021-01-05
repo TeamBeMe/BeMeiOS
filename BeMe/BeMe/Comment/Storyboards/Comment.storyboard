@@ -1494,10 +1494,10 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="LUK-QR-TSt">
-                                                            <rect key="frame" x="30" y="10" width="360" height="34"/>
+                                                            <rect key="frame" x="30" y="10" width="360" height="33.5"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgProfile" translatesAutoresizingMaskIntoConstraints="NO" id="EJ8-Cn-rRX">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="34" height="33.5"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="genie_self" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ID-ry-pHX">
                                                                     <rect key="frame" x="46" y="8.5" width="278" height="17"/>
@@ -1515,14 +1515,14 @@
                                                             </subviews>
                                                         </stackView>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" contentInsetAdjustmentBehavior="never" text="officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="CHk-as-dQU">
-                                                            <rect key="frame" x="75" y="48" width="309" height="66.5"/>
+                                                            <rect key="frame" x="71" y="47.5" width="313" height="66.5"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <color key="textColor" systemColor="labelColor"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="iBg-bm-h2I">
-                                                            <rect key="frame" x="80" y="129" width="121.5" height="34"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="iBg-bm-h2I">
+                                                            <rect key="frame" x="75" y="126" width="121.5" height="34"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12월 23일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lOI-7a-6gb">
                                                                     <rect key="frame" x="0.0" y="10" width="47.5" height="14.5"/>
@@ -1545,29 +1545,42 @@
                                                         </stackView>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="iBg-bm-h2I" firstAttribute="leading" secondItem="djS-ZN-81b" secondAttribute="leading" constant="75" id="3of-0A-OdS"/>
                                                         <constraint firstAttribute="trailing" secondItem="CHk-as-dQU" secondAttribute="trailing" constant="30" id="GCj-PI-KSf"/>
                                                         <constraint firstItem="LUK-QR-TSt" firstAttribute="leading" secondItem="djS-ZN-81b" secondAttribute="leading" constant="30" id="Uy8-ct-KVz"/>
                                                         <constraint firstItem="CHk-as-dQU" firstAttribute="top" secondItem="LUK-QR-TSt" secondAttribute="bottom" constant="4" id="ccc-dI-bCr"/>
                                                         <constraint firstItem="LUK-QR-TSt" firstAttribute="top" secondItem="djS-ZN-81b" secondAttribute="top" constant="10" id="fY9-MO-csK"/>
                                                         <constraint firstAttribute="trailing" secondItem="LUK-QR-TSt" secondAttribute="trailing" constant="24" id="hZR-bB-EnH"/>
-                                                        <constraint firstItem="CHk-as-dQU" firstAttribute="leading" secondItem="djS-ZN-81b" secondAttribute="leading" constant="75" id="uHS-JG-Xix"/>
+                                                        <constraint firstItem="CHk-as-dQU" firstAttribute="top" secondItem="EJ8-Cn-rRX" secondAttribute="bottom" constant="4" id="tyg-iS-BOX"/>
+                                                        <constraint firstItem="CHk-as-dQU" firstAttribute="leading" secondItem="djS-ZN-81b" secondAttribute="leading" constant="71" id="uHS-JG-Xix"/>
+                                                        <constraint firstItem="iBg-bm-h2I" firstAttribute="top" secondItem="CHk-as-dQU" secondAttribute="bottom" constant="12" id="uNt-b4-sMa"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="iBg-bm-h2I" secondAttribute="bottom" constant="5" id="wbS-mM-jxZ"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="contentTextView" destination="CHk-as-dQU" id="hv4-kQ-GvK"/>
+                                                </connections>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="120" id="eFa-bU-iyb">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SecondCommentTVC" rowHeight="120" id="eFa-bU-iyb" customClass="하SecondCommentTVC지만">
                                                 <rect key="frame" x="0.0" y="248" width="414" height="120"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="eFa-bU-iyb" id="ItW-2s-rDA">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                                                     <autoresizingMask key="autoresizingMask"/>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="G7r-h9-kHA">
-                                                <rect key="frame" x="0.0" y="368" width="414" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="G7r-h9-kHA" id="EqD-Z6-yS7">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="대댓글 ㅡㅡ " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bua-bs-9xT">
+                                                            <rect key="frame" x="220" y="11" width="82.5" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="Bua-bs-9xT" secondAttribute="bottom" constant="77.5" id="HLl-QX-TfU"/>
+                                                        <constraint firstItem="Bua-bs-9xT" firstAttribute="leading" secondItem="ItW-2s-rDA" secondAttribute="leadingMargin" constant="200" id="euj-ST-Ouz"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="Bua-bs-9xT" secondAttribute="trailing" constant="91.5" id="gRf-nh-BoH"/>
+                                                        <constraint firstItem="Bua-bs-9xT" firstAttribute="top" secondItem="ItW-2s-rDA" secondAttribute="topMargin" id="tFG-Yh-thu"/>
+                                                    </constraints>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                         </prototypes>
@@ -1604,6 +1617,7 @@
                         <outlet property="answerTextView" destination="4vW-4m-SGd" id="Gft-kA-k94"/>
                         <outlet property="cateogryLabel" destination="0tc-7d-P4o" id="dM3-05-2zA"/>
                         <outlet property="commentTableView" destination="osa-c8-jrl" id="gIe-Qp-y39"/>
+                        <outlet property="commentTableViewHeight" destination="Qod-IL-EL2" id="MIq-12-Ldi"/>
                         <outlet property="dateLabel" destination="ow3-Sd-J4d" id="FWV-8O-i6L"/>
                         <outlet property="informationView" destination="Pkc-sj-m34" id="OEc-1H-dDW"/>
                         <outlet property="moreAnswerButton" destination="EoT-ez-Owu" id="CB9-AA-dQD"/>

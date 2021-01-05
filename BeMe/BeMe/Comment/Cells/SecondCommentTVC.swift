@@ -1,5 +1,5 @@
 //
-//  CommentTVC.swift
+//  SecondeCommentTVC.swift
 //  BeMe
 //
 //  Created by 이재용 on 2021/01/05.
@@ -7,15 +7,11 @@
 
 import UIKit
 
-class CommentTVC: UITableViewCell {
-    static let identifier: String = "CommentTVC"
-    
-    @IBOutlet weak var contentTextView: UITextView!
+class SecondCommentTVC: UITableViewCell {
+    static let identifier: String = "SecondCommentTVC"
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentTextView.textContainerInset = .zero
-        print(contentTextView.contentInset)
-        print(contentTextView.textContainerInset)
+        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
