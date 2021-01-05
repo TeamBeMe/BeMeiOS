@@ -8,5 +8,100 @@
 import UIKit
 
 class MypageCVC: UICollectionViewCell {
+    //MARK:**- IBOutlet Part**
+    @IBOutlet weak var MypageTabCV: UICollectionView!
+
+    
+    //MARK:**- Variable Part**
+    static let identifier = "MypageCVC"
+    private var cellNumber: Int = 1
+    
+    
+    //MARK:**- Life Cycle Part**
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        collectionViewSetting()
+    }
+    
+    
+    //MARK:**- IBAction Part**
+    
+    //MARK:**- default Setting Function Part**
+    func collectionViewSetting()
+    {
+//        MypageTabCV.delegate = self
+//        MypageTabCV.dataSource = self
+    }
+    
+    //MARK:**- Function Part**
+    
+}
+
+//MARK:**- extension 부분**
+
+
+extension MypageCVC : UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        
+    }
+    
+}
+
+extension MypageCVC : UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: MypageTabCVC.identifier,
+                for: indexPath) as? MypageTabCVC else {
+            
+            return UICollectionViewCell()}
+        
+        
+        return cell
+    }
+    
+    
+    
+    
+}
+
+extension MypageCVC : UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.item <= 1 {
+            return CGSize(width: collectionView.frame.width , height: 204)
+        }
+        else{
+            return CGSize(width: collectionView.frame.width , height: 408)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+    //    UIEdgeInset
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+        
+    }
+    
+    
+
     
 }
