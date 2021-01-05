@@ -273,7 +273,8 @@ extension ExploreVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
             return UICollectionViewCell()
         }
         // border 계산 다시하기
-        cell.layer.cornerRadius = 10
+        let deviceBound: CGFloat = UIScreen.main.bounds.width/375.0
+        cell.layer.cornerRadius = 6 * deviceBound * deviceBound * deviceBound
         cell.setAnswer()
         cell.backgroundColor = .white
         return cell

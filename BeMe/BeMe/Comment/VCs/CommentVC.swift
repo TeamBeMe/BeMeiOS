@@ -50,7 +50,6 @@ class CommentVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        print("HELLLLOOOOOo")
         commentTableViewHeight.constant = commentTableView.contentSize.height
         
         print(commentTableView.contentSize.height)
@@ -101,7 +100,7 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                 return comment
             } else {
                 guard let secondComment = tableView.dequeueReusableCell(withIdentifier: SecondCommentTVC.identifier, for: indexPath) as? SecondCommentTVC else { return UITableViewCell() }
-                secondComment.backgroundColor = ((indexPath.row % 2) != 0) ? UIColor.yellow : UIColor.red
+                
                 return secondComment
             }
         }    

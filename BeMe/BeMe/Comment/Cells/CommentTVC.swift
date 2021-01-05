@@ -11,11 +11,14 @@ class CommentTVC: UITableViewCell {
     static let identifier: String = "CommentTVC"
     
     @IBOutlet weak var contentTextView: UITextView!
+    @IBOutlet weak var contentTextViewHeight: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentTextView.textContainerInset = .zero
+        
+        contentTextViewHeight.constant = contentTextView.contentSize.height
+     
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
