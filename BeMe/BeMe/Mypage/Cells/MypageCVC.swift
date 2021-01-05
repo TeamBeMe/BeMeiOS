@@ -30,8 +30,8 @@ class MypageCVC: UICollectionViewCell {
     //MARK:**- default Setting Function Part**
     func collectionViewSetting()
     {
-//        MypageTabCV.delegate = self
-//        MypageTabCV.dataSource = self
+        MypageTabCV.delegate = self
+        MypageTabCV.dataSource = self
     }
     
     //MARK:**- Function Part**
@@ -52,7 +52,7 @@ extension MypageCVC : UICollectionViewDelegate {
 
 extension MypageCVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return cellNumber
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -76,10 +76,10 @@ extension MypageCVC : UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.item <= 1 {
-            return CGSize(width: collectionView.frame.width , height: 204)
+            return CGSize(width: collectionView.frame.width  , height: 748)
         }
         else{
-            return CGSize(width: collectionView.frame.width , height: 408)
+            return CGSize(width: collectionView.frame.width, height: 748)
         }
     }
     
@@ -105,3 +105,5 @@ extension MypageCVC : UICollectionViewDelegateFlowLayout {
 
     
 }
+
+

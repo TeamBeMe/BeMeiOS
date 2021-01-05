@@ -20,7 +20,7 @@
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xh3-JJ-lUX" userLabel="MypageCV">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Ddr-pL-ik2">
                                     <size key="itemSize" width="289" height="588"/>
                                     <size key="headerReferenceSize" width="414" height="143"/>
@@ -28,7 +28,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="m3F-hD-Wtk" userLabel="MypageCVC" customClass="MypageCVC" customModule="BeMe" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="MypageCVC" reuseIdentifier="MypageCVC" id="m3F-hD-Wtk" userLabel="MypageCVC" customClass="MypageCVC" customModule="BeMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="143" width="414" height="588"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="YeC-J8-sZc">
@@ -45,7 +45,7 @@
                                                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     </collectionViewFlowLayout>
                                                     <cells>
-                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="fqR-Lq-Yas" userLabel="MypageTabCVC" customClass="MypageTabCVC" customModule="BeMe" customModuleProvider="target">
+                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="MypageTabCVC" reuseIdentifier="MypageTabCVC" id="fqR-Lq-Yas" userLabel="MypageTabCVC" customClass="MypageTabCVC" customModule="BeMe" customModuleProvider="target">
                                                             <rect key="frame" x="0.0" y="116" width="414" height="748"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="XOr-yc-uOQ">
@@ -56,7 +56,7 @@
                                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="748"/>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <prototypes>
-                                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MypageResultTVC" rowHeight="116" id="fyg-8D-Vz2" customClass="MypageResultTVC" customModule="BeMe" customModuleProvider="target">
+                                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MypageResultTVC" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MypageResultTVC" rowHeight="116" id="fyg-8D-Vz2" customClass="MypageResultTVC" customModule="BeMe" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="28" width="414" height="116"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fyg-8D-Vz2" id="t8F-UR-y0G">
@@ -66,7 +66,7 @@
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qfc-cj-1uj">
                                                                                             <rect key="frame" x="30" y="0.0" width="354" height="104"/>
                                                                                             <subviews>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbX-hB-FRC">
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nbX-hB-FRC">
                                                                                                     <rect key="frame" x="20" y="15" width="294" height="47"/>
                                                                                                     <string key="text">요즘 내 삶에서
 가장 만족스러운 것은 무엇인가요?
@@ -127,7 +127,6 @@
                                                                                     </constraints>
                                                                                 </tableViewCellContentView>
                                                                                 <connections>
-                                                                                    <outlet property="answerDate" destination="Hb2-y9-qbS" id="gMM-Pc-FX9"/>
                                                                                     <outlet property="answerDateLabel" destination="Hb2-y9-qbS" id="eMd-SK-s1W"/>
                                                                                     <outlet property="cardView" destination="Qfc-cj-1uj" id="BWr-Pe-n9a"/>
                                                                                     <outlet property="lockButton" destination="rtG-jt-FUe" id="5b9-wl-MsT"/>
@@ -135,7 +134,7 @@
                                                                                     <outlet property="questionLabel" destination="nbX-hB-FRC" id="ann-XQ-Kt2"/>
                                                                                 </connections>
                                                                             </tableViewCell>
-                                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="116" id="5DJ-XR-Fhn" customClass="MypageMyScrapTVC" customModule="BeMe" customModuleProvider="target">
+                                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MypageMyScrapTVC" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MypageMyScrapTVC" rowHeight="116" id="5DJ-XR-Fhn" customClass="MypageMyScrapTVC" customModule="BeMe" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="144" width="414" height="116"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5DJ-XR-Fhn" id="Xu3-qZ-K0s">
@@ -145,7 +144,7 @@
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nbw-WD-Nl4">
                                                                                             <rect key="frame" x="30" y="0.0" width="354" height="104"/>
                                                                                             <subviews>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8E-Af-JnC">
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e8E-Af-JnC">
                                                                                                     <rect key="frame" x="20" y="15" width="294" height="47"/>
                                                                                                     <string key="text">요즘 내 삶에서
 가장 만족스러운 것은 무엇인가요?
@@ -223,7 +222,7 @@
                                                                                     <outlet property="scrapButton" destination="KUz-vn-7FI" id="9XO-c4-8vT"/>
                                                                                 </connections>
                                                                             </tableViewCell>
-                                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="156" id="guo-LQ-SmO" customClass="MypageOthersScrapTVC" customModule="BeMe" customModuleProvider="target">
+                                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="MypageOthersScrapTVC" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MypageOthersScrapTVC" rowHeight="156" id="guo-LQ-SmO" customClass="MypageOthersScrapTVC" customModule="BeMe" customModuleProvider="target">
                                                                                 <rect key="frame" x="0.0" y="260" width="414" height="156"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="guo-LQ-SmO" id="5E2-VP-U78">
@@ -233,7 +232,7 @@
                                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MWg-dh-Fql">
                                                                                             <rect key="frame" x="30" y="0.0" width="354" height="144"/>
                                                                                             <subviews>
-                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GnL-20-7QI">
+                                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GnL-20-7QI">
                                                                                                     <rect key="frame" x="20" y="15" width="294" height="54.5"/>
                                                                                                     <string key="text">요즘 내 삶에서
 가장 만족스러운 것은 무엇인가요?
@@ -603,6 +602,9 @@
                             <constraint firstItem="JRG-h0-aOq" firstAttribute="bottom" secondItem="xh3-JJ-lUX" secondAttribute="bottom" id="vRi-kk-eKV"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="MypageCV" destination="xh3-JJ-lUX" id="P3G-h5-dFR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hdS-Wv-3Oa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -627,6 +629,9 @@
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

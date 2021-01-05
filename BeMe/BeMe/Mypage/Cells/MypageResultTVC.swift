@@ -27,7 +27,6 @@ class MypageResultTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        setCardView(question: "dbnd`", questionInfo: "아요 1번째 경험", answerDate: "202020202", isLocked: true)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -78,8 +77,8 @@ class MypageResultTVC: UITableViewCell {
         let attributedString = NSMutableAttributedString(string: questionInfoLabel.text!)
         attributedString.addAttribute(NSAttributedString.Key.foregroundColor,
                                       value: UIColor.rgb1C1C1E,
-                                      range: (questionInfoLabel.text! as NSString).range(of: #"[0-9]*번째"#,
-                                                                                         options: .regularExpression))
+                                      range: (questionInfoLabel.text! as NSString)
+                                        .range(of: #"[0-9]*번째"#, options: .regularExpression))
         // cardview init
         cardView.backgroundColor = .white
         cardView.setBorderWithRadius(borderColor: .rgbededed, borderWidth: 1, cornerRadius: 6)

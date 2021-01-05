@@ -13,7 +13,7 @@ class MypageTabCVC: UICollectionViewCell {
     
     //MARK:**- Variable Part**
     static let identifier = "MypageTabCVC"
-    private var cellNumber: Int = 2
+    private var cellNumber: Int = 8
     
     
     //MARK:**- Life Cycle Part**
@@ -29,8 +29,8 @@ class MypageTabCVC: UICollectionViewCell {
     //MARK:**- default Setting Function Part**
     func tableViewSetting()
     {
-        MypageTV.delegate = self.MypageTV.delegate
-        MypageTV.dataSource = self.MypageTV.dataSource
+        MypageTV.delegate = self
+        MypageTV.dataSource = self
         MypageTV.separatorStyle = .none
 
     }
@@ -51,58 +51,32 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
             guard let tab = tableView
                     .dequeueReusableCell(withIdentifier: MypageResultTVC.identifier, for: indexPath)
                     as? MypageResultTVC else { return UITableViewCell() }
+            tab.setCardView(question: "cell.layer.cornerRadius = cell.bounds.width / cell.bounds.height * 10cell.layer.cornerRadius = cell.bounds.width / cell.bounds.height * 10cell.layer.cornerRadius = cell.bounds.width / cell.bounds.height * 10", questionInfo: "아요 1000번째 경험", answerDate: "아요 1번째 경험", isLocked: true)
+            
 
             return tab
+        } else if indexPath.row == 1 {
+            guard let scrap = tableView
+                    .dequeueReusableCell(withIdentifier: MypageMyScrapTVC.identifier, for: indexPath)
+                    as? MypageMyScrapTVC else { return UITableViewCell() }
+            scrap.setCardView(question: "dbnd`", questionInfo: "아요 1번째 경험", answerDate: "202020202", isLocked:true ,isScrapped: true)
+            
+            return scrap
         } else {
             guard let scrap = tableView
-                    .dequeueReusableCell(withIdentifier: MypageResultTVC.identifier, for: indexPath)
-                    as? MypageResultTVC else { return UITableViewCell() }
+                    .dequeueReusableCell(withIdentifier: MypageOthersScrapTVC.identifier, for: indexPath)
+                    as? MypageOthersScrapTVC else { return UITableViewCell() }
+            scrap.setCardView(question: "아요 1000번째 경험아요 1000번째 경험아요 1000번째 경험아요 1000번째 경험아요 1000번째 경험아요 1000번째 경험아요 1000번번째 경험아요 1000번째 경험아요 1000번째 경험아요 1000번째 경험아요 1000번째 경험dbnd`", questionInfo: "아요 1번째 경험", answerDate: "202020202", writer: "재용아 맥주 그만 마셔", writerImg: "imgProfile66", isScrapped: true)
             
             return scrap
         }
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == 0 {
-            return 62
-        } else if indexPath.row == cellNumber - 1 {
-            return UITableView.automaticDimension
-        } else {
-            return UITableView.automaticDimension
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        if indexPath.row == 0 {
-            // no animation
-            
-        } else if indexPath.row == cellNumber - 1 {
-            // animation 2
-            cell.alpha = 0
-            UIView.animate(withDuration: 0.75) {
-                
-                cell.alpha = 1.0
-            }
-        } else {
-            // animation 1
-            let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 320, 0)
-            cell.layer.transform = rotationTransform
-            cell.alpha = 0.5
-            
-            UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut], animations: {
-                cell.layer.transform = CATransform3DIdentity
-                cell.alpha = 1.0
-            }) { (_) in
-                
-            }
-            
-        }
+        
         
     }
+    
+   
 }
+
+
