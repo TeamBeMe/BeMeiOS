@@ -1,80 +1,47 @@
 //
-//  MypageVC.swift
+//  MypageCVC.swift
 //  BeMe
 //
-//  Created by 박세란 on 2021/01/03.
+//  Created by 박세란 on 2021/01/05.
 //
 
 import UIKit
 
-class MypageVC: UIViewController {
-    
+class MypageCVC: UICollectionViewCell {
     //MARK:**- IBOutlet Part**
-    @IBOutlet weak var MypageCV: UICollectionView!
-    
+    @IBOutlet weak var MypageTabCV: UICollectionView!
+
     
     //MARK:**- Variable Part**
+    static let identifier = "MypageCVC"
+    private var cellNumber: Int = 1
     
-    //MARK:**- Constraint Part**
     
     //MARK:**- Life Cycle Part**
-    
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-//        setSearhButton(view: searchButton)
-//        setKeywordLabel(label: keywordLabel)
-        
-        MypageCV.delegate = self
-        MypageCV.dataSource = self
-        
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        collectionViewSetting()
     }
+    
     
     //MARK:**- IBAction Part**
     
-    @IBAction func searchButtonTapped(_ sender: Any) {
-    }
-    
-    @IBAction func deleteButtonTapped(_ sender: Any) {
-    }
-    
-    @IBAction func filterButtonTapped(_ sender: Any) {
-    }
-    
-    
     //MARK:**- default Setting Function Part**
-    
-    
-    func setSearhButton(view: UIButton) {
-        view.setBorderWithRadius(borderColor: .veryLightPinkTwo, borderWidth: 1, cornerRadius: 6)
-        view.backgroundColor = UIColor.veryLightPinkTwo
+    func collectionViewSetting()
+    {
+        MypageTabCV.delegate = self
+        MypageTabCV.dataSource = self
     }
-    
-    
-    // 아래 두 함수는 TVC 뿐만 아니라 여러 곳에서 사용가능
-    // 검색어를 삭제했거나 , 초기 화면
-    func setKeywordLabel(label : UILabel){
-        label.text = "검색"
-        label.textColor = UIColor.rgb8E8E93
-    }
-    
-    // 검색 결과 후
-    func setKeywordLabel( label : UILabel, keyword: String){
-        label.text = keyword
-        label.textColor = UIColor.darkGray
-        
-    }
-    
     
     //MARK:**- Function Part**
     
-    
-
-    
-    
 }
+
 //MARK:**- extension 부분**
-extension MypageVC : UICollectionViewDelegate {
+
+
+extension MypageCVC : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -83,15 +50,15 @@ extension MypageVC : UICollectionViewDelegate {
     
 }
 
-extension MypageVC : UICollectionViewDataSource {
+extension MypageCVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
+        return cellNumber
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: MypageCVC.identifier,
-                for: indexPath) as? MypageCVC else {
+                withReuseIdentifier: MypageTabCVC.identifier,
+                for: indexPath) as? MypageTabCVC else {
             
             return UICollectionViewCell()}
         
@@ -104,7 +71,7 @@ extension MypageVC : UICollectionViewDataSource {
     
 }
 
-extension MypageVC : UICollectionViewDelegateFlowLayout {
+extension MypageCVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -112,7 +79,7 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
             return CGSize(width: collectionView.frame.width  , height: 748)
         }
         else{
-            return CGSize(width: collectionView.frame.width  , height: 748)
+            return CGSize(width: collectionView.frame.width, height: 748)
         }
     }
     
@@ -138,7 +105,5 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
 
     
 }
-
-
 
 

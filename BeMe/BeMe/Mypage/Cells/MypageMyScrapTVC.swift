@@ -22,14 +22,14 @@ class MypageMyScrapTVC: UITableViewCell {
     //MARK:**- Variable Part**
     private var isScrapped = false
     private var isLocked = false
-    
+    static let identifier = "MypageMyScrapTVC"
     
     //MARK:**- Life Cycle Part**
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        setCardView(question: "dbnd`", questionInfo: "아요 1번째 경험", answerDate: "202020202", isLocked:true ,isScrapped: true)
+ 
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

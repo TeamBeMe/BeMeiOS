@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		3FDD35238DF8F48142B9F9F1 /* Pods_BeMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9DABE27D9C7D77517D82AB /* Pods_BeMe.framework */; };
+		A50140FA25A39B56001099E8 /* MypageCRV.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50140F925A39B56001099E8 /* MypageCRV.swift */; };
+		A50140FD25A39BFA001099E8 /* MypageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50140FC25A39BFA001099E8 /* MypageCVC.swift */; };
+		A501410025A39C18001099E8 /* MypageTabCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50140FF25A39C18001099E8 /* MypageTabCVC.swift */; };
+		A501410325A39C34001099E8 /* MypageTabCRV.swift in Sources */ = {isa = PBXBuildFile; fileRef = A501410225A39C34001099E8 /* MypageTabCRV.swift */; };
 		A578D4E1259E727C00F69908 /* Answer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A578D4E0259E727C00F69908 /* Answer.storyboard */; };
 		A578D4E4259E728500F69908 /* AnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A578D4E3259E728500F69908 /* AnswerVC.swift */; };
 		A578D4F025A0C4E600F69908 /* Mypage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A578D4EF25A0C4E600F69908 /* Mypage.storyboard */; };
 		A578D4F325A0C51400F69908 /* MypageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A578D4F225A0C51400F69908 /* MypageVC.swift */; };
-		A57F708925A1AC8F00152E89 /* MypageSearchTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F708825A1AC8F00152E89 /* MypageSearchTVC.swift */; };
 		A57F708C25A1ACB100152E89 /* MypageResultTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F708B25A1ACB100152E89 /* MypageResultTVC.swift */; };
-		A57F709025A1ACE400152E89 /* MypageProfileCRV.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F708F25A1ACE400152E89 /* MypageProfileCRV.swift */; };
 		A5CCCD9E25A334EA008A3125 /* MypageMyScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */; };
 		A5CCCDA125A33512008A3125 /* MypageOthersScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */; };
 		D492E41A25A0A0DE0088A181 /* ExploreDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492E41925A0A0DE0088A181 /* ExploreDetailVC.swift */; };
@@ -109,13 +111,15 @@
 /* Begin PBXFileReference section */
 		3A09AD0A5B04C9B6819B2606 /* Pods-BeMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.debug.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.debug.xcconfig"; sourceTree = "<group>"; };
 		81614202856C8826262057FD /* Pods-BeMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.release.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.release.xcconfig"; sourceTree = "<group>"; };
+		A50140F925A39B56001099E8 /* MypageCRV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageCRV.swift; sourceTree = "<group>"; };
+		A50140FC25A39BFA001099E8 /* MypageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageCVC.swift; sourceTree = "<group>"; };
+		A50140FF25A39C18001099E8 /* MypageTabCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageTabCVC.swift; sourceTree = "<group>"; };
+		A501410225A39C34001099E8 /* MypageTabCRV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageTabCRV.swift; sourceTree = "<group>"; };
 		A578D4E0259E727C00F69908 /* Answer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Answer.storyboard; path = BeMe/Answer/s/Answer.storyboard; sourceTree = SOURCE_ROOT; };
 		A578D4E3259E728500F69908 /* AnswerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnswerVC.swift; path = BeMe/Answer/ss/AnswerVC.swift; sourceTree = SOURCE_ROOT; };
 		A578D4EF25A0C4E600F69908 /* Mypage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mypage.storyboard; sourceTree = SOURCE_ROOT; };
 		A578D4F225A0C51400F69908 /* MypageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageVC.swift; sourceTree = SOURCE_ROOT; };
-		A57F708825A1AC8F00152E89 /* MypageSearchTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageSearchTVC.swift; sourceTree = "<group>"; };
 		A57F708B25A1ACB100152E89 /* MypageResultTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageResultTVC.swift; sourceTree = "<group>"; };
-		A57F708F25A1ACE400152E89 /* MypageProfileCRV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageProfileCRV.swift; sourceTree = "<group>"; };
 		A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageMyScrapTVC.swift; sourceTree = "<group>"; };
 		A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageOthersScrapTVC.swift; sourceTree = "<group>"; };
 		D492E41925A0A0DE0088A181 /* ExploreDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDetailVC.swift; sourceTree = "<group>"; };
@@ -284,9 +288,11 @@
 		A578D4EA25A0BFBD00F69908 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				A57F708825A1AC8F00152E89 /* MypageSearchTVC.swift */,
+				A50140F925A39B56001099E8 /* MypageCRV.swift */,
+				A50140FC25A39BFA001099E8 /* MypageCVC.swift */,
+				A501410225A39C34001099E8 /* MypageTabCRV.swift */,
+				A50140FF25A39C18001099E8 /* MypageTabCVC.swift */,
 				A57F708B25A1ACB100152E89 /* MypageResultTVC.swift */,
-				A57F708F25A1ACE400152E89 /* MypageProfileCRV.swift */,
 				A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */,
 				A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */,
 			);
@@ -839,12 +845,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A57F709025A1ACE400152E89 /* MypageProfileCRV.swift in Sources */,
 				D4E07CBE259F22C10075E616 /* ArticleTVC.swift in Sources */,
 				EC7FEFAE25A3901100C61147 /* SearchNewTVC.swift in Sources */,
 				D492E43B25A0E6250088A181 /* DetailMoreTVC.swift in Sources */,
 				EC5C1FFC25A43E1A008EE335 /* SignUpControlVC.swift in Sources */,
 				EC89E313259C27DF00DBAFE5 /* FollowingSearchCVC.swift in Sources */,
+				A50140FA25A39B56001099E8 /* MypageCRV.swift in Sources */,
+				A50140FD25A39BFA001099E8 /* MypageCVC.swift in Sources */,
 				EC813F462599A44F00BBCE25 /* GenericResponse.swift in Sources */,
 				EC7C1624259B9CA500A5BA4C /* FollowingHeaderCVC.swift in Sources */,
 				EC737F19259D867A0035207F /* CustomTodayCardView.swift in Sources */,
@@ -859,6 +866,7 @@
 				EC813F432599A42700BBCE25 /* APIConstants.swift in Sources */,
 				EC813F7B2599F88D00BBCE25 /* PastCardCVC.swift in Sources */,
 				EC7F0EAF25A09F24008EB88A /* AnswerDataForViewController.swift in Sources */,
+				A501410325A39C34001099E8 /* MypageTabCRV.swift in Sources */,
 				EC7C1612259B8BA100A5BA4C /* FollowingVC.swift in Sources */,
 				EC5C200025A43FA5008EE335 /* SignUpPVC.swift in Sources */,
 				D492E42F25A0CE5E0088A181 /* AnswerTVC.swift in Sources */,
@@ -886,6 +894,7 @@
 				EC89E316259C280200DBAFE5 /* FollowingListCVC.swift in Sources */,
 				EC5C201A25A49D7E008EE335 /* SignUpData.swift in Sources */,
 				D4F01029259C7A8000AA3EE8 /* ExploreVC.swift in Sources */,
+				A501410025A39C18001099E8 /* MypageTabCVC.swift in Sources */,
 				EC7C1637259BAD1A00A5BA4C /* FollowerHeaderCVC.swift in Sources */,
 				EC7F0EAC25A059AA008EB88A /* HomeVC+Protocols.swift in Sources */,
 				EC737F21259DB2C40035207F /* FollowUpperCVC.swift in Sources */,
@@ -900,7 +909,6 @@
 				A5CCCDA125A33512008A3125 /* MypageOthersScrapTVC.swift in Sources */,
 				EC89E325259C377400DBAFE5 /* FollowPersonCVC.swift in Sources */,
 				EC813F492599A59500BBCE25 /* NetworkResult.swift in Sources */,
-				A57F708925A1AC8F00152E89 /* MypageSearchTVC.swift in Sources */,
 				A5CCCD9E25A334EA008A3125 /* MypageMyScrapTVC.swift in Sources */,
 				EC7F0EA925A057DF008EB88A /* HomeVC+UnderAlert.swift in Sources */,
 				EC7C161E259B9B0F00A5BA4C /* FollowingPeopleCVC.swift in Sources */,
