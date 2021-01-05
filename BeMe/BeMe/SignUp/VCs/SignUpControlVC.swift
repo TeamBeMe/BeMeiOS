@@ -75,12 +75,15 @@ class SignUpControlVC: UIViewController {
 
 
 extension SignUpControlVC: SignUpNextButtonDelegate{
-    func nextButtonTapped(nickName: String) {
+    func nextButtonTapped(email: String,nickName: String,password: String) {
         guard let vcName = pageInstance?.VCArray[1] as? SignUpProfileVC else {return}
         vcIndex = vcIndex+1
         pageInstance?.setViewControllers([(pageInstance?.VCArray[1])!], direction: .forward,
         animated: true, completion: nil)
         vcName.myName = nickName
+        vcName.myEmail = email
+        vcName.myPassword = password
+        
         vcName.setNickname(nickName: nickName)
         progressBar.progress = 1.0
         UIView.animate(withDuration: 1.0, animations: {
@@ -90,6 +93,6 @@ extension SignUpControlVC: SignUpNextButtonDelegate{
 }
 
 protocol SignUpNextButtonDelegate {
-    func nextButtonTapped(nickName: String)
+    func nextButtonTapped(email: String,nickName: String,password: String)
     
 }

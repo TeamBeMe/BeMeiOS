@@ -20,6 +20,10 @@ class SignUpProfileVC: UIViewController {
     
     @IBOutlet weak var jumpButton: UIButton!
     var myName: String?
+    var myEmail: String?
+    var myPassword: String?
+    
+    
     lazy var imagePickerController = UIImagePickerController().then {
         $0.sourceType = .photoLibrary
         $0.allowsEditing = true
@@ -33,7 +37,48 @@ class SignUpProfileVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBAction func finishButtonAction(_ sender: Any) {
+        SignUpService.shared.signUp(email: myEmail!,nickName: myName!, password: myPassword!,image: profileImageView.image!,completion: { networkResult -> Void in
+            switch networkResult {
+            case .success(let data):
+                if let signupData = data as? SignUpData{
+                    print("회원가입 성공")
+                    UserDefaults.standard.set(signupData.nickname, forKey: "nickName")
+                    
+                    
+                }
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                    print("회원가입 실패")
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverERr")
+            case .networkFail :
+                print("networkFail")
+            default :
+                print("머지?")
+            }
+                                     
+            
+        
+            
+            
+        })
+        
+    }
+    
+    
+    @IBAction func jumpButtonAction(_ sender: Any) {
+       
+        
+        
+        
+        
+    }
+    
     
 }
 
