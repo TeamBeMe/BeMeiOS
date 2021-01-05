@@ -12,6 +12,7 @@ import UIKit
 struct CommentA {
     let comment: String
     let children: [CommentA]?
+    var open: Bool
 }
 
 class CommentVC: UIViewController {
@@ -28,15 +29,15 @@ class CommentVC: UIViewController {
     @IBOutlet weak var commentTableViewHeight: NSLayoutConstraint!
     
     private var commentArray: [CommentA] = [
-        CommentA(comment: "안녕!", children: [CommentA(comment: "오! 안녕!", children: []),
-                                                CommentA(comment: "오! 안녕!", children: []),
-                                                CommentA(comment: "오! 안녕!", children: [])]),
-        CommentA(comment: "안녕!", children: []),
-        CommentA(comment: "안녕!", children: [CommentA(comment: "오! 안녕!", children: []),
-                                                CommentA(comment: "오! 안녕!", children: [])]),
-        CommentA(comment: "안녕!", children: [CommentA(comment: "오! 안녕!", children: []),
-                                                CommentA(comment: "오! 안녕!", children: []),
-                                                CommentA(comment: "오! 안녕!", children: [])]),
+        CommentA(comment: "안녕!", children: [CommentA(comment: "오! 안녕!", children: [], open: false),
+                                                CommentA(comment: "오! 안녕!", children: [], open: false),
+                                                CommentA(comment: "오! 안녕!", children: [], open: false)], open: false),
+        CommentA(comment: "안녕!", children: [], open: false),
+        CommentA(comment: "안녕!", children: [CommentA(comment: "오! 안녕!", children: [], open: false),
+                                                CommentA(comment: "오! 안녕!", children: [], open: false)], open: false),
+        CommentA(comment: "안녕!", children: [CommentA(comment: "오! 안녕!", children: [], open: false),
+                                                CommentA(comment: "오! 안녕!", children: [], open: false),
+                                                CommentA(comment: "오! 안녕!", children: [], open: false)], open: false),
     ]
     
     override func viewDidLoad() {
@@ -64,7 +65,7 @@ extension CommentVC {
     }
     
     private func setTableView() {
-        commentTableView.estimatedRowHeight = 5
+        commentTableView.estimatedRowHeight = 30
         commentTableView.delegate = self
         commentTableView.dataSource = self
     }
@@ -88,7 +89,6 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        print("\(indexPath.section) : \(indexPath.row)")
         if indexPath.section == 0 {
             guard let header = tableView.dequeueReusableCell(withIdentifier: TitleTVC.identifier, for: indexPath) as? TitleTVC else { return UITableViewCell() }
             

@@ -1459,10 +1459,10 @@
                                         </constraints>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="osa-c8-jrl">
-                                        <rect key="frame" x="0.0" y="633" width="414" height="500"/>
+                                        <rect key="frame" x="0.0" y="633" width="414" height="1000"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="500" id="Qod-IL-EL2"/>
+                                            <constraint firstAttribute="height" constant="1000" id="Qod-IL-EL2"/>
                                         </constraints>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TitleTVC" rowHeight="44" id="NnZ-hj-kwJ" customClass="TitleTVC" customModule="BeMe" customModuleProvider="target">
@@ -1585,16 +1585,26 @@
                                                                 <constraint firstAttribute="height" constant="24" id="zfg-Io-nzw"/>
                                                             </constraints>
                                                         </stackView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VDn-bn-QJS">
+                                                            <rect key="frame" x="75" y="207" width="75" height="24"/>
+                                                            <connections>
+                                                                <action selector="moreCommentButtonTapped:" destination="TfK-An-96T" eventType="touchUpInside" id="bwB-DV-m9o"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="zEv-R1-QM6" firstAttribute="top" secondItem="iBg-bm-h2I" secondAttribute="bottom" constant="9" id="1WO-2V-31i"/>
                                                         <constraint firstItem="iBg-bm-h2I" firstAttribute="leading" secondItem="djS-ZN-81b" secondAttribute="leading" constant="75" id="3of-0A-OdS"/>
+                                                        <constraint firstItem="VDn-bn-QJS" firstAttribute="centerX" secondItem="zEv-R1-QM6" secondAttribute="centerX" id="54Z-M9-GFd"/>
+                                                        <constraint firstItem="VDn-bn-QJS" firstAttribute="width" secondItem="zEv-R1-QM6" secondAttribute="width" id="66x-5m-jZl"/>
                                                         <constraint firstAttribute="trailing" secondItem="CHk-as-dQU" secondAttribute="trailing" constant="26" id="GCj-PI-KSf"/>
+                                                        <constraint firstItem="VDn-bn-QJS" firstAttribute="height" secondItem="zEv-R1-QM6" secondAttribute="height" id="KQ6-0r-OAt"/>
                                                         <constraint firstAttribute="bottomMargin" secondItem="zEv-R1-QM6" secondAttribute="bottom" constant="10" id="Oot-yl-ZC2"/>
                                                         <constraint firstItem="LUK-QR-TSt" firstAttribute="leading" secondItem="djS-ZN-81b" secondAttribute="leading" constant="30" id="Uy8-ct-KVz"/>
                                                         <constraint firstItem="CHk-as-dQU" firstAttribute="top" secondItem="LUK-QR-TSt" secondAttribute="bottom" id="ZUg-lN-Qnu"/>
                                                         <constraint firstItem="LUK-QR-TSt" firstAttribute="top" secondItem="djS-ZN-81b" secondAttribute="top" constant="10" id="fY9-MO-csK"/>
                                                         <constraint firstAttribute="trailing" secondItem="LUK-QR-TSt" secondAttribute="trailing" constant="24" id="hZR-bB-EnH"/>
+                                                        <constraint firstItem="VDn-bn-QJS" firstAttribute="centerY" secondItem="zEv-R1-QM6" secondAttribute="centerY" id="oKm-Ti-2bm"/>
                                                         <constraint firstItem="CHk-as-dQU" firstAttribute="leading" secondItem="djS-ZN-81b" secondAttribute="leading" constant="71" id="uHS-JG-Xix"/>
                                                         <constraint firstItem="iBg-bm-h2I" firstAttribute="top" secondItem="CHk-as-dQU" secondAttribute="bottom" constant="-6" id="uNt-b4-sMa"/>
                                                         <constraint firstItem="zEv-R1-QM6" firstAttribute="leading" secondItem="djS-ZN-81b" secondAttribute="leading" constant="75" id="xfP-3i-BMq"/>
@@ -1685,6 +1695,14 @@
                                                     <outlet property="contentTextView" destination="eZr-C3-LoE" id="A2p-Ne-gKb"/>
                                                     <outlet property="contentTextViewHeight" destination="dkc-kH-AFG" id="3Rg-jn-HAn"/>
                                                 </connections>
+                                            </tableViewCell>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SecretTVC" rowHeight="228" id="MUF-57-GEk" customClass="SecretTVC" customModule="BeMe" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="576" width="414" height="228"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="MUF-57-GEk" id="RtF-QK-WrT">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="228"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>

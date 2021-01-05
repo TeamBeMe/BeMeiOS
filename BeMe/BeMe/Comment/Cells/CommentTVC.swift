@@ -25,4 +25,7 @@ class CommentTVC: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func moreCommentButtonTapped(_ sender: UIButton) {
+        
+    }
 }
