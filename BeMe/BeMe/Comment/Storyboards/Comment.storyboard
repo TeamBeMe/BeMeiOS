@@ -106,7 +106,7 @@
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="6c6-sL-5VE" secondAttribute="trailing" id="0jZ-uq-U8P"/>
                                             <constraint firstItem="RDW-Gp-pEA" firstAttribute="top" secondItem="ow3-Sd-J4d" secondAttribute="bottom" id="8h5-kM-vO7"/>
-                                            <constraint firstAttribute="bottom" secondItem="ow3-Sd-J4d" secondAttribute="bottom" priority="999" id="HT1-eL-8TR"/>
+                                            <constraint firstAttribute="bottom" secondItem="ow3-Sd-J4d" secondAttribute="bottom" priority="1" id="HT1-eL-8TR"/>
                                             <constraint firstItem="0tc-7d-P4o" firstAttribute="top" secondItem="aHu-z4-6VH" secondAttribute="bottom" constant="23" id="Rsd-LZ-NGx"/>
                                             <constraint firstItem="aHu-z4-6VH" firstAttribute="leading" secondItem="Pkc-sj-m34" secondAttribute="leading" constant="30" id="WWc-jj-Kq3"/>
                                             <constraint firstItem="0tc-7d-P4o" firstAttribute="leading" secondItem="Pkc-sj-m34" secondAttribute="leading" constant="30" id="XS7-fB-vLi"/>
@@ -1773,10 +1773,12 @@
                         <outlet property="cateogryLabel" destination="0tc-7d-P4o" id="dM3-05-2zA"/>
                         <outlet property="commentTableView" destination="osa-c8-jrl" id="gIe-Qp-y39"/>
                         <outlet property="commentTableViewHeight" destination="Qod-IL-EL2" id="MIq-12-Ldi"/>
+                        <outlet property="dateBottomConstraint" destination="HT1-eL-8TR" id="LC0-ky-HTd"/>
                         <outlet property="dateLabel" destination="ow3-Sd-J4d" id="FWV-8O-i6L"/>
                         <outlet property="informationView" destination="Pkc-sj-m34" id="OEc-1H-dDW"/>
                         <outlet property="moreAnswerButton" destination="EoT-ez-Owu" id="CB9-AA-dQD"/>
                         <outlet property="nickNameLabel" destination="MHR-0f-Yxp" id="uYH-ck-3hL"/>
+                        <outlet property="profileBottomConstraint" destination="zBB-za-RTv" id="dIi-uM-s85"/>
                         <outlet property="profileImageView" destination="Waf-uO-z6x" id="KeQ-Kz-PaZ"/>
                         <outlet property="questionLabel" destination="aHu-z4-6VH" id="UED-wm-CB7"/>
                     </connections>

@@ -27,6 +27,8 @@ class CommentVC: UIViewController {
     @IBOutlet weak var moreAnswerButton: UIButton!
     @IBOutlet weak var commentTableView: UITableView!
     @IBOutlet weak var commentTableViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var dateBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var profileBottomConstraint: NSLayoutConstraint!
     
     private var commentArray: [CommentA] = [
         CommentA(comment: "안녕!", children: [CommentA(comment: "오! 안녕!", children: [], open: false),
@@ -46,7 +48,14 @@ class CommentVC: UIViewController {
         
         setView()
         setTableView()
+        
+        // 디테일페이지에서 들어왔을 경우
         moreAnswerButton.isHidden = true
+        
+        // 내 글일 경우
+        dateBottomConstraint.constant = 14
+        dateBottomConstraint.priority = UILayoutPriority(1000)
+        profileBottomConstraint.priority = UILayoutPriority(999)
     }
     
     override func viewDidAppear(_ animated: Bool) {
