@@ -31,6 +31,12 @@
 		D4E07CBE259F22C10075E616 /* ArticleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E07CB8259F22C10075E616 /* ArticleTVC.swift */; };
 		D4E5FD37259E710200C57950 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E5FD36259E710200C57950 /* UIButton+Extensions.swift */; };
 		D4F01029259C7A8000AA3EE8 /* ExploreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01028259C7A8000AA3EE8 /* ExploreVC.swift */; };
+		EC5C1FF625A433EE008EE335 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5C1FF525A433EE008EE335 /* String+Extensions.swift */; };
+		EC5C1FFC25A43E1A008EE335 /* SignUpControlVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5C1FFB25A43E1A008EE335 /* SignUpControlVC.swift */; };
+		EC5C200025A43FA5008EE335 /* SignUpPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5C1FFF25A43FA5008EE335 /* SignUpPVC.swift */; };
+		EC5C200325A43FD0008EE335 /* SignUpProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5C200225A43FD0008EE335 /* SignUpProfileVC.swift */; };
+		EC5C200A25A47208008EE335 /* LogIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC5C200925A47208008EE335 /* LogIn.storyboard */; };
+		EC5C200D25A4721E008EE335 /* LogInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5C200C25A4721E008EE335 /* LogInVC.swift */; };
 		EC737F19259D867A0035207F /* CustomTodayCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F18259D867A0035207F /* CustomTodayCardView.swift */; };
 		EC737F1C259D8B9E0035207F /* CustomAddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */; };
 		EC737F21259DB2C40035207F /* FollowUpperCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F20259DB2C40035207F /* FollowUpperCVC.swift */; };
@@ -92,6 +98,8 @@
 		EC89E336259C4E7400DBAFE5 /* UnderTab.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC89E335259C4E7400DBAFE5 /* UnderTab.storyboard */; };
 		EC89E339259C507300DBAFE5 /* UnderTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E338259C507300DBAFE5 /* UnderTabBarController.swift */; };
 		EC89E33F259C5EBB00DBAFE5 /* HomeCardCustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E33E259C5EBB00DBAFE5 /* HomeCardCustomFlowLayout.swift */; };
+		EC9C5CD025A41E8D0021AF96 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC9C5CCF25A41E8D0021AF96 /* SignUp.storyboard */; };
+		EC9C5CD325A41EAA0021AF96 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C5CD225A41EAA0021AF96 /* SignUpVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +128,12 @@
 		D4E07CB8259F22C10075E616 /* ArticleTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleTVC.swift; sourceTree = "<group>"; };
 		D4E5FD36259E710200C57950 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		D4F01028259C7A8000AA3EE8 /* ExploreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreVC.swift; sourceTree = "<group>"; };
+		EC5C1FF525A433EE008EE335 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
+		EC5C1FFB25A43E1A008EE335 /* SignUpControlVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpControlVC.swift; sourceTree = "<group>"; };
+		EC5C1FFF25A43FA5008EE335 /* SignUpPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPVC.swift; sourceTree = "<group>"; };
+		EC5C200225A43FD0008EE335 /* SignUpProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileVC.swift; sourceTree = "<group>"; };
+		EC5C200925A47208008EE335 /* LogIn.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LogIn.storyboard; sourceTree = "<group>"; };
+		EC5C200C25A4721E008EE335 /* LogInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInVC.swift; sourceTree = "<group>"; };
 		EC737F18259D867A0035207F /* CustomTodayCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTodayCardView.swift; sourceTree = "<group>"; };
 		EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAddCardView.swift; sourceTree = "<group>"; };
 		EC737F20259DB2C40035207F /* FollowUpperCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUpperCVC.swift; sourceTree = "<group>"; };
@@ -183,6 +197,8 @@
 		EC89E335259C4E7400DBAFE5 /* UnderTab.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UnderTab.storyboard; sourceTree = "<group>"; };
 		EC89E338259C507300DBAFE5 /* UnderTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderTabBarController.swift; sourceTree = "<group>"; };
 		EC89E33E259C5EBB00DBAFE5 /* HomeCardCustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardCustomFlowLayout.swift; sourceTree = "<group>"; };
+		EC9C5CCF25A41E8D0021AF96 /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
+		EC9C5CD225A41EAA0021AF96 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		FE9DABE27D9C7D77517D82AB /* Pods_BeMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -344,6 +360,31 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		EC5C200625A471E5008EE335 /* LogIn */ = {
+			isa = PBXGroup;
+			children = (
+				EC5C200825A471F6008EE335 /* VCs */,
+				EC5C200725A471EE008EE335 /* Storyboards */,
+			);
+			path = LogIn;
+			sourceTree = "<group>";
+		};
+		EC5C200725A471EE008EE335 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				EC5C200925A47208008EE335 /* LogIn.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		EC5C200825A471F6008EE335 /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				EC5C200C25A4721E008EE335 /* LogInVC.swift */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
 		EC7C1603259B483F00A5BA4C /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -471,6 +512,8 @@
 		EC813F222599A15100BBCE25 /* BeMe */ = {
 			isa = PBXGroup;
 			children = (
+				EC5C200625A471E5008EE335 /* LogIn */,
+				EC9C5CCB25A41E5F0021AF96 /* SignUp */,
 				EC7FEFA025A38A7F00C61147 /* Search */,
 				A578D4E725A0BF8F00F69908 /* Mypage */,
 				D4DCD595259C66D4008DB300 /* Explore */,
@@ -504,6 +547,7 @@
 				D4E5FD36259E710200C57950 /* UIButton+Extensions.swift */,
 				D492E43F25A0E6A80088A181 /* UITableView+Extensions.swift */,
 				EC7FEFB025A39B7000C61147 /* UITextField+Extensions.swift */,
+				EC5C1FF525A433EE008EE335 /* String+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -581,6 +625,34 @@
 			path = FlowLayouts;
 			sourceTree = "<group>";
 		};
+		EC9C5CCB25A41E5F0021AF96 /* SignUp */ = {
+			isa = PBXGroup;
+			children = (
+				EC9C5CCD25A41E7C0021AF96 /* VCs */,
+				EC9C5CCC25A41E740021AF96 /* Storyboards */,
+			);
+			path = SignUp;
+			sourceTree = "<group>";
+		};
+		EC9C5CCC25A41E740021AF96 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				EC9C5CCF25A41E8D0021AF96 /* SignUp.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		EC9C5CCD25A41E7C0021AF96 /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				EC9C5CD225A41EAA0021AF96 /* SignUpVC.swift */,
+				EC5C1FFB25A43E1A008EE335 /* SignUpControlVC.swift */,
+				EC5C1FFF25A43FA5008EE335 /* SignUpPVC.swift */,
+				EC5C200225A43FD0008EE335 /* SignUpProfileVC.swift */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -644,12 +716,14 @@
 				D492E43525A0E14C0088A181 /* CustomActionSheet.storyboard in Resources */,
 				EC7C160F259B8B8100A5BA4C /* Following.storyboard in Resources */,
 				D4E07CB9259F22C10075E616 /* Explore.storyboard in Resources */,
+				EC5C200A25A47208008EE335 /* LogIn.storyboard in Resources */,
 				A578D4E1259E727C00F69908 /* Answer.storyboard in Resources */,
 				A578D4F025A0C4E600F69908 /* Mypage.storyboard in Resources */,
 				EC7C1618259B933F00A5BA4C /* FollowInfo.storyboard in Resources */,
 				EC813F302599A15200BBCE25 /* LaunchScreen.storyboard in Resources */,
 				EC813F2D2599A15200BBCE25 /* Assets.xcassets in Resources */,
 				EC813F2B2599A15100BBCE25 /* Main.storyboard in Resources */,
+				EC9C5CD025A41E8D0021AF96 /* SignUp.storyboard in Resources */,
 				EC813F732599F84F00BBCE25 /* Home.storyboard in Resources */,
 				EC89E336259C4E7400DBAFE5 /* UnderTab.storyboard in Resources */,
 				EC7FEFA525A38AE200C61147 /* Search.storyboard in Resources */,
@@ -709,6 +783,7 @@
 				D4E07CBE259F22C10075E616 /* ArticleTVC.swift in Sources */,
 				EC7FEFAE25A3901100C61147 /* SearchNewTVC.swift in Sources */,
 				D492E43B25A0E6250088A181 /* DetailMoreTVC.swift in Sources */,
+				EC5C1FFC25A43E1A008EE335 /* SignUpControlVC.swift in Sources */,
 				EC89E313259C27DF00DBAFE5 /* FollowingSearchCVC.swift in Sources */,
 				EC813F462599A44F00BBCE25 /* GenericResponse.swift in Sources */,
 				EC7C1624259B9CA500A5BA4C /* FollowingHeaderCVC.swift in Sources */,
@@ -716,6 +791,7 @@
 				EC89E31C259C281F00DBAFE5 /* FollowerListCVC.swift in Sources */,
 				A578D4F325A0C51400F69908 /* MypageVC.swift in Sources */,
 				EC7FEFB125A39B7000C61147 /* UITextField+Extensions.swift in Sources */,
+				EC5C1FF625A433EE008EE335 /* String+Extensions.swift in Sources */,
 				EC7C163A259BAD2D00A5BA4C /* FollowerCardCVC.swift in Sources */,
 				EC813F7E2599F89A00BBCE25 /* NewCardCVC.swift in Sources */,
 				EC7C1601259B469D00A5BA4C /* UIViewController+Extensions.swift in Sources */,
@@ -724,8 +800,10 @@
 				EC813F7B2599F88D00BBCE25 /* PastCardCVC.swift in Sources */,
 				EC7F0EAF25A09F24008EB88A /* AnswerDataForViewController.swift in Sources */,
 				EC7C1612259B8BA100A5BA4C /* FollowingVC.swift in Sources */,
+				EC5C200025A43FA5008EE335 /* SignUpPVC.swift in Sources */,
 				D492E42F25A0CE5E0088A181 /* AnswerTVC.swift in Sources */,
 				D492E44025A0E6A80088A181 /* UITableView+Extensions.swift in Sources */,
+				EC5C200325A43FD0008EE335 /* SignUpProfileVC.swift in Sources */,
 				EC737F1C259D8B9E0035207F /* CustomAddCardView.swift in Sources */,
 				A578D4E4259E728500F69908 /* AnswerVC.swift in Sources */,
 				EC7C1631259BACF100A5BA4C /* FollowerPeopleCVC.swift in Sources */,
@@ -753,6 +831,7 @@
 				EC7C1621259B9B8800A5BA4C /* FollowingPersonCVC.swift in Sources */,
 				EC7C162A259BA01200A5BA4C /* FollowerInfoVC.swift in Sources */,
 				D4E5FD37259E710200C57950 /* UIButton+Extensions.swift in Sources */,
+				EC5C200D25A4721E008EE335 /* LogInVC.swift in Sources */,
 				EC89E322259C376500DBAFE5 /* FollowPeopleCVC.swift in Sources */,
 				EC7C161B259B9A9200A5BA4C /* FollowingInfoVC.swift in Sources */,
 				A5CCCDA125A33512008A3125 /* MypageOthersScrapTVC.swift in Sources */,
@@ -769,6 +848,7 @@
 				D492E41A25A0A0DE0088A181 /* ExploreDetailVC.swift in Sources */,
 				EC7F0EA125A05460008EB88A /* CustomHomeActionSheetAlert.swift in Sources */,
 				EC7FEFAB25A38FE200C61147 /* SearchRecentTVC.swift in Sources */,
+				EC9C5CD325A41EAA0021AF96 /* SignUpVC.swift in Sources */,
 				EC89E32B259C378F00DBAFE5 /* FollowCardCVC.swift in Sources */,
 				EC813F652599F40800BBCE25 /* UIView+Extensions.swift in Sources */,
 				EC89E309259C1CC700DBAFE5 /* FollowSearchVC.swift in Sources */,
