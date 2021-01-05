@@ -14,6 +14,8 @@ class CommentTVC: UITableViewCell {
     @IBOutlet weak var contentTextViewHeight: NSLayoutConstraint!
     @IBOutlet weak var moreCommentLabel: UILabel!
     @IBOutlet weak var moreImageView: UIImageView!
+    @IBOutlet weak var moreCommentView: UIView!
+    @IBOutlet weak var moreCommentViewHeight: NSLayoutConstraint!
     
     weak var delegate: UITableViewButtonSelectedDelegate?
     
@@ -23,7 +25,6 @@ class CommentTVC: UITableViewCell {
         super.awakeFromNib()
         
         contentTextViewHeight.constant = contentTextView.contentSize.height
-     
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

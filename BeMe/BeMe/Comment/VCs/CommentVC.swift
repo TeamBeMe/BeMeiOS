@@ -109,7 +109,7 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                 comment.delegate = self
                 comment.indexPath = indexPath
                 if commentArray[indexPath.section-1].children!.count == 0 {
-                    
+                    comment.moreCommentViewHeight.constant = 0
                 }       else {
                     if commentArray[indexPath.section-1].open {
                       comment.moreCommentLabel.text = "답글 접기"
