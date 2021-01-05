@@ -13,6 +13,7 @@ class SearchVC: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var underTableView: UITableView!
     
+    @IBOutlet weak var backButton: UIButton!
     
     
     
@@ -54,6 +55,12 @@ class SearchVC: UIViewController {
         
         
     }
+    
+    
+    @IBAction func backButtonAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
 
 
 

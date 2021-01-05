@@ -24,6 +24,9 @@
                                     <constraint firstAttribute="height" constant="44" id="l2r-rX-MBI"/>
                                 </constraints>
                                 <state key="normal" image="btnArrlowLeft"/>
+                                <connections>
+                                    <action selector="backButtonAction:" destination="MU2-86-Vf9" eventType="touchUpInside" id="N1S-i6-Xjz"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이디 검색" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Cq-g3-J9F">
                                 <rect key="frame" x="30" y="104" width="92" height="24"/>
@@ -121,6 +124,9 @@
                                                     <state key="normal" title="팔로잉">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="followButtonAction:" destination="Wt3-R3-HzN" eventType="touchUpInside" id="aT4-bk-fiu"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -132,6 +138,9 @@
                                                 <constraint firstItem="gIk-yF-6CE" firstAttribute="centerY" secondItem="S77-fz-aZs" secondAttribute="centerY" id="jlF-x5-VUy"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="followButton" destination="mC3-Ja-mkR" id="0nF-t5-p5y"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -162,6 +171,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="AFT-Cy-L0q" id="ZVk-y9-LKu"/>
                         <outlet property="searchTextField" destination="KdN-ul-UWu" id="bgK-m7-S0B"/>
                         <outlet property="underTableView" destination="xDM-VL-kBC" id="lKE-Xc-E41"/>
                     </connections>
