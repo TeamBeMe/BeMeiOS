@@ -45,6 +45,9 @@
                                                                 <constraint firstAttribute="width" constant="44" id="c85-Rs-igQ"/>
                                                             </constraints>
                                                             <state key="normal" image="btnIdsearch"/>
+                                                            <connections>
+                                                                <action selector="plusButtonAction:" destination="vYJ-2M-xda" eventType="touchUpInside" id="TKV-em-qWW"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3id-Ar-Yvj">
                                                             <rect key="frame" x="307" y="11" width="44" height="44"/>
@@ -269,28 +272,22 @@
                                                     <rect key="frame" x="30" y="0.0" width="347" height="329"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[ 미래에 관한 질문 ]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4I-LQ-f1f">
-                                                            <rect key="frame" x="19" y="20" width="95.5" height="14.5"/>
+                                                            <rect key="frame" x="20" y="65.5" width="95.5" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5분 전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58l-kO-tu9">
-                                                            <rect key="frame" x="119.5" y="21.5" width="27" height="12"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pr5-ed-7ji">
-                                                            <rect key="frame" x="307" y="17.5" width="20" height="20"/>
+                                                            <rect key="frame" x="295" y="33.5" width="32" height="32"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="20" id="lHm-k4-D7d"/>
-                                                                <constraint firstAttribute="width" constant="20" id="tfY-IA-Yot"/>
+                                                                <constraint firstAttribute="height" constant="32" id="lHm-k4-D7d"/>
+                                                                <constraint firstAttribute="width" constant="32" id="tfY-IA-Yot"/>
                                                             </constraints>
                                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" image="btnArrowNext"/>
                                                         </button>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieB-sx-JeO">
-                                                            <rect key="frame" x="20" y="53.5" width="307" height="166.5"/>
+                                                            <rect key="frame" x="16" y="98.5" width="311" height="166.5"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <string key="text">저는 며칠 전 퇴사를 했어요. 수많은 고민 끝에 결국 저질렀습니다. 몇 년간 원해왔던 일이라 꿈만 같아요. 제가 스스로의 힘으로 하고 싶은 걸 해볼 수 있는 시간적 여유를 가지게 된 게 정말 만족스러워요. 앞으로 저에게는 정말 다양한 가능성들이 무궁무진하게 열려있어요. 앞으로 어떤 사람들과 만나게 될지, 어떤 프로젝트를 하게 될지 상상하면서 새해를 맞이하고 싶어요. 지금은 시국이 어떻게 풀릴지 확실하지 않지만 제 인생은 앞으로도 계속해서 나아가겠죠?  </string>
                                                             <color key="textColor" systemColor="labelColor"/>
@@ -316,24 +313,43 @@
                                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" image="btnScrapUnselected"/>
                                                         </button>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGk-KH-D1v">
+                                                            <rect key="frame" x="16" y="20" width="291" height="45.5"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <string key="text">요즘 내 삶에서
+가장 만족스러운 것은 무엇인가요?</string>
+                                                            <color key="textColor" systemColor="labelColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        </textView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="5분 전" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58l-kO-tu9">
+                                                            <rect key="frame" x="123" y="69" width="27" height="12"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="1Ig-9P-mhh" secondAttribute="bottom" constant="20" id="0wt-Px-17c"/>
                                                         <constraint firstItem="58l-kO-tu9" firstAttribute="leading" secondItem="t4I-LQ-f1f" secondAttribute="trailing" constant="5" id="1ln-q8-cQn"/>
+                                                        <constraint firstItem="1Ig-9P-mhh" firstAttribute="top" secondItem="ieB-sx-JeO" secondAttribute="bottom" constant="10" id="4LU-fA-sRN"/>
                                                         <constraint firstItem="utp-bR-MBl" firstAttribute="centerY" secondItem="1Ig-9P-mhh" secondAttribute="centerY" id="6vC-40-VlI"/>
-                                                        <constraint firstItem="t4I-LQ-f1f" firstAttribute="leading" secondItem="Q7y-FB-6g4" secondAttribute="leading" constant="19" id="BbD-ci-dxZ"/>
+                                                        <constraint firstItem="t4I-LQ-f1f" firstAttribute="leading" secondItem="Q7y-FB-6g4" secondAttribute="leading" constant="20" id="BbD-ci-dxZ"/>
                                                         <constraint firstAttribute="trailing" secondItem="ieB-sx-JeO" secondAttribute="trailing" constant="20" id="Ect-g2-bXp"/>
+                                                        <constraint firstItem="YGk-KH-D1v" firstAttribute="top" secondItem="Q7y-FB-6g4" secondAttribute="top" priority="250" constant="20" id="HPR-SD-Mab"/>
+                                                        <constraint firstItem="Pr5-ed-7ji" firstAttribute="bottom" secondItem="YGk-KH-D1v" secondAttribute="bottom" id="Hji-WM-dSu"/>
                                                         <constraint firstItem="utp-bR-MBl" firstAttribute="leading" secondItem="1Ig-9P-mhh" secondAttribute="trailing" constant="10" id="MDA-qL-AYR"/>
                                                         <constraint firstItem="1Ig-9P-mhh" firstAttribute="leading" secondItem="Q7y-FB-6g4" secondAttribute="leading" constant="20" id="OPq-pM-nlY"/>
+                                                        <constraint firstItem="t4I-LQ-f1f" firstAttribute="top" secondItem="YGk-KH-D1v" secondAttribute="bottom" id="TWu-zJ-VQc"/>
                                                         <constraint firstItem="db4-dt-lXa" firstAttribute="centerY" secondItem="1Ig-9P-mhh" secondAttribute="centerY" id="USN-Z2-ngg"/>
-                                                        <constraint firstItem="ieB-sx-JeO" firstAttribute="leading" secondItem="Q7y-FB-6g4" secondAttribute="leading" constant="20" id="Vxo-Of-pTt"/>
+                                                        <constraint firstItem="ieB-sx-JeO" firstAttribute="leading" secondItem="Q7y-FB-6g4" secondAttribute="leading" constant="16" id="Vxo-Of-pTt"/>
                                                         <constraint firstItem="58l-kO-tu9" firstAttribute="centerY" secondItem="t4I-LQ-f1f" secondAttribute="centerY" id="abE-sT-Zmp"/>
                                                         <constraint firstItem="ieB-sx-JeO" firstAttribute="top" secondItem="58l-kO-tu9" secondAttribute="bottom" constant="20" id="cfg-e3-c4Y"/>
+                                                        <constraint firstItem="YGk-KH-D1v" firstAttribute="leading" secondItem="Q7y-FB-6g4" secondAttribute="leading" constant="16" id="jey-iR-PkJ"/>
                                                         <constraint firstAttribute="trailing" secondItem="db4-dt-lXa" secondAttribute="trailing" constant="20" id="nxc-LO-4Je"/>
                                                         <constraint firstAttribute="trailing" secondItem="Pr5-ed-7ji" secondAttribute="trailing" constant="20" id="rdI-cx-S6J"/>
-                                                        <constraint firstItem="Pr5-ed-7ji" firstAttribute="centerY" secondItem="t4I-LQ-f1f" secondAttribute="centerY" id="tm5-0a-oTX"/>
-                                                        <constraint firstItem="t4I-LQ-f1f" firstAttribute="top" secondItem="Q7y-FB-6g4" secondAttribute="top" constant="20" id="w5N-is-ok2"/>
+                                                        <constraint firstAttribute="trailing" secondItem="YGk-KH-D1v" secondAttribute="trailing" constant="40" id="sWa-I0-iKI"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -352,6 +368,7 @@
                                             <outlet property="moreButotn" destination="Pr5-ed-7ji" id="Ons-Vq-jeX"/>
                                             <outlet property="profileImageView" destination="1Ig-9P-mhh" id="TCZ-9T-b2z"/>
                                             <outlet property="questionInfoLabel" destination="t4I-LQ-f1f" id="sDS-xi-fA4"/>
+                                            <outlet property="questionTextView" destination="YGk-KH-D1v" id="DIt-MT-znT"/>
                                             <outlet property="timeLabel" destination="58l-kO-tu9" id="9uV-rS-Dtd"/>
                                             <outlet property="userNameLabel" destination="utp-bR-MBl" id="7ML-5l-Y6l"/>
                                         </connections>

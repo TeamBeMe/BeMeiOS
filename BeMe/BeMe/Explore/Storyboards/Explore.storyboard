@@ -154,7 +154,7 @@
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DiffThoughtCVC" id="BpE-nu-Omz" customClass="DiffThoughtCVC" customModule="BeMe" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="3" width="361" height="223"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="189-gF-N6k">
+                                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                             <rect key="frame" x="0.0" y="0.0" width="361" height="223"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
@@ -202,17 +202,16 @@
                                                                     </constraints>
                                                                 </view>
                                                             </subviews>
-                                                            <constraints>
-                                                                <constraint firstAttribute="bottom" secondItem="1Eq-4F-sZF" secondAttribute="bottom" id="Efs-dv-IWq"/>
-                                                                <constraint firstItem="1Eq-4F-sZF" firstAttribute="leading" secondItem="189-gF-N6k" secondAttribute="leading" id="UqJ-Zd-HZ0"/>
-                                                                <constraint firstAttribute="trailing" secondItem="1Eq-4F-sZF" secondAttribute="trailing" id="W2W-iZ-Efi"/>
-                                                                <constraint firstItem="ZWf-Q0-G3K" firstAttribute="top" secondItem="189-gF-N6k" secondAttribute="top" id="Yf2-aM-Mvv"/>
-                                                                <constraint firstItem="ZWf-Q0-G3K" firstAttribute="leading" secondItem="189-gF-N6k" secondAttribute="leading" id="You-cG-1qh"/>
-                                                                <constraint firstItem="1Eq-4F-sZF" firstAttribute="top" secondItem="ZWf-Q0-G3K" secondAttribute="bottom" id="n25-8Y-RmJ"/>
-                                                                <constraint firstAttribute="trailing" secondItem="ZWf-Q0-G3K" secondAttribute="trailing" id="olY-h2-Ot2"/>
-                                                            </constraints>
-                                                        </collectionViewCellContentView>
-                                                        <size key="customSize" width="361" height="223"/>
+                                                        </view>
+                                                        <constraints>
+                                                            <constraint firstAttribute="bottom" secondItem="1Eq-4F-sZF" secondAttribute="bottom" id="Efs-dv-IWq"/>
+                                                            <constraint firstItem="1Eq-4F-sZF" firstAttribute="leading" secondItem="BpE-nu-Omz" secondAttribute="leading" id="UqJ-Zd-HZ0"/>
+                                                            <constraint firstAttribute="trailing" secondItem="1Eq-4F-sZF" secondAttribute="trailing" id="W2W-iZ-Efi"/>
+                                                            <constraint firstItem="ZWf-Q0-G3K" firstAttribute="top" secondItem="BpE-nu-Omz" secondAttribute="top" id="Yf2-aM-Mvv"/>
+                                                            <constraint firstItem="ZWf-Q0-G3K" firstAttribute="leading" secondItem="BpE-nu-Omz" secondAttribute="leading" id="You-cG-1qh"/>
+                                                            <constraint firstItem="1Eq-4F-sZF" firstAttribute="top" secondItem="ZWf-Q0-G3K" secondAttribute="bottom" id="n25-8Y-RmJ"/>
+                                                            <constraint firstAttribute="trailing" secondItem="ZWf-Q0-G3K" secondAttribute="trailing" id="olY-h2-Ot2"/>
+                                                        </constraints>
                                                         <connections>
                                                             <outlet property="answer" destination="Axa-kG-xDk" id="T7t-Gc-obZ"/>
                                                             <outlet property="question" destination="jKB-ig-WVY" id="t5c-4V-lwL"/>

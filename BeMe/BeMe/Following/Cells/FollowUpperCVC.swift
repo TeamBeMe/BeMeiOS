@@ -20,11 +20,12 @@ class FollowUpperCVC: UICollectionViewCell {
     @IBOutlet weak var underLIneView: UIView!
     
     var followingBarButtonDelegate : FollowingBarButtonDelegate?
+    var buttonAble = true
 
     
     var followingPeopleCollectionViewDelegate : FollowingPeopleCollectionViewDelegate?
     var followPeopleCollectionViewDelegate : FollowPeopleCollectionViewDelegate?
-    
+    var followPlusButtonDelegate: FollowPlusButtonDelegate?
     
     override func awakeFromNib() {
         plusButton.tintColor = .black
@@ -60,6 +61,12 @@ class FollowUpperCVC: UICollectionViewCell {
     
     @IBAction func barButtonAction(_ sender: Any) {
         followingBarButtonDelegate?.barButtonAction()
+        
+    }
+    
+    
+    @IBAction func plusButtonAction(_ sender: Any) {
+        followPlusButtonDelegate?.plusButtonAction()
         
     }
     
