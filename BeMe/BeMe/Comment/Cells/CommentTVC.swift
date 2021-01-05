@@ -14,8 +14,6 @@ class CommentTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         contentTextView.textContainerInset = .zero
-        print(contentTextView.contentInset)
-        print(contentTextView.textContainerInset)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

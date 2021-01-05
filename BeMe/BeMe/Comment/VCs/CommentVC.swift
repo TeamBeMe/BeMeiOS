@@ -8,27 +8,6 @@
 import UIKit
 
 //MARK: - Comment 모델
-struct Comment: Codable {
-    let id: Int
-    let content: String
-    let publicFlag: Bool
-    let userID, answerID: Int
-    let createdAt, updatedAt: String
-    let children: [Comment]?
-    let isAuthor: Bool
-    let parentID: Int?
-    
-    enum CodingKeys: String, CodingKey {
-        case id, content
-        case publicFlag = "public_flag"
-        case userID = "user_id"
-        case answerID = "answer_id"
-        case createdAt, updatedAt
-        case children = "Children"
-        case isAuthor = "is_author"
-        case parentID = "parent_id"
-    }
-}
 
 struct CommentA {
     let comment: String
@@ -59,6 +38,7 @@ class CommentVC: UIViewController {
                                                 CommentA(comment: "오! 안녕!", children: []),
                                                 CommentA(comment: "오! 안녕!", children: [])]),
     ]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,8 +49,11 @@ class CommentVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
+        print("HELLLLOOOOOo")
         commentTableViewHeight.constant = commentTableView.contentSize.height
+        
+        print(commentTableView.contentSize.height)
     }
     
 }
@@ -82,7 +65,7 @@ extension CommentVC {
     }
     
     private func setTableView() {
-        commentTableView.estimatedRowHeight = 400
+        commentTableView.estimatedRowHeight = 5
         commentTableView.delegate = self
         commentTableView.dataSource = self
     }
@@ -91,23 +74,22 @@ extension CommentVC {
 //MARK: - UITableViewDelegate
 
 extension CommentVC: UITableViewDelegate, UITableViewDataSource {
-    
     func numberOfSections(in tableView: UITableView) -> Int {
-        print(commentArray.count + 1)
         return commentArray.count + 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 1
+            return 1 // header
         } else {
-//            print(commentArray[section-1].children?.count)
-            return commentArray[section - 1].children?.count ?? 0
+            return commentArray[section-1].children!.count + 1
         }
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        print("\(indexPath.section) : \(indexPath.row)")
         if indexPath.section == 0 {
             guard let header = tableView.dequeueReusableCell(withIdentifier: TitleTVC.identifier, for: indexPath) as? TitleTVC else { return UITableViewCell() }
             
@@ -122,11 +104,15 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                 secondComment.backgroundColor = ((indexPath.row % 2) != 0) ? UIColor.yellow : UIColor.red
                 return secondComment
             }
-        }
-        
+        }    
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        if indexPath.section == 0 {
+            return 44.0
+        } else {
+            return UITableView.automaticDimension
+        }
+        
     }
 }
