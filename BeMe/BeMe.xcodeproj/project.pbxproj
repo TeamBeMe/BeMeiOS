@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3FDD35238DF8F48142B9F9F1 /* Pods_BeMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE9DABE27D9C7D77517D82AB /* Pods_BeMe.framework */; };
-		A578D4E1259E727C00F69908 /* Answer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A578D4E0259E727C00F69908 /* Answer.storyboard */; };
-		A578D4E4259E728500F69908 /* AnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A578D4E3259E728500F69908 /* AnswerVC.swift */; };
 		A578D4F025A0C4E600F69908 /* Mypage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A578D4EF25A0C4E600F69908 /* Mypage.storyboard */; };
 		A578D4F325A0C51400F69908 /* MypageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A578D4F225A0C51400F69908 /* MypageVC.swift */; };
 		A57F708925A1AC8F00152E89 /* MypageSearchTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F708825A1AC8F00152E89 /* MypageSearchTVC.swift */; };
@@ -31,6 +29,8 @@
 		D4E07CBE259F22C10075E616 /* ArticleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E07CB8259F22C10075E616 /* ArticleTVC.swift */; };
 		D4E5FD37259E710200C57950 /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E5FD36259E710200C57950 /* UIButton+Extensions.swift */; };
 		D4F01029259C7A8000AA3EE8 /* ExploreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01028259C7A8000AA3EE8 /* ExploreVC.swift */; };
+		D4F198E725A4348A000AF0E7 /* Answer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4F198E425A4348A000AF0E7 /* Answer.storyboard */; };
+		D4F198E825A4348A000AF0E7 /* AnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F198E625A4348A000AF0E7 /* AnswerVC.swift */; };
 		EC737F19259D867A0035207F /* CustomTodayCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F18259D867A0035207F /* CustomTodayCardView.swift */; };
 		EC737F1C259D8B9E0035207F /* CustomAddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */; };
 		EC737F21259DB2C40035207F /* FollowUpperCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F20259DB2C40035207F /* FollowUpperCVC.swift */; };
@@ -92,8 +92,6 @@
 /* Begin PBXFileReference section */
 		3A09AD0A5B04C9B6819B2606 /* Pods-BeMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.debug.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.debug.xcconfig"; sourceTree = "<group>"; };
 		81614202856C8826262057FD /* Pods-BeMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.release.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.release.xcconfig"; sourceTree = "<group>"; };
-		A578D4E0259E727C00F69908 /* Answer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Answer.storyboard; path = BeMe/Answer/s/Answer.storyboard; sourceTree = SOURCE_ROOT; };
-		A578D4E3259E728500F69908 /* AnswerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnswerVC.swift; path = BeMe/Answer/ss/AnswerVC.swift; sourceTree = SOURCE_ROOT; };
 		A578D4EF25A0C4E600F69908 /* Mypage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mypage.storyboard; sourceTree = SOURCE_ROOT; };
 		A578D4F225A0C51400F69908 /* MypageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageVC.swift; sourceTree = SOURCE_ROOT; };
 		A57F708825A1AC8F00152E89 /* MypageSearchTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageSearchTVC.swift; sourceTree = "<group>"; };
@@ -115,6 +113,8 @@
 		D4E07CB8259F22C10075E616 /* ArticleTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleTVC.swift; sourceTree = "<group>"; };
 		D4E5FD36259E710200C57950 /* UIButton+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extensions.swift"; sourceTree = "<group>"; };
 		D4F01028259C7A8000AA3EE8 /* ExploreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreVC.swift; sourceTree = "<group>"; };
+		D4F198E425A4348A000AF0E7 /* Answer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Answer.storyboard; sourceTree = "<group>"; };
+		D4F198E625A4348A000AF0E7 /* AnswerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerVC.swift; sourceTree = "<group>"; };
 		EC737F18259D867A0035207F /* CustomTodayCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTodayCardView.swift; sourceTree = "<group>"; };
 		EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAddCardView.swift; sourceTree = "<group>"; };
 		EC737F20259DB2C40035207F /* FollowUpperCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUpperCVC.swift; sourceTree = "<group>"; };
@@ -205,22 +205,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		A578D4DD259E724500F69908 /* VCs */ = {
-			isa = PBXGroup;
-			children = (
-				A578D4E3259E728500F69908 /* AnswerVC.swift */,
-			);
-			path = VCs;
-			sourceTree = "<group>";
-		};
-		A578D4DF259E725F00F69908 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				A578D4E0259E727C00F69908 /* Answer.storyboard */,
-			);
-			path = Storyboards;
-			sourceTree = "<group>";
-		};
 		A578D4E725A0BF8F00F69908 /* Mypage */ = {
 			isa = PBXGroup;
 			children = (
@@ -262,8 +246,8 @@
 		A5AF7DBA259A0971003C42B5 /* Answer */ = {
 			isa = PBXGroup;
 			children = (
-				A578D4DF259E725F00F69908 /* Storyboards */,
-				A578D4DD259E724500F69908 /* VCs */,
+				D4F198E325A4348A000AF0E7 /* Storyboards */,
+				D4F198E525A4348A000AF0E7 /* VCs */,
 			);
 			path = Answer;
 			sourceTree = "<group>";
@@ -332,6 +316,22 @@
 				D4E07CB8259F22C10075E616 /* ArticleTVC.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		D4F198E325A4348A000AF0E7 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D4F198E425A4348A000AF0E7 /* Answer.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		D4F198E525A4348A000AF0E7 /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				D4F198E625A4348A000AF0E7 /* AnswerVC.swift */,
+			);
+			path = VCs;
 			sourceTree = "<group>";
 		};
 		EC7C1603259B483F00A5BA4C /* CustomViews */ = {
@@ -597,11 +597,11 @@
 				D492E43525A0E14C0088A181 /* CustomActionSheet.storyboard in Resources */,
 				EC7C160F259B8B8100A5BA4C /* Following.storyboard in Resources */,
 				D4E07CB9259F22C10075E616 /* Explore.storyboard in Resources */,
-				A578D4E1259E727C00F69908 /* Answer.storyboard in Resources */,
 				A578D4F025A0C4E600F69908 /* Mypage.storyboard in Resources */,
 				EC7C1618259B933F00A5BA4C /* FollowInfo.storyboard in Resources */,
 				EC813F302599A15200BBCE25 /* LaunchScreen.storyboard in Resources */,
 				EC813F2D2599A15200BBCE25 /* Assets.xcassets in Resources */,
+				D4F198E725A4348A000AF0E7 /* Answer.storyboard in Resources */,
 				EC813F2B2599A15100BBCE25 /* Main.storyboard in Resources */,
 				EC813F732599F84F00BBCE25 /* Home.storyboard in Resources */,
 				EC89E336259C4E7400DBAFE5 /* UnderTab.storyboard in Resources */,
@@ -677,7 +677,6 @@
 				D492E42F25A0CE5E0088A181 /* AnswerTVC.swift in Sources */,
 				D492E44025A0E6A80088A181 /* UITableView+Extensions.swift in Sources */,
 				EC737F1C259D8B9E0035207F /* CustomAddCardView.swift in Sources */,
-				A578D4E4259E728500F69908 /* AnswerVC.swift in Sources */,
 				EC7C1631259BACF100A5BA4C /* FollowerPeopleCVC.swift in Sources */,
 				EC89E32E259C496C00DBAFE5 /* FollowMoreButtonCVC.swift in Sources */,
 				D4E07CBB259F22C10075E616 /* CategoryTVC.swift in Sources */,
@@ -713,6 +712,7 @@
 				EC7C161E259B9B0F00A5BA4C /* FollowingPeopleCVC.swift in Sources */,
 				EC813F612599F3E900BBCE25 /* UIColor+Extensions.swift in Sources */,
 				EC813F242599A15100BBCE25 /* AppDelegate.swift in Sources */,
+				D4F198E825A4348A000AF0E7 /* AnswerVC.swift in Sources */,
 				A57F708C25A1ACB100152E89 /* MypageResultTVC.swift in Sources */,
 				D4E07CBA259F22C10075E616 /* MoreTVC.swift in Sources */,
 				D492E41A25A0A0DE0088A181 /* ExploreDetailVC.swift in Sources */,
