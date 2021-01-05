@@ -24,6 +24,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PiZ-dl-leW">
                                         <rect key="frame" x="16" y="0.0" width="44" height="44"/>
                                         <state key="normal" image="btnClose"/>
+                                        <connections>
+                                            <action selector="dismissButtonTapped:" destination="nbU-Im-QwT" eventType="touchUpInside" id="fw7-73-0AD"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yE-z9-D8u">
                                         <rect key="frame" x="354" y="0.0" width="44" height="44"/>
@@ -35,6 +38,9 @@
                                             <constraint firstAttribute="width" secondItem="Mxu-LD-5ry" secondAttribute="height" multiplier="1:1" id="eKR-Xb-0To"/>
                                         </constraints>
                                         <state key="normal" image="btnScrapUnselected"/>
+                                        <connections>
+                                            <action selector="scrapButtonTapped:" destination="nbU-Im-QwT" eventType="touchUpInside" id="7sQ-hB-de6"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1781,6 +1787,7 @@
                         <outlet property="profileBottomConstraint" destination="zBB-za-RTv" id="dIi-uM-s85"/>
                         <outlet property="profileImageView" destination="Waf-uO-z6x" id="KeQ-Kz-PaZ"/>
                         <outlet property="questionLabel" destination="aHu-z4-6VH" id="UED-wm-CB7"/>
+                        <outlet property="scrapButton" destination="Mxu-LD-5ry" id="ZJF-ht-9V9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ij-CF-MD2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

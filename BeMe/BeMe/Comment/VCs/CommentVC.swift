@@ -29,6 +29,13 @@ class CommentVC: UIViewController {
     @IBOutlet weak var commentTableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var dateBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrapButton: UIButton!
+    
+    var isScrapped: Bool = false {
+        didSet {
+            
+        }
+    }
     
     private var commentArray: [CommentA] = [
         CommentA(comment: "안녕!", children: [CommentA(comment: "오! 안녕!", children: [], open: false),
@@ -62,6 +69,22 @@ class CommentVC: UIViewController {
         super.viewDidAppear(animated)
         
         adjustTableViewHeight()
+    }
+    
+    @IBAction func dismissButtonTapped(_ sender: UIButton) {
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func scrapButtonTapped(_ sender: UIButton) {
+        
+        if isScrapped {
+            isScrapped = false
+            scrapButton.setImage(UIImage(named: "btnScrapUnselected"), for: .normal)
+        } else {
+            isScrapped = true
+            scrapButton.setImage(UIImage(named: "btnScrapSelected"), for: .normal)
+        }
     }
     
 }
