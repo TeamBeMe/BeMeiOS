@@ -33,6 +33,8 @@
 		D4F198E825A4348A000AF0E7 /* AnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F198E625A4348A000AF0E7 /* AnswerVC.swift */; };
 		D4F198EE25A436C6000AF0E7 /* CommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F198ED25A436C6000AF0E7 /* CommentVC.swift */; };
 		D4F198F225A436D0000AF0E7 /* Comment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4F198F125A436D0000AF0E7 /* Comment.storyboard */; };
+		D4F1991D25A4782F000AF0E7 /* CommentTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F1991C25A4782F000AF0E7 /* CommentTVC.swift */; };
+		D4F1992025A479BE000AF0E7 /* TitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F1991F25A479BE000AF0E7 /* TitleTVC.swift */; };
 		EC737F19259D867A0035207F /* CustomTodayCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F18259D867A0035207F /* CustomTodayCardView.swift */; };
 		EC737F1C259D8B9E0035207F /* CustomAddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */; };
 		EC737F21259DB2C40035207F /* FollowUpperCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F20259DB2C40035207F /* FollowUpperCVC.swift */; };
@@ -119,6 +121,8 @@
 		D4F198E625A4348A000AF0E7 /* AnswerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerVC.swift; sourceTree = "<group>"; };
 		D4F198ED25A436C6000AF0E7 /* CommentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentVC.swift; sourceTree = "<group>"; };
 		D4F198F125A436D0000AF0E7 /* Comment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Comment.storyboard; sourceTree = "<group>"; };
+		D4F1991C25A4782F000AF0E7 /* CommentTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTVC.swift; sourceTree = "<group>"; };
+		D4F1991F25A479BE000AF0E7 /* TitleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleTVC.swift; sourceTree = "<group>"; };
 		EC737F18259D867A0035207F /* CustomTodayCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTodayCardView.swift; sourceTree = "<group>"; };
 		EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAddCardView.swift; sourceTree = "<group>"; };
 		EC737F20259DB2C40035207F /* FollowUpperCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUpperCVC.swift; sourceTree = "<group>"; };
@@ -341,6 +345,7 @@
 		D4F198EA25A4359E000AF0E7 /* Comment */ = {
 			isa = PBXGroup;
 			children = (
+				D4F1991625A471A5000AF0E7 /* Cells */,
 				D4F198EC25A436B3000AF0E7 /* VCs */,
 				D4F198EB25A436AC000AF0E7 /* Storyboards */,
 			);
@@ -361,6 +366,15 @@
 				D4F198ED25A436C6000AF0E7 /* CommentVC.swift */,
 			);
 			path = VCs;
+			sourceTree = "<group>";
+		};
+		D4F1991625A471A5000AF0E7 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D4F1991C25A4782F000AF0E7 /* CommentTVC.swift */,
+				D4F1991F25A479BE000AF0E7 /* TitleTVC.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		EC7C1603259B483F00A5BA4C /* CustomViews */ = {
@@ -706,7 +720,9 @@
 				EC7F0EAF25A09F24008EB88A /* AnswerDataForViewController.swift in Sources */,
 				EC7C1612259B8BA100A5BA4C /* FollowingVC.swift in Sources */,
 				D492E42F25A0CE5E0088A181 /* AnswerTVC.swift in Sources */,
+				D4F1991D25A4782F000AF0E7 /* CommentTVC.swift in Sources */,
 				D492E44025A0E6A80088A181 /* UITableView+Extensions.swift in Sources */,
+				D4F1992025A479BE000AF0E7 /* TitleTVC.swift in Sources */,
 				EC737F1C259D8B9E0035207F /* CustomAddCardView.swift in Sources */,
 				EC7C1631259BACF100A5BA4C /* FollowerPeopleCVC.swift in Sources */,
 				EC89E32E259C496C00DBAFE5 /* FollowMoreButtonCVC.swift in Sources */,
@@ -904,7 +920,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6ZTQ76LJPZ;
+				DEVELOPMENT_TEAM = TZVHD77BLL;
 				INFOPLIST_FILE = BeMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -924,7 +940,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6ZTQ76LJPZ;
+				DEVELOPMENT_TEAM = TZVHD77BLL;
 				INFOPLIST_FILE = BeMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
