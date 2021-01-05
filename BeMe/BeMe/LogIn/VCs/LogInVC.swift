@@ -8,7 +8,7 @@
 import UIKit
 
 class LogInVC: UIViewController {
-
+    
     @IBOutlet weak var labelContainView: UIView!
     
     @IBOutlet weak var bemeLabel: UILabel!
@@ -30,7 +30,7 @@ class LogInVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    
     @IBAction func showButtonAction(_ sender: Any) {
         if showButton.titleLabel?.text == "SHOW"{
             passwordTextField.isSecureTextEntry = false
@@ -51,15 +51,45 @@ class LogInVC: UIViewController {
     }
     
     @IBAction func logInButtonAction(_ sender: Any) {
-        guard let vcName = UIStoryboard(name: "UnderTab", bundle: nil).instantiateViewController(identifier: "UnderTabBarController") as? UINavigationController else {return}
-        vcName.modalPresentationStyle = .fullScreen
-        self.present(vcName, animated: true, completion: nil)
+        
+        
+        LogInService.shared.login(nickName: nickNameTextField.text!,
+                                  password: passwordTextField.text!) {(networkResult) -> (Void) in
+            switch networkResult {
+            case .success(let data) :
+                if let loginData = data as? LogInData{
+                    print("로그인 성공")
+                    UserDefaults.standard.set(loginData.token, forKey: "token")
+                    guard let vcName = UIStoryboard(name: "UnderTab", bundle: nil).instantiateViewController(identifier: "UnderTabBarController") as? UINavigationController else {return}
+                    vcName.modalPresentationStyle = .fullScreen
+                    self.present(vcName, animated: true, completion: nil)
+                    
+                }
+                
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+                
+                
+                
+            }
+            
+            
+            
+            
+        }
         
     }
     
     
     
-
 }
 
 
@@ -87,10 +117,10 @@ extension LogInVC {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
-         self.view.endEditing(true)
-           
-
-   }
+        self.view.endEditing(true)
+        
+        
+    }
     
 }
 
@@ -98,8 +128,8 @@ extension LogInVC: UITextFieldDelegate{
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         containViewHeight.constant = 105
-       
-//        topConstraint.constant = 158
+        
+        //        topConstraint.constant = 158
         UIView.animate(withDuration: 0.5, animations: {
             self.view.layoutIfNeeded()
         },completion: { finished in
@@ -112,7 +142,7 @@ extension LogInVC: UITextFieldDelegate{
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         containViewHeight.constant = 282
-//        topConstraint.constant = 108
+        //        topConstraint.constant = 108
         bemeLabel.alpha = 1.0
         UIView.animate(withDuration: 0.5, animations: {
             self.view.layoutIfNeeded()

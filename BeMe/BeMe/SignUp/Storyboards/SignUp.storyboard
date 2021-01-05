@@ -265,6 +265,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="완료"/>
+                                <connections>
+                                    <action selector="finishButtonAction:" destination="OZJ-O8-B3l" eventType="touchUpInside" id="ReR-Y1-L4u"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QXa-Yj-Umj">
                                 <rect key="frame" x="30" y="780" width="354" height="52"/>
@@ -273,6 +276,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="건너뛰기"/>
+                                <connections>
+                                    <action selector="jumpButtonAction:" destination="OZJ-O8-B3l" eventType="touchUpInside" id="FIv-Y5-P4c"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4Fg-To-Mfc"/>

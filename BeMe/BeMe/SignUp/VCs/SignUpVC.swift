@@ -71,7 +71,9 @@ class SignUpVC: UIViewController {
     
     
     @IBAction func finishButtonAction(_ sender: Any) {
-        signUpNextButtonDelegate?.nextButtonTapped(nickName: nickNameTextField.text!)
+        signUpNextButtonDelegate?.nextButtonTapped(email: emailTextField.text!,
+                                                   nickName: nickNameTextField.text!,
+                                                   password: passwordTextField.text!)
         self.isEditing = false
         let move = CGPoint(x: 0, y: 0)
         signUpScrollView.setContentOffset(move, animated: false)
