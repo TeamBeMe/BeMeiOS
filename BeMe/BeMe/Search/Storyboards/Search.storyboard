@@ -72,7 +72,7 @@
                                                         <constraint firstAttribute="width" constant="36" id="x7t-ep-RMy"/>
                                                     </constraints>
                                                 </button>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnClose" translatesAutoresizingMaskIntoConstraints="NO" id="4R6-uo-e46">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="btnDelete36" translatesAutoresizingMaskIntoConstraints="NO" id="4R6-uo-e46">
                                                     <rect key="frame" x="359" y="11" width="25" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="25" id="0vB-Fh-g0N"/>
@@ -183,7 +183,7 @@
     </scenes>
     <resources>
         <image name="btnArrlowLeft" width="44" height="44"/>
-        <image name="btnClose" width="44" height="44"/>
+        <image name="btnDelete36" width="36" height="36"/>
         <image name="icSearch" width="17" height="17"/>
         <image name="imgProfile" width="34" height="34"/>
         <systemColor name="systemBackgroundColor">
