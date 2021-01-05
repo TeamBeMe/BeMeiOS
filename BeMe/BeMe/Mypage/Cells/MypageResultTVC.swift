@@ -19,6 +19,7 @@ class MypageResultTVC: UITableViewCell {
     
     //MARK:**- Variable Part**
     private var isLocked = false
+    static let identifier = "MypageResultTVC"
     
     
     //MARK:**- Life Cycle Part**
