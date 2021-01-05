@@ -31,6 +31,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7yE-z9-D8u">
                                         <rect key="frame" x="354" y="0.0" width="44" height="44"/>
                                         <state key="normal" image="btnMore"/>
+                                        <connections>
+                                            <action selector="moreSettngButtonTapped:" destination="nbU-Im-QwT" eventType="touchUpInside" id="Ksd-9S-6WX"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mxu-LD-5ry">
                                         <rect key="frame" x="310" y="0.0" width="44" height="44"/>

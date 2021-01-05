@@ -31,6 +31,8 @@ class CommentVC: UIViewController {
     @IBOutlet weak var profileBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var scrapButton: UIButton!
     
+    lazy var popupBackgroundView: UIView = UIView()
+    
     var isScrapped: Bool = false {
         didSet {
             
@@ -55,6 +57,7 @@ class CommentVC: UIViewController {
         
         setView()
         setTableView()
+        setNotificationCenter()
         
         // 디테일페이지에서 들어왔을 경우
         moreAnswerButton.isHidden = true
@@ -86,6 +89,14 @@ class CommentVC: UIViewController {
             scrapButton.setImage(UIImage(named: "btnScrapSelected"), for: .normal)
         }
     }
+    @IBAction func moreSettngButtonTapped(_ sender: Any) {
+        popupBackgroundView.animatePopupBackground(true)
+        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheet.identifier) as?
+                CustomActionSheet else { return }
+        
+        settingActionSheet.modalPresentationStyle = .overCurrentContext
+        self.present(settingActionSheet, animated: true, completion: nil)
+    }
     
 }
 //MARK: - Private Method
@@ -96,7 +107,15 @@ extension CommentVC {
     }
     
     private func setView() {
-        
+        popupBackgroundView.setPopupBackgroundView(to: view)
+    }
+    
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(closePopup), name: .init("closePopupNoti"), object: nil)
+    }
+    
+    @objc func closePopup() {
+        popupBackgroundView.animatePopupBackground(false)
     }
     
     private func setTableView() {
@@ -144,13 +163,13 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                     comment.moreCommentViewHeight.constant = 0
                 }       else {
                     if commentArray[indexPath.section-1].open {
-                      comment.moreCommentLabel.text = "답글 접기"
-                      comment.moreImageView.image = UIImage(named: "icArrowUp")
-                      
-                  } else {
-                      comment.moreCommentLabel.text = "답글 보기"
-                      comment.moreImageView.image = UIImage(named: "icArrowDown")
-                  }
+                        comment.moreCommentLabel.text = "답글 접기"
+                        comment.moreImageView.image = UIImage(named: "icArrowUp")
+                        
+                    } else {
+                        comment.moreCommentLabel.text = "답글 보기"
+                        comment.moreImageView.image = UIImage(named: "icArrowDown")
+                    }
                 }
                 
                 return comment
@@ -195,7 +214,7 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
                     
                     UIView.animate(withDuration: 0.2, animations: {
                         self.commentTableView.reloadSections(section, with: .none)
-
+                        
                     }) { (_) in
                         self.adjustTableViewHeight()
                         print(self.commentTableView.contentSize.height)
