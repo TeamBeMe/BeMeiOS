@@ -31,6 +31,8 @@
 		D4F01029259C7A8000AA3EE8 /* ExploreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F01028259C7A8000AA3EE8 /* ExploreVC.swift */; };
 		D4F198E725A4348A000AF0E7 /* Answer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4F198E425A4348A000AF0E7 /* Answer.storyboard */; };
 		D4F198E825A4348A000AF0E7 /* AnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F198E625A4348A000AF0E7 /* AnswerVC.swift */; };
+		D4F198EE25A436C6000AF0E7 /* CommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F198ED25A436C6000AF0E7 /* CommentVC.swift */; };
+		D4F198F225A436D0000AF0E7 /* Comment.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4F198F125A436D0000AF0E7 /* Comment.storyboard */; };
 		EC737F19259D867A0035207F /* CustomTodayCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F18259D867A0035207F /* CustomTodayCardView.swift */; };
 		EC737F1C259D8B9E0035207F /* CustomAddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */; };
 		EC737F21259DB2C40035207F /* FollowUpperCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F20259DB2C40035207F /* FollowUpperCVC.swift */; };
@@ -115,6 +117,8 @@
 		D4F01028259C7A8000AA3EE8 /* ExploreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreVC.swift; sourceTree = "<group>"; };
 		D4F198E425A4348A000AF0E7 /* Answer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Answer.storyboard; sourceTree = "<group>"; };
 		D4F198E625A4348A000AF0E7 /* AnswerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerVC.swift; sourceTree = "<group>"; };
+		D4F198ED25A436C6000AF0E7 /* CommentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentVC.swift; sourceTree = "<group>"; };
+		D4F198F125A436D0000AF0E7 /* Comment.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Comment.storyboard; sourceTree = "<group>"; };
 		EC737F18259D867A0035207F /* CustomTodayCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTodayCardView.swift; sourceTree = "<group>"; };
 		EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAddCardView.swift; sourceTree = "<group>"; };
 		EC737F20259DB2C40035207F /* FollowUpperCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUpperCVC.swift; sourceTree = "<group>"; };
@@ -334,6 +338,31 @@
 			path = VCs;
 			sourceTree = "<group>";
 		};
+		D4F198EA25A4359E000AF0E7 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				D4F198EC25A436B3000AF0E7 /* VCs */,
+				D4F198EB25A436AC000AF0E7 /* Storyboards */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		D4F198EB25A436AC000AF0E7 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				D4F198F125A436D0000AF0E7 /* Comment.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		D4F198EC25A436B3000AF0E7 /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				D4F198ED25A436C6000AF0E7 /* CommentVC.swift */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
 		EC7C1603259B483F00A5BA4C /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -426,8 +455,9 @@
 		EC813F222599A15100BBCE25 /* BeMe */ = {
 			isa = PBXGroup;
 			children = (
-				A578D4E725A0BF8F00F69908 /* Mypage */,
+				D4F198EA25A4359E000AF0E7 /* Comment */,
 				D4DCD595259C66D4008DB300 /* Explore */,
+				A578D4E725A0BF8F00F69908 /* Mypage */,
 				A5AF7DBA259A0971003C42B5 /* Answer */,
 				EC89E332259C4E2800DBAFE5 /* UnderTab */,
 				EC7C160A259B8B1700A5BA4C /* Following */,
@@ -603,6 +633,7 @@
 				EC813F2D2599A15200BBCE25 /* Assets.xcassets in Resources */,
 				D4F198E725A4348A000AF0E7 /* Answer.storyboard in Resources */,
 				EC813F2B2599A15100BBCE25 /* Main.storyboard in Resources */,
+				D4F198F225A436D0000AF0E7 /* Comment.storyboard in Resources */,
 				EC813F732599F84F00BBCE25 /* Home.storyboard in Resources */,
 				EC89E336259C4E7400DBAFE5 /* UnderTab.storyboard in Resources */,
 			);
@@ -683,6 +714,7 @@
 				EC89E339259C507300DBAFE5 /* UnderTabBarController.swift in Sources */,
 				D4E07CBC259F22C10075E616 /* DiffThoughtCVC.swift in Sources */,
 				EC89E33F259C5EBB00DBAFE5 /* HomeCardCustomFlowLayout.swift in Sources */,
+				D4F198EE25A436C6000AF0E7 /* CommentVC.swift in Sources */,
 				D492E43825A0E16D0088A181 /* CustomActionSheet.swift in Sources */,
 				EC813F282599A15100BBCE25 /* ViewController.swift in Sources */,
 				EC7C1615259B925A00A5BA4C /* FollowingPVC.swift in Sources */,
