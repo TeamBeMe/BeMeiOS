@@ -10,11 +10,11 @@ import Foundation
 protocol UITableViewButtonSelectedDelegate: class {
     func settingButtonDidTapped()
     
-    func moreCellButtonDidTapped()
+    func moreCellButtonDidTapped(to indexPath: IndexPath)
 }
 
 extension UITableViewButtonSelectedDelegate {
     func settingButtonDidTapped() {}
     
-    func moreCellButtonDidTapped() {}
+    func moreCellButtonDidTapped(to: IndexPath) {}
 }

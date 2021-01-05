@@ -12,6 +12,13 @@ class CommentTVC: UITableViewCell {
     
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var contentTextViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var moreCommentLabel: UILabel!
+    @IBOutlet weak var moreImageView: UIImageView!
+    
+    weak var delegate: UITableViewButtonSelectedDelegate?
+    
+    var indexPath: IndexPath?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -27,5 +34,6 @@ class CommentTVC: UITableViewCell {
 
     @IBAction func moreCommentButtonTapped(_ sender: UIButton) {
         
+        delegate?.moreCellButtonDidTapped(to: indexPath!)
     }
 }
