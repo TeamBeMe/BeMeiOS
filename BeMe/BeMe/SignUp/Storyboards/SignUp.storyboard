@@ -308,7 +308,7 @@
         <!--Sign Up ControlVC-->
         <scene sceneID="3bW-8J-oh6">
             <objects>
-                <viewController id="iqI-Lh-GKx" customClass="SignUpControlVC" customModule="BeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignUpControlVC" id="iqI-Lh-GKx" customClass="SignUpControlVC" customModule="BeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="762-l9-amN">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
