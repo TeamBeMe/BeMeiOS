@@ -263,37 +263,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		A5196BBE25A5C5AB0044413D /* Otherspage */ = {
-			isa = PBXGroup;
-			children = (
-				A5196BC125A5C6000044413D /* Cells */,
-				A5196BC025A5C5C00044413D /* Storyboards */,
-				A5196BBF25A5C5BA0044413D /* VCs */,
-			);
-			path = Otherspage;
-			sourceTree = "<group>";
-		};
-		A5196BBF25A5C5BA0044413D /* VCs */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = VCs;
-			sourceTree = "<group>";
-		};
-		A5196BC025A5C5C00044413D /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		A5196BC125A5C6000044413D /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Cells;
-			sourceTree = "<group>";
-		};
 		A51CA35D25A57D1F0020F26D /* VCs */ = {
 			isa = PBXGroup;
 			children = (
@@ -688,8 +657,8 @@
 		EC813F222599A15100BBCE25 /* BeMe */ = {
 			isa = PBXGroup;
 			children = (
-				A5196BBE25A5C5AB0044413D /* Otherspage */,
 				D44F6DBF25A5784A002A9761 /* Answer */,
+				D4DCD595259C66D4008DB300 /* Explore */,
 				D44F6D9B25A575E0002A9761 /* Protocols */,
 				D4F198EA25A4359E000AF0E7 /* Comment */,
 				EC5C201225A49C98008EE335 /* Model */,
@@ -697,7 +666,6 @@
 				EC5C200625A471E5008EE335 /* LogIn */,
 				EC9C5CCB25A41E5F0021AF96 /* SignUp */,
 				EC7FEFA025A38A7F00C61147 /* Search */,
-				D4DCD595259C66D4008DB300 /* Explore */,
 				A578D4E725A0BF8F00F69908 /* Mypage */,
 				EC89E332259C4E2800DBAFE5 /* UnderTab */,
 				EC7C160A259B8B1700A5BA4C /* Following */,

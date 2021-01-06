@@ -21,10 +21,12 @@ class CommentVC: UIViewController {
     
     lazy var popupBackgroundView: UIView = UIView()
     
-    var isMoreButtonHidden: Bool = true
+    var pageNumber: Int?
     
-    var isMyAnswer: Bool = true
-        
+    var isMoreButtonHidden: Bool?
+    
+    var isMyAnswer: Bool = false
+    
     var isScrapped: Bool = false {
         didSet {
             
@@ -75,7 +77,7 @@ class CommentVC: UIViewController {
         settingActionSheet.modalPresentationStyle = .overCurrentContext
         self.present(settingActionSheet, animated: true, completion: nil)
     }
-
+    
     
 }
 
@@ -126,7 +128,11 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             guard let header = tableView.dequeueReusableCell(withIdentifier: QuestionAnswerTVC.identifier, for: indexPath) as? QuestionAnswerTVC else { return UITableViewCell() }
             
-            header.moreAnswerButton.isHidden = isMoreButtonHidden ? true : false
+            header.delegate = self
+            header.indexPath = indexPath
+            if let iMBH = isMoreButtonHidden {
+                header.moreAnswerButton.isHidden = iMBH
+            }
             header.profileView.isHidden = isMyAnswer
             return header
         } else {
@@ -135,7 +141,6 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                 
                 comment.delegate = self
                 comment.indexPath = indexPath
-                
                 if commentArray[indexPath.section-1].children!.count == 0 {
                     // 댓글 한개일 경우 "답글 보기" 없애는 로직 ******************고치기***********************
                     comment.moreCommentView.isHidden = true
@@ -186,13 +191,25 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
                     } else {
                         commentArray[index.section-1].open = true
                     }
-                    
                     let section = IndexSet.init(integer: indexPath.section)
                     commentTableView.reloadSections(section, with: .fade)
-                    
-                    
                 }
             }
         }
+    }
+    
+    func moreAnswerButtonDidTapped(to indexPath: IndexPath) {
+        
+        
+        
+        guard let detailVC = UIStoryboard.init(name: "Explore", bundle: nil).instantiateViewController(identifier: "ExploreDetailVC") as? ExploreDetailVC else { return }
+        self.dismiss(animated: true, completion: {
+//            detailVC.modalPresentationStyle = .fullScreen
+            guard let nowVC = self.presentingViewController else { return }
+            
+            print("nowVC")
+            print(nowVC)
+            nowVC.navigationController?.pushViewController(detailVC, animated: true)
+        })
     }
 }

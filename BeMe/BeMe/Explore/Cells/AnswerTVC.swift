@@ -41,7 +41,6 @@ class AnswerTVC: UITableViewCell {
     
     @IBAction func settingButtonTapped(_ sender: UIButton) {
         
-        print("hello")
         delegate?.settingButtonDidTapped()
     }
 }

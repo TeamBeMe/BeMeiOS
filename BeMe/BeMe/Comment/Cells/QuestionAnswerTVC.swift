@@ -13,6 +13,9 @@ class QuestionAnswerTVC: UITableViewCell {
     @IBOutlet weak var moreAnswerButton: UIButton!
     @IBOutlet weak var profileView: UIStackView!
     
+    weak var delegate: UITableViewButtonSelectedDelegate?
+    var indexPath: IndexPath?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -23,5 +26,10 @@ class QuestionAnswerTVC: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    @IBAction func moreAnswerButtonTapped(_ sender: UIButton) {
+        
+        delegate?.moreAnswerButtonDidTapped(to: indexPath!)
+        
+    }
+    
 }
