@@ -11,6 +11,7 @@ class MypageTabCVC: UICollectionViewCell {
     //MARK:**- IBOutlet Part**
     @IBOutlet weak var MypageTV: UITableView!
     
+    @IBOutlet weak var myPageTVHeight: NSLayoutConstraint!
     //MARK:**- Variable Part**
     static let identifier = "MypageTabCVC"
     private var cellNumber: Int = 8
@@ -32,6 +33,7 @@ class MypageTabCVC: UICollectionViewCell {
         MypageTV.delegate = self
         MypageTV.dataSource = self
         MypageTV.separatorStyle = .none
+        
 
     }
     //MARK:**- Function Part**
