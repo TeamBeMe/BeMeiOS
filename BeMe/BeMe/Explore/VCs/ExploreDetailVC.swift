@@ -170,6 +170,7 @@ extension ExploreDetailVC: UITableViewButtonSelectedDelegate {
         guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetVC.identifier) as?
                 CustomActionSheetVC else { return }
     
+        settingActionSheet.alertInformations = AlertLabels.article
         settingActionSheet.modalPresentationStyle = .overCurrentContext
         self.present(settingActionSheet, animated: true, completion: nil)
     }

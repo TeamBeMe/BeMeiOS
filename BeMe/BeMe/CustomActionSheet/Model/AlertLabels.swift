@@ -8,7 +8,14 @@
 import Foundation
 
 struct AlertLabels {
-    static let otherCommentNotMyArticle = ["icons": ["icDeclare", "icBlock"], "labels": ["신고하기", "차단하기"]]
-    static let otherCommentMyArticle = ["icons": ["icDeclare", "icBlock", "icDeleteBlack"], "labels": ["신고하기", "차단하기", "댓글 삭제"]]
-    static let myComment = ["icons": ["icEditBlack", "icDeleteBlack"], "labels": ["댓글 수정", "댓글 삭제"]]
+    
+    let icons: [String]
+    let names: [String]
+    
+    static let otherCommentNotMyArticle: AlertLabels = AlertLabels(icons: ["icDeclare", "icBlock"], names: ["신고하기", "차단하기"])
+    
+    static let otherCommentMyArticle: AlertLabels = AlertLabels(icons: ["icDeclare", "icBlock", "icDeleteBlack"], names: ["신고하기", "차단하기", "댓글 삭제"])
+    static let myComment: AlertLabels = AlertLabels(icons: ["icEditBlack", "icDeleteBlack"], names: ["댓글 수정", "댓글 삭제"])
+    static let article: AlertLabels = AlertLabels(icons: ["icShare", "icDeclare", "icBlock"], names: ["공유", "신고", "차단"])
+    
 }

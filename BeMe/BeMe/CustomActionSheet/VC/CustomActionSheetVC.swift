@@ -23,10 +23,18 @@ class CustomActionSheetVC: UIViewController {
     @IBOutlet weak var thirdIcon: UIImageView!
     @IBOutlet weak var thirdLabel: UILabel!
     
+    var alertInformations: AlertLabels?
+    
+    var color: UIColor?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         stackView.layer.addBorder([.bottom], color: .lightGray, width: 1.0)
         wrapper.roundCorners(cornerRadius: 10.0)
+        if let alertInfo = alertInformations {
+            setSettings(by: alertInfo, color: color)
+        }
+        
     }
     
     @IBAction func closeButtonTapped(_ sender: UIButton) {
@@ -34,14 +42,19 @@ class CustomActionSheetVC: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    func setSettings(icons: [String], names: [String]) {
-        firstIcon.image = UIImage(named: icons[0])
-        firstLabel.text = names[0]
-        secondIcon.image = UIImage(named: icons[1])
-        secondLabel.text = names[1]
-        thirdIcon.image = UIImage(named: icons[2])
-        thirdLabel.text = names[2]
+    func setSettings(by settings: AlertLabels, color: UIColor?) {
+        firstIcon.image = UIImage(named: "\(settings.icons[0])")
+        firstLabel.text = settings.names[0]
+        secondIcon.image = UIImage(named: settings.icons[1])
+        secondLabel.text = settings.names[1]
+        thirdIcon.image = UIImage(named: settings.icons[2])
+        thirdLabel.text = settings.names[2]
         
+        if let color = color {
+            firstLabel.textColor = color
+            secondLabel.textColor = color
+            thirdLabel.textColor = color
+        }
     }
 }
 

@@ -110,6 +110,8 @@ class CommentVC: UIViewController {
         guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetVC.identifier) as?
                 CustomActionSheetVC else { return }
         
+        settingActionSheet.color = .black
+        settingActionSheet.alertInformations = AlertLabels.article
         settingActionSheet.modalPresentationStyle = .overCurrentContext
         self.present(settingActionSheet, animated: true, completion: nil)
     }
@@ -319,12 +321,14 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
         commentTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
     }
     
-    func settingButtonTapped(to indexPath: IndexPath) {
+    
+    func settingButtonDidTapped(to indexPath: IndexPath) {
         
         popupBackgroundView.animatePopupBackground(true)
-        guard let actionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: nil).instantiateViewController(identifier: CustomActionSheetVC.identifier) as? CustomActionSheetVC else { return }
-        
-        self.present(actionSheet, animated: true, completion: nil)
+        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: nil).instantiateViewController(identifier: CustomActionSheetVC.identifier) as? CustomActionSheetVC else { return }
+        settingActionSheet.color = .red
+        settingActionSheet.alertInformations = AlertLabels.otherCommentMyArticle
+        self.present(settingActionSheet, animated: true, completion: nil)
     }
 }
 
