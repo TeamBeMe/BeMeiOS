@@ -32,7 +32,7 @@ protocol HomeFixButtonDelegate {
 }
 
 protocol HomeAnswerButtonDelegate{
-    func answerButtonTapped(question: String, questionInfo: String, answerDate: String,index : Int)
+    func answerButtonTapped(index: Int,answerData: AnswerDataForViewController)
 }
 
 protocol HomeGetDataFromAnswerDelegate{

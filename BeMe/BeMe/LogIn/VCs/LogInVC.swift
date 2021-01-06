@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Then
+import SnapKit
 
 class LogInVC: UIViewController {
     
@@ -19,8 +21,15 @@ class LogInVC: UIViewController {
     @IBOutlet weak var nickNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var buttonStackView: UIStackView!
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
+    var blackParticles = 0
+    var endTimer : Timer?
+    var blackView = UIView().then{
+        $0.backgroundColor = .black
+        
+    }
     
     
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
@@ -52,7 +61,7 @@ class LogInVC: UIViewController {
     
     @IBAction func logInButtonAction(_ sender: Any) {
         
-        
+        self.view.endEditing(true)
         LogInService.shared.login(nickName: nickNameTextField.text!,
                                   password: passwordTextField.text!) {(networkResult) -> (Void) in
             switch networkResult {
@@ -60,9 +69,11 @@ class LogInVC: UIViewController {
                 if let loginData = data as? LogInData{
                     print("로그인 성공")
                     UserDefaults.standard.set(loginData.token, forKey: "token")
-                    guard let vcName = UIStoryboard(name: "UnderTab", bundle: nil).instantiateViewController(identifier: "UnderTabBarController") as? UINavigationController else {return}
-                    vcName.modalPresentationStyle = .fullScreen
-                    self.present(vcName, animated: true, completion: nil)
+                    UserDefaults.standard.set(self.nickNameTextField.text!,forKey: "nickName")
+                    print(UserDefaults.standard.string(forKey: "nickName")!)
+                    self.endAnimation2()
+                    
+                   
                     
                 }
                 
@@ -121,6 +132,81 @@ extension LogInVC {
         
         
     }
+    
+    @objc func timerCallback(){
+        blackParticles = blackParticles + 1
+        let x = Int.random(in: Int(-view.frame.width/2)...Int(view.frame.width/2))
+        let y = Int.random(in: Int(-view.frame.height/2)...Int(view.frame.height/2))
+        var blackParticle = UIView().then{
+            $0.backgroundColor = .black
+            $0.makeRounded(cornerRadius: 250)
+            $0.alpha = 0
+        }
+        self.view.addSubview(blackParticle)
+        blackParticle.snp.makeConstraints{
+            $0.width.height.equalTo(500)
+            $0.centerX.equalToSuperview().offset(x)
+            $0.top.equalToSuperview().offset(y)
+        }
+        let smaller = CGAffineTransform(scaleX: 0, y: 0)
+        blackParticle.transform = smaller
+        
+        UIView.animate(withDuration: 2.0, animations: {
+            blackParticle.alpha = 1
+            blackParticle.transform = .identity
+        })
+        
+        if blackParticles>10 {
+            endTimer?.invalidate()
+        }
+        
+    }
+    func endAnimation(){
+        endTimer = Timer.scheduledTimer(timeInterval: Double(2/Double(10)),
+                                        target: self,
+                                        selector: #selector(timerCallback),
+                                        userInfo: nil,
+                                        repeats: true)
+        UIView.animate(withDuration: 1.0, delay: 2.0, animations: {
+            self.view.backgroundColor = .black
+            self.labelContainView.backgroundColor = .black
+            
+        }, completion: { finished in
+            guard let vcName = UIStoryboard(name: "UnderTab", bundle: nil).instantiateViewController(identifier: "UnderTabBarController") as? UINavigationController else {return}
+            vcName.modalPresentationStyle = .fullScreen
+            self.present(vcName, animated: false, completion: nil)
+        
+        })
+        
+        
+    }
+    
+    func endAnimation2(){
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            self.labelContainView.alpha = 0
+            self.nickNameTextField.alpha = 0
+            self.passwordTextField.alpha = 0
+            self.logInButton.alpha = 0
+            self.buttonStackView.alpha = 0
+            self.showButton.alpha = 0
+            
+        }, completion: { f in
+            
+            UIView.animate(withDuration: 1.0, animations: {
+                self.view.backgroundColor = .black
+            },completion: { f in
+                guard let vcName = UIStoryboard(name: "UnderTab", bundle: nil).instantiateViewController(identifier: "UnderTabBarController") as? UINavigationController else {return}
+                vcName.modalPresentationStyle = .fullScreen
+                self.present(vcName, animated: false, completion: nil)
+            
+                
+            })
+        })
+        
+    }
+    
+    
     
 }
 

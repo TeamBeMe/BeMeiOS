@@ -38,9 +38,7 @@ class AnswerVC: UIViewController {
     /// ex)  var imageViewList : [UIImageView] = []
     
     //
-    var question: String?
-    var questionInfo: String?
-    var answerDate: String?
+    var answerData: AnswerDataForViewController?
     
     // AnswerVC 에서 init
     var answer: String?
@@ -67,9 +65,9 @@ class AnswerVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setLabels(question: question!, questionInfo: questionInfo!, answerDate: answerDate!)
-//        answerTextView.text = ""
-//        answerTextView.becomeFirstResponder()
+        setLabels()
+        //        answerTextView.text = ""
+        //        answerTextView.becomeFirstResponder()
         
         
         
@@ -79,16 +77,12 @@ class AnswerVC: UIViewController {
         super.viewDidLoad()
         answerTextView.delegate = self
         setTextView(answerTextView)
-        setLabels(
-            question: "이번 2021년도를 후회 없이 보낼 수 있는 방법은 무엇인가요?",
-            questionInfo: "[ 비미에 관한 29999번째 질문 ]",
-            answerDate: "2021. 01. 01"
-        )
+        setLabels()
         
-
+        
     }
     
-
+    
     
     //MARK:**- IBAction Part**
     
@@ -142,7 +136,7 @@ class AnswerVC: UIViewController {
     func setTextView(_ textView: UITextView){
         
         let savedAnswer = UserDefaults.standard.string(forKey: "answer")
-
+        
         if savedAnswer == "" || savedAnswer == nil {
             textView.text = "답변을 입력해주세요."
             textView.textColor = .lightGray
@@ -164,23 +158,23 @@ class AnswerVC: UIViewController {
     }
     
     // 질문 관련 데이터 init
-    func setLabels(question: String, questionInfo: String, answerDate: String){
-
-        questionLabel.text = question
-        questionInfoLabel.text = questionInfo
-        answerDateLabel.text = answerDate
+    func setLabels(){
+        
+        questionLabel.text = answerData?.question
+        questionInfoLabel.text = "[ \((answerData?.questionCategory)!)에 관한 \((answerData?.answerIdx)!)번째 질문 ]"
+        answerDateLabel.text = answerData?.answerDate
         let attributedString = NSMutableAttributedString(string: questionInfoLabel.text!)
-        attributedString.addAttribute(NSAttributedString.Key.foregroundColor,
-                                      value: UIColor.black,
-                                      range: (questionInfo as NSString).range(of: #"[0-9]*번째"#,
-                                                                              options: .regularExpression))
-
+        //        attributedString.addAttribute(NSAttributedString.Key.foregroundColor,
+        //                                      value: UIColor.black,
+        //                                      range: (answerData?.questionCategory as NSString).range(of: #"[0-9]*번째"#,
+        //                                                                              options: .regularExpression))
+        
         answerTextView.text = answer
         textViewDidChange(answerTextView)
         answerTextView.becomeFirstResponder()
     }
     
-
+    
     
     //MARK:**- Function Part**
     
@@ -200,14 +194,10 @@ class AnswerVC: UIViewController {
     }
     
     @IBAction func finishButtonAction(_ sender: Any) {
-        let answerData = AnswerDataForViewController(lock: isAnswerPublic,
-                                                     questionInfo: questionInfo!,
-                                                     answerDate: answerDate!,
-                                                     question: question!,
-                                                     answer: answerTextView.text,
-                                                     index: curCardIdx!
-                                                     )
-        answerDataDelegate?.setNewAnswer(answerData: answerData)
+        
+        
+        answerData!.answer = answerTextView.text
+        answerDataDelegate?.setNewAnswer(answerData: answerData!)
         self.navigationController?.popViewController(animated: true)
         
     }
@@ -223,18 +213,18 @@ class AnswerVC: UIViewController {
 /// ex) extension ViewController : UICollectionViewDelegate { }
 
 extension AnswerVC: UITextViewDelegate {
-
+    
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-
+        
         if isInitial {
             textView.text = ""
             initialText = text
             textView.textColor = .black
         }
-
+        
         answer = textView.text
-
+        
         // 리턴키로 키보드 내림
         if (text as NSString).rangeOfCharacter(from: CharacterSet.newlines).location == NSNotFound {
             return true
@@ -244,7 +234,7 @@ extension AnswerVC: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-
+        
         if isInitial {
             textView.text = initialText
             textView.textColor = .black
@@ -253,7 +243,7 @@ extension AnswerVC: UITextViewDelegate {
         inputText = textView.text
         UserDefaults.standard.set(textView.text, forKey: "answer")
         self.isInitial = false
-
+        
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -268,6 +258,6 @@ extension AnswerVC: UITextViewDelegate {
         }
     }
     
-
+    
 }
 

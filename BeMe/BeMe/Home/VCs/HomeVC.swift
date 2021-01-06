@@ -86,20 +86,12 @@ class HomeVC: UIViewController {
     let userNotificationCenter = UNUserNotificationCenter.current()
     private var flexible = false
     var answerDataList : [AnswerDataForViewController] = []
+    var pageForServer = 1
     
-    let tmpPastData = AnswerDataForViewController(lock: true,
-                                              questionInfo: "미래에 관한 3번째 질문",
-                                              answerDate: "2020.12.24",
-                                              question: "이번 주말을 후회 없이\n보낼 수 있는 방법은 무엇인가요?"
-                                              , answer: "저는 몇일 전 퇴사를 했어요. 수많은 고민 끝에 결국 저질렀습니다. 몇 년간 원해 왔던 일이라 꿈만 같아요. 제가 스스로의 힘으로 하고 싶은 걸 해볼 수있는 시간적 여유를 가지게 된게 정말 만족스러워요.",
-                                              index: 0
-                                              )
-    let tmpNowData = AnswerDataForViewController(lock: true,
-                                                 questionInfo: "미래에 관한 3번째 질문",
-                                                 answerDate: "2020.12.24",
-                                                 question: "이번 주말을 후회 없이\n보낼 수 있는 방법은 무엇인가요?"
-                                                 , answer: "",
-                                                 index: 0)
+    let tmpPastData = AnswerDataForViewController(lock: true, questionCategory: "미래", answerDate: "2020.12.24", question: "이번 주말을 후회 없이\n보낼 수 있는 방법은 무엇인가요?", answer: "저는 몇일 전 퇴사를 했어요. 수많은 고민 끝에 결국 저질렀습니다. 몇 년간 원해 왔던 일이라 꿈만 같아요. 제가 스스로의 힘으로 하고 싶은 걸 해볼 수있는 시간적 여유를 가지게 된게 정말 만족스러워요.", index: 0, answerIdx: 3, questionID: 0, createdTime: "", categoryID: 0)
+    
+    let tmpNowData = AnswerDataForViewController(lock: true, questionCategory: "미래", answerDate: "2020.12.24", question: "이번 주말을 후회 없이\n보낼 수 있는 방법은 무엇인가요?", answer: "", index: 0, answerIdx: 3, questionID: 0, createdTime: "", categoryID: 0)
+    
 }
 
 
@@ -107,8 +99,8 @@ class HomeVC: UIViewController {
 extension HomeVC {
     override func viewDidLoad() {
         super.viewDidLoad()
-        pastCards = 3
-        todayCards = 1
+//        pastCards = 3
+//        todayCards = 1
         cardCollectionView.delegate = self
         cardCollectionView.dataSource = self
         let customLayout = HomeCardCustomFlowLayout()
@@ -126,7 +118,7 @@ extension HomeVC {
             cardHeight = Double(491*deviceBound)
             cardWidth = 315*deviceBound
         }
-//        userNotificationCenter.delegate = self
+        //        userNotificationCenter.delegate = self
         requestNotificationAuthorization()
         sendNotification()
         
@@ -137,23 +129,26 @@ extension HomeVC {
         for _ in 0..<todayCards{
             answerDataList.append(tmpNowData)
         }
-        
+        answerDataList = []
+        pageGetFromServer()
+        startAnimation()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+      
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {
         
-        if initialScrolled == false {
-            cardCollectionView.scrollToItem(at: IndexPath(item: pastCards, section: 0),
-                                            at: .centeredHorizontally,
-                                            animated: false)
-            initialScrolled = true
-            currentCardIdx = pastCards + todayCards - 1
-        }
+//        if initialScrolled == false {
+//            cardCollectionView.scrollToItem(at: IndexPath(item: pastCards, section: 0),
+//                                            at: .centeredHorizontally,
+//                                            animated: false)
+//            initialScrolled = true
+//            currentCardIdx = pastCards + todayCards - 1
+//        }
         
         
     }
@@ -164,6 +159,18 @@ extension HomeVC {
 }
 //MARK:- User Define functions
 extension HomeVC {
+    func startAnimation(){
+        self.cardCollectionView.alpha = 0
+        self.timeLabel.alpha = 0
+        
+        UIView.animate(withDuration: 2.0, animations: {
+            self.cardCollectionView.alpha = 1
+            self.timeLabel.alpha = 1
+            
+        })
+        
+    }
+    
     
     func changeLock(){
         locks[currentCardIdx] = !locks[currentCardIdx]
@@ -184,23 +191,23 @@ extension HomeVC {
     
     func requestNotificationAuthorization() {
         let authOptions = UNAuthorizationOptions(arrayLiteral: .alert, .badge, .sound)
-
+        
         userNotificationCenter.requestAuthorization(options: authOptions) { success, error in
             if let error = error {
                 print("Error: \(error)")
             }
         }
     }
-
+    
     func sendNotification() {
         let notificationContent = UNMutableNotificationContent()
-
+        
         notificationContent.title = "오늘의 질문이 도착했어요"
         notificationContent.body = "질문을 보러가려면 눌러주세요"
-
         
         
-       
+        
+        
         
         var date = DateComponents()
         date.hour = 22
@@ -211,12 +218,124 @@ extension HomeVC {
         let request = UNNotificationRequest(identifier: "testNotification",
                                             content: notificationContent,
                                             trigger: trigger)
-
+        
         userNotificationCenter.add(request) { error in
             if let error = error {
                 print("Notification Error: ", error)
             }
         }
+    }
+    
+    
+    func pageGetFromServer(){
+        HomePageDataService.shared.getHomeData(page: pageForServer){(networkResult) -> (Void) in
+            switch networkResult {
+            case .success(let data) :
+                self.pageForServer = self.pageForServer + 1
+                var i = 0
+                if let homePageDatas = data as? [HomePageData]{
+                    if self.pastCards > 0{
+                        self.pastCards = homePageDatas.count + self.pastCards
+                    }
+                    else{
+                        self.pastCards = homePageDatas.count-1
+                        self.todayCards = 1
+                    }
+                    
+                    
+                    for homePageData in homePageDatas{
+                        
+                        var answerDate: String?
+                        var answerIdx: Int?
+                        var content: String?
+                        var createdAt: String?
+                        
+                        if homePageData.answerDate == nil {
+                            answerDate = ""
+                        }
+                        else{
+                           
+                            answerDate = homePageData.answerDate
+                            let index = answerDate!.index(answerDate!.startIndex, offsetBy: 10)
+                            answerDate = answerDate!.substring(to: index)
+                        }
+                        if homePageData.answerIdx == nil {
+                            answerIdx = 0
+                        }
+                        else{
+                            answerIdx = homePageData.answerIdx
+                        }
+                        if homePageData.content == nil {
+                            content = ""
+                        }
+                        else{
+                            content = homePageData.content
+                        }
+                        if homePageData.createdAt == nil {
+                            createdAt = ""
+                        }
+                        else{
+                            createdAt = homePageData.createdAt
+                        }
+                        
+                        
+                        
+                        var newData = AnswerDataForViewController(lock: true,
+                                                                  questionCategory: homePageData.question!.category.name,
+                                                                  answerDate: answerDate!,
+                                                                  question: homePageData.question!.title,
+                                                                  answer: content!,
+                                                                  index: i,
+                                                                  answerIdx: answerIdx!,
+                                                                  questionID: homePageData.question!.id,
+                                                                  createdTime: createdAt!,
+                                                                  categoryID: homePageData.question!.category.id)
+                        
+                        
+                        
+                        self.answerDataList.insert(newData, at: i)
+                        i = i + 1
+                    }
+               
+                    self.cardCollectionView.reloadData()
+                    if self.initialScrolled == false {
+                        self.cardCollectionView.scrollToItem(at: IndexPath(item: self.pastCards,
+                                                                           section: 0),
+                                                        at: .centeredHorizontally,
+                                                        animated: false)
+                        self.initialScrolled = true
+                        self.currentCardIdx = self.pastCards + self.todayCards - 1
+                    }
+                    else{
+                        self.cardCollectionView.scrollToItem(at: IndexPath(item: self.currentCardIdx+homePageDatas.count,
+                                                                           section: 0),
+                                                        at: .centeredHorizontally,
+                                                        animated: false)
+                        self.currentCardIdx = self.currentCardIdx+homePageDatas.count
+                        
+                    }
+                    
+                }
+                
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+                
+                
+                
+            }
+            
+            
+        }
+        print(answerDataList)
+        
     }
     
     
@@ -331,29 +450,38 @@ extension HomeVC : UIScrollViewDelegate {
         }
         
         if initialScrolled == true && !flexible{
-
+            
             if Int(curPos.x) < Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) - 200 {
                 cardCollectionView.scrollToItem(at: IndexPath(item: currentCardIdx-1, section: 0),
                                                 at: .centeredHorizontally,
                                                 animated: true)
                 currentCardIdx = currentCardIdx-1
-
-
+                print("curr")
+                print(currentCardIdx)
+                if currentCardIdx < 1 {
+                    print("curr")
+                    print(currentCardIdx)
+                    pageGetFromServer()
+                    
+                }
+                
             }
             else if Int(curPos.x) > Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) + 200{
                 cardCollectionView.scrollToItem(at: IndexPath(item: currentCardIdx+1, section: 0),
                                                 at: .centeredHorizontally,
                                                 animated: true)
                 currentCardIdx = currentCardIdx+1
-
-
+                
+                
             }
-
+            
         }
-
+        
+       
+        
         
     }
-
+    
 }
 
 extension HomeVC : AddQuestionDelegate {
@@ -371,7 +499,7 @@ extension HomeVC : AddQuestionDelegate {
         answerDataList.append(tmpNowData)
         let customCard = CustomTodayCardView(frame: .zero)
         let customAddCard = CustomAddCardView(frame: .zero)
-
+        
         self.view.addSubview(customCard)
         self.view.addSubview(customAddCard)
         customCard.snp.makeConstraints{
@@ -399,8 +527,8 @@ extension HomeVC : AddQuestionDelegate {
                             self.cardCollectionView.scrollToItem(at: IndexPath(
                                                                     item: self.currentCardIdx,
                                                                     section: 0),
-                                                            at: .centeredHorizontally,
-                                                            animated: true)
+                                                                 at: .centeredHorizontally,
+                                                                 animated: true)
                             
                           })
         
@@ -462,9 +590,9 @@ extension HomeVC : ChangePublicDelegate{
                 self?.changeLock()
             }
             else {
-//                self.cardCollectionView.scrollToItem(at: IndexPath(item: self.pastCards+self.todayCards-1, section: 0),
-//                                                at: .centeredHorizontally,
-//                                                animated: true)
+                //                self.cardCollectionView.scrollToItem(at: IndexPath(item: self.pastCards+self.todayCards-1, section: 0),
+                //                                                at: .centeredHorizontally,
+                //                                                animated: true)
             }
             
             blurView.removeFromSuperview()
@@ -484,7 +612,7 @@ extension HomeVC: UNUserNotificationCenterDelegate {
                                 withCompletionHandler completionHandler: @escaping () -> Void) {
         completionHandler()
     }
-
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
@@ -495,15 +623,15 @@ extension HomeVC: UNUserNotificationCenterDelegate {
 extension HomeVC : HomeTabBarDelegate{
     func homeButtonTapped() {
         flexible = true
-
+        
         self.cardCollectionView.scrollToItem(at: IndexPath(item: self.pastCards+self.todayCards-1, section: 0),
-                                        at: .centeredHorizontally,
-                                        animated: true)
+                                             at: .centeredHorizontally,
+                                             animated: true)
         
         currentCardIdx = pastCards
         
         
-    
+        
         
     }
 }
@@ -516,21 +644,18 @@ extension HomeVC : HomeFixButtonDelegate{
 }
 
 extension HomeVC : HomeAnswerButtonDelegate {
-    func answerButtonTapped(question: String, questionInfo: String, answerDate: String,index: Int) {
+    func answerButtonTapped(index:Int,answerData: AnswerDataForViewController) {
         guard let answerVC = UIStoryboard(name: "Answer",
                                           bundle: nil).instantiateViewController(
-                                              withIdentifier: "AnswerVC") as? AnswerVC
-              else{
-                  
-                  return
-          }
+                                            withIdentifier: "AnswerVC") as? AnswerVC
+        else{
+            
+            return
+        }
         answerVC.answerDataDelegate = self
         answerVC.curCardIdx = index
         self.navigationController?.pushViewController(answerVC, animated: true)
-        answerVC.question = question
-        answerVC.questionInfo = questionInfo
-        answerVC.answerDate = answerDate
-
+        answerVC.answerData = answerData
     }
 }
 
@@ -544,3 +669,5 @@ extension HomeVC : HomeGetDataFromAnswerDelegate {
     
     
 }
+
+

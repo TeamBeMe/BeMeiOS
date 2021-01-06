@@ -129,6 +129,8 @@ extension PastCardCVC {
         questionLabel.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(162)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
         }
     }
     
@@ -137,7 +139,7 @@ extension PastCardCVC {
         answerTextView.snp.makeConstraints{
             $0.leading.equalToSuperview().offset(40)
             $0.trailing.equalToSuperview().offset(-40)
-            $0.top.equalToSuperview().offset(223)
+            $0.top.equalTo(questionLabel.snp_bottomMargin).offset(60)
             $0.height.equalTo(160)
         }
     }
@@ -193,7 +195,7 @@ extension PastCardCVC {
             lockButton.setImage(
                 UIImage(named: "btnUnlock")?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
-        questionInfoLabel.text = "[ " + (answerData?.questionInfo)! + " ]"
+        questionInfoLabel.text = "[ \((answerData?.questionCategory)!)에 관한 \((answerData?.answerIdx)!)번째 질문 ]"
         questionLabel.text = answerData?.question
         dateLabel.text = answerData?.answerDate
         answerTextView.text = answerData?.answer

@@ -160,6 +160,8 @@ extension NewCardCVC {
         questionLabel.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(162)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
         }
     }
     func makeReplyButton(){
@@ -218,11 +220,7 @@ extension NewCardCVC {
         
     }
     @objc func replyButtonAction(){
-        homeAnswerButtonDelegate?.answerButtonTapped(question: questionLabel.text!,
-                                                     questionInfo: questionInfoLabel.text!,
-                                                     answerDate: dateLabel.text!,
-                                                     index: index!
-        )
+        homeAnswerButtonDelegate?.answerButtonTapped(index: index!, answerData: answerData!)
     }
     @objc func fixButtonAction(){
         homeFixButtonDelegate?.fixButtonTapped()
@@ -254,12 +252,9 @@ extension NewCardCVC {
             lockButton.setImage(
                 UIImage(named: "btnUnlock")?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
-        if answerData?.questionInfo!.first == "["{
-            questionInfoLabel.text = answerData?.questionInfo
-        }
-        else{
-            questionInfoLabel.text = "[ " + (answerData?.questionInfo)! + " ]"
-        }
+       
+        
+        questionInfoLabel.text = "[ \((answerData?.questionCategory)!)에 관한 \((answerData?.answerIdx)!)번째 질문 ]"
         
         questionLabel.text = answerData?.question
         dateLabel.text = answerData?.answerDate

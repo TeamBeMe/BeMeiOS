@@ -13,7 +13,7 @@ class AddCardCVC: UICollectionViewCell {
     //MARK:- IBOutlets
     
     var questionLabel = UILabel().then {
-        $0.text = "송현님, 나를 더 알아보기\n위한 다른 질문이 준비되어 있어요."
+        $0.text = "\(UserDefaults.standard.string(forKey: "nickName")!)님, 나를 더 알아보기\n위한 다른 질문이 준비되어 있어요."
         $0.font = UIFont.systemFont(ofSize: 18)
         $0.textColor = .white
         $0.textAlignment = .center
