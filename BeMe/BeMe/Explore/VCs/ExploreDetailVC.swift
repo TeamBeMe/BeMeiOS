@@ -163,12 +163,13 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
 //MARK: - UITableViewButtonSelectedDelegate
 extension ExploreDetailVC: UITableViewButtonSelectedDelegate {
     
-    func settingButtonDidTapped() {
+    func settingButtonDidTapped(to indexPath: IndexPath) {
         
         popupBackgroundView.animatePopupBackground(true)
+        
         guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetVC.identifier) as?
                 CustomActionSheetVC else { return }
-        
+    
         settingActionSheet.modalPresentationStyle = .overCurrentContext
         self.present(settingActionSheet, animated: true, completion: nil)
     }

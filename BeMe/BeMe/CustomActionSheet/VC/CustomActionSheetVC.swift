@@ -13,6 +13,16 @@ class CustomActionSheetVC: UIViewController {
     
     @IBOutlet weak var wrapper: UIView!
     @IBOutlet weak var stackView: UIStackView!
+    
+    @IBOutlet weak var firstIcon: UIImageView!
+    @IBOutlet weak var firstLabel: UILabel!
+    
+    @IBOutlet weak var secondIcon: UIImageView!
+    @IBOutlet weak var secondLabel: UILabel!
+    
+    @IBOutlet weak var thirdIcon: UIImageView!
+    @IBOutlet weak var thirdLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         stackView.layer.addBorder([.bottom], color: .lightGray, width: 1.0)
@@ -22,6 +32,16 @@ class CustomActionSheetVC: UIViewController {
     @IBAction func closeButtonTapped(_ sender: UIButton) {
         NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil)
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    func setSettings(icons: [String], names: [String]) {
+        firstIcon.image = UIImage(named: icons[0])
+        firstLabel.text = names[0]
+        secondIcon.image = UIImage(named: icons[1])
+        secondLabel.text = names[1]
+        thirdIcon.image = UIImage(named: icons[2])
+        thirdLabel.text = names[2]
+        
     }
 }
 

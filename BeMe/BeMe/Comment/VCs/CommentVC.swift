@@ -322,7 +322,9 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
     func settingButtonTapped(to indexPath: IndexPath) {
         
         popupBackgroundView.animatePopupBackground(true)
+        guard let actionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: nil).instantiateViewController(identifier: CustomActionSheetVC.identifier) as? CustomActionSheetVC else { return }
         
+        self.present(actionSheet, animated: true, completion: nil)
     }
 }
 
