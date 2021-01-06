@@ -12,10 +12,10 @@
 		A50140FD25A39BFA001099E8 /* MypageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50140FC25A39BFA001099E8 /* MypageCVC.swift */; };
 		A501410025A39C18001099E8 /* MypageTabCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50140FF25A39C18001099E8 /* MypageTabCVC.swift */; };
 		A501410325A39C34001099E8 /* MypageTabCRV.swift in Sources */ = {isa = PBXBuildFile; fileRef = A501410225A39C34001099E8 /* MypageTabCRV.swift */; };
-		A578D4E1259E727C00F69908 /* Answer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A578D4E0259E727C00F69908 /* Answer.storyboard */; };
-		A578D4E4259E728500F69908 /* AnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A578D4E3259E728500F69908 /* AnswerVC.swift */; };
-		A578D4F025A0C4E600F69908 /* Mypage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A578D4EF25A0C4E600F69908 /* Mypage.storyboard */; };
-		A578D4F325A0C51400F69908 /* MypageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A578D4F225A0C51400F69908 /* MypageVC.swift */; };
+		A51CA35F25A57D2F0020F26D /* MypageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51CA35E25A57D2E0020F26D /* MypageVC.swift */; };
+		A51CA36325A57D430020F26D /* Mypage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A51CA36225A57D430020F26D /* Mypage.storyboard */; };
+		A51CA36625A57DBA0020F26D /* Answer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A51CA36525A57DBA0020F26D /* Answer.storyboard */; };
+		A51CA36925A57DBE0020F26D /* AnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51CA36825A57DBE0020F26D /* AnswerVC.swift */; };
 		A57F708C25A1ACB100152E89 /* MypageResultTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F708B25A1ACB100152E89 /* MypageResultTVC.swift */; };
 		A5CCCD9E25A334EA008A3125 /* MypageMyScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */; };
 		A5CCCDA125A33512008A3125 /* MypageOthersScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */; };
@@ -115,10 +115,10 @@
 		A50140FC25A39BFA001099E8 /* MypageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageCVC.swift; sourceTree = "<group>"; };
 		A50140FF25A39C18001099E8 /* MypageTabCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageTabCVC.swift; sourceTree = "<group>"; };
 		A501410225A39C34001099E8 /* MypageTabCRV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageTabCRV.swift; sourceTree = "<group>"; };
-		A578D4E0259E727C00F69908 /* Answer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Answer.storyboard; path = BeMe/Answer/s/Answer.storyboard; sourceTree = SOURCE_ROOT; };
-		A578D4E3259E728500F69908 /* AnswerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AnswerVC.swift; path = BeMe/Answer/ss/AnswerVC.swift; sourceTree = SOURCE_ROOT; };
-		A578D4EF25A0C4E600F69908 /* Mypage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mypage.storyboard; sourceTree = SOURCE_ROOT; };
-		A578D4F225A0C51400F69908 /* MypageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageVC.swift; sourceTree = SOURCE_ROOT; };
+		A51CA35E25A57D2E0020F26D /* MypageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MypageVC.swift; sourceTree = "<group>"; };
+		A51CA36225A57D430020F26D /* Mypage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Mypage.storyboard; sourceTree = "<group>"; };
+		A51CA36525A57DBA0020F26D /* Answer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Answer.storyboard; sourceTree = "<group>"; };
+		A51CA36825A57DBE0020F26D /* AnswerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerVC.swift; sourceTree = "<group>"; };
 		A57F708B25A1ACB100152E89 /* MypageResultTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageResultTVC.swift; sourceTree = "<group>"; };
 		A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageMyScrapTVC.swift; sourceTree = "<group>"; };
 		A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageOthersScrapTVC.swift; sourceTree = "<group>"; };
@@ -243,10 +243,26 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A51CA35D25A57D1F0020F26D /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				A51CA35E25A57D2E0020F26D /* MypageVC.swift */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
+		A51CA36125A57D380020F26D /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				A51CA36225A57D430020F26D /* Mypage.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		A578D4DD259E724500F69908 /* VCs */ = {
 			isa = PBXGroup;
 			children = (
-				A578D4E3259E728500F69908 /* AnswerVC.swift */,
+				A51CA36825A57DBE0020F26D /* AnswerVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -254,7 +270,7 @@
 		A578D4DF259E725F00F69908 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				A578D4E0259E727C00F69908 /* Answer.storyboard */,
+				A51CA36525A57DBA0020F26D /* Answer.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -263,26 +279,10 @@
 			isa = PBXGroup;
 			children = (
 				A578D4EA25A0BFBD00F69908 /* Cells */,
-				A578D4E925A0BFB100F69908 /* VCs */,
-				A578D4E825A0BFA900F69908 /* Storyboards */,
+				A51CA35D25A57D1F0020F26D /* VCs */,
+				A51CA36125A57D380020F26D /* Storyboards */,
 			);
 			path = Mypage;
-			sourceTree = "<group>";
-		};
-		A578D4E825A0BFA900F69908 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				A578D4EF25A0C4E600F69908 /* Mypage.storyboard */,
-			);
-			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		A578D4E925A0BFB100F69908 /* VCs */ = {
-			isa = PBXGroup;
-			children = (
-				A578D4F225A0C51400F69908 /* MypageVC.swift */,
-			);
-			path = VCs;
 			sourceTree = "<group>";
 		};
 		A578D4EA25A0BFBD00F69908 /* Cells */ = {
@@ -780,12 +780,12 @@
 			files = (
 				EC89E306259C1CA600DBAFE5 /* FollowSearch.storyboard in Resources */,
 				D492E43525A0E14C0088A181 /* CustomActionSheet.storyboard in Resources */,
+				A51CA36625A57DBA0020F26D /* Answer.storyboard in Resources */,
 				EC7C160F259B8B8100A5BA4C /* Following.storyboard in Resources */,
 				D4E07CB9259F22C10075E616 /* Explore.storyboard in Resources */,
 				EC5C200A25A47208008EE335 /* LogIn.storyboard in Resources */,
-				A578D4E1259E727C00F69908 /* Answer.storyboard in Resources */,
-				A578D4F025A0C4E600F69908 /* Mypage.storyboard in Resources */,
 				EC7C1618259B933F00A5BA4C /* FollowInfo.storyboard in Resources */,
+				A51CA36325A57D430020F26D /* Mypage.storyboard in Resources */,
 				EC813F302599A15200BBCE25 /* LaunchScreen.storyboard in Resources */,
 				EC813F2D2599A15200BBCE25 /* Assets.xcassets in Resources */,
 				EC813F2B2599A15100BBCE25 /* Main.storyboard in Resources */,
@@ -856,7 +856,6 @@
 				EC7C1624259B9CA500A5BA4C /* FollowingHeaderCVC.swift in Sources */,
 				EC737F19259D867A0035207F /* CustomTodayCardView.swift in Sources */,
 				EC89E31C259C281F00DBAFE5 /* FollowerListCVC.swift in Sources */,
-				A578D4F325A0C51400F69908 /* MypageVC.swift in Sources */,
 				EC7FEFB125A39B7000C61147 /* UITextField+Extensions.swift in Sources */,
 				EC5C1FF625A433EE008EE335 /* String+Extensions.swift in Sources */,
 				EC7C163A259BAD2D00A5BA4C /* FollowerCardCVC.swift in Sources */,
@@ -873,7 +872,6 @@
 				D492E44025A0E6A80088A181 /* UITableView+Extensions.swift in Sources */,
 				EC5C200325A43FD0008EE335 /* SignUpProfileVC.swift in Sources */,
 				EC737F1C259D8B9E0035207F /* CustomAddCardView.swift in Sources */,
-				A578D4E4259E728500F69908 /* AnswerVC.swift in Sources */,
 				EC7C1631259BACF100A5BA4C /* FollowerPeopleCVC.swift in Sources */,
 				EC89E32E259C496C00DBAFE5 /* FollowMoreButtonCVC.swift in Sources */,
 				D4E07CBB259F22C10075E616 /* CategoryTVC.swift in Sources */,
@@ -888,6 +886,7 @@
 				EC7FEFA825A38AF100C61147 /* SearchVC.swift in Sources */,
 				EC89E319259C281100DBAFE5 /* FollowerSearchCVC.swift in Sources */,
 				EC7C1627259B9CE200A5BA4C /* FollowingCardCVC.swift in Sources */,
+				A51CA36925A57DBE0020F26D /* AnswerVC.swift in Sources */,
 				EC5C202325A4C818008EE335 /* LogInData.swift in Sources */,
 				EC89E30C259C273400DBAFE5 /* FollowingSearchVC.swift in Sources */,
 				EC7C1605259B485D00A5BA4C /* CustomAlertView.swift in Sources */,
@@ -918,6 +917,7 @@
 				D4E07CBA259F22C10075E616 /* MoreTVC.swift in Sources */,
 				D492E41A25A0A0DE0088A181 /* ExploreDetailVC.swift in Sources */,
 				EC7F0EA125A05460008EB88A /* CustomHomeActionSheetAlert.swift in Sources */,
+				A51CA35F25A57D2F0020F26D /* MypageVC.swift in Sources */,
 				EC7FEFAB25A38FE200C61147 /* SearchRecentTVC.swift in Sources */,
 				EC5C201F25A4C7EB008EE335 /* LogInService.swift in Sources */,
 				EC9C5CD325A41EAA0021AF96 /* SignUpVC.swift in Sources */,
