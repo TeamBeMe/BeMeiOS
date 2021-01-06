@@ -19,6 +19,10 @@ class CommentVC: UIViewController {
     @IBOutlet weak var commentTableView: UITableView!
     @IBOutlet weak var scrapButton: UIButton!
     
+    @IBOutlet weak var commentTextWrapper: UIView!
+    @IBOutlet weak var commentBorderView: UIView!
+    @IBOutlet weak var commentTextView: UITextView!
+    @IBOutlet weak var lockButton: UIView!
     lazy var popupBackgroundView: UIView = UIView()
     
     var pageNumber: Int?
@@ -78,6 +82,8 @@ class CommentVC: UIViewController {
         self.present(settingActionSheet, animated: true, completion: nil)
     }
     
+    @IBAction func commentSendButtonTapped(_ sender: UIButton) {
+    }
     
 }
 
@@ -89,6 +95,7 @@ extension CommentVC {
         commentTableView.dataSource = self
         commentTableView.estimatedRowHeight = 30
         commentTableView.rowHeight = UITableView.automaticDimension
+        commentTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 166, right: 0)
     }
     
     private func setPopupView() {
@@ -192,7 +199,7 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
                         commentArray[index.section-1].open = true
                     }
                     let section = IndexSet.init(integer: indexPath.section)
-                    commentTableView.reloadSections(section, with: .fade)
+                    commentTableView.reloadSections(section, with: .none)
                 }
             }
         }
@@ -200,11 +207,8 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
     
     func moreAnswerButtonDidTapped(to indexPath: IndexPath) {
         
-        
-        
         guard let detailVC = UIStoryboard.init(name: "Explore", bundle: nil).instantiateViewController(identifier: "ExploreDetailVC") as? ExploreDetailVC else { return }
         self.dismiss(animated: true, completion: {
-//            detailVC.modalPresentationStyle = .fullScreen
             guard let nowVC = self.presentingViewController else { return }
             
             print("nowVC")
@@ -212,4 +216,11 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
             nowVC.navigationController?.pushViewController(detailVC, animated: true)
         })
     }
+}
+
+//MARK: - TextField
+
+extension CommentVC: UITextFieldDelegate {
+    
+    
 }
