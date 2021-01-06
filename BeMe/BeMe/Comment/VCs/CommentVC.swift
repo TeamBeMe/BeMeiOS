@@ -142,9 +142,7 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
             } else {
                 return 1
             }
-            
         }
-        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -159,9 +157,11 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                 
                 comment.delegate = self
                 comment.indexPath = indexPath
+                
                 if commentArray[indexPath.section-1].children!.count == 0 {
+                    // 댓글 한개일 경우 "답글 보기" 없애는 로직 ******************고치기***********************
                     comment.moreCommentViewHeight.constant = 0
-                }       else {
+                } else {
                     if commentArray[indexPath.section-1].open {
                         comment.moreCommentLabel.text = "답글 접기"
                         comment.moreImageView.image = UIImage(named: "icArrowUp")
@@ -208,17 +208,18 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
                         commentArray[index.section-1].open = false
                     } else {
                         commentArray[index.section-1].open = true
-                        
                     }
+                    
                     let section = IndexSet.init(integer: indexPath.section)
                     
                     UIView.animate(withDuration: 0.2, animations: {
-                        self.commentTableView.reloadSections(section, with: .none)
+                        self.commentTableView.reloadSections(section, with: .fade)
                         
                     }) { (_) in
+                        //self.commentTableView.layoutIfNeeded()
                         self.adjustTableViewHeight()
                         print(self.commentTableView.contentSize.height)
-                        self.commentTableView.layoutIfNeeded()
+                        
                         
                     }
                 }

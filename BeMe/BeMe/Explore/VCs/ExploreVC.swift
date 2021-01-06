@@ -334,7 +334,7 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
         } else if indexPath.row == cellNumber - 1 {
             
         } else {
-            guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
+            guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentTestVC") as? CommentTestVC else { return }
             
             comment.modalPresentationStyle = .fullScreen
             self.present(comment, animated: true, completion: nil)
