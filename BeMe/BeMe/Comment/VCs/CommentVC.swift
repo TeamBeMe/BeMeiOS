@@ -113,6 +113,10 @@ extension CommentVC {
     
     private func setCommentView() {
         commentBorderView.setBorderWithRadius(borderColor: UIColor.Border.textView, borderWidth: 1.0, cornerRadius: 6.0)
+        commentTextView.text = "댓글 달기"
+        commentTextView.textColor = UIColor.lightGray
+        
+        
     }
     private func setCommentTableView() {
         commentTableView.delegate = self
@@ -270,14 +274,14 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
     
     func moreAnswerButtonDidTapped(to indexPath: IndexPath) {
         
-//        guard let detailVC = UIStoryboard.init(name: "Explore", bundle: nil).instantiateViewController(identifier: "ExploreDetailVC") as? ExploreDetailVC else { return }
-//        self.dismiss(animated: true, completion: {
-//            guard let nowVC = self.presentingViewController else { return }
-//
-//            print("nowVC")
-//            print(nowVC)
-//            nowVC.navigationController?.pushViewController(detailVC, animated: true)
-//        })
+        //        guard let detailVC = UIStoryboard.init(name: "Explore", bundle: nil).instantiateViewController(identifier: "ExploreDetailVC") as? ExploreDetailVC else { return }
+        //        self.dismiss(animated: true, completion: {
+        //            guard let nowVC = self.presentingViewController else { return }
+        //
+        //            print("nowVC")
+        //            print(nowVC)
+        //            nowVC.navigationController?.pushViewController(detailVC, animated: true)
+        //        })
     }
     
     func sendCommentButtonDidTapped(to indexPath: IndexPath) {
@@ -293,7 +297,25 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
 extension CommentVC: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         if textView == commentTextView {
-            commentSendButton.isHidden = textView.text.isEmpty
+            let text = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+            commentSendButton.isHidden = text.isEmpty
+        }
+    }
+    
+    // TextView Place Holder
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+        
+    }
+    // TextView Place Holder
+    func textViewDidEndEditing(_ textView: UITextView) {
+        let text = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if text.isEmpty {
+            textView.text = "댓글 달기"
+            textView.textColor = UIColor.lightGray
         }
     }
 }
