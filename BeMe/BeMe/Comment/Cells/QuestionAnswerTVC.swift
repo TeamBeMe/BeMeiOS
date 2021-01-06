@@ -1,14 +1,14 @@
 //
-//  TitleTVC.swift
+//  QuestionAnswerTVC.swift
 //  BeMe
 //
-//  Created by 이재용 on 2021/01/05.
+//  Created by 이재용 on 2021/01/06.
 //
 
 import UIKit
 
-class TitleTVC: UITableViewCell {
-    static let identifier: String = "TitleTVC"
+class QuestionAnswerTVC: UITableViewCell {
+    static let identifier: String = "QuestionAnswerTVC"
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

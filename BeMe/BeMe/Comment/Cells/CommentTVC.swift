@@ -24,7 +24,6 @@ class CommentTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-//        contentTextViewHeight.constant = contentTextView.contentSize.height
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
