@@ -7,9 +7,6 @@
 
 import UIKit
 
-protocol UITableViewButtonSelectedDelegate: class {
-    func settingButtonDidTapped()
-}
 
 class AnswerTVC: UITableViewCell {
     static let identifier: String = "AnswerTVC"
