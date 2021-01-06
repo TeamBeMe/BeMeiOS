@@ -52,6 +52,7 @@ class ExploreVC: UIViewController {
         
         adjustScrollViewInset()
         setThoughtCollectionView()
+        setArticleTableView()
         diffArticleTableView.setDynamicCellHeight(to: 200)
         
     }
@@ -97,6 +98,10 @@ class ExploreVC: UIViewController {
 
 //MARK: - Private Method
 extension ExploreVC {
+    
+    private func setArticleTableView() {
+        
+    }
     
     private func setThoughtCollectionView() {
         
@@ -268,7 +273,8 @@ extension ExploreVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
             return UICollectionViewCell()
         }
         // border 계산 다시하기
-        cell.layer.cornerRadius = 10
+        let deviceBound: CGFloat = UIScreen.main.bounds.width/375.0
+        cell.layer.cornerRadius = 6 * deviceBound * deviceBound * deviceBound
         cell.setAnswer()
         cell.backgroundColor = .white
         return cell
@@ -291,21 +297,20 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
                     .dequeueReusableCell(withIdentifier: CategoryTVC.identifier, for: indexPath)
                     as? CategoryTVC else { return UITableViewCell() }
             category.delegate = self
+            category.selectionStyle = .none
             return category
         } else if indexPath.row == cellNumber - 1 {
             guard let more = tableView
                     .dequeueReusableCell(withIdentifier: MoreTVC.identifier, for: indexPath)
                     as? MoreTVC else { return UITableViewCell() }
-            
-            more.isUserInteractionEnabled = false
-            
+            more.selectionStyle = .none
+            more.selectionStyle = .none
             return more
         } else {
             guard let article = tableView
                     .dequeueReusableCell(withIdentifier: ArticleTVC.identifier, for: indexPath)
                     as? ArticleTVC else { return UITableViewCell() }
-            
-            
+            article.selectionStyle = .none
             return article
         }
     }
@@ -321,8 +326,21 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.row == 0 {
+            // nothing
+        } else if indexPath.row == cellNumber - 1 {
+            
+        } else {
+            guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
+            
+            comment.modalPresentationStyle = .fullScreen
+            self.present(comment, animated: true, completion: nil)
+        }
+
+
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -351,8 +369,9 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
             }
             
         }
-        
     }
+    
+    
 }
 
 extension ExploreVC: CategoryButtonPressedDelegate {

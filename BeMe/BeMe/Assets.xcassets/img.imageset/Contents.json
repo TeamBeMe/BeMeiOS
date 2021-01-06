@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "icArrowUp.png",
+      "filename" : "img.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "icArrowUp@2x.png",
+      "filename" : "img@2x.png",
       "scale" : "2x"
     },
     {
-      "filename" : "icArrowUp@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "filename" : "img@3x.png",
+      "idiom" : "universal"
     }
   ],
   "info" : {

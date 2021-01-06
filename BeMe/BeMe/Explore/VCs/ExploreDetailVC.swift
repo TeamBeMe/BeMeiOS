@@ -48,25 +48,7 @@ class ExploreDetailVC: UIViewController {
 //MARK: - Private Method
 extension ExploreDetailVC {
     private func setPopupBackgroundView() {
-        popupBackgroundView.backgroundColor = .black
-        view.addSubview(popupBackgroundView)
-        popupBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-        popupBackgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-        popupBackgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        popupBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-        popupBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
-        popupBackgroundView.isHidden = true
-        popupBackgroundView.alpha = 0
-        view.bringSubviewToFront(popupBackgroundView)
-    }
-    
-    private func animatePopupBackground(_ direction: Bool) {
-        let duration: TimeInterval = direction ? 0.35 : 0.15
-        let alpha: CGFloat = direction ? 0.40 : 0.0
-        self.popupBackgroundView.isHidden = !direction
-        UIView.animate(withDuration: duration) {
-            self.popupBackgroundView.alpha = alpha
-        }
+        popupBackgroundView.setPopupBackgroundView(to: view)
     }
     
     private func setNotificationCenter() {
@@ -74,7 +56,7 @@ extension ExploreDetailVC {
     }
     
     @objc func closePopup() {
-        animatePopupBackground(false)
+        popupBackgroundView.animatePopupBackground(false)
     }
 }
 
@@ -156,7 +138,7 @@ extension ExploreDetailVC: UITableViewButtonSelectedDelegate {
     
     func settingButtonDidTapped() {
         
-        animatePopupBackground(true)
+        popupBackgroundView.animatePopupBackground(true)
         guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheet.identifier) as?
                 CustomActionSheet else { return }
         

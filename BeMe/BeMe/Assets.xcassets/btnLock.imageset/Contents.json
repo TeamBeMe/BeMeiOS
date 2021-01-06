@@ -1,19 +1,19 @@
 {
   "images" : [
     {
-      "scale" : "1x",
       "filename" : "btnLock.png",
+      "scale" : "1x",
       "idiom" : "universal"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "btnLock@2x.png"
+      "filename" : "btnLock@2x.png",
+      "scale" : "2x"
     },
     {
+      "scale" : "3x",
       "idiom" : "universal",
-      "filename" : "btnLock@3x.png",
-      "scale" : "3x"
+      "filename" : "btnLock@3x.png"
     }
   ],
   "info" : {
