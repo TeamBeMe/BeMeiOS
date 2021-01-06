@@ -10,7 +10,7 @@
         <!--Navigation Controller-->
         <scene sceneID="o2R-Va-rGT">
             <objects>
-                <navigationController navigationBarHidden="YES" id="jzD-Yr-ySL" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="UnderTabBarController" navigationBarHidden="YES" id="jzD-Yr-ySL" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="jDX-7Q-mZk">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
