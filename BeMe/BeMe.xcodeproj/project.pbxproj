@@ -14,9 +14,6 @@
 		A501410325A39C34001099E8 /* MypageTabCRV.swift in Sources */ = {isa = PBXBuildFile; fileRef = A501410225A39C34001099E8 /* MypageTabCRV.swift */; };
 		A51CA35F25A57D2F0020F26D /* MypageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51CA35E25A57D2E0020F26D /* MypageVC.swift */; };
 		A51CA36325A57D430020F26D /* Mypage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A51CA36225A57D430020F26D /* Mypage.storyboard */; };
-		A51CA36625A57DBA0020F26D /* Answer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A51CA36525A57DBA0020F26D /* Answer.storyboard */; };
-		A51CA36925A57DBE0020F26D /* AnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51CA36825A57DBE0020F26D /* AnswerVC.swift */; };
-		A578D4F025A0C4E600F69908 /* Mypage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A578D4EF25A0C4E600F69908 /* Mypage.storyboard */; };
 		A57F708C25A1ACB100152E89 /* MypageResultTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F708B25A1ACB100152E89 /* MypageResultTVC.swift */; };
 		A5CCCD9E25A334EA008A3125 /* MypageMyScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */; };
 		A5CCCDA125A33512008A3125 /* MypageOthersScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */; };
@@ -860,11 +857,9 @@
 			files = (
 				EC89E306259C1CA600DBAFE5 /* FollowSearch.storyboard in Resources */,
 				D492E43525A0E14C0088A181 /* CustomActionSheet.storyboard in Resources */,
-				A51CA36625A57DBA0020F26D /* Answer.storyboard in Resources */,
 				EC7C160F259B8B8100A5BA4C /* Following.storyboard in Resources */,
 				D4E07CB9259F22C10075E616 /* Explore.storyboard in Resources */,
 				EC5C200A25A47208008EE335 /* LogIn.storyboard in Resources */,
-				A578D4F025A0C4E600F69908 /* Mypage.storyboard in Resources */,
 				EC7C1618259B933F00A5BA4C /* FollowInfo.storyboard in Resources */,
 				A51CA36325A57D430020F26D /* Mypage.storyboard in Resources */,
 				EC813F302599A15200BBCE25 /* LaunchScreen.storyboard in Resources */,
@@ -972,7 +967,6 @@
 				EC7FEFA825A38AF100C61147 /* SearchVC.swift in Sources */,
 				EC89E319259C281100DBAFE5 /* FollowerSearchCVC.swift in Sources */,
 				EC7C1627259B9CE200A5BA4C /* FollowingCardCVC.swift in Sources */,
-				A51CA36925A57DBE0020F26D /* AnswerVC.swift in Sources */,
 				EC5C202325A4C818008EE335 /* LogInData.swift in Sources */,
 				EC89E30C259C273400DBAFE5 /* FollowingSearchVC.swift in Sources */,
 				EC7C1605259B485D00A5BA4C /* CustomAlertView.swift in Sources */,

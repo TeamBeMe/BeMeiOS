@@ -106,7 +106,7 @@ extension MypageCVC : UICollectionViewDelegateFlowLayout {
         
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "soptBanner", for: indexPath)
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MypageTabCRV.identifier, for: indexPath)
             return headerView
         default:
             assert(false, "응 아니야")

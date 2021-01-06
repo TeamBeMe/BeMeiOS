@@ -11,7 +11,7 @@ class MypageVC: UIViewController {
     
     //MARK:**- IBOutlet Part**
     @IBOutlet weak var MypageCV: UICollectionView!
-    
+
     
     //MARK:**- Variable Part**
     
@@ -28,6 +28,14 @@ class MypageVC: UIViewController {
         MypageCV.delegate = self
         MypageCV.dataSource = self
         
+        if #available(iOS 11.0, *) {
+            MypageCV.automaticallyAdjustsScrollIndicatorInsets = false
+        } else {
+            automaticallyAdjustsScrollViewInsets = false
+        }
+        
+        
+        print("********************\(MypageCV.adjustedContentInset)")
     }
     
     //MARK:**- IBAction Part**
@@ -101,13 +109,16 @@ extension MypageVC : UICollectionViewDataSource {
     
     
     
-    
 }
 
 extension MypageVC : UICollectionViewDelegateFlowLayout {
+    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+//            layout.sectionHeadersPinToVisibleBounds = true
+//        }
         if indexPath.item <= 1 {
             return CGSize(width: collectionView.frame.width  , height: 748)
         }
@@ -115,6 +126,18 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
             return CGSize(width: collectionView.frame.width  , height: 748)
         }
     }
+    
+    
+    // header size
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if (section == 0) {
+            return CGSize(width: collectionView.frame.width, height: 300)
+        } else {
+             //refact
+            return CGSize.zero
+        }
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -134,11 +157,16 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
         
     }
     
-    
-
-    
+    // collectionview heaeder 사용
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView{
+        
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MypageCRV.identifier, for: indexPath)
+            return headerView
+        default:
+            assert(false, "응 아니야")
+            
+        }
+    }
 }
-
-
-
-
