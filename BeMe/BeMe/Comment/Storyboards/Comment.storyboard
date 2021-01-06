@@ -2440,6 +2440,9 @@
                                                                     <state key="normal" title="답글달기">
                                                                         <color key="titleColor" systemColor="labelColor"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="sendAnswerButtonTapped:" destination="B5h-Uh-Bz5" eventType="touchUpInside" id="QhR-7D-9k1"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                         </stackView>

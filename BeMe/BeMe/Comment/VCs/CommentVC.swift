@@ -270,15 +270,22 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
     
     func moreAnswerButtonDidTapped(to indexPath: IndexPath) {
         
-        guard let detailVC = UIStoryboard.init(name: "Explore", bundle: nil).instantiateViewController(identifier: "ExploreDetailVC") as? ExploreDetailVC else { return }
-        self.dismiss(animated: true, completion: {
-            guard let nowVC = self.presentingViewController else { return }
-            
-            print("nowVC")
-            print(nowVC)
-            nowVC.navigationController?.pushViewController(detailVC, animated: true)
-        })
+//        guard let detailVC = UIStoryboard.init(name: "Explore", bundle: nil).instantiateViewController(identifier: "ExploreDetailVC") as? ExploreDetailVC else { return }
+//        self.dismiss(animated: true, completion: {
+//            guard let nowVC = self.presentingViewController else { return }
+//
+//            print("nowVC")
+//            print(nowVC)
+//            nowVC.navigationController?.pushViewController(detailVC, animated: true)
+//        })
     }
+    
+    func sendCommentButtonDidTapped(to indexPath: IndexPath) {
+        
+        commentTextView.becomeFirstResponder()
+        commentTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+    }
+    
 }
 
 //MARK: - TextField
@@ -289,13 +296,5 @@ extension CommentVC: UITextViewDelegate {
             commentSendButton.isHidden = textView.text.isEmpty
         }
     }
-    
 }
 
-extension UIScrollView {
-    
-    func setContentInsetAndScrollIndicatorInsets(_ edgeInsets: UIEdgeInsets) {
-           self.contentInset = edgeInsets
-           self.scrollIndicatorInsets = edgeInsets
-    }
-}

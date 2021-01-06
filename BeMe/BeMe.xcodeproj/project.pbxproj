@@ -18,6 +18,7 @@
 		A57F708C25A1ACB100152E89 /* MypageResultTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F708B25A1ACB100152E89 /* MypageResultTVC.swift */; };
 		A5CCCD9E25A334EA008A3125 /* MypageMyScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */; };
 		A5CCCDA125A33512008A3125 /* MypageOthersScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */; };
+		D41196B125A640FC009C674A /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41196B025A640FC009C674A /* UIScrollView+Extensions.swift */; };
 		D44F6D9D25A575E0002A9761 /* UITableViewButtonSelectedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F6D9C25A575E0002A9761 /* UITableViewButtonSelectedDelegate.swift */; };
 		D44F6DC425A5784A002A9761 /* Answer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D44F6DC125A5784A002A9761 /* Answer.storyboard */; };
 		D44F6DC525A5784A002A9761 /* AnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F6DC325A5784A002A9761 /* AnswerVC.swift */; };
@@ -133,6 +134,7 @@
 		A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageMyScrapTVC.swift; sourceTree = "<group>"; };
 		A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageOthersScrapTVC.swift; sourceTree = "<group>"; };
 		B2F0C2D2FD99AEF5B492AAB9 /* Pods-BeMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.release.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.release.xcconfig"; sourceTree = "<group>"; };
+		D41196B025A640FC009C674A /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIScrollView+Extensions.swift"; path = "../../../../../../Desktop/UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
 		D44F6D9C25A575E0002A9761 /* UITableViewButtonSelectedDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewButtonSelectedDelegate.swift; sourceTree = "<group>"; };
 		D44F6DC125A5784A002A9761 /* Answer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Answer.storyboard; sourceTree = "<group>"; };
 		D44F6DC325A5784A002A9761 /* AnswerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerVC.swift; sourceTree = "<group>"; };
@@ -688,6 +690,7 @@
 			isa = PBXGroup;
 			children = (
 				EC813F602599F3E900BBCE25 /* UIColor+Extensions.swift */,
+				D41196B025A640FC009C674A /* UIScrollView+Extensions.swift */,
 				EC813F642599F40800BBCE25 /* UIView+Extensions.swift */,
 				EC7C1600259B469D00A5BA4C /* UIViewController+Extensions.swift */,
 				D4E5FD36259E710200C57950 /* UIButton+Extensions.swift */,
@@ -1014,6 +1017,7 @@
 				EC813F262599A15100BBCE25 /* SceneDelegate.swift in Sources */,
 				EC89E30F259C274200DBAFE5 /* FollowerSearchVC.swift in Sources */,
 				EC7C1634259BAD0600A5BA4C /* FollowerPersonCVC.swift in Sources */,
+				D41196B125A640FC009C674A /* UIScrollView+Extensions.swift in Sources */,
 				D44F6DFC25A5BDAD002A9761 /* QuestionAnswerTVC.swift in Sources */,
 				D44F6DC525A5784A002A9761 /* AnswerVC.swift in Sources */,
 			);

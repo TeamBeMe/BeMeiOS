@@ -33,4 +33,9 @@ class CommentTVC: UITableViewCell {
         
         delegate?.moreCellButtonDidTapped(to: indexPath!)
     }
+    
+    @IBAction func sendAnswerButtonTapped(_ sender: UIButton) {
+        
+        delegate?.sendCommentButtonDidTapped(to: indexPath!)
+    }
 }
