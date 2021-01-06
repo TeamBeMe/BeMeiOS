@@ -12,6 +12,7 @@
 		A50140FD25A39BFA001099E8 /* MypageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50140FC25A39BFA001099E8 /* MypageCVC.swift */; };
 		A501410025A39C18001099E8 /* MypageTabCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50140FF25A39C18001099E8 /* MypageTabCVC.swift */; };
 		A501410325A39C34001099E8 /* MypageTabCRV.swift in Sources */ = {isa = PBXBuildFile; fileRef = A501410225A39C34001099E8 /* MypageTabCRV.swift */; };
+		A5196BC325A5C8E10044413D /* MypageSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5196BC225A5C8E10044413D /* MypageSearch.storyboard */; };
 		A51CA35F25A57D2F0020F26D /* MypageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51CA35E25A57D2E0020F26D /* MypageVC.swift */; };
 		A51CA36325A57D430020F26D /* Mypage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A51CA36225A57D430020F26D /* Mypage.storyboard */; };
 		A57F708C25A1ACB100152E89 /* MypageResultTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F708B25A1ACB100152E89 /* MypageResultTVC.swift */; };
@@ -121,6 +122,7 @@
 		A50140FC25A39BFA001099E8 /* MypageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageCVC.swift; sourceTree = "<group>"; };
 		A50140FF25A39C18001099E8 /* MypageTabCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageTabCVC.swift; sourceTree = "<group>"; };
 		A501410225A39C34001099E8 /* MypageTabCRV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageTabCRV.swift; sourceTree = "<group>"; };
+		A5196BC225A5C8E10044413D /* MypageSearch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MypageSearch.storyboard; sourceTree = "<group>"; };
 		A51CA35E25A57D2E0020F26D /* MypageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MypageVC.swift; sourceTree = "<group>"; };
 		A51CA36225A57D430020F26D /* Mypage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Mypage.storyboard; sourceTree = "<group>"; };
 		A51CA36525A57DBA0020F26D /* Answer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Answer.storyboard; sourceTree = "<group>"; };
@@ -261,6 +263,37 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A5196BBE25A5C5AB0044413D /* Otherspage */ = {
+			isa = PBXGroup;
+			children = (
+				A5196BC125A5C6000044413D /* Cells */,
+				A5196BC025A5C5C00044413D /* Storyboards */,
+				A5196BBF25A5C5BA0044413D /* VCs */,
+			);
+			path = Otherspage;
+			sourceTree = "<group>";
+		};
+		A5196BBF25A5C5BA0044413D /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
+		A5196BC025A5C5C00044413D /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		A5196BC125A5C6000044413D /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		A51CA35D25A57D1F0020F26D /* VCs */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +306,7 @@
 			isa = PBXGroup;
 			children = (
 				A51CA36225A57D430020F26D /* Mypage.storyboard */,
+				A5196BC225A5C8E10044413D /* MypageSearch.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -654,6 +688,7 @@
 		EC813F222599A15100BBCE25 /* BeMe */ = {
 			isa = PBXGroup;
 			children = (
+				A5196BBE25A5C5AB0044413D /* Otherspage */,
 				D44F6DBF25A5784A002A9761 /* Answer */,
 				D44F6D9B25A575E0002A9761 /* Protocols */,
 				D4F198EA25A4359E000AF0E7 /* Comment */,
@@ -860,6 +895,7 @@
 				EC7C160F259B8B8100A5BA4C /* Following.storyboard in Resources */,
 				D4E07CB9259F22C10075E616 /* Explore.storyboard in Resources */,
 				EC5C200A25A47208008EE335 /* LogIn.storyboard in Resources */,
+				A5196BC325A5C8E10044413D /* MypageSearch.storyboard in Resources */,
 				EC7C1618259B933F00A5BA4C /* FollowInfo.storyboard in Resources */,
 				A51CA36325A57D430020F26D /* Mypage.storyboard in Resources */,
 				EC813F302599A15200BBCE25 /* LaunchScreen.storyboard in Resources */,
