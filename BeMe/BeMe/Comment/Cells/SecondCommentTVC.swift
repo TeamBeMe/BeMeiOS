@@ -11,9 +11,10 @@ class SecondCommentTVC: UITableViewCell {
     static let identifier: String = "SecondCommentTVC"
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var contentTextViewHeight: NSLayoutConstraint!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentTextViewHeight.constant = contentTextView.contentSize.height
+//        contentTextViewHeight.constant = contentTextView.contentSize.height
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
