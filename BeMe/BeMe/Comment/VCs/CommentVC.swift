@@ -11,7 +11,7 @@ import UIKit
 
 struct CommentA {
     let comment: String
-    let children: [CommentA]?
+    var children: [CommentA]?
     var open: Bool
 }
 class CommentVC: UIViewController {
@@ -33,6 +33,10 @@ class CommentVC: UIViewController {
     var isMoreButtonHidden: Bool?
     
     var isMyAnswer: Bool = false
+    
+    var isCommentToComment: Bool = false
+    
+    var selectedIndex: IndexPath?
     
     var isScrapped: Bool = false {
         didSet {
@@ -119,11 +123,33 @@ class CommentVC: UIViewController {
     @IBAction func commentSendButtonTapped(_ sender: UIButton) {
         
         // 서버 통신
+        
         if let comment = commentTextView.text {
-            commentArray.append(CommentA(comment: comment, children: [], open: false))
+            if isCommentToComment {
+                
+                if let selectedIndex = selectedIndex {
+                    
+                    commentArray[selectedIndex.section - 1].children?.append(CommentA(comment: comment, children: [], open: false))
+                    
+                    print("대댓글써지나?")
+                    commentTableView.reloadData()
+                    commentTableView.scrollToRow(at: selectedIndex, at: .bottom, animated: true)
+                }
+                
+                
+                isCommentToComment = false
+            } else {
+                commentArray.append(CommentA(comment: comment, children: [], open: false))
+                
+                commentTableView.reloadData()
+                commentTableView.scrollToRow(at: IndexPath.init(row: 0, section: commentArray.endIndex), at: .bottom, animated: true)
+            }
+           
         }
-        commentTableView.reloadData()
-        commentTableView.scrollToRow(at: IndexPath.init(row: 0, section: commentArray.endIndex), at: .bottom, animated: true)
+
+        commentTextView.text = ""
+        
+        
     }
     
     @IBAction func lockButtonTapped(_ sender: UIButton) {
@@ -319,6 +345,9 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
         
         commentTextView.becomeFirstResponder()
         commentTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+        selectedIndex = indexPath
+        isCommentToComment = true
+        
     }
     
     

@@ -18,7 +18,7 @@ class QuestionAnswerTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        moreAnswerButton.makeRound(to: 4)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

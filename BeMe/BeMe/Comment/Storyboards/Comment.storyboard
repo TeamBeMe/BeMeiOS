@@ -1826,7 +1826,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hca-ti-H8F">
-                                <rect key="frame" x="0.0" y="88" width="375" height="690.00000000000011"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="689.99999999999989"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="QuestionAnswerTVC" id="2M5-5L-veZ" customClass="QuestionAnswerTVC" customModule="BeMe" customModuleProvider="target">
@@ -2175,10 +2175,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SecondCommentTVC" id="J96-r2-zPW" customClass="SecondCommentTVC" customModule="BeMe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1108.0000152587891" width="375" height="124.33333587646484"/>
+                                        <rect key="frame" x="0.0" y="1108.0000152587891" width="375" height="90.666664123535156"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J96-r2-zPW" id="2yU-ax-3Bp">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="124.33333587646484"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="90.666664123535156"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="rfc-1A-nSY">
@@ -2218,8 +2218,8 @@
                                                         </stackView>
                                                     </subviews>
                                                 </stackView>
-                                                <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" scrollEnabled="NO" contentInsetAdjustmentBehavior="never" text="척박하고 각박한 세상에... 새소년의 눈을 들으며...시험기간 내 마음을 달래주는 당신들의 목도리 이벤트를 참여합니다.." translatesAutoresizingMaskIntoConstraints="NO" id="7Sz-cR-b5P">
-                                                    <rect key="frame" x="104" y="29" width="251" height="66.666666666666671"/>
+                                                <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" verticalHuggingPriority="251" scrollEnabled="NO" contentInsetAdjustmentBehavior="never" text="대댓글" translatesAutoresizingMaskIntoConstraints="NO" id="7Sz-cR-b5P">
+                                                    <rect key="frame" x="104" y="29" width="251" height="33"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="250" constant="1" id="cGW-7b-y9x"/>
@@ -2229,7 +2229,7 @@
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12월 23일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ogP-yQ-RHF">
-                                                    <rect key="frame" x="108" y="96.666666666666671" width="243" height="14.666666666666671"/>
+                                                    <rect key="frame" x="108" y="62.999999999999993" width="243" height="14.666666666666664"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" priority="250" constant="154.5" id="i6m-Ov-yLO"/>
                                                     </constraints>
@@ -2253,7 +2253,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SecretTVC" id="Zwe-IT-Ojd" customClass="SecretTVC" customModule="BeMe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1232.3333511352539" width="375" height="137.66667175292969"/>
+                                        <rect key="frame" x="0.0" y="1198.6666793823242" width="375" height="137.66667175292969"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zwe-IT-Ojd" id="qFz-C0-uNK">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="137.66667175292969"/>
@@ -2479,7 +2479,7 @@
             <color red="0.039000000804662704" green="0.51800000667572021" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="seperatorColor">
-            <color red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78799998760223389" green="0.78799998760223389" blue="0.78799998760223389" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
