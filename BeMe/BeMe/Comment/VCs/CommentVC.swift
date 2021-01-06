@@ -22,7 +22,7 @@ class CommentVC: UIViewController {
     @IBOutlet weak var commentTextWrapper: UIView!
     @IBOutlet weak var commentBorderView: UIView!
     @IBOutlet weak var commentTextView: UITextView!
-    @IBOutlet weak var lockButton: UIView!
+    @IBOutlet weak var lockButton: UIButton!
     @IBOutlet weak var commentSendButton: UIButton!
     @IBOutlet weak var commentTextWrapperBottomAnchor: NSLayoutConstraint!
     lazy var popupBackgroundView: UIView = UIView()
@@ -38,6 +38,8 @@ class CommentVC: UIViewController {
             
         }
     }
+    
+    var isCommentLocked: Bool = false
     
     private var commentArray: [CommentA] = [
         CommentA(comment: "안녕!", children: [CommentA(comment: "오! 안녕!", children: [], open: false),
@@ -106,6 +108,17 @@ class CommentVC: UIViewController {
         commentTableView.scrollToRow(at: IndexPath.init(row: 0, section: commentArray.endIndex), at: .bottom, animated: true)
     }
     
+    @IBAction func lockButtonTapped(_ sender: UIButton) {
+        
+        if isCommentLocked {
+            isCommentLocked = false
+            lockButton.setImage(UIImage.init(named: "btnUnlock"), for: .normal)
+        } else {
+            isCommentLocked = true
+            lockButton.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
+        }
+        
+    }
 }
 
 //MARK: - Private Method

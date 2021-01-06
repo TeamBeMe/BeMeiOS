@@ -1826,7 +1826,7 @@
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hca-ti-H8F">
-                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
+                                <rect key="frame" x="0.0" y="88" width="375" height="690.00000000000011"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="QuestionAnswerTVC" id="2M5-5L-veZ" customClass="QuestionAnswerTVC" customModule="BeMe" customModuleProvider="target">
@@ -2367,6 +2367,9 @@
                                             <constraint firstAttribute="width" constant="36" id="xna-sY-YzL"/>
                                         </constraints>
                                         <state key="normal" image="btnUnlock"/>
+                                        <connections>
+                                            <action selector="lockButtonTapped:" destination="CUp-WV-7Pi" eventType="touchUpInside" id="EUR-3K-1b5"/>
+                                        </connections>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="io2-te-fuu">
                                         <rect key="frame" x="30" y="16" width="279" height="50"/>
@@ -2448,7 +2451,7 @@
                         <outlet property="commentTextView" destination="s3v-Vk-fPt" id="0f8-Pe-ucj"/>
                         <outlet property="commentTextWrapper" destination="O6P-Fc-4Wx" id="CGh-c8-6Xy"/>
                         <outlet property="commentTextWrapperBottomAnchor" destination="lnX-c6-2C6" id="Qy9-fh-JuJ"/>
-                        <outlet property="lockButton" destination="ag1-5a-RcA" id="5U2-5x-ezj"/>
+                        <outlet property="lockButton" destination="XEA-qM-J8r" id="AcF-7x-fjR"/>
                         <outlet property="scrapButton" destination="aVQ-2G-6Ty" id="xya-ea-rF0"/>
                     </connections>
                 </viewController>
