@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--CommentVC-->
+        <!--View Controller-->
         <scene sceneID="YQ8-ZV-NQh">
             <objects>
-                <viewController storyboardIdentifier="CommentVC" id="nbU-Im-QwT" customClass="CommentVC" customModule="BeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="nbU-Im-QwT" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Pn6-3K-hNW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1769,12 +1769,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ij-CF-MD2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-443.47826086956525" y="325.44642857142856"/>
+            <point key="canvasLocation" x="114" y="1335"/>
         </scene>
-        <!--Comment TestVC-->
+        <!--CommentVC-->
         <scene sceneID="9E2-Mj-bJS">
             <objects>
-                <viewController storyboardIdentifier="CommentTestVC" id="CUp-WV-7Pi" customClass="CommentTestVC" customModule="BeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CommentVC" id="CUp-WV-7Pi" customClass="CommentVC" customModule="BeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4FR-gW-Fl3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -5287,7 +5287,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BIb-8S-06s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="676.81159420289862" y="324.77678571428572"/>
+            <point key="canvasLocation" x="632" y="162"/>
         </scene>
     </scenes>
     <resources>
