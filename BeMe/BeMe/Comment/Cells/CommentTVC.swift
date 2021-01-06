@@ -11,11 +11,9 @@ class CommentTVC: UITableViewCell {
     static let identifier: String = "CommentTVC"
     
     @IBOutlet weak var contentTextView: UITextView!
-    @IBOutlet weak var contentTextViewHeight: NSLayoutConstraint!
     @IBOutlet weak var moreCommentLabel: UILabel!
     @IBOutlet weak var moreImageView: UIImageView!
     @IBOutlet weak var moreCommentView: UIView!
-    @IBOutlet weak var moreCommentViewHeight: NSLayoutConstraint!
     
     weak var delegate: UITableViewButtonSelectedDelegate?
     
@@ -34,5 +32,15 @@ class CommentTVC: UITableViewCell {
     @IBAction func moreCommentButtonTapped(_ sender: UIButton) {
         
         delegate?.moreCellButtonDidTapped(to: indexPath!)
+    }
+    
+    @IBAction func settingButtonTapped(_ sender: UIButton) {
+        
+        delegate?.settingButtonDidTapped(to: indexPath!)
+    }
+    
+    @IBAction func sendAnswerButtonTapped(_ sender: UIButton) {
+        
+        delegate?.sendCommentButtonDidTapped(to: indexPath!)
     }
 }

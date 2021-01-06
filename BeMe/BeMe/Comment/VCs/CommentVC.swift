@@ -11,7 +11,7 @@ import UIKit
 
 struct CommentA {
     let comment: String
-    let children: [CommentA]?
+    var children: [CommentA]?
     var open: Bool
 }
 class CommentVC: UIViewController {
@@ -19,17 +19,32 @@ class CommentVC: UIViewController {
     @IBOutlet weak var commentTableView: UITableView!
     @IBOutlet weak var scrapButton: UIButton!
     
+    @IBOutlet weak var commentTextWrapper: UIView!
+    @IBOutlet weak var commentBorderView: UIView!
+    @IBOutlet weak var commentTextView: UITextView!
+    @IBOutlet weak var lockButton: UIButton!
+    @IBOutlet weak var commentSendButton: UIButton!
+    @IBOutlet weak var commentTextWrapperBottomAnchor: NSLayoutConstraint!
+    
     lazy var popupBackgroundView: UIView = UIView()
     
-    var isMoreButtonHidden: Bool = true
+    var pageNumber: Int?
     
-    var isMyAnswer: Bool = true
-        
+    var isMoreButtonHidden: Bool?
+    
+    var isMyAnswer: Bool = false
+    
+    var isCommentToComment: Bool = false
+    
+    var selectedIndex: IndexPath?
+    
     var isScrapped: Bool = false {
         didSet {
             
         }
     }
+    
+    var isCommentLocked: Bool = false
     
     private var commentArray: [CommentA] = [
         CommentA(comment: "안녕!", children: [CommentA(comment: "오! 안녕!", children: [], open: false),
@@ -43,18 +58,44 @@ class CommentVC: UIViewController {
                                                 CommentA(comment: "오! 안녕!", children: [], open: false)], open: false),
     ]
     
+    
+    //MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setPopupView()
         setCommentTableView()
         setNotificationCenter()
+        setCommentView()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     
-    
     @IBAction func dismissButtonTapped(_ sender: UIButton) {
+        let text = commentTextView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if text.isEmpty || text == "댓글 달기" {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            let alertVC = UIAlertController(title: "지금 뒤로가면 댓글이 삭제됩니다.\n뒤로 가시겠습니까?", message: "", preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "취소", style: .destructive, handler: {_ in
+                
+            })
+            let ok = UIAlertAction(title: "삭제", style: .default, handler: {
+                _ in
+                self.dismiss(animated: true, completion: nil)
+            })
+            alertVC.addAction(cancel)
+            alertVC.addAction(ok)
+            self.present(alertVC, animated: true, completion: nil)
+        }
         
-        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func scrapButtonTapped(_ sender: UIButton) {
@@ -67,26 +108,80 @@ class CommentVC: UIViewController {
             scrapButton.setImage(UIImage(named: "btnScrapSelected"), for: .normal)
         }
     }
+    
     @IBAction func moreSettngButtonTapped(_ sender: Any) {
         popupBackgroundView.animatePopupBackground(true)
-        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheet.identifier) as?
-                CustomActionSheet else { return }
+        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetVC.identifier) as?
+                CustomActionSheetVC else { return }
         
+        settingActionSheet.color = .black
+        settingActionSheet.alertInformations = AlertLabels.article
         settingActionSheet.modalPresentationStyle = .overCurrentContext
         self.present(settingActionSheet, animated: true, completion: nil)
     }
-
     
+    @IBAction func commentSendButtonTapped(_ sender: UIButton) {
+        
+        // 서버 통신
+        
+        if let comment = commentTextView.text {
+            if isCommentToComment {
+                
+                if let selectedIndex = selectedIndex {
+                    
+                    commentArray[selectedIndex.section - 1].children?.append(CommentA(comment: comment, children: [], open: false))
+                    
+                    print("대댓글써지나?")
+                    commentTableView.reloadData()
+                    commentTableView.scrollToRow(at: selectedIndex, at: .bottom, animated: true)
+                }
+                
+                
+                isCommentToComment = false
+            } else {
+                commentArray.append(CommentA(comment: comment, children: [], open: false))
+                
+                commentTableView.reloadData()
+                commentTableView.scrollToRow(at: IndexPath.init(row: 0, section: commentArray.endIndex), at: .bottom, animated: true)
+            }
+           
+        }
+
+        commentTextView.text = ""
+        
+        
+    }
+    
+    @IBAction func lockButtonTapped(_ sender: UIButton) {
+        
+        if isCommentLocked {
+            isCommentLocked = false
+            lockButton.setImage(UIImage.init(named: "btnUnlock"), for: .normal)
+        } else {
+            isCommentLocked = true
+            lockButton.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
+        }
+        
+    }
 }
 
 //MARK: - Private Method
 extension CommentVC {
     
+    private func setCommentView() {
+        commentBorderView.setBorderWithRadius(borderColor: UIColor.Border.textView, borderWidth: 1.0, cornerRadius: 6.0)
+        commentTextView.text = "댓글 달기"
+        commentTextView.textColor = UIColor.lightGray
+        
+        
+    }
     private func setCommentTableView() {
         commentTableView.delegate = self
         commentTableView.dataSource = self
         commentTableView.estimatedRowHeight = 30
         commentTableView.rowHeight = UITableView.automaticDimension
+        commentTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 166, right: 0)
+        commentTableView.keyboardDismissMode = .onDrag
     }
     
     private func setPopupView() {
@@ -95,10 +190,48 @@ extension CommentVC {
     
     private func setNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(closePopup), name: .init("closePopupNoti"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc func closePopup() {
         popupBackgroundView.animatePopupBackground(false)
+    }
+    
+    
+    @objc func keyboardWillShow(_ sender: Notification) {
+        handleKeyboardIssue(sender, isAppearing: true)
+    }
+    
+    @objc func keyboardWillHide(_ sender: Notification) {
+        handleKeyboardIssue(sender, isAppearing: false)
+    }
+    
+    private func handleKeyboardIssue(_ notification: Notification, isAppearing: Bool) {
+        guard let userInfo = notification.userInfo as? [String: Any] else { return }
+        guard let keyboardAnimationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+        guard let keyboardHeight = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
+        
+        // 기기별 bottom safearea 계산하기
+        let heightConstant = isAppearing ? keyboardHeight - 34 : 0
+        
+        UIView.animate(withDuration: keyboardAnimationDuration, animations: {
+            self.commentTextWrapperBottomAnchor.constant = heightConstant
+            self.view.layoutIfNeeded()
+        }) { (_) in
+        }
+        
+        if isAppearing {
+            let inset = UIEdgeInsets(top: 0, left: 0, bottom: 61 + keyboardHeight, right: 0)
+            commentTableView.contentInset = inset
+            commentTableView.setContentInsetAndScrollIndicatorInsets(inset)
+        } else {
+            let inset = UIEdgeInsets(top: 0, left: 0, bottom: 166, right: 0)
+            commentTableView.contentInset = inset
+            commentTableView.setContentInsetAndScrollIndicatorInsets(inset)
+        }
+        
+        print(commentTextWrapperBottomAnchor.constant)
     }
 }
 
@@ -126,7 +259,11 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             guard let header = tableView.dequeueReusableCell(withIdentifier: QuestionAnswerTVC.identifier, for: indexPath) as? QuestionAnswerTVC else { return UITableViewCell() }
             
-            header.moreAnswerButton.isHidden = isMoreButtonHidden ? true : false
+            header.delegate = self
+            header.indexPath = indexPath
+            if let iMBH = isMoreButtonHidden {
+                header.moreAnswerButton.isHidden = iMBH
+            }
             header.profileView.isHidden = isMyAnswer
             return header
         } else {
@@ -135,7 +272,6 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                 
                 comment.delegate = self
                 comment.indexPath = indexPath
-                
                 if commentArray[indexPath.section-1].children!.count == 0 {
                     // 댓글 한개일 경우 "답글 보기" 없애는 로직 ******************고치기***********************
                     comment.moreCommentView.isHidden = true
@@ -186,13 +322,83 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
                     } else {
                         commentArray[index.section-1].open = true
                     }
-                    
                     let section = IndexSet.init(integer: indexPath.section)
-                    commentTableView.reloadSections(section, with: .fade)
-                    
-                    
+                    commentTableView.reloadSections(section, with: .none)
                 }
             }
         }
     }
+    
+    func moreAnswerButtonDidTapped(to indexPath: IndexPath) {
+        
+        //        guard let detailVC = UIStoryboard.init(name: "Explore", bundle: nil).instantiateViewController(identifier: "ExploreDetailVC") as? ExploreDetailVC else { return }
+        //        self.dismiss(animated: true, completion: {
+        //            guard let nowVC = self.presentingViewController else { return }
+        //
+        //            print("nowVC")
+        //            print(nowVC)
+        //            nowVC.navigationController?.pushViewController(detailVC, animated: true)
+        //        })
+    }
+    
+    func sendCommentButtonDidTapped(to indexPath: IndexPath) {
+        
+        commentTextView.becomeFirstResponder()
+        commentTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+        selectedIndex = indexPath
+        isCommentToComment = true
+        
+    }
+    
+    
+    func settingButtonDidTapped(to indexPath: IndexPath) {
+        
+        popupBackgroundView.animatePopupBackground(true)
+        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: nil).instantiateViewController(identifier: CustomActionSheetVC.identifier) as? CustomActionSheetVC else { return }
+        settingActionSheet.color = .red
+        settingActionSheet.alertInformations = AlertLabels.otherCommentMyArticle
+        self.present(settingActionSheet, animated: true, completion: nil)
+    }
 }
+
+//MARK: - TextField
+
+extension CommentVC: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        if textView == commentTextView {
+            
+            // 완료버튼 처리
+            let text = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+            commentSendButton.isHidden = text.isEmpty
+            
+            // max 5줄 설정
+//            let line = Int(textView.contentSize.height / textView.font!.lineHeight )
+//
+//
+//            if line <= 5 {
+//                textView.isScrollEnabled = false
+//            } else {
+//                textView.isScrollEnabled = true
+//            }
+            
+        }
+    }
+    
+    // TextView Place Holder
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.textColor == UIColor.lightGray {
+            textView.text = nil
+            textView.textColor = UIColor.black
+        }
+        
+    }
+    // TextView Place Holder
+    func textViewDidEndEditing(_ textView: UITextView) {
+        let text = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if text.isEmpty {
+            textView.text = "댓글 달기"
+            textView.textColor = UIColor.lightGray
+        }
+    }
+}
+

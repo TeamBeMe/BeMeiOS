@@ -80,4 +80,8 @@ extension UIColor {
         static let black: UIColor = { UIColor(white: 0.0, alpha: 1.0) }()
         static let text: UIColor = { UIColor(white: 1.0, alpha: 1.0) }()
     }
+    
+    enum Border {
+        static let textView: UIColor = { UIColor(red: 142.0 / 255.0, green: 142.0 / 255.0, blue: 147.0 / 255.0, alpha: 1.0) }()
+    }
 }
