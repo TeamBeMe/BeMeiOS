@@ -23,6 +23,7 @@ class CommentVC: UIViewController {
     @IBOutlet weak var commentBorderView: UIView!
     @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var lockButton: UIView!
+    @IBOutlet weak var commentSendButton: UIButton!
     @IBOutlet weak var commentTextWrapperBottomAnchor: NSLayoutConstraint!
     lazy var popupBackgroundView: UIView = UIView()
     
@@ -64,6 +65,7 @@ class CommentVC: UIViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -84,6 +86,7 @@ class CommentVC: UIViewController {
             scrapButton.setImage(UIImage(named: "btnScrapSelected"), for: .normal)
         }
     }
+    
     @IBAction func moreSettngButtonTapped(_ sender: Any) {
         popupBackgroundView.animatePopupBackground(true)
         guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheet.identifier) as?
@@ -94,6 +97,13 @@ class CommentVC: UIViewController {
     }
     
     @IBAction func commentSendButtonTapped(_ sender: UIButton) {
+        
+        // 서버 통신
+        if let comment = commentTextView.text {
+            commentArray.append(CommentA(comment: comment, children: [], open: false))
+        }
+        commentTableView.reloadData()
+        commentTableView.scrollToRow(at: IndexPath.init(row: 0, section: commentArray.endIndex), at: .bottom, animated: true)
     }
     
 }
@@ -136,7 +146,7 @@ extension CommentVC {
         handleKeyboardIssue(sender, isAppearing: false)
     }
     
-    fileprivate func handleKeyboardIssue(_ notification: Notification, isAppearing: Bool) {
+    private func handleKeyboardIssue(_ notification: Notification, isAppearing: Bool) {
         guard let userInfo = notification.userInfo as? [String: Any] else { return }
         guard let keyboardAnimationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
         guard let keyboardHeight = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
@@ -151,9 +161,13 @@ extension CommentVC {
         }
         
         if isAppearing {
-            commentTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 61 + keyboardHeight, right: 0)
+            let inset = UIEdgeInsets(top: 0, left: 0, bottom: 61 + keyboardHeight, right: 0)
+            commentTableView.contentInset = inset
+            commentTableView.setContentInsetAndScrollIndicatorInsets(inset)
         } else {
-            commentTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 166, right: 0)
+            let inset = UIEdgeInsets(top: 0, left: 0, bottom: 166, right: 0)
+            commentTableView.contentInset = inset
+            commentTableView.setContentInsetAndScrollIndicatorInsets(inset)
         }
         
         print(commentTextWrapperBottomAnchor.constant)
@@ -269,8 +283,19 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
 
 //MARK: - TextField
 
-extension CommentVC: UITextFieldDelegate {
+extension CommentVC: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        if textView == commentTextView {
+            commentSendButton.isHidden = textView.text.isEmpty
+        }
+    }
     
+}
+
+extension UIScrollView {
     
-    
+    func setContentInsetAndScrollIndicatorInsets(_ edgeInsets: UIEdgeInsets) {
+           self.contentInset = edgeInsets
+           self.scrollIndicatorInsets = edgeInsets
+    }
 }

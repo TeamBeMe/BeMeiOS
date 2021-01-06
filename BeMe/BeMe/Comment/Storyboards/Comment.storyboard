@@ -2716,7 +2716,7 @@
                                                     <outlet property="delegate" destination="CUp-WV-7Pi" id="ROo-b7-Yuw"/>
                                                 </connections>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzd-D0-DXh">
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tzd-D0-DXh">
                                                 <rect key="frame" x="235" y="9" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="30" id="CW4-8w-vRb"/>
@@ -2774,6 +2774,7 @@
                     </view>
                     <connections>
                         <outlet property="commentBorderView" destination="io2-te-fuu" id="0LZ-Z3-icZ"/>
+                        <outlet property="commentSendButton" destination="tzd-D0-DXh" id="bdd-Hm-oTX"/>
                         <outlet property="commentTableView" destination="hca-ti-H8F" id="T4C-a4-8sr"/>
                         <outlet property="commentTextView" destination="s3v-Vk-fPt" id="0f8-Pe-ucj"/>
                         <outlet property="commentTextWrapper" destination="O6P-Fc-4Wx" id="CGh-c8-6Xy"/>
