@@ -19,6 +19,7 @@
 		A5CCCD9E25A334EA008A3125 /* MypageMyScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */; };
 		A5CCCDA125A33512008A3125 /* MypageOthersScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */; };
 		D41196B125A640FC009C674A /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41196B025A640FC009C674A /* UIScrollView+Extensions.swift */; };
+		D41196B825A64E82009C674A /* CustomActionSheetTwoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41196B725A64E82009C674A /* CustomActionSheetTwoVC.swift */; };
 		D44F6D9D25A575E0002A9761 /* UITableViewButtonSelectedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F6D9C25A575E0002A9761 /* UITableViewButtonSelectedDelegate.swift */; };
 		D44F6DC425A5784A002A9761 /* Answer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D44F6DC125A5784A002A9761 /* Answer.storyboard */; };
 		D44F6DC525A5784A002A9761 /* AnswerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F6DC325A5784A002A9761 /* AnswerVC.swift */; };
@@ -27,7 +28,7 @@
 		D492E41A25A0A0DE0088A181 /* ExploreDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492E41925A0A0DE0088A181 /* ExploreDetailVC.swift */; };
 		D492E42F25A0CE5E0088A181 /* AnswerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492E42E25A0CE5E0088A181 /* AnswerTVC.swift */; };
 		D492E43525A0E14C0088A181 /* CustomActionSheet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D492E43425A0E14C0088A181 /* CustomActionSheet.storyboard */; };
-		D492E43825A0E16D0088A181 /* CustomActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492E43725A0E16D0088A181 /* CustomActionSheet.swift */; };
+		D492E43825A0E16D0088A181 /* CustomActionSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492E43725A0E16D0088A181 /* CustomActionSheetVC.swift */; };
 		D492E43B25A0E6250088A181 /* DetailMoreTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492E43A25A0E6250088A181 /* DetailMoreTVC.swift */; };
 		D492E44025A0E6A80088A181 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492E43F25A0E6A80088A181 /* UITableView+Extensions.swift */; };
 		D4E07CB9259F22C10075E616 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4E07CB2259F22C10075E616 /* Explore.storyboard */; };
@@ -135,6 +136,7 @@
 		A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageOthersScrapTVC.swift; sourceTree = "<group>"; };
 		B2F0C2D2FD99AEF5B492AAB9 /* Pods-BeMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.release.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.release.xcconfig"; sourceTree = "<group>"; };
 		D41196B025A640FC009C674A /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIScrollView+Extensions.swift"; path = "../../../../../../Desktop/UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
+		D41196B725A64E82009C674A /* CustomActionSheetTwoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionSheetTwoVC.swift; sourceTree = "<group>"; };
 		D44F6D9C25A575E0002A9761 /* UITableViewButtonSelectedDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewButtonSelectedDelegate.swift; sourceTree = "<group>"; };
 		D44F6DC125A5784A002A9761 /* Answer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Answer.storyboard; sourceTree = "<group>"; };
 		D44F6DC325A5784A002A9761 /* AnswerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerVC.swift; sourceTree = "<group>"; };
@@ -143,7 +145,7 @@
 		D492E41925A0A0DE0088A181 /* ExploreDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDetailVC.swift; sourceTree = "<group>"; };
 		D492E42E25A0CE5E0088A181 /* AnswerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerTVC.swift; sourceTree = "<group>"; };
 		D492E43425A0E14C0088A181 /* CustomActionSheet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomActionSheet.storyboard; sourceTree = "<group>"; };
-		D492E43725A0E16D0088A181 /* CustomActionSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionSheet.swift; sourceTree = "<group>"; };
+		D492E43725A0E16D0088A181 /* CustomActionSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionSheetVC.swift; sourceTree = "<group>"; };
 		D492E43A25A0E6250088A181 /* DetailMoreTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMoreTVC.swift; sourceTree = "<group>"; };
 		D492E43F25A0E6A80088A181 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
 		D4E07CB2259F22C10075E616 /* Explore.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Explore.storyboard; sourceTree = "<group>"; };
@@ -362,7 +364,8 @@
 		D492E43225A0E1090088A181 /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				D492E43725A0E16D0088A181 /* CustomActionSheet.swift */,
+				D492E43725A0E16D0088A181 /* CustomActionSheetVC.swift */,
+				D41196B725A64E82009C674A /* CustomActionSheetTwoVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -965,8 +968,9 @@
 				EC89E339259C507300DBAFE5 /* UnderTabBarController.swift in Sources */,
 				D4E07CBC259F22C10075E616 /* DiffThoughtCVC.swift in Sources */,
 				EC89E33F259C5EBB00DBAFE5 /* HomeCardCustomFlowLayout.swift in Sources */,
-				D492E43825A0E16D0088A181 /* CustomActionSheet.swift in Sources */,
+				D492E43825A0E16D0088A181 /* CustomActionSheetVC.swift in Sources */,
 				EC813F282599A15100BBCE25 /* ViewController.swift in Sources */,
+				D41196B825A64E82009C674A /* CustomActionSheetTwoVC.swift in Sources */,
 				EC7C1615259B925A00A5BA4C /* FollowingPVC.swift in Sources */,
 				EC813F772599F86900BBCE25 /* HomeVC.swift in Sources */,
 				EC813F812599F8A800BBCE25 /* AddCardCVC.swift in Sources */,

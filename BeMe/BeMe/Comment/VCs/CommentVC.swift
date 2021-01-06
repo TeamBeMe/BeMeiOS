@@ -25,6 +25,7 @@ class CommentVC: UIViewController {
     @IBOutlet weak var lockButton: UIButton!
     @IBOutlet weak var commentSendButton: UIButton!
     @IBOutlet weak var commentTextWrapperBottomAnchor: NSLayoutConstraint!
+    
     lazy var popupBackgroundView: UIView = UIView()
     
     var pageNumber: Int?
@@ -106,8 +107,8 @@ class CommentVC: UIViewController {
     
     @IBAction func moreSettngButtonTapped(_ sender: Any) {
         popupBackgroundView.animatePopupBackground(true)
-        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheet.identifier) as?
-                CustomActionSheet else { return }
+        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetVC.identifier) as?
+                CustomActionSheetVC else { return }
         
         settingActionSheet.modalPresentationStyle = .overCurrentContext
         self.present(settingActionSheet, animated: true, completion: nil)
@@ -318,6 +319,11 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
         commentTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
     }
     
+    func settingButtonTapped(to indexPath: IndexPath) {
+        
+        popupBackgroundView.animatePopupBackground(true)
+        
+    }
 }
 
 //MARK: - TextField

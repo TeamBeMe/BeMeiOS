@@ -15,7 +15,11 @@ class AnswerTVC: UITableViewCell {
     
     weak var delegate: UITableViewButtonSelectedDelegate?
     
+    var indexPath: IndexPath?
+    
     @IBOutlet weak var answerView: UIView!
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -41,6 +45,6 @@ class AnswerTVC: UITableViewCell {
     
     @IBAction func settingButtonTapped(_ sender: UIButton) {
         
-        delegate?.settingButtonDidTapped()
+        delegate?.settingButtonDidTapped(to: indexPath!)
     }
 }

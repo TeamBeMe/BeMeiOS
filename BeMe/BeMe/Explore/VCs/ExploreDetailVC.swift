@@ -98,6 +98,7 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
             
             answer.selectionStyle = .none
             answer.delegate = self
+            answer.indexPath = indexPath
             return answer
         }
         
@@ -165,8 +166,8 @@ extension ExploreDetailVC: UITableViewButtonSelectedDelegate {
     func settingButtonDidTapped() {
         
         popupBackgroundView.animatePopupBackground(true)
-        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheet.identifier) as?
-                CustomActionSheet else { return }
+        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetVC.identifier) as?
+                CustomActionSheetVC else { return }
         
         settingActionSheet.modalPresentationStyle = .overCurrentContext
         self.present(settingActionSheet, animated: true, completion: nil)

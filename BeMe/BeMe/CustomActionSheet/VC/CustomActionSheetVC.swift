@@ -7,9 +7,9 @@
 
 import UIKit
 
-class CustomActionSheet: UIViewController {
+class CustomActionSheetVC: UIViewController {
     
-    static let identifier: String = "CustomActionSheet"
+    static let identifier: String = "CustomActionSheetVC"
     
     @IBOutlet weak var wrapper: UIView!
     @IBOutlet weak var stackView: UIStackView!

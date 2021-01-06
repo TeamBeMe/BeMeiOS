@@ -2061,6 +2061,9 @@
                                                                         <constraint firstAttribute="width" constant="24" id="sAb-j6-guX"/>
                                                                     </constraints>
                                                                     <state key="normal" image="btnMore24"/>
+                                                                    <connections>
+                                                                        <action selector="settingButtonTapped:" destination="B5h-Uh-Bz5" eventType="touchUpInside" id="9es-90-vJU"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                         </stackView>
