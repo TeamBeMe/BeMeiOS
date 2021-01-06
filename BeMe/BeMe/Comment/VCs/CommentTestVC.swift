@@ -54,8 +54,8 @@ extension CommentTestVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            guard let header = tableView.dequeueReusableCell(withIdentifier: QuestionAnswerTVC.identifier, for: indexPath) as? QuestionAnswerTVC else { return UITableViewCell() }
-            
+            guard let header = tableView.dequeueReusableCell(withIdentifier: CommentQuestionTVC.identifier, for: indexPath) as? CommentQuestionTVC else { return UITableViewCell() }
+            print("HEEEL#################################")
             return header
         } else {
             if indexPath.row == 0 {
