@@ -74,8 +74,23 @@ class CommentVC: UIViewController {
     
     
     @IBAction func dismissButtonTapped(_ sender: UIButton) {
+        let text = commentTextView.text.trimmingCharacters(in: .whitespacesAndNewlines)
+        if text.isEmpty || text == "댓글 달기" {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            let alertVC = UIAlertController(title: "지금 뒤로가면 댓글이 삭제됩니다.\n뒤로 가시겠습니까?", message: "", preferredStyle: .alert)
+            let cancel = UIAlertAction(title: "취소", style: .destructive, handler: {_ in
+                
+            })
+            let ok = UIAlertAction(title: "삭제", style: .default, handler: {
+                _ in
+                self.dismiss(animated: true, completion: nil)
+            })
+            alertVC.addAction(cancel)
+            alertVC.addAction(ok)
+            self.present(alertVC, animated: true, completion: nil)
+        }
         
-        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func scrapButtonTapped(_ sender: UIButton) {
