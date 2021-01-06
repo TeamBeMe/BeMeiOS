@@ -23,6 +23,7 @@ class CommentVC: UIViewController {
     @IBOutlet weak var commentBorderView: UIView!
     @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var lockButton: UIView!
+    @IBOutlet weak var commentTextWrapperBottomAnchor: NSLayoutConstraint!
     lazy var popupBackgroundView: UIView = UIView()
     
     var pageNumber: Int?
@@ -49,13 +50,23 @@ class CommentVC: UIViewController {
                                                 CommentA(comment: "오! 안녕!", children: [], open: false)], open: false),
     ]
     
+    
+    //MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setPopupView()
         setCommentTableView()
         setNotificationCenter()
+        setCommentView()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     
     @IBAction func dismissButtonTapped(_ sender: UIButton) {
@@ -90,12 +101,16 @@ class CommentVC: UIViewController {
 //MARK: - Private Method
 extension CommentVC {
     
+    private func setCommentView() {
+        commentBorderView.setBorderWithRadius(borderColor: UIColor.Border.textView, borderWidth: 1.0, cornerRadius: 6.0)
+    }
     private func setCommentTableView() {
         commentTableView.delegate = self
         commentTableView.dataSource = self
         commentTableView.estimatedRowHeight = 30
         commentTableView.rowHeight = UITableView.automaticDimension
         commentTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 166, right: 0)
+        commentTableView.keyboardDismissMode = .onDrag
     }
     
     private func setPopupView() {
@@ -104,10 +119,44 @@ extension CommentVC {
     
     private func setNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(closePopup), name: .init("closePopupNoti"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc func closePopup() {
         popupBackgroundView.animatePopupBackground(false)
+    }
+    
+    
+    @objc func keyboardWillShow(_ sender: Notification) {
+        handleKeyboardIssue(sender, isAppearing: true)
+    }
+    
+    @objc func keyboardWillHide(_ sender: Notification) {
+        handleKeyboardIssue(sender, isAppearing: false)
+    }
+    
+    fileprivate func handleKeyboardIssue(_ notification: Notification, isAppearing: Bool) {
+        guard let userInfo = notification.userInfo as? [String: Any] else { return }
+        guard let keyboardAnimationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+        guard let keyboardHeight = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height else { return }
+        
+        // 기기별 bottom safearea 계산하기
+        let heightConstant = isAppearing ? keyboardHeight - 34 : 0
+        
+        UIView.animate(withDuration: keyboardAnimationDuration, animations: {
+            self.commentTextWrapperBottomAnchor.constant = heightConstant
+            self.view.layoutIfNeeded()
+        }) { (_) in
+        }
+        
+        if isAppearing {
+            commentTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 61 + keyboardHeight, right: 0)
+        } else {
+            commentTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 166, right: 0)
+        }
+        
+        print(commentTextWrapperBottomAnchor.constant)
     }
 }
 
@@ -221,6 +270,7 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
 //MARK: - TextField
 
 extension CommentVC: UITextFieldDelegate {
+    
     
     
 }
