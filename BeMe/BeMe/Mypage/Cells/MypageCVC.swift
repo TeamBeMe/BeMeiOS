@@ -101,6 +101,18 @@ extension MypageCVC : UICollectionViewDelegateFlowLayout {
         
     }
     
+    // collectionview heaeder 사용
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView{
+        
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "soptBanner", for: indexPath)
+            return headerView
+        default:
+            assert(false, "응 아니야")
+            
+        }
+    }
     
 
     
