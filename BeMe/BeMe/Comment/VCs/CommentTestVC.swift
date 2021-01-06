@@ -8,8 +8,17 @@
 import UIKit
 
 class CommentTestVC: UIViewController {
-
+    
     @IBOutlet weak var commentTableView: UITableView!
+    
+    
+    lazy var popupBackgroundView: UIView = UIView()
+    
+    var isScrapped: Bool = false {
+        didSet {
+            
+        }
+    }
     
     private var commentArray: [CommentA] = [
         CommentA(comment: "안녕!", children: [CommentA(comment: "오! 안녕!", children: [], open: false),
@@ -25,13 +34,37 @@ class CommentTestVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        commentTableView.delegate = self
-        commentTableView.dataSource = self
+        
+        setCommentTableView()
+        setNotificationCenter()
     }
     
-
+    
 }
+
+//MARK: - Private Method
+extension CommentTestVC {
+    
+    private func setCommentTableView() {
+        commentTableView.delegate = self
+        commentTableView.dataSource = self
+        commentTableView.estimatedRowHeight = 30
+        commentTableView.rowHeight = UITableView.automaticDimension
+    }
+    
+    private func setView() {
+        popupBackgroundView.setPopupBackgroundView(to: view)
+    }
+    
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(closePopup), name: .init("closePopupNoti"), object: nil)
+    }
+    
+    @objc func closePopup() {
+        popupBackgroundView.animatePopupBackground(false)
+    }
+}
+
 //MARK: - UITableViewDelegate
 
 extension CommentTestVC: UITableViewDelegate, UITableViewDataSource {
@@ -54,8 +87,8 @@ extension CommentTestVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
-            guard let header = tableView.dequeueReusableCell(withIdentifier: CommentQuestionTVC.identifier, for: indexPath) as? CommentQuestionTVC else { return UITableViewCell() }
-            print("HEEEL#################################")
+            guard let header = tableView.dequeueReusableCell(withIdentifier: QuestionAnswerTVC.identifier, for: indexPath) as? QuestionAnswerTVC else { return UITableViewCell() }
+            
             return header
         } else {
             if indexPath.row == 0 {
@@ -90,11 +123,9 @@ extension CommentTestVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.section == 0 {
-            return 44.0
-        } else {
-            return UITableView.automaticDimension
-        }
+        
+        return UITableView.automaticDimension
+        
     }
     
     
@@ -118,10 +149,9 @@ extension CommentTestVC: UITableViewButtonSelectedDelegate {
                     }
                     
                     let section = IndexSet.init(integer: indexPath.section)
+                    commentTableView.reloadSections(section, with: .fade)
                     
-                        self.commentTableView.reloadSections(section, with: .fade)
-                        
-                   
+                    
                 }
             }
         }
