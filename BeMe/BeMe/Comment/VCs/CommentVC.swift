@@ -310,8 +310,21 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
 extension CommentVC: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
         if textView == commentTextView {
+            
+            // 완료버튼 처리
             let text = textView.text.trimmingCharacters(in: .whitespacesAndNewlines)
             commentSendButton.isHidden = text.isEmpty
+            
+            // max 5줄 설정
+//            let line = Int(textView.contentSize.height / textView.font!.lineHeight )
+//
+//
+//            if line <= 5 {
+//                textView.isScrollEnabled = false
+//            } else {
+//                textView.isScrollEnabled = true
+//            }
+            
         }
     }
     
