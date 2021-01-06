@@ -7,13 +7,24 @@
 
 import UIKit
 
+//MARK: - Comment 모델
+
+struct CommentA {
+    let comment: String
+    let children: [CommentA]?
+    var open: Bool
+}
 class CommentTestVC: UIViewController {
     
     @IBOutlet weak var commentTableView: UITableView!
-    
+    @IBOutlet weak var scrapButton: UIButton!
     
     lazy var popupBackgroundView: UIView = UIView()
     
+    var isMoreButtonHidden: Bool = true
+    
+    var isMyAnswer: Bool = true
+        
     var isScrapped: Bool = false {
         didSet {
             
@@ -39,6 +50,32 @@ class CommentTestVC: UIViewController {
         setNotificationCenter()
     }
     
+    
+    
+    @IBAction func dismissButtonTapped(_ sender: UIButton) {
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func scrapButtonTapped(_ sender: UIButton) {
+        
+        if isScrapped {
+            isScrapped = false
+            scrapButton.setImage(UIImage(named: "btnScrapUnselected"), for: .normal)
+        } else {
+            isScrapped = true
+            scrapButton.setImage(UIImage(named: "btnScrapSelected"), for: .normal)
+        }
+    }
+    @IBAction func moreSettngButtonTapped(_ sender: Any) {
+        popupBackgroundView.animatePopupBackground(true)
+        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheet.identifier) as?
+                CustomActionSheet else { return }
+        
+        settingActionSheet.modalPresentationStyle = .overCurrentContext
+        self.present(settingActionSheet, animated: true, completion: nil)
+    }
+
     
 }
 
@@ -89,6 +126,8 @@ extension CommentTestVC: UITableViewDelegate, UITableViewDataSource {
         if indexPath.section == 0 {
             guard let header = tableView.dequeueReusableCell(withIdentifier: QuestionAnswerTVC.identifier, for: indexPath) as? QuestionAnswerTVC else { return UITableViewCell() }
             
+            header.moreAnswerButton.isHidden = isMoreButtonHidden ? true : false
+            header.profileView.isHidden = isMyAnswer
             return header
         } else {
             if indexPath.row == 0 {

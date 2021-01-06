@@ -7,13 +7,7 @@
 
 import UIKit
 
-//MARK: - Comment 모델
 
-struct CommentA {
-    let comment: String
-    let children: [CommentA]?
-    var open: Bool
-}
 
 class CommentVC: UIViewController {
     

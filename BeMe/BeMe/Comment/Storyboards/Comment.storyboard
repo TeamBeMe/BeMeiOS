@@ -1787,12 +1787,14 @@
                                         <state key="normal" image="btnClose"/>
                                         <connections>
                                             <action selector="dismissButtonTapped:" destination="nbU-Im-QwT" eventType="touchUpInside" id="ncu-FO-ekW"/>
+                                            <action selector="dismissButtonTapped:" destination="CUp-WV-7Pi" eventType="touchUpInside" id="sAt-7G-bnn"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7hZ-tJ-Bhw">
                                         <rect key="frame" x="354" y="0.0" width="44" height="44"/>
                                         <state key="normal" image="btnMore"/>
                                         <connections>
+                                            <action selector="moreSettngButtonTapped:" destination="CUp-WV-7Pi" eventType="touchUpInside" id="Rgl-To-y5C"/>
                                             <action selector="moreSettngButtonTapped:" destination="nbU-Im-QwT" eventType="touchUpInside" id="l6R-LK-UZA"/>
                                         </connections>
                                     </button>
@@ -1803,6 +1805,7 @@
                                         </constraints>
                                         <state key="normal" image="btnScrapUnselected"/>
                                         <connections>
+                                            <action selector="scrapButtonTapped:" destination="CUp-WV-7Pi" eventType="touchUpInside" id="ZHW-uE-1dX"/>
                                             <action selector="scrapButtonTapped:" destination="nbU-Im-QwT" eventType="touchUpInside" id="lbw-VJ-BK3"/>
                                         </connections>
                                     </button>
@@ -5035,6 +5038,10 @@
                                                 <constraint firstItem="0tZ-gt-nPT" firstAttribute="leading" secondItem="rTj-5S-f9i" secondAttribute="leading" id="k7e-ce-5bU"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="moreAnswerButton" destination="NME-cu-isV" id="02D-In-uh2"/>
+                                            <outlet property="profileView" destination="Dzn-p8-yI0" id="gAC-Vl-LSh"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentTVC" id="B5h-Uh-Bz5" customClass="CommentTVC" customModule="BeMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="936.5" width="414" height="171.5"/>
@@ -5275,6 +5282,7 @@
                     </view>
                     <connections>
                         <outlet property="commentTableView" destination="hca-ti-H8F" id="T4C-a4-8sr"/>
+                        <outlet property="scrapButton" destination="aVQ-2G-6Ty" id="xya-ea-rF0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BIb-8S-06s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
