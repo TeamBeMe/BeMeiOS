@@ -10,13 +10,31 @@ import UIKit
 class MypageCRV: UICollectionReusableView {
     //MARK:**- IBOutlet Part**
     
+    // image
+    
+    
+    
+    
+    @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
+    // profile
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var answerCountLabel: UILabel!
     @IBOutlet weak var attendanceCountLabel: UILabel!
     @IBOutlet weak var profileEditButton: UIButton!
     @IBOutlet weak var attendanceCountInfoLabel: UILabel!
     @IBOutlet weak var answerCountInfoLabel: UILabel!
+    // header
+    @IBOutlet weak var myAnswerButton: UIButton!
+    @IBOutlet weak var scrappedAnswerButton: UIButton!
+    @IBOutlet weak var highLightBar: UIView!
+    @IBOutlet weak var keywordLabel: UILabel!
+    @IBOutlet weak var searchView: UIView!
+    @IBOutlet weak var searchButton: UIButton!
+    
+    // height
+    @IBOutlet weak var profileImageHeight: NSLayoutConstraint!
+    @IBOutlet weak var profileViewHeight: NSLayoutConstraint!
     
     
     //MARK:**- Variable Part**
@@ -31,11 +49,32 @@ class MypageCRV: UICollectionReusableView {
         setLabel(view: answerCountLabel, text: "4")
         setLabel(view: attendanceCountLabel, text: "4123124")
         setLabel(view: nameLabel, text: "재용아 개소리 좀 그만해")
+        setSearhButton(view: searchView)
+        
 
     }
     
     
     //MARK:**- IBAction Part**
+    
+    @IBAction func filterButtonTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func deleteButtonTapped(_ sender: UIButton) {
+        setKeywordLabel(label: keywordLabel, keyword: "")
+    }
+    
+    @IBAction func myAswerButtonTapped(_ sender: UIButton) {
+        myAnswerButton.setTitleColor(.black, for: .normal)
+        scrappedAnswerButton.setTitleColor(.rgb8E8E93, for: .normal)
+        
+        moveHighLightBar(to: sender)
+    }
+    @IBAction func scrappedAswerButtonTapped(_ sender: UIButton) {
+        myAnswerButton.setTitleColor(.rgb8E8E93, for: .normal)
+        scrappedAnswerButton.setTitleColor(.black, for: .normal)
+        moveHighLightBar(to: sender)
+    }
     
     //MARK:**- default Setting Function Part**
     func setProfileEditButton(view: UIButton) {
@@ -56,5 +95,54 @@ class MypageCRV: UICollectionReusableView {
         view.image = UIImage(contentsOfFile: text)
     }
     
+    func setSearhButton(view: UIView) {
+        view.setBorderWithRadius(borderColor: .veryLightPinkTwo, borderWidth: 1, cornerRadius: 6)
+        view.backgroundColor = UIColor.veryLightPinkTwo
+    }
+    
+    
+    // 아래 두 함수는 TVC 뿐만 아니라 여러 곳에서 사용가능
+    // 검색어를 삭제했거나 , 초기 화면
+    func setKeywordLabel(label : UILabel){
+        label.text = "검색"
+        label.textColor = UIColor.rgb8E8E93
+    }
+    
+    // 검색 결과 후
+    func setKeywordLabel( label : UILabel, keyword: String){
+        label.text = keyword
+        label.textColor = UIColor.darkGray
+        
+    }
+    
     //MARK:**- Function Part**
+    private func moveHighLightBar(to button: UIButton) {
+        
+        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveLinear], animations: {
+            // Slide Animation
+            self.highLightBar.frame.origin.x = 30 + button.frame.minX
+            
+        }) { _ in
+            
+        }
+    }
+}
+
+extension MypageCRV : MypageCRVDelegate {
+    func headerFix() {
+        profileImageHeight.constant = 0
+        profileViewHeight.constant = 0
+        settingButton.alpha = 0
+    }
+    func headerOrigin() {
+        profileImageHeight.constant = 180
+        profileViewHeight.constant = 110
+        settingButton.alpha = 1
+    }
+}
+
+protocol MypageCRVDelegate {
+    func headerFix()
+    func headerOrigin()
+    
 }
