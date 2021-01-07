@@ -12,8 +12,10 @@ class MypageVC: UIViewController {
     //MARK:**- IBOutlet Part**
     @IBOutlet weak var MypageCV: UICollectionView!
 
+
     
     //MARK:**- Variable Part**
+    let mypageCVLayout = MypageCVFlowLayout()
     
     //MARK:**- Constraint Part**
     
@@ -34,20 +36,12 @@ class MypageVC: UIViewController {
             automaticallyAdjustsScrollViewInsets = false
         }
         
+        MypageCV.collectionViewLayout = mypageCVLayout
         
         print("********************\(MypageCV.adjustedContentInset)")
     }
     
     //MARK:**- IBAction Part**
-    
-    @IBAction func searchButtonTapped(_ sender: Any) {
-    }
-    
-    @IBAction func deleteButtonTapped(_ sender: Any) {
-    }
-    
-    @IBAction func filterButtonTapped(_ sender: Any) {
-    }
     
     
     //MARK:**- default Setting Function Part**
@@ -131,7 +125,7 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
     // header size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if (section == 0) {
-            return CGSize(width: collectionView.frame.width, height: 300)
+            return CGSize(width: collectionView.frame.width, height: 393)
         } else {
              //refact
             return CGSize.zero
@@ -169,4 +163,5 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
             
         }
     }
+    
 }

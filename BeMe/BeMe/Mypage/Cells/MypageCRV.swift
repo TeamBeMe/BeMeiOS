@@ -18,6 +18,13 @@ class MypageCRV: UICollectionReusableView {
     @IBOutlet weak var attendanceCountInfoLabel: UILabel!
     @IBOutlet weak var answerCountInfoLabel: UILabel!
     
+    @IBOutlet weak var myAnswerButton: UIButton!
+    @IBOutlet weak var scrappedAnswerButton: UIButton!
+    @IBOutlet weak var highLightBar: UIView!
+    @IBOutlet weak var keywordLabel: UILabel!
+    @IBOutlet weak var searchView: UIView!
+    
+    @IBOutlet weak var searchButton: UIButton!
     
     //MARK:**- Variable Part**
     static let identifier = "MypageCRV"
@@ -31,11 +38,24 @@ class MypageCRV: UICollectionReusableView {
         setLabel(view: answerCountLabel, text: "4")
         setLabel(view: attendanceCountLabel, text: "4123124")
         setLabel(view: nameLabel, text: "재용아 개소리 좀 그만해")
+        setSearhButton(view: searchView)
+        
 
     }
     
     
     //MARK:**- IBAction Part**
+    
+    @IBAction func filterButtonTapped(_ sender: Any) {
+    }
+    
+    @IBAction func deleteButtonTapped(_ sender: Any) {
+    }
+    
+    @IBAction func myAswerButtonTapped(_ sender: Any) {
+    }
+    @IBAction func scrappedAswerButtonTapped(_ sender: Any) {
+    }
     
     //MARK:**- default Setting Function Part**
     func setProfileEditButton(view: UIButton) {
@@ -54,6 +74,26 @@ class MypageCRV: UICollectionReusableView {
     
     func setImgae(view: UIImageView, text: String){
         view.image = UIImage(contentsOfFile: text)
+    }
+    
+    func setSearhButton(view: UIView) {
+        view.setBorderWithRadius(borderColor: .veryLightPinkTwo, borderWidth: 1, cornerRadius: 6)
+        view.backgroundColor = UIColor.veryLightPinkTwo
+    }
+    
+    
+    // 아래 두 함수는 TVC 뿐만 아니라 여러 곳에서 사용가능
+    // 검색어를 삭제했거나 , 초기 화면
+    func setKeywordLabel(label : UILabel){
+        label.text = "검색"
+        label.textColor = UIColor.rgb8E8E93
+    }
+    
+    // 검색 결과 후
+    func setKeywordLabel( label : UILabel, keyword: String){
+        label.text = keyword
+        label.textColor = UIColor.darkGray
+        
     }
     
     //MARK:**- Function Part**

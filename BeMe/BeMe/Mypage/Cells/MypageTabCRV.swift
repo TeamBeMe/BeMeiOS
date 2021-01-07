@@ -24,8 +24,8 @@ class MypageTabCRV: UICollectionReusableView {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        setSearhView(view: searchView)
-        setKeywordLabel(label: keywordLabel ,keyword: "데헷데헷밍")
+//        setSearhView(view: searchView)
+//        setKeywordLabel(label: keywordLabel ,keyword: "데헷데헷밍")
     }
     
     
