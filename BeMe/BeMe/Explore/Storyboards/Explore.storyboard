@@ -581,7 +581,7 @@
         <!--Explore DetailVC-->
         <scene sceneID="LcZ-Gh-GZN">
             <objects>
-                <viewController id="gMw-Ns-qHK" customClass="ExploreDetailVC" customModule="BeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExploreDetailVC" id="gMw-Ns-qHK" customClass="ExploreDetailVC" customModule="BeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mma-ow-2e4">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

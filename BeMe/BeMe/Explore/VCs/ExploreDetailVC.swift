@@ -31,11 +31,23 @@ class ExploreDetailVC: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        print(diffAnswerTableView.contentSize.height)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setPopupBackgroundView()
         setNotificationCenter()
+        setTableView()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     //MARK: - IBAction
@@ -47,6 +59,10 @@ class ExploreDetailVC: UIViewController {
 
 //MARK: - Private Method
 extension ExploreDetailVC {
+    
+    private func setTableView() {
+        
+    }
     private func setPopupBackgroundView() {
         popupBackgroundView.setPopupBackgroundView(to: view)
     }
@@ -80,7 +96,9 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
                                                              for: indexPath) as? AnswerTVC else {
                 return UITableViewCell() }
             
+            answer.selectionStyle = .none
             answer.delegate = self
+            answer.indexPath = indexPath
             return answer
         }
         
@@ -96,7 +114,6 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        print(scrollDirection)
         if (scrollDirection) {
             let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 350, 0)
             cell.layer.transform = rotationTransform
@@ -131,17 +148,29 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
         }
         lastContentOffset = currentContentOffset
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
+        
+//        comment.
+        comment.isMoreButtonHidden = true
+        comment.modalPresentationStyle = .fullScreen
+        self.present(comment, animated: true, completion: nil)
+    }
 }
 
 //MARK: - UITableViewButtonSelectedDelegate
 extension ExploreDetailVC: UITableViewButtonSelectedDelegate {
     
-    func settingButtonDidTapped() {
+    func settingButtonDidTapped(to indexPath: IndexPath) {
         
         popupBackgroundView.animatePopupBackground(true)
-        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheet.identifier) as?
-                CustomActionSheet else { return }
         
+        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetVC.identifier) as?
+                CustomActionSheetVC else { return }
+    
+        settingActionSheet.alertInformations = AlertLabels.article
         settingActionSheet.modalPresentationStyle = .overCurrentContext
         self.present(settingActionSheet, animated: true, completion: nil)
     }

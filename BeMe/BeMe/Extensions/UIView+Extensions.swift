@@ -92,7 +92,7 @@ extension UIView {
     }
     
     func animatePopupBackground(_ direction: Bool) {
-        let duration: TimeInterval = direction ? 0.35 : 0.15
+        let duration: TimeInterval = direction ? 0.35 : 0.20
         let alpha: CGFloat = direction ? 0.40 : 0.0
         self.isHidden = !direction
         UIView.animate(withDuration: duration) {

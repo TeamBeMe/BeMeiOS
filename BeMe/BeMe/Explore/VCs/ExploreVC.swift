@@ -79,6 +79,10 @@ class ExploreVC: UIViewController {
         
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     
     //MARK: - IBActions
     
@@ -88,6 +92,7 @@ class ExploreVC: UIViewController {
         setLabel()
         diffArticleTableView.reloadData()
     }
+    
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
         moveHighLightBar(to: sender)
         isRecentButtonPressed = false
@@ -100,6 +105,18 @@ class ExploreVC: UIViewController {
 extension ExploreVC {
     
     private func setArticleTableView() {
+        
+    }
+    
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissCommentPage), name: .init("dismissCommentPage"), object: nil)
+    }
+    
+    @objc func dismissCommentPage(_ notification: Notification) {
+        guard let userInfo = notification.userInfo as? [String: Any] else { return }
+        guard let pageNumber = userInfo["indexPath"] as? Int else { return }
+        
+        print(pageNumber)
         
     }
     
@@ -273,8 +290,11 @@ extension ExploreVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
             return UICollectionViewCell()
         }
         // border 계산 다시하기
-        let deviceBound: CGFloat = UIScreen.main.bounds.width/375.0
-        cell.layer.cornerRadius = 6 * deviceBound * deviceBound * deviceBound
+//        let deviceBound: CGFloat = UIScreen.main.bounds.width/375.0
+        
+//        let width = cell.bounds.width
+//        let height = cell.bounds.height
+//        cell.layer.cornerRadius = width * 6 *  deviceBound
         cell.setAnswer()
         cell.backgroundColor = .white
         return cell
@@ -303,7 +323,6 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
             guard let more = tableView
                     .dequeueReusableCell(withIdentifier: MoreTVC.identifier, for: indexPath)
                     as? MoreTVC else { return UITableViewCell() }
-            more.selectionStyle = .none
             more.selectionStyle = .none
             return more
         } else {
@@ -336,6 +355,8 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
         } else {
             guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
             
+            comment.pageNumber = indexPath.row
+            comment.isMoreButtonHidden = false
             comment.modalPresentationStyle = .fullScreen
             self.present(comment, animated: true, completion: nil)
         }
