@@ -24,6 +24,7 @@ class LogInVC: UIViewController {
     @IBOutlet weak var buttonStackView: UIStackView!
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
+    
     var blackParticles = 0
     var endTimer : Timer?
     var blackView = UIView().then{

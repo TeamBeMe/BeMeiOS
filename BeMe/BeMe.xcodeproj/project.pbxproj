@@ -44,6 +44,8 @@
 		EC71C83025A5A2E300F51FEC /* HomePageData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC71C82F25A5A2E300F51FEC /* HomePageData.swift */; };
 		EC71C83525A5A41800F51FEC /* HomePageDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC71C83425A5A41800F51FEC /* HomePageDataService.swift */; };
 		EC71C84125A5B1BA00F51FEC /* HomeNewQuestionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC71C84025A5B1BA00F51FEC /* HomeNewQuestionData.swift */; };
+		EC71C84C25A7769B00F51FEC /* ShittyImageCropVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC71C84B25A7769B00F51FEC /* ShittyImageCropVC.swift */; };
+		EC71C84F25A778CE00F51FEC /* SignUpCropVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC71C84E25A778CE00F51FEC /* SignUpCropVC.swift */; };
 		EC737F19259D867A0035207F /* CustomTodayCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F18259D867A0035207F /* CustomTodayCardView.swift */; };
 		EC737F1C259D8B9E0035207F /* CustomAddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */; };
 		EC737F21259DB2C40035207F /* FollowUpperCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F20259DB2C40035207F /* FollowUpperCVC.swift */; };
@@ -148,6 +150,8 @@
 		EC71C82F25A5A2E300F51FEC /* HomePageData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageData.swift; sourceTree = "<group>"; };
 		EC71C83425A5A41800F51FEC /* HomePageDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageDataService.swift; sourceTree = "<group>"; };
 		EC71C84025A5B1BA00F51FEC /* HomeNewQuestionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewQuestionData.swift; sourceTree = "<group>"; };
+		EC71C84B25A7769B00F51FEC /* ShittyImageCropVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShittyImageCropVC.swift; sourceTree = "<group>"; };
+		EC71C84E25A778CE00F51FEC /* SignUpCropVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCropVC.swift; sourceTree = "<group>"; };
 		EC737F18259D867A0035207F /* CustomTodayCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTodayCardView.swift; sourceTree = "<group>"; };
 		EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAddCardView.swift; sourceTree = "<group>"; };
 		EC737F20259DB2C40035207F /* FollowUpperCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUpperCVC.swift; sourceTree = "<group>"; };
@@ -734,6 +738,8 @@
 				EC5C1FFB25A43E1A008EE335 /* SignUpControlVC.swift */,
 				EC5C1FFF25A43FA5008EE335 /* SignUpPVC.swift */,
 				EC5C200225A43FD0008EE335 /* SignUpProfileVC.swift */,
+				EC71C84B25A7769B00F51FEC /* ShittyImageCropVC.swift */,
+				EC71C84E25A778CE00F51FEC /* SignUpCropVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -886,6 +892,7 @@
 				EC813F7B2599F88D00BBCE25 /* PastCardCVC.swift in Sources */,
 				EC7F0EAF25A09F24008EB88A /* AnswerDataForViewController.swift in Sources */,
 				EC7C1612259B8BA100A5BA4C /* FollowingVC.swift in Sources */,
+				EC71C84C25A7769B00F51FEC /* ShittyImageCropVC.swift in Sources */,
 				EC5C200025A43FA5008EE335 /* SignUpPVC.swift in Sources */,
 				D492E42F25A0CE5E0088A181 /* AnswerTVC.swift in Sources */,
 				D492E44025A0E6A80088A181 /* UITableView+Extensions.swift in Sources */,
@@ -907,6 +914,7 @@
 				EC7FEFA825A38AF100C61147 /* SearchVC.swift in Sources */,
 				EC89E319259C281100DBAFE5 /* FollowerSearchCVC.swift in Sources */,
 				EC7C1627259B9CE200A5BA4C /* FollowingCardCVC.swift in Sources */,
+				EC71C84F25A778CE00F51FEC /* SignUpCropVC.swift in Sources */,
 				EC5C202325A4C818008EE335 /* LogInData.swift in Sources */,
 				EC71C83525A5A41800F51FEC /* HomePageDataService.swift in Sources */,
 				EC89E30C259C273400DBAFE5 /* FollowingSearchVC.swift in Sources */,

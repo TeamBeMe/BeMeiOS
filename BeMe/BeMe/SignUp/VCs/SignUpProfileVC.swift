@@ -16,17 +16,19 @@ class SignUpProfileVC: UIViewController {
     
     @IBOutlet weak var nickNameLabel: UILabel!
     
+    @IBOutlet weak var imageContainView: UIView!
+    @IBOutlet weak var addPhotoImage: UIImageView!
     @IBOutlet weak var finishButton: UIButton!
-    
+    var chosenImage: UIImage?
     @IBOutlet weak var jumpButton: UIButton!
     var myName: String?
     var myEmail: String?
     var myPassword: String?
-    
+    let cropSegue = "profileToCropSegue"
     
     lazy var imagePickerController = UIImagePickerController().then {
         $0.sourceType = .photoLibrary
-        $0.allowsEditing = true
+//        $0.allowsEditing = true
         $0.delegate = self
     }
     override func viewDidLoad() {
@@ -38,7 +40,8 @@ class SignUpProfileVC: UIViewController {
     }
     
     @IBAction func finishButtonAction(_ sender: Any) {
-        SignUpService.shared.signUp(email: myEmail!,nickName: myName!, password: myPassword!,image: profileImageView.image!,completion: { networkResult -> Void in
+        SignUpService.shared.signUp(email: myEmail!,nickName: myName!, password: myPassword!,
+                                    image: profileImageView.image!,completion: { networkResult -> Void in
             switch networkResult {
             case .success(let data):
                 if let signupData = data as? SignUpData{
@@ -92,12 +95,15 @@ extension SignUpProfileVC{
         
         finishButton.makeRounded(cornerRadius: 6)
         jumpButton.makeRounded(cornerRadius: 6)
-        profileImageView.makeRounded(cornerRadius: 60)
-        profileImageView.contentMode = .scaleToFill
+        profileImageView.makeRounded(cornerRadius: 6)
+        profileImageView.contentMode = .scaleAspectFill
         
         profileImageView.isUserInteractionEnabled = true
         let tabGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpProfileImageView))
         profileImageView.addGestureRecognizer(tabGesture)
+        imageContainView.makeRounded(cornerRadius: 6)
+        imageContainView.setBorder(borderColor: .black, borderWidth: 1.0)
+        
     }
     
     func setNickname(nickName: String){
@@ -106,6 +112,15 @@ extension SignUpProfileVC{
     
     @objc func touchUpProfileImageView(){
         self.present(self.imagePickerController, animated: true, completion: nil)
+      
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let cropViewController = segue.destination as?
+            SignUpCropVC,
+            segue.identifier == cropSegue {
+            cropViewController.initialImage = chosenImage
+         }
     }
     
 }
@@ -116,10 +131,27 @@ extension SignUpProfileVC: UIImagePickerControllerDelegate, UINavigationControll
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        if let originalImage: UIImage = info[.originalImage] as? UIImage {
-            self.profileImageView.image = originalImage
-        }
-        
-        self.dismiss(animated: true, completion: nil)
+        chosenImage = info[.originalImage] as? UIImage
+        let shittyVC = ShittyImageCropVC(frame: (self.navigationController?.view.frame)!, image: chosenImage!, aspectWidth: 4, aspectHeight: 3)
+        shittyVC.signUpProfileImageSetDelegate = self
+        self.dismiss(animated: true, completion: {
+            self.navigationController?.present(shittyVC, animated: true, completion: nil)
+        })
+        addPhotoImage.alpha = 0
     }
+    
+    
+    
+}
+
+extension SignUpProfileVC: SignUpProfileImageSetDelegate{
+    func setImage(img: UIImage) {
+        profileImageView.image = img
+    }
+}
+
+
+
+protocol SignUpProfileImageSetDelegate {
+    func setImage(img: UIImage)
 }
