@@ -10,21 +10,32 @@ import UIKit
 class MypageCRV: UICollectionReusableView {
     //MARK:**- IBOutlet Part**
     
+    // image
+    
+    
+    
+    
+    @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
+    // profile
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var answerCountLabel: UILabel!
     @IBOutlet weak var attendanceCountLabel: UILabel!
     @IBOutlet weak var profileEditButton: UIButton!
     @IBOutlet weak var attendanceCountInfoLabel: UILabel!
     @IBOutlet weak var answerCountInfoLabel: UILabel!
-    
+    // header
     @IBOutlet weak var myAnswerButton: UIButton!
     @IBOutlet weak var scrappedAnswerButton: UIButton!
     @IBOutlet weak var highLightBar: UIView!
     @IBOutlet weak var keywordLabel: UILabel!
     @IBOutlet weak var searchView: UIView!
-    
     @IBOutlet weak var searchButton: UIButton!
+    
+    // height
+    @IBOutlet weak var profileImageHeight: NSLayoutConstraint!
+    @IBOutlet weak var profileViewHeight: NSLayoutConstraint!
+    
     
     //MARK:**- Variable Part**
     static let identifier = "MypageCRV"
@@ -97,4 +108,23 @@ class MypageCRV: UICollectionReusableView {
     }
     
     //MARK:**- Function Part**
+}
+
+extension MypageCRV : MypageCRVDelegate {
+    func headerFix() {
+        profileImageHeight.constant = 0
+        profileViewHeight.constant = 0
+        settingButton.alpha = 0
+    }
+    func headerOrigin() {
+        profileImageHeight.constant = 180
+        profileViewHeight.constant = 110
+        settingButton.alpha = 1
+    }
+}
+
+protocol MypageCRVDelegate {
+    func headerFix()
+    func headerOrigin()
+    
 }

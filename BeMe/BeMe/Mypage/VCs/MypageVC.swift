@@ -156,7 +156,12 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
         
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MypageCRV.identifier, for: indexPath)
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MypageCRV.identifier, for: indexPath) as? MypageCRV else {
+                assert(false, "응 아니야")
+            }
+         
+            mypageCVLayout.mypageCRVDelegate = headerView
+            
             return headerView
         default:
             assert(false, "응 아니야")

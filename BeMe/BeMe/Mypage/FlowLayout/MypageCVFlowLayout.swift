@@ -9,6 +9,8 @@ import UIKit
 
 class MypageCVFlowLayout: UICollectionViewFlowLayout {
     
+    var mypageCRVDelegate: MypageCRVDelegate?
+    
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
@@ -20,7 +22,8 @@ class MypageCVFlowLayout: UICollectionViewFlowLayout {
         if offset.y < 0 {
             
             for attributes in stLayoutAttributes {
-                
+                print("sdfasdfasdfasdfasdfasdfasdf")
+                print(offset.y)
                 if let elmKind = attributes.representedElementKind, elmKind == UICollectionView.elementKindSectionHeader {
                     
                     let diffValue = abs(offset.y)
@@ -28,9 +31,29 @@ class MypageCVFlowLayout: UICollectionViewFlowLayout {
                     frame.size.height = max(0, 393 + diffValue)
                     frame.origin.y = frame.minY - diffValue
                     attributes.frame = frame
+                }
+            }
+        }
+        
+        else {
+            
+            for attributes in stLayoutAttributes {
+                
+                if let elmKind = attributes.representedElementKind, elmKind == UICollectionView.elementKindSectionHeader {
+                    print("===============")
+                    print(offset.y)
+                    if offset.y >= 290 {
+                        mypageCRVDelegate?.headerFix()
+                        self.sectionHeadersPinToVisibleBounds = true
+                    } else {
+                        print("========else=======")
+                        mypageCRVDelegate?.headerOrigin()
+                        self.sectionHeadersPinToVisibleBounds = false 
+                    }
                     
                 }
             }
+            
         }
         
         return layoutAttributes
