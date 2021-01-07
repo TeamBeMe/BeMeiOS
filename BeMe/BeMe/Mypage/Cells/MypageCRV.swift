@@ -57,15 +57,23 @@ class MypageCRV: UICollectionReusableView {
     
     //MARK:**- IBAction Part**
     
-    @IBAction func filterButtonTapped(_ sender: Any) {
+    @IBAction func filterButtonTapped(_ sender: UIButton) {
     }
     
-    @IBAction func deleteButtonTapped(_ sender: Any) {
+    @IBAction func deleteButtonTapped(_ sender: UIButton) {
+        setKeywordLabel(label: keywordLabel, keyword: "")
     }
     
-    @IBAction func myAswerButtonTapped(_ sender: Any) {
+    @IBAction func myAswerButtonTapped(_ sender: UIButton) {
+        myAnswerButton.setTitleColor(.black, for: .normal)
+        scrappedAnswerButton.setTitleColor(.rgb8E8E93, for: .normal)
+        
+        moveHighLightBar(to: sender)
     }
-    @IBAction func scrappedAswerButtonTapped(_ sender: Any) {
+    @IBAction func scrappedAswerButtonTapped(_ sender: UIButton) {
+        myAnswerButton.setTitleColor(.rgb8E8E93, for: .normal)
+        scrappedAnswerButton.setTitleColor(.black, for: .normal)
+        moveHighLightBar(to: sender)
     }
     
     //MARK:**- default Setting Function Part**
@@ -108,6 +116,16 @@ class MypageCRV: UICollectionReusableView {
     }
     
     //MARK:**- Function Part**
+    private func moveHighLightBar(to button: UIButton) {
+        
+        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveLinear], animations: {
+            // Slide Animation
+            self.highLightBar.frame.origin.x = 30 + button.frame.minX
+            
+        }) { _ in
+            
+        }
+    }
 }
 
 extension MypageCRV : MypageCRVDelegate {
