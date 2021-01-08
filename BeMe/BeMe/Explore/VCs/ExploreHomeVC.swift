@@ -70,6 +70,5 @@ extension ExploreHomeVC: UITableViewDataSource {
 }
 extension ExploreHomeVC: UITableViewDelegate {
     
-    
 }
 

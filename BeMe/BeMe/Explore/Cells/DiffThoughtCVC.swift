@@ -17,14 +17,11 @@ class DiffThoughtCVC: UICollectionViewCell {
     var indexPath: IndexPath?
     
     func setQuestionAnswer(_ que: String, _ ans: String) {
-        
         question.text = que
         answer.text = ans
     }
     
     @IBAction func goToDetailButtonTapped(_ sender: Any) {
-        
         delegate?.moreAnswerButtonDidTapped(to: indexPath!)
-        
     }
 }
