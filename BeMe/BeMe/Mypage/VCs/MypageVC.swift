@@ -167,6 +167,8 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
             assert(false, "응 아니야")
             
         }
+        
+        
     }
     
 }

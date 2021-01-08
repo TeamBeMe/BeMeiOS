@@ -28,9 +28,9 @@ class MypageCRV: UICollectionReusableView {
     @IBOutlet weak var myAnswerButton: UIButton!
     @IBOutlet weak var scrappedAnswerButton: UIButton!
     @IBOutlet weak var highLightBar: UIView!
-    @IBOutlet weak var keywordLabel: UILabel!
     @IBOutlet weak var searchView: UIView!
     @IBOutlet weak var searchButton: UIButton!
+    @IBOutlet weak var searchTextField: UITextField!
     
     // height
     @IBOutlet weak var profileImageHeight: NSLayoutConstraint!
@@ -61,7 +61,7 @@ class MypageCRV: UICollectionReusableView {
     }
     
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
-        setKeywordLabel(label: keywordLabel, keyword: "")
+        setKeywordLabel(label: searchTextField, keyword: "")
     }
     
     @IBAction func myAswerButtonTapped(_ sender: UIButton) {
@@ -103,13 +103,13 @@ class MypageCRV: UICollectionReusableView {
     
     // 아래 두 함수는 TVC 뿐만 아니라 여러 곳에서 사용가능
     // 검색어를 삭제했거나 , 초기 화면
-    func setKeywordLabel(label : UILabel){
+    func setKeywordLabel(label : UITextField){
         label.text = "검색"
         label.textColor = UIColor.rgb8E8E93
     }
     
     // 검색 결과 후
-    func setKeywordLabel( label : UILabel, keyword: String){
+    func setKeywordLabel( label : UITextField, keyword: String){
         label.text = keyword
         label.textColor = UIColor.darkGray
         
@@ -144,5 +144,4 @@ extension MypageCRV : MypageCRVDelegate {
 protocol MypageCRVDelegate {
     func headerFix()
     func headerOrigin()
-    
 }

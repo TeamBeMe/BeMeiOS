@@ -37,22 +37,22 @@ class MypageCVFlowLayout: UICollectionViewFlowLayout {
         
         else {
             
-            for attributes in stLayoutAttributes {
-                
-                if let elmKind = attributes.representedElementKind, elmKind == UICollectionView.elementKindSectionHeader {
-                    print("===============")
-                    print(offset.y)
-                    if offset.y >= 290 {
-                        mypageCRVDelegate?.headerFix()
-                        self.sectionHeadersPinToVisibleBounds = true
-                    } else {
-                        print("========else=======")
-                        mypageCRVDelegate?.headerOrigin()
-                        self.sectionHeadersPinToVisibleBounds = false 
-                    }
-                    
-                }
-            }
+//            for attributes in stLayoutAttributes {
+//                
+//                if let elmKind = attributes.representedElementKind, elmKind == UICollectionView.elementKindSectionHeader {
+//                    print("===============")
+//                    print(offset.y)
+//                    if offset.y >= 290 {
+//                        mypageCRVDelegate?.headerFix()
+//                        self.sectionHeadersPinToVisibleBounds = true
+//                    } else {
+//                        print("========else=======")
+//                        mypageCRVDelegate?.headerOrigin()
+//                        self.sectionHeadersPinToVisibleBounds = false 
+//                    }
+//                    
+//                }
+//            }
             
         }
         
