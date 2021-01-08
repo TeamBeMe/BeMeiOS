@@ -1,5 +1,4 @@
 # Uncomment the next line to define a global platform for your project
-
 # platform :ios, '9.0'
 
 target 'BeMe' do
@@ -7,12 +6,5 @@ target 'BeMe' do
   use_frameworks!
 
   # Pods for BeMe
-pod 'Alamofire'
-pod 'Kingfisher'
-pod 'SnapKit'
-pod 'Then'
-pod 'lottie-ios'
-pod 'SwiftyGif'
-pod 'SwiftLint'
 
 end

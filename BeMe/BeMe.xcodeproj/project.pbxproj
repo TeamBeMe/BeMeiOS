@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -316,6 +316,7 @@
 				A5B9A1A125A716900051E19F /* MypageCVFlowLayout.swift */,
 			);
 			path = FlowLayout;
+			sourceTree = "<group>";
 		};
 		D41196BE25A65563009C674A /* Model */ = {
 			isa = PBXGroup;
@@ -834,7 +835,6 @@
 				EC813F1C2599A15100BBCE25 /* Sources */,
 				EC813F1D2599A15100BBCE25 /* Frameworks */,
 				EC813F1E2599A15100BBCE25 /* Resources */,
-				7AE39A73F932C8287C667F4F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -904,23 +904,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7AE39A73F932C8287C667F4F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BeMe/Pods-BeMe-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-BeMe/Pods-BeMe-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BeMe/Pods-BeMe-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		E2468185A13440AF6813A2C0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
