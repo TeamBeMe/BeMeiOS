@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -245,6 +246,9 @@
                                                                             <state key="normal" title="최신">
                                                                                 <color key="titleColor" systemColor="labelColor"/>
                                                                             </state>
+                                                                            <connections>
+                                                                                <action selector="recentButtonTapped:" destination="UEb-O2-8F0" eventType="touchUpInside" id="38x-9X-KYc"/>
+                                                                            </connections>
                                                                         </button>
                                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W9W-bq-div">
                                                                             <rect key="frame" x="73" y="0.0" width="60" height="32"/>
@@ -255,6 +259,9 @@
                                                                             <state key="normal" title="흥미">
                                                                                 <color key="titleColor" systemColor="labelColor"/>
                                                                             </state>
+                                                                            <connections>
+                                                                                <action selector="favoriteButtonTapped:" destination="UEb-O2-8F0" eventType="touchUpInside" id="tTy-Zu-hLg"/>
+                                                                            </connections>
                                                                         </button>
                                                                     </subviews>
                                                                 </stackView>
@@ -355,6 +362,8 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="categoryCollectionView" destination="f2p-kd-Z8y" id="4RI-5s-yxo"/>
+                                            <outlet property="diffArticleSubTitle" destination="Gch-PN-vZd" id="74Z-bx-VRv"/>
+                                            <outlet property="highLightBar" destination="FNN-Rm-R4j" id="70z-3n-V0Q"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArticleTVC" id="gmT-TG-Alj" customClass="ArticleTVC" customModule="BeMe" customModuleProvider="target">
@@ -493,7 +502,7 @@
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="p3r-7Q-Di9"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="background"/>
                         <constraints>
                             <constraint firstItem="p3r-7Q-Di9" firstAttribute="bottom" secondItem="xhH-FY-cbF" secondAttribute="bottom" id="23w-QM-08T"/>
                             <constraint firstItem="xhH-FY-cbF" firstAttribute="leading" secondItem="p3r-7Q-Di9" secondAttribute="leading" id="UFC-bS-76W"/>
@@ -503,7 +512,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="SUa-TA-jQK"/>
                     <connections>
-                        <outlet property="exlporeTableView" destination="xhH-FY-cbF" id="OzH-dl-vol"/>
+                        <outlet property="exploreTableView" destination="xhH-FY-cbF" id="OzH-dl-vol"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="333-TK-xlE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -782,6 +791,9 @@
         <image name="btnScrapSelected" width="32" height="32"/>
         <image name="btnScrapUnselected" width="32" height="32"/>
         <image name="imgProfile" width="34" height="34"/>
+        <namedColor name="background">
+            <color red="0.92900002002716064" green="0.92900002002716064" blue="0.92900002002716064" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

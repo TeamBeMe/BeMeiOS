@@ -8,25 +8,31 @@
 import UIKit
 
 class ExploreHomeVC: UIViewController {
-
-    @IBOutlet weak var exlporeTableView: UITableView!
+    
+    @IBOutlet weak var exploreTableView: UITableView!
+    
+    private var lastContentOffset: CGFloat = 0
+    
+    private let maxHeight: CGFloat = 32.0
+    
+    private let minHeight: CGFloat = 0.0
+    
+    private var scrollDirection: Bool = true
     
     // 서버통신을 통해 받아오는 값
     var articlesArray: [ExploreAnswer] = []
     
-    var diffThoughtArray: [ExploreThoughtData] = []
+    private var exploreThoughtArray: [ExploreThoughtData] = []
     
     var cellNum: Int = 10
     
-    
-    
     //MARK: - life cylce
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -40,6 +46,7 @@ class ExploreHomeVC: UIViewController {
     }
 }
 
+//MARK: - UITableView
 extension ExploreHomeVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return cellNum + 2
@@ -49,6 +56,7 @@ extension ExploreHomeVC: UITableViewDataSource {
         if indexPath.row == 0 {
             guard let diffThought = tableView.dequeueReusableCell(withIdentifier: DiffThoughtTVC.identifier, for: indexPath) as? DiffThoughtTVC else { return UITableViewCell() }
             
+            diffThought.exploreThoughtArray = self.exploreThoughtArray
             return diffThought
         } else if indexPath.row == 1 {
             guard let diffAnswer = tableView.dequeueReusableCell(withIdentifier: DiffArticleTVC.identifier, for: indexPath) as? DiffArticleTVC else { return UITableViewCell() }
@@ -70,10 +78,8 @@ extension ExploreHomeVC: UITableViewDelegate {
     
     // 애니메이션
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
         if indexPath.row == 0  || indexPath.row == 1{
             // no animation
-            
         } else if indexPath.row == cellNum + 2 - 1 {
             // animation 2
             cell.alpha = 0
@@ -83,25 +89,163 @@ extension ExploreHomeVC: UITableViewDelegate {
             }
         } else {
             // animation 1
-            let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 160, 0)
-            cell.layer.transform = rotationTransform
-            cell.alpha = 0.5
-            
-            UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut], animations: {
-                cell.layer.transform = CATransform3DIdentity
-                cell.alpha = 1.0
-            }) { (_) in
-                
+            if (scrollDirection) {
+                // up
+                let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+                cell.layer.transform = rotationTransform
+                UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+                    cell.layer.transform = CATransform3DIdentity
+                }) { (_) in
+                    
+                }
+            } else {
+                // down
+                let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
+                cell.layer.transform = rotationTransform
+                UIView.animate(withDuration: 0.3, animations: {
+                    cell.layer.transform = CATransform3DIdentity
+                })
             }
+            
             
         }
     }
 }
 
-extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
+//MARK: - ScrollViewDelegate
+
+extension ExploreHomeVC: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let currentOffset = exploreTableView.contentOffset.y
+        
+        print(currentOffset)
+        // iphone safe area 문제 해결 코드
+        self.view.backgroundColor = currentOffset > 394 ? .white : UIColor.init(named: "background")
+        
+        if (currentOffset > 432 + 69 + 32) {
+            if (lastContentOffset < currentOffset) {
+                //                // scroll up
+                scrollDirection = true
+                //                hideTabBarWhenScrollingUp()
+                
+            } else {
+                //                // scroll down
+                scrollDirection = false
+                //                showTabBarWhenScrollingDown()
+            }
+        } else {
+            //            hideTabBarWhenScrollingUp()
+        }
+        //
+        lastContentOffset = currentOffset
+    }
     
+    
+}
+
+//MARK: - Private Method
+extension ExploreHomeVC {
+    
+    private func setThoughtData() {
+        
+        ExploreThoughtService.shared.getExploreThought { (result) in
+            switch result {
+            case .success(let data):
+                guard let dt = data as? GenericResponse<[ExploreThoughtData]> else { return }
+                
+                if let thoughts = dt.data {
+                    print(thoughts)
+                    self.exploreThoughtArray = thoughts
+                    self.exploreTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+                } else {
+                    
+                    // empty 화면 만들기
+                    
+                }
+                
+                
+            case .requestErr(let message):
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                
+            case .pathErr: print("path")
+            case .serverErr:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+                print("serverErr")
+            case .networkFail:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+            }
+        }
+    }
+    
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissCommentPage), name: .init("dismissCommentPage"), object: nil)
+    }
+    
+    @objc func dismissCommentPage(_ notification: Notification) {
+        guard let userInfo = notification.userInfo as? [String: Any] else { return }
+        guard let pageNumber = userInfo["indexPath"] as? Int else { return }
+        
+        print(pageNumber)
+    }
+    
+    //    private func setLayout() {
+    //        headerView.center.y -= view.bounds.height
+    //    }
+    
+    private func adjustScrollViewInset() {
+        if #available(iOS 11.0, *) {
+            exploreTableView.contentInsetAdjustmentBehavior = .never
+        } else {
+            automaticallyAdjustsScrollViewInsets = false
+        }
+        
+    }
+    
+    //    private func hideTabBarWhenScrollingUp() {
+    //        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveLinear], animations: {
+    //            self.headerViewHeight.constant = self.minHeight
+    //            //            self.headerView.center.y = -self.headerView.frame.height
+    //            self.headerView.alpha = 0.0
+    //        }) { _ in
+    //
+    //        }
+    //    }
+    //
+    //    private func showTabBarWhenScrollingDown() {
+    //        UIView.animate(withDuration: 0.3, delay: 0.3, options: [.curveLinear], animations: {
+    //            self.headerViewHeight.constant = self.maxHeight
+    //            //            self.headerView.center.y = self.headerView.frame.height
+    //            self.headerView.alpha = 1.0
+    //        }) { _ in
+    //
+    //        }
+    //    }
+}
+
+
+extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     func categoryButtonTapped(_ indexPath: IndexPath) {
         
-        exlporeTableView.reloadData()
+        scrollDirection = true
+        exploreTableView.reloadData()
     }
+    
+    func recentOrFavoriteButtonTapped(_ indexPath: Int) {
+        scrollDirection = true
+        exploreTableView.reloadData()
+    }
+    
+    
 }

@@ -18,7 +18,11 @@ class DiffThoughtTVC: UITableViewCell {
     
     private var isOneStepPaging = true
     
-    var exploreThoughtArray: [ExploreThoughtData] = []
+    var exploreThoughtArray: [ExploreThoughtData] = [] {
+        didSet {
+            diffThoughtCollectionView.reloadData()
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -34,22 +38,8 @@ class DiffThoughtTVC: UITableViewCell {
     }
     
     private func setThoughtCollectionView() {
-        
-        //        diffThoughtCollectionView.decelerationRate = .fast
-        //        diffThoughtCollectionView.isPagingEnabled = false
-        //        print("width: \(UIScreen.main.bounds.width)")
-        //        print(self.frame.height)
-        //        let cellWidth: CGFloat = UIScreen.main.bounds.width - 55.0
-        //        let cellHeight: CGFloat = 229.0 // 상하, 좌우 inset value 설정
-        //        let insetX = (UIScreen.main.bounds.width - cellWidth) / 2.0
-        //        let layout = diffThoughtCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        //        layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
-        //        layout.minimumLineSpacing = 12.0
-        //        layout.scrollDirection = .horizontal
-        //        diffThoughtCollectionView.contentInset = UIEdgeInsets(top: 16.0, left: insetX, bottom:  30.0, right: insetX)
         diffThoughtCollectionView.delegate = self
         diffThoughtCollectionView.dataSource = self
-        
         let cellWidth: CGFloat = UIScreen.main.bounds.width - 55.0
         print(diffThoughtCollectionView.frame.width)
         let cellHeight: CGFloat = cellWidth * 229.0 / 320.0
