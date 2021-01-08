@@ -41,7 +41,6 @@ class DiffThoughtTVC: UITableViewCell {
         diffThoughtCollectionView.delegate = self
         diffThoughtCollectionView.dataSource = self
         let cellWidth: CGFloat = UIScreen.main.bounds.width - 55.0
-        print(diffThoughtCollectionView.frame.width)
         let cellHeight: CGFloat = cellWidth * 229.0 / 320.0
         
         // 상하, 좌우 inset value 설정
@@ -53,11 +52,7 @@ class DiffThoughtTVC: UITableViewCell {
         layout.minimumLineSpacing = lineSpacing
         layout.scrollDirection = .horizontal
         diffThoughtCollectionView.contentInset = UIEdgeInsets(top: 16, left: insetX, bottom: 30, right: insetX)
-        
         diffThoughtCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
-        
-        print(diffThoughtCollectionView.contentInset)
-        print((diffThoughtCollectionView.collectionViewLayout as! UICollectionViewFlowLayout).minimumLineSpacing)
     }
     
     
@@ -70,7 +65,7 @@ class DiffThoughtTVC: UITableViewCell {
 extension DiffThoughtTVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return exploreThoughtArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -78,17 +73,13 @@ extension DiffThoughtTVC: UICollectionViewDataSource, UICollectionViewDelegateFl
         guard let card = collectionView.dequeueReusableCell(withReuseIdentifier: DiffThoughtCVC.identifier, for: indexPath) as? DiffThoughtCVC else { return UICollectionViewCell() }
         
         card.makeRounded(cornerRadius: 6.0)
-        
+        card.setQuestionAnswer(exploreThoughtArray[indexPath.item].questionTitle, exploreThoughtArray[indexPath.item].content)
         return card
     }
     
 }
 
 extension DiffThoughtTVC: UIScrollViewDelegate {
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.x)
-    }
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>)
     {
         if scrollView == diffThoughtCollectionView {

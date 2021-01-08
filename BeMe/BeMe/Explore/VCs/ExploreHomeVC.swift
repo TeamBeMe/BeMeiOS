@@ -10,6 +10,8 @@ import UIKit
 class ExploreHomeVC: UIViewController {
     
     @IBOutlet weak var exploreTableView: UITableView!
+    @IBOutlet weak var safeAreaView: UIView!
+    @IBOutlet weak var headerView: UIView!
     
     private var lastContentOffset: CGFloat = 0
     
@@ -17,12 +19,18 @@ class ExploreHomeVC: UIViewController {
     
     private let minHeight: CGFloat = 0.0
     
+    private let headerFrameOriginY: CGFloat = 56.0
+    
     private var scrollDirection: Bool = true
     
     // 서버통신을 통해 받아오는 값
     var articlesArray: [ExploreAnswer] = []
     
-    private var exploreThoughtArray: [ExploreThoughtData] = []
+    private var exploreThoughtArray: [ExploreThoughtData] = [] {
+        didSet {
+            exploreTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+        }
+    }
     
     var cellNum: Int = 10
     
@@ -31,11 +39,13 @@ class ExploreHomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("~~~~~~~~~~~~~~~> \(headerView.frame.origin.y)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        setThoughtData()
         self.navigationController?.navigationBar.isHidden = true
     }
     
@@ -117,24 +127,35 @@ extension ExploreHomeVC: UITableViewDelegate {
 extension ExploreHomeVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffset = exploreTableView.contentOffset.y
+//        print(currentOffset)
         
-        print(currentOffset)
+        
         // iphone safe area 문제 해결 코드
-        self.view.backgroundColor = currentOffset > 394 ? .white : UIColor.init(named: "background")
+        self.safeAreaView.backgroundColor = currentOffset > 394 ? .white : UIColor.init(named: "background")
+        view.backgroundColor = currentOffset > 394 ? .white : UIColor.init(named: "background")
+        // animation 문제 해결 코드
+        if (lastContentOffset < currentOffset) {
+            //scroll up
+            scrollDirection = true
+        } else {
+            //scroll down
+            scrollDirection = false
+        }
         
-        if (currentOffset > 432 + 69 + 32) {
+        // 상단 view
+        if (currentOffset > 542.333) {
             if (lastContentOffset < currentOffset) {
-                //                // scroll up
-                scrollDirection = true
-                //                hideTabBarWhenScrollingUp()
+                //scroll up
                 
+                hideTabBarWhenScrollingUp()
             } else {
-                //                // scroll down
-                scrollDirection = false
-                //                showTabBarWhenScrollingDown()
+                //scroll down
+                print("before")
+                showTabBarWhenScrollingDown()
+                print("after")
             }
         } else {
-            //            hideTabBarWhenScrollingUp()
+            //hideTabBarWhenScrollingUp()
         }
         //
         lastContentOffset = currentOffset
@@ -156,9 +177,10 @@ extension ExploreHomeVC {
                 if let thoughts = dt.data {
                     print(thoughts)
                     self.exploreThoughtArray = thoughts
-                    self.exploreTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+//                    self.exploreTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
                 } else {
                     
+                    print("none")
                     // empty 화면 만들기
                     
                 }
@@ -213,25 +235,25 @@ extension ExploreHomeVC {
         
     }
     
-    //    private func hideTabBarWhenScrollingUp() {
-    //        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveLinear], animations: {
-    //            self.headerViewHeight.constant = self.minHeight
-    //            //            self.headerView.center.y = -self.headerView.frame.height
-    //            self.headerView.alpha = 0.0
-    //        }) { _ in
-    //
-    //        }
-    //    }
-    //
-    //    private func showTabBarWhenScrollingDown() {
-    //        UIView.animate(withDuration: 0.3, delay: 0.3, options: [.curveLinear], animations: {
-    //            self.headerViewHeight.constant = self.maxHeight
-    //            //            self.headerView.center.y = self.headerView.frame.height
-    //            self.headerView.alpha = 1.0
-    //        }) { _ in
-    //
-    //        }
-    //    }
+    private func hideTabBarWhenScrollingUp() {
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveLinear], animations: {
+            
+            
+            self.headerView.frame.origin.y =  self.headerFrameOriginY - self.headerView.frame.height
+        }) { _ in
+            
+        }
+    }
+    
+    private func showTabBarWhenScrollingDown() {
+        UIView.animate(withDuration: 0.3, delay: 0.3, options: [.curveLinear], animations: {
+            
+            
+            self.headerView.frame.origin.y = self.headerFrameOriginY + self.headerView.frame.height
+        }) { _ in
+            
+        }
+    }
 }
 
 
