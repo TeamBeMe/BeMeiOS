@@ -173,6 +173,7 @@
                         <outlet property="finishButton" destination="cwF-ah-mvH" id="9az-Zs-M5d"/>
                         <outlet property="questionInfoLabel" destination="0h7-HA-j0l" id="i8x-0J-ngy"/>
                         <outlet property="questionLabel" destination="eoJ-XV-IBo" id="gB3-0t-iSQ"/>
+                        <outlet property="textViewBottomConstraint" destination="Jb7-4T-eVD" id="iuY-Zk-r4w"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QUy-cB-T8s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

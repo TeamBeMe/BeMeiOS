@@ -31,6 +31,7 @@ class AnswerVC: UIViewController {
     
     @IBOutlet weak var commentSwitch: UISwitch!
     
+    @IBOutlet weak var textViewBottomConstraint: NSLayoutConstraint!
     //MARK:**- Variable Part**
     
     /// 뷰컨에 필요한 변수들을 선언합니다  // 변수명 lowerCamelCase 사용
@@ -50,6 +51,7 @@ class AnswerVC: UIViewController {
     var initialText: String = ""
     var answerDataDelegate: HomeGetDataFromAnswerDelegate?
     var curCardIdx : Int?
+    var isRegister: Bool?
     
     //MARK:**- Constraint Part**
     
@@ -68,7 +70,7 @@ class AnswerVC: UIViewController {
         setLabels()
         //        answerTextView.text = ""
         //        answerTextView.becomeFirstResponder()
-        
+        registerForKeyboardNotifications()
         
         
     }
@@ -78,11 +80,15 @@ class AnswerVC: UIViewController {
         answerTextView.delegate = self
         setTextView(answerTextView)
         setLabels()
-        
+        clarifyRegister()
         
     }
     
     
+    override func viewWillDisappear(_ animated: Bool) {
+        unregisterForKeyboardNotifications()
+        
+    }
     
     //MARK:**- IBAction Part**
     
@@ -132,6 +138,8 @@ class AnswerVC: UIViewController {
         
     }
     
+    
+    
     // placeholder 및 커서 작업
     func setTextView(_ textView: UITextView){
         
@@ -148,11 +156,11 @@ class AnswerVC: UIViewController {
         } else {
             textView.text = savedAnswer
             textView.textColor = .black
-            
+            //
             let position = textView.endOfDocument
             textView.selectedTextRange = textView.textRange(from:position, to:position)
             textView.endFloatingCursor()
-            
+            //
             isInitial = false
         }
     }
@@ -161,19 +169,36 @@ class AnswerVC: UIViewController {
     func setLabels(){
         
         questionLabel.text = answerData?.question
-        questionInfoLabel.text = "[ \((answerData?.questionCategory)!)에 관한 \((answerData?.answerIdx)!)번째 질문 ]"
+        //        questionInfoLabel.text = "[ \((answerData?.questionCategory)!)에 관한 \((answerData?.answerIdx)!)번째 질문 ]"
         answerDateLabel.text = answerData?.answerDate
-        let attributedString = NSMutableAttributedString(string: questionInfoLabel.text!)
-        //        attributedString.addAttribute(NSAttributedString.Key.foregroundColor,
-        //                                      value: UIColor.black,
-        //                                      range: (answerData?.questionCategory as NSString).range(of: #"[0-9]*번째"#,
-        //                                                                              options: .regularExpression))
+        
+        let mainString = "[ \((answerData?.questionCategory)!)에 관한 \((answerData?.answerIdx)!)번째 질문 ]"
+        
+        let range = (mainString as! NSString).range(of: String((answerData?.answerIdx)!)+"번째")
+        let mutableAttributedString = NSMutableAttributedString.init(string: mainString)
+        mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.black, range: range)
+        
+        questionInfoLabel.attributedText = mutableAttributedString
+        
         
         answerTextView.text = answer
         textViewDidChange(answerTextView)
         answerTextView.becomeFirstResponder()
+        
+        answerSwitch.isOn = !answerData!.lock!
+        
+        
+        
     }
-    
+    func clarifyRegister(){
+        if answerData?.answer == "" || answerData?.answer == ""{
+            isRegister = true
+        }
+        else{
+            isRegister = false
+        }
+
+    }
     
     
     //MARK:**- Function Part**
@@ -194,15 +219,94 @@ class AnswerVC: UIViewController {
     }
     
     @IBAction func finishButtonAction(_ sender: Any) {
-        
-        
         answerData!.answer = answerTextView.text
+        if isRegister! == true{
+            AnswerRegistService.shared.regist(answerID: answerData!.id!, content: answerData!.answer!, commentBlocked: commentSwitch.isOn, isPublic: answerSwitch.isOn) {(networkResult) -> (Void) in
+                switch networkResult{
+                case .success(let data) :
+                    print("success")
+                case .requestErr(let msg):
+                    if let message = msg as? String {
+                        print(message)
+                    }
+                case .pathErr :
+                    print("pathErr")
+                case .serverErr :
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+                    
+                }
+            }
+
+        }
+        else{
+            AnswerModifyService.shared.modify(answerID: answerData!.id!, content: answerData!.answer!, commentBlocked: commentSwitch.isOn, isPublic: answerSwitch.isOn) {(networkResult) -> (Void) in
+                switch networkResult{
+                case .success(let data) :
+                    print("success")
+                case .requestErr(let msg):
+                    if let message = msg as? String {
+                        print(message)
+                    }
+                case .pathErr :
+                    print("pathErr")
+                case .serverErr :
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+                    
+                }
+            }
+            
+            
+            
+        }
+        
+        
+       
+        
+      
+        
+        
         answerDataDelegate?.setNewAnswer(answerData: answerData!)
         self.navigationController?.popViewController(animated: true)
         
     }
     
+    func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow(_:)), name:
+                                                UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name:
+                                                UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    @objc func keyboardWillShow(_ notification: NSNotification) {
+        
+        
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey]
+                                as? NSValue)?.cgRectValue {
+            
+            textViewBottomConstraint.constant = 30 + keyboardSize.height - (view.frame.height-answerTextView.frame.maxY)
+            
+            
+        }
+    }
     
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        //        guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]
+        //            as? Double else {return}
+        //        guard let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey]
+        //            as? UInt else {return}
+        textViewBottomConstraint.constant = 30
+        
+    }
+    func unregisterForKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name:
+                                                    UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name:
+                                                    UIResponder.keyboardWillHideNotification, object: nil)
+    }
     
 }
 

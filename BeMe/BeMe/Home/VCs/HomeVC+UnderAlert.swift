@@ -116,13 +116,14 @@ extension HomeVC {
     }
     
     func makeRemoveButton(){
-        alertContainView.addSubview(changeButton)
-        changeButton.snp.makeConstraints{
+        alertContainView.addSubview(removeButton)
+        removeButton.snp.makeConstraints{
             $0.leading.trailing.equalToSuperview()
             $0.height.equalTo(57)
             $0.top.equalToSuperview().offset(57)
         }
         
+        removeButton.addTarget(self, action: #selector(deleteButtonAction), for: .touchUpInside)
     }
     
     @objc func underAlertCancelButtonAction(){
@@ -162,7 +163,14 @@ extension HomeVC {
             case .success(let data) :
                 
                 print("success")
+                if self.deleteIdx >= self.pastCards{
+                    self.todayCards = self.todayCards - 1
+                }
+                else{
+                    self.pastCards = self.pastCards - 1
+                }
                 self.answerDataList.remove(at: self.deleteIdx)
+                
                 self.cardCollectionView.reloadData()
                 
                 
