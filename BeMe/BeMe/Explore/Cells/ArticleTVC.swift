@@ -19,7 +19,6 @@ class ArticleTVC: UITableViewCell {
         super.awakeFromNib()
         
         answerCardView.setBorderWithRadius(borderColor: .lightGray, borderWidth: 1, cornerRadius: 8)
-        
         answerTextView.font = UIFont(name: "AppleSDGothicNeo-Light", size: 14.0)
         
     }
@@ -46,6 +45,6 @@ class ArticleTVC: UITableViewCell {
     }
     
     @IBAction func goToDetailExploreVC(_ sender: UIButton) {
-        
+        print("?????????????뭐지")
     }
 }

@@ -31,11 +31,23 @@ class ExploreDetailVC: UIViewController {
         navigationController?.navigationBar.isHidden = false
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+//        print(diffAnswerTableView.contentSize.height)
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setPopupBackgroundView()
         setNotificationCenter()
+        setTableView()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     //MARK: - IBAction
@@ -47,26 +59,12 @@ class ExploreDetailVC: UIViewController {
 
 //MARK: - Private Method
 extension ExploreDetailVC {
-    private func setPopupBackgroundView() {
-        popupBackgroundView.backgroundColor = .black
-        view.addSubview(popupBackgroundView)
-        popupBackgroundView.translatesAutoresizingMaskIntoConstraints = false
-        popupBackgroundView.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-        popupBackgroundView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        popupBackgroundView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-        popupBackgroundView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
-        popupBackgroundView.isHidden = true
-        popupBackgroundView.alpha = 0
-        view.bringSubviewToFront(popupBackgroundView)
-    }
     
-    private func animatePopupBackground(_ direction: Bool) {
-        let duration: TimeInterval = direction ? 0.35 : 0.15
-        let alpha: CGFloat = direction ? 0.40 : 0.0
-        self.popupBackgroundView.isHidden = !direction
-        UIView.animate(withDuration: duration) {
-            self.popupBackgroundView.alpha = alpha
-        }
+    private func setTableView() {
+        
+    }
+    private func setPopupBackgroundView() {
+        popupBackgroundView.setPopupBackgroundView(to: view)
     }
     
     private func setNotificationCenter() {
@@ -74,7 +72,7 @@ extension ExploreDetailVC {
     }
     
     @objc func closePopup() {
-        animatePopupBackground(false)
+        popupBackgroundView.animatePopupBackground(false)
     }
 }
 
@@ -98,7 +96,9 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
                                                              for: indexPath) as? AnswerTVC else {
                 return UITableViewCell() }
             
+            answer.selectionStyle = .none
             answer.delegate = self
+            answer.indexPath = indexPath
             return answer
         }
         
@@ -114,7 +114,6 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        print(scrollDirection)
         if (scrollDirection) {
             let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 350, 0)
             cell.layer.transform = rotationTransform
@@ -149,17 +148,29 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
         }
         lastContentOffset = currentContentOffset
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
+        
+//        comment.
+        comment.isMoreButtonHidden = true
+        comment.modalPresentationStyle = .fullScreen
+        self.present(comment, animated: true, completion: nil)
+    }
 }
 
 //MARK: - UITableViewButtonSelectedDelegate
 extension ExploreDetailVC: UITableViewButtonSelectedDelegate {
     
-    func settingButtonDidTapped() {
+    func settingButtonDidTapped(to indexPath: IndexPath) {
         
-        animatePopupBackground(true)
-        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheet.identifier) as?
-                CustomActionSheet else { return }
+        popupBackgroundView.animatePopupBackground(true)
         
+        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetVC.identifier) as?
+                CustomActionSheetVC else { return }
+    
+        settingActionSheet.alertInformations = AlertLabels.article
         settingActionSheet.modalPresentationStyle = .overCurrentContext
         self.present(settingActionSheet, animated: true, completion: nil)
     }

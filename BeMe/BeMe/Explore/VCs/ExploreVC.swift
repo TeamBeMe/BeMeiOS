@@ -52,6 +52,7 @@ class ExploreVC: UIViewController {
         
         adjustScrollViewInset()
         setThoughtCollectionView()
+        setArticleTableView()
         diffArticleTableView.setDynamicCellHeight(to: 200)
         
     }
@@ -78,6 +79,10 @@ class ExploreVC: UIViewController {
         
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     
     //MARK: - IBActions
     
@@ -87,6 +92,7 @@ class ExploreVC: UIViewController {
         setLabel()
         diffArticleTableView.reloadData()
     }
+    
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
         moveHighLightBar(to: sender)
         isRecentButtonPressed = false
@@ -97,6 +103,22 @@ class ExploreVC: UIViewController {
 
 //MARK: - Private Method
 extension ExploreVC {
+    
+    private func setArticleTableView() {
+        
+    }
+    
+    private func setNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissCommentPage), name: .init("dismissCommentPage"), object: nil)
+    }
+    
+    @objc func dismissCommentPage(_ notification: Notification) {
+        guard let userInfo = notification.userInfo as? [String: Any] else { return }
+        guard let pageNumber = userInfo["indexPath"] as? Int else { return }
+        
+        print(pageNumber)
+        
+    }
     
     private func setThoughtCollectionView() {
         
@@ -268,7 +290,11 @@ extension ExploreVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
             return UICollectionViewCell()
         }
         // border 계산 다시하기
-        cell.layer.cornerRadius = 10
+//        let deviceBound: CGFloat = UIScreen.main.bounds.width/375.0
+        
+//        let width = cell.bounds.width
+//        let height = cell.bounds.height
+//        cell.layer.cornerRadius = width * 6 *  deviceBound
         cell.setAnswer()
         cell.backgroundColor = .white
         return cell
@@ -291,21 +317,19 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
                     .dequeueReusableCell(withIdentifier: CategoryTVC.identifier, for: indexPath)
                     as? CategoryTVC else { return UITableViewCell() }
             category.delegate = self
+            category.selectionStyle = .none
             return category
         } else if indexPath.row == cellNumber - 1 {
             guard let more = tableView
                     .dequeueReusableCell(withIdentifier: MoreTVC.identifier, for: indexPath)
                     as? MoreTVC else { return UITableViewCell() }
-            
-            more.isUserInteractionEnabled = false
-            
+            more.selectionStyle = .none
             return more
         } else {
             guard let article = tableView
                     .dequeueReusableCell(withIdentifier: ArticleTVC.identifier, for: indexPath)
                     as? ArticleTVC else { return UITableViewCell() }
-            
-            
+            article.selectionStyle = .none
             return article
         }
     }
@@ -321,8 +345,23 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.row == 0 {
+            // nothing
+        } else if indexPath.row == cellNumber - 1 {
+            
+        } else {
+            guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
+            
+            comment.pageNumber = indexPath.row
+            comment.isMoreButtonHidden = false
+            comment.modalPresentationStyle = .fullScreen
+            self.present(comment, animated: true, completion: nil)
+        }
+
+
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -351,8 +390,9 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
             }
             
         }
-        
     }
+    
+    
 }
 
 extension ExploreVC: CategoryButtonPressedDelegate {

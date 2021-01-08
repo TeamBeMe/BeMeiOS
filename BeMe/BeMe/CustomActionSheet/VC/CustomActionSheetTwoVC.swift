@@ -1,13 +1,13 @@
 //
-//  MypageVC.swift
+//  CustomActionSheetTwoVC.swift
 //  BeMe
 //
-//  Created by 박세란 on 2021/01/03.
+//  Created by 이재용 on 2021/01/07.
 //
 
 import UIKit
 
-class MypageVC: UIViewController {
+class CustomActionSheetTwoVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
