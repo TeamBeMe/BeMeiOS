@@ -34,7 +34,7 @@ class ExploreVC: UIViewController {
     
     var diffThoughtArray: [ExploreThoughtData] = []
     
-    var diffArticleArray: [ExploreArticleData] = []
+    var diffArticleArray: [ExploreAnswerData] = []
     private var lastContentOffset: CGFloat = 0
     
     private let maxHeight: CGFloat = 32.0
@@ -452,12 +452,3 @@ extension ExploreVC: UITableViewButtonSelectedDelegate {
     
     
 }
-//
-//extension ExploreVC: CategoryButtonPressedDelegate {
-//    func categoryButtonTapped(_ indexPath: IndexPath) {
-//        
-//        // indexPath 서버에 보내줘서 비동기 처리 (로딩화면)
-//        diffArticleTableView.reloadData()
-//    }
-//    
-//}

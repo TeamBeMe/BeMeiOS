@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ExploreArticleData: Codable {
+struct ExploreAnswerData: Codable {
     let pageLen: Int
     let answers: [ExploreAnswer]?
     
