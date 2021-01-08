@@ -7,14 +7,11 @@
 
 import UIKit
 
-protocol CategoryButtonPressedDelegate: class {
-    func categoryButtonTapped(_ indexPath: IndexPath)
-}
 
 class CategoryTVC: UITableViewCell {
     static let identifier: String = "CategoryTVC"
     
-    weak var delegate: CategoryButtonPressedDelegate?
+    weak var delegate: UITableViewButtonSelectedDelegate?
     
     // CollectionView 동적 너비를 위해
     var flowLayout: UICollectionViewFlowLayout  {

@@ -53,6 +53,7 @@ extension ExploreHomeVC: UITableViewDataSource {
         } else if indexPath.row == 1 {
             guard let diffAnswer = tableView.dequeueReusableCell(withIdentifier: DiffArticleTVC.identifier, for: indexPath) as? DiffArticleTVC else { return UITableViewCell() }
             
+            diffAnswer.delegate = self
             return diffAnswer
         } else if indexPath.row == cellNum + 2 - 1 {
             // 더보기 버튼
@@ -64,11 +65,43 @@ extension ExploreHomeVC: UITableViewDataSource {
             return answer
         }
     }
-    
-
-    
 }
 extension ExploreHomeVC: UITableViewDelegate {
     
+    // 애니메이션
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == 0  || indexPath.row == 1{
+            // no animation
+            
+        } else if indexPath.row == cellNum + 2 - 1 {
+            // animation 2
+            cell.alpha = 0
+            UIView.animate(withDuration: 0.75) {
+                
+                cell.alpha = 1.0
+            }
+        } else {
+            // animation 1
+            let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 160, 0)
+            cell.layer.transform = rotationTransform
+            cell.alpha = 0.5
+            
+            UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut], animations: {
+                cell.layer.transform = CATransform3DIdentity
+                cell.alpha = 1.0
+            }) { (_) in
+                
+            }
+            
+        }
+    }
 }
 
+extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
+    
+    func categoryButtonTapped(_ indexPath: IndexPath) {
+        
+        exlporeTableView.reloadData()
+    }
+}

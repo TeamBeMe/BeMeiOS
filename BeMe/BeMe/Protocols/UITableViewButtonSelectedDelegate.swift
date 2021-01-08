@@ -20,6 +20,9 @@ protocol UITableViewButtonSelectedDelegate: class {
     
     // 댓글 페이지의 답글 달기 버튼 눌릴 때
     func sendCommentButtonDidTapped(to indexPath: IndexPath)
+    
+    // 카테고리 버튼 누를 때
+    func categoryButtonTapped(_ indexPath: IndexPath)
 }
 
 extension UITableViewButtonSelectedDelegate {
@@ -30,4 +33,6 @@ extension UITableViewButtonSelectedDelegate {
     func moreAnswerButtonDidTapped(to indexPath: IndexPath) {}
     
     func sendCommentButtonDidTapped(to indexPath: IndexPath) {}
+    
+    func categoryButtonTapped(_ indexPath: IndexPath) {}
 }

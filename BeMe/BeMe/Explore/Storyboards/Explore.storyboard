@@ -287,7 +287,7 @@
                                                                 <constraint firstAttribute="bottom" secondItem="FNN-Rm-R4j" secondAttribute="bottom" id="vB6-Qa-kGb"/>
                                                             </constraints>
                                                         </view>
-                                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="f2p-kd-Z8y">
+                                                        <collectionView clipsSubviews="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="f2p-kd-Z8y" customClass="하지만">
                                                             <rect key="frame" x="0.0" y="155.66666666666666" width="390" height="54"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
