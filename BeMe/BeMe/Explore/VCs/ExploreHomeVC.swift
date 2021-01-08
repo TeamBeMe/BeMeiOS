@@ -47,16 +47,29 @@ extension ExploreHomeVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
+            guard let diffThought = tableView.dequeueReusableCell(withIdentifier: DiffThoughtTVC.identifier, for: indexPath) as? DiffThoughtTVC else { return UITableViewCell() }
             
+            return diffThought
         } else if indexPath.row == 1 {
+            guard let diffAnswer = tableView.dequeueReusableCell(withIdentifier: DiffArticleTVC.identifier, for: indexPath) as? DiffArticleTVC else { return UITableViewCell() }
             
-        } else if indexPath.row == cellNum + 
+            return diffAnswer
+        } else if indexPath.row == cellNum + 2 - 1 {
+            // 더보기 버튼
+            guard let more = tableView.dequeueReusableCell(withIdentifier: MoreTVC.identifier, for: indexPath) as? MoreTVC else { return UITableViewCell() }
+            return more
+        } else {
+            guard let answer = tableView.dequeueReusableCell(withIdentifier: ArticleTVC.identifier, for: indexPath)  as? ArticleTVC else { return UITableViewCell() }
+            
+            return answer
+        }
     }
     
 
     
 }
 extension ExploreHomeVC: UITableViewDelegate {
+    
     
 }
 

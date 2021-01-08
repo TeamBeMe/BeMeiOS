@@ -21,4 +21,8 @@ class DiffThoughtTVC: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func friendButtonTapped(_ sender: Any) {
+    }
+    @IBAction func alarmButtonTapped(_ sender: Any) {
+    }
 }

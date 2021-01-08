@@ -461,14 +461,14 @@
 			isa = PBXGroup;
 			children = (
 				D4E07CB4259F22C10075E616 /* MoreTVC.swift */,
-				D480732D25A89E4500DE1DD3 /* DiffArticleTVC.swift */,
 				D492E43A25A0E6250088A181 /* DetailMoreTVC.swift */,
-				D492E42E25A0CE5E0088A181 /* AnswerTVC.swift */,
 				D4E07CB5259F22C10075E616 /* CategoryTVC.swift */,
 				D4E07CB6259F22C10075E616 /* DiffThoughtCVC.swift */,
 				D4E07CB7259F22C10075E616 /* CategoryCVC.swift */,
 				D4E07CB8259F22C10075E616 /* ArticleTVC.swift */,
 				D480732A25A89DDD00DE1DD3 /* DiffThoughtTVC.swift */,
+				D480732D25A89E4500DE1DD3 /* DiffArticleTVC.swift */,
+				D492E42E25A0CE5E0088A181 /* AnswerTVC.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
