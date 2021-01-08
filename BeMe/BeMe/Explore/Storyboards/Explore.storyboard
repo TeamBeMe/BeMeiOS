@@ -261,7 +261,7 @@
                                             <outlet property="diffThoughtCollectionView" destination="eAG-qh-YCs" id="Xk0-pa-tdE"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DiffArticleTVC" id="UEb-O2-8F0" customClass="DiffArticleTVC" customModule="BeMe" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DiffArticleTVC" id="UEb-O2-8F0" userLabel="DiffAnswerTVC" customClass="DiffArticleTVC" customModule="BeMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="422.66665649414062" width="390" height="209.66667175292969"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UEb-O2-8F0" id="aai-9y-1DK">
@@ -421,18 +421,20 @@
                                         <connections>
                                             <outlet property="categoryCollectionView" destination="f2p-kd-Z8y" id="4RI-5s-yxo"/>
                                             <outlet property="diffArticleSubTitle" destination="Gch-PN-vZd" id="74Z-bx-VRv"/>
+                                            <outlet property="favoriteButton" destination="W9W-bq-div" id="Jfl-1b-aQY"/>
                                             <outlet property="highLightBar" destination="FNN-Rm-R4j" id="70z-3n-V0Q"/>
+                                            <outlet property="highLightBarLeading" destination="mni-6d-Kga" id="3BW-Jl-4qR"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArticleTVC" id="gmT-TG-Alj" customClass="ArticleTVC" customModule="BeMe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="632.33332824707031" width="390" height="377.66665649414062"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArticleTVC" id="gmT-TG-Alj" userLabel="AnswerTVC" customClass="ArticleTVC" customModule="BeMe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="632.33332824707031" width="390" height="360.66665649414062"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gmT-TG-Alj" id="TlR-lz-5zw">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="377.66665649414062"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="360.66665649414062"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yth-8F-KdI">
-                                                    <rect key="frame" x="30" y="6" width="330" height="365.66666666666669"/>
+                                                    <rect key="frame" x="30" y="6" width="330" height="348.66666666666669"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oBt-VM-5S3">
                                                             <rect key="frame" x="20" y="19.999999999999996" width="270" height="57.666666666666657"/>
@@ -450,7 +452,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jz1-do-HC8">
-                                                            <rect key="frame" x="20" y="120.33333333333333" width="290" height="184.33333333333337"/>
+                                                            <rect key="frame" x="20" y="120.33333333333333" width="290" height="167.33333333333337"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" priority="249" constant="167.33000000000001" id="KA6-mG-gwj"/>
@@ -461,7 +463,7 @@
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="3RU-zA-1vT">
-                                                            <rect key="frame" x="20.000000000000007" y="313.66666666666669" width="112.66666666666669" height="34"/>
+                                                            <rect key="frame" x="20.000000000000007" y="296.66666666666669" width="112.66666666666669" height="34"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgProfile" translatesAutoresizingMaskIntoConstraints="NO" id="6DN-FU-ttj">
                                                                     <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
@@ -482,7 +484,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSz-oK-Xis">
-                                                            <rect key="frame" x="286" y="314.66666666666669" width="32" height="32"/>
+                                                            <rect key="frame" x="286" y="297.66666666666669" width="32" height="32"/>
                                                             <state key="normal" image="btnScrapUnselected"/>
                                                             <state key="selected" image="btnScrapSelected"/>
                                                             <connections>
@@ -520,10 +522,14 @@
                                         <connections>
                                             <outlet property="answerCardView" destination="yth-8F-KdI" id="h3t-ns-XRQ"/>
                                             <outlet property="answerTextView" destination="Jz1-do-HC8" id="bKw-Pt-Xbf"/>
+                                            <outlet property="nickNameLabel" destination="YcG-D2-HI5" id="T6O-dz-wzX"/>
+                                            <outlet property="profileImageView" destination="6DN-FU-ttj" id="waB-Me-U9L"/>
+                                            <outlet property="question" destination="oBt-VM-5S3" id="qh4-lx-jmw"/>
+                                            <outlet property="subTitle" destination="qfP-YZ-i0Q" id="Ihs-Ee-cgD"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MoreTVC" rowHeight="193" id="HxO-zO-D7x" customClass="MoreTVC" customModule="BeMe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1009.9999847412109" width="390" height="193"/>
+                                        <rect key="frame" x="0.0" y="992.99998474121094" width="390" height="193"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HxO-zO-D7x" id="oNR-Br-D1e">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="193"/>

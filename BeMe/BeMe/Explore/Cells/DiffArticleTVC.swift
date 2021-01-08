@@ -13,6 +13,8 @@ class DiffArticleTVC: UITableViewCell {
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     @IBOutlet weak var highLightBar: UIView!
     @IBOutlet weak var diffArticleSubTitle: UILabel!
+    @IBOutlet weak var highLightBarLeading: NSLayoutConstraint!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     weak var delegate: UITableViewButtonSelectedDelegate?
 
@@ -78,6 +80,7 @@ extension DiffArticleTVC {
         UIView.animate(withDuration: 0.2, delay: 0, options: [.curveLinear], animations: {
             // Slide Animation
             self.highLightBar.frame.origin.x = 30 + button.frame.minX
+        
         }) { _ in
         }
     }

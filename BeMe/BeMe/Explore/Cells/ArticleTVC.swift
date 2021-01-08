@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ArticleTVC: UITableViewCell {
     static let identifier: String = "ArticleTVC"
@@ -14,6 +15,10 @@ class ArticleTVC: UITableViewCell {
     
     @IBOutlet weak var answerCardView: UIView!
     @IBOutlet weak var answerTextView: UITextView!
+    @IBOutlet weak var question: UILabel!
+    @IBOutlet weak var subTitle: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nickNameLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,9 +31,23 @@ class ArticleTVC: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
     }
 
+    func setCardDatas(que: String, date: String, cate: String, content: String, profileImage: String?, nick: String) {
+        
+        question.text = que
+        subTitle.text = "[  \(cate)에 관한 질문  ]  ·  \(date)"
+        answerTextView.text = content
+        nickNameLabel.text = nick
+        
+        if let pi = profileImage {
+            let url = URL(string: pi)
+            profileImageView.kf.setImage(with: url)
+        } else {
+            profileImageView.image = UIImage(named: "imgProfile")
+        }
+        
+    }
     
     
     //MARK: - IBAction

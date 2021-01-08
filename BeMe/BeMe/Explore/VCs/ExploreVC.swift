@@ -336,14 +336,6 @@ extension ExploreVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
                 for: indexPath) as? DiffThoughtCVC else {
             return UICollectionViewCell()
         }
-        // border 계산 다시하기
-//        let deviceBound: CGFloat = UIScreen.main.bounds.width/375.0
-        
-//        let width = cell.bounds.width
-//        let height = cell.bounds.height
-//        cell.layer.cornerRadius = width * 6 *  deviceBound
-        
-        
         cell.setQuestionAnswer(diffThoughtArray[indexPath.row].questionTitle, diffThoughtArray[indexPath.row].content)
         cell.backgroundColor = .white
         return cell

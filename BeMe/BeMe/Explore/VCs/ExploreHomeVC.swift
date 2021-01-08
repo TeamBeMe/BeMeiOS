@@ -23,24 +23,26 @@ class ExploreHomeVC: UIViewController {
     
     private var scrollDirection: Bool = true
     
-    // 서버통신을 통해 받아오는 값
-    var articlesArray: [ExploreAnswer] = [] {
-        didSet {
-        }
-    }
+    private var page: Int = 1
     
+    // 서버통신을 통해 받아오는 값
     private var categoryArray: [ExploreCategory] = [] {
         didSet {
-            exploreTableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)
+            exploreTableView.reloadData()
         }
     }
     
     private var exploreThoughtArray: [ExploreThoughtData] = [] {
         didSet {
-            exploreTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+            exploreTableView.reloadData()
         }
     }
     
+    private var exploreAnswerArray: [ExploreAnswer] = [] {
+        didSet {
+            exploreTableView.reloadData()
+        }
+    }
     var cellNum: Int = 10
     
     //MARK: - life cylce
@@ -68,7 +70,7 @@ class ExploreHomeVC: UIViewController {
 //MARK: - UITableView
 extension ExploreHomeVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellNum + 2
+        return exploreAnswerArray.count + 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -83,13 +85,17 @@ extension ExploreHomeVC: UITableViewDataSource {
             diffAnswer.categoryArray = self.categoryArray
             diffAnswer.delegate = self
             return diffAnswer
-        } else if indexPath.row == cellNum + 2 - 1 {
+        } else if indexPath.row == exploreAnswerArray.count + 2 {
             // 더보기 버튼
             guard let more = tableView.dequeueReusableCell(withIdentifier: MoreTVC.identifier, for: indexPath) as? MoreTVC else { return UITableViewCell() }
             return more
         } else {
+            print(indexPath.row)
+            print("~~~~~~~~~~~~~> \(exploreAnswerArray.count)")
             guard let answer = tableView.dequeueReusableCell(withIdentifier: ArticleTVC.identifier, for: indexPath)  as? ArticleTVC else { return UITableViewCell() }
             
+            
+            answer.setCardDatas(que: exploreAnswerArray[indexPath.row - 2].question, date: exploreAnswerArray[indexPath.row - 2].answerDate, cate: exploreAnswerArray[indexPath.row - 2].category, content: exploreAnswerArray[indexPath.row - 2].content, profileImage: exploreAnswerArray[indexPath.row - 2].userProfile, nick: exploreAnswerArray[indexPath.row - 2].userNickname)
             return answer
         }
     }
@@ -222,10 +228,14 @@ extension ExploreHomeVC {
         ExploreAnswerService.shared.getExploreAnswer(page: 1, category: nil, sorting: "최신") { (result) in
             switch result {
             case .success(let data):
-                guard let dt = data as? GenericResponse<[ExploreAnswerData]> else { return }
-            let _ = dt
-
-            
+                guard let dt = data as? GenericResponse<ExploreAnswerData> else { return }
+                if let dat = dt.data {
+                    self.page = dat.pageLen
+                    if let ans = dat.answers {
+                        self.exploreAnswerArray = ans
+                    }
+                }
+    
             case .requestErr(let message):
                 guard let message = message as? String else { return }
                 let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
@@ -337,6 +347,4 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
         scrollDirection = true
         exploreTableView.reloadData()
     }
-    
-    
 }
