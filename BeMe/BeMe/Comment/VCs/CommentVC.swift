@@ -25,6 +25,8 @@ class CommentVC: UIViewController {
     @IBOutlet weak var lockButton: UIButton!
     @IBOutlet weak var commentSendButton: UIButton!
     @IBOutlet weak var commentTextWrapperBottomAnchor: NSLayoutConstraint!
+    @IBOutlet weak var commentToCommentView: UIView!
+    @IBOutlet weak var commentToCommentLabel: UILabel!
     
     lazy var popupBackgroundView: UIView = UIView()
     
@@ -131,7 +133,8 @@ class CommentVC: UIViewController {
                     
                     commentArray[selectedIndex.section - 1].children?.append(CommentA(comment: comment, children: [], open: false))
                     
-                    print("대댓글써지나?")
+                    commentToCommentView.isHidden = true
+                    
                     commentTableView.reloadData()
                     commentTableView.scrollToRow(at: selectedIndex, at: .bottom, animated: true)
                 }
@@ -152,6 +155,10 @@ class CommentVC: UIViewController {
         
     }
     
+    @IBAction func cancelCommentToCommentButtonTapped(_ sender: UIButton) {
+        
+        commentToCommentView.isHidden = true
+    }
     @IBAction func lockButtonTapped(_ sender: UIButton) {
         
         if isCommentLocked {
@@ -345,6 +352,7 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
         
         commentTextView.becomeFirstResponder()
         commentTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+        commentToCommentView.isHidden = false
         selectedIndex = indexPath
         isCommentToComment = true
         
