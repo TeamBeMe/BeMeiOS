@@ -53,7 +53,7 @@ class SignUpControlVC: UIViewController {
           
             pageInstance?.setViewControllers([(pageInstance?.VCArray[0])!], direction: .reverse,
             animated: true, completion: nil)
-            
+            vcIndex = 0
             progressBar.progress = 0.5
             UIView.animate(withDuration: 1.0, animations: {
                 self.progressBar.layoutIfNeeded()

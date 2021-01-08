@@ -141,16 +141,45 @@ extension HomeVC {
                   return
           }
         answerVC.answerDataDelegate = self
-        answerVC.answer = answerDataList[currentCardIdx].answer
-        answerVC.questionInfo = answerDataList[currentCardIdx].questionInfo
-        answerVC.question = answerDataList[currentCardIdx].question
-        answerVC.answerDate = answerDataList[currentCardIdx].answerDate
+       
+        answerVC.answerData = answerDataList[currentCardIdx]
         answerVC.curCardIdx = currentCardIdx
         
         blurView.removeFromSuperview()
         alertContainView.removeFromSuperview()
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.pushViewController(answerVC, animated: true)
+        
+        
+        
+    }
+    
+    @objc func deleteButtonAction() {
+        
+        HomeDeleteAnswerService.shared.deleteAnswer(id: deleteAnswerID) { (networkResult) -> (Void) in
+          
+            switch networkResult {
+            case .success(let data) :
+                
+                print("success")
+                self.answerDataList.remove(at: self.deleteIdx)
+                self.cardCollectionView.reloadData()
+                
+                
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            }
+            
+            
+        }
         
         
         
