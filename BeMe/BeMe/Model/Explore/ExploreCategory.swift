@@ -10,4 +10,5 @@ import Foundation
 struct ExploreCategory: Codable {
     let id: Int
     let name: String
+    var selected: Bool? 
 }

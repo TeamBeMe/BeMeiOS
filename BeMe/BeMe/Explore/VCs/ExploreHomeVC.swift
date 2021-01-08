@@ -24,7 +24,16 @@ class ExploreHomeVC: UIViewController {
     private var scrollDirection: Bool = true
     
     // 서버통신을 통해 받아오는 값
-    var articlesArray: [ExploreAnswer] = []
+    var articlesArray: [ExploreAnswer] = [] {
+        didSet {
+        }
+    }
+    
+    private var categoryArray: [ExploreCategory] = [] {
+        didSet {
+            exploreTableView.reloadRows(at: [IndexPath(row: 1, section: 0)], with: .none)
+        }
+    }
     
     private var exploreThoughtArray: [ExploreThoughtData] = [] {
         didSet {
@@ -38,8 +47,6 @@ class ExploreHomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("~~~~~~~~~~~~~~~> \(headerView.frame.origin.y)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,6 +54,7 @@ class ExploreHomeVC: UIViewController {
         
         setAnswerData()
         setThoughtData()
+        setCategoryData()
         self.navigationController?.navigationBar.isHidden = true
     }
     
@@ -72,6 +80,7 @@ extension ExploreHomeVC: UITableViewDataSource {
         } else if indexPath.row == 1 {
             guard let diffAnswer = tableView.dequeueReusableCell(withIdentifier: DiffArticleTVC.identifier, for: indexPath) as? DiffArticleTVC else { return UITableViewCell() }
             
+            diffAnswer.categoryArray = self.categoryArray
             diffAnswer.delegate = self
             return diffAnswer
         } else if indexPath.row == cellNum + 2 - 1 {
@@ -128,7 +137,7 @@ extension ExploreHomeVC: UITableViewDelegate {
 extension ExploreHomeVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffset = exploreTableView.contentOffset.y
-//        print(currentOffset)
+        //        print(currentOffset)
         
         
         // iphone safe area 문제 해결 코드
@@ -151,9 +160,9 @@ extension ExploreHomeVC: UIScrollViewDelegate {
                 hideTabBarWhenScrollingUp()
             } else {
                 //scroll down
-                print("before")
+                
                 showTabBarWhenScrollingDown()
-                print("after")
+                
             }
         } else {
             //hideTabBarWhenScrollingUp()
@@ -176,10 +185,8 @@ extension ExploreHomeVC {
                 guard let dt = data as? GenericResponse<[ExploreThoughtData]> else { return }
                 
                 if let thoughts = dt.data {
-                    print(thoughts)
                     self.exploreThoughtArray = thoughts
                 } else {
-                    
                     print("none")
                     // empty 화면 만들기
                     
@@ -216,9 +223,46 @@ extension ExploreHomeVC {
             switch result {
             case .success(let data):
                 guard let dt = data as? GenericResponse<[ExploreAnswerData]> else { return }
-                print(dt)
-//                if let answers = dt.
+            let _ = dt
+
+            
+            case .requestErr(let message):
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
                 
+            case .pathErr: print("path")
+            case .serverErr:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+                print("serverErr")
+            case .networkFail:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+            }
+        }
+    }
+    
+    private func setCategoryData() {
+        ExploreCategoryService.shared.getExploreCategory { (result) in
+            switch result {
+            case .success(let data):
+                guard let dt = data as? GenericResponse<[ExploreCategory]> else { return }
+                if let categories = dt.data {
+                    self.categoryArray = categories
+                    
+                    for var category in self.categoryArray {
+                        category.selected = false
+                    }
+                }
                 
             case .requestErr(let message):
                 guard let message = message as? String else { return }
@@ -256,10 +300,6 @@ extension ExploreHomeVC {
         print(pageNumber)
     }
     
-    //    private func setLayout() {
-    //        headerView.center.y -= view.bounds.height
-    //    }
-    
     private func adjustScrollViewInset() {
         if #available(iOS 11.0, *) {
             exploreTableView.contentInsetAdjustmentBehavior = .never
@@ -271,8 +311,6 @@ extension ExploreHomeVC {
     
     private func hideTabBarWhenScrollingUp() {
         UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveLinear], animations: {
-            
-            
             self.headerView.frame.origin.y =  self.headerFrameOriginY - self.headerView.frame.height
         }) { _ in
             
@@ -281,8 +319,6 @@ extension ExploreHomeVC {
     
     private func showTabBarWhenScrollingDown() {
         UIView.animate(withDuration: 0.3, delay: 0.3, options: [.curveLinear], animations: {
-            
-            
             self.headerView.frame.origin.y = self.headerFrameOriginY + self.headerView.frame.height
         }) { _ in
             
@@ -293,9 +329,8 @@ extension ExploreHomeVC {
 
 extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     func categoryButtonTapped(_ indexPath: IndexPath) {
-        
         scrollDirection = true
-        exploreTableView.reloadData()
+        exploreTableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .none)
     }
     
     func recentOrFavoriteButtonTapped(_ indexPath: Int) {

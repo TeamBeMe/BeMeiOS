@@ -15,9 +15,15 @@ class DiffArticleTVC: UITableViewCell {
     @IBOutlet weak var diffArticleSubTitle: UILabel!
     
     weak var delegate: UITableViewButtonSelectedDelegate?
-    
+
     private var isRecentButtonPressed: Bool = true
-    var categoryArray: [String] = ["가치관", "사랑", "일상", "이야기", "미래", "의미", "사랑"]
+    
+    private var selectedCategoryId: Int = 0
+    var categoryArray: [ExploreCategory] = [] {
+        didSet {
+            categoryCollectionView.reloadData()
+        }
+    }
     
     // CollectionView 동적 너비를 위해
     var flowLayout: UICollectionViewFlowLayout  {
@@ -32,7 +38,6 @@ class DiffArticleTVC: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
     }
     
     private func setCategoryCollectionView() {
@@ -47,7 +52,6 @@ class DiffArticleTVC: UITableViewCell {
         delegate?.recentOrFavoriteButtonTapped(0)
         isRecentButtonPressed = true
         setLabel()
-        print("Hello")
     }
     
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
@@ -56,58 +60,68 @@ class DiffArticleTVC: UITableViewCell {
         isRecentButtonPressed = false
         setLabel()
     }
-    
 }
 
 //MARK: - Private Method
 
 extension DiffArticleTVC {
-    
     private func setLabel() {
         diffArticleSubTitle.alpha = 0.0
         UIView.animate(withDuration: 0.3, animations: {
             self.diffArticleSubTitle.alpha = 1.0
             self.diffArticleSubTitle.text = self.isRecentButtonPressed ? "내가 답한 질문에 대한 다른 사람들의 최신 답변이에요" : "내가 관심있어 할 다른 사람들의 답변이에요"
         }) { (_) in
-            
         }
-        
     }
-    
     private func moveHighLightBar(to button: UIButton) {
         
         UIView.animate(withDuration: 0.2, delay: 0, options: [.curveLinear], animations: {
             // Slide Animation
             self.highLightBar.frame.origin.x = 30 + button.frame.minX
         }) { _ in
-            
         }
     }
-    
 }
+
 extension DiffArticleTVC: UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return categoryArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let category = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCVC.identifier, for: indexPath) as? CategoryCVC else { return UICollectionViewCell() }
+                
         
+        category.name.text = categoryArray[indexPath.item].name
         category.name.sizeToFit()
-        category.name.text = categoryArray[indexPath.item]
         category.makeRounded(cornerRadius: 4.0)
         category.setBorder(borderColor: .gray, borderWidth: 1)
-        
         return category
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? CategoryCVC {
-            cell.backgroundColor = .black
-            cell.name.textColor = .white
+    
+        // 화면을 나갔을 때를 위하여
+        delegate?.categoryButtonTapped(indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        delegate?.categoryButtonTapped(indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryCVC else {
+            return true
         }
-        // 카테고리 Sorting 작업
-        delegate?.categoryButtonTapped(indexPath) // indexPath = 어떤 category 인지
+        
+        if cell.isSelected {
+            collectionView.deselectItem(at: indexPath, animated: true)
+            return false
+        } else {
+            return true
+        }
+        
     }
 }
 
