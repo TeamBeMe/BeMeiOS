@@ -15,7 +15,7 @@ protocol UITableViewButtonSelectedDelegate: class {
     // 댓글 페이지의 댓글 보기 버튼 눌릴 때
     func moreCellButtonDidTapped(to indexPath: IndexPath)
     
-    // ?
+    // detail 화면으로 넘어가는 것을 알려줄때
     func moreAnswerButtonDidTapped(to indexPath: IndexPath)
     
     // 댓글 페이지의 답글 달기 버튼 눌릴 때

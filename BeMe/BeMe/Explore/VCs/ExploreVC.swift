@@ -32,6 +32,9 @@ class ExploreVC: UIViewController {
         }
     }
     
+    var diffThoughtArray: [ExploreThoughtData] = []
+    
+    var diffArticleArray: [ExploreArticleData] = []
     private var lastContentOffset: CGFloat = 0
     
     private let maxHeight: CGFloat = 32.0
@@ -60,33 +63,7 @@ class ExploreVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        ExploreThoughtService.shared.getExploreThought { (result) in
-            switch result {
-            case .success(let data):
-                print(data)
-            case .requestErr(let message):
-                 guard let message = message as? String else { return }
-                 let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
-                 let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-                 alertViewController.addAction(action)
-                 self.present(alertViewController, animated: true, completion: nil)
-                 
-            case .pathErr: print("path")
-            case .serverErr:
-                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
-                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-                alertViewController.addAction(action)
-                self.present(alertViewController, animated: true, completion: nil)
-                print("networkFail")
-                print("serverErr")
-            case .networkFail:
-                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
-                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-                alertViewController.addAction(action)
-                self.present(alertViewController, animated: true, completion: nil)
-                print("networkFail")
-            }
-        }
+        setThoughtData()
         self.view.bringSubviewToFront(headerView)
         navigationController?.navigationBar.isHidden = true
         
@@ -132,6 +109,49 @@ class ExploreVC: UIViewController {
 //MARK: - Private Method
 extension ExploreVC {
     
+    private func setThoughtData() {
+        
+        ExploreThoughtService.shared.getExploreThought { (result) in
+            switch result {
+            case .success(let data):
+                guard let dt = data as? GenericResponse<[ExploreThoughtData]> else { return }
+                
+                if let thoughts = dt.data {
+                    print(thoughts)
+                    self.diffThoughtArray = thoughts
+                    self.diffThoughtCollectionView.reloadData()
+                } else {
+                    
+                    // empty 화면 만들기
+                    
+                }
+                
+                
+            case .requestErr(let message):
+                 guard let message = message as? String else { return }
+                 let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                 let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                 alertViewController.addAction(action)
+                 self.present(alertViewController, animated: true, completion: nil)
+                 
+            case .pathErr: print("path")
+            case .serverErr:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+                print("serverErr")
+            case .networkFail:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+            }
+        }
+    }
+    
     private func setArticleTableView() {
         
     }
@@ -152,7 +172,6 @@ extension ExploreVC {
         
         let cellWidth: CGFloat = view.bounds.width - 55.0
         let cellHeight: CGFloat = cellWidth * 229.0 / 320.0
-//        floor(view.frame.height * cellRatio)
         
         // 상하, 좌우 inset value 설정
         let insetX: CGFloat = (view.bounds.width - cellWidth) / 2.0
@@ -308,7 +327,7 @@ extension ExploreVC: UIScrollViewDelegate {
 //MARK: - CollectionViewDelegate
 extension ExploreVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return diffThoughtArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -323,7 +342,9 @@ extension ExploreVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLay
 //        let width = cell.bounds.width
 //        let height = cell.bounds.height
 //        cell.layer.cornerRadius = width * 6 *  deviceBound
-        cell.setAnswer()
+        
+        
+        cell.setQuestionAnswer(diffThoughtArray[indexPath.row].questionTitle, diffThoughtArray[indexPath.row].content)
         cell.backgroundColor = .white
         return cell
     }
@@ -351,12 +372,16 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
             guard let more = tableView
                     .dequeueReusableCell(withIdentifier: MoreTVC.identifier, for: indexPath)
                     as? MoreTVC else { return UITableViewCell() }
+            
             more.selectionStyle = .none
+            
+            
             return more
         } else {
             guard let article = tableView
                     .dequeueReusableCell(withIdentifier: ArticleTVC.identifier, for: indexPath)
                     as? ArticleTVC else { return UITableViewCell() }
+
             article.selectionStyle = .none
             return article
         }
@@ -423,10 +448,16 @@ extension ExploreVC: UITableViewDataSource, UITableViewDelegate {
     
 }
 
+extension ExploreVC: UITableViewButtonSelectedDelegate {
+    
+    
+}
+
 extension ExploreVC: CategoryButtonPressedDelegate {
     func categoryButtonTapped(_ indexPath: IndexPath) {
         
         // indexPath 서버에 보내줘서 비동기 처리 (로딩화면)
         diffArticleTableView.reloadData()
     }
+    
 }

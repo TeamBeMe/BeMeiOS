@@ -12,7 +12,7 @@ struct ExploreThoughtService {
     static let shared = ExploreThoughtService()
     
     func getExploreThought(completion: @escaping (NetworkResult<Any>) -> Void) {
-        let token = UserDefaults.standard.string(forKey: "token") ?? "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA5Nzc3ODg2LCJleHAiOjE2MzU2OTc4ODYsImlzcyI6ImJlbWUifQ.34mc263uDc9vYq9N8BVzfqVdsgKzL51Ld03kB0afcSQ"
+        let token = UserDefaults.standard.string(forKey: "token") ?? "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjEwMDk5MjQwLCJleHAiOjE2MzYwMTkyNDAsImlzcyI6ImJlbWUifQ.JeYfzJsg-kdatqhIOqfJ4oXUvUdsiLUaGHwLl1mJRvQ"
         let header: HTTPHeaders = ["Content-Type":"application/json", "token":token]
         
         let url = APIConstants.explorationDiffThoughtURL
@@ -37,12 +37,10 @@ struct ExploreThoughtService {
     
     private func judge(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(GenericResponse<ExploreThoughtData>.self, from : data) else { return .pathErr }
-//        print(decodedData.message)
-        print(decodedData)
-        guard let realData = decodedData.data else { return .pathErr }
+        guard let decodedData = try? decoder.decode(GenericResponse<[ExploreThoughtData]>.self, from : data) else { return .pathErr }
+
         switch statusCode {
-        case 200..<300: return .success(realData)
+        case 200..<300: return .success(decodedData)
         case 400..<500: return .pathErr
         case 500: return .serverErr
         default: return .networkFail
