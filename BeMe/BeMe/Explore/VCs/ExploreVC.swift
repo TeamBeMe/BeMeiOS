@@ -60,9 +60,37 @@ class ExploreVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        ExploreThoughtService.shared.getExploreThought { (result) in
+            switch result {
+            case .success(let data):
+                print(data)
+            case .requestErr(let message):
+                 guard let message = message as? String else { return }
+                 let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                 let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                 alertViewController.addAction(action)
+                 self.present(alertViewController, animated: true, completion: nil)
+                 
+            case .pathErr: print("path")
+            case .serverErr:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+                print("serverErr")
+            case .networkFail:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+            }
+        }
         self.view.bringSubviewToFront(headerView)
-        
         navigationController?.navigationBar.isHidden = true
+        
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {

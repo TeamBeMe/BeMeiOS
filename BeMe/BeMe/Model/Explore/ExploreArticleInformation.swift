@@ -7,22 +7,6 @@
 
 import Foundation
 
-// MARK: - ExploreArticleInformation
-struct ExploreArticleInformation: Codable {
-    let status: Int
-    let success: Bool
-    let message: String
-    let data: ExploreArticleData?
-    
-    init(from decoder: Decoder) throws {
-        let values = try decoder.container(keyedBy: CodingKeys.self)
-        status = (try? values.decode(Int.self, forKey: .status)) ?? -1
-        success = (try? values.decode(Bool.self, forKey: .success)) ?? false
-        message = (try? values.decode(String.self, forKey: .message)) ?? ""
-        data = (try? values.decode(ExploreArticleData.self, forKey: .data)) ?? nil
-    }
-}
-
 // MARK: - ExploreArticleData
 struct ExploreArticleData: Codable {
     let pageLen: Int

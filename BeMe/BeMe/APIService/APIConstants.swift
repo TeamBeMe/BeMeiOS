@@ -14,6 +14,7 @@ struct APIConstants{
     static let loginURL = baseURL+"/users/signin"
     
     // Exploration Tab
-    static let explorationCategoryURL = baseURL+"/exploration/category"
-    static let diffThoughtURL = baseURL+"/exploration/another"
+    static let explorationCategoryURL = baseURL + "/exploration/category"
+    static let explorationDiffThoughtURL = baseURL + "/exploration/another"
+    static let explorationDiffArticleURL = baseURL + "/exploration"
 }

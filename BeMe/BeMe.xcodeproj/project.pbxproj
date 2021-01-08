@@ -25,8 +25,10 @@
 		D44F6DE725A58A1F002A9761 /* CommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F6DE625A58A1F002A9761 /* CommentVC.swift */; };
 		D44F6DFC25A5BDAD002A9761 /* QuestionAnswerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F6DFB25A5BDAD002A9761 /* QuestionAnswerTVC.swift */; };
 		D480730525A81DF400DE1DD3 /* MypageCVFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D480730425A81DF400DE1DD3 /* MypageCVFlowLayout.swift */; };
-		D480730925A82D0000DE1DD3 /* DiffArticleInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D480730825A82D0000DE1DD3 /* DiffArticleInformation.swift */; };
+		D480730925A82D0000DE1DD3 /* ExploreArticleInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D480730825A82D0000DE1DD3 /* ExploreArticleInformation.swift */; };
 		D480730D25A8324500DE1DD3 /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D480730C25A8324400DE1DD3 /* UIScrollView+Extensions.swift */; };
+		D480731025A8492800DE1DD3 /* ExploreThoughtInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D480730F25A8492800DE1DD3 /* ExploreThoughtInformation.swift */; };
+		D480731425A849FF00DE1DD3 /* ExploreThoughtService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D480731325A849FF00DE1DD3 /* ExploreThoughtService.swift */; };
 		D492E41A25A0A0DE0088A181 /* ExploreDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492E41925A0A0DE0088A181 /* ExploreDetailVC.swift */; };
 		D492E42F25A0CE5E0088A181 /* AnswerTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492E42E25A0CE5E0088A181 /* AnswerTVC.swift */; };
 		D492E43525A0E14C0088A181 /* CustomActionSheet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D492E43425A0E14C0088A181 /* CustomActionSheet.storyboard */; };
@@ -144,8 +146,10 @@
 		D44F6DE625A58A1F002A9761 /* CommentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentVC.swift; sourceTree = "<group>"; };
 		D44F6DFB25A5BDAD002A9761 /* QuestionAnswerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionAnswerTVC.swift; sourceTree = "<group>"; };
 		D480730425A81DF400DE1DD3 /* MypageCVFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MypageCVFlowLayout.swift; sourceTree = "<group>"; };
-		D480730825A82D0000DE1DD3 /* DiffArticleInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffArticleInformation.swift; sourceTree = "<group>"; };
+		D480730825A82D0000DE1DD3 /* ExploreArticleInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreArticleInformation.swift; sourceTree = "<group>"; };
 		D480730C25A8324400DE1DD3 /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
+		D480730F25A8492800DE1DD3 /* ExploreThoughtInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreThoughtInformation.swift; sourceTree = "<group>"; };
+		D480731325A849FF00DE1DD3 /* ExploreThoughtService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreThoughtService.swift; sourceTree = "<group>"; };
 		D492E41925A0A0DE0088A181 /* ExploreDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreDetailVC.swift; sourceTree = "<group>"; };
 		D492E42E25A0CE5E0088A181 /* AnswerTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerTVC.swift; sourceTree = "<group>"; };
 		D492E43425A0E14C0088A181 /* CustomActionSheet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CustomActionSheet.storyboard; sourceTree = "<group>"; };
@@ -375,7 +379,16 @@
 		D480730725A82B3200DE1DD3 /* Explore */ = {
 			isa = PBXGroup;
 			children = (
-				D480730825A82D0000DE1DD3 /* DiffArticleInformation.swift */,
+				D480730825A82D0000DE1DD3 /* ExploreArticleInformation.swift */,
+				D480730F25A8492800DE1DD3 /* ExploreThoughtInformation.swift */,
+			);
+			path = Explore;
+			sourceTree = "<group>";
+		};
+		D480731225A849E700DE1DD3 /* Explore */ = {
+			isa = PBXGroup;
+			children = (
+				D480731325A849FF00DE1DD3 /* ExploreThoughtService.swift */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -513,6 +526,7 @@
 		EC5C201125A49C8A008EE335 /* APIService */ = {
 			isa = PBXGroup;
 			children = (
+				D480731225A849E700DE1DD3 /* Explore */,
 				EC5C201D25A4C7DB008EE335 /* LogIn */,
 				EC5C201325A49CC5008EE335 /* SignUp */,
 				EC813F422599A42700BBCE25 /* APIConstants.swift */,
@@ -1008,6 +1022,7 @@
 				EC7FEFA825A38AF100C61147 /* SearchVC.swift in Sources */,
 				EC89E319259C281100DBAFE5 /* FollowerSearchCVC.swift in Sources */,
 				EC7C1627259B9CE200A5BA4C /* FollowingCardCVC.swift in Sources */,
+				D480731025A8492800DE1DD3 /* ExploreThoughtInformation.swift in Sources */,
 				EC5C202325A4C818008EE335 /* LogInData.swift in Sources */,
 				EC89E30C259C273400DBAFE5 /* FollowingSearchVC.swift in Sources */,
 				EC7C1605259B485D00A5BA4C /* CustomAlertView.swift in Sources */,
@@ -1029,11 +1044,12 @@
 				EC5C201525A49CD5008EE335 /* SignUpService.swift in Sources */,
 				D44F6D9D25A575E0002A9761 /* UITableViewButtonSelectedDelegate.swift in Sources */,
 				A5CCCDA125A33512008A3125 /* MypageOthersScrapTVC.swift in Sources */,
-				D480730925A82D0000DE1DD3 /* DiffArticleInformation.swift in Sources */,
+				D480730925A82D0000DE1DD3 /* ExploreArticleInformation.swift in Sources */,
 				EC89E325259C377400DBAFE5 /* FollowPersonCVC.swift in Sources */,
 				EC813F492599A59500BBCE25 /* NetworkResult.swift in Sources */,
 				A5CCCD9E25A334EA008A3125 /* MypageMyScrapTVC.swift in Sources */,
 				EC7F0EA925A057DF008EB88A /* HomeVC+UnderAlert.swift in Sources */,
+				D480731425A849FF00DE1DD3 /* ExploreThoughtService.swift in Sources */,
 				EC7C161E259B9B0F00A5BA4C /* FollowingPeopleCVC.swift in Sources */,
 				EC813F612599F3E900BBCE25 /* UIColor+Extensions.swift in Sources */,
 				EC813F242599A15100BBCE25 /* AppDelegate.swift in Sources */,
