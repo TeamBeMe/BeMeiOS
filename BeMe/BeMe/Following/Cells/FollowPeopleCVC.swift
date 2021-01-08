@@ -13,21 +13,28 @@ class FollowPeopleCVC: UICollectionViewCell {
     var totalCell = 10
     @IBOutlet weak var peopleCollectionView: UICollectionView!
     
+    var shows: [FollowingFollows] = []
+    var followers: [FollowingFollows] = []
+    var followees: [FollowingFollows] = []
+    
+    
     var isFollowing = true
     var mTimer : Timer?
     override func awakeFromNib() {
         peopleCollectionView.delegate = self
         peopleCollectionView.dataSource = self
-        
+        totalCell = followees.count
+        shows = followees
         
     }
     func changeFollow(){
         if isFollowing == true{
             isFollowing = false
-            
+            shows = followers
         }
         else {
             isFollowing = true
+            shows = followees
         }
         
     }
@@ -41,6 +48,9 @@ class FollowPeopleCVC: UICollectionViewCell {
         })
         if i>=totalCell {
             mTimer?.invalidate()
+            totalCell = shows.count
+            self.peopleCollectionView.reloadData()
+            
             i = 0
         }
         
@@ -56,13 +66,12 @@ extension FollowPeopleCVC : UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: FollowPersonCVC.identifier,
                 for: indexPath) as? FollowPersonCVC else {return UICollectionViewCell()}
-        if isFollowing == true {
-            cell.setProfile(userName: "Following")
-            
-        }
-        else{
-            cell.setProfile(userName: "Follower")
-        }
+       
+        let profileURL = shows[indexPath.item].profileImg ?? ""
+        
+        cell.setProfile(userName: shows[indexPath.item].nickname!,
+                        profileImageURL: profileURL)
+        
         
         return cell
             
@@ -73,7 +82,8 @@ extension FollowPeopleCVC : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
-        return totalCell
+
+        return shows.count
     }
     
     
@@ -123,20 +133,9 @@ extension FollowPeopleCVC : FollowingFollowButtonDelegate{
     func followButtonAction() {
         if isFollowing{
             isFollowing = false
-//            UIView.animate(withDuration: 0.5, animations: {
-//                self.alpha = 0
-//
-//            }, completion: { finished in
-//                UIView.animate(withDuration: 0.5, animations: {
-//                    self.peopleCollectionView.reloadData()
-//                    self.alpha = 1
-//                })
-//
-//
-//            })
-           
+            shows = followers
             mTimer = Timer.scheduledTimer(timeInterval: Double(1/Double(totalCell)), target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
-            
+            print(shows)
 
            
             
@@ -153,19 +152,9 @@ extension FollowPeopleCVC : FollowingFollowingButtonDelegate{
     func followingButtonAction() {
         if !isFollowing{
             isFollowing = true
-//            UIView.animate(withDuration: 0.5, animations: {
-//                self.alpha = 0
-//
-//            }, completion: { finished in
-//                UIView.animate(withDuration: 0.5, animations: {
-//                    self.peopleCollectionView.reloadData()
-//                    self.alpha = 1
-//                })
-//
-//
-//            })
+            shows = followees
             mTimer = Timer.scheduledTimer(timeInterval: Double(1/Double(totalCell)), target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
-
+            print(shows)
   
         }
     }

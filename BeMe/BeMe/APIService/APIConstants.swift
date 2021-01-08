@@ -19,5 +19,6 @@ struct APIConstants{
     static let homeDeleteAnswerURL = baseURL + "/home/"
     static let answerRegistURL = baseURL+"/answers"
     static let answerModifyURL = baseURL+"/answers"
+    static let followGetURL = baseURL+"/follow"
     
 }
