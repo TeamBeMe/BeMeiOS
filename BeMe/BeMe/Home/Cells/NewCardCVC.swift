@@ -88,6 +88,7 @@ class NewCardCVC: UICollectionViewCell {
     var homeAnswerButtonDelegate : HomeAnswerButtonDelegate?
     var homeFixButtonDelegate : HomeFixButtonDelegate?
     let deviceBound = UIScreen.main.bounds.height/812.0
+    var homeChangeQuestionDelegate: HomeChangeQuestionDelegate?
 }
 
 
@@ -182,6 +183,7 @@ extension NewCardCVC {
             $0.bottom.equalToSuperview().offset(-25)
             $0.centerX.equalToSuperview()
         }
+        changeButton.addTarget(self, action: #selector(changeButtonAction), for: .touchUpInside)
         
     }
     
@@ -216,14 +218,17 @@ extension NewCardCVC {
 extension NewCardCVC {
     @objc func changePublic(){
 
-        changePublicDelegate?.changePublic()
+        changePublicDelegate?.changePublic(idx: index!,answerID: (answerData?.id)!)
         
     }
     @objc func replyButtonAction(){
         homeAnswerButtonDelegate?.answerButtonTapped(index: index!, answerData: answerData!)
     }
     @objc func fixButtonAction(){
-        homeFixButtonDelegate?.fixButtonTapped()
+        homeFixButtonDelegate?.fixButtonTapped(idx: index!)
+    }
+    @objc func changeButtonAction(){
+        homeChangeQuestionDelegate?.getNewQuestion(idx: index!,answerID: (answerData?.id)!)
     }
     
     
@@ -257,7 +262,7 @@ extension NewCardCVC {
         questionInfoLabel.text = "[ \((answerData?.questionCategory)!)에 관한 \((answerData?.answerIdx)!)번째 질문 ]"
         
         questionLabel.text = answerData?.question
-        dateLabel.text = answerData?.answerDate
+        dateLabel.text = answerData?.createdTime
         answerTextView.text = answerData?.answer
         
         if answerData?.answer == ""{

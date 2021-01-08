@@ -15,7 +15,7 @@ protocol AddQuestionDelegate{
 
 protocol ChangePublicDelegate{
     
-    func changePublic()
+    func changePublic(idx: Int,answerID: Int)
     
 }
 
@@ -27,7 +27,7 @@ protocol HomeTabBarDelegate {
 }
 
 protocol HomeFixButtonDelegate {
-    func fixButtonTapped()
+    func fixButtonTapped(idx: Int)
     
 }
 
@@ -37,4 +37,10 @@ protocol HomeAnswerButtonDelegate{
 
 protocol HomeGetDataFromAnswerDelegate{
     func setNewAnswer(answerData: AnswerDataForViewController)
+}
+
+protocol HomeChangeQuestionDelegate{
+    func getNewQuestion(idx: Int,answerID: Int)
+    
+    
 }

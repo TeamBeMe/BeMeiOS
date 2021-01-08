@@ -10,37 +10,32 @@ import Foundation
 
 // MARK: - DataClass
 struct HomeNewQuestionData: Codable {
-    let id: Int
+    let id: Int?
     let answerIdx: Int?
     let content: String?
-    let createdAt: String
+    let publicFlag: Int?
+    let commentBlockedFlag: Bool?
+    let createdAt: String?
     let answerDate: String?
-    let question: NewQuestion
+    let questionID: Int?
+    let questionTitle: String?
+    let questionCategoryID: Int?
+    let questionCategoryName: String?
+    let isToday: Bool?
 
     enum CodingKeys: String, CodingKey {
         case id
         case answerIdx = "answer_idx"
         case content
+        case publicFlag = "public_flag"
+        case commentBlockedFlag = "comment_blocked_flag"
         case createdAt = "created_at"
         case answerDate = "answer_date"
-        case question = "Question"
+        case questionID = "Question.id"
+        case questionTitle = "Question.title"
+        case questionCategoryID = "Question.Category.id"
+        case questionCategoryName = "Question.Category.name"
+        case isToday = "is_today"
     }
 }
 
-// MARK: - Question
-struct NewQuestion: Codable {
-    let id: Int
-    let title: String
-    let category: NewQuestionCategory
-
-    enum CodingKeys: String, CodingKey {
-        case id, title
-        case category = "Category"
-    }
-}
-
-// MARK: - Category
-struct NewQuestionCategory: Codable {
-    let id: Int
-    let name: String
-}

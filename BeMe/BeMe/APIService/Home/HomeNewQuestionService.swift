@@ -1,18 +1,19 @@
 //
-//  HomePageDataService.swift
+//  HomeNewQuestionService.swift
 //  BeMe
 //
-//  Created by Yunjae Kim on 2021/01/06.
+//  Created by Yunjae Kim on 2021/01/08.
 //
 
 import Foundation
 import Alamofire
 
-struct HomePageDataService{
-    static let shared = HomePageDataService()
+struct HomeNewQuestionService{
     
-    func getHomeData(page: Int,completion : @escaping (NetworkResult<Any>) -> (Void) ){
-        let url = APIConstants.homeGetURL+String(page)
+    static let shared = HomeNewQuestionService()
+    
+    func getHomeData(completion : @escaping (NetworkResult<Any>) -> (Void) ){
+        let url = APIConstants.homeGetNewQuestionURL
         
         let header : HTTPHeaders = [
             "Content-Type":"application/json",
@@ -55,13 +56,13 @@ struct HomePageDataService{
     
     private func judge(status : Int, data : Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(GenericResponse<[HomePageData]>.self, from : data) else{
+        guard let decodedData = try? decoder.decode(GenericResponse<HomeNewQuestionData>.self, from : data) else{
             return .pathErr
         }
         
         switch status{
         case 200..<300:
-            print("질문 page 받아오기 성공")
+            print("새로운 질문 받아오기 성공")
             print(decodedData.data)
             return .success(decodedData.data)
         case 400..<500 :

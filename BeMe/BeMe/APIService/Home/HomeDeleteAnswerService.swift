@@ -1,28 +1,30 @@
 //
-//  HomePageDataService.swift
+//  HomeDeleteAnswerService.swift
 //  BeMe
 //
-//  Created by Yunjae Kim on 2021/01/06.
+//  Created by Yunjae Kim on 2021/01/08.
 //
 
 import Foundation
 import Alamofire
 
-struct HomePageDataService{
-    static let shared = HomePageDataService()
+
+struct HomeDeleteAnswerService {
+    static let shared = HomeDeleteAnswerService()
     
-    func getHomeData(page: Int,completion : @escaping (NetworkResult<Any>) -> (Void) ){
-        let url = APIConstants.homeGetURL+String(page)
-        
+    func deleteAnswer(id: Int,completion : @escaping (NetworkResult<Any>) -> (Void)) {
+        let url = APIConstants.homeDeleteAnswerURL+String(id)
         let header : HTTPHeaders = [
             "Content-Type":"application/json",
             "token":UserDefaults.standard.string(forKey: "token")!
-//            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA5Nzc3ODg2LCJleHAiOjE2MzU2OTc4ODYsImlzcyI6ImJlbWUifQ.34mc263uDc9vYq9N8BVzfqVdsgKzL51Ld03kB0afcSQ"
         ]
-
+        
+//        let body : Parameters = [
+//            "answer_id" : id
+//        ]
         
         let dataRequest = AF.request(url,
-                                     method: .get,
+                                     method: .delete,
                                      encoding: JSONEncoding.default,
                                      headers: header)
         
@@ -33,15 +35,16 @@ struct HomePageDataService{
                 guard let statusCode = response.response?.statusCode else{
                     return
                 }
+                
                 guard let data = response.value else{
                     return
                     
                 }
-               
                 
-               
-                completion(judge(status: statusCode, data: data))
-
+                
+                
+                completion(judge(status: statusCode,data: data))
+                
             case .failure(let err):
                 print(err)
                 completion(.networkFail)
@@ -53,16 +56,15 @@ struct HomePageDataService{
         
     }
     
-    private func judge(status : Int, data : Data) -> NetworkResult<Any> {
+    private func judge(status : Int,data: Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(GenericResponse<[HomePageData]>.self, from : data) else{
+        guard let decodedData = try? decoder.decode(GenericResponse<Int>.self, from : data) else{
             return .pathErr
         }
         
         switch status{
         case 200..<300:
-            print("질문 page 받아오기 성공")
-            print(decodedData.data)
+            print("답변 삭제 성공")
             return .success(decodedData.data)
         case 400..<500 :
             return .requestErr(decodedData.message)

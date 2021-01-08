@@ -87,11 +87,11 @@ class HomeVC: UIViewController {
     private var flexible = false
     var answerDataList : [AnswerDataForViewController] = []
     var pageForServer = 1
-    
-    let tmpPastData = AnswerDataForViewController(lock: true, questionCategory: "미래", answerDate: "2020.12.24", question: "이번 주말을 후회 없이\n보낼 수 있는 방법은 무엇인가요?", answer: "저는 몇일 전 퇴사를 했어요. 수많은 고민 끝에 결국 저질렀습니다. 몇 년간 원해 왔던 일이라 꿈만 같아요. 제가 스스로의 힘으로 하고 싶은 걸 해볼 수있는 시간적 여유를 가지게 된게 정말 만족스러워요.", index: 0, answerIdx: 3, questionID: 0, createdTime: "", categoryID: 0)
-    
-    let tmpNowData = AnswerDataForViewController(lock: true, questionCategory: "미래", answerDate: "2020.12.24", question: "이번 주말을 후회 없이\n보낼 수 있는 방법은 무엇인가요?", answer: "", index: 0, answerIdx: 3, questionID: 0, createdTime: "", categoryID: 0)
-    
+    var changePublicIdx = 0
+    var changePublicAnswerID = 0
+    var deleteAnswerID = 0
+    var deleteIdx = 0
+   
 }
 
 
@@ -99,8 +99,8 @@ class HomeVC: UIViewController {
 extension HomeVC {
     override func viewDidLoad() {
         super.viewDidLoad()
-//        pastCards = 3
-//        todayCards = 1
+        //        pastCards = 3
+        //        todayCards = 1
         cardCollectionView.delegate = self
         cardCollectionView.dataSource = self
         let customLayout = HomeCardCustomFlowLayout()
@@ -123,12 +123,7 @@ extension HomeVC {
         sendNotification()
         
         
-        for _ in 0..<pastCards{
-            answerDataList.append(tmpPastData)
-        }
-        for _ in 0..<todayCards{
-            answerDataList.append(tmpNowData)
-        }
+      
         answerDataList = []
         pageGetFromServer()
         startAnimation()
@@ -136,19 +131,19 @@ extension HomeVC {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-      
-       
+        
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         
-//        if initialScrolled == false {
-//            cardCollectionView.scrollToItem(at: IndexPath(item: pastCards, section: 0),
-//                                            at: .centeredHorizontally,
-//                                            animated: false)
-//            initialScrolled = true
-//            currentCardIdx = pastCards + todayCards - 1
-//        }
+        //        if initialScrolled == false {
+        //            cardCollectionView.scrollToItem(at: IndexPath(item: pastCards, section: 0),
+        //                                            at: .centeredHorizontally,
+        //                                            animated: false)
+        //            initialScrolled = true
+        //            currentCardIdx = pastCards + todayCards - 1
+        //        }
         
         
     }
@@ -173,14 +168,44 @@ extension HomeVC {
     
     
     func changeLock(){
-        locks[currentCardIdx] = !locks[currentCardIdx]
-        answerDataList[currentCardIdx].lock!     = !answerDataList[currentCardIdx].lock!
-        cardCollectionView.reloadData()
+        var input = 1
+        if answerDataList[changePublicIdx].lock! {
+            input = 0
+        }
+        
+        HomeChangePublicService.shared.changePublic(id: changePublicAnswerID,publicFlag: input) {(networkResult) -> (Void) in
+            switch networkResult{
+            case .success(let data) :
+                self.answerDataList[self.changePublicIdx].lock! = !self.answerDataList[self.changePublicIdx].lock!
+                self.cardCollectionView.reloadData()
+                print("success")
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+            
+            }
+    
+            
+            
+            
+        
+            
+        }
+        
+        
+      
         
     }
     
     func makeAlertTitle() -> String {
-        if locks[currentCardIdx] == false {
+        if answerDataList[changePublicIdx].lock == true {
             return "공개 질문으로 전환하시겠어요?"
         }
         else{
@@ -231,86 +256,78 @@ extension HomeVC {
         HomePageDataService.shared.getHomeData(page: pageForServer){(networkResult) -> (Void) in
             switch networkResult {
             case .success(let data) :
+                
                 self.pageForServer = self.pageForServer + 1
                 var i = 0
+                print(data)
                 if let homePageDatas = data as? [HomePageData]{
-                    if self.pastCards > 0{
-                        self.pastCards = homePageDatas.count + self.pastCards
-                    }
-                    else{
-                        self.pastCards = homePageDatas.count-1
-                        self.todayCards = 1
-                    }
-                    
-                    
+                    print(homePageDatas.count)
                     for homePageData in homePageDatas{
                         
-                        var answerDate: String?
-                        var answerIdx: Int?
-                        var content: String?
-                        var createdAt: String?
                         
-                        if homePageData.answerDate == nil {
-                            answerDate = ""
+                        var answerDate = homePageData.answerDate ?? ""
+                        var answerIdx = homePageData.answerIdx ?? 0
+                        var content = homePageData.content ?? ""
+                        var createdAt = homePageData.createdAt ?? ""
+                        var categoryName = homePageData.questionCategoryName ?? ""
+                        var questionCategoryName = homePageData.questionCategoryName ?? ""
+                        var questionTitle = homePageData.questionTitle ?? ""
+                        var questionID = homePageData.questionID ?? 0
+                        var questionCategoryID = homePageData.questionCategoryID ?? 0
+                        var dataId = homePageData.id ?? 0
+                        
+                        if answerDate != ""{
+                            let index = answerDate.index(answerDate.startIndex, offsetBy: 10)
+                            answerDate = answerDate.substring(to: index)
+                        }
+                        if createdAt != "" {
+                            let index = createdAt.index(createdAt.startIndex, offsetBy: 10)
+                            createdAt = createdAt.substring(to: index)
+                        }
+
+                        
+                        if homePageData.isToday! {
+                            self.todayCards = self.todayCards + 1
                         }
                         else{
-                           
-                            answerDate = homePageData.answerDate
-                            let index = answerDate!.index(answerDate!.startIndex, offsetBy: 10)
-                            answerDate = answerDate!.substring(to: index)
-                        }
-                        if homePageData.answerIdx == nil {
-                            answerIdx = 0
-                        }
-                        else{
-                            answerIdx = homePageData.answerIdx
-                        }
-                        if homePageData.content == nil {
-                            content = ""
-                        }
-                        else{
-                            content = homePageData.content
-                        }
-                        if homePageData.createdAt == nil {
-                            createdAt = ""
-                        }
-                        else{
-                            createdAt = homePageData.createdAt
+                            self.pastCards = self.pastCards + 1
                         }
                         
                         
                         
-                        var newData = AnswerDataForViewController(lock: true,
-                                                                  questionCategory: homePageData.question!.category.name,
-                                                                  answerDate: answerDate!,
-                                                                  question: homePageData.question!.title,
-                                                                  answer: content!,
-                                                                  index: i,
-                                                                  answerIdx: answerIdx!,
-                                                                  questionID: homePageData.question!.id,
-                                                                  createdTime: createdAt!,
-                                                                  categoryID: homePageData.question!.category.id)
                         
-                        
-                        
-                        self.answerDataList.insert(newData, at: i)
+                        var newData = AnswerDataForViewController(lock: homePageData.publicFlag!==1,
+                                                                  questionCategory: questionCategoryName,
+                                                                  answerDate: answerDate,
+                                                                  question: questionTitle,
+                                                                  answer: content,
+                                                                  index: self.currentCardIdx,
+                                                                  answerIdx: answerIdx,
+                                                                  questionID: questionID,
+                                                                  createdTime: createdAt,
+                                                                  categoryID: questionCategoryID,
+                                                                  id: dataId)
+                        print("")
+                        print(newData)
+                        self.answerDataList.insert(newData, at: 0)
                         i = i + 1
                     }
-               
+                    
                     self.cardCollectionView.reloadData()
                     if self.initialScrolled == false {
                         self.cardCollectionView.scrollToItem(at: IndexPath(item: self.pastCards,
                                                                            section: 0),
-                                                        at: .centeredHorizontally,
-                                                        animated: false)
+                                                             at: .centeredHorizontally,
+                                                             animated: false)
                         self.initialScrolled = true
                         self.currentCardIdx = self.pastCards + self.todayCards - 1
+                        self.timeLabel.text = "오늘의 질문"
                     }
                     else{
                         self.cardCollectionView.scrollToItem(at: IndexPath(item: self.currentCardIdx+homePageDatas.count,
                                                                            section: 0),
-                                                        at: .centeredHorizontally,
-                                                        animated: false)
+                                                             at: .centeredHorizontally,
+                                                             animated: false)
                         self.currentCardIdx = self.currentCardIdx+homePageDatas.count
                         
                     }
@@ -336,6 +353,7 @@ extension HomeVC {
         }
         print(answerDataList)
         
+        
     }
     
     
@@ -353,6 +371,7 @@ extension HomeVC : UICollectionViewDataSource {
             cell.index = indexPath.item
             cell.changePublicDelegate = self
             cell.homeAnswerButtonDelegate = self
+            cell.homeChangeQuestionDelegate = self
             cell.answerData = answerDataList[indexPath.item]
             cell.setItems()
             
@@ -434,13 +453,15 @@ extension HomeVC : UICollectionViewDelegateFlowLayout {
 extension HomeVC : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let curPos = scrollView.contentOffset
-        if Int(curPos.x) < (pastCards-1)*collectionViewWidth {
-            timeLabel.text = "과거의 질문"
-        }
-        else{
-            timeLabel.text = "오늘의 질문"
-            
-        }
+        //        if Int(curPos.x) < (pastCards-1)*collectionViewWidth {
+        //            timeLabel.text = "과거의 질문"
+        //        }
+        //        else{
+        //            timeLabel.text = "오늘의 질문"
+        //
+        //        }
+        
+        
         
         if flexible {
             if Int(curPos.x) > Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) - 200
@@ -476,8 +497,14 @@ extension HomeVC : UIScrollViewDelegate {
             }
             
         }
+        if currentCardIdx < pastCards{
+            timeLabel.text = "과거의 질문"
+        }
+        else{
+            timeLabel.text = "오늘의 질문"
+        }
         
-       
+        
         
         
     }
@@ -487,50 +514,131 @@ extension HomeVC : UIScrollViewDelegate {
 extension HomeVC : AddQuestionDelegate {
     func addQuestion() {
         
-        for i in pastCards..<pastCards+todayCards{
-            if answerDataList[i].answer == "" || answerDataList[i].answer == nil{
-                showAlert(titleLabel: "새로운 질문을 받기 위해\n오늘의 질문을 먼저 대답해주세요",
-                          leftButtonTitle: "취소",
-                          rightButtonTitle: "확인",
-                          topConstraint: 24)
-                return
-            }
-        }
-        answerDataList.append(tmpNowData)
-        let customCard = CustomTodayCardView(frame: .zero)
-        let customAddCard = CustomAddCardView(frame: .zero)
+//        for i in pastCards..<pastCards+todayCards{
+//            if answerDataList[i].answer == "" || answerDataList[i].answer == nil{
+//                showAlert(titleLabel: "새로운 질문을 받기 위해\n오늘의 질문을 먼저 대답해주세요",
+//                          leftButtonTitle: "취소",
+//                          rightButtonTitle: "확인",
+//                          topConstraint: 24)
+//                return
+//            }
+//        }
         
-        self.view.addSubview(customCard)
-        self.view.addSubview(customAddCard)
-        customCard.snp.makeConstraints{
-            $0.width.equalTo(cardWidth)
-            $0.height.equalTo(cardHeight)
-            $0.top.equalToSuperview().offset(150*deviceBound)
-            $0.leading.equalToSuperview().offset(40)
+        HomeNewQuestionService.shared.getHomeData() {(networkResult) -> (Void) in
+            switch networkResult {
+            case .success(let data) :
+                
+                
+                if let newQuestionData = data as? HomeNewQuestionData {
+                    self.todayCards = self.todayCards+1
+                    var answerDate = newQuestionData.answerDate ?? ""
+                    var answerIdx = newQuestionData.answerIdx ?? 0
+                    var content = newQuestionData.content ?? ""
+                    var createdAt = newQuestionData.createdAt ?? ""
+                    var categoryName = newQuestionData.questionCategoryName ?? ""
+                    var questionCategoryName = newQuestionData.questionCategoryName ?? ""
+                    var questionTitle = newQuestionData.questionTitle ?? ""
+                    var questionID = newQuestionData.questionID ?? 0
+                    var questionCategoryID = newQuestionData.questionCategoryID ?? 0
+                    var dataID = newQuestionData.id ?? 0
+                    
+                    
+                    if answerDate != ""{
+                        let index = answerDate.index(answerDate.startIndex, offsetBy: 10)
+                        answerDate = answerDate.substring(to: index)
+                    }
+                    if createdAt != "" {
+                        let index = createdAt.index(createdAt.startIndex, offsetBy: 10)
+                        createdAt = createdAt.substring(to: index)
+                    }
+
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    var newData = AnswerDataForViewController(lock: newQuestionData.publicFlag!==1,
+                                                              questionCategory: questionCategoryName,
+                                                              answerDate: answerDate,
+                                                              question: questionTitle,
+                                                              answer: content,
+                                                              index: self.currentCardIdx,
+                                                              answerIdx: answerIdx,
+                                                              questionID: questionID,
+                                                              createdTime: createdAt,
+                                                              categoryID: questionCategoryID,
+                                                              id: dataID)
+                    
+                    
+                    self.answerDataList.append(newData)
+                    self.cardCollectionView.reloadData()
+                    
+                    
+                    
+                }
+                
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+                
+                
+                
+            }
+            
+            
+            
+            
             
         }
-        customAddCard.snp.makeConstraints{
-            $0.width.equalTo(cardWidth)
-            $0.height.equalTo(cardHeight)
-            $0.top.equalToSuperview().offset(150*deviceBound)
-            $0.leading.equalToSuperview().offset(40)
-            
-        }
-        UIView.transition(from: customAddCard,
-                          to: customCard,
-                          duration: 1.5,
-                          options: .transitionCurlUp,
-                          completion: { f in
-                            customCard.removeFromSuperview()
-                            self.todayCards = self.todayCards+1
-                            self.cardCollectionView.reloadData()
-                            self.cardCollectionView.scrollToItem(at: IndexPath(
-                                                                    item: self.currentCardIdx,
-                                                                    section: 0),
-                                                                 at: .centeredHorizontally,
-                                                                 animated: true)
-                            
-                          })
+        
+        
+        
+        //        answerDataList.append(tmpNowData)
+        //        let customCard = CustomTodayCardView(frame: .zero)
+        //        let customAddCard = CustomAddCardView(frame: .zero)
+        //
+        //        self.view.addSubview(customCard)
+        //        self.view.addSubview(customAddCard)
+        //        customCard.snp.makeConstraints{
+        //            $0.width.equalTo(cardWidth)
+        //            $0.height.equalTo(cardHeight)
+        //            $0.top.equalToSuperview().offset(150*deviceBound)
+        //            $0.leading.equalToSuperview().offset(40)
+        //
+        //        }
+        //        customAddCard.snp.makeConstraints{
+        //            $0.width.equalTo(cardWidth)
+        //            $0.height.equalTo(cardHeight)
+        //            $0.top.equalToSuperview().offset(150*deviceBound)
+        //            $0.leading.equalToSuperview().offset(40)
+        //
+        //        }
+        //        UIView.transition(from: customAddCard,
+        //                          to: customCard,
+        //                          duration: 1.5,
+        //                          options: .transitionCurlUp,
+        //                          completion: { f in
+        //                            customCard.removeFromSuperview()
+        //                            self.todayCards = self.todayCards+1
+        //                            self.cardCollectionView.reloadData()
+        //                            self.cardCollectionView.scrollToItem(at: IndexPath(
+        //                                                                    item: self.currentCardIdx,
+        //                                                                    section: 0),
+        //                                                                 at: .centeredHorizontally,
+        //                                                                 animated: true)
+        //
+        //                          })
+        //
+        
         
     }
     
@@ -538,8 +646,9 @@ extension HomeVC : AddQuestionDelegate {
 
 
 extension HomeVC : ChangePublicDelegate{
-    func changePublic() {
-        
+    func changePublic(idx: Int,answerID: Int) {
+        changePublicIdx = idx
+        changePublicAnswerID = answerID
         showAlert(titleLabel: makeAlertTitle(),leftButtonTitle: "취소",
                   rightButtonTitle: "확인",topConstraint: 30)
         
@@ -590,9 +699,19 @@ extension HomeVC : ChangePublicDelegate{
                 self?.changeLock()
             }
             else {
-                //                self.cardCollectionView.scrollToItem(at: IndexPath(item: self.pastCards+self.todayCards-1, section: 0),
-                //                                                at: .centeredHorizontally,
-                //                                                animated: true)
+                var goTo = self?.currentCardIdx
+                for i in 0..<(self?.answerDataList.count)!+1{
+                    if self?.answerDataList[i].answer == nil || self?.answerDataList[i].answer == ""{
+                        goTo = i
+                        break
+                    }
+                    
+                }
+                
+                
+                self?.cardCollectionView.scrollToItem(at: IndexPath(item: goTo!, section: 0),
+                                                at: .centeredHorizontally,
+                                                animated: false)
             }
             
             blurView.removeFromSuperview()
@@ -638,7 +757,9 @@ extension HomeVC : HomeTabBarDelegate{
 
 
 extension HomeVC : HomeFixButtonDelegate{
-    func fixButtonTapped() {
+    func fixButtonTapped(idx: Int) {
+        deleteIdx = idx
+        deleteAnswerID = answerDataList[deleteIdx].id!
         makeUnderAlertView()
     }
 }
@@ -671,3 +792,83 @@ extension HomeVC : HomeGetDataFromAnswerDelegate {
 }
 
 
+extension HomeVC: HomeChangeQuestionDelegate{
+    func getNewQuestion(idx: Int,answerID: Int) {
+        print("called")
+        HomeChangeQuestionService.shared.getNewQuestion(answerID: answerID){ (networkResult) -> (Void) in
+            switch networkResult{
+            case .success(let data) :
+                
+                
+                if let newQuestionData = data as? HomeNewQuestionData {
+                    
+                    var answerDate = newQuestionData.answerDate ?? ""
+                    var answerIdx = newQuestionData.answerIdx ?? 0
+                    var content = newQuestionData.content ?? ""
+                    var createdAt = newQuestionData.createdAt ?? ""
+                    var categoryName = newQuestionData.questionCategoryName ?? ""
+                    var questionCategoryName = newQuestionData.questionCategoryName ?? ""
+                    var questionTitle = newQuestionData.questionTitle ?? ""
+                    var questionID = newQuestionData.questionID ?? 0
+                    var questionCategoryID = newQuestionData.questionCategoryID ?? 0
+                    var dataID = newQuestionData.id ?? 0
+                    if answerDate != ""{
+                        let index = answerDate.index(answerDate.startIndex, offsetBy: 10)
+                        answerDate = answerDate.substring(to: index)
+                    }
+                    if createdAt != "" {
+                        let index = createdAt.index(createdAt.startIndex, offsetBy: 10)
+                        createdAt = createdAt.substring(to: index)
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                    var newData = AnswerDataForViewController(lock: newQuestionData.publicFlag!==1,
+                                                              questionCategory: questionCategoryName,
+                                                              answerDate: answerDate,
+                                                              question: questionTitle,
+                                                              answer: content,
+                                                              index: self.currentCardIdx,
+                                                              answerIdx: answerIdx,
+                                                              questionID: questionID,
+                                                              createdTime: createdAt,
+                                                              categoryID: questionCategoryID,
+                                                              id: dataID)
+                    print(newData)
+                    
+                    
+                   
+                    
+                    self.answerDataList[idx] = newData
+                    self.cardCollectionView.reloadData()
+                    
+                    
+                    
+                }
+                
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+                
+                
+                
+            }
+            
+        }
+        
+        
+    }
+    
+    
+    
+}

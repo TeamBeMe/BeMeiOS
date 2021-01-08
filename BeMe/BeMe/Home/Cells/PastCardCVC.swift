@@ -165,25 +165,14 @@ extension PastCardCVC {
     
     @objc func changePublic(){
 
-        changePublicDelegate?.changePublic()
+        changePublicDelegate?.changePublic(idx: index!,answerID: (answerData?.id)!)
         
     }
     
-    func setLock(after : Bool){
-        if after == true {
-            lockButton.setImage(
-                UIImage(named: "btnUnlock")?.withRenderingMode(.alwaysOriginal), for: .normal)
- 
-        }
-        else{
-            lockButton.setImage(
-                UIImage(named: "btnLock")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        }
-        
-    }
+
     
     @objc func fixButtonAction(){
-        homeFixButtonDelegate?.fixButtonTapped()
+        homeFixButtonDelegate?.fixButtonTapped(idx: index!)
     }
     
     func setItems(){
@@ -197,7 +186,7 @@ extension PastCardCVC {
         }
         questionInfoLabel.text = "[ \((answerData?.questionCategory)!)에 관한 \((answerData?.answerIdx)!)번째 질문 ]"
         questionLabel.text = answerData?.question
-        dateLabel.text = answerData?.answerDate
+        dateLabel.text = answerData?.createdTime
         answerTextView.text = answerData?.answer
         
     }
