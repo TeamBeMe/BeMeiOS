@@ -98,21 +98,8 @@ extension NewCardCVC {
     
     
     override func awakeFromNib() {
-        makeLockButton()
-        makeQuestionInfoLabel()
-        makeDateLabel()
-        makeQuestionLabel()
-
-        if answerData?.answer == nil{
-            makeReplyButton()
-            makeChangeButton()
-           
-        }
-        else{
-            makeAnswerTextView()
-            makeFixButton()
-        }
-        
+       
+        makeItems()
         
         self.backgroundColor = .darkGrey
         self.contentView.backgroundColor = .darkGrey
@@ -121,6 +108,23 @@ extension NewCardCVC {
         self.setBorder(borderColor: .veryLightPink, borderWidth: 1.0)
     }
     
+    func makeItems(){
+        makeLockButton()
+        makeQuestionInfoLabel()
+        makeDateLabel()
+        makeQuestionLabel()
+
+        if answerData?.answer == nil || answerData?.answer == ""{
+            makeReplyButton()
+            makeChangeButton()
+           
+        }
+        else{
+            
+            makeAnswerTextView()
+            makeFixButton()
+        }
+    }
     
     
 }
@@ -200,6 +204,7 @@ extension NewCardCVC {
     
     func makeFixButton(){
         self.addSubview(fixButton)
+        
         fixButton.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-25)

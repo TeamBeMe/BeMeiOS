@@ -74,8 +74,8 @@ class HomeVC: UIViewController {
     //MARK:- User Define Variables
     private var collectionViewWidth = 0
     private var cardWidth : CGFloat = 0.0
-    private var pastCards = 0
-    private var todayCards = 0
+    var pastCards = 0
+    var todayCards = 0
     var currentCardIdx = 0
     private var initialScrolled = false
     private var cardHeight = 0.0
@@ -372,6 +372,7 @@ extension HomeVC : UICollectionViewDataSource {
             cell.changePublicDelegate = self
             cell.homeAnswerButtonDelegate = self
             cell.homeChangeQuestionDelegate = self
+            cell.homeFixButtonDelegate = self
             cell.answerData = answerDataList[indexPath.item]
             cell.setItems()
             
@@ -514,15 +515,15 @@ extension HomeVC : UIScrollViewDelegate {
 extension HomeVC : AddQuestionDelegate {
     func addQuestion() {
         
-//        for i in pastCards..<pastCards+todayCards{
-//            if answerDataList[i].answer == "" || answerDataList[i].answer == nil{
-//                showAlert(titleLabel: "새로운 질문을 받기 위해\n오늘의 질문을 먼저 대답해주세요",
-//                          leftButtonTitle: "취소",
-//                          rightButtonTitle: "확인",
-//                          topConstraint: 24)
-//                return
-//            }
-//        }
+        for i in pastCards..<pastCards+todayCards{
+            if answerDataList[i].answer == "" || answerDataList[i].answer == nil{
+                showAlert(titleLabel: "새로운 질문을 받기 위해\n오늘의 질문을 먼저 대답해주세요",
+                          leftButtonTitle: "취소",
+                          rightButtonTitle: "확인",
+                          topConstraint: 24)
+                return
+            }
+        }
         
         HomeNewQuestionService.shared.getHomeData() {(networkResult) -> (Void) in
             switch networkResult {
@@ -758,6 +759,7 @@ extension HomeVC : HomeTabBarDelegate{
 
 extension HomeVC : HomeFixButtonDelegate{
     func fixButtonTapped(idx: Int) {
+        print("called")
         deleteIdx = idx
         deleteAnswerID = answerDataList[deleteIdx].id!
         makeUnderAlertView()

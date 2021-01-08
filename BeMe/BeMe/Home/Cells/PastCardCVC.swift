@@ -86,7 +86,7 @@ extension PastCardCVC {
         self.contentView.backgroundColor = .darkGrey
         lockButton.addTarget(self, action: #selector(changePublic), for: .touchUpInside)
 //        self.setBorder(borderColor: .veryLightPink, borderWidth: 1.0)
-        
+       
     }
     
     
