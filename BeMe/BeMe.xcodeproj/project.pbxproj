@@ -15,6 +15,7 @@
 		A51CA35F25A57D2F0020F26D /* MypageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51CA35E25A57D2E0020F26D /* MypageVC.swift */; };
 		A51CA36325A57D430020F26D /* Mypage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A51CA36225A57D430020F26D /* Mypage.storyboard */; };
 		A57F708C25A1ACB100152E89 /* MypageResultTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F708B25A1ACB100152E89 /* MypageResultTVC.swift */; };
+		A5A5BE5225A835AF00036431 /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5BE5125A835AF00036431 /* UIScrollView+Extensions.swift */; };
 		A5B9A1A225A716900051E19F /* MypageCVFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9A1A125A716900051E19F /* MypageCVFlowLayout.swift */; };
 		A5CCCD9E25A334EA008A3125 /* MypageMyScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */; };
 		A5CCCDA125A33512008A3125 /* MypageOthersScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */; };
@@ -131,6 +132,7 @@
 		A578D4E0259E727C00F69908 /* Answer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Answer.storyboard; path = BeMe/Answer/s/Answer.storyboard; sourceTree = SOURCE_ROOT; };
 		A578D4EF25A0C4E600F69908 /* Mypage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mypage.storyboard; sourceTree = SOURCE_ROOT; };
 		A57F708B25A1ACB100152E89 /* MypageResultTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageResultTVC.swift; sourceTree = "<group>"; };
+		A5A5BE5125A835AF00036431 /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
 		A5B9A1A125A716900051E19F /* MypageCVFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageCVFlowLayout.swift; sourceTree = "<group>"; };
 		A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageMyScrapTVC.swift; sourceTree = "<group>"; };
 		A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageOthersScrapTVC.swift; sourceTree = "<group>"; };
@@ -709,6 +711,7 @@
 		EC813F5F2599F3C700BBCE25 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A5A5BE5125A835AF00036431 /* UIScrollView+Extensions.swift */,
 				EC813F602599F3E900BBCE25 /* UIColor+Extensions.swift */,
 				EC813F642599F40800BBCE25 /* UIView+Extensions.swift */,
 				EC7C1600259B469D00A5BA4C /* UIViewController+Extensions.swift */,
@@ -999,6 +1002,7 @@
 				EC89E325259C377400DBAFE5 /* FollowPersonCVC.swift in Sources */,
 				EC813F492599A59500BBCE25 /* NetworkResult.swift in Sources */,
 				A5CCCD9E25A334EA008A3125 /* MypageMyScrapTVC.swift in Sources */,
+				A5A5BE5225A835AF00036431 /* UIScrollView+Extensions.swift in Sources */,
 				EC7F0EA925A057DF008EB88A /* HomeVC+UnderAlert.swift in Sources */,
 				EC7C161E259B9B0F00A5BA4C /* FollowingPeopleCVC.swift in Sources */,
 				EC813F612599F3E900BBCE25 /* UIColor+Extensions.swift in Sources */,
