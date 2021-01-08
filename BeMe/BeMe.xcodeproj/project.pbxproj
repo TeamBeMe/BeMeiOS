@@ -18,7 +18,6 @@
 		A5B9A1A225A716900051E19F /* MypageCVFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9A1A125A716900051E19F /* MypageCVFlowLayout.swift */; };
 		A5CCCD9E25A334EA008A3125 /* MypageMyScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */; };
 		A5CCCDA125A33512008A3125 /* MypageOthersScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */; };
-		D41196B125A640FC009C674A /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41196B025A640FC009C674A /* UIScrollView+Extensions.swift */; };
 		D41196B825A64E82009C674A /* CustomActionSheetTwoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41196B725A64E82009C674A /* CustomActionSheetTwoVC.swift */; };
 		D41196BC25A65477009C674A /* AlertLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41196BB25A65477009C674A /* AlertLabels.swift */; };
 		D44F6D9D25A575E0002A9761 /* UITableViewButtonSelectedDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F6D9C25A575E0002A9761 /* UITableViewButtonSelectedDelegate.swift */; };
@@ -136,7 +135,6 @@
 		A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageMyScrapTVC.swift; sourceTree = "<group>"; };
 		A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageOthersScrapTVC.swift; sourceTree = "<group>"; };
 		B2F0C2D2FD99AEF5B492AAB9 /* Pods-BeMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.release.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.release.xcconfig"; sourceTree = "<group>"; };
-		D41196B025A640FC009C674A /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "UIScrollView+Extensions.swift"; path = "../../../../../../Desktop/UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
 		D41196B725A64E82009C674A /* CustomActionSheetTwoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionSheetTwoVC.swift; sourceTree = "<group>"; };
 		D41196BB25A65477009C674A /* AlertLabels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertLabels.swift; sourceTree = "<group>"; };
 		D44F6D9C25A575E0002A9761 /* UITableViewButtonSelectedDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITableViewButtonSelectedDelegate.swift; sourceTree = "<group>"; };
@@ -712,7 +710,6 @@
 			isa = PBXGroup;
 			children = (
 				EC813F602599F3E900BBCE25 /* UIColor+Extensions.swift */,
-				D41196B025A640FC009C674A /* UIScrollView+Extensions.swift */,
 				EC813F642599F40800BBCE25 /* UIView+Extensions.swift */,
 				EC7C1600259B469D00A5BA4C /* UIViewController+Extensions.swift */,
 				D4E5FD36259E710200C57950 /* UIButton+Extensions.swift */,
@@ -1023,7 +1020,6 @@
 				EC813F262599A15100BBCE25 /* SceneDelegate.swift in Sources */,
 				EC89E30F259C274200DBAFE5 /* FollowerSearchVC.swift in Sources */,
 				EC7C1634259BAD0600A5BA4C /* FollowerPersonCVC.swift in Sources */,
-				D41196B125A640FC009C674A /* UIScrollView+Extensions.swift in Sources */,
 				D44F6DFC25A5BDAD002A9761 /* QuestionAnswerTVC.swift in Sources */,
 				D44F6DC525A5784A002A9761 /* AnswerVC.swift in Sources */,
 			);
