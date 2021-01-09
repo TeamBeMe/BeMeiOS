@@ -26,12 +26,13 @@ class OthersPageCRV: UICollectionReusableView {
     
     //MARK:**- Variable Part**
     static let identifier = "OthersPageCRV"
+    private var isFollowed = false
     
     //MARK:**- Life Cycle Part**
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        setProfileEditButton(view: followButton)
+        setFollowButton(view: followButton, isFollowed: isFollowed)
         setInfoLabel()
         setLabel(view: answerCountLabel, text: "4")
         setLabel(view: attendanceCountLabel, text: "4123124")
@@ -45,12 +46,22 @@ class OthersPageCRV: UICollectionReusableView {
     @IBAction func reportButtonTapped(_ sender: Any) {
     }
     @IBAction func followButtonTapped(_ sender: Any) {
+        isFollowed = !isFollowed
+        setFollowButton(view: followButton, isFollowed: isFollowed)
     }
     
     //MARK:**- default Setting Function Part**
-    func setProfileEditButton(view: UIButton) {
-        view.setBorderWithRadius(borderColor: .veryLightPinkTwo, borderWidth: 1, cornerRadius: 3)
-        view.backgroundColor = UIColor.white
+    func setFollowButton(view: UIButton, isFollowed: Bool) {
+        if isFollowed {
+            view.setBorderWithRadius(borderColor: .veryLightPinkTwo, borderWidth: 1, cornerRadius: 3)
+            view.backgroundColor = UIColor.white
+            view.setTitleColor(.black, for: .normal)
+        } else {
+            view.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 3)
+            view.backgroundColor = UIColor.black
+            view.setTitleColor(.white, for: .normal)
+        }
+        
     }
 
     func setInfoLabel(){
@@ -64,11 +75,6 @@ class OthersPageCRV: UICollectionReusableView {
     
     func setImgae(view: UIImageView, text: String){
         view.image = UIImage(contentsOfFile: text)
-    }
-    
-    func setSearhButton(view: UIView) {
-        view.setBorderWithRadius(borderColor: .veryLightPinkTwo, borderWidth: 1, cornerRadius: 6)
-        view.backgroundColor = UIColor.veryLightPinkTwo
     }
     
     //MARK:**- Function Part**
