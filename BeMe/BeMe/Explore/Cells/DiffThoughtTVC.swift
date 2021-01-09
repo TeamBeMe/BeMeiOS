@@ -14,9 +14,12 @@ class DiffThoughtTVC: UITableViewCell {
     
     weak var delegate: UITableViewButtonSelectedDelegate?
     
+    
     private var currentIndex: CGFloat = 0
     
     private var isOneStepPaging = true
+    
+    var isEmpty = false
     
     var exploreThoughtArray: [ExploreThoughtData] = [] {
         didSet {
@@ -40,19 +43,30 @@ class DiffThoughtTVC: UITableViewCell {
     private func setThoughtCollectionView() {
         diffThoughtCollectionView.delegate = self
         diffThoughtCollectionView.dataSource = self
-        let cellWidth: CGFloat = UIScreen.main.bounds.width - 55.0
-        let cellHeight: CGFloat = cellWidth * 229.0 / 320.0
         
-        // 상하, 좌우 inset value 설정
-        let insetX: CGFloat = (UIScreen.main.bounds.width - cellWidth) / 2.0
-        let lineSpacing: CGFloat = 12.0
+        if isEmpty {
+            let cellWidth: CGFloat = UIScreen.main.bounds.width
+            let cellHeight = cellWidth * 229.0 / 320.0
+            let layout = diffThoughtCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+            layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
+            diffThoughtCollectionView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 30, right: 0)
+            
+        } else {
+            let cellWidth: CGFloat = UIScreen.main.bounds.width - 55.0
+            let cellHeight: CGFloat = cellWidth * 229.0 / 320.0
+            
+            // 상하, 좌우 inset value 설정
+            let insetX: CGFloat = (UIScreen.main.bounds.width - cellWidth) / 2.0
+            let lineSpacing: CGFloat = 12.0
+            
+            let layout = diffThoughtCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+            layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
+            layout.minimumLineSpacing = lineSpacing
+            layout.scrollDirection = .horizontal
+            diffThoughtCollectionView.contentInset = UIEdgeInsets(top: 16, left: insetX, bottom: 30, right: insetX)
+            diffThoughtCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
+        }
         
-        let layout = diffThoughtCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: cellWidth, height: cellHeight)
-        layout.minimumLineSpacing = lineSpacing
-        layout.scrollDirection = .horizontal
-        diffThoughtCollectionView.contentInset = UIEdgeInsets(top: 16, left: insetX, bottom: 30, right: insetX)
-        diffThoughtCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
     }
     
     
@@ -65,16 +79,26 @@ class DiffThoughtTVC: UITableViewCell {
 extension DiffThoughtTVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return exploreThoughtArray.count
+        if isEmpty {
+            return 1
+        } else {
+            return exploreThoughtArray.count
+        }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        guard let card = collectionView.dequeueReusableCell(withReuseIdentifier: DiffThoughtCVC.identifier, for: indexPath) as? DiffThoughtCVC else { return UICollectionViewCell() }
-        
-        card.makeRounded(cornerRadius: 6.0)
-        card.setQuestionAnswer(exploreThoughtArray[indexPath.item].questionTitle, exploreThoughtArray[indexPath.item].content)
-        return card
+        if isEmpty {
+            guard let empty = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyThoughtCVC.identifier, for: indexPath) as? EmptyThoughtCVC else { return UICollectionViewCell() }
+            
+            return empty
+        } else {
+            guard let card = collectionView.dequeueReusableCell(withReuseIdentifier: DiffThoughtCVC.identifier, for: indexPath) as? DiffThoughtCVC else { return UICollectionViewCell() }
+            print(exploreThoughtArray.count)
+            card.makeRounded(cornerRadius: 6.0)
+            card.setQuestionAnswer(exploreThoughtArray[indexPath.item].questionTitle, exploreThoughtArray[indexPath.item].content)
+            return card
+        }
     }
     
 }

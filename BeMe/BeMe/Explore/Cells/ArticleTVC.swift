@@ -41,10 +41,14 @@ class ArticleTVC: UITableViewCell {
         nickNameLabel.text = nick
         
         if let pi = profileImage {
-            let url = URL(string: pi)
-            profileImageView.kf.setImage(with: url)
+            if pi == "" {
+                profileImageView.image = UIImage(named: "imgProfile")
+            } else {
+                let url = URL(string: pi)
+                profileImageView.kf.setImage(with: url)
+            }
         } else {
-            profileImageView.image = UIImage(named: "imgProfile")
+            
         }
         
     }

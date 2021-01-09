@@ -25,6 +25,8 @@ class ExploreHomeVC: UIViewController {
     
     private var page: Int = 1
     
+    private var currentPage: Int = 1
+    
     // 서버통신을 통해 받아오는 값
     private var categoryArray: [ExploreCategory] = [] {
         didSet {
@@ -69,69 +71,134 @@ class ExploreHomeVC: UIViewController {
 
 //MARK: - UITableView
 extension ExploreHomeVC: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 3
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return exploreAnswerArray.count + 3
+        if section == 0 {
+            return 1
+        } else if section == 1 {
+            return 1
+        } else {
+            if currentPage < page {
+                return 10 + 1
+            } else {
+                return exploreAnswerArray.count
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == 0 {
+        if indexPath.section == 0 {
             guard let diffThought = tableView.dequeueReusableCell(withIdentifier: DiffThoughtTVC.identifier, for: indexPath) as? DiffThoughtTVC else { return UITableViewCell() }
             
+            if exploreThoughtArray.count == 0 {
+                diffThought.isEmpty = true
+            } else {
+                diffThought.isEmpty = false
+            }
+            
             diffThought.exploreThoughtArray = self.exploreThoughtArray
+            
             return diffThought
-        } else if indexPath.row == 1 {
+        } else if indexPath.section == 1 {
             guard let diffAnswer = tableView.dequeueReusableCell(withIdentifier: DiffArticleTVC.identifier, for: indexPath) as? DiffArticleTVC else { return UITableViewCell() }
             
             diffAnswer.categoryArray = self.categoryArray
             diffAnswer.delegate = self
             return diffAnswer
-        } else if indexPath.row == exploreAnswerArray.count + 2 {
-            // 더보기 버튼
-            guard let more = tableView.dequeueReusableCell(withIdentifier: MoreTVC.identifier, for: indexPath) as? MoreTVC else { return UITableViewCell() }
-            return more
         } else {
-            print(indexPath.row)
-            print("~~~~~~~~~~~~~> \(exploreAnswerArray.count)")
-            guard let answer = tableView.dequeueReusableCell(withIdentifier: ArticleTVC.identifier, for: indexPath)  as? ArticleTVC else { return UITableViewCell() }
-            
-            
-            answer.setCardDatas(que: exploreAnswerArray[indexPath.row - 2].question, date: exploreAnswerArray[indexPath.row - 2].answerDate, cate: exploreAnswerArray[indexPath.row - 2].category, content: exploreAnswerArray[indexPath.row - 2].content, profileImage: exploreAnswerArray[indexPath.row - 2].userProfile, nick: exploreAnswerArray[indexPath.row - 2].userNickname)
-            return answer
+            if currentPage < page {
+                if indexPath.row == 11 - 1 {
+                    // 더보기 버튼
+                    guard let more = tableView.dequeueReusableCell(withIdentifier: MoreTVC.identifier, for: indexPath) as? MoreTVC else { return UITableViewCell() }
+                    return more
+                } else {
+                    guard let answer = tableView.dequeueReusableCell(withIdentifier: ArticleTVC.identifier, for: indexPath)  as? ArticleTVC else { return UITableViewCell() }
+                    
+                    
+                    print(exploreAnswerArray[indexPath.row].userNickname)
+                    print(exploreAnswerArray[indexPath.row].userProfile)
+                    answer.setCardDatas(que: exploreAnswerArray[indexPath.row].question, date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row ].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row ].userNickname)
+                    return answer
+                }
+            } else {
+                guard let answer = tableView.dequeueReusableCell(withIdentifier: ArticleTVC.identifier, for: indexPath)  as? ArticleTVC else { return UITableViewCell() }
+                
+                
+                print(exploreAnswerArray[indexPath.row].userNickname)
+                print(exploreAnswerArray[indexPath.row].userProfile)
+                answer.setCardDatas(que: exploreAnswerArray[indexPath.row].question, date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row ].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row ].userNickname)
+                return answer
+                
+            }
         }
     }
 }
+
 extension ExploreHomeVC: UITableViewDelegate {
     
     // 애니메이션
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == 0  || indexPath.row == 1{
+        if indexPath.section == 0 || indexPath.section == 1 {
             // no animation
-        } else if indexPath.row == cellNum + 2 - 1 {
-            // animation 2
-            cell.alpha = 0
-            UIView.animate(withDuration: 0.75) {
-                
-                cell.alpha = 1.0
-            }
         } else {
-            // animation 1
-            if (scrollDirection) {
-                // up
-                let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
-                cell.layer.transform = rotationTransform
-                UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
-                    cell.layer.transform = CATransform3DIdentity
-                }) { (_) in
-                    
+            if currentPage < page {
+                if indexPath.row == 11 - 1 {
+                    // animation 2
+                    cell.alpha = 0
+                    UIView.animate(withDuration: 0.75) {
+
+                        cell.alpha = 1.0
+                    }
+                } else {
+                    // animation 1
+                    if (scrollDirection) {
+                        // up
+                        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+                        cell.layer.transform = rotationTransform
+                        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+                            cell.layer.transform = CATransform3DIdentity
+                        }) { (_) in
+
+                        }
+                    } else {
+                        // down
+                        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
+                        cell.layer.transform = rotationTransform
+                        UIView.animate(withDuration: 0.3, animations: {
+                            cell.layer.transform = CATransform3DIdentity
+                        })
+                    }
                 }
             } else {
-                // down
-                let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
-                cell.layer.transform = rotationTransform
-                UIView.animate(withDuration: 0.3, animations: {
-                    cell.layer.transform = CATransform3DIdentity
-                })
+                // animation 1
+                if (scrollDirection) {
+                    // up
+                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+                    cell.layer.transform = rotationTransform
+                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+                        cell.layer.transform = CATransform3DIdentity
+                    }) { (_) in
+
+                    }
+                } else {
+                    // down
+                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
+                    cell.layer.transform = rotationTransform
+                    UIView.animate(withDuration: 0.3, animations: {
+                        cell.layer.transform = CATransform3DIdentity
+                    })
+                }
             }
+        }
+        
+        if indexPath.row == 0 || indexPath.row == 1 {
+            // no animation
+        } else if indexPath.row == cellNum + 2 - 1 {
+        } else {
+            
             
             
         }
@@ -176,8 +243,6 @@ extension ExploreHomeVC: UIScrollViewDelegate {
         //
         lastContentOffset = currentOffset
     }
-    
-    
 }
 
 //MARK: - Private Method
@@ -195,9 +260,8 @@ extension ExploreHomeVC {
                 } else {
                     print("none")
                     // empty 화면 만들기
-                    
                 }
-                
+                self.exploreTableView.reloadData()
                 
             case .requestErr(let message):
                 guard let message = message as? String else { return }
@@ -235,7 +299,7 @@ extension ExploreHomeVC {
                         self.exploreAnswerArray = ans
                     }
                 }
-    
+                
             case .requestErr(let message):
                 guard let message = message as? String else { return }
                 let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)

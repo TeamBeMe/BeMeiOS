@@ -16,9 +16,9 @@ struct ExploreThoughtData: Codable {
     
     enum CodingKeys: String, CodingKey {
         case id
-        case questionID = "question.id"
         case content
         case commentCount = "comment_count"
+        case questionID = "Question.id"
         case questionTitle = "Question.title"
     }
     

@@ -13,6 +13,7 @@ struct ExploreThoughtService {
     
     func getExploreThought(completion: @escaping (NetworkResult<Any>) -> Void) {
         let token = UserDefaults.standard.string(forKey: "token") ?? "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjEwMDk5MjQwLCJleHAiOjE2MzYwMTkyNDAsImlzcyI6ImJlbWUifQ.JeYfzJsg-kdatqhIOqfJ4oXUvUdsiLUaGHwLl1mJRvQ"
+        
         let header: HTTPHeaders = ["Content-Type":"application/json", "token":token]
         
         let url = APIConstants.explorationDiffThoughtURL
@@ -39,6 +40,7 @@ struct ExploreThoughtService {
         let decoder = JSONDecoder()
         guard let decodedData = try? decoder.decode(GenericResponse<[ExploreThoughtData]>.self, from : data) else { return .pathErr }
 
+        print(decodedData)
         switch statusCode {
         case 200..<300: return .success(decodedData)
         case 400..<500: return .pathErr
