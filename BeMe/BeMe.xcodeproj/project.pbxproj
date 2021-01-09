@@ -17,7 +17,6 @@
 		A5A5BE5225A835AF00036431 /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5BE5125A835AF00036431 /* UIScrollView+Extensions.swift */; };
 		A5A5BE6625A9DC4E00036431 /* OthersPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5A5BE6525A9DC4E00036431 /* OthersPage.storyboard */; };
 		A5A5BE6925A9DF2E00036431 /* OthersPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5BE6825A9DF2E00036431 /* OthersPageVC.swift */; };
-		A5B9A1A225A716900051E19F /* MypageCVFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9A1A125A716900051E19F /* MypageCVFlowLayout.swift */; };
 		A5CCCD9E25A334EA008A3125 /* MypageMyScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */; };
 		A5CCCDA125A33512008A3125 /* MypageOthersScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */; };
 		D41196B825A64E82009C674A /* CustomActionSheetTwoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41196B725A64E82009C674A /* CustomActionSheetTwoVC.swift */; };
@@ -172,7 +171,6 @@
 		A5A5BE5125A835AF00036431 /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
 		A5A5BE6525A9DC4E00036431 /* OthersPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OthersPage.storyboard; sourceTree = "<group>"; };
 		A5A5BE6825A9DF2E00036431 /* OthersPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersPageVC.swift; sourceTree = "<group>"; };
-		A5B9A1A125A716900051E19F /* MypageCVFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageCVFlowLayout.swift; sourceTree = "<group>"; };
 		A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageMyScrapTVC.swift; sourceTree = "<group>"; };
 		A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageOthersScrapTVC.swift; sourceTree = "<group>"; };
 		B2F0C2D2FD99AEF5B492AAB9 /* Pods-BeMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.release.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.release.xcconfig"; sourceTree = "<group>"; };
@@ -416,14 +414,6 @@
 			children = (
 			);
 			path = Cells;
-			sourceTree = "<group>";
-		};
-		A5B9A1A025A7163D0051E19F /* FlowLayout */ = {
-			isa = PBXGroup;
-			children = (
-				A5B9A1A125A716900051E19F /* MypageCVFlowLayout.swift */,
-			);
-			path = FlowLayout;
 			sourceTree = "<group>";
 		};
 		D41196BE25A65563009C674A /* Model */ = {
