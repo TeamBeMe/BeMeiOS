@@ -20,5 +20,8 @@ struct APIConstants{
     static let answerRegistURL = baseURL+"/answers"
     static let answerModifyURL = baseURL+"/answers"
     static let followGetURL = baseURL+"/follow"
+    static let findPeopleSearchURL = baseURL+"/users/search?"
+    static let followingfollowURL = baseURL+"/follow"
+    static let followingGetAnswerURL = baseURL+"/follow/answers?"
     
 }

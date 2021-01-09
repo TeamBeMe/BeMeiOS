@@ -22,7 +22,7 @@ class FollowCardCVC: UICollectionViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var bookMarkButton: UIButton!
     
-    
+    var answerData: FollowingAnswers?
     
     override func awakeFromNib() {
         containView.setBorder(borderColor: .lightGray, borderWidth: 1.0)
@@ -33,7 +33,8 @@ class FollowCardCVC: UICollectionViewCell {
         questionTextView.delegate = self
         questionTextView.translatesAutoresizingMaskIntoConstraints = false
         questionTextView.isScrollEnabled = false
-        
+        profileImageView.makeRounded(cornerRadius: 17)
+        profileImageView.contentMode = .scaleAspectFit
 //        answerTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 //        questionTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 //        
@@ -41,10 +42,14 @@ class FollowCardCVC: UICollectionViewCell {
         
     }
     
-    func setItems(question: String,answer: String){
+    func setItems(question: String,answer: String,category: String,answerTime: String,
+                  profileImgUrl: String,userName: String){
         answerTextView.text = answer
         questionTextView.text = question
-
+        timeLabel.text = answerTime
+        
+        profileImageView.imageFromUrl(profileImgUrl, defaultImgPath: "")
+        userNameLabel.text = userName
 
     }
     

@@ -9,18 +9,36 @@ import Foundation
 
 import Alamofire
 
-struct FollowingGetService{
+struct FindPeopleSearchService {
     
-    static let shared = FollowingGetService()
+    static let shared = FindPeopleSearchService()
     
-    func getHomeData(completion : @escaping (NetworkResult<Any>) -> (Void) ){
-        let url = APIConstants.followGetURL
+    func search(findID: String, isFollowing: Int,completion : @escaping (NetworkResult<Any>) -> (Void) ){
+        let query = "query="+findID
+        var range: String?
+        switch isFollowing {
+        case 0:
+            range = "all"
+        case 1:
+            range = "followee"
+        case 2:
+            range = "follower"
+        default:
+            range = "all"
+        }
+        range = "&range="+range!
         
+        
+        
+        let url = APIConstants.findPeopleSearchURL+query+range!
+        print(url)
         let header : HTTPHeaders = [
             "Content-Type":"application/json",
             "token":UserDefaults.standard.string(forKey: "token")!
 //            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjEwMDk5MjQwLCJleHAiOjE2MzYwMTkyNDAsImlzcyI6ImJlbWUifQ.JeYfzJsg-kdatqhIOqfJ4oXUvUdsiLUaGHwLl1mJRvQ"
         ]
+
+        
         let dataRequest = AF.request(url,
                                      method: .get,
                                      encoding: JSONEncoding.default,
@@ -55,13 +73,13 @@ struct FollowingGetService{
     
     private func judge(status : Int, data : Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(GenericResponse<FollowingGetData>.self, from : data) else{
+        guard let decodedData = try? decoder.decode(GenericResponse<FindPeopleSearchData>.self, from : data) else{
             return .pathErr
         }
         
         switch status{
         case 200..<300:
-            print("팔로잉 팔로워 조회 성공")
+            print("아이디 검색 성공")
             print(decodedData.data)
             return .success(decodedData.data)
         case 400..<500 :

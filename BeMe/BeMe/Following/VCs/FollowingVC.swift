@@ -21,6 +21,9 @@ class FollowingVC: UIViewController {
     var lastContentOffset: CGFloat = 0.0
     @IBOutlet weak var wholeCollectionView: UICollectionView!
     
+    var answers: [FollowingAnswers] = []
+    var answerPage = 1
+    
     var myQuestion = "요즘 내 삶에서\n가장 만족스러운 것은 무엇인가요?"
     var myText = "저는 며칠 전 퇴사를 했어요. 수많은 고민 끝에 결국 저질렀습니다. 몇 년간 원해왔던 일이라 꿈만 같아요. 제가 스스로의 힘으로 하고 싶은 걸 해볼 수 있는 시간적 여유를 가지게 된 게 정말 만족스러워요. 앞으로 저에게는 정말 다양한 가능성들이 무궁무진하게 열려있어요. 앞으로 어떤 사람들과 만나게 될지, 어떤 프로젝트를 하게 될지 상상하면서 새해를 맞이하고 싶어요. 지금은 시국이 어떻게 풀릴지 확실하지 않지만 제 인생은 앞으로도 계속해서 나아가겠죠?  "
     
@@ -38,8 +41,8 @@ class FollowingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setItems()
-    
         
+        getAnswerData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,6 +107,9 @@ extension FollowingVC {
         FollowingGetService.shared.getHomeData() {(networkResult) -> (Void) in
             switch networkResult{
             case .success(let data) :
+                self.followers = []
+                self.followees = []
+                
                 if let followDatas = data as? FollowingGetData{
                     for f in followDatas.followers {
                         self.followers.append(f)
@@ -133,6 +139,39 @@ extension FollowingVC {
             }
             
             
+            
+            
+        }
+        
+        
+    }
+    
+    
+    func getAnswerData(){
+        FollowingGetAnswersService.shared.getAnswerData(page: answerPage){(networkResult) -> (Void) in
+            switch networkResult{
+            case .success(let data) :
+                if let answerDatas = data as? FollowingAnswersData {
+                    for answerData in answerDatas.answers{
+                        self.answers.append(answerData)
+                    }
+                    
+                }
+                self.wholeCollectionView.reloadData()
+                print(self.answers)
+                print("success")
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+                
+            }
             
             
         }
@@ -190,7 +229,7 @@ extension FollowingVC : UICollectionViewDataSource {
             
         }
         else{
-            if indexPath.item == totalCell-1 {
+            if indexPath.item == answers.count-1 {
                 guard let cell = collectionView.dequeueReusableCell(
                         withReuseIdentifier: FollowMoreButtonCVC.identifier,
                         for: indexPath) as? FollowMoreButtonCVC else {return UICollectionViewCell()}
@@ -204,9 +243,21 @@ extension FollowingVC : UICollectionViewDataSource {
                 guard let cell = collectionView.dequeueReusableCell(
                         withReuseIdentifier: FollowCardCVC.identifier,
                         for: indexPath) as? FollowCardCVC else {return UICollectionViewCell()}
+                let answerTmp = answers[indexPath.item]
+                let answerText = answerTmp.content ?? ""
+                let answerCategory = answerTmp.category ?? ""
+                let answerDate = answerTmp.answerDate ?? ""
+                let answerProfile = answerTmp.userProfile ?? ""
+                let answerUserName = answerTmp.userNickname ?? ""
                 
-                
-                cell.setItems(question: myQuestion, answer: myText)
+                cell.setItems(question: answerTmp.question,
+                            answer: answerText,
+                            category: answerCategory,
+                            answerTime: answerDate,
+                            profileImgUrl: answerProfile,
+                            userName: answerUserName
+                            
+                            )
                 
                 return cell
                 
@@ -234,7 +285,8 @@ extension FollowingVC : UICollectionViewDataSource {
             return 1
         }
         else{
-            return totalCell
+            
+            return answers.count
         }
         
         
@@ -264,16 +316,19 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
             return CGSize(width: collectionView.frame.width , height: 80)
         }
         else{
-            if indexPath.item == totalCell-1 {
+            if indexPath.item == answers.count-1 {
                 return CGSize(width: collectionView.frame.width , height: 70)
                 
             }
             else {
                 let tmpQuestionTextView = UITextView().then{
-                    $0.frame = CGRect(x: 0, y: 0, width: 275, height: 50)
+                    $0.frame = CGRect(x: 0, y: 0, width: 260, height: 50)
                     $0.backgroundColor = .lightGray
                     $0.alpha = 0
-                    $0.text = myQuestion
+                    let questionText = answers[indexPath.item].question
+                    print(questionText)
+                    $0.text = questionText
+                    
                     $0.font = UIFont.systemFont(ofSize: 16)
                 }
                 
@@ -281,7 +336,8 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
                     $0.frame = CGRect(x: 0, y: 0, width: 275, height: 50)
                     $0.backgroundColor = .lightGray
                     $0.alpha = 0
-                    $0.text = myText
+                    let answerText = answers[indexPath.item].content ?? ""
+                    $0.text = answerText
                     $0.font = UIFont.systemFont(ofSize: 14)
                 }
                 
@@ -291,14 +347,14 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
                 tmpQuestionTextView.translatesAutoresizingMaskIntoConstraints = false
                 
                 tmpTextView.snp.makeConstraints{
-                    $0.leading.equalToSuperview().offset(46)
+                    $0.leading.equalToSuperview().offset(50)
                     $0.trailing.equalToSuperview().offset(-50)
                     $0.height.equalTo(50)
                     $0.top.equalToSuperview().offset(50)
                     
                 }
                 tmpQuestionTextView.snp.makeConstraints{
-                    $0.leading.equalToSuperview().offset(46)
+                    $0.leading.equalToSuperview().offset(50)
                     $0.trailing.equalToSuperview().offset(-70)
                     $0.height.equalTo(50)
                     $0.top.equalToSuperview().offset(50)
@@ -325,6 +381,11 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
                 }
                 tmpTextView.removeFromSuperview()
                 tmpQuestionTextView.removeFromSuperview()
+                print("dynamicQuestionHeight")
+                print(dynamicQuestionHeight)
+                
+                print("dynamicHeight")
+                print(dynamicHeight)
                 
                 
                 

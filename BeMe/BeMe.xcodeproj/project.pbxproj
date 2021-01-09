@@ -131,6 +131,14 @@
 		EC89E33F259C5EBB00DBAFE5 /* HomeCardCustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E33E259C5EBB00DBAFE5 /* HomeCardCustomFlowLayout.swift */; };
 		EC9C5CD025A41E8D0021AF96 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC9C5CCF25A41E8D0021AF96 /* SignUp.storyboard */; };
 		EC9C5CD325A41EAA0021AF96 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C5CD225A41EAA0021AF96 /* SignUpVC.swift */; };
+		ECC630F925A967B7009E4FD4 /* FindPeopleSearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC630F825A967B7009E4FD4 /* FindPeopleSearchData.swift */; };
+		ECC630FF25A967FD009E4FD4 /* FindPeopleSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC630FE25A967FD009E4FD4 /* FindPeopleSearchService.swift */; };
+		ECC6310325A99404009E4FD4 /* FollowingFollowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC6310225A99404009E4FD4 /* FollowingFollowService.swift */; };
+		ECC6310625A9987A009E4FD4 /* FollowingAnswersData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC6310525A9987A009E4FD4 /* FollowingAnswersData.swift */; };
+		ECC6310925A999DB009E4FD4 /* FollowingGetAnswersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC6310825A999DB009E4FD4 /* FollowingGetAnswersService.swift */; };
+		ECC6310D25A9B27E009E4FD4 /* AnswerDataForFollowing.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC6310C25A9B27E009E4FD4 /* AnswerDataForFollowing.swift */; };
+		ECC6311525A9E69A009E4FD4 /* HomeLottietest.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECC6311425A9E69A009E4FD4 /* HomeLottietest.storyboard */; };
+		ECC6311825A9E6AA009E4FD4 /* HomeLottietestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC6311725A9E6AA009E4FD4 /* HomeLottietestVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -265,6 +273,14 @@
 		EC89E33E259C5EBB00DBAFE5 /* HomeCardCustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardCustomFlowLayout.swift; sourceTree = "<group>"; };
 		EC9C5CCF25A41E8D0021AF96 /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
 		EC9C5CD225A41EAA0021AF96 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		ECC630F825A967B7009E4FD4 /* FindPeopleSearchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPeopleSearchData.swift; sourceTree = "<group>"; };
+		ECC630FE25A967FD009E4FD4 /* FindPeopleSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPeopleSearchService.swift; sourceTree = "<group>"; };
+		ECC6310225A99404009E4FD4 /* FollowingFollowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingFollowService.swift; sourceTree = "<group>"; };
+		ECC6310525A9987A009E4FD4 /* FollowingAnswersData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingAnswersData.swift; sourceTree = "<group>"; };
+		ECC6310825A999DB009E4FD4 /* FollowingGetAnswersService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingGetAnswersService.swift; sourceTree = "<group>"; };
+		ECC6310C25A9B27E009E4FD4 /* AnswerDataForFollowing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerDataForFollowing.swift; sourceTree = "<group>"; };
+		ECC6311425A9E69A009E4FD4 /* HomeLottietest.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeLottietest.storyboard; sourceTree = "<group>"; };
+		ECC6311725A9E6AA009E4FD4 /* HomeLottietestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeLottietestVC.swift; sourceTree = "<group>"; };
 		F395802B4D6B242442819A14 /* Pods_BeMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BeMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -531,6 +547,7 @@
 		EC5C201125A49C8A008EE335 /* APIService */ = {
 			isa = PBXGroup;
 			children = (
+				ECC630FD25A967E4009E4FD4 /* FindPeople */,
 				EC75A25625A8A77200F4E160 /* Following */,
 				EC75A24525A8874A00F4E160 /* Answer */,
 				EC71C83725A5A41C00F51FEC /* Home */,
@@ -545,6 +562,7 @@
 		EC5C201225A49C98008EE335 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ECC630F725A96799009E4FD4 /* FindPeople */,
 				EC75A25225A8A70200F4E160 /* Following */,
 				EC71C82D25A5A2C100F51FEC /* Home */,
 				EC5C202125A4C806008EE335 /* LogIn */,
@@ -620,6 +638,7 @@
 			isa = PBXGroup;
 			children = (
 				EC75A25325A8A71800F4E160 /* FollowingGetData.swift */,
+				ECC6310525A9987A009E4FD4 /* FollowingAnswersData.swift */,
 			);
 			path = Following;
 			sourceTree = "<group>";
@@ -628,6 +647,8 @@
 			isa = PBXGroup;
 			children = (
 				EC75A25725A8A78400F4E160 /* FollowingGetService.swift */,
+				ECC6310225A99404009E4FD4 /* FollowingFollowService.swift */,
+				ECC6310825A999DB009E4FD4 /* FollowingGetAnswersService.swift */,
 			);
 			path = Following;
 			sourceTree = "<group>";
@@ -646,6 +667,7 @@
 		EC7C160A259B8B1700A5BA4C /* Following */ = {
 			isa = PBXGroup;
 			children = (
+				ECC6310B25A99E7C009E4FD4 /* CustomClass */,
 				EC7C160B259B8B5300A5BA4C /* Storyboards */,
 				EC7C160C259B8B6300A5BA4C /* VCs */,
 				EC7C160D259B8B6700A5BA4C /* Cells */,
@@ -818,6 +840,7 @@
 			isa = PBXGroup;
 			children = (
 				EC813F722599F84F00BBCE25 /* Home.storyboard */,
+				ECC6311425A9E69A009E4FD4 /* HomeLottietest.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -829,6 +852,7 @@
 				EC7F0EA825A057DF008EB88A /* HomeVC+UnderAlert.swift */,
 				EC7F0EAB25A059AA008EB88A /* HomeVC+Protocols.swift */,
 				EC7F0EAE25A09F24008EB88A /* AnswerDataForViewController.swift */,
+				ECC6311725A9E6AA009E4FD4 /* HomeLottietestVC.swift */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -906,6 +930,30 @@
 			path = VCs;
 			sourceTree = "<group>";
 		};
+		ECC630F725A96799009E4FD4 /* FindPeople */ = {
+			isa = PBXGroup;
+			children = (
+				ECC630F825A967B7009E4FD4 /* FindPeopleSearchData.swift */,
+			);
+			path = FindPeople;
+			sourceTree = "<group>";
+		};
+		ECC630FD25A967E4009E4FD4 /* FindPeople */ = {
+			isa = PBXGroup;
+			children = (
+				ECC630FE25A967FD009E4FD4 /* FindPeopleSearchService.swift */,
+			);
+			path = FindPeople;
+			sourceTree = "<group>";
+		};
+		ECC6310B25A99E7C009E4FD4 /* CustomClass */ = {
+			isa = PBXGroup;
+			children = (
+				ECC6310C25A9B27E009E4FD4 /* AnswerDataForFollowing.swift */,
+			);
+			path = CustomClass;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -979,6 +1027,7 @@
 				EC9C5CD025A41E8D0021AF96 /* SignUp.storyboard in Resources */,
 				EC813F732599F84F00BBCE25 /* Home.storyboard in Resources */,
 				EC89E336259C4E7400DBAFE5 /* UnderTab.storyboard in Resources */,
+				ECC6311525A9E69A009E4FD4 /* HomeLottietest.storyboard in Resources */,
 				D44F6DC425A5784A002A9761 /* Answer.storyboard in Resources */,
 				EC7FEFA525A38AE200C61147 /* Search.storyboard in Resources */,
 			);
@@ -1034,6 +1083,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4E07CBE259F22C10075E616 /* ArticleTVC.swift in Sources */,
+				ECC630FF25A967FD009E4FD4 /* FindPeopleSearchService.swift in Sources */,
 				EC7FEFAE25A3901100C61147 /* SearchNewTVC.swift in Sources */,
 				D492E43B25A0E6250088A181 /* DetailMoreTVC.swift in Sources */,
 				EC5C1FFC25A43E1A008EE335 /* SignUpControlVC.swift in Sources */,
@@ -1048,10 +1098,12 @@
 				EC737F19259D867A0035207F /* CustomTodayCardView.swift in Sources */,
 				D44F6DE725A58A1F002A9761 /* CommentVC.swift in Sources */,
 				EC89E31C259C281F00DBAFE5 /* FollowerListCVC.swift in Sources */,
+				ECC6310925A999DB009E4FD4 /* FollowingGetAnswersService.swift in Sources */,
 				EC7FEFB125A39B7000C61147 /* UITextField+Extensions.swift in Sources */,
 				EC5C1FF625A433EE008EE335 /* String+Extensions.swift in Sources */,
 				EC7C163A259BAD2D00A5BA4C /* FollowerCardCVC.swift in Sources */,
 				EC813F7E2599F89A00BBCE25 /* NewCardCVC.swift in Sources */,
+				ECC6310625A9987A009E4FD4 /* FollowingAnswersData.swift in Sources */,
 				EC75A24725A8876E00F4E160 /* AnswerRegistService.swift in Sources */,
 				EC7C1601259B469D00A5BA4C /* UIViewController+Extensions.swift in Sources */,
 				D4E07CBD259F22C10075E616 /* CategoryCVC.swift in Sources */,
@@ -1082,6 +1134,7 @@
 				EC813F772599F86900BBCE25 /* HomeVC.swift in Sources */,
 				EC813F812599F8A800BBCE25 /* AddCardCVC.swift in Sources */,
 				EC7FEFA825A38AF100C61147 /* SearchVC.swift in Sources */,
+				ECC6310325A99404009E4FD4 /* FollowingFollowService.swift in Sources */,
 				EC89E319259C281100DBAFE5 /* FollowerSearchCVC.swift in Sources */,
 				EC75A25825A8A78400F4E160 /* FollowingGetService.swift in Sources */,
 				EC7C1627259B9CE200A5BA4C /* FollowingCardCVC.swift in Sources */,
@@ -1091,6 +1144,7 @@
 				EC89E30C259C273400DBAFE5 /* FollowingSearchVC.swift in Sources */,
 				EC7C1605259B485D00A5BA4C /* CustomAlertView.swift in Sources */,
 				EC89E316259C280200DBAFE5 /* FollowingListCVC.swift in Sources */,
+				ECC630F925A967B7009E4FD4 /* FindPeopleSearchData.swift in Sources */,
 				EC5C201A25A49D7E008EE335 /* SignUpData.swift in Sources */,
 				D4F01029259C7A8000AA3EE8 /* ExploreVC.swift in Sources */,
 				A501410025A39C18001099E8 /* MypageTabCVC.swift in Sources */,
@@ -1104,6 +1158,7 @@
 				D4E5FD37259E710200C57950 /* UIButton+Extensions.swift in Sources */,
 				EC5C200D25A4721E008EE335 /* LogInVC.swift in Sources */,
 				EC89E322259C376500DBAFE5 /* FollowPeopleCVC.swift in Sources */,
+				ECC6311825A9E6AA009E4FD4 /* HomeLottietestVC.swift in Sources */,
 				EC7C161B259B9A9200A5BA4C /* FollowingInfoVC.swift in Sources */,
 				EC5C201525A49CD5008EE335 /* SignUpService.swift in Sources */,
 				EC75A25E25A8B28000F4E160 /* UIImageView+Extensions.swift in Sources */,
@@ -1133,6 +1188,7 @@
 				EC89E32B259C378F00DBAFE5 /* FollowCardCVC.swift in Sources */,
 				EC813F652599F40800BBCE25 /* UIView+Extensions.swift in Sources */,
 				D41196BC25A65477009C674A /* AlertLabels.swift in Sources */,
+				ECC6310D25A9B27E009E4FD4 /* AnswerDataForFollowing.swift in Sources */,
 				EC89E309259C1CC700DBAFE5 /* FollowSearchVC.swift in Sources */,
 				EC89E328259C378300DBAFE5 /* FollowHeaderCVC.swift in Sources */,
 				EC813F262599A15100BBCE25 /* SceneDelegate.swift in Sources */,
@@ -1288,7 +1344,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TZVHD77BLL;
+				DEVELOPMENT_TEAM = 6ZTQ76LJPZ;
 				INFOPLIST_FILE = BeMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1308,7 +1364,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TZVHD77BLL;
+				DEVELOPMENT_TEAM = 6ZTQ76LJPZ;
 				INFOPLIST_FILE = BeMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
