@@ -165,7 +165,7 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
             }
          
             headerView.delegate = self
-            mypageCVLayout.mypageCRVDelegate = headerView
+//            mypageCVLayout.mypageCRVDelegate = headerView
             
             return headerView
         default:

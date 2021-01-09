@@ -17,7 +17,10 @@
 		A5A5BE5225A835AF00036431 /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5BE5125A835AF00036431 /* UIScrollView+Extensions.swift */; };
 		A5A5BE6625A9DC4E00036431 /* OthersPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5A5BE6525A9DC4E00036431 /* OthersPage.storyboard */; };
 		A5A5BE6925A9DF2E00036431 /* OthersPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5BE6825A9DF2E00036431 /* OthersPageVC.swift */; };
-		A5B9A1A225A716900051E19F /* MypageCVFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5B9A1A125A716900051E19F /* MypageCVFlowLayout.swift */; };
+		A5A5BE7225A9E35A00036431 /* OthersPageCRV.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5BE7125A9E35A00036431 /* OthersPageCRV.swift */; };
+		A5A5BE7525A9E37300036431 /* OthersPageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5BE7425A9E37300036431 /* OthersPageCVC.swift */; };
+		A5A5BE7825A9E38D00036431 /* OthersPageTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5BE7725A9E38D00036431 /* OthersPageTVC.swift */; };
+		A5A5BE9A25A9FCBA00036431 /* OthersPageCVFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5BE9925A9FCBA00036431 /* OthersPageCVFlowLayout.swift */; };
 		A5CCCD9E25A334EA008A3125 /* MypageMyScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */; };
 		A5CCCDA125A33512008A3125 /* MypageOthersScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */; };
 		D41196B825A64E82009C674A /* CustomActionSheetTwoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41196B725A64E82009C674A /* CustomActionSheetTwoVC.swift */; };
@@ -164,7 +167,10 @@
 		A5A5BE5125A835AF00036431 /* UIScrollView+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIScrollView+Extensions.swift"; sourceTree = "<group>"; };
 		A5A5BE6525A9DC4E00036431 /* OthersPage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = OthersPage.storyboard; sourceTree = "<group>"; };
 		A5A5BE6825A9DF2E00036431 /* OthersPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersPageVC.swift; sourceTree = "<group>"; };
-		A5B9A1A125A716900051E19F /* MypageCVFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageCVFlowLayout.swift; sourceTree = "<group>"; };
+		A5A5BE7125A9E35A00036431 /* OthersPageCRV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersPageCRV.swift; sourceTree = "<group>"; };
+		A5A5BE7425A9E37300036431 /* OthersPageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersPageCVC.swift; sourceTree = "<group>"; };
+		A5A5BE7725A9E38D00036431 /* OthersPageTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersPageTVC.swift; sourceTree = "<group>"; };
+		A5A5BE9925A9FCBA00036431 /* OthersPageCVFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersPageCVFlowLayout.swift; sourceTree = "<group>"; };
 		A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageMyScrapTVC.swift; sourceTree = "<group>"; };
 		A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageOthersScrapTVC.swift; sourceTree = "<group>"; };
 		B2F0C2D2FD99AEF5B492AAB9 /* Pods-BeMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.release.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.release.xcconfig"; sourceTree = "<group>"; };
@@ -372,6 +378,7 @@
 		A5A5BE6025A9D9B200036431 /* OthersPage */ = {
 			isa = PBXGroup;
 			children = (
+				A5A5BE9525A9FB5F00036431 /* FlowLayout */,
 				A5A5BE6425A9DBAD00036431 /* Cells */,
 				A5A5BE6225A9DB6500036431 /* Storyboards */,
 				A5A5BE6325A9DB9F00036431 /* VCs */,
@@ -398,14 +405,17 @@
 		A5A5BE6425A9DBAD00036431 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				A5A5BE7125A9E35A00036431 /* OthersPageCRV.swift */,
+				A5A5BE7425A9E37300036431 /* OthersPageCVC.swift */,
+				A5A5BE7725A9E38D00036431 /* OthersPageTVC.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
 		};
-		A5B9A1A025A7163D0051E19F /* FlowLayout */ = {
+		A5A5BE9525A9FB5F00036431 /* FlowLayout */ = {
 			isa = PBXGroup;
 			children = (
-				A5B9A1A125A716900051E19F /* MypageCVFlowLayout.swift */,
+				A5A5BE9925A9FCBA00036431 /* OthersPageCVFlowLayout.swift */,
 			);
 			path = FlowLayout;
 			sourceTree = "<group>";
@@ -1159,6 +1169,7 @@
 				EC7FEFB125A39B7000C61147 /* UITextField+Extensions.swift in Sources */,
 				EC5C1FF625A433EE008EE335 /* String+Extensions.swift in Sources */,
 				EC7C163A259BAD2D00A5BA4C /* FollowerCardCVC.swift in Sources */,
+				A5A5BE9A25A9FCBA00036431 /* OthersPageCVFlowLayout.swift in Sources */,
 				EC813F7E2599F89A00BBCE25 /* NewCardCVC.swift in Sources */,
 				EC75A24725A8876E00F4E160 /* AnswerRegistService.swift in Sources */,
 				EC7C1601259B469D00A5BA4C /* UIViewController+Extensions.swift in Sources */,
@@ -1190,9 +1201,11 @@
 				EC813F282599A15100BBCE25 /* ViewController.swift in Sources */,
 				D41196B825A64E82009C674A /* CustomActionSheetTwoVC.swift in Sources */,
 				EC7C1615259B925A00A5BA4C /* FollowingPVC.swift in Sources */,
+				A5A5BE7225A9E35A00036431 /* OthersPageCRV.swift in Sources */,
 				EC813F772599F86900BBCE25 /* HomeVC.swift in Sources */,
 				EC813F812599F8A800BBCE25 /* AddCardCVC.swift in Sources */,
 				EC7FEFA825A38AF100C61147 /* SearchVC.swift in Sources */,
+				A5A5BE7825A9E38D00036431 /* OthersPageTVC.swift in Sources */,
 				EC89E319259C281100DBAFE5 /* FollowerSearchCVC.swift in Sources */,
 				EC75A25825A8A78400F4E160 /* FollowingGetService.swift in Sources */,
 				EC7C1627259B9CE200A5BA4C /* FollowingCardCVC.swift in Sources */,
@@ -1213,6 +1226,7 @@
 				D480733F25A8DF0400DE1DD3 /* ExploreCategory.swift in Sources */,
 				EC89E31F259C2B0800DBAFE5 /* FollowingSearchPVC.swift in Sources */,
 				D4F1992525A4A9E9000AF0E7 /* SecondCommentTVC.swift in Sources */,
+				A5A5BE7525A9E37300036431 /* OthersPageCVC.swift in Sources */,
 				EC7C1621259B9B8800A5BA4C /* FollowingPersonCVC.swift in Sources */,
 				EC7C162A259BA01200A5BA4C /* FollowerInfoVC.swift in Sources */,
 				D4E5FD37259E710200C57950 /* UIButton+Extensions.swift in Sources */,
