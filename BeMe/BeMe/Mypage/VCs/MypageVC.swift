@@ -13,9 +13,12 @@ class MypageVC: UIViewController {
     @IBOutlet weak var MypageCV: UICollectionView!
 
 
+    private var directionMenu: Int = 0
     
     //MARK:**- Variable Part**
     let mypageCVLayout = MypageCVFlowLayout()
+    
+    let mypageCVC = MypageCVC()
     
     //MARK:**- Constraint Part**
     
@@ -94,10 +97,10 @@ extension MypageVC : UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: MypageCVC.identifier,
                 for: indexPath) as? MypageCVC else {
-            
             return UICollectionViewCell()}
         
-        
+
+        cell.scrollDirection(by: directionMenu)
         return cell
     }
     
@@ -113,6 +116,7 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
 //        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
 //            layout.sectionHeadersPinToVisibleBounds = true
 //        }
+        
         if indexPath.item <= 1 {
             return CGSize(width: collectionView.frame.width  , height: 748)
         }
@@ -160,6 +164,7 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
                 assert(false, "응 아니야")
             }
          
+            headerView.delegate = self
             mypageCVLayout.mypageCRVDelegate = headerView
             
             return headerView
@@ -167,6 +172,22 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
             assert(false, "응 아니야")
             
         }
+        
+        
     }
+}
+
+extension MypageVC: MypageCVCDelegate {
+    func myAnswerItem() {
+        directionMenu = 0
+        MypageCV.reloadData()
+    }
+    
+    func othersAnswerItem() {
+        directionMenu = 1
+        MypageCV.reloadData()
+    }
+    
+    
     
 }
