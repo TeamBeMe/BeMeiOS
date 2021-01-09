@@ -338,7 +338,7 @@
                                                                 </constraints>
                                                             </collectionViewCellContentView>
                                                             <connections>
-                                                                <outlet property="MypageTV" destination="E1B-PY-Rwo" id="g5u-gb-m2V"/>
+                                                                <outlet property="mypageTableView" destination="E1B-PY-Rwo" id="g5u-gb-m2V"/>
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
@@ -353,7 +353,7 @@
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="414" height="588"/>
                                         <connections>
-                                            <outlet property="MypageTabCV" destination="9J8-av-cvT" id="l9S-6H-iLW"/>
+                                            <outlet property="mypageTabCollectionView" destination="9J8-av-cvT" id="l9S-6H-iLW"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -614,7 +614,7 @@
                     </view>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="KI7-5q-Jxp"/>
                     <connections>
-                        <outlet property="MypageCV" destination="xh3-JJ-lUX" id="P3G-h5-dFR"/>
+                        <outlet property="mypageCollectionView" destination="xh3-JJ-lUX" id="P3G-h5-dFR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hdS-Wv-3Oa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

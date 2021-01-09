@@ -9,7 +9,7 @@ import UIKit
 
 class MypageCVC: UICollectionViewCell {
     //MARK:**- IBOutlet Part**
-    @IBOutlet weak var MypageTabCV: UICollectionView!
+    @IBOutlet weak var mypageTabCollectionView: UICollectionView!
     var mypageCVCDelegate: MypageCVCDelegate?
     
     
@@ -32,8 +32,8 @@ class MypageCVC: UICollectionViewCell {
     //MARK:**- default Setting Function Part**
     func collectionViewSetting()
     {
-        MypageTabCV.delegate = self
-        MypageTabCV.dataSource = self
+        mypageTabCollectionView.delegate = self
+        mypageTabCollectionView.dataSource = self
         
     }
     
@@ -42,9 +42,9 @@ class MypageCVC: UICollectionViewCell {
     func scrollDirection(by direction: Int) {
         print(direction)
         if (direction == 0) {
-            MypageTabCV.scrollToItem(at: IndexPath(item: 0, section: 0), at: .right, animated: true)
+            mypageTabCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .right, animated: true)
         } else {
-            MypageTabCV.scrollToItem(at: IndexPath(item: 1, section: 0), at: .left, animated: true)
+            mypageTabCollectionView.scrollToItem(at: IndexPath(item: 1, section: 0), at: .left, animated: true)
         }
     }
 }
