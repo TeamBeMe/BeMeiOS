@@ -55,6 +55,7 @@ class ExploreHomeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -63,6 +64,7 @@ class ExploreHomeVC: UIViewController {
         setAnswerData(page: 1, category: selectedCategoryId, sorting: selectedRecentOrFavorite)
         setThoughtData()
         setCategoryData()
+
         self.navigationController?.navigationBar.isHidden = true
     }
     
@@ -122,13 +124,15 @@ extension ExploreHomeVC: UITableViewDataSource {
                 } else {
                     guard let answer = tableView.dequeueReusableCell(withIdentifier: ArticleTVC.identifier, for: indexPath)  as? ArticleTVC else { return UITableViewCell() }
                     
-                    answer.setCardDatas(que: exploreAnswerArray[indexPath.row].question, date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row ].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row ].userNickname)
+                    answer.delegate = self
+                    answer.setCardDatas(que: exploreAnswerArray[indexPath.row].question, date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row ].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row ].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped, answerId: exploreAnswerArray[indexPath.row].id)
                     return answer
                 }
             } else {
                 guard let answer = tableView.dequeueReusableCell(withIdentifier: ArticleTVC.identifier, for: indexPath)  as? ArticleTVC else { return UITableViewCell() }
                 
-                answer.setCardDatas(que: exploreAnswerArray[indexPath.row].question, date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row ].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row ].userNickname)
+                answer.delegate = self
+                answer.setCardDatas(que: exploreAnswerArray[indexPath.row].question, date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row ].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row ].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped, answerId: exploreAnswerArray[indexPath.row].id)
                 return answer
                 
             }
@@ -411,6 +415,51 @@ extension ExploreHomeVC {
         }
     }
     
+    private func scrapAnswer(answerId: Int) {
+        
+        ExploreAnswerScrapService.shared.putExploreAnswerScrap(answerId: answerId) { (result) in
+            switch result {
+            case .success(let data):
+                
+                guard let dt = data as? GenericResponse<[ExploreCategory]> else { return }
+                print(dt.message)
+                if dt.message == "스크랩 성공" {
+                    // 사용자한테 성공했다고 알려주는 동작
+                } else {
+                    // 사용자한테 실패했다고 알려주는 동작
+                }
+                 
+            case .requestErr(let message):
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                
+            case .pathErr: print("path")
+            case .serverErr:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+                print("serverErr")
+            case .networkFail:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+            }
+        }
+    }
+    
+    private func setTableView() {
+        exploreTableView.delegate = self
+        exploreTableView.dataSource = self
+        exploreTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 119, right: 0)
+    }
+    
     private func setNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(dismissCommentPage), name: .init("dismissCommentPage"), object: nil)
     }
@@ -469,5 +518,10 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     func exploreMoreAnswersButtonDidTapped() {
         currentPage += 1
         setAnswerData(page: currentPage, category: selectedCategoryId, sorting: selectedRecentOrFavorite)
+    }
+    
+    func exploreAnswerScrapButtonDidTapped(_ answerId: Int) {
+        
+        scrapAnswer(answerId: answerId)
     }
 }

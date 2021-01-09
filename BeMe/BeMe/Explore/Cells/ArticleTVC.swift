@@ -11,14 +11,19 @@ import Kingfisher
 class ArticleTVC: UITableViewCell {
     static let identifier: String = "ArticleTVC"
     
-    lazy var isScrapped: Bool = false
-    
     @IBOutlet weak var answerCardView: UIView!
     @IBOutlet weak var answerTextView: UITextView!
     @IBOutlet weak var question: UILabel!
     @IBOutlet weak var subTitle: UILabel!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nickNameLabel: UILabel!
+    @IBOutlet weak var scrapButton: UIButton!
+    
+    lazy var isScrapped: Bool = false
+    
+    var answerId: Int?
+    
+    weak var delegate: UITableViewButtonSelectedDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,18 +32,26 @@ class ArticleTVC: UITableViewCell {
         answerTextView.font = UIFont(name: "AppleSDGothicNeo-Light", size: 14.0)
         
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
     }
-
-    func setCardDatas(que: String, date: String, cate: String, content: String, profileImage: String?, nick: String) {
+    
+    func setCardDatas(que: String, date: String, cate: String, content: String, profileImage: String?, nick: String, isScrap: Bool, answerId: Int) {
         
         question.text = que
         subTitle.text = "[  \(cate)에 관한 질문  ]  ·  \(date)"
         answerTextView.text = content
         nickNameLabel.text = nick
+        isScrapped = isScrap
+        self.answerId = answerId
+        if isScrapped {
+            scrapButton.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
+            
+        } else {
+            scrapButton.setImage(UIImage.init(named: "btnScrapUnselected"), for: .normal)
+        }
         
         if let pi = profileImage {
             if pi == "" {
@@ -47,16 +60,14 @@ class ArticleTVC: UITableViewCell {
                 let url = URL(string: pi)
                 profileImageView.kf.setImage(with: url)
             }
-        } else {
-            
         }
-        
     }
     
     
     //MARK: - IBAction
     @IBAction func scrapButtonTapped(_ sender: UIButton) {
         
+        print(isScrapped)
         if isScrapped {
             isScrapped = false
             sender.setImage(UIImage.init(named: "btnScrapUnselected"), for: .normal)
@@ -64,10 +75,11 @@ class ArticleTVC: UITableViewCell {
             isScrapped = true
             sender.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
         }
-        
+        delegate?.exploreAnswerScrapButtonDidTapped(answerId!)
     }
     
     @IBAction func goToDetailExploreVC(_ sender: UIButton) {
-        print("?????????????뭐지")
+        
+        
     }
 }

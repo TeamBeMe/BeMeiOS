@@ -29,6 +29,9 @@ protocol UITableViewButtonSelectedDelegate: class {
     
     // 더 많은 답변 보기 버튼 누를 때
     func exploreMoreAnswersButtonDidTapped()
+    
+    // 답변 스크랩하기
+    func exploreAnswerScrapButtonDidTapped(_ answerId: Int)
 }
 
 extension UITableViewButtonSelectedDelegate {
@@ -45,4 +48,6 @@ extension UITableViewButtonSelectedDelegate {
     func recentOrFavoriteButtonTapped(_ whichOne: Int, _ selected: String) {}
     
     func exploreMoreAnswersButtonDidTapped() {}
+    
+    func exploreAnswerScrapButtonDidTapped(_ answerId: Int) {}
 }

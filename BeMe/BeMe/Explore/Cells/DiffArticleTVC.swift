@@ -70,7 +70,7 @@ class DiffArticleTVC: UITableViewCell {
 extension DiffArticleTVC {
     private func setLabel() {
         diffArticleSubTitle.alpha = 0.0
-        UIView.animate(withDuration: 0.3, animations: {
+        UIView.animate(withDuration: 0.33, animations: {
             self.diffArticleSubTitle.alpha = 1.0
             self.diffArticleSubTitle.text = self.isRecentButtonPressed ? "내가 답한 질문에 대한 다른 사람들의 최신 답변이에요" : "내가 관심있어 할 다른 사람들의 답변이에요"
         }) { (_) in
@@ -78,7 +78,7 @@ extension DiffArticleTVC {
     }
     private func moveHighLightBar(to button: UIButton) {
         
-        UIView.animate(withDuration: 0.2, delay: 0, options: [.curveLinear], animations: {
+        UIView.animate(withDuration: 0.33, delay: 0, options: [.curveLinear], animations: {
             // Slide Animation
             self.highLightBar.frame.origin.x = 30 + button.frame.minX
         

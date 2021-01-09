@@ -13,7 +13,7 @@ struct ExploreAnswer: Codable {
     let content: String
     let publicFlag: Bool
     let answerDate: String
-    let answerIdx: Int?
+    let answerIdx: Int
     let questionID, userID: Int
     let isAuthor, isScrapped: Bool
     let userProfile: String
