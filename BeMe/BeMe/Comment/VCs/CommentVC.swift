@@ -50,6 +50,12 @@ class CommentVC: UIViewController {
     
     var isCommentLocked: Bool = false
     
+    private var answerDetail: AnswerDetail? {
+        didSet {
+            commentTableView.reloadData()
+        }
+    }
+    
     private var commentArray: [CommentA] = [
         CommentA(comment: "안녕!", children: [CommentA(comment: "오! 안녕!", children: [], open: false),
                                                 CommentA(comment: "오! 안녕!", children: [], open: false),
@@ -79,9 +85,12 @@ class CommentVC: UIViewController {
         AnswerDetailService.shared.getAnswerDetail(answerId: answerId!) { (result) in
             switch result {
             case .success(let data):
-                guard let dt = data as? GenericResponse<[AnswerDetail]> else { return }
+                guard let dt = data as? GenericResponse<AnswerDetail> else { return }
                 
-                print(dt)
+                if let ad = dt.data {
+                    self.answerDetail = ad
+                }
+                
                 
             case .requestErr(let message):
                 guard let message = message as? String else { return }
@@ -308,7 +317,12 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
             if let iMBH = isMoreButtonHidden {
                 header.moreAnswerButton.isHidden = iMBH
             }
+            
             header.profileView.isHidden = isMyAnswer
+            if let ad = answerDetail {
+                header.setInformation(question: ad.question, category: ad.category , date: ad.answerDate, profileImg: ad.userProfile, nickName: ad.userNickname, content: ad.content)
+            }
+            
             return header
         } else {
             if indexPath.row == 0 {
