@@ -1,16 +1,14 @@
 //
-//  MypageCVFlowLayout.swift
+//  OthersPageCVFlowLayout.swift
 //  BeMe
 //
-//  Created by 박세란 on 2021/01/07.
+//  Created by 박세란 on 2021/01/10.
 //
 
 import UIKit
 
-class MypageCVFlowLayout: UICollectionViewFlowLayout {
-    
-//    var mypageCRVDelegate: MypageCRVDelegate?
-    
+class OthersPageCVFlowLayout: UICollectionViewFlowLayout {
+
     override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
         return true
     }
@@ -26,32 +24,13 @@ class MypageCVFlowLayout: UICollectionViewFlowLayout {
                     
                     let diffValue = abs(offset.y)
                     var frame = attributes.frame //현재 프레임 받음
-                    frame.size.height = max(0, 393 + diffValue)
+                    frame.size.height = max(0, 294 + diffValue)
                     frame.origin.y = frame.minY - diffValue
                     attributes.frame = frame
                 }
             }
         }
-        
-//        else {
-//
-//            for attributes in stLayoutAttributes {
-//
-//                if let elmKind = attributes.representedElementKind, elmKind == UICollectionView.elementKindSectionHeader {
-//
-//                    if offset.y >= 290 {
-//                        mypageCRVDelegate?.headerFix()
-//                        self.sectionHeadersPinToVisibleBounds = true
-//                    } else {
-//                        print("========else=======")
-//                        mypageCRVDelegate?.headerOrigin()
-//                        self.sectionHeadersPinToVisibleBounds = false
-//                    }
-//
-//                }
-//            }
-//
-//        }
+
         
         return layoutAttributes
     }

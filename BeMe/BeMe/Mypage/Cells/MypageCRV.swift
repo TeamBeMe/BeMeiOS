@@ -128,20 +128,20 @@ class MypageCRV: UICollectionReusableView {
     }
 }
 
-extension MypageCRV : MypageCRVDelegate {
-    func headerFix() {
-        profileImageHeight.constant = 0
-        profileViewHeight.constant = 0
-        settingButton.alpha = 0
-    }
-    func headerOrigin() {
-        profileImageHeight.constant = 180
-        profileViewHeight.constant = 110
-        settingButton.alpha = 1
-    }
-}
-
-protocol MypageCRVDelegate {
-    func headerFix()
-    func headerOrigin()
-}
+//extension MypageCRV : MypageCRVDelegate {
+//    func headerFix() {
+//        profileImageHeight.constant = 0
+//        profileViewHeight.constant = 0
+//        settingButton.alpha = 0
+//    }
+//    func headerOrigin() {
+//        profileImageHeight.constant = 180
+//        profileViewHeight.constant = 110
+//        settingButton.alpha = 1
+//    }
+//}
+//
+//protocol MypageCRVDelegate {
+//    func headerFix()
+//    func headerOrigin()
+//}
