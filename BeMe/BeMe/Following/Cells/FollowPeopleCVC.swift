@@ -134,9 +134,9 @@ extension FollowPeopleCVC : FollowingFollowButtonDelegate{
         if isFollowing{
             isFollowing = false
             shows = followers
-            mTimer = Timer.scheduledTimer(timeInterval: Double(1/Double(totalCell)), target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
+//            mTimer = Timer.scheduledTimer(timeInterval: Double(1/Double(totalCell)), target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
             print(shows)
-
+            peopleCollectionView.reloadData()
            
             
         }
@@ -153,8 +153,9 @@ extension FollowPeopleCVC : FollowingFollowingButtonDelegate{
         if !isFollowing{
             isFollowing = true
             shows = followees
-            mTimer = Timer.scheduledTimer(timeInterval: Double(1/Double(totalCell)), target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
+//            mTimer = Timer.scheduledTimer(timeInterval: Double(1/Double(totalCell)), target: self, selector: #selector(timerCallback), userInfo: nil, repeats: true)
             print(shows)
+            peopleCollectionView.reloadData()
   
         }
     }

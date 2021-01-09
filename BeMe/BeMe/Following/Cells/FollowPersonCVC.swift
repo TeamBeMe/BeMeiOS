@@ -15,7 +15,8 @@ class FollowPersonCVC: UICollectionViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     override func awakeFromNib() {
         profileImageView.tintColor = .black
-        
+        profileImageView.makeRounded(cornerRadius: 29)
+        profileImageView.contentMode = .scaleAspectFill
     }
     
     

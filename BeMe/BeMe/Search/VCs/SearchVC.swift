@@ -15,7 +15,7 @@ class SearchVC: UIViewController {
     
     @IBOutlet weak var backButton: UIButton!
     
-    
+    var searched: [FindPeopleSearchData] = []
     
     
     
@@ -23,8 +23,9 @@ class SearchVC: UIViewController {
         super.viewDidLoad()
         underTableView.dataSource = self
         underTableView.delegate = self
+        searchTextField.delegate = self
         setItems()
-       
+        
         
     }
     
@@ -55,21 +56,28 @@ class SearchVC: UIViewController {
         
         
     }
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
     
     @IBAction func backButtonAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
     
-
-
-
+    
+    
+    
 }
 
 
 extension SearchVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        if searchTextField.text == ""{
+            return 5
+        }
+        else{
+            return searched.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -86,6 +94,12 @@ extension SearchVC: UITableViewDataSource {
                     .dequeueReusableCell(withIdentifier: SearchNewTVC.identifier, for: indexPath)
                     as? SearchNewTVC else { return UITableViewCell() }
             underTableView.tableHeaderView = .none
+            
+            let data = searched[indexPath.item]
+            let profileImgurl = data.profileImg ?? ""
+            
+            cell.setItems(profileImg: profileImgurl, userName: data.nickname, isFollowed: data.isFollowed)
+            cell.findPeopleSearchData = searched[indexPath.item]
             return cell
             
         }
@@ -102,21 +116,66 @@ extension SearchVC: UITableViewDelegate{
         
     }
     
-
- 
+    
+    
     
 }
 
 
 extension SearchVC: UITextFieldDelegate{
     
-   
+    
     @objc func textFieldDidChange(){
+        
+        
+        
+        
         underTableView.reloadData()
         
     }
     
-    
-    
-    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("called")
+        
+        
+        
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("called2")
+        FindPeopleSearchService.shared.search(findID: searchTextField.text!,
+                                              isFollowing: 0){(networkResult) -> (Void) in
+            switch networkResult{
+            case .success(let data) :
+                self.searched = []
+                print(self.searchTextField.text!)
+                if let searchedData = data as? FindPeopleSearchData{
+                    
+                    
+                    self.searched.append(searchedData)
+                    
+                    
+                }
+                self.underTableView.reloadData()
+                print("success")
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+                
+            }
+            
+            
+        }
+        
+        
+        
+        
+        return true
+    }
 }
