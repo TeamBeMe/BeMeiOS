@@ -111,8 +111,8 @@ extension DiffThoughtTVC: UICollectionViewDataSource, UICollectionViewDelegateFl
 }
 
 extension DiffThoughtTVC: UICollectionViewButtonDelegate {
-    func goToOneQuestionMoreAnswerButtonDidTapped(_ questionId: Int) {
-        delegate?.goToMoreAnswerButtonDidTapped(questionId: questionId)
+    func goToOneQuestionMoreAnswerButtonDidTapped(_ questionId: Int, question: String) {
+        delegate?.goToMoreAnswerButtonDidTapped(questionId: questionId, question: question)
     }
 }
 
@@ -155,9 +155,9 @@ extension DiffThoughtTVC: UIScrollViewDelegate {
 
 
 protocol UICollectionViewButtonDelegate: class {
-    func goToOneQuestionMoreAnswerButtonDidTapped(_ questionId: Int)
+    func goToOneQuestionMoreAnswerButtonDidTapped(_ questionId: Int, question: String)
 }
 
 extension UICollectionViewButtonDelegate {
-    func goToOneQuestionMoreAnswerButtonDidTapped(_ questionId: Int) {}
+    func goToOneQuestionMoreAnswerButtonDidTapped(_ questionId: Int, question: String) {}
 }

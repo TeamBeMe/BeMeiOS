@@ -699,6 +699,9 @@
                                                 <state key="normal" title="최신">
                                                     <color key="titleColor" systemColor="labelColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="recentButtonTapped:" destination="gMw-Ns-qHK" eventType="touchUpInside" id="cao-EL-aga"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Fo-Cr-kgs">
                                                 <rect key="frame" x="73" y="0.0" width="60" height="32"/>
@@ -709,6 +712,9 @@
                                                 <state key="normal" title="흥미">
                                                     <color key="titleColor" systemColor="labelColor"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="favoriteButtonTapped:" destination="gMw-Ns-qHK" eventType="touchUpInside" id="hQI-Vk-pAx"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -830,7 +836,12 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="answerTextView" destination="bMI-RQ-2CI" id="ZjK-Gg-gZs"/>
                                             <outlet property="answerView" destination="mgJ-CR-Lml" id="quD-jm-59r"/>
+                                            <outlet property="nickNameLabel" destination="wrL-3Y-82c" id="fVu-h7-KYs"/>
+                                            <outlet property="profileImageView" destination="kQI-7H-M5Y" id="Gkr-T3-Y8h"/>
+                                            <outlet property="scrapButton" destination="Cra-ah-TPP" id="nEm-Cx-msa"/>
+                                            <outlet property="subTitleLabel" destination="Yc9-ha-nhM" id="vA4-zf-ndn"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DetailMoreTVC" id="Oor-ug-rhe" customClass="DetailMoreTVC" customModule="BeMe" customModuleProvider="target">
@@ -890,11 +901,13 @@
                     <navigationItem key="navigationItem" id="Mp1-rn-4dT"/>
                     <connections>
                         <outlet property="diffAnswerTableView" destination="qTX-Wx-fgd" id="aSr-dH-okp"/>
+                        <outlet property="highLightBar" destination="Uch-nI-qD4" id="4gI-UW-NzD"/>
+                        <outlet property="questionLabel" destination="Hnu-Na-ymX" id="X8Y-ra-GF6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gAz-ud-aSC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2854" y="188"/>
+            <point key="canvasLocation" x="2037" y="176"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mdl-LQ-opT">

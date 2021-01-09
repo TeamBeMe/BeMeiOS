@@ -85,6 +85,6 @@ class ArticleTVC: UITableViewCell {
     
     @IBAction func goToDetailExploreVC(_ sender: UIButton) {
         
-        delegate?.goToMoreAnswerButtonDidTapped(questionId: questionId!)
+        delegate?.goToMoreAnswerButtonDidTapped(questionId: questionId!, question: question.text!)
     }
 }

@@ -525,11 +525,12 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
         scrapAnswer(answerId: answerId)
     }
     
-    func goToMoreAnswerButtonDidTapped(questionId: Int) {
+    func goToMoreAnswerButtonDidTapped(questionId: Int, question: String) {
         guard let detail = self.storyboard?.instantiateViewController(identifier: "ExploreDetailVC") as?
                 ExploreDetailVC else { return }
         
-        print(questionId)
+        detail.questionId = questionId
+        detail.questionText = question
         self.navigationController?.pushViewController(detail, animated: true)
     }
 }
