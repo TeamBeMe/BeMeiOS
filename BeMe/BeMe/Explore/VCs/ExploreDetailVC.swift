@@ -190,7 +190,7 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
                 
                 answer.delegate = self
                 answer.indexPath = indexPath
-                answer.setCardDatas(date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped, answerId: exploreAnswerArray[indexPath.row].id, questionId: exploreAnswerArray[indexPath.row].questionID)
+                answer.setCardDatas(date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped!, answerId: exploreAnswerArray[indexPath.row].id, questionId: exploreAnswerArray[indexPath.row].questionID)
                 
                 return answer
             }
@@ -201,7 +201,7 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
             
             answer.delegate = self
             answer.indexPath = indexPath
-            answer.setCardDatas(date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped, answerId: exploreAnswerArray[indexPath.row].id, questionId: exploreAnswerArray[indexPath.row].questionID)
+            answer.setCardDatas(date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped!, answerId: exploreAnswerArray[indexPath.row].id, questionId: exploreAnswerArray[indexPath.row].questionID)
             
             
             return answer
@@ -209,54 +209,54 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if currentPage < page {
-            if indexPath.row == 11 - 1 {
-                // animation 2
-                cell.alpha = 0
-                UIView.animate(withDuration: 0.75) {
-                    
-                    cell.alpha = 1.0
-                }
-            } else {
-                // animation 1
-                if (scrollDirection) {
-                    // up
-                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
-                    cell.layer.transform = rotationTransform
-                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
-                        cell.layer.transform = CATransform3DIdentity
-                    }) { (_) in
-                        
-                    }
-                } else {
-                    // down
-                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
-                    cell.layer.transform = rotationTransform
-                    UIView.animate(withDuration: 0.3, animations: {
-                        cell.layer.transform = CATransform3DIdentity
-                    })
-                }
-            }
-        } else {
-            // animation 1
-            if (scrollDirection) {
-                // up
-                let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
-                cell.layer.transform = rotationTransform
-                UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
-                    cell.layer.transform = CATransform3DIdentity
-                }) { (_) in
-                    
-                }
-            } else {
-                // down
-                let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
-                cell.layer.transform = rotationTransform
-                UIView.animate(withDuration: 0.3, animations: {
-                    cell.layer.transform = CATransform3DIdentity
-                })
-            }
-        }
+//        if currentPage < page {
+//            if indexPath.row == 11 - 1 {
+//                // animation 2
+//                cell.alpha = 0
+//                UIView.animate(withDuration: 0.75) {
+//                    
+//                    cell.alpha = 1.0
+//                }
+//            } else {
+//                // animation 1
+//                if (scrollDirection) {
+//                    // up
+//                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+//                    cell.layer.transform = rotationTransform
+//                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+//                        cell.layer.transform = CATransform3DIdentity
+//                    }) { (_) in
+//                        
+//                    }
+//                } else {
+//                    // down
+//                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
+//                    cell.layer.transform = rotationTransform
+//                    UIView.animate(withDuration: 0.3, animations: {
+//                        cell.layer.transform = CATransform3DIdentity
+//                    })
+//                }
+//            }
+//        } else {
+//            // animation 1
+//            if (scrollDirection) {
+//                // up
+//                let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+//                cell.layer.transform = rotationTransform
+//                UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+//                    cell.layer.transform = CATransform3DIdentity
+//                }) { (_) in
+//                    
+//                }
+//            } else {
+//                // down
+//                let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
+//                cell.layer.transform = rotationTransform
+//                UIView.animate(withDuration: 0.3, animations: {
+//                    cell.layer.transform = CATransform3DIdentity
+//                })
+//            }
+//        }
     }
     
     func scrollViewDidScroll (_ scrollView: UIScrollView) {

@@ -15,7 +15,8 @@ struct ExploreAnswer: Codable {
     let answerDate: String
     let answerIdx: Int
     let questionID, userID: Int
-    let isAuthor, isScrapped: Bool
+    let isAuthor: Bool
+    var isScrapped: Bool?
     let userProfile: String
     let userNickname: String
     let question, category: String

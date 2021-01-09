@@ -11,7 +11,7 @@ import Alamofire
 struct ExploreAnswerScrapService {
     static let shared = ExploreAnswerScrapService()
     
-    func putExploreAnswerScrap(answerId: Int,completion: @escaping (NetworkResult<Any>) -> Void) {
+    func putExploreAnswerScrap(answerId: Int, completion: @escaping (NetworkResult<Any>) -> Void) {
         let token = UserDefaults.standard.string(forKey: "token") ?? "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjEwMDk5MjQwLCJleHAiOjE2MzYwMTkyNDAsImlzcyI6ImJlbWUifQ.JeYfzJsg-kdatqhIOqfJ4oXUvUdsiLUaGHwLl1mJRvQ"
         let header: HTTPHeaders = ["Content-Type":"application/json", "token":token]
         
@@ -39,6 +39,7 @@ struct ExploreAnswerScrapService {
         let decoder = JSONDecoder()
         guard let decodedData = try? decoder.decode(GenericResponse<Int>.self, from : data) else { return .pathErr }
         
+        print(decodedData)
         switch statusCode {
         case 200..<300: return .success(decodedData)
         case 400..<500: return .pathErr
