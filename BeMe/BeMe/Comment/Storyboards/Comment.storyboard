@@ -2356,7 +2356,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6P-Fc-4Wx">
                                 <rect key="frame" x="0.0" y="681.33333333333337" width="375" height="96.666666666666629"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gBK-a7-S7A">
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gBK-a7-S7A">
                                         <rect key="frame" x="0.0" y="-36" width="375" height="36"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="genie_self 님에게 답글을 남기는 중" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MI6-sf-Vfc">
@@ -2368,6 +2368,9 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xX2-WH-VmM">
                                                 <rect key="frame" x="309" y="0.0" width="36" height="36"/>
                                                 <state key="normal" image="btnDelete36"/>
+                                                <connections>
+                                                    <action selector="cancelCoCButtonTapped:" destination="CUp-WV-7Pi" eventType="touchUpInside" id="dfa-sM-Kb0"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>

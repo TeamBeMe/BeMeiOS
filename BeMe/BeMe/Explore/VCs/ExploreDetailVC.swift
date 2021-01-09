@@ -274,12 +274,6 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
-//
-//        //        comment.
-//        comment.isMoreButtonHidden = true
-//        comment.modalPresentationStyle = .fullScreen
-//        self.present(comment, animated: true, completion: nil)
     }
 }
 
@@ -297,5 +291,18 @@ extension ExploreDetailVC: UITableViewButtonSelectedDelegate {
         settingActionSheet.alertInformations = AlertLabels.article
         settingActionSheet.modalPresentationStyle = .overCurrentContext
         self.present(settingActionSheet, animated: true, completion: nil)
+    }
+    func exploreMoreAnswersButtonDidTapped() {
+        currentPage += 1
+        setAnswerData()
+    }
+    
+    func goToCommentButtonTapped(_ answerId: Int) {
+        guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
+
+        comment.answerId = answerId
+        comment.isMoreButtonHidden = true
+        comment.modalPresentationStyle = .fullScreen
+        self.present(comment, animated: true, completion: nil)
     }
 }

@@ -30,6 +30,8 @@ class CommentVC: UIViewController {
     
     lazy var popupBackgroundView: UIView = UIView()
     
+    var answerId: Int?
+    
     var pageNumber: Int?
     
     var isMoreButtonHidden: Bool?
@@ -71,6 +73,40 @@ class CommentVC: UIViewController {
         setCommentView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        AnswerDetailService.shared.getAnswerDetail(answerId: answerId!) { (result) in
+            switch result {
+            case .success(let data):
+                guard let dt = data as? GenericResponse<[AnswerDetail]> else { return }
+                
+                print(dt)
+                
+            case .requestErr(let message):
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                
+            case .pathErr: print("path")
+            case .serverErr:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+                print("serverErr")
+            case .networkFail:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+            }
+        }
+    }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -155,10 +191,11 @@ class CommentVC: UIViewController {
         
     }
     
-    @IBAction func cancelCommentToCommentButtonTapped(_ sender: UIButton) {
+    @IBAction func cancelCoCButtonTapped(_ sender: UIButton) {
         
-        commentToCommentView.isHidden = true
     }
+    
+    
     @IBAction func lockButtonTapped(_ sender: UIButton) {
         
         if isCommentLocked {

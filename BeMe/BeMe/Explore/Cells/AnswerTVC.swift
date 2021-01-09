@@ -78,4 +78,11 @@ class AnswerTVC: UITableViewCell {
         
         delegate?.settingButtonDidTapped(to: indexPath!)
     }
+    
+    
+    @IBAction func goToCommentButtonTapped(_ sender: Any) {
+        
+        delegate?.goToCommentButtonTapped(answerId!)
+    }
+    
 }

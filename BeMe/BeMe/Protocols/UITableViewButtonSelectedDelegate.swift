@@ -32,6 +32,9 @@ protocol UITableViewButtonSelectedDelegate: class {
     
     // 답변 스크랩하기
     func exploreAnswerScrapButtonDidTapped(_ answerId: Int)
+    
+    // 댓글 화면으로 넘어갈 때
+    func goToCommentButtonTapped(_ answerId: Int)
 }
 
 extension UITableViewButtonSelectedDelegate {
@@ -50,4 +53,6 @@ extension UITableViewButtonSelectedDelegate {
     func exploreMoreAnswersButtonDidTapped() {}
     
     func exploreAnswerScrapButtonDidTapped(_ answerId: Int) {}
+    
+    func goToCommentButtonTapped(_ answerId: Int) {}
 }

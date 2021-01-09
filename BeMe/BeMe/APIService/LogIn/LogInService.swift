@@ -69,6 +69,7 @@ struct LogInService{
         
         switch status{
         case 200..<300:
+            print(decodedData.data?.token)
             UserDefaults.standard.setValue(decodedData.data?.token, forKey: "token")
             
             return .success(decodedData.data)
