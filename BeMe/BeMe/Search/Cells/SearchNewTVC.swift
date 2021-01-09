@@ -11,6 +11,9 @@ class SearchNewTVC: UITableViewCell {
 
     static let identifier = "SearchNewTVC"
     @IBOutlet weak var followButton: UIButton!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var userNameLabel: UILabel!
+    var findPeopleSearchData: FindPeopleSearchData?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -18,6 +21,8 @@ class SearchNewTVC: UITableViewCell {
         followButton.tintColor = .black
         followButton.makeRounded(cornerRadius: 3)
         followButton.setBorder(borderColor: .lightGray, borderWidth: 1.0)
+        profileImageView.makeRounded(cornerRadius: 18)
+        profileImageView.contentMode = .scaleAspectFill
         // Initialization code
     }
 
@@ -30,19 +35,80 @@ class SearchNewTVC: UITableViewCell {
     
     @IBAction func followButtonAction(_ sender: Any) {
         if followButton.titleLabel?.text == "팔로잉"{
-            followButton.setTitle("팔로우", for: .normal)
-            followButton.backgroundColor = .black
-            followButton.setTitleColor(.white, for: .normal)
+            FollowingFollowService.shared.follow(id: findPeopleSearchData!.id){(networkResult) -> (Void) in
+                switch networkResult{
+                case .success(let data) :
+                    print("success")
+                    self.followButton.setTitle("팔로우", for: .normal)
+                    self.followButton.backgroundColor = .black
+                    self.followButton.setTitleColor(.white, for: .normal)
+                    
+                    
+                    
+                    
+                case .requestErr(let msg):
+                    if let message = msg as? String {
+                        print(message)
+                    }
+                case .pathErr :
+                    print("pathErr")
+                case .serverErr :
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+                    
+                }
+                
+
+            }
+            
+            
             
         }
         else {
-            followButton.setTitle("팔로잉", for: .normal)
-            followButton.backgroundColor = .white
-            followButton.setTitleColor(.black, for: .normal)
+            FollowingFollowService.shared.follow(id: findPeopleSearchData!.id){(networkResult) -> (Void) in
+                switch networkResult{
+                case .success(let data) :
+                    print("success")
+                    self.followButton.setTitle("팔로잉", for: .normal)
+                    self.followButton.backgroundColor = .white
+                    self.followButton.setTitleColor(.black, for: .normal)
+                    
+                    
+                    
+                    
+                case .requestErr(let msg):
+                    if let message = msg as? String {
+                        print(message)
+                    }
+                case .pathErr :
+                    print("pathErr")
+                case .serverErr :
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+                    
+                }
+                
+
+            }
+            
             
         }
         
     }
+    
+    func setItems(profileImg: String, userName: String,isFollowed: Bool){
+        profileImageView.imageFromUrl(profileImg, defaultImgPath: "")
+        userNameLabel.text = userName
+        if !isFollowed{
+            followButton.setTitle("팔로우", for: .normal)
+            followButton.backgroundColor = .black
+            followButton.setTitleColor(.white, for: .normal)
+        }
+        
+    }
+    
     
     
 }

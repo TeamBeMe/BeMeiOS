@@ -40,7 +40,7 @@
                                     <constraint firstAttribute="height" constant="36" id="FfU-21-nRd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xDM-VL-kBC">
                                 <rect key="frame" x="0.0" y="220" width="414" height="676"/>
@@ -140,6 +140,8 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="followButton" destination="mC3-Ja-mkR" id="0nF-t5-p5y"/>
+                                            <outlet property="profileImageView" destination="S77-fz-aZs" id="fnl-CG-Doi"/>
+                                            <outlet property="userNameLabel" destination="gIk-yF-6CE" id="Qax-vt-uHb"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
