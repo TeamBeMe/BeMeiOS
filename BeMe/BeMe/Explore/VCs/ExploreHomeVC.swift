@@ -27,6 +27,8 @@ class ExploreHomeVC: UIViewController {
     
     private var currentPage: Int = 1
     
+    var selectedCategoryId: Int = 0
+    
     // 서버통신을 통해 받아오는 값
     private var categoryArray: [ExploreCategory] = [] {
         didSet {
@@ -105,6 +107,7 @@ extension ExploreHomeVC: UITableViewDataSource {
         } else if indexPath.section == 1 {
             guard let diffAnswer = tableView.dequeueReusableCell(withIdentifier: DiffArticleTVC.identifier, for: indexPath) as? DiffArticleTVC else { return UITableViewCell() }
             
+            diffAnswer.selectedCategoryId = self.selectedCategoryId
             diffAnswer.categoryArray = self.categoryArray
             diffAnswer.delegate = self
             return diffAnswer
@@ -117,18 +120,12 @@ extension ExploreHomeVC: UITableViewDataSource {
                 } else {
                     guard let answer = tableView.dequeueReusableCell(withIdentifier: ArticleTVC.identifier, for: indexPath)  as? ArticleTVC else { return UITableViewCell() }
                     
-                    
-                    print(exploreAnswerArray[indexPath.row].userNickname)
-                    print(exploreAnswerArray[indexPath.row].userProfile)
                     answer.setCardDatas(que: exploreAnswerArray[indexPath.row].question, date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row ].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row ].userNickname)
                     return answer
                 }
             } else {
                 guard let answer = tableView.dequeueReusableCell(withIdentifier: ArticleTVC.identifier, for: indexPath)  as? ArticleTVC else { return UITableViewCell() }
                 
-                
-                print(exploreAnswerArray[indexPath.row].userNickname)
-                print(exploreAnswerArray[indexPath.row].userProfile)
                 answer.setCardDatas(que: exploreAnswerArray[indexPath.row].question, date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row ].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row ].userNickname)
                 return answer
                 
@@ -402,13 +399,18 @@ extension ExploreHomeVC {
 
 
 extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
-    func categoryButtonTapped(_ indexPath: IndexPath) {
+    func categoryButtonTapped(_ indexPath: IndexPath, _ categoryId: Int) {
         scrollDirection = true
-        exploreTableView.reloadRows(at: [IndexPath(row: 2, section: 0)], with: .none)
+        
+        print(categoryId)
+        selectedCategoryId = categoryId
+//        let section = IndexSet.init(integer: indexPath.section + 1)
+//        exploreTableView.reloadSections(section, with: .none)
+        exploreTableView.reloadData()
     }
     
     func recentOrFavoriteButtonTapped(_ indexPath: Int) {
         scrollDirection = true
-        exploreTableView.reloadData()
+//        exploreTableView.reloadData()
     }
 }

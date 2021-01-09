@@ -20,7 +20,7 @@ class DiffArticleTVC: UITableViewCell {
 
     private var isRecentButtonPressed: Bool = true
     
-    private var selectedCategoryId: Int = 0
+    var selectedCategoryId: Int = 0
     var categoryArray: [ExploreCategory] = [] {
         didSet {
             categoryCollectionView.reloadData()
@@ -45,6 +45,7 @@ class DiffArticleTVC: UITableViewCell {
     private func setCategoryCollectionView() {
         categoryCollectionView.dataSource = self
         categoryCollectionView.delegate = self
+        categoryCollectionView.isMultipleTouchEnabled = true
         flowLayout.estimatedItemSize = CGSize(width: 34, height: 34)
         flowLayout.minimumLineSpacing = 8.0
     }
@@ -96,6 +97,15 @@ extension DiffArticleTVC: UICollectionViewDataSource {
         guard let category = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCVC.identifier, for: indexPath) as? CategoryCVC else { return UICollectionViewCell() }
                 
         
+        if selectedCategoryId != 0 {
+            if indexPath.item == selectedCategoryId - 1 {
+                category.isSelected = true
+            } else {
+                category.isSelected = false
+            }
+        } else {
+//            category.isSelected = false
+        }
         category.name.text = categoryArray[indexPath.item].name
         category.name.sizeToFit()
         category.makeRounded(cornerRadius: 4.0)
@@ -104,22 +114,27 @@ extension DiffArticleTVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
-        // 화면을 나갔을 때를 위하여
-        delegate?.categoryButtonTapped(indexPath)
+        
+        //        categoryCollectionView.scrollToItem(at: indexPath, at: .left, animated: true)
+        
+        selectedCategoryId = indexPath.item + 1
+        delegate?.categoryButtonTapped(indexPath, selectedCategoryId)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        delegate?.categoryButtonTapped(indexPath)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryCVC else {
             return true
         }
-        
+
         if cell.isSelected {
-            collectionView.deselectItem(at: indexPath, animated: true)
+            selectedCategoryId = 0
+            print(selectedCategoryId)
+            delegate?.categoryButtonTapped(indexPath, selectedCategoryId)
+            collectionView.deselectItem(at: indexPath, animated: false)
             return false
         } else {
             return true

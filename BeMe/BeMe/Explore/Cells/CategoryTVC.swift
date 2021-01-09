@@ -70,7 +70,7 @@ extension CategoryTVC: UICollectionViewDataSource, UICollectionViewDelegate {
             cell.name.textColor = .white
         }
         // 카테고리 Sorting 작업
-        delegate?.categoryButtonTapped(indexPath) // indexPath = 어떤 category 인지
+//        delegate?.categoryButtonTapped(indexPath) // indexPath = 어떤 category 인지
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -80,7 +80,7 @@ extension CategoryTVC: UICollectionViewDataSource, UICollectionViewDelegate {
         }
 
         // 카테고리 Sorting 작업
-        delegate?.categoryButtonTapped(indexPath) // indexPath = 어떤 category 인지
+//        delegate?.categoryButtonTapped(indexPath) // indexPath = 어떤 category 인지
     }
 }
 

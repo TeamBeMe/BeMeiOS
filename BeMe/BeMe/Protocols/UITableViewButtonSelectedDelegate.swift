@@ -22,7 +22,7 @@ protocol UITableViewButtonSelectedDelegate: class {
     func sendCommentButtonDidTapped(to indexPath: IndexPath)
     
     // 카테고리 버튼 누를 때
-    func categoryButtonTapped(_ indexPath: IndexPath)
+    func categoryButtonTapped(_ indexPath: IndexPath, _ cateogoryId: Int)
     
     // 최신 흥미 버튼 누를 때
     func recentOrFavoriteButtonTapped(_ indexPath: Int)
@@ -37,7 +37,7 @@ extension UITableViewButtonSelectedDelegate {
     
     func sendCommentButtonDidTapped(to indexPath: IndexPath) {}
     
-    func categoryButtonTapped(_ indexPath: IndexPath) {}
+    func categoryButtonTapped(_ indexPath: IndexPath, _ cateogoryId: Int) {}
     
     func recentOrFavoriteButtonTapped(_ whichOne: Int) {}
 }
