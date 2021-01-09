@@ -48,7 +48,7 @@ extension UnderTabBarController {
         
         homeTabBarDelegate = homeVC
         guard let exploreVC = UIStoryboard(name:"Explore",bundle:nil)
-                .instantiateViewController(identifier: "ExploreVC") as? ExploreVC else {
+                .instantiateViewController(identifier: "ExploreHomeVC") as? ExploreHomeVC else {
             return
             
         }

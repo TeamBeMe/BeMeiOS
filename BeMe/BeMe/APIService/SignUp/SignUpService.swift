@@ -13,7 +13,7 @@ struct SignUpService{
     static let shared = SignUpService()
     func signUp(email : String, nickName : String, password : String, image: UIImage,
                 completion : @escaping (NetworkResult<Any>) -> (Void)) {
-        let url = APIConstants.signupURL
+        let _ = APIConstants.signupURL
         
         let header : HTTPHeaders = [
             "Content-Type":"multipart/form-data"

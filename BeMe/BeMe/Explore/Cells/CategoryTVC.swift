@@ -7,14 +7,11 @@
 
 import UIKit
 
-protocol CategoryButtonPressedDelegate: class {
-    func categoryButtonTapped(_ indexPath: IndexPath)
-}
 
 class CategoryTVC: UITableViewCell {
     static let identifier: String = "CategoryTVC"
     
-    weak var delegate: CategoryButtonPressedDelegate?
+    weak var delegate: UITableViewButtonSelectedDelegate?
     
     // CollectionView 동적 너비를 위해
     var flowLayout: UICollectionViewFlowLayout  {
@@ -73,7 +70,7 @@ extension CategoryTVC: UICollectionViewDataSource, UICollectionViewDelegate {
             cell.name.textColor = .white
         }
         // 카테고리 Sorting 작업
-        delegate?.categoryButtonTapped(indexPath) // indexPath = 어떤 category 인지
+//        delegate?.categoryButtonTapped(indexPath) // indexPath = 어떤 category 인지
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
@@ -83,7 +80,7 @@ extension CategoryTVC: UICollectionViewDataSource, UICollectionViewDelegate {
         }
 
         // 카테고리 Sorting 작업
-        delegate?.categoryButtonTapped(indexPath) // indexPath = 어떤 category 인지
+//        delegate?.categoryButtonTapped(indexPath) // indexPath = 어떤 category 인지
     }
 }
 
