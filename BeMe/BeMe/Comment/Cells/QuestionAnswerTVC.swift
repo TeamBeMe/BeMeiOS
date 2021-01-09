@@ -28,7 +28,7 @@ class QuestionAnswerTVC: UITableViewCell {
     }
     @IBAction func moreAnswerButtonTapped(_ sender: UIButton) {
         
-        delegate?.moreAnswerButtonDidTapped(to: indexPath!)
+        delegate?.goToMoreAnswerButtonDidTapped(to: indexPath!)
         
     }
     

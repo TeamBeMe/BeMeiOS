@@ -27,7 +27,9 @@ class ExploreHomeVC: UIViewController {
     
     private var currentPage: Int = 1
     
-    var selectedCategoryId: Int = 0
+    private var selectedCategoryId: Int = 0
+    
+    private var selectedRecentOrFavorite: String = "최신"
     
     // 서버통신을 통해 받아오는 값
     private var categoryArray: [ExploreCategory] = [] {
@@ -58,7 +60,7 @@ class ExploreHomeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setAnswerData()
+        setAnswerData(page: 1, category: selectedCategoryId, sorting: selectedRecentOrFavorite)
         setThoughtData()
         setCategoryData()
         self.navigationController?.navigationBar.isHidden = true
@@ -146,7 +148,7 @@ extension ExploreHomeVC: UITableViewDelegate {
                     // animation 2
                     cell.alpha = 0
                     UIView.animate(withDuration: 0.75) {
-
+                        
                         cell.alpha = 1.0
                     }
                 } else {
@@ -158,7 +160,7 @@ extension ExploreHomeVC: UITableViewDelegate {
                         UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
                             cell.layer.transform = CATransform3DIdentity
                         }) { (_) in
-
+                            
                         }
                     } else {
                         // down
@@ -178,7 +180,7 @@ extension ExploreHomeVC: UITableViewDelegate {
                     UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
                         cell.layer.transform = CATransform3DIdentity
                     }) { (_) in
-
+                        
                     }
                 } else {
                     // down
@@ -285,40 +287,89 @@ extension ExploreHomeVC {
         }
     }
     
-    private func setAnswerData() {
-        ExploreAnswerService.shared.getExploreAnswer(page: 1, category: nil, sorting: "최신") { (result) in
-            switch result {
-            case .success(let data):
-                guard let dt = data as? GenericResponse<ExploreAnswerData> else { return }
-                if let dat = dt.data {
-                    self.page = dat.pageLen
-                    if let ans = dat.answers {
-                        self.exploreAnswerArray = ans
+    private func setAnswerData(page: Int?, category: Int?, sorting: String) {
+        
+        var c: Int?
+        if let p = page {
+            if category == 0 {
+                c = nil
+                ExploreAnswerService.shared.getExploreAnswer(page: p, category: c, sorting: sorting) { (result) in
+                    switch result {
+                    case .success(let data):
+                        guard let dt = data as? GenericResponse<ExploreAnswerData> else { return }
+                        if let dat = dt.data {
+                            self.page = dat.pageLen
+                            if let ans = dat.answers {
+                                self.exploreAnswerArray = ans
+                            }
+                        }
+                        
+                    case .requestErr(let message):
+                        guard let message = message as? String else { return }
+                        let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                        let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                        alertViewController.addAction(action)
+                        self.present(alertViewController, animated: true, completion: nil)
+                        
+                    case .pathErr: print("path")
+                    case .serverErr:
+                        let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                        let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                        alertViewController.addAction(action)
+                        self.present(alertViewController, animated: true, completion: nil)
+                        print("networkFail")
+                        print("serverErr")
+                    case .networkFail:
+                        let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                        let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                        alertViewController.addAction(action)
+                        self.present(alertViewController, animated: true, completion: nil)
+                        print("networkFail")
+                    }
+                }
+            } else {
+                if let cate = category {
+                    c = cate
+                    ExploreAnswerService.shared.getExploreAnswer(page: p, category: c, sorting: sorting) { (result) in
+                        switch result {
+                        case .success(let data):
+                            guard let dt = data as? GenericResponse<ExploreAnswerData> else { return }
+                            if let dat = dt.data {
+                                self.page = dat.pageLen
+                                if let ans = dat.answers {
+                                    self.exploreAnswerArray = ans
+                                }
+                            }
+                            
+                        case .requestErr(let message):
+                            guard let message = message as? String else { return }
+                            let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                            let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                            alertViewController.addAction(action)
+                            self.present(alertViewController, animated: true, completion: nil)
+                            
+                        case .pathErr: print("path")
+                        case .serverErr:
+                            let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                            let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                            alertViewController.addAction(action)
+                            self.present(alertViewController, animated: true, completion: nil)
+                            print("networkFail")
+                            print("serverErr")
+                        case .networkFail:
+                            let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                            let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                            alertViewController.addAction(action)
+                            self.present(alertViewController, animated: true, completion: nil)
+                            print("networkFail")
+                        }
                     }
                 }
                 
-            case .requestErr(let message):
-                guard let message = message as? String else { return }
-                let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
-                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-                alertViewController.addAction(action)
-                self.present(alertViewController, animated: true, completion: nil)
-                
-            case .pathErr: print("path")
-            case .serverErr:
-                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
-                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-                alertViewController.addAction(action)
-                self.present(alertViewController, animated: true, completion: nil)
-                print("networkFail")
-                print("serverErr")
-            case .networkFail:
-                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
-                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-                alertViewController.addAction(action)
-                self.present(alertViewController, animated: true, completion: nil)
-                print("networkFail")
             }
+            
+            
+            
         }
     }
     
@@ -401,16 +452,22 @@ extension ExploreHomeVC {
 extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     func categoryButtonTapped(_ indexPath: IndexPath, _ categoryId: Int) {
         scrollDirection = true
-        
-        print(categoryId)
         selectedCategoryId = categoryId
-//        let section = IndexSet.init(integer: indexPath.section + 1)
-//        exploreTableView.reloadSections(section, with: .none)
-        exploreTableView.reloadData()
+        
+        // 서버 통신
+        setAnswerData(page: currentPage, category: selectedCategoryId, sorting: selectedRecentOrFavorite)
+        
     }
     
-    func recentOrFavoriteButtonTapped(_ indexPath: Int) {
+    func recentOrFavoriteButtonTapped(_ indexPath: Int, _ selected: String) {
         scrollDirection = true
-//        exploreTableView.reloadData()
+        selectedRecentOrFavorite = selected
+        selectedCategoryId = 0
+        setAnswerData(page: currentPage, category: selectedCategoryId , sorting: selectedRecentOrFavorite)
+    }
+    
+    func exploreMoreAnswersButtonDidTapped() {
+        currentPage += 1
+        setAnswerData(page: currentPage, category: selectedCategoryId, sorting: selectedRecentOrFavorite)
     }
 }

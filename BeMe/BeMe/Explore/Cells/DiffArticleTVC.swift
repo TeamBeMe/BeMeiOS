@@ -52,14 +52,14 @@ class DiffArticleTVC: UITableViewCell {
     
     @IBAction func recentButtonTapped(_ sender: UIButton) {
         moveHighLightBar(to: sender)
-        delegate?.recentOrFavoriteButtonTapped(0)
+        delegate?.recentOrFavoriteButtonTapped(0, "최신")
         isRecentButtonPressed = true
         setLabel()
     }
     
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
         moveHighLightBar(to: sender)
-        delegate?.recentOrFavoriteButtonTapped(1)
+        delegate?.recentOrFavoriteButtonTapped(1, "흥미")
         isRecentButtonPressed = false
         setLabel()
     }

@@ -336,18 +336,6 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
         }
     }
     
-    func moreAnswerButtonDidTapped(to indexPath: IndexPath) {
-        
-        //        guard let detailVC = UIStoryboard.init(name: "Explore", bundle: nil).instantiateViewController(identifier: "ExploreDetailVC") as? ExploreDetailVC else { return }
-        //        self.dismiss(animated: true, completion: {
-        //            guard let nowVC = self.presentingViewController else { return }
-        //
-        //            print("nowVC")
-        //            print(nowVC)
-        //            nowVC.navigationController?.pushViewController(detailVC, animated: true)
-        //        })
-    }
-    
     func sendCommentButtonDidTapped(to indexPath: IndexPath) {
         
         commentTextView.becomeFirstResponder()

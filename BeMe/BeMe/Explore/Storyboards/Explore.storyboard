@@ -586,6 +586,9 @@
                                                     <state key="normal" title="더보기">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="moreAnswerButtonTapped:" destination="HxO-zO-D7x" eventType="touchUpInside" id="8e6-Oz-UKz"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

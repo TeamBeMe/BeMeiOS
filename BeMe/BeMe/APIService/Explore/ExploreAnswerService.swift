@@ -11,15 +11,25 @@ import Alamofire
 struct ExploreAnswerService {
    static let shared = ExploreAnswerService()
    
-   func getExploreAnswer(page: Int = 1, category: Int?, sorting: String = "최신", completion: @escaping (NetworkResult<Any>) -> Void) {
+   func getExploreAnswer(page: Int = 1, category: Int?, sorting: String, completion: @escaping (NetworkResult<Any>) -> Void) {
       let token = UserDefaults.standard.string(forKey: "token") ?? "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjEwMDk5MjQwLCJleHAiOjE2MzYwMTkyNDAsImlzcyI6ImJlbWUifQ.JeYfzJsg-kdatqhIOqfJ4oXUvUdsiLUaGHwLl1mJRvQ"
       let header: HTTPHeaders = ["Content-Type":"application/json", "token":token]
       
-      let params: Parameters = [
-         "page": "\(page)",
-         "sorting": "\(sorting)"
+      var params: Parameters = [:
       ]
       
+      if let c = category {
+         params = [
+            "page": "\(page)",
+            "category": "\(c)",
+            "sorting": "\(sorting)"
+         ]
+      } else {
+         params = [
+            "page": "\(page)",
+            "sorting": "\(sorting)"
+         ]
+      }
       let url = APIConstants.explorationDiffArticleURL
       let dataRequest = AF.request(url, method: .get, parameters: params, headers: header)
       
@@ -43,6 +53,7 @@ struct ExploreAnswerService {
       let decoder = JSONDecoder()
       guard let decodedData = try? decoder.decode(GenericResponse<ExploreAnswerData>.self, from : data) else { return .pathErr }
       
+      print(decodedData)
       switch statusCode {
       case 200..<300: return .success(decodedData)
       case 400..<500: return .pathErr

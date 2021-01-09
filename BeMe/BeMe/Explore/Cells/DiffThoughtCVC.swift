@@ -22,6 +22,6 @@ class DiffThoughtCVC: UICollectionViewCell {
     }
     
     @IBAction func goToDetailButtonTapped(_ sender: Any) {
-        delegate?.moreAnswerButtonDidTapped(to: indexPath!)
+        delegate?.goToMoreAnswerButtonDidTapped(to: indexPath!)
     }
 }
