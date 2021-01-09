@@ -10,12 +10,15 @@ import UIKit
 class MypageVC: UIViewController {
     
     //MARK:**- IBOutlet Part**
-    @IBOutlet weak var MypageCV: UICollectionView!
+    @IBOutlet weak var mypageCollectionView: UICollectionView!
 
 
+    private var directionMenu: Int = 0
     
     //MARK:**- Variable Part**
     let mypageCVLayout = MypageCVFlowLayout()
+    
+    let mypageCVC = MypageCVC()
     
     //MARK:**- Constraint Part**
     
@@ -27,18 +30,18 @@ class MypageVC: UIViewController {
 //        setSearhButton(view: searchButton)
 //        setKeywordLabel(label: keywordLabel)
         
-        MypageCV.delegate = self
-        MypageCV.dataSource = self
+        mypageCollectionView.delegate = self
+        mypageCollectionView.dataSource = self
         
         if #available(iOS 11.0, *) {
-            MypageCV.automaticallyAdjustsScrollIndicatorInsets = false
+            mypageCollectionView.automaticallyAdjustsScrollIndicatorInsets = false
         } else {
             automaticallyAdjustsScrollViewInsets = false
         }
         
-        MypageCV.collectionViewLayout = mypageCVLayout
+        mypageCollectionView.collectionViewLayout = mypageCVLayout
         
-        print("********************\(MypageCV.adjustedContentInset)")
+        print("********************\(mypageCollectionView.adjustedContentInset)")
     }
     
     //MARK:**- IBAction Part**
@@ -94,10 +97,10 @@ extension MypageVC : UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(
                 withReuseIdentifier: MypageCVC.identifier,
                 for: indexPath) as? MypageCVC else {
-            
             return UICollectionViewCell()}
         
-        
+
+        cell.scrollDirection(by: directionMenu)
         return cell
     }
     
@@ -113,6 +116,7 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
 //        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
 //            layout.sectionHeadersPinToVisibleBounds = true
 //        }
+        
         if indexPath.item <= 1 {
             return CGSize(width: collectionView.frame.width  , height: 748)
         }
@@ -160,6 +164,7 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
                 assert(false, "응 아니야")
             }
          
+            headerView.delegate = self
             mypageCVLayout.mypageCRVDelegate = headerView
             
             return headerView
@@ -167,6 +172,22 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
             assert(false, "응 아니야")
             
         }
+        
+        
     }
+}
+
+extension MypageVC: MypageCVCDelegate {
+    func myAnswerItem() {
+        directionMenu = 0
+        mypageCollectionView.reloadData()
+    }
+    
+    func othersAnswerItem() {
+        directionMenu = 1
+        mypageCollectionView.reloadData()
+    }
+    
+    
     
 }

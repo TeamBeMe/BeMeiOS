@@ -10,7 +10,9 @@ import UIKit
 class ExploreDetailVC: UIViewController {
     
     private var cellNumber: Int = 10
+    
     private var lastContentOffset: CGFloat = 0.0
+    
     private var scrollDirection: Bool = true
     
     lazy var popupBackgroundView: UIView = UIView()

@@ -15,11 +15,23 @@ protocol UITableViewButtonSelectedDelegate: class {
     // 댓글 페이지의 댓글 보기 버튼 눌릴 때
     func moreCellButtonDidTapped(to indexPath: IndexPath)
     
-    // ?
-    func moreAnswerButtonDidTapped(to indexPath: IndexPath)
+    // detail 화면으로 넘어가는 것을 알려줄때
+    func goToMoreAnswerButtonDidTapped(to indexPath: IndexPath)
     
     // 댓글 페이지의 답글 달기 버튼 눌릴 때
     func sendCommentButtonDidTapped(to indexPath: IndexPath)
+    
+    // 카테고리 버튼 누를 때
+    func categoryButtonTapped(_ indexPath: IndexPath, _ cateogoryId: Int)
+    
+    // 최신 흥미 버튼 누를 때
+    func recentOrFavoriteButtonTapped(_ indexPath: Int, _ selected: String)
+    
+    // 더 많은 답변 보기 버튼 누를 때
+    func exploreMoreAnswersButtonDidTapped()
+    
+    // 답변 스크랩하기
+    func exploreAnswerScrapButtonDidTapped(_ answerId: Int)
 }
 
 extension UITableViewButtonSelectedDelegate {
@@ -27,7 +39,15 @@ extension UITableViewButtonSelectedDelegate {
     
     func moreCellButtonDidTapped(to: IndexPath) {}
     
-    func moreAnswerButtonDidTapped(to indexPath: IndexPath) {}
+    func goToMoreAnswerButtonDidTapped(to indexPath: IndexPath) {}
     
     func sendCommentButtonDidTapped(to indexPath: IndexPath) {}
+    
+    func categoryButtonTapped(_ indexPath: IndexPath, _ cateogoryId: Int) {}
+    
+    func recentOrFavoriteButtonTapped(_ whichOne: Int, _ selected: String) {}
+    
+    func exploreMoreAnswersButtonDidTapped() {}
+    
+    func exploreAnswerScrapButtonDidTapped(_ answerId: Int) {}
 }

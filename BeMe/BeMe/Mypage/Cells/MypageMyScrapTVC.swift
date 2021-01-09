@@ -55,7 +55,7 @@ class MypageMyScrapTVC: UITableViewCell {
     @IBAction func lockButtonTapped(_ sender: UIButton) {
         if isLocked {
             isLocked = false
-            sender.setImage(UIImage.init(named: "btnLickBlack"), for: .normal)
+            sender.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
             
         } else {
             isLocked = true
@@ -82,7 +82,7 @@ class MypageMyScrapTVC: UITableViewCell {
         }
         
         if isLocked {
-            lockButton.setImage(UIImage.init(named: "btnLickBlack"), for: .normal)
+            lockButton.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
             
         } else {
             lockButton.setImage(UIImage.init(named: "btnUnlockExplore"), for: .normal)
