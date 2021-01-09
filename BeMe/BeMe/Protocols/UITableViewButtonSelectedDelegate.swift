@@ -16,7 +16,7 @@ protocol UITableViewButtonSelectedDelegate: class {
     func moreCellButtonDidTapped(to indexPath: IndexPath)
     
     // detail 화면으로 넘어가는 것을 알려줄때
-    func goToMoreAnswerButtonDidTapped(to indexPath: IndexPath)
+    func goToMoreAnswerButtonDidTapped(questionId: Int)
     
     // 댓글 페이지의 답글 달기 버튼 눌릴 때
     func sendCommentButtonDidTapped(to indexPath: IndexPath)
@@ -39,7 +39,7 @@ extension UITableViewButtonSelectedDelegate {
     
     func moreCellButtonDidTapped(to: IndexPath) {}
     
-    func goToMoreAnswerButtonDidTapped(to indexPath: IndexPath) {}
+    func goToMoreAnswerButtonDidTapped(questionId: Int) {}
     
     func sendCommentButtonDidTapped(to indexPath: IndexPath) {}
     

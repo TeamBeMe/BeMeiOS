@@ -13,7 +13,10 @@ class DiffThoughtCVC: UICollectionViewCell {
     @IBOutlet weak var question: UILabel!
     @IBOutlet weak var answer: UITextView!
     
-    weak var delegate: UITableViewButtonSelectedDelegate?
+    weak var delegate: UICollectionViewButtonDelegate?
+    
+    var questionId: Int?
+    
     var indexPath: IndexPath?
     
     func setQuestionAnswer(_ que: String, _ ans: String) {
@@ -22,6 +25,6 @@ class DiffThoughtCVC: UICollectionViewCell {
     }
     
     @IBAction func goToDetailButtonTapped(_ sender: Any) {
-        delegate?.goToMoreAnswerButtonDidTapped(to: indexPath!)
+        delegate?.goToOneQuestionMoreAnswerButtonDidTapped(questionId!)
     }
 }

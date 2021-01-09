@@ -125,14 +125,14 @@ extension ExploreHomeVC: UITableViewDataSource {
                     guard let answer = tableView.dequeueReusableCell(withIdentifier: ArticleTVC.identifier, for: indexPath)  as? ArticleTVC else { return UITableViewCell() }
                     
                     answer.delegate = self
-                    answer.setCardDatas(que: exploreAnswerArray[indexPath.row].question, date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row ].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row ].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped, answerId: exploreAnswerArray[indexPath.row].id)
+                    answer.setCardDatas(que: exploreAnswerArray[indexPath.row].question, date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row ].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row ].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped, answerId: exploreAnswerArray[indexPath.row].id, questionId: exploreAnswerArray[indexPath.row].questionID)
                     return answer
                 }
             } else {
                 guard let answer = tableView.dequeueReusableCell(withIdentifier: ArticleTVC.identifier, for: indexPath)  as? ArticleTVC else { return UITableViewCell() }
                 
                 answer.delegate = self
-                answer.setCardDatas(que: exploreAnswerArray[indexPath.row].question, date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row ].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row ].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped, answerId: exploreAnswerArray[indexPath.row].id)
+                answer.setCardDatas(que: exploreAnswerArray[indexPath.row].question, date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row ].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row ].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped, answerId: exploreAnswerArray[indexPath.row].id, questionId: exploreAnswerArray[indexPath.row].questionID)
                 return answer
                 
             }
@@ -523,5 +523,13 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     func exploreAnswerScrapButtonDidTapped(_ answerId: Int) {
         
         scrapAnswer(answerId: answerId)
+    }
+    
+    func goToMoreAnswerButtonDidTapped(questionId: Int) {
+        guard let detail = self.storyboard?.instantiateViewController(identifier: "ExploreDetailVC") as?
+                ExploreDetailVC else { return }
+        
+        print(questionId)
+        self.navigationController?.pushViewController(detail, animated: true)
     }
 }

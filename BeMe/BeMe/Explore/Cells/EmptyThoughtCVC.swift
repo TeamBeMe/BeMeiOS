@@ -9,4 +9,7 @@ import UIKit
 
 class EmptyThoughtCVC: UICollectionViewCell {
     static let identifier: String = "EmptyThoughtCVC"
+    
+    @IBOutlet weak var todayButton: UIButton!
+    
 }

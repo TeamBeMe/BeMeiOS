@@ -15,7 +15,17 @@ class ExploreDetailVC: UIViewController {
     
     private var scrollDirection: Bool = true
     
+    private var currentPage: Int = 1
+    
+    private var page: Int = 1
+    
     lazy var popupBackgroundView: UIView = UIView()
+    
+    private var exploreAnswerArray: [ExploreAnswer] = [] {
+        didSet {
+            diffAnswerTableView.reloadData()
+        }
+    }
     
     @IBOutlet weak var diffAnswerTableView: UITableView!
     
@@ -36,7 +46,7 @@ class ExploreDetailVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        print(diffAnswerTableView.contentSize.height)
+        //        print(diffAnswerTableView.contentSize.height)
         
     }
     
@@ -62,9 +72,47 @@ class ExploreDetailVC: UIViewController {
 //MARK: - Private Method
 extension ExploreDetailVC {
     
-    private func setTableView() {
-        
+    private func setAnswerData(_ sorting: String) {
+        ExploreAnswerService.shared.getExploreAnswer(page: currentPage, category: nil, sorting: sorting) { (result) in
+            switch result {
+            case .success(let data):
+                guard let dt = data as? GenericResponse<ExploreAnswerData> else { return }
+                if let dat = dt.data {
+                    self.page = dat.pageLen
+                    if let ans = dat.answers {
+                        self.exploreAnswerArray = ans
+                    }
+                }
+                
+            case .requestErr(let message):
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                
+            case .pathErr: print("path")
+            case .serverErr:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+                print("serverErr")
+            case .networkFail:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+            }
+        }
     }
+    
+    private func setTableView() {
+        diffAnswerTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 119, right: 0)
+    }
+    
     private func setPopupBackgroundView() {
         popupBackgroundView.setPopupBackgroundView(to: view)
     }
@@ -82,10 +130,19 @@ extension ExploreDetailVC {
 extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        if currentPage < page {
+            return 10 + 1
+        } else {
+            return exploreAnswerArray.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if currentPage < page {
+            return 10 + 1
+        } else {
+            return exploreAnswerArray.count
+        }
         if indexPath.row == cellNumber - 1 {
             guard let more = tableView.dequeueReusableCell(withIdentifier: DetailMoreTVC.identifier,
                                                            for: indexPath) as? DetailMoreTVC else {
@@ -129,12 +186,17 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
                 
             }
         } else {
+            let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -350, 0)
+            cell.layer.transform = rotationTransform
+            cell.alpha = 0.5
             
-            cell.alpha = 0.2
-            UIView.animate(withDuration: 0.8, animations: {
-              
+            
+            UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut], animations: {
+                cell.layer.transform = CATransform3DIdentity
                 cell.alpha = 1.0
-            })
+            }) { (_) in
+                
+            }
         }
         
     }
@@ -155,12 +217,13 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
         
         guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
         
-//        comment.
+        //        comment.
         comment.isMoreButtonHidden = true
         comment.modalPresentationStyle = .fullScreen
         self.present(comment, animated: true, completion: nil)
     }
 }
+
 
 //MARK: - UITableViewButtonSelectedDelegate
 extension ExploreDetailVC: UITableViewButtonSelectedDelegate {
@@ -171,7 +234,7 @@ extension ExploreDetailVC: UITableViewButtonSelectedDelegate {
         
         guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetVC.identifier) as?
                 CustomActionSheetVC else { return }
-    
+        
         settingActionSheet.alertInformations = AlertLabels.article
         settingActionSheet.modalPresentationStyle = .overCurrentContext
         self.present(settingActionSheet, animated: true, completion: nil)
