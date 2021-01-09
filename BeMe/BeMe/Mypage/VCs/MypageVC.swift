@@ -10,7 +10,7 @@ import UIKit
 class MypageVC: UIViewController {
     
     //MARK:**- IBOutlet Part**
-    @IBOutlet weak var MypageCV: UICollectionView!
+    @IBOutlet weak var mypageCollectionView: UICollectionView!
 
 
     private var directionMenu: Int = 0
@@ -30,18 +30,18 @@ class MypageVC: UIViewController {
 //        setSearhButton(view: searchButton)
 //        setKeywordLabel(label: keywordLabel)
         
-        MypageCV.delegate = self
-        MypageCV.dataSource = self
+        mypageCollectionView.delegate = self
+        mypageCollectionView.dataSource = self
         
         if #available(iOS 11.0, *) {
-            MypageCV.automaticallyAdjustsScrollIndicatorInsets = false
+            mypageCollectionView.automaticallyAdjustsScrollIndicatorInsets = false
         } else {
             automaticallyAdjustsScrollViewInsets = false
         }
         
-        MypageCV.collectionViewLayout = mypageCVLayout
+        mypageCollectionView.collectionViewLayout = mypageCVLayout
         
-        print("********************\(MypageCV.adjustedContentInset)")
+        print("********************\(mypageCollectionView.adjustedContentInset)")
     }
     
     //MARK:**- IBAction Part**
@@ -180,12 +180,12 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
 extension MypageVC: MypageCVCDelegate {
     func myAnswerItem() {
         directionMenu = 0
-        MypageCV.reloadData()
+        mypageCollectionView.reloadData()
     }
     
     func othersAnswerItem() {
         directionMenu = 1
-        MypageCV.reloadData()
+        mypageCollectionView.reloadData()
     }
     
     

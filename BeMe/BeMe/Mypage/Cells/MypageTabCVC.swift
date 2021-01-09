@@ -9,7 +9,7 @@ import UIKit
 
 class MypageTabCVC: UICollectionViewCell {
     //MARK:**- IBOutlet Part**
-    @IBOutlet weak var MypageTV: UITableView!
+    @IBOutlet weak var mypageTableView: UITableView!
     
     @IBOutlet weak var myPageTVHeight: NSLayoutConstraint!
     //MARK:**- Variable Part**
@@ -30,9 +30,9 @@ class MypageTabCVC: UICollectionViewCell {
     //MARK:**- default Setting Function Part**
     func tableViewSetting()
     {
-        MypageTV.delegate = self
-        MypageTV.dataSource = self
-        MypageTV.separatorStyle = .none
+        mypageTableView.delegate = self
+        mypageTableView.dataSource = self
+        mypageTableView.separatorStyle = .none
     }
     //MARK:**- Function Part**
     
