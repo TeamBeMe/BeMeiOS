@@ -9,19 +9,33 @@ import Foundation
 
 struct AnswerDataForViewController {
     var lock: Bool?
-    var questionInfo: String?
+    var questionCategory: String?
     var answerDate: String?
     var question: String?
     var answer: String?
     var index: Int?
+    var answerIdx: Int?
     
-    init(lock: Bool, questionInfo: String, answerDate: String, question: String, answer: String, index: Int) {
+    var questionID: Int?
+    var createdTime: String?
+    var categoryID: Int?
+    var id: Int?
+    
+    
+    init(lock: Bool, questionCategory: String, answerDate: String,
+         question: String, answer: String, index: Int, answerIdx: Int,
+         questionID: Int, createdTime: String,categoryID: Int?,id: Int) {
         self.lock = lock
-        self.questionInfo = questionInfo
+        self.questionCategory = questionCategory
         self.answerDate = answerDate
         self.question = question
         self.answer = answer
         self.index = index
+        self.answerIdx = answerIdx
+        self.questionID = questionID
+        self.createdTime = createdTime
+        self.categoryID = categoryID
+        self.id = id
     }
     
 }

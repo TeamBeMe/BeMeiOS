@@ -1,31 +1,30 @@
 //
-//  LogInService.swift
+//  FollowingFollowService.swift
 //  BeMe
 //
-//  Created by Yunjae Kim on 2021/01/06.
+//  Created by Yunjae Kim on 2021/01/08.
 //
 
 import Foundation
+
 import Alamofire
 
-struct LogInService{
-    static let shared = LogInService()
+struct FollowingGetService{
     
-    func login(nickName: String, password: String, completion : @escaping (NetworkResult<Any>) -> (Void) ){
-        let url = APIConstants.loginURL
+    static let shared = FollowingGetService()
+    
+    func getHomeData(completion : @escaping (NetworkResult<Any>) -> (Void) ){
+        let url = APIConstants.followGetURL
         
         let header : HTTPHeaders = [
-            "Content-Type":"application/json"
+            "Content-Type":"application/json",
+//            "token":UserDefaults.standard.string(forKey: "token")!
+            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjEwMDk5MjQwLCJleHAiOjE2MzYwMTkyNDAsImlzcyI6ImJlbWUifQ.JeYfzJsg-kdatqhIOqfJ4oXUvUdsiLUaGHwLl1mJRvQ"
         ]
-        
-        let body : Parameters = [
-            "nickname" : nickName,
-            "password": password,
-        ]
+
         
         let dataRequest = AF.request(url,
-                                     method: .post,
-                                     parameters: body,
+                                     method: .get,
                                      encoding: JSONEncoding.default,
                                      headers: header)
         
@@ -41,12 +40,10 @@ struct LogInService{
                     
                 }
                
-                completion(judgeLogInData(status: statusCode, data: data))
                 
-                
-                
-                
-                
+               
+                completion(judge(status: statusCode, data: data))
+
             case .failure(let err):
                 print(err)
                 completion(.networkFail)
@@ -58,19 +55,16 @@ struct LogInService{
         
     }
     
-    private func judgeLogInData(status : Int, data : Data) -> NetworkResult<Any> {
+    private func judge(status : Int, data : Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(GenericResponse<LogInData>.self, from : data) else{
-            
-            
+        guard let decodedData = try? decoder.decode(GenericResponse<FollowingGetData>.self, from : data) else{
             return .pathErr
-            
         }
         
         switch status{
         case 200..<300:
-            UserDefaults.standard.setValue(decodedData.data?.token, forKey: "token")
-            
+            print("팔로잉 팔로워 조회 성공")
+            print(decodedData.data)
             return .success(decodedData.data)
         case 400..<500 :
             return .requestErr(decodedData.message)
@@ -85,5 +79,7 @@ struct LogInService{
         
         
     }
-
+    
+    
+    
 }

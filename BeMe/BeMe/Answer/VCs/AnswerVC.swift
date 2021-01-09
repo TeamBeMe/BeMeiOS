@@ -31,6 +31,7 @@ class AnswerVC: UIViewController {
     
     @IBOutlet weak var commentSwitch: UISwitch!
     
+    @IBOutlet weak var textViewBottomConstraint: NSLayoutConstraint!
     //MARK:**- Variable Part**
     
     /// 뷰컨에 필요한 변수들을 선언합니다  // 변수명 lowerCamelCase 사용
@@ -38,9 +39,7 @@ class AnswerVC: UIViewController {
     /// ex)  var imageViewList : [UIImageView] = []
     
     //
-    var question: String?
-    var questionInfo: String?
-    var answerDate: String?
+    var answerData: AnswerDataForViewController?
     
     // AnswerVC 에서 init
     var answer: String?
@@ -52,6 +51,7 @@ class AnswerVC: UIViewController {
     var initialText: String = ""
     var answerDataDelegate: HomeGetDataFromAnswerDelegate?
     var curCardIdx : Int?
+    var isRegister: Bool?
     
     //MARK:**- Constraint Part**
     
@@ -67,10 +67,10 @@ class AnswerVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        setLabels(question: question!, questionInfo: questionInfo!, answerDate: answerDate!)
-//        answerTextView.text = ""
-//        answerTextView.becomeFirstResponder()
-        
+        setLabels()
+        //        answerTextView.text = ""
+        //        answerTextView.becomeFirstResponder()
+        registerForKeyboardNotifications()
         
         
     }
@@ -79,16 +79,16 @@ class AnswerVC: UIViewController {
         super.viewDidLoad()
         answerTextView.delegate = self
         setTextView(answerTextView)
-        setLabels(
-            question: "이번 2021년도를 후회 없이 보낼 수 있는 방법은 무엇인가요?",
-            questionInfo: "[ 비미에 관한 29999번째 질문 ]",
-            answerDate: "2021. 01. 01"
-        )
+        setLabels()
+        clarifyRegister()
         
-
     }
     
-
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        unregisterForKeyboardNotifications()
+        
+    }
     
     //MARK:**- IBAction Part**
     
@@ -138,11 +138,13 @@ class AnswerVC: UIViewController {
         
     }
     
+    
+    
     // placeholder 및 커서 작업
     func setTextView(_ textView: UITextView){
         
         let savedAnswer = UserDefaults.standard.string(forKey: "answer")
-
+        
         if savedAnswer == "" || savedAnswer == nil {
             textView.text = "답변을 입력해주세요."
             textView.textColor = .lightGray
@@ -154,33 +156,50 @@ class AnswerVC: UIViewController {
         } else {
             textView.text = savedAnswer
             textView.textColor = .black
-            
+            //
             let position = textView.endOfDocument
             textView.selectedTextRange = textView.textRange(from:position, to:position)
             textView.endFloatingCursor()
-            
+            //
             isInitial = false
         }
     }
     
     // 질문 관련 데이터 init
-    func setLabels(question: String, questionInfo: String, answerDate: String){
-
-        questionLabel.text = question
-        questionInfoLabel.text = questionInfo
-        answerDateLabel.text = answerDate
-        let attributedString = NSMutableAttributedString(string: questionInfoLabel.text!)
-        attributedString.addAttribute(NSAttributedString.Key.foregroundColor,
-                                      value: UIColor.black,
-                                      range: (questionInfo as NSString).range(of: #"[0-9]*번째"#,
-                                                                              options: .regularExpression))
-
+    func setLabels(){
+        
+        questionLabel.text = answerData?.question
+        //        questionInfoLabel.text = "[ \((answerData?.questionCategory)!)에 관한 \((answerData?.answerIdx)!)번째 질문 ]"
+        answerDateLabel.text = answerData?.answerDate
+        
+        let mainString = "[ \((answerData?.questionCategory)!)에 관한 \((answerData?.answerIdx)!)번째 질문 ]"
+        
+        let range = (mainString as! NSString).range(of: String((answerData?.answerIdx)!)+"번째")
+        let mutableAttributedString = NSMutableAttributedString.init(string: mainString)
+        mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.black, range: range)
+        
+        questionInfoLabel.attributedText = mutableAttributedString
+        
+        
         answerTextView.text = answer
         textViewDidChange(answerTextView)
         answerTextView.becomeFirstResponder()
+        
+        answerSwitch.isOn = !answerData!.lock!
+        
+        
+        
+    }
+    func clarifyRegister(){
+        if answerData?.answer == "" || answerData?.answer == ""{
+            isRegister = true
+        }
+        else{
+            isRegister = false
+        }
+
     }
     
-
     
     //MARK:**- Function Part**
     
@@ -200,19 +219,94 @@ class AnswerVC: UIViewController {
     }
     
     @IBAction func finishButtonAction(_ sender: Any) {
-        let answerData = AnswerDataForViewController(lock: isAnswerPublic,
-                                                     questionInfo: questionInfo!,
-                                                     answerDate: answerDate!,
-                                                     question: question!,
-                                                     answer: answerTextView.text,
-                                                     index: curCardIdx!
-                                                     )
-        answerDataDelegate?.setNewAnswer(answerData: answerData)
+        answerData!.answer = answerTextView.text
+        if isRegister! == true{
+            AnswerRegistService.shared.regist(answerID: answerData!.id!, content: answerData!.answer!, commentBlocked: commentSwitch.isOn, isPublic: answerSwitch.isOn) {(networkResult) -> (Void) in
+                switch networkResult{
+                case .success(let data) :
+                    print("success")
+                case .requestErr(let msg):
+                    if let message = msg as? String {
+                        print(message)
+                    }
+                case .pathErr :
+                    print("pathErr")
+                case .serverErr :
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+                    
+                }
+            }
+
+        }
+        else{
+            AnswerModifyService.shared.modify(answerID: answerData!.id!, content: answerData!.answer!, commentBlocked: commentSwitch.isOn, isPublic: answerSwitch.isOn) {(networkResult) -> (Void) in
+                switch networkResult{
+                case .success(let data) :
+                    print("success")
+                case .requestErr(let msg):
+                    if let message = msg as? String {
+                        print(message)
+                    }
+                case .pathErr :
+                    print("pathErr")
+                case .serverErr :
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+                    
+                }
+            }
+            
+            
+            
+        }
+        
+        
+       
+        
+      
+        
+        
+        answerDataDelegate?.setNewAnswer(answerData: answerData!)
         self.navigationController?.popViewController(animated: true)
         
     }
     
+    func registerForKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(keyboardWillShow(_:)), name:
+                                                UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name:
+                                                UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    @objc func keyboardWillShow(_ notification: NSNotification) {
+        
+        
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey]
+                                as? NSValue)?.cgRectValue {
+            
+            textViewBottomConstraint.constant = 30 + keyboardSize.height - (view.frame.height-answerTextView.frame.maxY)
+            
+            
+        }
+    }
     
+    @objc func keyboardWillHide(_ notification: NSNotification) {
+        //        guard let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]
+        //            as? Double else {return}
+        //        guard let curve = notification.userInfo?[UIResponder.keyboardAnimationCurveUserInfoKey]
+        //            as? UInt else {return}
+        textViewBottomConstraint.constant = 30
+        
+    }
+    func unregisterForKeyboardNotifications() {
+        NotificationCenter.default.removeObserver(self, name:
+                                                    UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name:
+                                                    UIResponder.keyboardWillHideNotification, object: nil)
+    }
     
 }
 
@@ -223,18 +317,18 @@ class AnswerVC: UIViewController {
 /// ex) extension ViewController : UICollectionViewDelegate { }
 
 extension AnswerVC: UITextViewDelegate {
-
+    
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-
+        
         if isInitial {
             textView.text = ""
             initialText = text
             textView.textColor = .black
         }
-
+        
         answer = textView.text
-
+        
         // 리턴키로 키보드 내림
         if (text as NSString).rangeOfCharacter(from: CharacterSet.newlines).location == NSNotFound {
             return true
@@ -244,7 +338,7 @@ extension AnswerVC: UITextViewDelegate {
     }
     
     func textViewDidChange(_ textView: UITextView) {
-
+        
         if isInitial {
             textView.text = initialText
             textView.textColor = .black
@@ -253,7 +347,7 @@ extension AnswerVC: UITextViewDelegate {
         inputText = textView.text
         UserDefaults.standard.set(textView.text, forKey: "answer")
         self.isInitial = false
-
+        
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
@@ -268,6 +362,6 @@ extension AnswerVC: UITextViewDelegate {
         }
     }
     
-
+    
 }
 

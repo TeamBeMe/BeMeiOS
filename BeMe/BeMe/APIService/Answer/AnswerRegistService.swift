@@ -1,26 +1,32 @@
 //
-//  LogInService.swift
+//  AnswerRegist.swift
 //  BeMe
 //
-//  Created by Yunjae Kim on 2021/01/06.
+//  Created by Yunjae Kim on 2021/01/08.
 //
 
 import Foundation
+
 import Alamofire
 
-struct LogInService{
-    static let shared = LogInService()
+struct AnswerRegistService {
+    static let shared = AnswerRegistService()
     
-    func login(nickName: String, password: String, completion : @escaping (NetworkResult<Any>) -> (Void) ){
-        let url = APIConstants.loginURL
+    func regist(answerID: Int,content: String,commentBlocked: Bool,isPublic:Bool,
+               completion : @escaping (NetworkResult<Any>) -> (Void) ){
+        let url = APIConstants.answerRegistURL
         
         let header : HTTPHeaders = [
-            "Content-Type":"application/json"
+            "Content-Type":"application/json",
+            "token":UserDefaults.standard.string(forKey: "token")!
         ]
         
         let body : Parameters = [
-            "nickname" : nickName,
-            "password": password,
+            "answer_id" : answerID,
+            "content": content,
+            "is_comment_blocked" : commentBlocked,
+            "is_public": isPublic
+            
         ]
         
         let dataRequest = AF.request(url,
@@ -41,7 +47,7 @@ struct LogInService{
                     
                 }
                
-                completion(judgeLogInData(status: statusCode, data: data))
+                completion(judge(status: statusCode, data: data))
                 
                 
                 
@@ -58,9 +64,9 @@ struct LogInService{
         
     }
     
-    private func judgeLogInData(status : Int, data : Data) -> NetworkResult<Any> {
+    private func judge(status : Int, data : Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(GenericResponse<LogInData>.self, from : data) else{
+        guard let decodedData = try? decoder.decode(GenericResponse<Int>.self, from : data) else{
             
             
             return .pathErr
@@ -69,7 +75,7 @@ struct LogInService{
         
         switch status{
         case 200..<300:
-            UserDefaults.standard.setValue(decodedData.data?.token, forKey: "token")
+            print("글 포스팅 성공")
             
             return .success(decodedData.data)
         case 400..<500 :
@@ -86,4 +92,7 @@ struct LogInService{
         
     }
 
+    
+    
+    
 }

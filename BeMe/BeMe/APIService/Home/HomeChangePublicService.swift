@@ -1,30 +1,30 @@
 //
-//  LogInService.swift
+//  HomeChangePublicService.swift
 //  BeMe
 //
-//  Created by Yunjae Kim on 2021/01/06.
+//  Created by Yunjae Kim on 2021/01/08.
 //
 
 import Foundation
 import Alamofire
 
-struct LogInService{
-    static let shared = LogInService()
+struct HomeChangePublicService{
+    static let shared = HomeChangePublicService()
     
-    func login(nickName: String, password: String, completion : @escaping (NetworkResult<Any>) -> (Void) ){
-        let url = APIConstants.loginURL
-        
+    func changePublic(id: Int, publicFlag: Int, completion : @escaping (NetworkResult<Any>) -> (Void)) {
+        let url = APIConstants.homeChangePublicURL
         let header : HTTPHeaders = [
-            "Content-Type":"application/json"
+            "Content-Type":"application/json",
+            "token":UserDefaults.standard.string(forKey: "token")!
         ]
         
         let body : Parameters = [
-            "nickname" : nickName,
-            "password": password,
+            "answer_id" : id,
+            "public_flag": publicFlag,
         ]
         
         let dataRequest = AF.request(url,
-                                     method: .post,
+                                     method: .put,
                                      parameters: body,
                                      encoding: JSONEncoding.default,
                                      headers: header)
@@ -36,16 +36,15 @@ struct LogInService{
                 guard let statusCode = response.response?.statusCode else{
                     return
                 }
+                
                 guard let data = response.value else{
                     return
                     
                 }
-               
-                completion(judgeLogInData(status: statusCode, data: data))
                 
                 
                 
-                
+                completion(judge(status: statusCode,data: data))
                 
             case .failure(let err):
                 print(err)
@@ -58,19 +57,15 @@ struct LogInService{
         
     }
     
-    private func judgeLogInData(status : Int, data : Data) -> NetworkResult<Any> {
+    private func judge(status : Int,data: Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(GenericResponse<LogInData>.self, from : data) else{
-            
-            
+        guard let decodedData = try? decoder.decode(GenericResponse<Int>.self, from : data) else{
             return .pathErr
-            
         }
         
         switch status{
         case 200..<300:
-            UserDefaults.standard.setValue(decodedData.data?.token, forKey: "token")
-            
+            print("공개여부 수정 성공")
             return .success(decodedData.data)
         case 400..<500 :
             return .requestErr(decodedData.message)
@@ -85,5 +80,14 @@ struct LogInService{
         
         
     }
-
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

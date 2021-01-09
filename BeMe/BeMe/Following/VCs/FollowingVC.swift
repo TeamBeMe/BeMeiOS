@@ -32,14 +32,20 @@ class FollowingVC: UIViewController {
     var followingFollowButtonDelegate : FollowingFollowButtonDelegate?
     var followingFollowingButtonDelegate : FollowingFollowingButtonDelegate?
     
+    var followers: [FollowingFollows] = []
+    var followees: [FollowingFollows] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setItems()
-        
+    
         
     }
     
-    
+    override func viewWillAppear(_ animated: Bool) {
+        getFollowData()
+        
+    }
     
     
     @IBAction func followerButtonAction(_ sender: Any) {
@@ -94,6 +100,45 @@ extension FollowingVC {
         
     }
     
+    func getFollowData(){
+        FollowingGetService.shared.getHomeData() {(networkResult) -> (Void) in
+            switch networkResult{
+            case .success(let data) :
+                if let followDatas = data as? FollowingGetData{
+                    for f in followDatas.followers {
+                        self.followers.append(f)
+                    }
+                    for f in followDatas.followees {
+                        self.followees.append(f)
+                    }
+                    
+                    
+                }
+                self.wholeCollectionView.reloadData()
+                print(self.followees)
+                print(self.followers)
+                
+                print("success")
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+                
+            }
+            
+            
+            
+            
+        }
+        
+        
+    }
     
     
     
@@ -127,7 +172,10 @@ extension FollowingVC : UICollectionViewDataSource {
                     for: indexPath) as? FollowPeopleCVC else {return UICollectionViewCell()}
             followingFollowButtonDelegate = cell
             followingFollowingButtonDelegate = cell
-            
+            cell.followees = self.followees
+            cell.followers = self.followers
+            cell.shows = self.followees
+            cell.peopleCollectionView.reloadData()
             
             return cell
             
@@ -277,7 +325,7 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
                 }
                 tmpTextView.removeFromSuperview()
                 tmpQuestionTextView.removeFromSuperview()
-                print(CGFloat(dynamicQuestionHeight!))
+                
                 
                 
                 return CGSize(width: collectionView.frame.width  ,
@@ -321,10 +369,10 @@ extension FollowingVC: UICollectionViewDelegate {
         if indexPath.section > 2{
             if (scrollDirection) {
                 let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 150, 0)
-//                cell.layer.transform = rotate
+                //                cell.layer.transform = rotate
                 cell.layer.transform = rotationTransform
                 
-//                cell.alpha = 0.5
+                //                cell.alpha = 0.5
                 
                 UIView.animate(withDuration: 0.5, animations: {
                     cell.layer.transform = CATransform3DIdentity
@@ -334,14 +382,14 @@ extension FollowingVC: UICollectionViewDelegate {
                 
                 cell.alpha = 0.2
                 UIView.animate(withDuration: 0.8, animations: {
-                  
+                    
                     cell.alpha = 1.0
                 })
             }
             
         }
         
-       
+        
         
         
     }
@@ -371,7 +419,7 @@ extension FollowingVC : UITextViewDelegate{
                 textView.snp.makeConstraints{
                     $0.height.equalTo(estimatedSize.height)
                 }
-                print(estimatedSize.height)
+                
             }
             
             
@@ -441,7 +489,7 @@ extension FollowingVC: FollowPlusButtonDelegate{
         
         vcName.modalPresentationStyle = .fullScreen
         self.navigationController?.pushViewController(vcName, animated: true)
-    
+        
     }
     
 }

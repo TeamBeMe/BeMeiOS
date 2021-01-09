@@ -19,7 +19,7 @@ class FollowPersonCVC: UICollectionViewCell {
     }
     
     
-    func setProfile(userName : String){
+    func setProfile(userName : String,profileImageURL: String){
         userNameLabel.text = userName
         if userName == "Follower"{
             profileImageView.tintColor = .systemBlue
@@ -27,6 +27,7 @@ class FollowPersonCVC: UICollectionViewCell {
         else{
             profileImageView.tintColor = .black
         }
+        profileImageView.imageFromUrl(profileImageURL, defaultImgPath: "")
         
     }
     

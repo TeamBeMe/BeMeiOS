@@ -86,7 +86,7 @@ extension PastCardCVC {
         self.contentView.backgroundColor = .darkGrey
         lockButton.addTarget(self, action: #selector(changePublic), for: .touchUpInside)
 //        self.setBorder(borderColor: .veryLightPink, borderWidth: 1.0)
-        
+       
     }
     
     
@@ -129,6 +129,8 @@ extension PastCardCVC {
         questionLabel.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(162)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
         }
     }
     
@@ -137,7 +139,7 @@ extension PastCardCVC {
         answerTextView.snp.makeConstraints{
             $0.leading.equalToSuperview().offset(40)
             $0.trailing.equalToSuperview().offset(-40)
-            $0.top.equalToSuperview().offset(223)
+            $0.top.equalTo(questionLabel.snp_bottomMargin).offset(60)
             $0.height.equalTo(160)
         }
     }
@@ -163,25 +165,14 @@ extension PastCardCVC {
     
     @objc func changePublic(){
 
-        changePublicDelegate?.changePublic()
+        changePublicDelegate?.changePublic(idx: index!,answerID: (answerData?.id)!)
         
     }
     
-    func setLock(after : Bool){
-        if after == true {
-            lockButton.setImage(
-                UIImage(named: "btnUnlock")?.withRenderingMode(.alwaysOriginal), for: .normal)
- 
-        }
-        else{
-            lockButton.setImage(
-                UIImage(named: "btnLock")?.withRenderingMode(.alwaysOriginal), for: .normal)
-        }
-        
-    }
+
     
     @objc func fixButtonAction(){
-        homeFixButtonDelegate?.fixButtonTapped()
+        homeFixButtonDelegate?.fixButtonTapped(idx: index!)
     }
     
     func setItems(){
@@ -193,9 +184,9 @@ extension PastCardCVC {
             lockButton.setImage(
                 UIImage(named: "btnUnlock")?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
-        questionInfoLabel.text = "[ " + (answerData?.questionInfo)! + " ]"
+        questionInfoLabel.text = "[ \((answerData?.questionCategory)!)에 관한 \((answerData?.answerIdx)!)번째 질문 ]"
         questionLabel.text = answerData?.question
-        dateLabel.text = answerData?.answerDate
+        dateLabel.text = answerData?.createdTime
         answerTextView.text = answerData?.answer
         
     }

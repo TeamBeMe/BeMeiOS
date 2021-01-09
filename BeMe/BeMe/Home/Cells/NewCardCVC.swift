@@ -88,6 +88,7 @@ class NewCardCVC: UICollectionViewCell {
     var homeAnswerButtonDelegate : HomeAnswerButtonDelegate?
     var homeFixButtonDelegate : HomeFixButtonDelegate?
     let deviceBound = UIScreen.main.bounds.height/812.0
+    var homeChangeQuestionDelegate: HomeChangeQuestionDelegate?
 }
 
 
@@ -97,21 +98,8 @@ extension NewCardCVC {
     
     
     override func awakeFromNib() {
-        makeLockButton()
-        makeQuestionInfoLabel()
-        makeDateLabel()
-        makeQuestionLabel()
-
-        if answerData?.answer == nil{
-            makeReplyButton()
-            makeChangeButton()
-           
-        }
-        else{
-            makeAnswerTextView()
-            makeFixButton()
-        }
-        
+       
+        makeItems()
         
         self.backgroundColor = .darkGrey
         self.contentView.backgroundColor = .darkGrey
@@ -120,6 +108,23 @@ extension NewCardCVC {
         self.setBorder(borderColor: .veryLightPink, borderWidth: 1.0)
     }
     
+    func makeItems(){
+        makeLockButton()
+        makeQuestionInfoLabel()
+        makeDateLabel()
+        makeQuestionLabel()
+
+        if answerData?.answer == nil || answerData?.answer == ""{
+            makeReplyButton()
+            makeChangeButton()
+           
+        }
+        else{
+            
+            makeAnswerTextView()
+            makeFixButton()
+        }
+    }
     
     
 }
@@ -160,6 +165,8 @@ extension NewCardCVC {
         questionLabel.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(162)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
         }
     }
     func makeReplyButton(){
@@ -180,6 +187,7 @@ extension NewCardCVC {
             $0.bottom.equalToSuperview().offset(-25)
             $0.centerX.equalToSuperview()
         }
+        changeButton.addTarget(self, action: #selector(changeButtonAction), for: .touchUpInside)
         
     }
     
@@ -196,6 +204,7 @@ extension NewCardCVC {
     
     func makeFixButton(){
         self.addSubview(fixButton)
+        
         fixButton.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-25)
@@ -214,18 +223,17 @@ extension NewCardCVC {
 extension NewCardCVC {
     @objc func changePublic(){
 
-        changePublicDelegate?.changePublic()
+        changePublicDelegate?.changePublic(idx: index!,answerID: (answerData?.id)!)
         
     }
     @objc func replyButtonAction(){
-        homeAnswerButtonDelegate?.answerButtonTapped(question: questionLabel.text!,
-                                                     questionInfo: questionInfoLabel.text!,
-                                                     answerDate: dateLabel.text!,
-                                                     index: index!
-        )
+        homeAnswerButtonDelegate?.answerButtonTapped(index: index!, answerData: answerData!)
     }
     @objc func fixButtonAction(){
-        homeFixButtonDelegate?.fixButtonTapped()
+        homeFixButtonDelegate?.fixButtonTapped(idx: index!)
+    }
+    @objc func changeButtonAction(){
+        homeChangeQuestionDelegate?.getNewQuestion(idx: index!,answerID: (answerData?.id)!)
     }
     
     
@@ -254,15 +262,12 @@ extension NewCardCVC {
             lockButton.setImage(
                 UIImage(named: "btnUnlock")?.withRenderingMode(.alwaysOriginal), for: .normal)
         }
-        if answerData?.questionInfo!.first == "["{
-            questionInfoLabel.text = answerData?.questionInfo
-        }
-        else{
-            questionInfoLabel.text = "[ " + (answerData?.questionInfo)! + " ]"
-        }
+       
+        
+        questionInfoLabel.text = "[ \((answerData?.questionCategory)!)에 관한 \((answerData?.answerIdx)!)번째 질문 ]"
         
         questionLabel.text = answerData?.question
-        dateLabel.text = answerData?.answerDate
+        dateLabel.text = answerData?.createdTime
         answerTextView.text = answerData?.answer
         
         if answerData?.answer == ""{

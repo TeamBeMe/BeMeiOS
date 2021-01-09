@@ -161,6 +161,7 @@
                     <navigationItem key="navigationItem" id="nHS-Ou-b4e"/>
                     <connections>
                         <outlet property="bemeLabel" destination="cPg-9z-5QW" id="0Aw-7G-9n0"/>
+                        <outlet property="buttonStackView" destination="D4F-sw-sVI" id="DQf-Zn-2cu"/>
                         <outlet property="containViewHeight" destination="XSm-mc-7A6" id="1Lz-Vz-M3v"/>
                         <outlet property="labelContainView" destination="Gk7-KS-d8s" id="zVB-FF-afK"/>
                         <outlet property="logInButton" destination="8Wp-nE-ySQ" id="y1l-J0-QaA"/>
