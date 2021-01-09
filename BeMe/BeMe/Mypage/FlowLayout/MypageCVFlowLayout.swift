@@ -22,8 +22,6 @@ class MypageCVFlowLayout: UICollectionViewFlowLayout {
         if offset.y < 0 {
             
             for attributes in stLayoutAttributes {
-                print("sdfasdfasdfasdfasdfasdfasdf")
-                print(offset.y)
                 if let elmKind = attributes.representedElementKind, elmKind == UICollectionView.elementKindSectionHeader {
                     
                     let diffValue = abs(offset.y)
@@ -35,26 +33,25 @@ class MypageCVFlowLayout: UICollectionViewFlowLayout {
             }
         }
         
-        else {
-            
+//        else {
+//
 //            for attributes in stLayoutAttributes {
-//                
+//
 //                if let elmKind = attributes.representedElementKind, elmKind == UICollectionView.elementKindSectionHeader {
-//                    print("===============")
-//                    print(offset.y)
+//
 //                    if offset.y >= 290 {
 //                        mypageCRVDelegate?.headerFix()
 //                        self.sectionHeadersPinToVisibleBounds = true
 //                    } else {
 //                        print("========else=======")
 //                        mypageCRVDelegate?.headerOrigin()
-//                        self.sectionHeadersPinToVisibleBounds = false 
+//                        self.sectionHeadersPinToVisibleBounds = false
 //                    }
-//                    
+//
 //                }
 //            }
-            
-        }
+//
+//        }
         
         return layoutAttributes
     }

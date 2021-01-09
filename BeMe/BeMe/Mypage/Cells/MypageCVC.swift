@@ -10,11 +10,13 @@ import UIKit
 class MypageCVC: UICollectionViewCell {
     //MARK:**- IBOutlet Part**
     @IBOutlet weak var MypageTabCV: UICollectionView!
-
+    var mypageCVCDelegate: MypageCVCDelegate?
+    
     
     //MARK:**- Variable Part**
     static let identifier = "MypageCVC"
-    private var cellNumber: Int = 1
+    private var cellNumber: Int = 2
+    
     
     
     //MARK:**- Life Cycle Part**
@@ -32,10 +34,19 @@ class MypageCVC: UICollectionViewCell {
     {
         MypageTabCV.delegate = self
         MypageTabCV.dataSource = self
+        
     }
     
     //MARK:**- Function Part**
     
+    func scrollDirection(by direction: Int) {
+        print(direction)
+        if (direction == 0) {
+            MypageTabCV.scrollToItem(at: IndexPath(item: 0, section: 0), at: .right, animated: true)
+        } else {
+            MypageTabCV.scrollToItem(at: IndexPath(item: 1, section: 0), at: .left, animated: true)
+        }
+    }
 }
 
 //MARK:**- extension 부분**
@@ -62,12 +73,8 @@ extension MypageCVC : UICollectionViewDataSource {
             
             return UICollectionViewCell()}
         
-        
-        return cell
+        return cell        
     }
-    
-    
-    
     
 }
 
@@ -75,12 +82,7 @@ extension MypageCVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.item <= 1 {
-            return CGSize(width: collectionView.frame.width  , height: 748)
-        }
-        else{
-            return CGSize(width: collectionView.frame.width, height: 748)
-        }
+        return CGSize(width: collectionView.frame.width, height: 748)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -88,7 +90,6 @@ extension MypageCVC : UICollectionViewDelegateFlowLayout {
     }
     
     //    UIEdgeInset
-    
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -101,27 +102,10 @@ extension MypageCVC : UICollectionViewDelegateFlowLayout {
         
     }
     
-    // collectionview heaeder 사용
-//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView{
-//        
-//        switch kind {
-//        case UICollectionView.elementKindSectionHeader:
-//            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MypageTabCRV.identifier, for: indexPath)
-//            return headerView
-//        default:
-//            assert(false, "응 아니야")
-//            
-//        }
-//    }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-//            let width: CGFloat = collectionView.frame.width
-//            let height: CGFloat = 116
-//            return CGSize(width: width, height: height)
-//        }
-//
-
-    
 }
 
+protocol MypageCVCDelegate {
+    func myAnswerItem()
+    func othersAnswerItem()
+}
 

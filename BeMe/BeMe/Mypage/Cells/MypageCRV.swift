@@ -11,10 +11,6 @@ class MypageCRV: UICollectionReusableView {
     //MARK:**- IBOutlet Part**
     
     // image
-    
-    
-    
-    
     @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
     // profile
@@ -40,6 +36,10 @@ class MypageCRV: UICollectionReusableView {
     //MARK:**- Variable Part**
     static let identifier = "MypageCRV"
     
+    let mypageCVC = MypageCVC()
+    
+    var delegate: MypageCVCDelegate?
+    
     //MARK:**- Life Cycle Part**
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -51,7 +51,6 @@ class MypageCRV: UICollectionReusableView {
         setLabel(view: nameLabel, text: "재용아 개소리 좀 그만해")
         setSearhButton(view: searchView)
         
-
     }
     
     
@@ -67,12 +66,13 @@ class MypageCRV: UICollectionReusableView {
     @IBAction func myAswerButtonTapped(_ sender: UIButton) {
         myAnswerButton.setTitleColor(.black, for: .normal)
         scrappedAnswerButton.setTitleColor(.rgb8E8E93, for: .normal)
-        
+        delegate?.myAnswerItem()
         moveHighLightBar(to: sender)
     }
     @IBAction func scrappedAswerButtonTapped(_ sender: UIButton) {
         myAnswerButton.setTitleColor(.rgb8E8E93, for: .normal)
         scrappedAnswerButton.setTitleColor(.black, for: .normal)
+        delegate?.othersAnswerItem()
         moveHighLightBar(to: sender)
     }
     
