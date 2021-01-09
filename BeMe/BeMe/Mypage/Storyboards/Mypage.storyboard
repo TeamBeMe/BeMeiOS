@@ -443,7 +443,7 @@
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Uk-kR-ZKH">
-                                            <rect key="frame" x="352" y="18" width="44" height="44"/>
+                                            <rect key="frame" x="352" y="-4" width="44" height="44"/>
                                             <state key="normal" image="btnSettings"/>
                                         </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F9q-UY-90u" userLabel="Header">
@@ -571,7 +571,6 @@
                                     <constraints>
                                         <constraint firstItem="F9q-UY-90u" firstAttribute="top" secondItem="Eqe-1U-nIQ" secondAttribute="bottom" id="5SN-fr-eT2"/>
                                         <constraint firstItem="he0-mZ-5vy" firstAttribute="top" secondItem="WRi-g6-kzK" secondAttribute="top" id="7vf-qM-0oz"/>
-                                        <constraint firstItem="9Uk-kR-ZKH" firstAttribute="top" secondItem="WRi-g6-kzK" secondAttribute="top" constant="18" id="8h2-Dc-nJV"/>
                                         <constraint firstAttribute="bottom" secondItem="F9q-UY-90u" secondAttribute="bottom" id="HSR-uz-e8n"/>
                                         <constraint firstItem="Eqe-1U-nIQ" firstAttribute="top" secondItem="he0-mZ-5vy" secondAttribute="bottom" id="Iue-0J-8Up"/>
                                         <constraint firstItem="Eqe-1U-nIQ" firstAttribute="leading" secondItem="WRi-g6-kzK" secondAttribute="leading" id="LaE-Q9-vK2"/>
@@ -580,6 +579,7 @@
                                         <constraint firstItem="F9q-UY-90u" firstAttribute="leading" secondItem="WRi-g6-kzK" secondAttribute="leading" id="dOg-ys-Drj"/>
                                         <constraint firstAttribute="trailing" secondItem="F9q-UY-90u" secondAttribute="trailing" id="h8j-sX-e4U"/>
                                         <constraint firstItem="he0-mZ-5vy" firstAttribute="leading" secondItem="WRi-g6-kzK" secondAttribute="leading" id="p6e-eP-saf"/>
+                                        <constraint firstItem="Eqe-1U-nIQ" firstAttribute="top" secondItem="9Uk-kR-ZKH" secondAttribute="bottom" constant="140" id="sxb-v6-Fcj"/>
                                         <constraint firstAttribute="trailing" secondItem="9Uk-kR-ZKH" secondAttribute="trailing" constant="18" id="vuq-N5-PFu"/>
                                     </constraints>
                                     <connections>

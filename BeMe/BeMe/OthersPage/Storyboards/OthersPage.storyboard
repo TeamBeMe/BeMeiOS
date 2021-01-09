@@ -248,14 +248,14 @@
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7s-AV-zjl">
-                                            <rect key="frame" x="352" y="18" width="44" height="44"/>
+                                            <rect key="frame" x="352" y="0.0" width="44" height="44"/>
                                             <state key="normal" image="btnMore"/>
                                             <connections>
                                                 <action selector="reportButtonTapped:" destination="EZ4-SK-f09" eventType="touchUpInside" id="s8U-P9-Qh6"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nal-8z-zRJ">
-                                            <rect key="frame" x="18" y="18" width="44" height="44"/>
+                                            <rect key="frame" x="18" y="0.0" width="44" height="44"/>
                                             <state key="normal" image="btnArrlowLeft"/>
                                             <connections>
                                                 <action selector="backButtonTapped:" destination="EZ4-SK-f09" eventType="touchUpInside" id="Fpr-LK-cea"/>
@@ -263,14 +263,14 @@
                                         </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="nal-8z-zRJ" firstAttribute="top" secondItem="EZ4-SK-f09" secondAttribute="top" constant="18" id="AZQ-NA-hBO"/>
                                         <constraint firstItem="ZAO-d9-0uB" firstAttribute="top" secondItem="EZ4-SK-f09" secondAttribute="top" id="FTr-3W-eBP"/>
+                                        <constraint firstItem="6Ki-BQ-bfM" firstAttribute="top" secondItem="a7s-AV-zjl" secondAttribute="bottom" constant="140" id="Gy8-k6-JC0"/>
                                         <constraint firstAttribute="trailing" secondItem="ZAO-d9-0uB" secondAttribute="trailing" id="JJ7-vH-LNa"/>
                                         <constraint firstItem="6Ki-BQ-bfM" firstAttribute="top" secondItem="ZAO-d9-0uB" secondAttribute="bottom" id="Mbi-JE-gPC"/>
                                         <constraint firstItem="nal-8z-zRJ" firstAttribute="leading" secondItem="EZ4-SK-f09" secondAttribute="leading" constant="18" id="PVS-KX-jbm"/>
                                         <constraint firstItem="6Ki-BQ-bfM" firstAttribute="leading" secondItem="EZ4-SK-f09" secondAttribute="leading" id="T1F-xD-eax"/>
-                                        <constraint firstItem="a7s-AV-zjl" firstAttribute="top" secondItem="EZ4-SK-f09" secondAttribute="top" constant="18" id="W7G-FB-BF9"/>
                                         <constraint firstAttribute="trailing" secondItem="a7s-AV-zjl" secondAttribute="trailing" constant="18" id="X1L-Kw-U3L"/>
+                                        <constraint firstItem="6Ki-BQ-bfM" firstAttribute="top" secondItem="nal-8z-zRJ" secondAttribute="bottom" constant="140" id="dCR-sn-6Ce"/>
                                         <constraint firstItem="ZAO-d9-0uB" firstAttribute="leading" secondItem="EZ4-SK-f09" secondAttribute="leading" id="hqC-kW-V92"/>
                                         <constraint firstAttribute="bottom" secondItem="6Ki-BQ-bfM" secondAttribute="bottom" id="rbd-w5-XYO"/>
                                         <constraint firstAttribute="trailing" secondItem="6Ki-BQ-bfM" secondAttribute="trailing" id="tch-JQ-0mC"/>
