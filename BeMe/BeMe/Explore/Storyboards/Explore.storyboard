@@ -518,7 +518,7 @@
                                                             </subviews>
                                                         </stackView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sex-P0-Tug">
-                                                            <rect key="frame" x="285" y="45.666666666666664" width="32" height="31.999999999999993"/>
+                                                            <rect key="frame" x="285" y="51.666666666666657" width="32" height="32"/>
                                                             <state key="normal" image="btnArrowNext"/>
                                                             <connections>
                                                                 <action selector="goToDetailExploreVC:" destination="gmT-TG-Alj" eventType="touchUpInside" id="9lM-3h-AFW"/>
@@ -538,7 +538,7 @@
                                                         <constraint firstItem="LSz-oK-Xis" firstAttribute="centerY" secondItem="3RU-zA-1vT" secondAttribute="centerY" id="2KT-BX-Xvq"/>
                                                         <constraint firstAttribute="bottom" secondItem="3RU-zA-1vT" secondAttribute="bottom" constant="18" id="4iA-eW-EAg"/>
                                                         <constraint firstAttribute="trailing" secondItem="Jz1-do-HC8" secondAttribute="trailing" constant="20" id="57I-nt-mO1"/>
-                                                        <constraint firstItem="Sex-P0-Tug" firstAttribute="bottom" secondItem="oBt-VM-5S3" secondAttribute="bottom" id="AUx-qh-LMK"/>
+                                                        <constraint firstItem="Sex-P0-Tug" firstAttribute="bottom" secondItem="oBt-VM-5S3" secondAttribute="bottom" constant="6" id="AUx-qh-LMK"/>
                                                         <constraint firstItem="3RU-zA-1vT" firstAttribute="top" secondItem="Jz1-do-HC8" secondAttribute="bottom" constant="9" id="DpJ-hb-vBf"/>
                                                         <constraint firstAttribute="trailing" secondItem="Sex-P0-Tug" secondAttribute="trailing" constant="13" id="KV8-RH-OfM"/>
                                                         <constraint firstItem="3RU-zA-1vT" firstAttribute="leading" secondItem="yth-8F-KdI" secondAttribute="leading" constant="20" id="WYx-B8-kUD"/>
