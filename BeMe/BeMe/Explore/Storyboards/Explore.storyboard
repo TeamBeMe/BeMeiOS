@@ -85,10 +85,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DiffThoughtTVC" id="b61-FY-5F7" customClass="DiffThoughtTVC" customModule="BeMe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="390" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="390" height="394.66665649414062"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="b61-FY-5F7" id="jZA-Z2-813">
-                                            <rect key="frame" x="0.0" y="0.0" width="390" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="390" height="394.66665649414062"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zFt-Of-6Ta" userLabel="Alarm">
@@ -127,16 +127,16 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ucd-TN-kGD" userLabel="Title">
-                                                    <rect key="frame" x="0.0" y="44" width="390" height="0.0"/>
+                                                    <rect key="frame" x="0.0" y="44.000000000000007" width="390" height="75.666666666666686"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나와 다른 생각들" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RcK-1x-bSD">
-                                                            <rect key="frame" x="30" y="16" width="130.33333333333334" height="0.0"/>
+                                                            <rect key="frame" x="30" y="16" width="130.33333333333334" height="24"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내가 최근에 답한 질문들의 다른 답변이에요:)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ejy-uN-l9p">
-                                                            <rect key="frame" x="30.000000000000014" y="-10" width="227.33333333333337" height="0.0"/>
+                                                            <rect key="frame" x="30.000000000000014" y="50" width="227.33333333333337" height="15.666666666666671"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" priority="250" constant="15.666666666666671" id="QEd-hf-vQ4"/>
                                                             </constraints>
@@ -156,7 +156,7 @@
                                                     </constraints>
                                                 </view>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="eAG-qh-YCs">
-                                                    <rect key="frame" x="0.0" y="44" width="390" height="0.0"/>
+                                                    <rect key="frame" x="0.0" y="119.66666666666669" width="390" height="275"/>
                                                     <color key="backgroundColor" red="0.92941802740000001" green="0.92940050360000004" blue="0.92941236500000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="275" id="dWM-QQ-488"/>
@@ -169,8 +169,10 @@
                                                     </collectionViewFlowLayout>
                                                     <cells>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EmptyThoughtCVC" id="Yfm-XF-MBV" customClass="EmptyThoughtCVC" customModule="BeMe" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="24" width="337" height="213"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="l21-RD-443">
+                                                                <rect key="frame" x="0.0" y="0.0" width="337" height="213"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8o-9A-d2o">
@@ -207,8 +209,10 @@
                                                             </connections>
                                                         </collectionViewCell>
                                                         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DiffThoughtCVC" id="lvK-PG-eZ5" customClass="DiffThoughtCVC" customModule="BeMe" customModuleProvider="target">
+                                                            <rect key="frame" x="347" y="24" width="337" height="213"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                                <rect key="frame" x="0.0" y="0.0" width="337" height="213"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HEI-fm-Kt2">
@@ -319,7 +323,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DiffArticleTVC" id="UEb-O2-8F0" userLabel="DiffAnswerTVC" customClass="DiffArticleTVC" customModule="BeMe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="390" height="209.66667175292969"/>
+                                        <rect key="frame" x="0.0" y="422.66665649414062" width="390" height="209.66667175292969"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UEb-O2-8F0" id="aai-9y-1DK">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="209.66667175292969"/>
@@ -484,7 +488,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArticleTVC" id="gmT-TG-Alj" userLabel="AnswerTVC" customClass="ArticleTVC" customModule="BeMe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="281.66667175292969" width="390" height="360.66665649414062"/>
+                                        <rect key="frame" x="0.0" y="632.33332824707031" width="390" height="360.66665649414062"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gmT-TG-Alj" id="TlR-lz-5zw">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="360.66665649414062"/>
@@ -601,7 +605,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MoreTVC" rowHeight="193" id="HxO-zO-D7x" customClass="MoreTVC" customModule="BeMe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="642.33332824707031" width="390" height="193"/>
+                                        <rect key="frame" x="0.0" y="992.99998474121094" width="390" height="193"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="HxO-zO-D7x" id="oNR-Br-D1e">
                                             <rect key="frame" x="0.0" y="0.0" width="390" height="193"/>

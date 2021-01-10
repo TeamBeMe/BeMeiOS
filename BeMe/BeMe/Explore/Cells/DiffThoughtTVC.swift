@@ -100,7 +100,7 @@ extension DiffThoughtTVC: UICollectionViewDataSource, UICollectionViewDelegateFl
             card.delegate = self
             
             card.makeRounded(cornerRadius: 6.0)
-            card.setQuestionAnswer(exploreThoughtArray[indexPath.item].questionTitle, exploreThoughtArray[indexPath.item].content, answerId:exploreThoughtArray[indexPath.item].questionID , questionId: exploreThoughtArray[indexPath.item].id)
+            card.setQuestionAnswer(exploreThoughtArray[indexPath.item].questionTitle, exploreThoughtArray[indexPath.item].content, answerId:exploreThoughtArray[indexPath.item].id , questionId: exploreThoughtArray[indexPath.item].questionID)
             return card
         }
     }

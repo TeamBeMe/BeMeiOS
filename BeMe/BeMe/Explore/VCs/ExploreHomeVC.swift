@@ -552,6 +552,7 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
         guard let detail = self.storyboard?.instantiateViewController(identifier: "ExploreDetailVC") as?
                 ExploreDetailVC else { return }
         
+        print("questionId: \(questionId)")
         detail.questionId = questionId
         detail.questionText = question
         self.navigationController?.pushViewController(detail, animated: true)
