@@ -264,21 +264,21 @@
                                                                                 <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
                                                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                             </textView>
-                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y36-wv-1Yt">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="30" height="117"/>
+                                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U4a-6x-i9c">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="337" height="117"/>
                                                                                 <connections>
-                                                                                    <action selector="goToAnswerDetailButtonTapped:" destination="lvK-PG-eZ5" eventType="touchUpInside" id="PcZ-I8-7J6"/>
+                                                                                    <action selector="goToAnswerDetailButtonTapped:" destination="lvK-PG-eZ5" eventType="touchUpInside" id="tM5-pX-X3s"/>
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
                                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="bottom" secondItem="gxd-cS-APu" secondAttribute="bottom" constant="20" id="7s9-5k-gFb"/>
-                                                                            <constraint firstItem="Y36-wv-1Yt" firstAttribute="top" secondItem="qxv-qc-CAX" secondAttribute="top" id="BRe-h8-0TC"/>
-                                                                            <constraint firstItem="Y36-wv-1Yt" firstAttribute="leading" secondItem="qxv-qc-CAX" secondAttribute="leading" id="Eir-xn-aR4"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="Y36-wv-1Yt" secondAttribute="trailing" priority="1" id="PIA-PB-kMG"/>
+                                                                            <constraint firstItem="U4a-6x-i9c" firstAttribute="leading" secondItem="qxv-qc-CAX" secondAttribute="leading" id="BnS-lq-jqx"/>
+                                                                            <constraint firstItem="U4a-6x-i9c" firstAttribute="top" secondItem="qxv-qc-CAX" secondAttribute="top" id="GoA-f3-yVH"/>
+                                                                            <constraint firstAttribute="trailing" secondItem="U4a-6x-i9c" secondAttribute="trailing" id="VEq-JY-Jxc"/>
+                                                                            <constraint firstAttribute="bottom" secondItem="U4a-6x-i9c" secondAttribute="bottom" id="W06-Xe-dLM"/>
                                                                             <constraint firstItem="gxd-cS-APu" firstAttribute="top" secondItem="qxv-qc-CAX" secondAttribute="top" constant="15" id="bfw-x8-YJJ"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="Y36-wv-1Yt" secondAttribute="bottom" id="dYD-MB-uoF"/>
                                                                             <constraint firstAttribute="trailing" secondItem="gxd-cS-APu" secondAttribute="trailing" constant="18" id="gdW-BS-mto"/>
                                                                             <constraint firstAttribute="height" constant="133" id="jHO-t3-Scc"/>
                                                                             <constraint firstItem="gxd-cS-APu" firstAttribute="leading" secondItem="qxv-qc-CAX" secondAttribute="leading" constant="14" id="r0i-7r-tjj"/>

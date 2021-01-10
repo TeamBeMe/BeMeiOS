@@ -32,7 +32,9 @@ class DiffThoughtCVC: UICollectionViewCell {
         
         delegate?.goToOneQuestionMoreAnswerButtonDidTapped(questionId!, question: question.text!)
     }
+    
     @IBAction func goToAnswerDetailButtonTapped(_ sender: Any) {
+        
         delegate?.goToAnswerDetailButtonDidTapped(answerId!)
     }
 }
