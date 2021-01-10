@@ -19,6 +19,8 @@ class DiffThoughtTVC: UITableViewCell {
     
     private var isOneStepPaging = true
     
+    var questionId: Int?
+        
     var isEmpty = false
     
     var exploreThoughtArray: [ExploreThoughtData] = [] {
@@ -90,15 +92,30 @@ extension DiffThoughtTVC: UICollectionViewDataSource, UICollectionViewDelegateFl
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if isEmpty {
             guard let empty = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyThoughtCVC.identifier, for: indexPath) as? EmptyThoughtCVC else { return UICollectionViewCell() }
-            
+
+            empty.todayButton.makeRound(to: 6.0)
             return empty
         } else {
             guard let card = collectionView.dequeueReusableCell(withReuseIdentifier: DiffThoughtCVC.identifier, for: indexPath) as? DiffThoughtCVC else { return UICollectionViewCell() }
-            print(exploreThoughtArray.count)
+            card.delegate = self
+            
             card.makeRounded(cornerRadius: 6.0)
-            card.setQuestionAnswer(exploreThoughtArray[indexPath.item].questionTitle, exploreThoughtArray[indexPath.item].content)
+            card.setQuestionAnswer(exploreThoughtArray[indexPath.item].questionTitle, exploreThoughtArray[indexPath.item].content, answerId:exploreThoughtArray[indexPath.item].id , questionId: exploreThoughtArray[indexPath.item].questionID)
             return card
         }
+    }
+}
+
+extension DiffThoughtTVC: UICollectionViewButtonDelegate {
+    func goToOneQuestionMoreAnswerButtonDidTapped(_ questionId: Int, question: String) {
+        
+        delegate?.goToMoreAnswerButtonDidTapped(questionId: questionId, question: question)
+    }
+    
+    func goToAnswerDetailButtonDidTapped(_ answerId: Int) {
+        
+        print(answerId)
+        delegate?.goToCommentButtonTapped(answerId)
     }
     
 }
@@ -138,4 +155,17 @@ extension DiffThoughtTVC: UIScrollViewDelegate {
         
         
     }
+}
+
+
+protocol UICollectionViewButtonDelegate: class {
+    func goToOneQuestionMoreAnswerButtonDidTapped(_ questionId: Int, question: String)
+    
+    func goToAnswerDetailButtonDidTapped(_ answerId: Int)
+}
+
+extension UICollectionViewButtonDelegate {
+    func goToOneQuestionMoreAnswerButtonDidTapped(_ questionId: Int, question: String) {}
+    
+    func goToAnswerDetailButtonDidTapped(_ answerId: Int) {}
 }

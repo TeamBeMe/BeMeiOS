@@ -46,10 +46,10 @@ class ExploreHomeVC: UIViewController {
     
     private var exploreAnswerArray: [ExploreAnswer] = [] {
         didSet {
+//            let section = IndexSet.init(integer: 2)
             exploreTableView.reloadData()
         }
     }
-    var cellNum: Int = 10
     
     //MARK: - life cylce
     
@@ -105,8 +105,8 @@ extension ExploreHomeVC: UITableViewDataSource {
                 diffThought.isEmpty = false
             }
             
+            diffThought.delegate = self
             diffThought.exploreThoughtArray = self.exploreThoughtArray
-            
             return diffThought
         } else if indexPath.section == 1 {
             guard let diffAnswer = tableView.dequeueReusableCell(withIdentifier: DiffArticleTVC.identifier, for: indexPath) as? DiffArticleTVC else { return UITableViewCell() }
@@ -125,14 +125,14 @@ extension ExploreHomeVC: UITableViewDataSource {
                     guard let answer = tableView.dequeueReusableCell(withIdentifier: ArticleTVC.identifier, for: indexPath)  as? ArticleTVC else { return UITableViewCell() }
                     
                     answer.delegate = self
-                    answer.setCardDatas(que: exploreAnswerArray[indexPath.row].question, date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row ].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row ].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped, answerId: exploreAnswerArray[indexPath.row].id)
+                    answer.setCardDatas(que: exploreAnswerArray[indexPath.row].question, date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row ].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row ].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped!, answerId: exploreAnswerArray[indexPath.row].id, questionId: exploreAnswerArray[indexPath.row].questionID)
                     return answer
                 }
             } else {
                 guard let answer = tableView.dequeueReusableCell(withIdentifier: ArticleTVC.identifier, for: indexPath)  as? ArticleTVC else { return UITableViewCell() }
                 
                 answer.delegate = self
-                answer.setCardDatas(que: exploreAnswerArray[indexPath.row].question, date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row ].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row ].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped, answerId: exploreAnswerArray[indexPath.row].id)
+                answer.setCardDatas(que: exploreAnswerArray[indexPath.row].question, date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row ].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row ].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped!, answerId: exploreAnswerArray[indexPath.row].id, questionId: exploreAnswerArray[indexPath.row].questionID)
                 return answer
                 
             }
@@ -144,73 +144,89 @@ extension ExploreHomeVC: UITableViewDelegate {
     
     // 애니메이션
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 || indexPath.section == 1 {
-            // no animation
-        } else {
-            if currentPage < page {
-                if indexPath.row == 11 - 1 {
-                    // animation 2
-                    cell.alpha = 0
-                    UIView.animate(withDuration: 0.75) {
-                        
-                        cell.alpha = 1.0
-                    }
-                } else {
-                    // animation 1
-                    if (scrollDirection) {
-                        // up
-                        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
-                        cell.layer.transform = rotationTransform
-                        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
-                            cell.layer.transform = CATransform3DIdentity
-                        }) { (_) in
-                            
-                        }
-                    } else {
-                        // down
-                        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
-                        cell.layer.transform = rotationTransform
-                        UIView.animate(withDuration: 0.3, animations: {
-                            cell.layer.transform = CATransform3DIdentity
-                        })
-                    }
-                }
-            } else {
-                // animation 1
-                if (scrollDirection) {
-                    // up
-                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
-                    cell.layer.transform = rotationTransform
-                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
-                        cell.layer.transform = CATransform3DIdentity
-                    }) { (_) in
-                        
-                    }
-                } else {
-                    // down
-                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
-                    cell.layer.transform = rotationTransform
-                    UIView.animate(withDuration: 0.3, animations: {
-                        cell.layer.transform = CATransform3DIdentity
-                    })
-                }
-            }
-        }
-        
-        if indexPath.row == 0 || indexPath.row == 1 {
-            // no animation
-        } else if indexPath.row == cellNum + 2 - 1 {
-        } else {
-            
-            
-            
-        }
+//        if indexPath.section == 0 || indexPath.section == 1 {
+//            // no animation
+//        } else {
+//            if currentPage < page {
+//                if indexPath.row == 11 - 1 {
+//                    // animation 2
+//                    cell.alpha = 0
+//                    UIView.animate(withDuration: 0.75) {
+//                        
+//                        cell.alpha = 1.0
+//                    }
+//                } else {
+//                    // animation 1
+//                    if (scrollDirection) {
+//                        // up
+//                        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+//                        cell.layer.transform = rotationTransform
+//                        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+//                            cell.layer.transform = CATransform3DIdentity
+//                        }) { (_) in
+//                            
+//                        }
+//                    } else {
+//                        // down
+//                        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
+//                        cell.layer.transform = rotationTransform
+//                        UIView.animate(withDuration: 0.3, animations: {
+//                            cell.layer.transform = CATransform3DIdentity
+//                        })
+//                    }
+//                }
+//            } else {
+//                // animation 1
+//                if (scrollDirection) {
+//                    // up
+//                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+//                    cell.layer.transform = rotationTransform
+//                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+//                        cell.layer.transform = CATransform3DIdentity
+//                    }) { (_) in
+//                        
+//                    }
+//                } else {
+//                    // down
+//                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
+//                    cell.layer.transform = rotationTransform
+//                    UIView.animate(withDuration: 0.3, animations: {
+//                        cell.layer.transform = CATransform3DIdentity
+//                    })
+//                }
+//            }
+//        }
+//        
+//        if indexPath.row == 0 || indexPath.row == 1 {
+//            // no animation
+//        } else if indexPath.row == cellNum + 2 - 1 {
+//        } else {
+//            
+//            
+//            
+//        }
     }
 }
 
 //MARK: - ScrollViewDelegate
 
 extension ExploreHomeVC: UIScrollViewDelegate {
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+//        print("stop Dragging")
+        print(scrollDirection)
+        let currentOffset = exploreTableView.contentOffset.y
+        
+        if currentOffset > 542.333 {
+            if (scrollDirection) {
+                
+            } else {
+                
+            }
+        }
+        
+    }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffset = exploreTableView.contentOffset.y
         //        print(currentOffset)
@@ -264,7 +280,6 @@ extension ExploreHomeVC {
                     print("none")
                     // empty 화면 만들기
                 }
-                self.exploreTableView.reloadData()
                 
             case .requestErr(let message):
                 guard let message = message as? String else { return }
@@ -482,15 +497,20 @@ extension ExploreHomeVC {
     
     private func hideTabBarWhenScrollingUp() {
         UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveLinear], animations: {
-            self.headerView.frame.origin.y =  self.headerFrameOriginY - self.headerView.frame.height
+            self.headerView.center.y =  self.headerFrameOriginY - self.headerView.frame.height
+            
+            print(self.headerView.center.y)
         }) { _ in
+            
             
         }
     }
     
     private func showTabBarWhenScrollingDown() {
         UIView.animate(withDuration: 0.3, delay: 0.3, options: [.curveLinear], animations: {
-            self.headerView.frame.origin.y = self.headerFrameOriginY + self.headerView.frame.height
+            self.headerView.center.y = self.headerFrameOriginY + self.headerView.frame.height
+            
+            print(self.headerView.center.y)
         }) { _ in
             
         }
@@ -521,7 +541,29 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     }
     
     func exploreAnswerScrapButtonDidTapped(_ answerId: Int) {
+        print(answerId)
         
         scrapAnswer(answerId: answerId)
+        
+    }
+    
+    func goToMoreAnswerButtonDidTapped(questionId: Int, question: String) {
+        print("ExploreHomeVC")
+        guard let detail = self.storyboard?.instantiateViewController(identifier: "ExploreDetailVC") as?
+                ExploreDetailVC else { return }
+        
+        print("questionId: \(questionId)")
+        detail.questionId = questionId
+        detail.questionText = question
+        self.navigationController?.pushViewController(detail, animated: true)
+    }
+    
+    func goToCommentButtonTapped(_ answerId: Int) {
+        guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
+
+        comment.answerId = answerId
+        comment.isMoreButtonHidden = false
+        comment.modalPresentationStyle = .fullScreen
+        self.present(comment, animated: true, completion: nil)
     }
 }

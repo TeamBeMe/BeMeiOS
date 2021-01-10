@@ -12,6 +12,12 @@ class QuestionAnswerTVC: UITableViewCell {
    
     @IBOutlet weak var moreAnswerButton: UIButton!
     @IBOutlet weak var profileView: UIStackView!
+    @IBOutlet weak var questionLabel: UILabel!
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nickNameLabel: UILabel!
+    @IBOutlet weak var answerTextView: UITextView!
     
     weak var delegate: UITableViewButtonSelectedDelegate?
     var indexPath: IndexPath?
@@ -26,9 +32,25 @@ class QuestionAnswerTVC: UITableViewCell {
 
         // Configure the view for the selected state
     }
+    
+    func setInformation(question: String, category: String, date: String, profileImg: String, nickName: String, content: String) {
+        questionLabel.text = question
+        categoryLabel.text = "[  \(category)에 관한 질문  ]"
+        dateLabel.text = date
+        if profileImg == "" {
+            profileImageView.image = UIImage(named: "imgProfile")
+        } else {
+            let url = URL(string: profileImg)
+            profileImageView.kf.setImage(with: url)
+        }
+        nickNameLabel.text = nickName
+        answerTextView.text = content
+    }
+    
+    
     @IBAction func moreAnswerButtonTapped(_ sender: UIButton) {
         
-        delegate?.goToMoreAnswerButtonDidTapped(to: indexPath!)
+//        delegate?.goToMoreAnswerButtonDidTapped(to: indexPath!)
         
     }
     

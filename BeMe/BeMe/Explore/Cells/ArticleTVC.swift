@@ -23,11 +23,14 @@ class ArticleTVC: UITableViewCell {
     
     var answerId: Int?
     
+    var questionId: Int?
+    
     weak var delegate: UITableViewButtonSelectedDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        profileImageView.makeRounded(cornerRadius: profileImageView.bounds.width / 2)
         answerCardView.setBorderWithRadius(borderColor: .lightGray, borderWidth: 1, cornerRadius: 8)
         answerTextView.font = UIFont(name: "AppleSDGothicNeo-Light", size: 14.0)
         
@@ -38,7 +41,7 @@ class ArticleTVC: UITableViewCell {
         
     }
     
-    func setCardDatas(que: String, date: String, cate: String, content: String, profileImage: String?, nick: String, isScrap: Bool, answerId: Int) {
+    func setCardDatas(que: String, date: String, cate: String, content: String, profileImage: String?, nick: String, isScrap: Bool, answerId: Int, questionId: Int) {
         
         question.text = que
         subTitle.text = "[  \(cate)에 관한 질문  ]  ·  \(date)"
@@ -46,6 +49,8 @@ class ArticleTVC: UITableViewCell {
         nickNameLabel.text = nick
         isScrapped = isScrap
         self.answerId = answerId
+        self.questionId = questionId
+        
         if isScrapped {
             scrapButton.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
             
@@ -75,11 +80,18 @@ class ArticleTVC: UITableViewCell {
             isScrapped = true
             sender.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
         }
+        
         delegate?.exploreAnswerScrapButtonDidTapped(answerId!)
     }
     
     @IBAction func goToDetailExploreVC(_ sender: UIButton) {
         
-        
+        delegate?.goToMoreAnswerButtonDidTapped(questionId: questionId!, question: question.text!)
     }
+    
+    @IBAction func goToAnswerDetailButtonTapped(_ sender: Any) {
+        
+        delegate?.goToCommentButtonTapped(answerId!)
+    }
+    
 }
