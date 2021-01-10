@@ -231,10 +231,12 @@ extension ExploreHomeVC: UIScrollViewDelegate {
         let currentOffset = exploreTableView.contentOffset.y
         //        print(currentOffset)
         
+        print(currentOffset)
         
         // iphone safe area 문제 해결 코드
-        self.safeAreaView.backgroundColor = currentOffset > 394 ? .white : UIColor.init(named: "background")
+//        self.safeAreaView.backgroundColor = currentOffset > 394 ? .white : UIColor.init(named: "background")
         view.backgroundColor = currentOffset > 394 ? .white : UIColor.init(named: "background")
+        exploreTableView.backgroundColor = currentOffset > 110 ? .white : UIColor.init(named: "background")
         // animation 문제 해결 코드
         if (lastContentOffset < currentOffset) {
             //scroll up
@@ -497,9 +499,9 @@ extension ExploreHomeVC {
     
     private func hideTabBarWhenScrollingUp() {
         UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveLinear], animations: {
-            self.headerView.center.y =  self.headerFrameOriginY - self.headerView.frame.height
+//            self.headerView.center.y =  self.headerFrameOriginY - self.headerView.frame.height
             
-            print(self.headerView.center.y)
+//            print(self.headerView.center.y)
         }) { _ in
             
             
@@ -508,9 +510,9 @@ extension ExploreHomeVC {
     
     private func showTabBarWhenScrollingDown() {
         UIView.animate(withDuration: 0.3, delay: 0.3, options: [.curveLinear], animations: {
-            self.headerView.center.y = self.headerFrameOriginY + self.headerView.frame.height
+//            self.headerView.center.y = self.headerFrameOriginY + self.headerView.frame.height
             
-            print(self.headerView.center.y)
+//            print(self.headerView.center.y)
         }) { _ in
             
         }
