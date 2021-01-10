@@ -16,7 +16,7 @@ struct AnswerDetailService {
         let header: HTTPHeaders = ["Content-Type":"application/json", "token":token]
         
         
-        let url = APIConstants.answerDetailURL + "/\(answerId)"
+        let url = APIConstants.answerDetailURL + "/1"
         print(url)
         let dataRequest = AF.request(url, method: .get, headers: header)
         

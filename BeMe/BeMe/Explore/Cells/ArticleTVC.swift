@@ -87,4 +87,10 @@ class ArticleTVC: UITableViewCell {
         
         delegate?.goToMoreAnswerButtonDidTapped(questionId: questionId!, question: question.text!)
     }
+    
+    @IBAction func goToAnswerDetailButtonTapped(_ sender: Any) {
+        
+        delegate?.goToCommentButtonTapped(answerId!)
+    }
+    
 }

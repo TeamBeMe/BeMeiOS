@@ -99,6 +99,7 @@ extension ExploreDetailVC {
     
     private func setAnswerData() {
         
+        print(questionId!)
         ExploreDetailAnswerService.shared.getExploreDetailAnswer(questionId: questionId!, page: currentPage, sorting: sorting) { (result) in
             switch result {
             case .success(let data):

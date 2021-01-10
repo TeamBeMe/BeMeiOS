@@ -320,18 +320,24 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
             
             header.profileView.isHidden = isMyAnswer
             if let ad = answerDetail {
-                header.setInformation(question: ad.question, category: ad.category , date: ad.answerDate, profileImg: ad.userProfile, nickName: ad.userNickname, content: ad.content)
+                header.setInformation(question: ad.question, category: ad.category , date: ad.answerDate,
+                                      profileImg: ad.userProfile, nickName: ad.userNickname, content: ad.content)
             }
             
             return header
         } else {
             if indexPath.row == 0 {
-                guard let comment = tableView.dequeueReusableCell(withIdentifier: CommentTVC.identifier, for: indexPath) as? CommentTVC else { return UITableViewCell() }
+                guard let comment = tableView.dequeueReusableCell(withIdentifier: CommentTVC.identifier,
+                                                                  for: indexPath) as? CommentTVC else {
+                    return UITableViewCell() }
                 
                 comment.delegate = self
                 comment.indexPath = indexPath
+                
+                
+                
                 if commentArray[indexPath.section-1].children!.count == 0 {
-                    // 댓글 한개일 경우 "답글 보기" 없애는 로직 ******************고치기***********************
+                    
                     comment.moreCommentView.isHidden = true
                 } else {
                     comment.moreCommentView.isHidden = false

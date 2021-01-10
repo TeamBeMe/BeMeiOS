@@ -97,14 +97,10 @@ extension DiffThoughtTVC: UICollectionViewDataSource, UICollectionViewDelegateFl
             return empty
         } else {
             guard let card = collectionView.dequeueReusableCell(withReuseIdentifier: DiffThoughtCVC.identifier, for: indexPath) as? DiffThoughtCVC else { return UICollectionViewCell() }
-            print(exploreThoughtArray.count)
             card.delegate = self
-            if let question = questionId {
-                card.questionId = question
-            }
             
             card.makeRounded(cornerRadius: 6.0)
-            card.setQuestionAnswer(exploreThoughtArray[indexPath.item].questionTitle, exploreThoughtArray[indexPath.item].content)
+            card.setQuestionAnswer(exploreThoughtArray[indexPath.item].questionTitle, exploreThoughtArray[indexPath.item].content, answerId:exploreThoughtArray[indexPath.item].questionID , questionId: exploreThoughtArray[indexPath.item].id)
             return card
         }
     }
@@ -112,8 +108,14 @@ extension DiffThoughtTVC: UICollectionViewDataSource, UICollectionViewDelegateFl
 
 extension DiffThoughtTVC: UICollectionViewButtonDelegate {
     func goToOneQuestionMoreAnswerButtonDidTapped(_ questionId: Int, question: String) {
+        
         delegate?.goToMoreAnswerButtonDidTapped(questionId: questionId, question: question)
     }
+    
+    func goToAnswerDetailButtonDidTapped(_ answerId: Int) {
+        delegate?.goToCommentButtonTapped(answerId)
+    }
+    
 }
 
 extension DiffThoughtTVC: UIScrollViewDelegate {
@@ -156,8 +158,12 @@ extension DiffThoughtTVC: UIScrollViewDelegate {
 
 protocol UICollectionViewButtonDelegate: class {
     func goToOneQuestionMoreAnswerButtonDidTapped(_ questionId: Int, question: String)
+    
+    func goToAnswerDetailButtonDidTapped(_ answerId: Int)
 }
 
 extension UICollectionViewButtonDelegate {
     func goToOneQuestionMoreAnswerButtonDidTapped(_ questionId: Int, question: String) {}
+    
+    func goToAnswerDetailButtonDidTapped(_ answerId: Int) {}
 }

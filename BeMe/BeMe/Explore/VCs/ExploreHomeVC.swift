@@ -46,8 +46,8 @@ class ExploreHomeVC: UIViewController {
     
     private var exploreAnswerArray: [ExploreAnswer] = [] {
         didSet {
-            let section = IndexSet.init(integer: 2)
-            exploreTableView.reloadSections(section, with: .top)
+//            let section = IndexSet.init(integer: 2)
+            exploreTableView.reloadData()
         }
     }
     
@@ -105,8 +105,8 @@ extension ExploreHomeVC: UITableViewDataSource {
                 diffThought.isEmpty = false
             }
             
+            diffThought.delegate = self
             diffThought.exploreThoughtArray = self.exploreThoughtArray
-            
             return diffThought
         } else if indexPath.section == 1 {
             guard let diffAnswer = tableView.dequeueReusableCell(withIdentifier: DiffArticleTVC.identifier, for: indexPath) as? DiffArticleTVC else { return UITableViewCell() }
@@ -548,11 +548,21 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     }
     
     func goToMoreAnswerButtonDidTapped(questionId: Int, question: String) {
+        print("ExploreHomeVC")
         guard let detail = self.storyboard?.instantiateViewController(identifier: "ExploreDetailVC") as?
                 ExploreDetailVC else { return }
         
         detail.questionId = questionId
         detail.questionText = question
         self.navigationController?.pushViewController(detail, animated: true)
+    }
+    
+    func goToCommentButtonTapped(_ answerId: Int) {
+        guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
+
+        comment.answerId = answerId
+        comment.isMoreButtonHidden = false
+        comment.modalPresentationStyle = .fullScreen
+        self.present(comment, animated: true, completion: nil)
     }
 }
