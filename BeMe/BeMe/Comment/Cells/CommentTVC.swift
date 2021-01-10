@@ -10,7 +10,12 @@ import UIKit
 class CommentTVC: UITableViewCell {
     static let identifier: String = "CommentTVC"
     
+    @IBOutlet weak var profileImageView: UIImageView!
+    @IBOutlet weak var nickNameLabel: UILabel!
+    @IBOutlet weak var lockImageView: UIImageView!
     @IBOutlet weak var contentTextView: UITextView!
+    @IBOutlet weak var dateLabel: UILabel!
+    
     @IBOutlet weak var moreCommentLabel: UILabel!
     @IBOutlet weak var moreImageView: UIImageView!
     @IBOutlet weak var moreCommentView: UIView!
@@ -24,9 +29,18 @@ class CommentTVC: UITableViewCell {
         
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
+    func setInformations(profileImage: String, nickName: String, publicFlag: Bool, isVisible: Bool ,content: String, date: String) {
+        if profileImage == "" {
+            profileImageView.image = UIImage.init(named: "imgProfile")
+        } else {
+            let url = URL(string: profileImage)
+            profileImageView.kf.setImage(with: url)
+        }
+        
+        nickNameLabel.text = nickName
+        lockImageView.isHidden = publicFlag
+        contentTextView.text = content
+        dateLabel.text = date
     }
 
     @IBAction func moreCommentButtonTapped(_ sender: UIButton) {

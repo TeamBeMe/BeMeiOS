@@ -2179,9 +2179,14 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="contentTextView" destination="RP6-cR-RKX" id="7fD-U8-Kyg"/>
+                                            <outlet property="dateLabel" destination="9IO-Te-RsV" id="Lgp-Mb-CZY"/>
+                                            <outlet property="lockImageView" destination="zgs-NP-VxH" id="BVs-oJ-ApB"/>
                                             <outlet property="moreCommentLabel" destination="UK7-Pt-Dhp" id="Iza-fi-Iro"/>
                                             <outlet property="moreCommentView" destination="drt-k9-2fz" id="WUd-B3-Tdc"/>
                                             <outlet property="moreImageView" destination="Wkf-b6-Kpm" id="hVa-eX-u8C"/>
+                                            <outlet property="nickNameLabel" destination="1Is-9G-wV4" id="Fin-mJ-TK9"/>
+                                            <outlet property="profileImageView" destination="tj5-TR-LLI" id="DiD-u6-WeN"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SecondCommentTVC" id="J96-r2-zPW" customClass="SecondCommentTVC" customModule="BeMe" customModuleProvider="target">
@@ -2223,6 +2228,9 @@
                                                                         <constraint firstAttribute="width" secondItem="Icm-Cr-1dM" secondAttribute="height" multiplier="1:1" id="xaC-bm-tFh"/>
                                                                     </constraints>
                                                                     <state key="normal" image="btnMore24"/>
+                                                                    <connections>
+                                                                        <action selector="settingButtonTapped:" destination="J96-r2-zPW" eventType="touchUpInside" id="GKG-Au-xaZ"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                         </stackView>
@@ -2261,25 +2269,33 @@
                                                 <constraint firstItem="rfc-1A-nSY" firstAttribute="top" secondItem="2yU-ax-3Bp" secondAttribute="top" constant="4" id="xHu-zf-MdY"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="contentTextView" destination="7Sz-cR-b5P" id="y6q-rA-EoQ"/>
+                                            <outlet property="dateLabel" destination="ogP-yQ-RHF" id="jYp-WF-Hnc"/>
+                                            <outlet property="lockImageView" destination="lvT-nd-8it" id="Zqe-bS-Zdc"/>
+                                            <outlet property="nickNameLabel" destination="UcD-Be-Gch" id="efP-JD-IX0"/>
+                                            <outlet property="profileImageView" destination="L76-av-5Vq" id="1zU-iT-s24"/>
+                                            <outlet property="settingButton" destination="Icm-Cr-1dM" id="aHe-sa-ejT"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SecretTVC" id="Zwe-IT-Ojd" customClass="SecretTVC" customModule="BeMe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1198.6666793823242" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="1198.6666793823242" width="375" height="126.66666412353516"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zwe-IT-Ojd" id="qFz-C0-uNK">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="126.66666412353516"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="익명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ntX-8m-9AZ">
                                                     <rect key="frame" x="75" y="10" width="24.333333333333329" height="17"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" priority="250" constant="17" id="7Tp-II-JP9"/>
+                                                        <constraint firstAttribute="height" constant="17" id="7Tp-II-JP9"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="비공개 댓글입니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UMh-e7-P63">
-                                                    <rect key="frame" x="75" y="-53.666666666666664" width="104" height="17"/>
+                                                    <rect key="frame" x="75" y="40" width="104" height="17"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="17" id="R6M-qm-CQm"/>
                                                     </constraints>
@@ -2288,7 +2304,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="fFD-oy-NiC">
-                                                    <rect key="frame" x="75" y="-24.666666666666668" width="75" height="53.666666666666664"/>
+                                                    <rect key="frame" x="75" y="69" width="75" height="53.666666666666657"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12월 23일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uRA-hM-7Kx">
                                                             <rect key="frame" x="0.0" y="0.0" width="75" height="14.666666666666666"/>
@@ -2329,6 +2345,9 @@
                                                                     <state key="normal">
                                                                         <color key="titleColor" name="deepSemiBlue"/>
                                                                     </state>
+                                                                    <connections>
+                                                                        <action selector="moreAnswerButtonTapped:" destination="Zwe-IT-Ojd" eventType="touchUpInside" id="Ryq-Kl-a91"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2349,13 +2368,20 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="fFD-oy-NiC" firstAttribute="top" secondItem="UMh-e7-P63" secondAttribute="bottom" constant="12" id="1Ep-FI-fSH"/>
+                                                <constraint firstItem="UMh-e7-P63" firstAttribute="top" secondItem="ntX-8m-9AZ" secondAttribute="bottom" constant="13" id="F9o-Qw-Obf"/>
                                                 <constraint firstItem="ntX-8m-9AZ" firstAttribute="top" secondItem="qFz-C0-uNK" secondAttribute="top" constant="10" id="dOX-TZ-Cly"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="fFD-oy-NiC" secondAttribute="bottom" constant="4" id="i0n-qe-Q4E"/>
                                                 <constraint firstItem="ntX-8m-9AZ" firstAttribute="leading" secondItem="qFz-C0-uNK" secondAttribute="leading" constant="75" id="l4O-fY-ktu"/>
                                                 <constraint firstItem="fFD-oy-NiC" firstAttribute="leading" secondItem="qFz-C0-uNK" secondAttribute="leading" constant="75" id="n8L-MB-7o3"/>
+                                                <constraint firstAttribute="bottom" secondItem="fFD-oy-NiC" secondAttribute="bottom" constant="4" id="oEK-Fq-k4s"/>
                                                 <constraint firstItem="UMh-e7-P63" firstAttribute="leading" secondItem="qFz-C0-uNK" secondAttribute="leading" constant="75" id="qqI-vO-EL1"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="uRA-hM-7Kx" id="r3Q-vo-72x"/>
+                                            <outlet property="moreCommentLabel" destination="iyh-WN-EdD" id="eS8-6m-u13"/>
+                                            <outlet property="moreCommentView" destination="4pA-BR-KgS" id="XaE-NO-Bk5"/>
+                                            <outlet property="moreImageView" destination="4xG-Zb-yzu" id="zut-9u-NvC"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

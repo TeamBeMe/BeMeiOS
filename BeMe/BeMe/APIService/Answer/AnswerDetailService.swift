@@ -40,7 +40,7 @@ struct AnswerDetailService {
         let decoder = JSONDecoder()
         guard let decodedData = try? decoder.decode(GenericResponse<AnswerDetail>.self, from : data) else { return .pathErr }
         
-        print(decodedData)
+//        print(decodedData)
         switch statusCode {
         case 200..<300: return .success(decodedData)
         case 400..<500: return .pathErr

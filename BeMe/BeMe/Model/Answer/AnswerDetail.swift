@@ -19,7 +19,7 @@ struct AnswerDetail: Codable {
     let userNickname, question, category: String
     let categoryID: Int
     let isAnswered: Bool
-    let comment: [AnswerDetail]
+    let comment: [Comment]
 
     
     init(from decoder: Decoder) throws {
@@ -40,7 +40,7 @@ struct AnswerDetail: Codable {
         category = (try? values.decode(String.self, forKey: .category)) ?? ""
         categoryID = (try? values.decode(Int.self, forKey: .categoryID)) ?? -1
         isAnswered = (try? values.decode(Bool.self, forKey: .isAnswered)) ?? false
-        comment = (try? values.decode([AnswerDetail].self, forKey: .comment)) ?? []
+        comment = (try? values.decode([Comment].self, forKey: .comment)) ?? []
     }
     
     enum CodingKeys: String, CodingKey {

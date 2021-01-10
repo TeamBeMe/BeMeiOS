@@ -9,15 +9,28 @@ import UIKit
 
 class SecretTVC: UITableViewCell {
     static let identifier: String = "SecretTVC"
+    
+    @IBOutlet weak var moreCommentView: UIView!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var moreCommentLabel: UILabel!
+    @IBOutlet weak var moreImageView: UIImageView!
+    
+    weak var delegate: UITableViewButtonSelectedDelegate?
+    
+    var indexPath: IndexPath?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    func setInformation(date: String) {
+        dateLabel.text = date
     }
-
+    
+    @IBAction func moreAnswerButtonTapped(_ sender: Any) {
+        
+        print("SEeleleel")
+        delegate?.moreCellButtonDidTapped(to: indexPath!)
+    }
 }

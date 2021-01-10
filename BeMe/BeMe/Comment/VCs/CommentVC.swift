@@ -56,6 +56,16 @@ class CommentVC: UIViewController {
         }
     }
     
+    private var realCommentArray: [Comment] = [] {
+        didSet {
+            realCommentArray.forEach { com in
+                print(com)
+                
+            }
+            commentTableView.reloadData()
+        }
+    }
+    
     private var commentArray: [CommentA] = [
         CommentA(comment: "안녕!", children: [CommentA(comment: "오! 안녕!", children: [], open: false),
                                                 CommentA(comment: "오! 안녕!", children: [], open: false),
@@ -89,6 +99,8 @@ class CommentVC: UIViewController {
                 
                 if let ad = dt.data {
                     self.answerDetail = ad
+                    self.realCommentArray = ad.comment
+                    
                 }
                 
                 
@@ -292,15 +304,15 @@ extension CommentVC {
 
 extension CommentVC: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return commentArray.count + 1
+        return realCommentArray.count + 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1 // header
         } else {
-            if commentArray[section-1].open {
-                return commentArray[section-1].children!.count + 1
+            if realCommentArray[section-1].open {
+                return realCommentArray[section-1].children.count + 1
             } else {
                 return 1
             }
@@ -310,6 +322,7 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
+            
             guard let header = tableView.dequeueReusableCell(withIdentifier: QuestionAnswerTVC.identifier, for: indexPath) as? QuestionAnswerTVC else { return UITableViewCell() }
             
             header.delegate = self
@@ -327,35 +340,67 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
             return header
         } else {
             if indexPath.row == 0 {
-                guard let comment = tableView.dequeueReusableCell(withIdentifier: CommentTVC.identifier,
-                                                                  for: indexPath) as? CommentTVC else {
-                    return UITableViewCell() }
-                
-                comment.delegate = self
-                comment.indexPath = indexPath
-                
-                
-                
-                if commentArray[indexPath.section-1].children!.count == 0 {
+                print("비공개 공개")
+                print(realCommentArray[indexPath.section-1].isVisible)
+                if realCommentArray[indexPath.section-1].isVisible {
                     
-                    comment.moreCommentView.isHidden = true
-                } else {
-                    comment.moreCommentView.isHidden = false
-                    if commentArray[indexPath.section-1].open {
-                        comment.moreCommentLabel.text = "답글 접기"
-                        comment.moreImageView.image = UIImage(named: "icArrowUp")
+                    guard let comment = tableView.dequeueReusableCell(withIdentifier: CommentTVC.identifier,
+                                                                      for: indexPath) as? CommentTVC else {
+                        return UITableViewCell() }
+                    
+                    comment.delegate = self
+                    comment.indexPath = indexPath
+                    
+                    if realCommentArray[indexPath.section-1].children.count == 0 {
                         
+                        comment.moreCommentView.isHidden = true
                     } else {
-                        comment.moreCommentLabel.text = "답글 보기"
-                        comment.moreImageView.image = UIImage(named: "icArrowDown")
+                        comment.moreCommentView.isHidden = false
+                        if realCommentArray[indexPath.section-1].open {
+                            comment.moreCommentLabel.text = "답글 접기"
+                            comment.moreImageView.image = UIImage(named: "icArrowUp")
+                            
+                        } else {
+                            comment.moreCommentLabel.text = "답글 보기"
+                            comment.moreImageView.image = UIImage(named: "icArrowDown")
+                        }
                     }
+                    
+                    comment.setInformations(profileImage: realCommentArray[indexPath.row].profileImg, nickName: realCommentArray[indexPath.row].userNickname, publicFlag: realCommentArray[indexPath.row].publicFlag, isVisible: realCommentArray[indexPath.row].isVisible, content: realCommentArray[indexPath.row].content, date: realCommentArray[indexPath.row].createdAt)
+                    
+                    return comment
+                } else {
+                    guard let secret = tableView.dequeueReusableCell(withIdentifier: SecretTVC.identifier, for: indexPath) as? SecretTVC else { return UITableViewCell() }
+                    
+
+                    secret.delegate = self
+                    secret.indexPath = indexPath
+                    if realCommentArray[indexPath.section-1].children.count == 0{
+                        secret.moreCommentView.isHidden = true
+                    } else {
+                        secret.moreCommentView.isHidden = false
+                        if realCommentArray[indexPath.section-1].open {
+                            secret.moreCommentLabel.text = "답글 접기"
+                            secret.moreImageView.image = UIImage(named: "icArrowUp")
+                            
+                        } else {
+                            secret.moreCommentLabel.text = "답글 보기"
+                            secret.moreImageView.image = UIImage(named: "icArrowDown")
+                        }
+                    }
+                    
+                    return secret
                 }
-                
-                return comment
             } else {
+                
                 guard let secondComment = tableView.dequeueReusableCell(withIdentifier: SecondCommentTVC.identifier, for: indexPath) as? SecondCommentTVC else { return UITableViewCell() }
+ 
+                
+                secondComment.setInformation(profileImage: realCommentArray[indexPath.section-1].children[indexPath.row-1].profileImg, nickName: realCommentArray[indexPath.section-1].children[indexPath.row-1].userNickname, content: realCommentArray[indexPath.section-1].children[indexPath.row-1].content, date: realCommentArray[indexPath.section-1].children[indexPath.row-1].createdAt, isVisible: realCommentArray[indexPath.section-1].children[indexPath.row-1].isVisible, publicFlag: realCommentArray[indexPath.section-1].children[indexPath.row-1].publicFlag)
+                
                 
                 return secondComment
+ 
             }
         }
         
@@ -373,21 +418,27 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
 extension CommentVC: UITableViewButtonSelectedDelegate {
     
     func moreCellButtonDidTapped(to indexPath: IndexPath) {
-        guard let cell = commentTableView.cellForRow(at: indexPath) as? CommentTVC else { return }
+        
+        print("first")
+        guard let cell = commentTableView.cellForRow(at: indexPath) as? SecretTVC else { return }
+        print("second")
         guard let index = commentTableView.indexPath(for: cell) else { return }
         
+        print(index)
+        print("moreCellButtonDidTapped")
         if indexPath.section == 0 {
             return
         } else {
             if indexPath.row == index.row {
                 if indexPath.row == 0 {
-                    if commentArray[index.section-1].open {
-                        commentArray[index.section-1].open = false
+                    if realCommentArray[index.section-1].open {
+                        realCommentArray[index.section-1].open = false
                     } else {
-                        commentArray[index.section-1].open = true
+                        realCommentArray[index.section-1].open = true
                     }
-                    let section = IndexSet.init(integer: indexPath.section)
-                    commentTableView.reloadSections(section, with: .none)
+                    // 애니메이션 삭제
+//                    let section = IndexSet.init(integer: indexPath.section)
+//                    commentTableView.reloadSections(section, with: .fade)
                 }
             }
         }
