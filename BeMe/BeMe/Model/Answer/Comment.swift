@@ -13,7 +13,7 @@ struct Comment: Codable {
     let publicFlag: Bool
     let userID, answerID: Int
     let createdAt, updatedAt: String
-    let children: [Comment] // 대댓글은 대댓글을 포함하고 있지 않다.
+    var children: [Comment] // 대댓글은 대댓글을 포함하고 있지 않다.
     let isAuthor, isVisible: Bool
     let parentID: Int
     let userNickname: String

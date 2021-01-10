@@ -30,7 +30,6 @@ class SecretTVC: UITableViewCell {
     
     @IBAction func moreAnswerButtonTapped(_ sender: Any) {
         
-        print("SEeleleel")
-        delegate?.moreCellButtonDidTapped(to: indexPath!)
+        delegate?.moreCellButtonDidTapped(to: indexPath!, isSecret: 1)
     }
 }

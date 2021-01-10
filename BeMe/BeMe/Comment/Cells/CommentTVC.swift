@@ -24,28 +24,41 @@ class CommentTVC: UITableViewCell {
     
     var indexPath: IndexPath?
     
+    var commentId: Int?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
     }
     
-    func setInformations(profileImage: String, nickName: String, publicFlag: Bool, isVisible: Bool ,content: String, date: String) {
-        if profileImage == "" {
-            profileImageView.image = UIImage.init(named: "imgProfile")
+    func setInformations(profileImage: String, nickName: String, publicFlag: Bool, isVisible: Bool ,content: String, date: String, commentId: Int) {
+        
+        self.commentId = commentId
+        if isVisible {
+            if profileImage == "" {
+                profileImageView.image = UIImage.init(named: "imgProfile")
+            } else {
+                let url = URL(string: profileImage)
+                profileImageView.kf.setImage(with: url)
+            }
+            
+            nickNameLabel.text = nickName
+            lockImageView.isHidden = publicFlag
+            contentTextView.text = content
+            dateLabel.text = date
         } else {
-            let url = URL(string: profileImage)
-            profileImageView.kf.setImage(with: url)
+            profileImageView.isHidden = true
+            nickNameLabel.text = "익명"
+            lockImageView.isHidden = publicFlag
+            contentTextView.text = content
+            dateLabel.text = date
         }
         
-        nickNameLabel.text = nickName
-        lockImageView.isHidden = publicFlag
-        contentTextView.text = content
-        dateLabel.text = date
     }
 
     @IBAction func moreCommentButtonTapped(_ sender: UIButton) {
         
-        delegate?.moreCellButtonDidTapped(to: indexPath!)
+        delegate?.moreCellButtonDidTapped(to: indexPath!, isSecret: 0)
     }
     
     @IBAction func settingButtonTapped(_ sender: UIButton) {
@@ -55,6 +68,6 @@ class CommentTVC: UITableViewCell {
     
     @IBAction func sendAnswerButtonTapped(_ sender: UIButton) {
         
-        delegate?.sendCommentButtonDidTapped(to: indexPath!)
+        delegate?.sendCommentButtonDidTapped(to: indexPath!, nickName: nickNameLabel.text!,  parentId: commentId!)
     }
 }

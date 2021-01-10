@@ -40,15 +40,17 @@ class CommentVC: UIViewController {
     
     var isCommentToComment: Bool = false
     
+    var parentId: Int?
+    
     var selectedIndex: IndexPath?
     
-    var isScrapped: Bool = false {
+    private var isPublic: Bool = true
+    
+    private var isScrapped: Bool = false {
         didSet {
             
         }
     }
-    
-    var isCommentLocked: Bool = false
     
     private var answerDetail: AnswerDetail? {
         didSet {
@@ -92,42 +94,9 @@ class CommentVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        AnswerDetailService.shared.getAnswerDetail(answerId: answerId!) { (result) in
-            switch result {
-            case .success(let data):
-                guard let dt = data as? GenericResponse<AnswerDetail> else { return }
-                
-                if let ad = dt.data {
-                    self.answerDetail = ad
-                    self.realCommentArray = ad.comment
-                    
-                }
-                
-                
-            case .requestErr(let message):
-                guard let message = message as? String else { return }
-                let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
-                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-                alertViewController.addAction(action)
-                self.present(alertViewController, animated: true, completion: nil)
-                
-            case .pathErr: print("path")
-            case .serverErr:
-                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
-                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-                alertViewController.addAction(action)
-                self.present(alertViewController, animated: true, completion: nil)
-                print("networkFail")
-                print("serverErr")
-            case .networkFail:
-                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
-                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
-                alertViewController.addAction(action)
-                self.present(alertViewController, animated: true, completion: nil)
-                print("networkFail")
-            }
-        }
+        getAnswerDetail()
     }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -137,6 +106,7 @@ class CommentVC: UIViewController {
     }
     
     
+    //MARK: - IBAction Method
     @IBAction func dismissButtonTapped(_ sender: UIButton) {
         let text = commentTextView.text.trimmingCharacters(in: .whitespacesAndNewlines)
         if text.isEmpty || text == "댓글 달기" {
@@ -182,29 +152,20 @@ class CommentVC: UIViewController {
     @IBAction func commentSendButtonTapped(_ sender: UIButton) {
         
         // 서버 통신
-        
         if let comment = commentTextView.text {
             if isCommentToComment {
                 
                 if let selectedIndex = selectedIndex {
+                    sendComment(content: comment, parentId: parentId)
                     
-                    commentArray[selectedIndex.section - 1].children?.append(CommentA(comment: comment, children: [], open: false))
-                    
-                    commentToCommentView.isHidden = true
                     
                     commentTableView.reloadData()
                     commentTableView.scrollToRow(at: selectedIndex, at: .bottom, animated: true)
                 }
-                
-                
                 isCommentToComment = false
             } else {
-                commentArray.append(CommentA(comment: comment, children: [], open: false))
-                
-                commentTableView.reloadData()
-                commentTableView.scrollToRow(at: IndexPath.init(row: 0, section: commentArray.endIndex), at: .bottom, animated: true)
+                sendComment(content: comment, parentId: nil)
             }
-           
         }
 
         commentTextView.text = ""
@@ -214,16 +175,18 @@ class CommentVC: UIViewController {
     
     @IBAction func cancelCoCButtonTapped(_ sender: UIButton) {
         
+        commentToCommentView.isHidden = true
+        isCommentToComment = false
     }
     
     
     @IBAction func lockButtonTapped(_ sender: UIButton) {
         
-        if isCommentLocked {
-            isCommentLocked = false
+        if isPublic {
+            isPublic = false
             lockButton.setImage(UIImage.init(named: "btnUnlock"), for: .normal)
         } else {
-            isCommentLocked = true
+            isPublic = true
             lockButton.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
         }
         
@@ -233,11 +196,100 @@ class CommentVC: UIViewController {
 //MARK: - Private Method
 extension CommentVC {
     
+    private func sendComment(content: String, parentId: Int?) {
+        CommentService.shared.postComment(answerId: answerId!, content: content, parentId: parentId,
+                                          isPublic: isPublic) { (result) in
+            switch result {
+            case .success(let data):
+                guard let dt = data as? GenericResponse<Comment> else { return }
+                print(dt)
+                if let co = dt.data {
+                    print(co)
+                    let newComment: Comment = co
+                    
+                    if newComment.parentID == -1 {
+                        self.realCommentArray.append(newComment)
+                        self.commentTableView.scrollToRow(at: IndexPath.init(row: 0, section: self.realCommentArray.endIndex), at: .bottom, animated: true)
+                        
+                    } else {
+                        self.realCommentArray[self.selectedIndex!.section-1].children.append(newComment)
+                        self.commentToCommentView.isHidden = true
+//                        self.commentTableView.scrollToRow(at: IndexPath(row: self.realCommentArray[self.selectedIndex!.section-1].children.count - 1, section: self.selectedIndex!.section), at: .middle, animated: true)
+                    }
+                    
+                    
+                    
+                }
+                
+            case .requestErr(let message):
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                
+            case .pathErr: print("path")
+            case .serverErr:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+                print("serverErr")
+            case .networkFail:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+            }
+        }
+    }
+    
+    private func getAnswerDetail() {
+        
+        AnswerDetailService.shared.getAnswerDetail(answerId: answerId!) { (result) in
+            switch result {
+            case .success(let data):
+                guard let dt = data as? GenericResponse<AnswerDetail> else { return }
+                
+                if let ad = dt.data {
+                    self.answerDetail = ad
+                    self.realCommentArray = ad.comment
+                }
+                
+                
+            case .requestErr(let message):
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                
+            case .pathErr: print("path")
+            case .serverErr:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+                print("serverErr")
+            case .networkFail:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+            }
+        }
+    }
+
+    
     private func setCommentView() {
         commentBorderView.setBorderWithRadius(borderColor: UIColor.Border.textView, borderWidth: 1.0, cornerRadius: 6.0)
         commentTextView.text = "댓글 달기"
         commentTextView.textColor = UIColor.lightGray
-        
+        commentToCommentView.isHidden = true
         
     }
     private func setCommentTableView() {
@@ -246,7 +298,7 @@ extension CommentVC {
         commentTableView.estimatedRowHeight = 30
         commentTableView.rowHeight = UITableView.automaticDimension
         commentTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 166, right: 0)
-        commentTableView.keyboardDismissMode = .onDrag
+        commentTableView.keyboardDismissMode = .interactive
     }
     
     private func setPopupView() {
@@ -340,8 +392,7 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
             return header
         } else {
             if indexPath.row == 0 {
-                print("비공개 공개")
-                print(realCommentArray[indexPath.section-1].isVisible)
+               
                 if realCommentArray[indexPath.section-1].isVisible {
                     
                     guard let comment = tableView.dequeueReusableCell(withIdentifier: CommentTVC.identifier,
@@ -352,7 +403,6 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                     comment.indexPath = indexPath
                     
                     if realCommentArray[indexPath.section-1].children.count == 0 {
-                        
                         comment.moreCommentView.isHidden = true
                     } else {
                         comment.moreCommentView.isHidden = false
@@ -366,7 +416,8 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                         }
                     }
                     
-                    comment.setInformations(profileImage: realCommentArray[indexPath.row].profileImg, nickName: realCommentArray[indexPath.row].userNickname, publicFlag: realCommentArray[indexPath.row].publicFlag, isVisible: realCommentArray[indexPath.row].isVisible, content: realCommentArray[indexPath.row].content, date: realCommentArray[indexPath.row].createdAt)
+
+                    comment.setInformations(profileImage: realCommentArray[indexPath.section-1].profileImg, nickName: realCommentArray[indexPath.section-1].userNickname, publicFlag: realCommentArray[indexPath.section-1].publicFlag, isVisible: realCommentArray[indexPath.section-1].isVisible, content: realCommentArray[indexPath.section-1].content, date: realCommentArray[indexPath.section-1].createdAt, commentId: realCommentArray[indexPath.section-1].id)
                     
                     return comment
                 } else {
@@ -395,6 +446,7 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                 
                 guard let secondComment = tableView.dequeueReusableCell(withIdentifier: SecondCommentTVC.identifier, for: indexPath) as? SecondCommentTVC else { return UITableViewCell() }
  
+                print(realCommentArray[indexPath.section-1].children[indexPath.row-1].userNickname)
                 
                 secondComment.setInformation(profileImage: realCommentArray[indexPath.section-1].children[indexPath.row-1].profileImg, nickName: realCommentArray[indexPath.section-1].children[indexPath.row-1].userNickname, content: realCommentArray[indexPath.section-1].children[indexPath.row-1].content, date: realCommentArray[indexPath.section-1].children[indexPath.row-1].createdAt, isVisible: realCommentArray[indexPath.section-1].children[indexPath.row-1].isVisible, publicFlag: realCommentArray[indexPath.section-1].children[indexPath.row-1].publicFlag)
                 
@@ -417,39 +469,61 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
 
 extension CommentVC: UITableViewButtonSelectedDelegate {
     
-    func moreCellButtonDidTapped(to indexPath: IndexPath) {
-        
-        print("first")
-        guard let cell = commentTableView.cellForRow(at: indexPath) as? SecretTVC else { return }
-        print("second")
-        guard let index = commentTableView.indexPath(for: cell) else { return }
-        
-        print(index)
-        print("moreCellButtonDidTapped")
-        if indexPath.section == 0 {
-            return
-        } else {
-            if indexPath.row == index.row {
-                if indexPath.row == 0 {
-                    if realCommentArray[index.section-1].open {
-                        realCommentArray[index.section-1].open = false
-                    } else {
-                        realCommentArray[index.section-1].open = true
+    func moreCellButtonDidTapped(to indexPath: IndexPath, isSecret: Int) {
+        if isSecret == 0 {
+            guard let cell = commentTableView.cellForRow(at: indexPath) as? CommentTVC else { return }
+            guard let index = commentTableView.indexPath(for: cell) else { return }
+            
+            if indexPath.section == 0 {
+                return
+            } else {
+                if indexPath.row == index.row {
+                    if indexPath.row == 0 {
+                        if realCommentArray[index.section-1].open {
+                            realCommentArray[index.section-1].open = false
+                        } else {
+                            realCommentArray[index.section-1].open = true
+                        }
+                        // 애니메이션 삭제
+    //                    let section = IndexSet.init(integer: indexPath.section)
+    //                    commentTableView.reloadSections(section, with: .fade)
                     }
-                    // 애니메이션 삭제
-//                    let section = IndexSet.init(integer: indexPath.section)
-//                    commentTableView.reloadSections(section, with: .fade)
+                }
+            }
+        } else {
+            guard let cell = commentTableView.cellForRow(at: indexPath) as? SecretTVC else { return }
+            
+            guard let index = commentTableView.indexPath(for: cell) else { return }
+            
+            if indexPath.section == 0 {
+                return
+            } else {
+                if indexPath.row == index.row {
+                    if indexPath.row == 0 {
+                        if realCommentArray[index.section-1].open {
+                            realCommentArray[index.section-1].open = false
+                        } else {
+                            realCommentArray[index.section-1].open = true
+                        }
+                        // 애니메이션 삭제
+    //                    let section = IndexSet.init(integer: indexPath.section)
+    //                    commentTableView.reloadSections(section, with: .fade)
+                    }
                 }
             }
         }
+        
     }
     
-    func sendCommentButtonDidTapped(to indexPath: IndexPath) {
+    func sendCommentButtonDidTapped(to indexPath: IndexPath, nickName: String, parentId: Int) {
         
         commentTextView.becomeFirstResponder()
         commentTableView.scrollToRow(at: indexPath, at: .middle, animated: true)
+        commentToCommentLabel.text = "\(nickName)님에게 답글을 남기는 중"
         commentToCommentView.isHidden = false
+        
         selectedIndex = indexPath
+        self.parentId = parentId
         isCommentToComment = true
         
     }

@@ -33,6 +33,7 @@ class SecondCommentTVC: UITableViewCell {
             contentTextView.text = content
             dateLabel.text = date
             lockImageView.isHidden = publicFlag
+            settingButton.isHidden = false
         } else {
             profileImageView.isHidden = true
             nickNameLabel.text = "익명"

@@ -27,4 +27,5 @@ struct APIConstants{
     static let explorationAnswerScapURL = baseURL + "/exploration/"
     static let explorationDetailAnswerURL = baseURL + "/exploration/"
     static let answerDetailURL = baseURL + "/answers/detail"
+    static let answerCommentURL = baseURL + "/answers/comments"
 }

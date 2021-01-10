@@ -13,13 +13,13 @@ protocol UITableViewButtonSelectedDelegate: class {
     func settingButtonDidTapped(to indexPath: IndexPath)
     
     // 댓글 페이지의 댓글 보기 버튼 눌릴 때
-    func moreCellButtonDidTapped(to indexPath: IndexPath)
+    func moreCellButtonDidTapped(to indexPath: IndexPath, isSecret: Int)
     
     // detail 화면으로 넘어가는 것을 알려줄때
     func goToMoreAnswerButtonDidTapped(questionId: Int, question: String)
     
     // 댓글 페이지의 답글 달기 버튼 눌릴 때
-    func sendCommentButtonDidTapped(to indexPath: IndexPath)
+    func sendCommentButtonDidTapped(to indexPath: IndexPath, nickName: String, parentId: Int)
     
     // 카테고리 버튼 누를 때
     func categoryButtonTapped(_ indexPath: IndexPath, _ cateogoryId: Int)
@@ -40,11 +40,11 @@ protocol UITableViewButtonSelectedDelegate: class {
 extension UITableViewButtonSelectedDelegate {
     func settingButtonDidTapped(to indexPath: IndexPath) {}
     
-    func moreCellButtonDidTapped(to: IndexPath) {}
+    func moreCellButtonDidTapped(to: IndexPath, isSecret: Int) {}
     
     func goToMoreAnswerButtonDidTapped(questionId: Int, question: String) {}
     
-    func sendCommentButtonDidTapped(to indexPath: IndexPath) {}
+    func sendCommentButtonDidTapped(to indexPath: IndexPath, nickName: String, parentId: Int) {}
     
     func categoryButtonTapped(_ indexPath: IndexPath, _ cateogoryId: Int) {}
     
