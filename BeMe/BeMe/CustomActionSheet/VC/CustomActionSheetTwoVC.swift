@@ -60,10 +60,20 @@ class CustomActionSheetTwoVC: UIViewController {
     
     @IBAction func firstItemTapped(_ sender: UIButton) {
         
+        if firstItemLabel.text == AlertLabels.myComment.names[0] {
+            NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil, userInfo: ["action": "commentPut"])
+            
+            
+        } else if firstItemLabel.text == AlertLabels.otherCommentNotMyArticle.names[0] {
+            NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil, userInfo: ["action": "report"])
+        }
+        
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBAction func secondItemTapped(_ sender: Any) {
         
+        self.dismiss(animated: true, completion: nil)
     }
     
 }

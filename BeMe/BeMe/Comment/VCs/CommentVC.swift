@@ -64,18 +64,6 @@ class CommentVC: UIViewController {
         }
     }
     
-    private var commentArray: [CommentA] = [
-        CommentA(comment: "안녕!", children: [CommentA(comment: "오! 안녕!", children: [], open: false),
-                                                CommentA(comment: "오! 안녕!", children: [], open: false),
-                                                CommentA(comment: "오! 안녕!", children: [], open: false)], open: false),
-        CommentA(comment: "안녕!", children: [], open: false),
-        CommentA(comment: "안녕!", children: [CommentA(comment: "오! 안녕!", children: [], open: false),
-                                                CommentA(comment: "오! 안녕!", children: [], open: false)], open: false),
-        CommentA(comment: "안녕!", children: [CommentA(comment: "오! 안녕!", children: [], open: false),
-                                                CommentA(comment: "오! 안녕!", children: [], open: false),
-                                                CommentA(comment: "오! 안녕!", children: [], open: false)], open: false),
-    ]
-    
     
     //MARK: - Life Cycle
     
@@ -308,8 +296,14 @@ extension CommentVC {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc func closePopup() {
+    @objc func closePopup(_ notification: Notification) {
         popupBackgroundView.animatePopupBackground(false)
+        guard let userInfo = notification.userInfo as? [String:Any] else { return }
+        guard let action = userInfo["action"] as? String else { return }
+        
+        print(action)
+        
+        
     }
     
     
