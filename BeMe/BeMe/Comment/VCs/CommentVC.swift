@@ -60,10 +60,6 @@ class CommentVC: UIViewController {
     
     private var realCommentArray: [Comment] = [] {
         didSet {
-            realCommentArray.forEach { com in
-                print(com)
-                
-            }
             commentTableView.reloadData()
         }
     }
@@ -143,6 +139,7 @@ class CommentVC: UIViewController {
         guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetVC.identifier) as?
                 CustomActionSheetVC else { return }
         
+        print("moreSetting")
         settingActionSheet.color = .black
         settingActionSheet.alertInformations = AlertLabels.article
         settingActionSheet.modalPresentationStyle = .overCurrentContext
@@ -417,7 +414,7 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                     }
                     
 
-                    comment.setInformations(profileImage: realCommentArray[indexPath.section-1].profileImg, nickName: realCommentArray[indexPath.section-1].userNickname, publicFlag: realCommentArray[indexPath.section-1].publicFlag, isVisible: realCommentArray[indexPath.section-1].isVisible, content: realCommentArray[indexPath.section-1].content, date: realCommentArray[indexPath.section-1].createdAt, commentId: realCommentArray[indexPath.section-1].id)
+                    comment.setInformations(profileImage: realCommentArray[indexPath.section-1].profileImg, nickName: realCommentArray[indexPath.section-1].userNickname, publicFlag: realCommentArray[indexPath.section-1].publicFlag, isVisible: realCommentArray[indexPath.section-1].isVisible, content: realCommentArray[indexPath.section-1].content, date: realCommentArray[indexPath.section-1].createdAt, commentId: realCommentArray[indexPath.section-1].id, isAuthor: realCommentArray[indexPath.section-1].isAuthor)
                     
                     return comment
                 } else {
@@ -529,13 +526,24 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
     }
     
     
-    func settingButtonDidTapped(to indexPath: IndexPath) {
+    func settingButtonDidTapped(to indexPath: IndexPath, isAuthor: Bool) {
         
         popupBackgroundView.animatePopupBackground(true)
-        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: nil).instantiateViewController(identifier: CustomActionSheetVC.identifier) as? CustomActionSheetVC else { return }
-        settingActionSheet.color = .red
-        settingActionSheet.alertInformations = AlertLabels.otherCommentMyArticle
-        self.present(settingActionSheet, animated: true, completion: nil)
+        if isAuthor {
+            guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: nil).instantiateViewController(withIdentifier: CustomActionSheetTwoVC.identifier) as?
+                    CustomActionSheetTwoVC else { return }
+        
+            settingActionSheet.alertInformations = AlertLabels.myComment
+            settingActionSheet.isOnlySecondTextColored = true
+            settingActionSheet.secondColor = UIColor.init(named: "grapefruit")
+            settingActionSheet.modalPresentationStyle = .overCurrentContext
+            
+            print("first")
+            self.present(settingActionSheet, animated: true, completion: nil)
+        } else {
+            
+        }
+        
     }
 }
 

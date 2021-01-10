@@ -76,7 +76,7 @@ class AnswerTVC: UITableViewCell {
     
     @IBAction func settingButtonTapped(_ sender: UIButton) {
         
-        delegate?.settingButtonDidTapped(to: indexPath!)
+        delegate?.settingButtonDidTapped(to: indexPath!, isAuthor: false)
     }
     
     

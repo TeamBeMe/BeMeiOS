@@ -26,14 +26,17 @@ class CommentTVC: UITableViewCell {
     
     var commentId: Int?
     
+    var isAuthor: Bool?
+
     override func awakeFromNib() {
         super.awakeFromNib()
         
     }
     
-    func setInformations(profileImage: String, nickName: String, publicFlag: Bool, isVisible: Bool ,content: String, date: String, commentId: Int) {
+    func setInformations(profileImage: String, nickName: String, publicFlag: Bool, isVisible: Bool ,content: String, date: String, commentId: Int, isAuthor: Bool) {
         
         self.commentId = commentId
+        self.isAuthor = isAuthor
         if isVisible {
             if profileImage == "" {
                 profileImageView.image = UIImage.init(named: "imgProfile")
@@ -63,7 +66,7 @@ class CommentTVC: UITableViewCell {
     
     @IBAction func settingButtonTapped(_ sender: UIButton) {
         
-        delegate?.settingButtonDidTapped(to: indexPath!)
+        delegate?.settingButtonDidTapped(to: indexPath!, isAuthor: isAuthor!)
     }
     
     @IBAction func sendAnswerButtonTapped(_ sender: UIButton) {

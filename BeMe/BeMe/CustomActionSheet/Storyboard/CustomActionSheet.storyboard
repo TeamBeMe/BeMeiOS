@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32S-JJ-MRy">
-                                <rect key="frame" x="0.0" y="687" width="414" height="209"/>
+                                <rect key="frame" x="0.0" y="686" width="414" height="176"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="QRI-I4-CVN">
                                         <rect key="frame" x="0.0" y="10" width="414" height="104"/>
@@ -41,6 +41,9 @@
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hnt-DQ-niF">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="52"/>
+                                                        <connections>
+                                                            <action selector="firstItemTapped:" destination="8MC-Fn-Thv" eventType="touchUpInside" id="eXL-bP-eFV"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -74,6 +77,9 @@
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gau-GP-0X1">
                                                         <rect key="frame" x="0.0" y="0.0" width="414" height="52"/>
+                                                        <connections>
+                                                            <action selector="secondItemTapped:" destination="8MC-Fn-Thv" eventType="touchUpInside" id="Mbe-E8-3kU"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -95,43 +101,64 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ysW-sj-QZI">
-                                        <rect key="frame" x="0.0" y="114" width="414" height="54"/>
+                                        <rect key="frame" x="0.0" y="114" width="414" height="48"/>
                                         <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="16"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="14" maxX="0.0" maxY="20"/>
                                         <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="1" maxY="0.0"/>
                                         <state key="normal" title="취소">
                                             <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
+                                        <connections>
+                                            <action selector="dismissButtonTapped:" destination="8MC-Fn-Thv" eventType="touchUpInside" id="4px-oR-RsL"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="ysW-sj-QZI" secondAttribute="bottom" constant="14" id="05N-LK-5if"/>
                                     <constraint firstAttribute="trailing" secondItem="ysW-sj-QZI" secondAttribute="trailing" id="3ZQ-Aj-nAL"/>
                                     <constraint firstAttribute="trailing" secondItem="QRI-I4-CVN" secondAttribute="trailing" id="Jrj-SI-Hme"/>
                                     <constraint firstItem="ysW-sj-QZI" firstAttribute="top" secondItem="QRI-I4-CVN" secondAttribute="bottom" id="Jv8-G5-yC8"/>
                                     <constraint firstItem="QRI-I4-CVN" firstAttribute="top" secondItem="32S-JJ-MRy" secondAttribute="top" constant="10" id="TND-gO-As8"/>
-                                    <constraint firstAttribute="height" constant="209" id="ZVo-yJ-HMq"/>
+                                    <constraint firstAttribute="height" constant="176" id="ZVo-yJ-HMq"/>
                                     <constraint firstItem="ysW-sj-QZI" firstAttribute="leading" secondItem="32S-JJ-MRy" secondAttribute="leading" id="cX8-Df-5KV"/>
                                     <constraint firstItem="QRI-I4-CVN" firstAttribute="leading" secondItem="32S-JJ-MRy" secondAttribute="leading" id="dCo-ae-Rlm"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9la-8Y-dXq">
-                                <rect key="frame" x="0.0" y="44" width="414" height="643"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9la-8Y-dXq" userLabel="outside">
+                                <rect key="frame" x="0.0" y="44" width="414" height="642"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="dismissButtonTapped:" destination="8MC-Fn-Thv" eventType="touchUpInside" id="dwd-pw-T4P"/>
+                                </connections>
                             </button>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kIe-g4-A5W" userLabel="safeareaview">
+                                <rect key="frame" x="0.0" y="862" width="414" height="34"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="YKU-la-2K1"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="YKU-la-2K1" firstAttribute="trailing" secondItem="32S-JJ-MRy" secondAttribute="trailing" id="1hu-S1-ct7"/>
-                            <constraint firstAttribute="bottom" secondItem="32S-JJ-MRy" secondAttribute="bottom" id="79c-ja-8bx"/>
+                            <constraint firstItem="YKU-la-2K1" firstAttribute="bottom" secondItem="32S-JJ-MRy" secondAttribute="bottom" id="79c-ja-8bx"/>
                             <constraint firstItem="32S-JJ-MRy" firstAttribute="top" secondItem="9la-8Y-dXq" secondAttribute="bottom" id="U4Q-Ap-Piy"/>
                             <constraint firstItem="9la-8Y-dXq" firstAttribute="top" secondItem="YKU-la-2K1" secondAttribute="top" id="YuI-kj-SHB"/>
+                            <constraint firstItem="kIe-g4-A5W" firstAttribute="leading" secondItem="YKU-la-2K1" secondAttribute="leading" id="e4I-jm-Mdv"/>
+                            <constraint firstItem="kIe-g4-A5W" firstAttribute="top" secondItem="32S-JJ-MRy" secondAttribute="bottom" id="fBx-ph-vFs"/>
                             <constraint firstItem="9la-8Y-dXq" firstAttribute="leading" secondItem="YKU-la-2K1" secondAttribute="leading" id="hcr-fb-HYr"/>
+                            <constraint firstItem="YKU-la-2K1" firstAttribute="trailing" secondItem="kIe-g4-A5W" secondAttribute="trailing" id="iKm-E4-lJx"/>
+                            <constraint firstItem="kIe-g4-A5W" firstAttribute="bottom" secondItem="rPe-sq-iZw" secondAttribute="bottom" id="p9w-Dh-IUi"/>
                             <constraint firstItem="YKU-la-2K1" firstAttribute="trailing" secondItem="9la-8Y-dXq" secondAttribute="trailing" id="rOd-zq-Hlo"/>
                             <constraint firstItem="32S-JJ-MRy" firstAttribute="leading" secondItem="YKU-la-2K1" secondAttribute="leading" id="ySr-0Y-eg4"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="firstItemImageView" destination="Jyj-cj-6n7" id="wy5-kM-sDA"/>
+                        <outlet property="firstItemLabel" destination="B7x-lt-6kz" id="nBC-k8-dze"/>
+                        <outlet property="secondItemImageView" destination="DDr-Cr-1FU" id="16u-Ua-X0M"/>
+                        <outlet property="secondeItemLabel" destination="jbX-SE-C7h" id="G45-V4-cck"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qXI-yT-WVz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
