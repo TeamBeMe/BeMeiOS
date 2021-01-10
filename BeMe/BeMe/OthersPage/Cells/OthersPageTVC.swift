@@ -1,13 +1,13 @@
 //
-//  MypageMyScrapTVC.swift
+//  OthersPageTVC.swift
 //  BeMe
 //
-//  Created by 박세란 on 2021/01/04.
+//  Created by 박세란 on 2021/01/09.
 //
 
 import UIKit
 
-class MypageMyScrapTVC: UITableViewCell {
+class OthersPageTVC: UITableViewCell {
     
     //MARK:**- IBOutlet Part**
     
@@ -15,21 +15,20 @@ class MypageMyScrapTVC: UITableViewCell {
     @IBOutlet weak var questionLabel: UILabel!
     @IBOutlet weak var questionInfoLabel: UILabel!
     @IBOutlet weak var answerDateLabel: UILabel!
-    @IBOutlet weak var lockButton: UIButton!
+    @IBOutlet weak var writerLabel: UILabel!
+    @IBOutlet weak var writerImageView: UIImageView!
     @IBOutlet weak var scrapButton: UIButton!
-    
     
     //MARK:**- Variable Part**
     private var isScrapped = false
-    private var isLocked = false
-    static let identifier = "MypageMyScrapTVC"
+    static let identifier = "OthersPageTVC"
     
     //MARK:**- Life Cycle Part**
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
- 
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -52,25 +51,15 @@ class MypageMyScrapTVC: UITableViewCell {
     }
     
     
-    @IBAction func lockButtonTapped(_ sender: UIButton) {
-        if isLocked {
-            isLocked = false
-            sender.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
-            
-        } else {
-            isLocked = true
-            sender.setImage(UIImage.init(named: "btnUnlockExplore"), for: .normal)
-            
-        }
-    }
     
     //MARK:**- default Setting Function Part**
-    func setCardView(question: String, questionInfo: String, answerDate: String, isLocked: Bool, isScrapped: Bool){
+    func setCardView(question: String, questionInfo: String, answerDate: String, writer: String, writerImg: String, isScrapped: Bool){
         
         // text init
         questionLabel.text = question
         questionInfoLabel.text = questionInfo
         answerDateLabel.text = answerDate
+        writerLabel.text = writer
         
         // button image init
         if isScrapped {
@@ -81,14 +70,10 @@ class MypageMyScrapTVC: UITableViewCell {
             
         }
         
-        if isLocked {
-            lockButton.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
-            
-        } else {
-            lockButton.setImage(UIImage.init(named: "btnUnlockExplore"), for: .normal)
-            
-        }
-
+        // writer profile image init
+        writerImageView.image = UIImage(named: writerImg)
+        
+        
         // color
         questionLabel.textColor = .black
         questionInfoLabel.textColor = .slateGrey
@@ -98,8 +83,7 @@ class MypageMyScrapTVC: UITableViewCell {
         let attributedString = NSMutableAttributedString(string: questionInfoLabel.text!)
         attributedString.addAttribute(NSAttributedString.Key.foregroundColor,
                                       value: UIColor.rgb1C1C1E,
-                                      range: (questionInfoLabel.text! as NSString).range(of: #"[0-9]*번째"#,
-                                                                                         options: .regularExpression))
+                                      range: (questionInfoLabel.text! as NSString).range(of: #"[0-9]*번째"#, options: .regularExpression))
         // cardview init
         cardView.backgroundColor = .white
         cardView.setBorderWithRadius(borderColor: .rgbededed, borderWidth: 1, cornerRadius: 6)

@@ -1,24 +1,22 @@
 //
-//  MypageVC.swift
+//  OthersPageVC.swift
 //  BeMe
 //
-//  Created by 박세란 on 2021/01/03.
+//  Created by 박세란 on 2021/01/09.
 //
 
 import UIKit
 
-class MypageVC: UIViewController {
+class OthersPageVC: UIViewController {
     
     //MARK:**- IBOutlet Part**
-    @IBOutlet weak var mypageCollectionView: UICollectionView!
+    @IBOutlet weak var othersPageCollectionView: UICollectionView!
 
-
-    private var directionMenu: Int = 0
     
     //MARK:**- Variable Part**
-    let mypageCVLayout = MypageCVFlowLayout()
+    let othersPageCVLayout = OthersPageCVFlowLayout()
     
-    let mypageCVC = MypageCVC()
+    let othersPageCVC = OthersPageCVC()
     
     //MARK:**- Constraint Part**
     
@@ -27,21 +25,17 @@ class MypageVC: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-//        setSearhButton(view: searchButton)
-//        setKeywordLabel(label: keywordLabel)
         
-        mypageCollectionView.delegate = self
-        mypageCollectionView.dataSource = self
+        othersPageCollectionView.delegate = self
+        othersPageCollectionView.dataSource = self
         
         if #available(iOS 11.0, *) {
-            mypageCollectionView.automaticallyAdjustsScrollIndicatorInsets = false
+            othersPageCollectionView.automaticallyAdjustsScrollIndicatorInsets = false
         } else {
             automaticallyAdjustsScrollViewInsets = false
         }
         
-        mypageCollectionView.collectionViewLayout = mypageCVLayout
-        
-        print("********************\(mypageCollectionView.adjustedContentInset)")
+        othersPageCollectionView.collectionViewLayout = othersPageCVLayout
     }
     
     //MARK:**- IBAction Part**
@@ -49,21 +43,6 @@ class MypageVC: UIViewController {
     
     //MARK:**- default Setting Function Part**
     
-    
-    func setSearhButton(view: UIButton) {
-        view.setBorderWithRadius(borderColor: .veryLightPinkTwo, borderWidth: 1, cornerRadius: 6)
-        view.backgroundColor = UIColor.veryLightPinkTwo
-    }
-    
-    
-    // 아래 두 함수는 TVC 뿐만 아니라 여러 곳에서 사용가능
-    // 검색어를 삭제했거나 , 초기 화면
-    func setKeywordLabel(label : UILabel){
-        label.text = "검색"
-        label.textColor = UIColor.rgb8E8E93
-    }
-    
-    // 검색 결과 후
     func setKeywordLabel( label : UILabel, keyword: String){
         label.text = keyword
         label.textColor = UIColor.darkGray
@@ -79,7 +58,7 @@ class MypageVC: UIViewController {
     
 }
 //MARK:**- extension 부분**
-extension MypageVC : UICollectionViewDelegate {
+extension OthersPageVC : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -88,19 +67,18 @@ extension MypageVC : UICollectionViewDelegate {
     
 }
 
-extension MypageVC : UICollectionViewDataSource {
+extension OthersPageVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: MypageCVC.identifier,
-                for: indexPath) as? MypageCVC else {
+                withReuseIdentifier: OthersPageCVC.identifier,
+                for: indexPath) as? OthersPageCVC else {
             return UICollectionViewCell()}
         
 
-        cell.scrollDirection(by: directionMenu)
         return cell
     }
     
@@ -108,14 +86,11 @@ extension MypageVC : UICollectionViewDataSource {
     
 }
 
-extension MypageVC : UICollectionViewDelegateFlowLayout {
+extension OthersPageVC : UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-//            layout.sectionHeadersPinToVisibleBounds = true
-//        }
         
         if indexPath.item <= 1 {
             return CGSize(width: collectionView.frame.width  , height: 748)
@@ -129,7 +104,7 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
     // header size
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         if (section == 0) {
-            return CGSize(width: collectionView.frame.width, height: 393)
+            return CGSize(width: collectionView.frame.width, height: 294)
         } else {
              //refact
             return CGSize.zero
@@ -160,12 +135,11 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
         
         switch kind {
         case UICollectionView.elementKindSectionHeader:
-            guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MypageCRV.identifier, for: indexPath) as? MypageCRV else {
+            guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: OthersPageCRV.identifier, for: indexPath) as? OthersPageCRV else {
                 assert(false, "응 아니야")
             }
          
-            headerView.delegate = self
-//            mypageCVLayout.mypageCRVDelegate = headerView
+//            othersPageCVLayout.mypageCRVDelegate = headerView
             
             return headerView
         default:
@@ -177,17 +151,3 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension MypageVC: MypageCVCDelegate {
-    func myAnswerItem() {
-        directionMenu = 0
-        mypageCollectionView.reloadData()
-    }
-    
-    func othersAnswerItem() {
-        directionMenu = 1
-        mypageCollectionView.reloadData()
-    }
-    
-    
-    
-}
