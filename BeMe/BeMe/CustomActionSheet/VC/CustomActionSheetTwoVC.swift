@@ -13,8 +13,8 @@ class CustomActionSheetTwoVC: UIViewController {
     @IBOutlet weak var firstItemImageView: UIImageView!
     @IBOutlet weak var firstItemLabel: UILabel!
     @IBOutlet weak var secondItemImageView: UIImageView!
-    @IBOutlet weak var secondeItemLabel: UILabel!
-    
+    @IBOutlet weak var secondItemLabel: UILabel!
+    @IBOutlet weak var cancelButton: UIButton!
     
     var alertInformations: AlertLabels?
     
@@ -26,8 +26,8 @@ class CustomActionSheetTwoVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("seconde")
+        
+        cancelButton.layer.addBorder([.top], color: .lightGray, width: 1.0)
         if let alertInfo = alertInformations {
             setSettings(by: alertInfo, color: color)
             
@@ -38,17 +38,17 @@ class CustomActionSheetTwoVC: UIViewController {
     }
     
     func onlySecondItemColor() {
-        secondeItemLabel.textColor = secondColor
+        secondItemLabel.textColor = secondColor
     }
     func setSettings(by settings: AlertLabels, color: UIColor?) {
         firstItemImageView.image = UIImage(named: "\(settings.icons[0])")
         firstItemLabel.text = settings.names[0]
         secondItemImageView.image = UIImage(named: settings.icons[1])
-        secondeItemLabel.text = settings.names[1]
+        secondItemLabel.text = settings.names[1]
         
         if let c = color {
             firstItemLabel.textColor = c
-            secondeItemLabel.textColor = c
+            secondItemLabel.textColor = c
         }
     }
     
@@ -72,7 +72,12 @@ class CustomActionSheetTwoVC: UIViewController {
     }
     
     @IBAction func secondItemTapped(_ sender: Any) {
-        
+        print("FirstTapped")
+        if secondItemLabel.text == AlertLabels.myComment.names[1] {
+            NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil, userInfo: ["action": "commentDelete"])
+        } else if secondItemLabel.text == AlertLabels.otherCommentNotMyArticle.names[1] {
+            NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil, userInfo: ["action": "block"])
+        }
         self.dismiss(animated: true, completion: nil)
     }
     

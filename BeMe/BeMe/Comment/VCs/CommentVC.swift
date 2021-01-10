@@ -43,7 +43,7 @@ class CommentVC: UIViewController {
     var parentId: Int?
     var selectedIndex: IndexPath?
     
-    // 댓글수정
+    // 댓글에 대한 더보기 설정을 위한 변수들
     var selectedCommentId: Int?
     var selectedCommentContent: String?
     var isEditingComment: Bool = false
@@ -349,6 +349,39 @@ extension CommentVC {
         }
     }
     
+    private func deleteComment() {
+        CommentService.shared.deleteComment(commentId: selectedCommentId!) { (result) in
+            switch result {
+            case .success(let data):
+                guard let _ = data as? GenericResponse<Comment> else { return }
+
+                self.getAnswerDetail()
+                self.showToast(message: "댓글이 삭제되었습니다.", font: UIFont(name: "AppleSDGothicNeo-Medium", size: 14.0) ?? UIFont.systemFont(ofSize: 14.0))
+            case .requestErr(let message):
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                
+            case .pathErr: print("path")
+            case .serverErr:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+                print("serverErr")
+            case .networkFail:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+            }
+        }
+    }
+    
     private func setCommentView() {
         commentBorderView.setBorderWithRadius(borderColor: UIColor.Border.textView, borderWidth: 1.0, cornerRadius: 6.0)
         commentTextView.text = "댓글 달기"
@@ -376,6 +409,7 @@ extension CommentVC {
     }
     
     @objc func closePopup(_ notification: Notification) {
+        print("SecondTapped")
         popupBackgroundView.animatePopupBackground(false)
         guard let userInfo = notification.userInfo as? [String:Any] else { return }
         guard let action = userInfo["action"] as? String else { return }
@@ -388,9 +422,23 @@ extension CommentVC {
             commentTextView.becomeFirstResponder()
             commentTableView.scrollToRow(at: selectedIndexPath!, at: .middle, animated: true)
             
-        } else {
+        } else if action == "report" {
+            // 메일 띄우기
+        } else if action == "commentDelete" {
             
+            deleteComment()
+            
+        } else if action == "block" {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.21) {
+                
+                let alertViewController = UIAlertController(title: "업데이트 될 예정입니다.", message: "다음 업데이트를 기다려주세요🥰", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+            }
+
         }
+        
         print(action)
     }
     
@@ -525,8 +573,10 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                 
                 guard let secondComment = tableView.dequeueReusableCell(withIdentifier: SecondCommentTVC.identifier, for: indexPath) as? SecondCommentTVC else { return UITableViewCell() }
  
+                secondComment.delegate = self
+                secondComment.indexPath = indexPath
 
-                secondComment.setInformation(profileImage: realCommentArray[indexPath.section-1].children[indexPath.row-1].profileImg, nickName: realCommentArray[indexPath.section-1].children[indexPath.row-1].userNickname, content: realCommentArray[indexPath.section-1].children[indexPath.row-1].content, date: realCommentArray[indexPath.section-1].children[indexPath.row-1].createdAt, isVisible: realCommentArray[indexPath.section-1].children[indexPath.row-1].isVisible, publicFlag: realCommentArray[indexPath.section-1].children[indexPath.row-1].publicFlag)
+                secondComment.setInformation(profileImage: realCommentArray[indexPath.section-1].children[indexPath.row-1].profileImg, nickName: realCommentArray[indexPath.section-1].children[indexPath.row-1].userNickname, content: realCommentArray[indexPath.section-1].children[indexPath.row-1].content, date: realCommentArray[indexPath.section-1].children[indexPath.row-1].createdAt, isVisible: realCommentArray[indexPath.section-1].children[indexPath.row-1].isVisible, publicFlag: realCommentArray[indexPath.section-1].children[indexPath.row-1].publicFlag, isAuthor: realCommentArray[indexPath.section-1].children[indexPath.row-1].isAuthor, commentId: realCommentArray[indexPath.section-1].children[indexPath.row-1].id)
                 
                 
                 return secondComment
@@ -625,7 +675,33 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
             selectedCommentContent = content
             self.present(settingActionSheet, animated: true, completion: nil)
         } else {
+            if answerDetail!.isAuthor {
+                guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: nil).instantiateViewController(withIdentifier: CustomActionSheetVC.identifier) as?
+                        CustomActionSheetVC else { return }
             
+                settingActionSheet.alertInformations = AlertLabels.otherCommentMyArticle
+                settingActionSheet.color = .grapefruit
+                settingActionSheet.modalPresentationStyle = .overCurrentContext
+            
+                selectedIndexPath = indexPath
+                selectedCommentId = commentId
+                selectedCommentContent = content
+                
+                self.present(settingActionSheet, animated: true, completion: nil)
+            } else {
+                guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: nil).instantiateViewController(withIdentifier: CustomActionSheetTwoVC.identifier) as?
+                        CustomActionSheetTwoVC else { return }
+            
+                settingActionSheet.alertInformations = AlertLabels.otherCommentNotMyArticle
+                settingActionSheet.color = .grapefruit
+                settingActionSheet.modalPresentationStyle = .overCurrentContext
+            
+                selectedIndexPath = indexPath
+                selectedCommentId = commentId
+                selectedCommentContent = content
+                
+                self.present(settingActionSheet, animated: true, completion: nil)
+            }
         }
         
     }

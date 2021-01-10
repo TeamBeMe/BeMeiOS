@@ -16,12 +16,20 @@ class SecondCommentTVC: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var settingButton: UIButton!
     
+    var delegate: UITableViewButtonSelectedDelegate?
+    
+    var indexPath: IndexPath?
+
+    var isAuthor: Bool?
+    
+    var commentId: Int?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 //        contentTextViewHeight.constant = contentTextView.contentSize.height
     }
 
-    func setInformation(profileImage: String, nickName: String, content: String, date: String, isVisible: Bool, publicFlag: Bool) {
+    func setInformation(profileImage: String, nickName: String, content: String, date: String, isVisible: Bool, publicFlag: Bool, isAuthor: Bool, commentId: Int) {
         if isVisible {
             if profileImage == "" {
                 profileImageView.image = UIImage.init(named: "imgProfile")
@@ -43,10 +51,11 @@ class SecondCommentTVC: UITableViewCell {
             settingButton.isHidden = true
         }
         
-        
+        self.isAuthor = isAuthor
+        self.commentId = commentId
     }
 
     @IBAction func settingButtonTapped(_ sender: Any) {
-        
+        delegate?.settingButtonDidTapped(to: indexPath!, isAuthor: isAuthor!, commentId: commentId!, content: contentTextView.text!)
     }
 }

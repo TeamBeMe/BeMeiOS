@@ -23,23 +23,21 @@ class CustomActionSheetVC: UIViewController {
     @IBOutlet weak var thirdIcon: UIImageView!
     @IBOutlet weak var thirdLabel: UILabel!
     
+    @IBOutlet weak var cancelButton: UIButton!
+    
     var alertInformations: AlertLabels?
     
     var color: UIColor?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        stackView.layer.addBorder([.bottom], color: .lightGray, width: 1.0)
+        cancelButton.layer.addBorder([.top], color: .lightGray, width: 1.0)
         wrapper.roundCorners(cornerRadius: 10.0)
+        
         if let alertInfo = alertInformations {
             setSettings(by: alertInfo, color: color)
         }
         
-    }
-    
-    @IBAction func closeButtonTapped(_ sender: UIButton) {
-        NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil)
-        self.dismiss(animated: true, completion: nil)
     }
     
     func setSettings(by settings: AlertLabels, color: UIColor?) {
@@ -56,7 +54,53 @@ class CustomActionSheetVC: UIViewController {
             thirdLabel.textColor = color
         }
     }
+    
+    @IBAction func closeButtonTapped(_ sender: UIButton) {
+        NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func firstItemTapped(_ sender: Any) {
+        
+        if firstLabel.text == AlertLabels.otherCommentMyArticle.names[0] {
+            NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil, userInfo: ["action": "report"])
+        }
+        
+        self.dismiss(animated: true) {
+            
+            
+        }
+    }
+    
+    
+    @IBAction func secondItemTapped(_ sender: Any) {
+        if firstLabel.text == AlertLabels.otherCommentMyArticle.names[1] {
+            NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil, userInfo: ["action": "block"])
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func thirdItemTapped(_ sender: Any) {
+        if firstLabel.text == AlertLabels.otherCommentMyArticle.names[2] {
+            NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil, userInfo: ["action": "commentDelete"])
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    
 }
+
+
+
+
+
+
+
 
 extension CALayer {
     func addBorder(_ arr_edge: [UIRectEdge], color: UIColor, width: CGFloat) {
