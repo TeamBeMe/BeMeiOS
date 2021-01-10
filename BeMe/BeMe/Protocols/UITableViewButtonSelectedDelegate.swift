@@ -10,7 +10,7 @@ import Foundation
 protocol UITableViewButtonSelectedDelegate: class {
     
     // 탐색 디테일 페이지의 설정 버튼 눌릴때 + 댓글 페이지의 설정 버튼 누를때
-    func settingButtonDidTapped(to indexPath: IndexPath, isAuthor: Bool)
+    func settingButtonDidTapped(to indexPath: IndexPath, isAuthor: Bool, commentId: Int, content: String)
     
     // 댓글 페이지의 댓글 보기 버튼 눌릴 때
     func moreCellButtonDidTapped(to indexPath: IndexPath, isSecret: Int)
@@ -38,7 +38,7 @@ protocol UITableViewButtonSelectedDelegate: class {
 }
 
 extension UITableViewButtonSelectedDelegate {
-    func settingButtonDidTapped(to indexPath: IndexPath, isAuthor: Bool) {}
+    func settingButtonDidTapped(to indexPath: IndexPath, isAuthor: Bool, commentId: Int, content: String) {}
     
     func moreCellButtonDidTapped(to: IndexPath, isSecret: Int) {}
     

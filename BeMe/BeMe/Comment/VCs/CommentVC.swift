@@ -38,14 +38,19 @@ class CommentVC: UIViewController {
     
     var isMyAnswer: Bool = false
     
+    // 대댓글달기
     var isCommentToComment: Bool = false
-    
     var parentId: Int?
-    
     var selectedIndex: IndexPath?
     
-    private var isPublic: Bool = true
+    // 댓글수정
+    var selectedCommentId: Int?
+    var selectedCommentContent: String?
+    var isEditingComment: Bool = false
+    var selectedIndexPath: IndexPath?
     
+    // 댓글 공개 유무 default
+    private var isPublic: Bool = true
     private var isScrapped: Bool = false {
         didSet {
             
@@ -138,19 +143,25 @@ class CommentVC: UIViewController {
         
         // 서버 통신
         if let comment = commentTextView.text {
-            if isCommentToComment {
-                
-                if let selectedIndex = selectedIndex {
-                    sendComment(content: comment, parentId: parentId)
-                    
-                    
-                    commentTableView.reloadData()
-                    commentTableView.scrollToRow(at: selectedIndex, at: .bottom, animated: true)
-                }
-                isCommentToComment = false
+            if isEditingComment {
+                editComment()
+                isEditingComment = false
             } else {
-                sendComment(content: comment, parentId: nil)
+                if isCommentToComment {
+                    
+                    if let selectedIndex = selectedIndex {
+                        sendComment(content: comment, parentId: parentId)
+                        
+                        
+                        commentTableView.reloadData()
+                        commentTableView.scrollToRow(at: selectedIndex, at: .bottom, animated: true)
+                    }
+                    isCommentToComment = false
+                } else {
+                    sendComment(content: comment, parentId: nil)
+                }
             }
+            
         }
 
         commentTextView.text = ""
@@ -167,19 +178,53 @@ class CommentVC: UIViewController {
     
     @IBAction func lockButtonTapped(_ sender: UIButton) {
         
-        if isPublic {
-            isPublic = false
-            lockButton.setImage(UIImage.init(named: "btnUnlock"), for: .normal)
+        if isEditingComment {
+            showToast(message: "댓글 공개범위는 수정이 불가능합니다.", font: UIFont(name: "AppleSDGothicNeo-Medium", size: 14.0) ?? UIFont.systemFont(ofSize: 14.0))
         } else {
-            isPublic = true
-            lockButton.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
+            if isPublic {
+                isPublic = false
+                lockButton.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
+            } else {
+                isPublic = true
+                lockButton.setImage(UIImage.init(named: "btnUnlock"), for: .normal)
+            }
+
         }
-        
+                
     }
 }
 
 //MARK: - Private Method
 extension CommentVC {
+    
+    private func showToast(message : String, font: UIFont = UIFont.systemFont(ofSize: 14.0)) {
+        let toastLabel = UILabel()
+        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        toastLabel.textColor = UIColor.white
+        toastLabel.font = font
+        toastLabel.textAlignment = .center
+        toastLabel.text = message
+        
+        toastLabel.alpha = 1.0
+        toastLabel.layer.cornerRadius = 10;
+        toastLabel.clipsToBounds = true
+        
+        self.view.addSubview(toastLabel)
+        
+        toastLabel.translatesAutoresizingMaskIntoConstraints = false
+        toastLabel.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 15.0).isActive = true
+        toastLabel.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -15.0).isActive = true
+        toastLabel.bottomAnchor.constraint(equalTo: commentTextWrapper.topAnchor, constant: -15.0).isActive = true
+        toastLabel.heightAnchor.constraint(equalToConstant: 52.0).isActive = true
+        
+        UIView.animate(withDuration: 2.0, delay: 0.1, options: .curveEaseOut, animations: {
+                        toastLabel.alpha = 0.0
+            
+        }, completion: {
+                            (isCompleted) in toastLabel.removeFromSuperview()
+                            
+                        })
+    }
     
     private func sendComment(content: String, parentId: Int?) {
         CommentService.shared.postComment(answerId: answerId!, content: content, parentId: parentId,
@@ -269,6 +314,40 @@ extension CommentVC {
         }
     }
 
+    private func editComment() {
+        CommentService.shared.putComment(commentId: selectedCommentId!, content: commentTextView.text!) {
+            (result) in
+            switch result {
+            case .success(let data):
+                guard let _ = data as? GenericResponse<Comment> else { return }
+
+                self.commentTableView.scrollToRow(at: self.selectedIndexPath!, at: .middle, animated: true)
+                self.getAnswerDetail()
+                
+            case .requestErr(let message):
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                
+            case .pathErr: print("path")
+            case .serverErr:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+                print("serverErr")
+            case .networkFail:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+            }
+        }
+    }
     
     private func setCommentView() {
         commentBorderView.setBorderWithRadius(borderColor: UIColor.Border.textView, borderWidth: 1.0, cornerRadius: 6.0)
@@ -301,12 +380,21 @@ extension CommentVC {
         guard let userInfo = notification.userInfo as? [String:Any] else { return }
         guard let action = userInfo["action"] as? String else { return }
         
+        if action == "commentPut" {
+            
+            isEditingComment = true
+            commentTextView.textColor = .black
+            commentTextView.text = selectedCommentContent
+            commentTextView.becomeFirstResponder()
+            commentTableView.scrollToRow(at: selectedIndexPath!, at: .middle, animated: true)
+            
+        } else {
+            
+        }
         print(action)
-        
-        
     }
     
-    
+//    private func
     @objc func keyboardWillShow(_ sender: Notification) {
         handleKeyboardIssue(sender, isAppearing: true)
     }
@@ -407,7 +495,7 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                         }
                     }
                     
-
+//                    print(realCommentArray[indexPath.section-1].publicFlag)
                     comment.setInformations(profileImage: realCommentArray[indexPath.section-1].profileImg, nickName: realCommentArray[indexPath.section-1].userNickname, publicFlag: realCommentArray[indexPath.section-1].publicFlag, isVisible: realCommentArray[indexPath.section-1].isVisible, content: realCommentArray[indexPath.section-1].content, date: realCommentArray[indexPath.section-1].createdAt, commentId: realCommentArray[indexPath.section-1].id, isAuthor: realCommentArray[indexPath.section-1].isAuthor)
                     
                     return comment
@@ -437,8 +525,7 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                 
                 guard let secondComment = tableView.dequeueReusableCell(withIdentifier: SecondCommentTVC.identifier, for: indexPath) as? SecondCommentTVC else { return UITableViewCell() }
  
-                print(realCommentArray[indexPath.section-1].children[indexPath.row-1].userNickname)
-                
+
                 secondComment.setInformation(profileImage: realCommentArray[indexPath.section-1].children[indexPath.row-1].profileImg, nickName: realCommentArray[indexPath.section-1].children[indexPath.row-1].userNickname, content: realCommentArray[indexPath.section-1].children[indexPath.row-1].content, date: realCommentArray[indexPath.section-1].children[indexPath.row-1].createdAt, isVisible: realCommentArray[indexPath.section-1].children[indexPath.row-1].isVisible, publicFlag: realCommentArray[indexPath.section-1].children[indexPath.row-1].publicFlag)
                 
                 
@@ -520,9 +607,10 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
     }
     
     
-    func settingButtonDidTapped(to indexPath: IndexPath, isAuthor: Bool) {
+    func settingButtonDidTapped(to indexPath: IndexPath, isAuthor: Bool, commentId: Int, content: String) {
         
         popupBackgroundView.animatePopupBackground(true)
+        
         if isAuthor {
             guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: nil).instantiateViewController(withIdentifier: CustomActionSheetTwoVC.identifier) as?
                     CustomActionSheetTwoVC else { return }
@@ -531,8 +619,10 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
             settingActionSheet.isOnlySecondTextColored = true
             settingActionSheet.secondColor = UIColor.init(named: "grapefruit")
             settingActionSheet.modalPresentationStyle = .overCurrentContext
-            
-            print("first")
+        
+            selectedIndexPath = indexPath
+            selectedCommentId = commentId
+            selectedCommentContent = content
             self.present(settingActionSheet, animated: true, completion: nil)
         } else {
             

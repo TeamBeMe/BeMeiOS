@@ -66,7 +66,7 @@ class CommentTVC: UITableViewCell {
     
     @IBAction func settingButtonTapped(_ sender: UIButton) {
         
-        delegate?.settingButtonDidTapped(to: indexPath!, isAuthor: isAuthor!)
+        delegate?.settingButtonDidTapped(to: indexPath!, isAuthor: isAuthor!, commentId: commentId!, content: contentTextView.text!)
     }
     
     @IBAction func sendAnswerButtonTapped(_ sender: UIButton) {
