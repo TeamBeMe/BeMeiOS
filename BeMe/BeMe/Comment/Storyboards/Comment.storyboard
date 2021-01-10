@@ -2359,6 +2359,33 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gBK-a7-S7A">
+                                <rect key="frame" x="0.0" y="645.33333333333337" width="375" height="36"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="genie_self 님에게 답글을 남기는 중" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MI6-sf-Vfc">
+                                        <rect key="frame" x="30" y="9.6666666666666288" width="193" height="17"/>
+                                        <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
+                                        <color key="textColor" red="0.3529411764705882" green="0.3529411764705882" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xX2-WH-VmM">
+                                        <rect key="frame" x="309" y="0.0" width="36" height="36"/>
+                                        <state key="normal" image="btnDelete36"/>
+                                        <connections>
+                                            <action selector="cancelCoCButtonTapped:" destination="CUp-WV-7Pi" eventType="touchUpInside" id="dfa-sM-Kb0"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="MI6-sf-Vfc" firstAttribute="leading" secondItem="gBK-a7-S7A" secondAttribute="leading" constant="30" id="2Bs-id-3iL"/>
+                                    <constraint firstItem="MI6-sf-Vfc" firstAttribute="centerY" secondItem="gBK-a7-S7A" secondAttribute="centerY" id="VSo-mj-3G9"/>
+                                    <constraint firstItem="xX2-WH-VmM" firstAttribute="top" secondItem="gBK-a7-S7A" secondAttribute="top" id="Yq6-cq-TlC"/>
+                                    <constraint firstAttribute="trailing" secondItem="xX2-WH-VmM" secondAttribute="trailing" constant="30" id="g21-Jh-Q5y"/>
+                                    <constraint firstAttribute="bottom" secondItem="xX2-WH-VmM" secondAttribute="bottom" id="omK-A9-w0a"/>
+                                    <constraint firstAttribute="height" constant="36" id="sZw-JQ-mHZ"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kWY-2T-1VS" userLabel="SafeArea">
                                 <rect key="frame" x="0.0" y="778" width="375" height="34"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2366,33 +2393,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O6P-Fc-4Wx">
                                 <rect key="frame" x="0.0" y="681.33333333333337" width="375" height="96.666666666666629"/>
                                 <subviews>
-                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gBK-a7-S7A">
-                                        <rect key="frame" x="0.0" y="-36" width="375" height="36"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="genie_self 님에게 답글을 남기는 중" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MI6-sf-Vfc">
-                                                <rect key="frame" x="30" y="9.6666666666666288" width="193" height="17"/>
-                                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="14"/>
-                                                <color key="textColor" red="0.3529411764705882" green="0.3529411764705882" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xX2-WH-VmM">
-                                                <rect key="frame" x="309" y="0.0" width="36" height="36"/>
-                                                <state key="normal" image="btnDelete36"/>
-                                                <connections>
-                                                    <action selector="cancelCoCButtonTapped:" destination="CUp-WV-7Pi" eventType="touchUpInside" id="dfa-sM-Kb0"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.94901960784313721" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstItem="MI6-sf-Vfc" firstAttribute="leading" secondItem="gBK-a7-S7A" secondAttribute="leading" constant="30" id="2Bs-id-3iL"/>
-                                            <constraint firstItem="MI6-sf-Vfc" firstAttribute="centerY" secondItem="gBK-a7-S7A" secondAttribute="centerY" id="VSo-mj-3G9"/>
-                                            <constraint firstItem="xX2-WH-VmM" firstAttribute="top" secondItem="gBK-a7-S7A" secondAttribute="top" id="Yq6-cq-TlC"/>
-                                            <constraint firstAttribute="trailing" secondItem="xX2-WH-VmM" secondAttribute="trailing" constant="30" id="g21-Jh-Q5y"/>
-                                            <constraint firstAttribute="bottom" secondItem="xX2-WH-VmM" secondAttribute="bottom" id="omK-A9-w0a"/>
-                                            <constraint firstAttribute="height" constant="36" id="sZw-JQ-mHZ"/>
-                                        </constraints>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ag1-5a-RcA">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
                                         <color key="backgroundColor" name="seperatorColor"/>
@@ -2454,14 +2454,11 @@
                                     <constraint firstItem="io2-te-fuu" firstAttribute="top" secondItem="O6P-Fc-4Wx" secondAttribute="top" constant="16" id="FsX-qc-rXY"/>
                                     <constraint firstAttribute="trailing" secondItem="XEA-qM-J8r" secondAttribute="trailing" constant="18" id="Fsm-ax-9By"/>
                                     <constraint firstAttribute="height" priority="249" constant="72" id="LG5-1b-0Z1"/>
-                                    <constraint firstAttribute="trailing" secondItem="gBK-a7-S7A" secondAttribute="trailing" id="P9S-1t-vsg"/>
                                     <constraint firstAttribute="trailing" secondItem="ag1-5a-RcA" secondAttribute="trailing" id="YFv-aQ-0LX"/>
                                     <constraint firstAttribute="bottom" secondItem="XEA-qM-J8r" secondAttribute="bottom" constant="18" id="Z3Y-pj-lSp"/>
-                                    <constraint firstItem="gBK-a7-S7A" firstAttribute="top" secondItem="O6P-Fc-4Wx" secondAttribute="top" constant="-36" id="kPD-89-CnY"/>
                                     <constraint firstItem="ag1-5a-RcA" firstAttribute="leading" secondItem="O6P-Fc-4Wx" secondAttribute="leading" id="nUa-OV-0x6"/>
                                     <constraint firstItem="ag1-5a-RcA" firstAttribute="top" secondItem="O6P-Fc-4Wx" secondAttribute="top" id="p6I-gX-VND"/>
                                     <constraint firstItem="io2-te-fuu" firstAttribute="leading" secondItem="O6P-Fc-4Wx" secondAttribute="leading" constant="30" id="sEB-K1-8Sw"/>
-                                    <constraint firstItem="gBK-a7-S7A" firstAttribute="leading" secondItem="O6P-Fc-4Wx" secondAttribute="leading" id="sTg-Pz-ljd"/>
                                     <constraint firstItem="XEA-qM-J8r" firstAttribute="leading" secondItem="io2-te-fuu" secondAttribute="trailing" constant="12" id="sil-eU-1eg"/>
                                     <constraint firstAttribute="bottom" secondItem="io2-te-fuu" secondAttribute="bottom" constant="14" id="z73-n5-jfR"/>
                                 </constraints>
@@ -2476,12 +2473,15 @@
                             <constraint firstItem="sm5-PO-UMz" firstAttribute="trailing" secondItem="vck-WQ-yRY" secondAttribute="trailing" id="AUD-vQ-IOU"/>
                             <constraint firstItem="vck-WQ-yRY" firstAttribute="top" secondItem="sm5-PO-UMz" secondAttribute="top" id="IxE-xf-Q2M"/>
                             <constraint firstItem="O6P-Fc-4Wx" firstAttribute="bottom" secondItem="kWY-2T-1VS" secondAttribute="top" id="LYY-KV-rVY"/>
+                            <constraint firstItem="gBK-a7-S7A" firstAttribute="leading" secondItem="sm5-PO-UMz" secondAttribute="leading" id="Lun-Fu-hyd"/>
                             <constraint firstItem="hca-ti-H8F" firstAttribute="top" secondItem="vck-WQ-yRY" secondAttribute="bottom" id="Mut-fC-lo1"/>
                             <constraint firstAttribute="bottom" secondItem="kWY-2T-1VS" secondAttribute="bottom" id="Ov1-LP-iWD"/>
+                            <constraint firstItem="O6P-Fc-4Wx" firstAttribute="top" secondItem="gBK-a7-S7A" secondAttribute="bottom" id="Ow1-RP-3M2"/>
                             <constraint firstItem="sm5-PO-UMz" firstAttribute="trailing" secondItem="O6P-Fc-4Wx" secondAttribute="trailing" id="Tg3-8J-Eid"/>
                             <constraint firstItem="sm5-PO-UMz" firstAttribute="trailing" secondItem="kWY-2T-1VS" secondAttribute="trailing" id="Ywx-25-Ra0"/>
                             <constraint firstItem="O6P-Fc-4Wx" firstAttribute="leading" secondItem="sm5-PO-UMz" secondAttribute="leading" id="j7Q-7I-c0a"/>
                             <constraint firstItem="sm5-PO-UMz" firstAttribute="bottom" secondItem="O6P-Fc-4Wx" secondAttribute="bottom" id="lnX-c6-2C6"/>
+                            <constraint firstItem="sm5-PO-UMz" firstAttribute="trailing" secondItem="gBK-a7-S7A" secondAttribute="trailing" id="mXo-uO-jSg"/>
                             <constraint firstItem="hca-ti-H8F" firstAttribute="leading" secondItem="sm5-PO-UMz" secondAttribute="leading" id="oxq-wf-MfB"/>
                             <constraint firstItem="kWY-2T-1VS" firstAttribute="leading" secondItem="sm5-PO-UMz" secondAttribute="leading" id="t7N-uT-1lX"/>
                         </constraints>
