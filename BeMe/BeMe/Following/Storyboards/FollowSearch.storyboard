@@ -76,7 +76,7 @@
                                 </constraints>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xEn-bj-oKU">
-                                <rect key="frame" x="0.0" y="148" width="414" height="714"/>
+                                <rect key="frame" x="0.0" y="128" width="414" height="734"/>
                                 <connections>
                                     <segue destination="Mz5-bJ-g7e" kind="embed" identifier="followSearchSegue" id="onp-BM-Yjz"/>
                                 </connections>
@@ -91,7 +91,7 @@
                             <constraint firstItem="xEn-bj-oKU" firstAttribute="leading" secondItem="bGM-YI-c6z" secondAttribute="leading" id="SlA-Nh-H7X"/>
                             <constraint firstItem="bGM-YI-c6z" firstAttribute="bottom" secondItem="xEn-bj-oKU" secondAttribute="bottom" id="m3b-94-tbT"/>
                             <constraint firstItem="bGM-YI-c6z" firstAttribute="trailing" secondItem="Uyy-t3-q7l" secondAttribute="trailing" id="pVO-Ds-Yd5"/>
-                            <constraint firstItem="xEn-bj-oKU" firstAttribute="top" secondItem="Uyy-t3-q7l" secondAttribute="bottom" constant="20" id="wsW-IL-7fD"/>
+                            <constraint firstItem="xEn-bj-oKU" firstAttribute="top" secondItem="Uyy-t3-q7l" secondAttribute="bottom" id="wsW-IL-7fD"/>
                         </constraints>
                     </view>
                     <connections>
@@ -122,7 +122,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="t2h-jE-xer">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="j8Z-Bv-BhF">
                                     <size key="itemSize" width="374" height="115"/>
@@ -207,17 +207,38 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="검색" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ro2-Be-pWk">
+                                <rect key="frame" x="30" y="22" width="354" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="6wg-9O-gxF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icSearch" translatesAutoresizingMaskIntoConstraints="NO" id="T2r-cQ-x5n">
+                                <rect key="frame" x="38" y="32" width="17" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="17" id="dwT-38-1Qn"/>
+                                    <constraint firstAttribute="height" constant="17" id="t4Y-Ip-QdZ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Eds-dy-VwG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="t2h-jE-xer" firstAttribute="top" secondItem="Ro2-Be-pWk" secondAttribute="bottom" constant="30" id="70j-bx-ws9"/>
+                            <constraint firstItem="Ro2-Be-pWk" firstAttribute="top" secondItem="tSp-Sw-hxY" secondAttribute="top" constant="22" id="CaZ-kk-1z5"/>
+                            <constraint firstItem="T2r-cQ-x5n" firstAttribute="top" secondItem="Ro2-Be-pWk" secondAttribute="top" constant="10" id="Gyn-N5-hPy"/>
+                            <constraint firstItem="Ro2-Be-pWk" firstAttribute="leading" secondItem="Eds-dy-VwG" secondAttribute="leading" constant="30" id="Iuq-Ry-2H6"/>
                             <constraint firstItem="Eds-dy-VwG" firstAttribute="trailing" secondItem="t2h-jE-xer" secondAttribute="trailing" id="MnJ-AS-zR6"/>
+                            <constraint firstItem="Eds-dy-VwG" firstAttribute="trailing" secondItem="Ro2-Be-pWk" secondAttribute="trailing" constant="30" id="R4c-Zd-ySZ"/>
                             <constraint firstItem="Eds-dy-VwG" firstAttribute="bottom" secondItem="t2h-jE-xer" secondAttribute="bottom" id="Rn0-u7-5vU"/>
-                            <constraint firstItem="t2h-jE-xer" firstAttribute="top" secondItem="tSp-Sw-hxY" secondAttribute="top" id="hsG-Af-zGi"/>
                             <constraint firstItem="t2h-jE-xer" firstAttribute="leading" secondItem="Eds-dy-VwG" secondAttribute="leading" id="kWn-SE-oqb"/>
+                            <constraint firstItem="T2r-cQ-x5n" firstAttribute="leading" secondItem="Eds-dy-VwG" secondAttribute="leading" constant="38" id="mic-kv-4cq"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="searchTextField" destination="Ro2-Be-pWk" id="AHG-8v-whg"/>
                         <outlet property="wholeCollectionView" destination="t2h-jE-xer" id="8EG-fi-TBY"/>
                     </connections>
                 </viewController>
@@ -234,7 +255,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gLV-yF-Hja">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="wta-37-FMu">
                                     <size key="itemSize" width="393" height="104"/>
@@ -294,7 +315,7 @@
                                                         <constraint firstAttribute="height" constant="27" id="GtN-WA-jnb"/>
                                                         <constraint firstAttribute="width" constant="56" id="ok4-Rg-Dxc"/>
                                                     </constraints>
-                                                    <state key="normal" image="text.justify" catalog="system"/>
+                                                    <state key="normal" image="btnMore"/>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -314,17 +335,38 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="검색" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Fhw-AU-fBW">
+                                <rect key="frame" x="30" y="22" width="354" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="0jf-Ld-8WY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="search"/>
+                            </textField>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icSearch" translatesAutoresizingMaskIntoConstraints="NO" id="sV2-MC-UQy">
+                                <rect key="frame" x="38" y="32" width="17" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="17" id="R0N-Pu-YwF"/>
+                                    <constraint firstAttribute="width" constant="17" id="xfN-rc-M7c"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="r2d-xj-fxE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="r2d-xj-fxE" firstAttribute="bottom" secondItem="gLV-yF-Hja" secondAttribute="bottom" id="AZu-vw-nRJ"/>
-                            <constraint firstItem="gLV-yF-Hja" firstAttribute="top" secondItem="MVl-Y2-TZC" secondAttribute="top" id="Je4-VT-dNe"/>
+                            <constraint firstItem="gLV-yF-Hja" firstAttribute="top" secondItem="Fhw-AU-fBW" secondAttribute="bottom" constant="30" id="Je4-VT-dNe"/>
+                            <constraint firstItem="sV2-MC-UQy" firstAttribute="top" secondItem="Fhw-AU-fBW" secondAttribute="top" constant="10" id="U9f-8C-aes"/>
+                            <constraint firstItem="Fhw-AU-fBW" firstAttribute="top" secondItem="MVl-Y2-TZC" secondAttribute="top" constant="22" id="aa1-Em-cik"/>
                             <constraint firstItem="r2d-xj-fxE" firstAttribute="trailing" secondItem="gLV-yF-Hja" secondAttribute="trailing" id="dLc-S8-Bou"/>
+                            <constraint firstItem="sV2-MC-UQy" firstAttribute="leading" secondItem="r2d-xj-fxE" secondAttribute="leading" constant="38" id="mOc-23-lC4"/>
+                            <constraint firstItem="Fhw-AU-fBW" firstAttribute="leading" secondItem="r2d-xj-fxE" secondAttribute="leading" constant="30" id="rj6-P0-Ez4"/>
+                            <constraint firstItem="r2d-xj-fxE" firstAttribute="trailing" secondItem="Fhw-AU-fBW" secondAttribute="trailing" constant="30" id="uUS-Eo-hQm"/>
                             <constraint firstItem="gLV-yF-Hja" firstAttribute="leading" secondItem="r2d-xj-fxE" secondAttribute="leading" id="yID-yj-aec"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="searchTextField" destination="Fhw-AU-fBW" id="656-b9-P0v"/>
                         <outlet property="wholeCollectionView" destination="gLV-yF-Hja" id="Cxo-AH-FHM"/>
                     </connections>
                 </viewController>
@@ -335,8 +377,9 @@
     </scenes>
     <resources>
         <image name="btnArrlowLeft" width="44" height="44"/>
+        <image name="btnMore" width="44" height="44"/>
+        <image name="icSearch" width="17" height="17"/>
         <image name="imgProfile" width="34" height="34"/>
-        <image name="text.justify" catalog="system" width="128" height="100"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
