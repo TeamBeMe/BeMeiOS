@@ -14,7 +14,7 @@ class FollowerSearchVC: UIViewController {
     var isSearching = false
     @IBOutlet weak var searchTextField: UITextField!
     var followAlertDelegate: FollowAlertDelegate?
-    
+    let customEmptyView = CustomEmptyView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,16 +26,16 @@ class FollowerSearchVC: UIViewController {
         searchTextField.delegate = self
     }
     
-
-  
-
+    
+    
+    
 }
 extension FollowerSearchVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
- 
-         if !isSearching {
+        
+        if !isSearching {
             guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: FollowerListCVC.identifier,
                     for: indexPath) as? FollowerListCVC else {return UICollectionViewCell()}
@@ -45,16 +45,16 @@ extension FollowerSearchVC : UICollectionViewDataSource {
             return cell
             
         }
-         else{
-             guard let cell = collectionView.dequeueReusableCell(
-                     withReuseIdentifier: FollowerListCVC.identifier,
-                     for: indexPath) as? FollowerListCVC else {return UICollectionViewCell()}
+        else{
+            guard let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: FollowerListCVC.identifier,
+                    for: indexPath) as? FollowerListCVC else {return UICollectionViewCell()}
             cell.tableViewDelegate = self
-             cell.findPeopleSearchData = searched[indexPath.item]
-             cell.setSearchedItem()
-             return cell
-             
-         }
+            cell.findPeopleSearchData = searched[indexPath.item]
+            cell.setSearchedItem()
+            return cell
+            
+        }
         
         
         
@@ -63,10 +63,39 @@ extension FollowerSearchVC : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
         if isSearching == false{
+            if followers.count == 0{
+                customEmptyView.setItems(text: "나를 팔로우 한 사람이 없습니다.")
+                view.addSubview(customEmptyView)
+                customEmptyView.snp.makeConstraints{
+                    $0.leading.trailing.equalToSuperview()
+                    $0.top.equalToSuperview().offset(157)
+                    $0.height.equalTo(80)
+                    
+                }
+            }
+            else{
+                customEmptyView.removeFromSuperview()
+            }
+            
             return followers.count
         }
+        if searched.count == 0{
+            customEmptyView.setItems(text: "검색 결과가 없습니다.")
+            view.addSubview(customEmptyView)
+            customEmptyView.snp.makeConstraints{
+                $0.leading.trailing.equalToSuperview()
+                $0.top.equalToSuperview().offset(157)
+                $0.height.equalTo(80)
+                
+            }
+        }
+        else{
+            customEmptyView.removeFromSuperview()
+        }
+        
         return searched.count
     }
+    
     
     
 }
@@ -88,7 +117,7 @@ extension FollowerSearchVC : UICollectionViewDelegateFlowLayout {
             return CGSize(width: collectionView.frame.width-60 , height: 40)
             
         }
-      
+        
         
     }
     
@@ -124,11 +153,11 @@ extension FollowerSearchVC : UITextFieldDelegate{
                 self.searched = []
                 print(self.searchTextField.text!)
                 if let searchedData = data as? FindPeopleSearchData{
-
-
+                    
+                    
                     self.searched.append(searchedData)
-
-
+                    
+                    
                 }
                 self.wholeCollectionView.reloadData()
                 print("success")
@@ -142,10 +171,10 @@ extension FollowerSearchVC : UITextFieldDelegate{
                 print("serverErr")
             case .networkFail:
                 print("networkFail")
-
+                
             }
             
-
+            
         }
         
         
@@ -163,7 +192,7 @@ extension FollowerSearchVC : UITextFieldDelegate{
             isSearching = false
             wholeCollectionView.reloadData()
         }
-
+        
     }
     
 }
@@ -176,7 +205,7 @@ extension FollowerSearchVC: FollowMoreButtonMidDelegate {
         print("callll33")
         followAlertDelegate?.showAlert(id: id)
     }
-
+    
 }
 
 protocol FollowMoreButtonMidDelegate{

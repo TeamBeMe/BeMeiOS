@@ -14,7 +14,7 @@ class SearchVC: UIViewController {
     @IBOutlet weak var underTableView: UITableView!
     
     @IBOutlet weak var backButton: UIButton!
-    
+    let customEmptyView = CustomEmptyView()
     var searched: [FindPeopleSearchData] = []
     var historyData: [SearchHistoryData] = []
     
@@ -108,9 +108,23 @@ class SearchVC: UIViewController {
 extension SearchVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchTextField.text == ""{
+            customEmptyView.removeFromSuperview()
             return historyData.count
         }
         else{
+            if searched.count == 0{
+                customEmptyView.setItems(text: "검색 결과가 없습니다.")
+                view.addSubview(customEmptyView)
+                customEmptyView.snp.makeConstraints{
+                    $0.leading.trailing.equalToSuperview()
+                    $0.top.equalToSuperview().offset(286)
+                    $0.height.equalTo(80)
+                    
+                }
+            }
+            else{
+                customEmptyView.removeFromSuperview()
+            }
             return searched.count
         }
     }

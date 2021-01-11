@@ -164,6 +164,7 @@
 		ECB44D5825ACA82C00F491F2 /* FollowingWholeCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB44D5725ACA82C00F491F2 /* FollowingWholeCV.swift */; };
 		ECB44D6125ACAF4A00F491F2 /* animation_relation_final.json in Resources */ = {isa = PBXBuildFile; fileRef = ECB44D5F25ACAF4A00F491F2 /* animation_relation_final.json */; };
 		ECB44D6225ACAF4A00F491F2 /* animation_love_final.json in Resources */ = {isa = PBXBuildFile; fileRef = ECB44D6025ACAF4A00F491F2 /* animation_love_final.json */; };
+		ECB44D6725ACCB4500F491F2 /* CustomEmtpyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB44D6625ACCB4500F491F2 /* CustomEmtpyView.swift */; };
 		ECC630F925A967B7009E4FD4 /* FindPeopleSearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC630F825A967B7009E4FD4 /* FindPeopleSearchData.swift */; };
 		ECC630FF25A967FD009E4FD4 /* FindPeopleSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC630FE25A967FD009E4FD4 /* FindPeopleSearchService.swift */; };
 		ECC6310325A99404009E4FD4 /* FollowingFollowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC6310225A99404009E4FD4 /* FollowingFollowService.swift */; };
@@ -341,6 +342,7 @@
 		ECB44D5725ACA82C00F491F2 /* FollowingWholeCV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingWholeCV.swift; sourceTree = "<group>"; };
 		ECB44D5F25ACAF4A00F491F2 /* animation_relation_final.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_relation_final.json; sourceTree = "<group>"; };
 		ECB44D6025ACAF4A00F491F2 /* animation_love_final.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_love_final.json; sourceTree = "<group>"; };
+		ECB44D6625ACCB4500F491F2 /* CustomEmtpyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmtpyView.swift; sourceTree = "<group>"; };
 		ECC630F825A967B7009E4FD4 /* FindPeopleSearchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPeopleSearchData.swift; sourceTree = "<group>"; };
 		ECC630FE25A967FD009E4FD4 /* FindPeopleSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPeopleSearchService.swift; sourceTree = "<group>"; };
 		ECC6310225A99404009E4FD4 /* FollowingFollowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingFollowService.swift; sourceTree = "<group>"; };
@@ -835,6 +837,7 @@
 				EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */,
 				EC7F0EA025A05460008EB88A /* CustomHomeActionSheetAlert.swift */,
 				ECB44D5425AC9CD800F491F2 /* CustomLoadingView.swift */,
+				ECB44D6625ACCB4500F491F2 /* CustomEmtpyView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -1399,6 +1402,7 @@
 				EC813F242599A15100BBCE25 /* AppDelegate.swift in Sources */,
 				A57F708C25A1ACB100152E89 /* MypageResultTVC.swift in Sources */,
 				D4F1992925A4E804000AF0E7 /* SecretTVC.swift in Sources */,
+				ECB44D6725ACCB4500F491F2 /* CustomEmtpyView.swift in Sources */,
 				D4E07CBA259F22C10075E616 /* MoreTVC.swift in Sources */,
 				EC75A24E25A88AC400F4E160 /* AnswerModifyService.swift in Sources */,
 				D4475F0725AA1B6E00426591 /* ExploreDetailAnswerService.swift in Sources */,
