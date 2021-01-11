@@ -154,6 +154,10 @@
 		EC89E33F259C5EBB00DBAFE5 /* HomeCardCustomFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E33E259C5EBB00DBAFE5 /* HomeCardCustomFlowLayout.swift */; };
 		EC9C5CD025A41E8D0021AF96 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC9C5CCF25A41E8D0021AF96 /* SignUp.storyboard */; };
 		EC9C5CD325A41EAA0021AF96 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC9C5CD225A41EAA0021AF96 /* SignUpVC.swift */; };
+		ECB44D4425AC739B00F491F2 /* FindHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB44D4325AC739B00F491F2 /* FindHistoryService.swift */; };
+		ECB44D4725AC741400F491F2 /* SearchHistoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB44D4625AC741400F491F2 /* SearchHistoryData.swift */; };
+		ECB44D4A25AC76A500F491F2 /* FindDeleteSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB44D4925AC76A500F491F2 /* FindDeleteSearchService.swift */; };
+		ECB44D4D25AC886800F491F2 /* FollowerDeleteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB44D4C25AC886800F491F2 /* FollowerDeleteService.swift */; };
 		ECC630F925A967B7009E4FD4 /* FindPeopleSearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC630F825A967B7009E4FD4 /* FindPeopleSearchData.swift */; };
 		ECC630FF25A967FD009E4FD4 /* FindPeopleSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC630FE25A967FD009E4FD4 /* FindPeopleSearchService.swift */; };
 		ECC6310325A99404009E4FD4 /* FollowingFollowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC6310225A99404009E4FD4 /* FollowingFollowService.swift */; };
@@ -321,6 +325,10 @@
 		EC89E33E259C5EBB00DBAFE5 /* HomeCardCustomFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardCustomFlowLayout.swift; sourceTree = "<group>"; };
 		EC9C5CCF25A41E8D0021AF96 /* SignUp.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
 		EC9C5CD225A41EAA0021AF96 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		ECB44D4325AC739B00F491F2 /* FindHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindHistoryService.swift; sourceTree = "<group>"; };
+		ECB44D4625AC741400F491F2 /* SearchHistoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryData.swift; sourceTree = "<group>"; };
+		ECB44D4925AC76A500F491F2 /* FindDeleteSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindDeleteSearchService.swift; sourceTree = "<group>"; };
+		ECB44D4C25AC886800F491F2 /* FollowerDeleteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerDeleteService.swift; sourceTree = "<group>"; };
 		ECC630F825A967B7009E4FD4 /* FindPeopleSearchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPeopleSearchData.swift; sourceTree = "<group>"; };
 		ECC630FE25A967FD009E4FD4 /* FindPeopleSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPeopleSearchService.swift; sourceTree = "<group>"; };
 		ECC6310225A99404009E4FD4 /* FollowingFollowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingFollowService.swift; sourceTree = "<group>"; };
@@ -801,6 +809,7 @@
 				EC75A25725A8A78400F4E160 /* FollowingGetService.swift */,
 				ECC6310225A99404009E4FD4 /* FollowingFollowService.swift */,
 				ECC6310825A999DB009E4FD4 /* FollowingGetAnswersService.swift */,
+				ECB44D4C25AC886800F491F2 /* FollowerDeleteService.swift */,
 			);
 			path = Following;
 			sourceTree = "<group>";
@@ -1089,6 +1098,7 @@
 			isa = PBXGroup;
 			children = (
 				ECC630F825A967B7009E4FD4 /* FindPeopleSearchData.swift */,
+				ECB44D4625AC741400F491F2 /* SearchHistoryData.swift */,
 			);
 			path = FindPeople;
 			sourceTree = "<group>";
@@ -1097,6 +1107,8 @@
 			isa = PBXGroup;
 			children = (
 				ECC630FE25A967FD009E4FD4 /* FindPeopleSearchService.swift */,
+				ECB44D4325AC739B00F491F2 /* FindHistoryService.swift */,
+				ECB44D4925AC76A500F491F2 /* FindDeleteSearchService.swift */,
 			);
 			path = FindPeople;
 			sourceTree = "<group>";
@@ -1257,6 +1269,7 @@
 				EC89E313259C27DF00DBAFE5 /* FollowingSearchCVC.swift in Sources */,
 				D480732425A8744700DE1DD3 /* ExploreAnswer.swift in Sources */,
 				A50140FA25A39B56001099E8 /* MypageCRV.swift in Sources */,
+				ECB44D4725AC741400F491F2 /* SearchHistoryData.swift in Sources */,
 				A50140FD25A39BFA001099E8 /* MypageCVC.swift in Sources */,
 				EC813F462599A44F00BBCE25 /* GenericResponse.swift in Sources */,
 				EC75A23225A8664200F4E160 /* HomeDeleteAnswerService.swift in Sources */,
@@ -1308,6 +1321,7 @@
 				EC7C1615259B925A00A5BA4C /* FollowingPVC.swift in Sources */,
 				D4996BF725AB8F4500E3987B /* AlertLabels.swift in Sources */,
 				A5A5BE7225A9E35A00036431 /* OthersPageCRV.swift in Sources */,
+				ECB44D4D25AC886800F491F2 /* FollowerDeleteService.swift in Sources */,
 				EC813F772599F86900BBCE25 /* HomeVC.swift in Sources */,
 				EC813F812599F8A800BBCE25 /* AddCardCVC.swift in Sources */,
 				EC7FEFA825A38AF100C61147 /* SearchVC.swift in Sources */,
@@ -1340,6 +1354,7 @@
 				EC7C162A259BA01200A5BA4C /* FollowerInfoVC.swift in Sources */,
 				D4E5FD37259E710200C57950 /* UIButton+Extensions.swift in Sources */,
 				EC5C200D25A4721E008EE335 /* LogInVC.swift in Sources */,
+				ECB44D4425AC739B00F491F2 /* FindHistoryService.swift in Sources */,
 				EC89E322259C376500DBAFE5 /* FollowPeopleCVC.swift in Sources */,
 				ECC6311825A9E6AA009E4FD4 /* HomeLottietestVC.swift in Sources */,
 				EC7C161B259B9A9200A5BA4C /* FollowingInfoVC.swift in Sources */,
@@ -1371,6 +1386,7 @@
 				D449CFFC25AA39FD00A07C3C /* AnswerDetailService.swift in Sources */,
 				D480733C25A8DAE500DE1DD3 /* ExploreAnswerService.swift in Sources */,
 				EC75A22F25A85DE800F4E160 /* HomeChangePublicService.swift in Sources */,
+				ECB44D4A25AC76A500F491F2 /* FindDeleteSearchService.swift in Sources */,
 				EC5C201F25A4C7EB008EE335 /* LogInService.swift in Sources */,
 				D4344B3625AAF122002858CF /* CommentService.swift in Sources */,
 				EC9C5CD325A41EAA0021AF96 /* SignUpVC.swift in Sources */,

@@ -14,6 +14,7 @@ class FollowerListCVC: UICollectionViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var moreButton: UIButton!
+    var tableViewDelegate: FollowMoreButtonMidDelegate?
     
     override func awakeFromNib() {
         userNameLabel.text = followerPerson?.nickname
@@ -34,4 +35,8 @@ class FollowerListCVC: UICollectionViewCell {
         userNameLabel.text = findPeopleSearchData?.nickname
     }
     
+    @IBAction func moreButtonTapped(_ sender: Any) {
+        print("callll")
+        tableViewDelegate?.settingButtonDidTapped()
+    }
 }

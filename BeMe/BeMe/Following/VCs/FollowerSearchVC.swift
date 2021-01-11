@@ -13,6 +13,8 @@ class FollowerSearchVC: UIViewController {
     var searched: [FindPeopleSearchData] = []
     var isSearching = false
     @IBOutlet weak var searchTextField: UITextField!
+    var followAlertDelegate: FollowAlertDelegate?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +39,7 @@ extension FollowerSearchVC : UICollectionViewDataSource {
             guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: FollowerListCVC.identifier,
                     for: indexPath) as? FollowerListCVC else {return UICollectionViewCell()}
-            
+            cell.tableViewDelegate = self
             cell.followerPerson = followers[indexPath.item]
             cell.setItems()
             return cell
@@ -47,7 +49,7 @@ extension FollowerSearchVC : UICollectionViewDataSource {
              guard let cell = collectionView.dequeueReusableCell(
                      withReuseIdentifier: FollowerListCVC.identifier,
                      for: indexPath) as? FollowerListCVC else {return UICollectionViewCell()}
-             
+            cell.tableViewDelegate = self
              cell.findPeopleSearchData = searched[indexPath.item]
              cell.setSearchedItem()
              return cell
@@ -166,3 +168,17 @@ extension FollowerSearchVC : UITextFieldDelegate{
     
 }
 
+
+
+extension FollowerSearchVC: FollowMoreButtonMidDelegate {
+    
+    func settingButtonDidTapped() {
+        print("callll33")
+        followAlertDelegate?.showAlert()
+    }
+
+}
+
+protocol FollowMoreButtonMidDelegate{
+    func settingButtonDidTapped()
+}

@@ -316,6 +316,9 @@
                                                         <constraint firstAttribute="width" constant="56" id="ok4-Rg-Dxc"/>
                                                     </constraints>
                                                     <state key="normal" image="btnMore"/>
+                                                    <connections>
+                                                        <action selector="moreButtonTapped:" destination="qiq-Rp-3X1" eventType="touchUpInside" id="4yb-cw-Sxo"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
