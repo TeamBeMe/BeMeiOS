@@ -529,10 +529,14 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     
     func goToCommentButtonTapped(_ answerId: Int) {
         guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
+//        guard let nav = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentNC") as? CommentNC else { return }
         
         comment.answerId = answerId
         comment.isMoreButtonHidden = false
         comment.modalPresentationStyle = .fullScreen
-        self.present(comment, animated: true, completion: nil)
+        let nc = UINavigationController(rootViewController: comment)
+        nc.modalPresentationStyle = .fullScreen
+        self.present(nc, animated: true, completion: nil)
+        
     }
 }

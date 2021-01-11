@@ -2036,7 +2036,7 @@
                                         <rect key="frame" x="0.0" y="936.66668701171875" width="375" height="90.666664123535156"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J96-r2-zPW" id="2yU-ax-3Bp">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="90.666666666666671"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="90.666664123535156"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgProfile" translatesAutoresizingMaskIntoConstraints="NO" id="L76-av-5Vq">
@@ -2127,7 +2127,7 @@
                                         <rect key="frame" x="0.0" y="1027.3333511352539" width="375" height="128.66667175292969"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Zwe-IT-Ojd" id="qFz-C0-uNK">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="128.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="128.66667175292969"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="익명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ntX-8m-9AZ">
@@ -2232,7 +2232,7 @@
                                         <rect key="frame" x="0.0" y="1156.0000228881836" width="375" height="171.33332824707031"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="B5h-Uh-Bz5" id="2EP-Ai-HGP">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="171.33333333333334"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="171.33332824707031"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="X1u-GS-7dL">
@@ -2513,6 +2513,7 @@
                             <constraint firstItem="kWY-2T-1VS" firstAttribute="leading" secondItem="sm5-PO-UMz" secondAttribute="leading" id="t7N-uT-1lX"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="dJ7-np-a7Z"/>
                     <connections>
                         <outlet property="commentBorderView" destination="io2-te-fuu" id="0LZ-Z3-icZ"/>
                         <outlet property="commentSendButton" destination="tzd-D0-DXh" id="bdd-Hm-oTX"/>
@@ -2528,7 +2529,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BIb-8S-06s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="631.20000000000005" y="161.08374384236453"/>
+            <point key="canvasLocation" x="-23" y="162"/>
         </scene>
     </scenes>
     <resources>

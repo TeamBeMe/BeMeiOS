@@ -83,7 +83,13 @@ class CommentVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.navigationController?.navigationBar.isHidden = true
         getAnswerDetail()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -281,7 +287,7 @@ extension CommentVC {
                         self.commentToCommentView.isHidden = true
                         
                     }
-                    
+                
                     
                     
                 }
@@ -551,7 +557,9 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.section == 0 {
             
-            guard let header = tableView.dequeueReusableCell(withIdentifier: QuestionAnswerTVC.identifier, for: indexPath) as? QuestionAnswerTVC else { return UITableViewCell() }
+            guard let header = tableView.dequeueReusableCell(withIdentifier: QuestionAnswerTVC.identifier,
+                                                             for: indexPath) as? QuestionAnswerTVC else {
+                return UITableViewCell() }
             
             header.delegate = self
             header.indexPath = indexPath
@@ -562,7 +570,8 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
             header.profileView.isHidden = answerDetail?.isAuthor ?? true
             if let ad = answerDetail {
                 header.setInformation(question: ad.question, category: ad.category , date: ad.answerDate,
-                                      profileImg: ad.userProfile, nickName: ad.userNickname, content: ad.content)
+                                      profileImg: ad.userProfile, nickName: ad.userNickname,
+                                      content: ad.content, questionId: ad.questionID)
             }
             
             return header
@@ -645,6 +654,15 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension CommentVC: UITableViewButtonSelectedDelegate {
+    
+    func goToMoreAnswerButtonDidTapped(questionId: Int, question: String) {
+        let sb = UIStoryboard.init(name: "Explore", bundle: nil)
+        guard let detail = sb.instantiateViewController(identifier: "ExploreDetailVC") as?
+                ExploreDetailVC else { return }
+        detail.questionId = questionId
+        detail.questionText = question
+        self.navigationController?.pushViewController(detail, animated: true)
+    }
     
     func moreCellButtonDidTapped(to indexPath: IndexPath, isSecret: Int) {
         if isSecret == 0 {
