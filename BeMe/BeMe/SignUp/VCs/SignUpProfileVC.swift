@@ -132,7 +132,7 @@ extension SignUpProfileVC: UIImagePickerControllerDelegate, UINavigationControll
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         chosenImage = info[.originalImage] as? UIImage
-        let shittyVC = ShittyImageCropVC(frame: (self.navigationController?.view.frame)!, image: chosenImage!, aspectWidth: 4, aspectHeight: 3)
+        let shittyVC = ShittyImageCropVC(frame: (self.navigationController?.view.frame)!, image: chosenImage!, aspectWidth: 315, aspectHeight: 152)
         shittyVC.signUpProfileImageSetDelegate = self
         self.dismiss(animated: true, completion: {
             self.navigationController?.present(shittyVC, animated: true, completion: nil)

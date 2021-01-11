@@ -296,7 +296,7 @@ extension HomeVC {
                         
                         
                         
-                        var newData = AnswerDataForViewController(lock: homePageData.publicFlag!==1,
+                        var newData = AnswerDataForViewController(lock: homePageData.publicFlag != 1,
                                                                   questionCategory: questionCategoryName,
                                                                   answerDate: answerDate,
                                                                   question: questionTitle,
@@ -315,7 +315,7 @@ extension HomeVC {
                     
                     self.cardCollectionView.reloadData()
                     if self.initialScrolled == false {
-                        self.cardCollectionView.scrollToItem(at: IndexPath(item: self.pastCards,
+                        self.cardCollectionView.scrollToItem(at: IndexPath(item: self.pastCards + self.todayCards - 1,
                                                                            section: 0),
                                                              at: .centeredHorizontally,
                                                              animated: false)
@@ -374,6 +374,14 @@ extension HomeVC : UICollectionViewDataSource {
             cell.homeChangeQuestionDelegate = self
             cell.homeFixButtonDelegate = self
             cell.answerData = answerDataList[indexPath.item]
+            if indexPath.item == self.pastCards + self.todayCards - 1{
+                if answerDataList[indexPath.item].answer == ""{
+                    cell.isInitial = true
+                    cell.initialAnimation()
+                }
+            }
+            
+            
             cell.setItems()
             
             
@@ -560,7 +568,7 @@ extension HomeVC : AddQuestionDelegate {
                     
                     
                     
-                    var newData = AnswerDataForViewController(lock: newQuestionData.publicFlag!==1,
+                    var newData = AnswerDataForViewController(lock: newQuestionData.publicFlag != 1,
                                                               questionCategory: questionCategoryName,
                                                               answerDate: answerDate,
                                                               question: questionTitle,
@@ -775,18 +783,21 @@ extension HomeVC : HomeAnswerButtonDelegate {
             
             return
         }
+        
         answerVC.answerDataDelegate = self
         answerVC.curCardIdx = index
-        self.navigationController?.pushViewController(answerVC, animated: true)
         answerVC.answerData = answerData
+        answerVC.setLabels()
+        self.navigationController?.pushViewController(answerVC, animated: true)
+        
     }
 }
 
 extension HomeVC : HomeGetDataFromAnswerDelegate {
     func setNewAnswer(answerData: AnswerDataForViewController) {
-        print("called")
-        answerDataList[answerData.index!] = answerData
-        print(answerDataList[answerData.index!])
+        print("setNewAnswer")
+        answerDataList[currentCardIdx] = answerData
+        print(answerDataList[currentCardIdx])
         cardCollectionView.reloadData()
     }
     
@@ -828,7 +839,7 @@ extension HomeVC: HomeChangeQuestionDelegate{
                     
                     
                     
-                    var newData = AnswerDataForViewController(lock: newQuestionData.publicFlag!==1,
+                    var newData = AnswerDataForViewController(lock: newQuestionData.publicFlag != 1,
                                                               questionCategory: questionCategoryName,
                                                               answerDate: answerDate,
                                                               question: questionTitle,

@@ -172,13 +172,13 @@ extension FollowerSearchVC : UITextFieldDelegate{
 
 extension FollowerSearchVC: FollowMoreButtonMidDelegate {
     
-    func settingButtonDidTapped() {
+    func settingButtonDidTapped(id: Int) {
         print("callll33")
-        followAlertDelegate?.showAlert()
+        followAlertDelegate?.showAlert(id: id)
     }
 
 }
 
 protocol FollowMoreButtonMidDelegate{
-    func settingButtonDidTapped()
+    func settingButtonDidTapped(id: Int)
 }

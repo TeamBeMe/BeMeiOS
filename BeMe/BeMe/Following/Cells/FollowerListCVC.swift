@@ -37,6 +37,6 @@ class FollowerListCVC: UICollectionViewCell {
     
     @IBAction func moreButtonTapped(_ sender: Any) {
         print("callll")
-        tableViewDelegate?.settingButtonDidTapped()
+        tableViewDelegate?.settingButtonDidTapped(id: (followerPerson?.id)!)
     }
 }

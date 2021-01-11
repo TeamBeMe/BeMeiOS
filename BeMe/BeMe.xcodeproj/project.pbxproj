@@ -159,6 +159,11 @@
 		ECB44D4725AC741400F491F2 /* SearchHistoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB44D4625AC741400F491F2 /* SearchHistoryData.swift */; };
 		ECB44D4A25AC76A500F491F2 /* FindDeleteSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB44D4925AC76A500F491F2 /* FindDeleteSearchService.swift */; };
 		ECB44D4D25AC886800F491F2 /* FollowerDeleteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB44D4C25AC886800F491F2 /* FollowerDeleteService.swift */; };
+		ECB44D5225AC968A00F491F2 /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = ECB44D5125AC968A00F491F2 /* loading.json */; };
+		ECB44D5525AC9CD800F491F2 /* CustomLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB44D5425AC9CD800F491F2 /* CustomLoadingView.swift */; };
+		ECB44D5825ACA82C00F491F2 /* FollowingWholeCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB44D5725ACA82C00F491F2 /* FollowingWholeCV.swift */; };
+		ECB44D6125ACAF4A00F491F2 /* animation_relation_final.json in Resources */ = {isa = PBXBuildFile; fileRef = ECB44D5F25ACAF4A00F491F2 /* animation_relation_final.json */; };
+		ECB44D6225ACAF4A00F491F2 /* animation_love_final.json in Resources */ = {isa = PBXBuildFile; fileRef = ECB44D6025ACAF4A00F491F2 /* animation_love_final.json */; };
 		ECC630F925A967B7009E4FD4 /* FindPeopleSearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC630F825A967B7009E4FD4 /* FindPeopleSearchData.swift */; };
 		ECC630FF25A967FD009E4FD4 /* FindPeopleSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC630FE25A967FD009E4FD4 /* FindPeopleSearchService.swift */; };
 		ECC6310325A99404009E4FD4 /* FollowingFollowService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECC6310225A99404009E4FD4 /* FollowingFollowService.swift */; };
@@ -331,6 +336,11 @@
 		ECB44D4625AC741400F491F2 /* SearchHistoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryData.swift; sourceTree = "<group>"; };
 		ECB44D4925AC76A500F491F2 /* FindDeleteSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindDeleteSearchService.swift; sourceTree = "<group>"; };
 		ECB44D4C25AC886800F491F2 /* FollowerDeleteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerDeleteService.swift; sourceTree = "<group>"; };
+		ECB44D5125AC968A00F491F2 /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
+		ECB44D5425AC9CD800F491F2 /* CustomLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLoadingView.swift; sourceTree = "<group>"; };
+		ECB44D5725ACA82C00F491F2 /* FollowingWholeCV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingWholeCV.swift; sourceTree = "<group>"; };
+		ECB44D5F25ACAF4A00F491F2 /* animation_relation_final.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_relation_final.json; sourceTree = "<group>"; };
+		ECB44D6025ACAF4A00F491F2 /* animation_love_final.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation_love_final.json; sourceTree = "<group>"; };
 		ECC630F825A967B7009E4FD4 /* FindPeopleSearchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPeopleSearchData.swift; sourceTree = "<group>"; };
 		ECC630FE25A967FD009E4FD4 /* FindPeopleSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPeopleSearchService.swift; sourceTree = "<group>"; };
 		ECC6310225A99404009E4FD4 /* FollowingFollowService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingFollowService.swift; sourceTree = "<group>"; };
@@ -824,6 +834,7 @@
 				EC737F18259D867A0035207F /* CustomTodayCardView.swift */,
 				EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */,
 				EC7F0EA025A05460008EB88A /* CustomHomeActionSheetAlert.swift */,
+				ECB44D5425AC9CD800F491F2 /* CustomLoadingView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -885,6 +896,7 @@
 				EC89E32A259C378F00DBAFE5 /* FollowCardCVC.swift */,
 				EC89E32D259C496C00DBAFE5 /* FollowMoreButtonCVC.swift */,
 				EC737F20259DB2C40035207F /* FollowUpperCVC.swift */,
+				ECB44D5725ACA82C00F491F2 /* FollowingWholeCV.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1127,8 +1139,11 @@
 		ECC6312725A9E88B009E4FD4 /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
+				ECB44D5125AC968A00F491F2 /* loading.json */,
 				ECC6312B25A9E98E009E4FD4 /* data1.json */,
 				ECC6312825A9E8A0009E4FD4 /* animation_test.json */,
+				ECB44D6025ACAF4A00F491F2 /* animation_love_final.json */,
+				ECB44D5F25ACAF4A00F491F2 /* animation_relation_final.json */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -1195,6 +1210,7 @@
 				EC89E306259C1CA600DBAFE5 /* FollowSearch.storyboard in Resources */,
 				D492E43525A0E14C0088A181 /* CustomActionSheet.storyboard in Resources */,
 				EC7C160F259B8B8100A5BA4C /* Following.storyboard in Resources */,
+				ECB44D6125ACAF4A00F491F2 /* animation_relation_final.json in Resources */,
 				ECC6312C25A9E98E009E4FD4 /* data1.json in Resources */,
 				D4E07CB9259F22C10075E616 /* Explore.storyboard in Resources */,
 				EC5C200A25A47208008EE335 /* LogIn.storyboard in Resources */,
@@ -1203,6 +1219,7 @@
 				EC7C1618259B933F00A5BA4C /* FollowInfo.storyboard in Resources */,
 				A51CA36325A57D430020F26D /* Mypage.storyboard in Resources */,
 				EC813F302599A15200BBCE25 /* LaunchScreen.storyboard in Resources */,
+				ECB44D5225AC968A00F491F2 /* loading.json in Resources */,
 				EC813F2D2599A15200BBCE25 /* Assets.xcassets in Resources */,
 				EC813F2B2599A15100BBCE25 /* Main.storyboard in Resources */,
 				D4F198F225A436D0000AF0E7 /* Comment.storyboard in Resources */,
@@ -1212,6 +1229,7 @@
 				ECC6311525A9E69A009E4FD4 /* HomeLottietest.storyboard in Resources */,
 				D44F6DC425A5784A002A9761 /* Answer.storyboard in Resources */,
 				EC7FEFA525A38AE200C61147 /* Search.storyboard in Resources */,
+				ECB44D6225ACAF4A00F491F2 /* animation_love_final.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1295,6 +1313,7 @@
 				EC75A24725A8876E00F4E160 /* AnswerRegistService.swift in Sources */,
 				EC7C1601259B469D00A5BA4C /* UIViewController+Extensions.swift in Sources */,
 				D4E07CBD259F22C10075E616 /* CategoryCVC.swift in Sources */,
+				ECB44D5825ACA82C00F491F2 /* FollowingWholeCV.swift in Sources */,
 				EC813F432599A42700BBCE25 /* APIConstants.swift in Sources */,
 				EC813F7B2599F88D00BBCE25 /* PastCardCVC.swift in Sources */,
 				EC7F0EAF25A09F24008EB88A /* AnswerDataForViewController.swift in Sources */,
@@ -1344,6 +1363,7 @@
 				EC89E316259C280200DBAFE5 /* FollowingListCVC.swift in Sources */,
 				D449CFF825AA390100A07C3C /* AnswerDetail.swift in Sources */,
 				ECC630F925A967B7009E4FD4 /* FindPeopleSearchData.swift in Sources */,
+				ECB44D5525AC9CD800F491F2 /* CustomLoadingView.swift in Sources */,
 				EC5C201A25A49D7E008EE335 /* SignUpData.swift in Sources */,
 				A501410025A39C18001099E8 /* MypageTabCVC.swift in Sources */,
 				EC7C1637259BAD1A00A5BA4C /* FollowerHeaderCVC.swift in Sources */,

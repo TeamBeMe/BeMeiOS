@@ -1,18 +1,18 @@
 {
   "images" : [
     {
-      "scale" : "1x",
       "idiom" : "universal",
-      "filename" : "icInfo32.png"
+      "filename" : "icInfoGrey.png",
+      "scale" : "1x"
     },
     {
-      "filename" : "icInfo32@2x.png",
       "scale" : "2x",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "filename" : "icInfoGrey@2x.png"
     },
     {
-      "filename" : "icInfo32@3x.png",
       "scale" : "3x",
+      "filename" : "icInfoGrey@3x.png",
       "idiom" : "universal"
     }
   ],
