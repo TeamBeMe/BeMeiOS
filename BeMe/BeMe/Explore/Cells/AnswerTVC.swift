@@ -32,11 +32,6 @@ class AnswerTVC: UITableViewCell {
         answerView.makeRounded(cornerRadius: 8.0)
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
-
     func setCardDatas(date: String, cate: String, content: String, profileImage: String?, nick: String, isScrap: Bool, answerId: Int, questionId: Int) {
         
         subTitleLabel.text = "[  \(cate)에 관한 질문  ]  ·  \(date)"
@@ -62,9 +57,9 @@ class AnswerTVC: UITableViewCell {
         }
     }
     
-    
     @IBAction func scrapButtonTapped(_ sender: UIButton) {
         
+        delegate?.exploreAnswerScrapButtonDidTapped(answerId!)
         if isScrapped {
             isScrapped = false
             sender.setImage(UIImage.init(named: "btnScrapUnselected"), for: .normal)

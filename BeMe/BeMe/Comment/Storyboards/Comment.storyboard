@@ -1769,7 +1769,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Ij-CF-MD2" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="114" y="1335"/>
+            <point key="canvasLocation" x="-23" y="1129"/>
         </scene>
         <!--CommentVC-->
         <scene sceneID="9E2-Mj-bJS">
@@ -1795,7 +1795,6 @@
                                         <state key="normal" image="btnMore"/>
                                         <connections>
                                             <action selector="moreSettngButtonTapped:" destination="CUp-WV-7Pi" eventType="touchUpInside" id="Rgl-To-y5C"/>
-                                            <action selector="moreSettngButtonTapped:" destination="nbU-Im-QwT" eventType="touchUpInside" id="l6R-LK-UZA"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVQ-2G-6Ty">
@@ -2514,6 +2513,7 @@
                             <constraint firstItem="kWY-2T-1VS" firstAttribute="leading" secondItem="sm5-PO-UMz" secondAttribute="leading" id="t7N-uT-1lX"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="dJ7-np-a7Z"/>
                     <connections>
                         <outlet property="commentBorderView" destination="io2-te-fuu" id="0LZ-Z3-icZ"/>
                         <outlet property="commentSendButton" destination="tzd-D0-DXh" id="bdd-Hm-oTX"/>
@@ -2529,7 +2529,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BIb-8S-06s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="631.20000000000005" y="161.08374384236453"/>
+            <point key="canvasLocation" x="-23" y="162"/>
         </scene>
     </scenes>
     <resources>
