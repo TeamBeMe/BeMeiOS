@@ -18,4 +18,6 @@ struct AlertLabels {
     static let myComment: AlertLabels = AlertLabels(icons: ["icEditBlack", "icDeleteBlack"], names: ["댓글 수정", "댓글 삭제"])
     static let article: AlertLabels = AlertLabels(icons: ["icShare", "icDeclare", "icBlock"], names: ["공유", "신고", "차단"])
     
+    static let followerReport: AlertLabels = AlertLabels(icons: ["icDeclare", "icFollowDelete"], names: ["신고하기","팔로워 삭제"])
+    
 }

@@ -23,6 +23,9 @@ struct APIConstants{
     static let findPeopleSearchURL = baseURL+"/users/search?"
     static let followingfollowURL = baseURL+"/follow"
     static let followingGetAnswerURL = baseURL+"/follow/answers?"
+    static let searchHistoryURL = baseURL+"/users/search/history"
+    static let searchDeleteURL = baseURL+"/users/search/"
+    static let followerDeleteURL = baseURL+"/follow/"
     
     static let explorationCategoryURL = baseURL + "/exploration/category"
     static let explorationDiffThoughtURL = baseURL + "/exploration/another"
