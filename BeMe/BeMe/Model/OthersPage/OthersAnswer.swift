@@ -16,6 +16,12 @@ struct OthersAnswer: Codable {
         case pageLen = "page_len"
         case answers
     }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        pageLen = (try? values.decode(Int.self, forKey: .pageLen)) ?? -1
+        answers = (try? values.decode([Answer].self, forKey: .answers)) ?? []
+    }
 }
 
 // MARK: - Answer

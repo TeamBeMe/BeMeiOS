@@ -13,7 +13,8 @@ class OthersPageCVC: UICollectionViewCell {
     
     //MARK:**- Variable Part**
     static let identifier = "OthersPageCVC"
-    private var cellNumber: Int = 8
+//    private var cellNumber: Int = 8
+    var othersAnswerArray: [Answer] = []
     
     
     //MARK:**- Life Cycle Part**
@@ -21,6 +22,7 @@ class OthersPageCVC: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         tableViewSetting()
+        
     }
     
     
@@ -41,7 +43,7 @@ class OthersPageCVC: UICollectionViewCell {
 extension OthersPageCVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellNumber
+        return othersAnswerArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -50,8 +52,11 @@ extension OthersPageCVC: UITableViewDataSource, UITableViewDelegate {
                 .dequeueReusableCell(withIdentifier: OthersPageTVC.identifier, for: indexPath)
                 as? OthersPageTVC else { return UITableViewCell() }
 
-        tab.setCardView(question: "cell.layer.cornerRadius = cell.bounds.width / cell.bounds.height * 10cell.layer.cornerRadius = cell.bounds.width / cell.bounds.height * 10cell.layer.cornerRadius = cell.bounds.width / cell.bounds.height * 10", questionInfo: "serysery 1", answerDate: "2020.20.20", writer: "ㄴㄷ교270", writerImg: "icDeclare", isScrapped: false)
-
+//        tab.setCardView(question: "cell.layer.cornerRadius = cell.bounds.width / cell.bounds.height * 10cell.layer.cornerRadius = cell.bounds.width / cell.bounds.height * 10cell.layer.cornerRadius = cell.bounds.width / cell.bounds.height * 10", questionInfo: "serysery 1", answerDate: "2020.20.20", writer: "ㄴㄷ교270", writerImg: "icDeclare", isScrapped: false)
+        
+        
+        tab.setCardView(question: othersAnswerArray[indexPath.row].question, questionInfo: othersAnswerArray[indexPath.row].category, answerDate: othersAnswerArray[indexPath.row].answerDate, writer: othersAnswerArray[indexPath.row].userNickname, writerImg: "icDeclare", isScrapped: othersAnswerArray[indexPath.row].isScrapped)
+        print(self.othersAnswerArray.count)
         return tab
 
     }

@@ -11,12 +11,26 @@ class OthersPageVC: UIViewController {
     
     //MARK:**- IBOutlet Part**
     @IBOutlet weak var othersPageCollectionView: UICollectionView!
-
+    
     
     //MARK:**- Variable Part**
     let othersPageCVLayout = OthersPageCVFlowLayout()
     
     let othersPageCVC = OthersPageCVC()
+    
+    private var othersAnswerArray: [Answer] = [] {
+        didSet {
+            othersPageCollectionView.reloadData()
+        }
+    }
+    
+    private var othersProfile: [OthersProfile] = [] {
+        didSet {
+            othersPageCollectionView.reloadData()
+        }
+    }
+    
+
     
     //MARK:**- Constraint Part**
     
@@ -25,6 +39,7 @@ class OthersPageVC: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         
         othersPageCollectionView.delegate = self
         othersPageCollectionView.dataSource = self
@@ -36,8 +51,14 @@ class OthersPageVC: UIViewController {
         }
         
         othersPageCollectionView.collectionViewLayout = othersPageCVLayout
+        
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setAnswerData(userId: 1, page: 1)
+        setProfileData(userId: 2)
+    }
     //MARK:**- IBAction Part**
     
     
@@ -53,7 +74,7 @@ class OthersPageVC: UIViewController {
     //MARK:**- Function Part**
     
     
-
+    
     
     
 }
@@ -78,7 +99,13 @@ extension OthersPageVC : UICollectionViewDataSource {
                 for: indexPath) as? OthersPageCVC else {
             return UICollectionViewCell()}
         
-
+        
+        
+        cell.othersAnswerArray = othersAnswerArray
+        
+//        cell.otherspageTableView
+        
+//        setCardView(question: othersAnswerArray[indexPath.row].question, questionInfo: othersAnswerArray[indexPath.row].category, answerDate: othersAnswerArray[indexPath.row].answerDate, writer: othersAnswerArray[indexPath.row].userNickname, writerImg: "icDeclare", isScrapped: othersAnswerArray[indexPath.row].isScrapped)
         return cell
     }
     
@@ -106,7 +133,7 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
         if (section == 0) {
             return CGSize(width: collectionView.frame.width, height: 294)
         } else {
-             //refact
+            //refact
             return CGSize.zero
         }
     }
@@ -138,8 +165,9 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: OthersPageCRV.identifier, for: indexPath) as? OthersPageCRV else {
                 assert(false, "응 아니야")
             }
-         
-//            othersPageCVLayout.mypageCRVDelegate = headerView
+            
+            headerView.othersProfile = othersProfile
+            //            othersPageCVLayout.mypageCRVDelegate = headerView
             
             return headerView
         default:
@@ -151,3 +179,67 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
     }
 }
 
+
+extension OthersPageVC {
+    private func setAnswerData(userId: Int, page: Int) {
+        OthersPageAnswerService.shared.getOthersAnswer(userId: userId, page: page) { (result) in
+            switch result {
+            case .success(let data):
+                if let response = data as? OthersAnswer{
+                    print(" 성공")
+                    
+                    
+                    self.othersAnswerArray = response.answers
+                    print(self.othersAnswerArray[0].answerDate)
+                    self.othersPageCollectionView.reloadData()
+                }
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                    print(" 실패")
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverERr")
+            case .networkFail :
+                print("networkFail")
+            default :
+                print("?")
+            }
+        }
+        
+        
+    }
+    
+    
+    private func setProfileData(userId: Int) {
+        OthersPageProfileService.shared.getOthersProfile(userId: userId) { (result) in
+            switch result {
+            case .success(let data):
+                if let othersProfile = data as? OthersProfile{
+                    print(" 성공")
+                    
+                    self.othersProfile[0] = othersProfile
+                    
+                }
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                    print(" 실패")
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverERr")
+            case .networkFail :
+                print("networkFail")
+            default :
+                print("?")
+            }
+        }
+        
+    }
+    
+    
+}

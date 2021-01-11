@@ -27,16 +27,22 @@ class OthersPageCRV: UICollectionReusableView {
     //MARK:**- Variable Part**
     static let identifier = "OthersPageCRV"
     private var isFollowed = false
-    
+    var othersProfile: [OthersProfile] = [] 
     //MARK:**- Life Cycle Part**
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        setFollowButton(view: followButton, isFollowed: isFollowed)
+//        setFollowButton(view: followButton, isFollowed: isFollowed)
+//        setInfoLabel()
+//        setLabel(view: answerCountLabel, text: "4")
+//        setLabel(view: attendanceCountLabel, text: "4123124")
+//        setLabel(view: nameLabel, text: "재용아 개소리 좀 그만해")
+        setFollowButton(view: followButton, isFollowed: othersProfile[0].isFollowed)
         setInfoLabel()
-        setLabel(view: answerCountLabel, text: "4")
-        setLabel(view: attendanceCountLabel, text: "4123124")
-        setLabel(view: nameLabel, text: "재용아 개소리 좀 그만해")
+        setLabel(view: answerCountLabel, text: String(othersProfile[0].answerCount))
+        setLabel(view: attendanceCountLabel, text: String(othersProfile[0].continuedVisit))
+        setLabel(view: nameLabel, text: othersProfile[0].nickname)
+        
     }
     
     
