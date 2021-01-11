@@ -32,6 +32,8 @@ class ExploreDetailVC: UIViewController {
     lazy var popupBackgroundView: UIView = UIView()
     
     private var currentPageAlreadyGetContainers: [Int] = []
+
+    private var isTableViewAnimation: Bool = false
     
     private var exploreAnswerArray: [ExploreAnswer] = [] {
         didSet {
@@ -103,7 +105,7 @@ class ExploreDetailVC: UIViewController {
 extension ExploreDetailVC {
     
     private func scrapAnswer(answerId: Int) {
-
+        
         ExploreAnswerScrapService.shared.putExploreAnswerScrap(answerId: answerId) { (result) in
             switch result {
             case .success(let data):
@@ -246,7 +248,7 @@ extension ExploreDetailVC {
                 alertViewController.addAction(action)
                 self.present(alertViewController, animated: true, completion: nil)
             }
-
+            
         }
         
         print(action)
@@ -299,59 +301,53 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //        if currentPage < page {
-        //            if indexPath.row == 11 - 1 {
-        //                // animation 2
-        //                cell.alpha = 0
-        //                UIView.animate(withDuration: 0.75) {
-        //
-        //                    cell.alpha = 1.0
-        //                }
-        //            } else {
-        //                // animation 1
-        //                if (scrollDirection) {
-        //                    // up
-        //                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
-        //                    cell.layer.transform = rotationTransform
-        //                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
-        //                        cell.layer.transform = CATransform3DIdentity
-        //                    }) { (_) in
-        //
-        //                    }
-        //                } else {
-        //                    // down
-        //                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
-        //                    cell.layer.transform = rotationTransform
-        //                    UIView.animate(withDuration: 0.3, animations: {
-        //                        cell.layer.transform = CATransform3DIdentity
-        //                    })
-        //                }
-        //            }
-        //        } else {
-        //            // animation 1
-        //            if (scrollDirection) {
-        //                // up
-        //                let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
-        //                cell.layer.transform = rotationTransform
-        //                UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
-        //                    cell.layer.transform = CATransform3DIdentity
-        //                }) { (_) in
-        //
-        //                }
-        //            } else {
-        //                // down
-        //                let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
-        //                cell.layer.transform = rotationTransform
-        //                UIView.animate(withDuration: 0.3, animations: {
-        //                    cell.layer.transform = CATransform3DIdentity
-        //                })
-        //            }
-        //        }
+        
+        if exploreAnswerArray.isEmpty {
+            // no animation
+        } else {
+            print(isTableViewAnimation)
+            if isTableViewAnimation {
+                if scrollDirection {
+                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+                    cell.layer.transform = rotationTransform
+                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+                        cell.layer.transform = CATransform3DIdentity
+                    }) { (_) in
+                    }
+                } else {
+                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
+                    cell.layer.transform = rotationTransform
+                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+                        cell.layer.transform = CATransform3DIdentity
+                    }) { (_) in
+                    }
+                }
+            } else {
+                // no animation
+            }
+        }
+        
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            self.stopScrolling()
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        self.stopScrolling()
+    }
+    
+    private func stopScrolling() {
+        isTableViewAnimation = false
+        print("STOPPED")
     }
     
     func scrollViewDidScroll (_ scrollView: UIScrollView) {
         let currentContentOffset = scrollView.contentOffset.y
-        
+        isTableViewAnimation = true
+        print("HELLO")
         if (currentContentOffset > lastContentOffset) {
             // scroll up
             scrollDirection = true

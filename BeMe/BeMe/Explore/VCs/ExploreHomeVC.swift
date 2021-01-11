@@ -31,24 +31,25 @@ class ExploreHomeVC: UIViewController {
     
     private var selectedRecentOrFavorite: String = "최신"
     
+    private var isTableViewAnimation: Bool = false
+    
     private var currentPageAlreadyGetContainers: [Int] = []
     
     // 서버통신을 통해 받아오는 값
     private var categoryArray: [ExploreCategory] = [] {
         didSet {
-            //            exploreTableView.reloadData()
+            exploreTableView.reloadData()
         }
     }
     
     private var exploreThoughtArray: [ExploreThoughtData] = [] {
         didSet {
-            //            exploreTableView.reloadData()
+            exploreTableView.reloadData()
         }
     }
     
     private var exploreAnswerArray: [ExploreAnswer] = [] {
         didSet {
-            //            let section = IndexSet.init(integer: 2)
             exploreTableView.reloadData()
         }
     }
@@ -88,6 +89,7 @@ extension ExploreHomeVC: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
     }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 1
@@ -164,30 +166,36 @@ extension ExploreHomeVC: UITableViewDelegate {
     
     // 애니메이션
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        print("cellWillDisplay: \(scrollDirection)")
+        
         if indexPath.section == 0 || indexPath.section == 1 {
             // no animation
         } else {
             if exploreAnswerArray.isEmpty {
                 // no animation
             } else {
-                if scrollDirection {
-                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
-                    cell.layer.transform = rotationTransform
-                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
-                        cell.layer.transform = CATransform3DIdentity
-                    }) { (_) in
-                        
+                if isTableViewAnimation {
+                    if scrollDirection {
+                        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+                        cell.layer.transform = rotationTransform
+                        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+                            cell.layer.transform = CATransform3DIdentity
+                        }) { (_) in
+                            
+                        }
+                    } else {
+                        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
+                        cell.layer.transform = rotationTransform
+                        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+                            cell.layer.transform = CATransform3DIdentity
+                        }) { (_) in
+                            
+                        }
                     }
+                    
                 } else {
-                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
-                    cell.layer.transform = rotationTransform
-                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
-                        cell.layer.transform = CATransform3DIdentity
-                    }) { (_) in
-                        
-                    }
+                    // no animation
                 }
+                
             }
             
         }
@@ -199,22 +207,24 @@ extension ExploreHomeVC: UITableViewDelegate {
 extension ExploreHomeVC: UIScrollViewDelegate {
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        
-        let currentOffset = exploreTableView.contentOffset.y
-        
-        if currentOffset > 542.333 {
-            if (scrollDirection) {
-                
-            } else {
-                
-            }
+        if !decelerate {
+            self.stoppedScrolling()
         }
-        
     }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        
+        self.stoppedScrolling()
+    }
+    
+    private func stoppedScrolling() {
+        isTableViewAnimation = false
+    }
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffset = exploreTableView.contentOffset.y
         // iphone safe area 문제 해결 코드
-        
+        isTableViewAnimation = true
         view.backgroundColor = currentOffset > 394.0 ? .white : UIColor.init(named: "background")
         exploreTableView.backgroundColor = currentOffset >= 0.0 ? .white : UIColor.init(named: "background")
         // animation 문제 해결 코드
@@ -225,8 +235,6 @@ extension ExploreHomeVC: UIScrollViewDelegate {
             //scroll down
             scrollDirection = false
         }
-        
-        print("ScrollviewDidScroll: \(scrollDirection)")
         
         // 상단 view
         //        if (currentOffset > 542.333) {
@@ -407,10 +415,10 @@ extension ExploreHomeVC {
             switch result {
             case .success(let data):
                 
-                guard let dt = data as? GenericResponse<[ExploreCategory]> else { return }
+                guard let dt = data as? GenericResponse<Int> else { return }
                 print(dt.message)
-                if dt.message == "스크랩 성공" {
-                    // 사용자한테 성공했다고 알려주는 동작
+                if dt.message == "스크랩 성공" || dt.message == "스크랩 취소 성공" {
+                    self.setAnswerData(page: self.currentPage, category: self.selectedCategoryId, sorting: self.selectedRecentOrFavorite)
                 } else {
                     // 사용자한테 실패했다고 알려주는 동작
                 }
@@ -452,10 +460,9 @@ extension ExploreHomeVC {
     
     @objc func dismissCommentPage(_ notification: Notification) {
         guard let userInfo = notification.userInfo as? [String: Any] else { return }
-        guard let pageNumber = userInfo["indexPath"] as? Int else { return }
+        guard let _ = userInfo["indexPath"] as? Int else { return }
         
         scrollDirection = true
-        print(pageNumber)
     }
     
     private func adjustScrollViewInset() {
@@ -491,6 +498,7 @@ extension ExploreHomeVC {
 
 
 extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
+    
     func categoryButtonTapped(_ indexPath: IndexPath, _ categoryId: Int) {
         scrollDirection = true
         selectedCategoryId = categoryId
@@ -529,8 +537,6 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     
     func goToCommentButtonTapped(_ answerId: Int) {
         guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
-//        guard let nav = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentNC") as? CommentNC else { return }
-        
         comment.answerId = answerId
         comment.isMoreButtonHidden = false
         comment.modalPresentationStyle = .fullScreen

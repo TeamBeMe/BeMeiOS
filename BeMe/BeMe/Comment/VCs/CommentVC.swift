@@ -127,13 +127,13 @@ class CommentVC: UIViewController {
     }
     
     @IBAction func moreSettngButtonTapped(_ sender: Any) {
-        
         popupBackgroundView.animatePopupBackground(true)
         guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetTwoVC.identifier) as?
                 CustomActionSheetTwoVC else { return }
         
         settingActionSheet.alertInformations = AlertLabels.otherCommentNotMyArticle
         settingActionSheet.color = .grapefruit
+        settingActionSheet.modalPresentationStyle = .overCurrentContext
         
         self.present(settingActionSheet, animated: true, completion: nil)
     }
@@ -464,7 +464,6 @@ extension CommentVC {
     }
     
     @objc func closePopup(_ notification: Notification) {
-        print("SecondTapped")
         popupBackgroundView.animatePopupBackground(false)
         guard let userInfo = notification.userInfo as? [String:Any] else { return }
         guard let action = userInfo["action"] as? String else { return }
