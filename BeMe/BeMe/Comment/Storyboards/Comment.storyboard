@@ -1795,7 +1795,6 @@
                                         <state key="normal" image="btnMore"/>
                                         <connections>
                                             <action selector="moreSettngButtonTapped:" destination="CUp-WV-7Pi" eventType="touchUpInside" id="Rgl-To-y5C"/>
-                                            <action selector="moreSettngButtonTapped:" destination="nbU-Im-QwT" eventType="touchUpInside" id="l6R-LK-UZA"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVQ-2G-6Ty">

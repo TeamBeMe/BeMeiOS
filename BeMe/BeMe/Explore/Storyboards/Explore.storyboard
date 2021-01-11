@@ -858,6 +858,9 @@
                                                     <state key="normal" title="더보기">
                                                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="moreButtonTapped:" destination="Oor-ug-rhe" eventType="touchUpInside" id="LPZ-6V-oXd"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

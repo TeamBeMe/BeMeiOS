@@ -32,8 +32,7 @@ class CustomActionSheetVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         cancelButton.layer.addBorder([.top], color: .lightGray, width: 1.0)
-        wrapper.roundCorners(cornerRadius: 10.0)
-        
+        wrapper.roundCorners(cornerRadius: 10.0, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
         if let alertInfo = alertInformations {
             setSettings(by: alertInfo, color: color)
         }
