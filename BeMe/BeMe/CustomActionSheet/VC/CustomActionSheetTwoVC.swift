@@ -69,8 +69,8 @@ class CustomActionSheetTwoVC: UIViewController {
             
         } else if firstItemLabel.text == AlertLabels.otherCommentNotMyArticle.names[0] {
             NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil, userInfo: ["action": "report"])
-        }
-        
+        } 
+       
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -80,6 +80,8 @@ class CustomActionSheetTwoVC: UIViewController {
             NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil, userInfo: ["action": "commentDelete"])
         } else if secondItemLabel.text == AlertLabels.otherCommentNotMyArticle.names[1] {
             NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil, userInfo: ["action": "block"])
+        } else if secondItemLabel.text == AlertLabels.followerReport.names[1] {
+            NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil,userInfo: ["action":"followerDelete"])
         }
         self.dismiss(animated: true, completion: nil)
     }

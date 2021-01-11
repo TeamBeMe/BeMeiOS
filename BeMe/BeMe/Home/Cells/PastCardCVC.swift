@@ -139,7 +139,7 @@ extension PastCardCVC {
         answerTextView.snp.makeConstraints{
             $0.leading.equalToSuperview().offset(40)
             $0.trailing.equalToSuperview().offset(-40)
-            $0.top.equalTo(questionLabel.snp_bottomMargin).offset(60)
+            $0.top.equalTo(questionLabel.snp_bottomMargin).offset(15)
             $0.height.equalTo(160)
         }
     }

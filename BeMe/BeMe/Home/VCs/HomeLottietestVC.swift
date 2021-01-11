@@ -22,7 +22,7 @@ class HomeLottietestVC: UIViewController {
         //animationView 크기가 view와 같게
         animationView.frame = view.bounds
         //어떤 jsonv파일을 쓸지
-        animationView.animation = Animation.named("data1")
+        animationView.animation = Animation.named("loading")
         //화면에 적합하게
         animationView.contentMode = .scaleAspectFit
         //반복되게
