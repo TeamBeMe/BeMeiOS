@@ -506,8 +506,11 @@ extension FollowingVC : FollowingBarButtonDelegate{
             
             return
         }
+        vcName.followers = followers
+        vcName.followees = followees
         
         vcName.modalPresentationStyle = .fullScreen
+
         self.navigationController?.pushViewController(vcName, animated: true)
     }
     

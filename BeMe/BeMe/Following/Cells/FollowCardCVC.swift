@@ -34,7 +34,7 @@ class FollowCardCVC: UICollectionViewCell {
         questionTextView.translatesAutoresizingMaskIntoConstraints = false
         questionTextView.isScrollEnabled = false
         profileImageView.makeRounded(cornerRadius: 17)
-        profileImageView.contentMode = .scaleAspectFit
+        profileImageView.contentMode = .scaleAspectFill
 //        answerTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 //        questionTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 //        

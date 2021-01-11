@@ -17,6 +17,9 @@ class FollowSearchVC: UIViewController {
     @IBOutlet weak var underLineView: UIView!
     @IBOutlet weak var backButton: UIButton!
     
+    var followers: [FollowingFollows] = []
+    var followees: [FollowingFollows] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setItems()
@@ -27,6 +30,8 @@ class FollowSearchVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "followSearchSegue"{
             pageInstance = segue.destination as? FollowingSearchPVC
+            pageInstance?.followees = followees
+            pageInstance?.followers = followers
         }
         
     }
