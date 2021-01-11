@@ -43,6 +43,8 @@ struct ExploreDetailAnswerService {
     
     private func judge(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
+        print(data)
+        print(statusCode)
         guard let decodedData = try? decoder.decode(GenericResponse<ExploreAnswerData>.self, from : data) else { return .pathErr }
         
         print(decodedData)

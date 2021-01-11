@@ -21,7 +21,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="xhH-FY-cbF">
                                 <rect key="frame" x="0.0" y="88" width="390" height="722"/>
-                                <color key="backgroundColor" name="background"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DiffThoughtTVC" id="b61-FY-5F7" customClass="DiffThoughtTVC" customModule="BeMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="390" height="394.66665649414062"/>

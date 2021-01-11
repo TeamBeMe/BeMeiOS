@@ -36,13 +36,13 @@ class ExploreHomeVC: UIViewController {
     // 서버통신을 통해 받아오는 값
     private var categoryArray: [ExploreCategory] = [] {
         didSet {
-            exploreTableView.reloadData()
+            //            exploreTableView.reloadData()
         }
     }
     
     private var exploreThoughtArray: [ExploreThoughtData] = [] {
         didSet {
-            exploreTableView.reloadData()
+            //            exploreTableView.reloadData()
         }
     }
     
@@ -73,11 +73,8 @@ class ExploreHomeVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        print("lastContentOffset")
-        print(lastContentOffset)
-//        view.backgroundColor = lastContentOffset < 394.0 ? .white : UIColor.init(named: "background")
-        print(lastContentOffset > 394.0)
     }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -97,8 +94,7 @@ extension ExploreHomeVC: UITableViewDataSource {
         } else if section == 1 {
             return 1
         } else {
-            print("currentpage: \(currentPage)")
-            print("~~~> page: \(page)")
+            
             if exploreAnswerArray.count == 0 {
                 return 1
             } else {
@@ -168,67 +164,33 @@ extension ExploreHomeVC: UITableViewDelegate {
     
     // 애니메이션
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //        if indexPath.section == 0 || indexPath.section == 1 {
-        //            // no animation
-        //        } else {
-        //            if currentPage < page {
-        //                if indexPath.row == 11 - 1 {
-        //                    // animation 2
-        //                    cell.alpha = 0
-        //                    UIView.animate(withDuration: 0.75) {
-        //
-        //                        cell.alpha = 1.0
-        //                    }
-        //                } else {
-        //                    // animation 1
-        //                    if (scrollDirection) {
-        //                        // up
-        //                        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
-        //                        cell.layer.transform = rotationTransform
-        //                        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
-        //                            cell.layer.transform = CATransform3DIdentity
-        //                        }) { (_) in
-        //
-        //                        }
-        //                    } else {
-        //                        // down
-        //                        let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
-        //                        cell.layer.transform = rotationTransform
-        //                        UIView.animate(withDuration: 0.3, animations: {
-        //                            cell.layer.transform = CATransform3DIdentity
-        //                        })
-        //                    }
-        //                }
-        //            } else {
-        //                // animation 1
-        //                if (scrollDirection) {
-        //                    // up
-        //                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
-        //                    cell.layer.transform = rotationTransform
-        //                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
-        //                        cell.layer.transform = CATransform3DIdentity
-        //                    }) { (_) in
-        //
-        //                    }
-        //                } else {
-        //                    // down
-        //                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
-        //                    cell.layer.transform = rotationTransform
-        //                    UIView.animate(withDuration: 0.3, animations: {
-        //                        cell.layer.transform = CATransform3DIdentity
-        //                    })
-        //                }
-        //            }
-        //        }
-        //
-        //        if indexPath.row == 0 || indexPath.row == 1 {
-        //            // no animation
-        //        } else if indexPath.row == cellNum + 2 - 1 {
-        //        } else {
-        //
-        //
-        //
-        //        }
+        print("cellWillDisplay: \(scrollDirection)")
+        if indexPath.section == 0 || indexPath.section == 1 {
+            // no animation
+        } else {
+            if exploreAnswerArray.isEmpty {
+                // no animation
+            } else {
+                if scrollDirection {
+                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+                    cell.layer.transform = rotationTransform
+                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+                        cell.layer.transform = CATransform3DIdentity
+                    }) { (_) in
+                        
+                    }
+                } else {
+                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
+                    cell.layer.transform = rotationTransform
+                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+                        cell.layer.transform = CATransform3DIdentity
+                    }) { (_) in
+                        
+                    }
+                }
+            }
+            
+        }
     }
 }
 
@@ -238,8 +200,6 @@ extension ExploreHomeVC: UIScrollViewDelegate {
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         
-        //        print("stop Dragging")
-        print(scrollDirection)
         let currentOffset = exploreTableView.contentOffset.y
         
         if currentOffset > 542.333 {
@@ -253,12 +213,10 @@ extension ExploreHomeVC: UIScrollViewDelegate {
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffset = exploreTableView.contentOffset.y
-        //        print(currentOffset)
-        
         // iphone safe area 문제 해결 코드
-        //        self.safeAreaView.backgroundColor = currentOffset > 394 ? .white : UIColor.init(named: "background")
-        view.backgroundColor = currentOffset > 394 ? .white : UIColor.init(named: "background")
-        exploreTableView.backgroundColor = currentOffset > 110 ? .white : UIColor.init(named: "background")
+        
+        view.backgroundColor = currentOffset > 394.0 ? .white : UIColor.init(named: "background")
+        exploreTableView.backgroundColor = currentOffset >= 0.0 ? .white : UIColor.init(named: "background")
         // animation 문제 해결 코드
         if (lastContentOffset < currentOffset) {
             //scroll up
@@ -268,21 +226,23 @@ extension ExploreHomeVC: UIScrollViewDelegate {
             scrollDirection = false
         }
         
+        print("ScrollviewDidScroll: \(scrollDirection)")
+        
         // 상단 view
-//        if (currentOffset > 542.333) {
-//            if (lastContentOffset < currentOffset) {
-//                //scroll up
-//
-//                hideTabBarWhenScrollingUp()
-//            } else {
-//                //scroll down
-//
-//                showTabBarWhenScrollingDown()
-//
-//            }
-//        } else {
-//            //hideTabBarWhenScrollingUp()
-//        }
+        //        if (currentOffset > 542.333) {
+        //            if (lastContentOffset < currentOffset) {
+        //                //scroll up
+        //
+        //                hideTabBarWhenScrollingUp()
+        //            } else {
+        //                //scroll down
+        //
+        //                showTabBarWhenScrollingDown()
+        //
+        //            }
+        //        } else {
+        //            //hideTabBarWhenScrollingUp()
+        //        }
         
         lastContentOffset = currentOffset
     }
@@ -301,7 +261,6 @@ extension ExploreHomeVC {
                 if let thoughts = dt.data {
                     self.exploreThoughtArray = thoughts
                 } else {
-                    print("none")
                     // empty 화면 만들기
                 }
                 
@@ -368,8 +327,6 @@ extension ExploreHomeVC {
                                 self.exploreAnswerArray = ans
                             } else {
                                 self.exploreAnswerArray.append(contentsOf: ans)
-                                
-                                print("합쳐진 배열의 크기 : \(self.exploreAnswerArray.count)")
                             }
                             
                         }
@@ -497,6 +454,7 @@ extension ExploreHomeVC {
         guard let userInfo = notification.userInfo as? [String: Any] else { return }
         guard let pageNumber = userInfo["indexPath"] as? Int else { return }
         
+        scrollDirection = true
         print(pageNumber)
     }
     

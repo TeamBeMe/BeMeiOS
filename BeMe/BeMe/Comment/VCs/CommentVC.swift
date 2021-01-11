@@ -286,6 +286,13 @@ extension CommentVC {
                 if let ad = dt.data {
                     self.answerDetail = ad
                     self.realCommentArray = ad.comment
+                    
+                    // 댓글 막을지 말지
+                    if ad.commentBlockedFlag {
+                        self.commentTextWrapper.isHidden = true
+                    } else {
+                        self.commentTextWrapper.isHidden = false
+                    }
                 }
                 
                 
@@ -510,7 +517,7 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                 header.moreAnswerButton.isHidden = iMBH
             }
             
-            header.profileView.isHidden = isMyAnswer
+            header.profileView.isHidden = answerDetail?.isAuthor ?? true 
             if let ad = answerDetail {
                 header.setInformation(question: ad.question, category: ad.category , date: ad.answerDate,
                                       profileImg: ad.userProfile, nickName: ad.userNickname, content: ad.content)

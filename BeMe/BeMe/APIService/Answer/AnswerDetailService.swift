@@ -16,8 +16,7 @@ struct AnswerDetailService {
         let header: HTTPHeaders = ["Content-Type":"application/json", "token":token]
         
         
-        let url = APIConstants.answerDetailURL + "/1"
-        print(url)
+        let url = APIConstants.answerDetailURL + "/\(answerId)"
         let dataRequest = AF.request(url, method: .get, headers: header)
         
         dataRequest
@@ -40,7 +39,7 @@ struct AnswerDetailService {
         let decoder = JSONDecoder()
         guard let decodedData = try? decoder.decode(GenericResponse<AnswerDetail>.self, from : data) else { return .pathErr }
         
-//        print(decodedData)
+        print(decodedData)
         switch statusCode {
         case 200..<300: return .success(decodedData)
         case 400..<500: return .pathErr
