@@ -103,6 +103,46 @@ class ExploreDetailVC: UIViewController {
 //MARK: - Private Method
 extension ExploreDetailVC {
     
+    private func scrapAnswer(answerId: Int) {
+
+        ExploreAnswerScrapService.shared.putExploreAnswerScrap(answerId: answerId) { (result) in
+            switch result {
+            case .success(let data):
+                guard let dt = data as? GenericResponse<Int> else { return }
+                print(dt.message)
+                if dt.message == "스크랩 성공" || dt.message == "스크랩 취소 성공" {
+                    // 사용자한테 성공했다고 알려주는 동작
+                    // 사용자한테 스크랩 취소 성공했다고 알려주는 동작
+                    self.setAnswerData()
+                } else {
+                    // 사용자한테 실패했다고 알려주는 동작
+                }
+                
+            case .requestErr(let message):
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                
+            case .pathErr: print("path")
+            case .serverErr:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+                print("serverErr")
+            case .networkFail:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+            }
+        }
+    }
+    
     private func setAnswerData() {
         
         // 중복으로 같은 데이터값 가져오는 것 막는 해결 코드
@@ -323,14 +363,16 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
         lastContentOffset = currentContentOffset
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
+    
 }
 
 
 //MARK: - UITableViewButtonSelectedDelegate
 extension ExploreDetailVC: UITableViewButtonSelectedDelegate {
+    
+    func exploreAnswerScrapButtonDidTapped(_ answerId: Int) {
+        scrapAnswer(answerId: answerId)
+    }
     
     func settingButtonDidTapped(to: IndexPath, isAuthor: Bool, commentId: Int, content: String) {
         popupBackgroundView.animatePopupBackground(true)

@@ -57,9 +57,9 @@ class AnswerTVC: UITableViewCell {
         }
     }
     
-    
     @IBAction func scrapButtonTapped(_ sender: UIButton) {
         
+        delegate?.exploreAnswerScrapButtonDidTapped(answerId!)
         if isScrapped {
             isScrapped = false
             sender.setImage(UIImage.init(named: "btnScrapUnselected"), for: .normal)
@@ -71,7 +71,6 @@ class AnswerTVC: UITableViewCell {
     
     @IBAction func settingButtonTapped(_ sender: UIButton) {
         
-        print("tapped")
         delegate?.settingButtonDidTapped(to: indexPath!, isAuthor: false, commentId: 0, content: "")
     }
     
