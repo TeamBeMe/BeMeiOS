@@ -40,6 +40,11 @@ struct APIConstants{
     static let othersPageProfileURL = baseURL + "/profiles/"
     static let othersPageAnswerURL = baseURL + "/profiles/answers/"
     
+    static let myPageProfileURL = baseURL + "/profiles"
+    static let myPageAnswerURL = baseURL + "/profiles/answers"
+    static let myPageScrapURL = baseURL + "/profiles/scraps"
+//    static let settingMyPageProfileURL = baseURL + "/profiles"
+    
     
     
 }
