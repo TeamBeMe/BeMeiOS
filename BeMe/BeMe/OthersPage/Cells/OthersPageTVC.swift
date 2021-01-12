@@ -22,6 +22,11 @@ class OthersPageTVC: UITableViewCell {
     //MARK:**- Variable Part**
     private var isScrapped = false
     static let identifier = "OthersPageTVC"
+    var answerId: Int?
+    
+    var questionId: Int?
+    
+    weak var delegate: UITableViewButtonSelectedDelegate?
     
     //MARK:**- Life Cycle Part**
     
@@ -48,12 +53,20 @@ class OthersPageTVC: UITableViewCell {
             sender.setImage(UIImage.init(named: "btnScrapUnselected"), for: .normal)
             
         }
+        delegate?.exploreAnswerScrapButtonDidTapped(answerId!)
+        print("answerid 는 무엇이냐면 ! ")
+        print(answerId!)
+    
     }
     
     
     
     //MARK:**- default Setting Function Part**
-    func setCardView(question: String, questionInfo: String, answerDate: String, writer: String, writerImg: String, isScrapped: Bool){
+    func setCardView(question: String, questionInfo: String, answerDate: String, writer: String, writerImg: String, isScrapped: Bool, answerId: Int, questionId: Int){
+        
+        // id init
+        self.answerId = answerId
+        self.questionId = questionId
         
         // text init
         questionLabel.text = question
@@ -71,8 +84,10 @@ class OthersPageTVC: UITableViewCell {
         }
         
         // writer profile image init
-        writerImageView.image = UIImage(named: writerImg)
-        
+        writerImageView.imageFromUrl(writerImg, defaultImgPath: "img")
+        writerImageView.makeRounded(cornerRadius: 10)
+        writerImageView.contentMode = .scaleAspectFill
+   
         
         // color
         questionLabel.textColor = .black

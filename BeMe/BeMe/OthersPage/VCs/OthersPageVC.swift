@@ -18,6 +18,9 @@ class OthersPageVC: UIViewController {
     
     let othersPageCVC = OthersPageCVC()
     
+    var tableviewHeight: CGFloat = 0.0
+    
+    
     private var othersAnswerArray: [Answer] = [] {
         didSet {
             othersPageCollectionView.reloadData()
@@ -30,7 +33,7 @@ class OthersPageVC: UIViewController {
         }
     }
     
-
+    
     
     //MARK:**- Constraint Part**
     
@@ -56,8 +59,8 @@ class OthersPageVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setAnswerData(userId: 1, page: 1)
-        setProfileData(userId: 2)
+        setAnswerData(userId: 3, page: 1)
+        setProfileData(userId: 1)
     }
     //MARK:**- IBAction Part**
     
@@ -102,10 +105,18 @@ extension OthersPageVC : UICollectionViewDataSource {
         
         
         cell.othersAnswerArray = othersAnswerArray
-        print("=====")
-        print(cell.othersAnswerArray.count)
+        print("otehrspage CV ")
+        print(othersAnswerArray[0].id)
+        print(othersAnswerArray[0].content)
+        print(othersAnswerArray[0].isScrapped)
+        //        print("=====")
+        //        print(cell.othersAnswerArray.count)
+        //        tableviewHeight = cell.tableviewHeight
+        //        print("=====")
+        //        print(tableviewHeight)
         cell.otherspageTableView.reloadData()
-
+        
+        
         return cell
     }
     
@@ -119,12 +130,12 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if indexPath.item <= 1 {
-            return CGSize(width: collectionView.frame.width  , height: 748)
-        }
-        else{
-            return CGSize(width: collectionView.frame.width  , height: 748)
-        }
+        tableviewHeight = CGFloat(othersAnswerArray.count) * 135.0
+        
+        //        print("=====")
+        //        print(tableviewHeight)
+        //        collectionView.cellForItem(at: indexPath)
+        return CGSize(width: collectionView.frame.width  , height: tableviewHeight)
     }
     
     
@@ -169,10 +180,9 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
             headerView.othersProfile = othersProfile
             if (othersProfile.count != 0) {
                 headerView.setProfile(nickname: othersProfile[0].nickname, img: othersProfile[0].profileImg!, visit: String(othersProfile[0].continuedVisit), answerCount: String(othersProfile[0].answerCount), isFollowed: othersProfile[0].isFollowed)
+                //                print("othersProfile[0].isFollowed")
+                //                print(othersProfile[0].isFollowed)
             }
-            
-//            headerView.da
-            //            othersPageCVLayout.mypageCRVDelegate = headerView
             
             return headerView
         default:
@@ -191,17 +201,18 @@ extension OthersPageVC {
             switch result {
             case .success(let data):
                 if let response = data as? OthersAnswer{
-                    print(" 성공")
+                    print("setAnswerData 성공")
                     
                     
                     self.othersAnswerArray = response.answers
-                    print(self.othersAnswerArray[0].answerDate)
+                    print("setAnswerData 안에ㅐ서")
+                    print(response.answers[0].isScrapped)
                     self.othersPageCollectionView.reloadData()
                 }
             case .requestErr(let msg):
                 if let message = msg as? String {
                     print(message)
-                    print(" 실패")
+                    print("setAnswerData 실패")
                 }
             case .pathErr :
                 print("pathErr")
@@ -223,7 +234,7 @@ extension OthersPageVC {
             switch result {
             case .success(let data):
                 if let othersProfile = data as? OthersProfile{
-                    print(" 성공")
+                    print("setProfileData 성공")
                     
                     self.othersProfile.append(othersProfile)
                     
@@ -232,7 +243,7 @@ extension OthersPageVC {
             case .requestErr(let msg):
                 if let message = msg as? String {
                     print(message)
-                    print(" 실패")
+                    print("setProfileData 실패")
                 }
             case .pathErr :
                 print("pathErr")
@@ -246,6 +257,4 @@ extension OthersPageVC {
         }
         
     }
-    
-    
 }

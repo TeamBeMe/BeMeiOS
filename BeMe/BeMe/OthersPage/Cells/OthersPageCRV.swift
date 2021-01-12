@@ -50,8 +50,7 @@ class OthersPageCRV: UICollectionReusableView {
     
     func setProfile(nickname: String, img: String, visit: String, answerCount: String, isFollowed: Bool){
         nameLabel.text = nickname
-        profileImage.image = UIImage(contentsOfFile: img)
-//        profileImage.image = UI
+        profileImage.imageFromUrl(img, defaultImgPath: "imgMypage")
         attendanceCountInfoLabel.text = visit
         answerCountInfoLabel.text = answerCount
         setInfoLabel()
