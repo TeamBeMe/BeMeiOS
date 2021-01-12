@@ -13,6 +13,8 @@ class AlarmTVC: UITableViewCell {
     
     @IBOutlet weak var alarmLabel: UILabel!
     
+    @IBOutlet weak var stackView: UIStackView!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         profileImageView.makeRounded(cornerRadius: profileImageView.bounds.width / 2)
@@ -40,5 +42,23 @@ class AlarmTVC: UITableViewCell {
         let attributedStr = NSMutableAttributedString(string: alarmLabel.text!)
         attributedStr.addAttribute(.font, value: font!, range: (alarmLabel.text! as NSString).range(of: nickName))
         alarmLabel.attributedText = attributedStr
+        
+//        print(alarmLabel.calculateMaxLines())
+//        if alarmLabel.calculateMaxLines() > 2 {
+//            stackView.alignment = .top
+//        } else {
+//            stackView.alignment = .center
+//        }
+    }
+}
+
+extension UILabel {
+    func calculateMaxLines() -> Int {
+        let maxSize = CGSize(width: frame.size.width, height: CGFloat(Float.infinity))
+        let charSize = font.lineHeight
+        let text = (self.text ?? "") as NSString
+        let textSize = text.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: [NSAttributedString.Key.font: font], context: nil)
+        let linesRoundedUp = Int(ceil(textSize.height/charSize))
+        return linesRoundedUp
     }
 }

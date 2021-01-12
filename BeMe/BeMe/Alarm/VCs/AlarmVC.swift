@@ -26,7 +26,6 @@ class AlarmVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print("Alarm 화면 들어옴")
         getAlarms()
     }
     
@@ -106,24 +105,25 @@ extension AlarmVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let title = tableView.dequeueReusableCell(withIdentifier: AlarmTitleTVC.identifier, for: indexPath) as? AlarmTitleTVC else { return UITableViewCell() }
-            
+            title.isUserInteractionEnabled = false
             return title
         } else {
             if currentPage < page {
                 if indexPath.row == alarmArray.count {
                     guard let more = tableView.dequeueReusableCell(withIdentifier: AlarmMoreTVC.identifier, for: indexPath) as? AlarmMoreTVC else { return UITableViewCell() }
-                    
+                    more.selectionStyle = .none
                     more.delegate = self
                     return more
                 } else {
                     guard let alarm = tableView.dequeueReusableCell(withIdentifier: AlarmTVC.identifier, for: indexPath) as? AlarmTVC else { return UITableViewCell() }
-                    
+                    alarm.selectionStyle = .none
                     alarm.setInformations(type: alarmArray[indexPath.row].type, profileImg: alarmArray[indexPath.row].profileImg, question: alarmArray[indexPath.row].questionTitle, nickName: alarmArray[indexPath.row].userNickname)
                     return alarm
                 }
             } else {
                 guard let alarm = tableView.dequeueReusableCell(withIdentifier: AlarmTVC.identifier, for: indexPath) as? AlarmTVC else { return UITableViewCell() }
-                
+
+                alarm.selectionStyle = .none
                 alarm.setInformations(type: alarmArray[indexPath.row].type, profileImg: alarmArray[indexPath.row].profileImg, question: alarmArray[indexPath.row].questionTitle, nickName: alarmArray[indexPath.row].userNickname)
                 return alarm
             }
@@ -131,13 +131,29 @@ extension AlarmVC: UITableViewDataSource {
     }
 }
 
+extension AlarmVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if alarmArray[indexPath.row].type == "comment" || alarmArray[indexPath.row].type == "cocomment"  {
+            guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
+            
+            comment.answerId = alarmArray[indexPath.row].answerId
+            comment.isMoreButtonHidden = false
+            comment.modalPresentationStyle = .fullScreen
+            self.present(comment, animated: true, completion: nil)
+        }  else {
+            // 타인 프로필로 이동
+        }
+    }
+    
+}
+
+//MARK: - UITableViewButtonSelectedDelegate
+
 extension AlarmVC: UITableViewButtonSelectedDelegate {
     func exploreMoreAnswersButtonDidTapped() {
         currentPage += 1
         getAlarms()
     }
-}
-
-extension AlarmVC: UITableViewDelegate {
-    
 }

@@ -322,7 +322,6 @@ extension ExploreHomeVC {
         }
         
         if canGetServerData {
-            print("getServer!")
             ExploreAnswerService.shared.getExploreAnswer(page: page, category: cate, sorting: sorting) { (result) in
                 switch result {
                 case .success(let data):
@@ -552,5 +551,11 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
         guard let alarm = UIStoryboard.init(name: "Alarm", bundle: nil).instantiateViewController(identifier: "AlarmVC") as? AlarmVC else { return }
         
         self.navigationController?.pushViewController(alarm, animated: true)
+    }
+}
+
+extension ExploreHomeVC: ExploreTabBarDelegate {
+    func exploreTabDidTapped() {
+        self.exploreTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
 }

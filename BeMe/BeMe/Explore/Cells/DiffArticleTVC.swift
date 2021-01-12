@@ -127,7 +127,6 @@ extension DiffArticleTVC: UICollectionViewDataSource {
 
         if cell.isSelected {
             selectedCategoryId = 0
-            print(selectedCategoryId)
             delegate?.categoryButtonTapped(indexPath, selectedCategoryId)
             collectionView.deselectItem(at: indexPath, animated: false)
             return false

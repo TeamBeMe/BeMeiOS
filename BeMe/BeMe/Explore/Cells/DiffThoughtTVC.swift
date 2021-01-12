@@ -117,7 +117,6 @@ extension DiffThoughtTVC: UICollectionViewButtonDelegate {
     
     func goToAnswerDetailButtonDidTapped(_ answerId: Int) {
         
-        print(answerId)
         delegate?.goToCommentButtonTapped(answerId)
     }
     

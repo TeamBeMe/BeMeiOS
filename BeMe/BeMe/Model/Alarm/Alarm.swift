@@ -14,6 +14,8 @@ struct Alarm: Codable {
     let profileImg: String
     let questionTitle: String
     let createdAt: String
+    let answerId: Int
+    
     enum CodingKeys: String, CodingKey {
         case type
         case userID = "user_id"
@@ -21,6 +23,7 @@ struct Alarm: Codable {
         case profileImg = "profile_img"
         case questionTitle = "question_title"
         case createdAt
+        case answerId = "answer_id"
     }
     init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
@@ -30,5 +33,6 @@ struct Alarm: Codable {
         profileImg = (try? values.decode(String.self, forKey: .profileImg)) ?? ""
         questionTitle = (try? values.decode(String.self, forKey: .questionTitle)) ?? ""
         createdAt = (try? values.decode(String.self, forKey: .createdAt)) ?? ""
+        answerId = (try? values.decode(Int.self, forKey: .answerId)) ?? -1
     }
 }
