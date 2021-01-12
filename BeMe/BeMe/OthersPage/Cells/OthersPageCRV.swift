@@ -32,16 +32,6 @@ class OthersPageCRV: UICollectionReusableView {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-//        setFollowButton(view: followButton, isFollowed: isFollowed)
-//        setInfoLabel()
-//        setLabel(view: answerCountLabel, text: "4")
-//        setLabel(view: attendanceCountLabel, text: "4123124")
-//        setLabel(view: nameLabel, text: "재용아 개소리 좀 그만해")
-        setFollowButton(view: followButton, isFollowed: othersProfile[0].isFollowed)
-        setInfoLabel()
-        setLabel(view: answerCountLabel, text: String(othersProfile[0].answerCount))
-        setLabel(view: attendanceCountLabel, text: String(othersProfile[0].continuedVisit))
-        setLabel(view: nameLabel, text: othersProfile[0].nickname)
         
     }
     
@@ -57,6 +47,16 @@ class OthersPageCRV: UICollectionReusableView {
     }
     
     //MARK:**- default Setting Function Part**
+    
+    func setProfile(nickname: String, img: String, visit: String, answerCount: String, isFollowed: Bool){
+        nameLabel.text = nickname
+        profileImage.image = UIImage(contentsOfFile: img)
+//        profileImage.image = UI
+        attendanceCountInfoLabel.text = visit
+        answerCountInfoLabel.text = answerCount
+        setInfoLabel()
+        setFollowButton(view: followButton, isFollowed: isFollowed)
+    }
     func setFollowButton(view: UIButton, isFollowed: Bool) {
         if isFollowed {
             view.setBorderWithRadius(borderColor: .veryLightPinkTwo, borderWidth: 1, cornerRadius: 3)
@@ -74,15 +74,7 @@ class OthersPageCRV: UICollectionReusableView {
         attendanceCountInfoLabel.textColor = .slateGrey
         answerCountInfoLabel.textColor = .slateGrey
     }
-    
-    func setLabel(view: UILabel, text: String){
-        view.text = text
-    }
-    
-    func setImgae(view: UIImageView, text: String){
-        view.image = UIImage(contentsOfFile: text)
-    }
-    
+
     //MARK:**- Function Part**
         
 }
