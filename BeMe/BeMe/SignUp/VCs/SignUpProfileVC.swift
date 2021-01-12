@@ -40,6 +40,7 @@ class SignUpProfileVC: UIViewController {
     }
     
     @IBAction func finishButtonAction(_ sender: Any) {
+        LoadingHUD.show(loadingFrame: self.view.frame,color: .white)
         SignUpService.shared.signUp(email: myEmail!,nickName: myName!, password: myPassword!,
                                     image: profileImageView.image!,completion: { networkResult -> Void in
                                         switch networkResult {
@@ -56,7 +57,15 @@ class SignUpProfileVC: UIViewController {
                                                             print("회원가입 후 로그인 성공")
                                                             UserDefaults.standard.set(loginData.token, forKey: "token")
                                                             print(UserDefaults.standard.string(forKey: "nickName")!)
-                                                            
+                                                            self.dismiss(animated: false, completion: {
+                                                                guard let vcName = UIStoryboard(name: "UnderTab", bundle: nil).instantiateViewController(identifier: "UnderTabBarController") as? UINavigationController else {return}
+                                                                vcName.modalPresentationStyle = .fullScreen
+                                                                self.present(vcName, animated: false, completion: {
+                                                                    
+                                                                })
+
+                                                                
+                                                            })
                                                             
                                                             
                                                         }

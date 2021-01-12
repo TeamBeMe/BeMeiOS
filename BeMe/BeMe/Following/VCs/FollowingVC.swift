@@ -44,7 +44,7 @@ class FollowingVC: UIViewController {
         super.viewDidLoad()
         setItems()
         let loadingFrame = CGRect(x: 0, y: 155, width: view.frame.width, height: view.frame.height-155)
-        LoadingHUD.show(loadingFrame: loadingFrame)
+        LoadingHUD.show(loadingFrame: loadingFrame,color: .white)
         isLoading = true
         getAnswerData()
     }
@@ -165,7 +165,7 @@ extension FollowingVC {
     func getAnswerData(){
         let loadingFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         if isLoading == false{
-            LoadingHUD.show(loadingFrame: loadingFrame)
+            LoadingHUD.show(loadingFrame: loadingFrame,color: .white)
             isLoading = true
         }
         
@@ -437,6 +437,10 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
+        if section > 2{
+            return UIEdgeInsets(top: 0, left: 0, bottom: 20, right:0)
+        }
+        
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right:0)
     }
     

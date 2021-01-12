@@ -18,7 +18,7 @@ class LoadingHUD {
     private var loadingLabel: UILabel?
     private var animationView: AnimationView?
     
-    class func show(loadingFrame: CGRect) {
+    class func show(loadingFrame: CGRect,color: UIColor) {
         let backgroundView = UIView(frame: loadingFrame)
         
         
@@ -41,7 +41,7 @@ class LoadingHUD {
           
             
             backgroundView.frame = loadingFrame
-            backgroundView.backgroundColor = .white
+            backgroundView.backgroundColor = color
             
 //            animationView.frame = CGRect.init(x: 0, y: 0, width: 100, height: 100)
             animationView.snp.makeConstraints{
