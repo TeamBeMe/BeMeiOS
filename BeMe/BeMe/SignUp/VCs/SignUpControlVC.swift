@@ -38,32 +38,58 @@ class SignUpControlVC: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "signUpSegue"{
             pageInstance = segue.destination as? SignUpPVC
-            guard let vcName = pageInstance?.VCArray[0] as? SignUpVC else {return}
-            vcName.signUpNextButtonDelegate = self
+            guard let firstVC = pageInstance?.VCArray[0] as? SignUpNoticeVC else {return}
+            firstVC.signUpNextButtonDelegate = self
+            guard let secondVC = pageInstance?.VCArray[1] as? SignUpAgreeVC else {return}
+            secondVC.signUpNextButtonDelegate = self
+            guard let thirdVC = pageInstance?.VCArray[2] as? SignUpVC else {return}
+            thirdVC.signUpNextButtonDelegate = self
           
         }
         
     }
     
     @IBAction func backButtonAction(_ sender: Any) {
-        if vcIndex == 0{
+        switch vcIndex {
+        case 0:
             self.navigationController?.popViewController(animated: true)
-        }
-        else{
-          
+        case 1:
             pageInstance?.setViewControllers([(pageInstance?.VCArray[0])!], direction: .reverse,
             animated: true, completion: nil)
-            vcIndex = 0
+            vcIndex = vcIndex - 1
+            progressBar.progress = 0.25
+            UIView.animate(withDuration: 1.0, animations: {
+                self.progressBar.layoutIfNeeded()
+            })
+        case 2:
+            pageInstance?.setViewControllers([(pageInstance?.VCArray[1])!], direction: .reverse,
+            animated: true, completion: nil)
+            vcIndex = vcIndex - 1
             progressBar.progress = 0.5
             UIView.animate(withDuration: 1.0, animations: {
                 self.progressBar.layoutIfNeeded()
             })
+        case 3:
+            pageInstance?.setViewControllers([(pageInstance?.VCArray[2])!], direction: .reverse,
+            animated: true, completion: nil)
+            vcIndex = vcIndex - 1
+            progressBar.progress = 0.75
+            UIView.animate(withDuration: 1.0, animations: {
+                self.progressBar.layoutIfNeeded()
+            })
+            
+        default:
+            return
+        
         }
+        
+        
+        
         
     }
     func startAnimation(){
         
-        progressBar.progress = 0.5
+        progressBar.progress = 0.25
         UIView.animate(withDuration: 1.0, animations: {
             self.progressBar.layoutIfNeeded()
         })
@@ -76,19 +102,48 @@ class SignUpControlVC: UIViewController {
 
 extension SignUpControlVC: SignUpNextButtonDelegate{
     func nextButtonTapped(email: String,nickName: String,password: String) {
-        guard let vcName = pageInstance?.VCArray[1] as? SignUpProfileVC else {return}
-        vcIndex = vcIndex+1
-        pageInstance?.setViewControllers([(pageInstance?.VCArray[1])!], direction: .forward,
-        animated: true, completion: nil)
-        vcName.myName = nickName
-        vcName.myEmail = email
-        vcName.myPassword = password
+        switch vcIndex{
+        case 0:
+            guard let vcName = pageInstance?.VCArray[1] as? SignUpAgreeVC else {return}
+            vcIndex = vcIndex+1
+            pageInstance?.setViewControllers([(pageInstance?.VCArray[1])!], direction: .forward,
+            animated: true, completion: nil)
+            progressBar.progress = 0.5
+            UIView.animate(withDuration: 1.0, animations: {
+                self.progressBar.layoutIfNeeded()
+            })
+        case 1:
+            guard let vcName = pageInstance?.VCArray[2] as? SignUpVC else {return}
+            vcIndex = vcIndex+1
+            pageInstance?.setViewControllers([(pageInstance?.VCArray[2])!], direction: .forward,
+            animated: true, completion: nil)
+            progressBar.progress = 0.75
+            UIView.animate(withDuration: 1.0, animations: {
+                self.progressBar.layoutIfNeeded()
+            })
+        case 2:
+            guard let vcName = pageInstance?.VCArray[3] as? SignUpProfileVC else {return}
+            vcIndex = vcIndex+1
+            pageInstance?.setViewControllers([(pageInstance?.VCArray[3])!], direction: .forward,
+            animated: true, completion: nil)
+            vcName.myName = nickName
+            vcName.myEmail = email
+            vcName.myPassword = password
+            
+            vcName.setNickname(nickName: nickName)
+            progressBar.progress = 1.0
+            UIView.animate(withDuration: 1.0, animations: {
+                self.progressBar.layoutIfNeeded()
+            })
+        case 3:
+            return
+        default:
+            return
         
-        vcName.setNickname(nickName: nickName)
-        progressBar.progress = 1.0
-        UIView.animate(withDuration: 1.0, animations: {
-            self.progressBar.layoutIfNeeded()
-        })
+        
+        
+        }
+       
     }
 }
 

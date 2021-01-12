@@ -11,6 +11,7 @@ struct APIConstants{
     static let baseURL = "http://15.164.67.58:3000"
     
     static let signupURL = baseURL+"/users/signup"
+    static let signupDuplicateURL = baseURL+"/users?nickname="
     static let loginURL = baseURL+"/users/signin"
     static let homeGetURL = baseURL+"/home/all/"
     static let homeGetNewQuestionURL = baseURL + "/home"
@@ -26,6 +27,7 @@ struct APIConstants{
     static let searchHistoryURL = baseURL+"/users/search/history"
     static let searchDeleteURL = baseURL+"/users/search/"
     static let followerDeleteURL = baseURL+"/follow/"
+    
     
     static let explorationCategoryURL = baseURL + "/exploration/category"
     static let explorationDiffThoughtURL = baseURL + "/exploration/another"

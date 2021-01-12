@@ -28,54 +28,90 @@ class SignUpProfileVC: UIViewController {
     
     lazy var imagePickerController = UIImagePickerController().then {
         $0.sourceType = .photoLibrary
-//        $0.allowsEditing = true
+        //        $0.allowsEditing = true
         $0.delegate = self
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         setItems()
-
+        
         
         // Do any additional setup after loading the view.
     }
     
     @IBAction func finishButtonAction(_ sender: Any) {
+        LoadingHUD.show(loadingFrame: self.view.frame,color: .white)
         SignUpService.shared.signUp(email: myEmail!,nickName: myName!, password: myPassword!,
                                     image: profileImageView.image!,completion: { networkResult -> Void in
-            switch networkResult {
-            case .success(let data):
-                if let signupData = data as? SignUpData{
-                    print("회원가입 성공")
-                    UserDefaults.standard.set(signupData.nickname, forKey: "nickName")
-                    
-                    
-                }
-            case .requestErr(let msg):
-                if let message = msg as? String {
-                    print(message)
-                    print("회원가입 실패")
-                }
-            case .pathErr :
-                print("pathErr")
-            case .serverErr :
-                print("serverERr")
-            case .networkFail :
-                print("networkFail")
-            default :
-                print("머지?")
-            }
-                                     
-            
-        
-            
-            
-        })
+                                        switch networkResult {
+                                        case .success(let data):
+                                            if let signupData = data as? SignUpData{
+                                                print("회원가입 성공")
+                                                UserDefaults.standard.set(signupData.nickname, forKey: "nickName")
+                                                
+                                                LogInService.shared.login(nickName: self.myName!,
+                                                                          password: self.myPassword!) {(networkResult) -> (Void) in
+                                                    switch networkResult {
+                                                    case .success(let data) :
+                                                        if let loginData = data as? LogInData{
+                                                            print("회원가입 후 로그인 성공")
+                                                            UserDefaults.standard.set(loginData.token, forKey: "token")
+                                                            print(UserDefaults.standard.string(forKey: "nickName")!)
+                                                            self.dismiss(animated: false, completion: {
+                                                                guard let vcName = UIStoryboard(name: "UnderTab", bundle: nil).instantiateViewController(identifier: "UnderTabBarController") as? UINavigationController else {return}
+                                                                vcName.modalPresentationStyle = .fullScreen
+                                                                self.present(vcName, animated: false, completion: {
+                                                                    
+                                                                })
+
+                                                                
+                                                            })
+                                                            
+                                                            
+                                                        }
+                                                        
+                                                    case .requestErr(let msg):
+                                                        if let message = msg as? String {
+                                                            print(message)
+                                                        }
+                                                    case .pathErr :
+                                                        print("pathErr")
+                                                    case .serverErr :
+                                                        print("serverErr")
+                                                    case .networkFail:
+                                                        print("networkFail")
+                                                        
+                                                        
+                                                        
+                                                    }
+                                                }
+                                            }
+                                        case .requestErr(let msg):
+                                            if let message = msg as? String {
+                                                print(message)
+                                                print("회원가입 실패")
+                                            }
+                                        case .pathErr :
+                                            print("pathErr")
+                                        case .serverErr :
+                                            print("serverERr")
+                                        case .networkFail :
+                                            print("networkFail")
+                                        default :
+                                            print("머지?")
+                                        }
+                                        
+                                        
+                                        
+                                        
+                                        
+                                    })
         
     }
     
     
     @IBAction func jumpButtonAction(_ sender: Any) {
-       
+        
         
         
         
@@ -112,15 +148,15 @@ extension SignUpProfileVC{
     
     @objc func touchUpProfileImageView(){
         self.present(self.imagePickerController, animated: true, completion: nil)
-      
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let cropViewController = segue.destination as?
-            SignUpCropVC,
-            segue.identifier == cropSegue {
-            cropViewController.initialImage = chosenImage
-         }
+        //        if let cropViewController = segue.destination as?
+        //            SignUpCropVC,
+        //            segue.identifier == cropSegue {
+        //            cropViewController.initialImage = chosenImage
+        //         }
     }
     
 }

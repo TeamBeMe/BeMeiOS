@@ -13,7 +13,7 @@ import UserNotifications
 class HomeVC: UIViewController {
     //MARK:- IBOutlets
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var cardCollectionView: UICollectionView!
+    @IBOutlet weak var cardCollectionView: HomeCardCollectionView!
     
     
     let alertHorizontalSeperator = UIView().then{
@@ -98,6 +98,7 @@ class HomeVC: UIViewController {
 //MARK:- LifeCycle Methods
 extension HomeVC {
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         //        pastCards = 3
         //        todayCards = 1
@@ -126,12 +127,12 @@ extension HomeVC {
       
         answerDataList = []
         pageGetFromServer()
-        startAnimation()
+       
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        LoadingHUD.show(loadingFrame: self.view.frame,color: .black)
         
     }
     
@@ -158,9 +159,13 @@ extension HomeVC {
         self.cardCollectionView.alpha = 0
         self.timeLabel.alpha = 0
         
-        UIView.animate(withDuration: 2.0, animations: {
+        UIView.animate(withDuration: 1.5, animations: {
             self.cardCollectionView.alpha = 1
             self.timeLabel.alpha = 1
+           
+        },completion: { finished in
+           
+            
             
         })
         
@@ -313,12 +318,19 @@ extension HomeVC {
                         i = i + 1
                     }
                     
-                    self.cardCollectionView.reloadData()
+                    self.cardCollectionView.reloadDataWithCompletion {
+                        LoadingHUD.hide()
+                        if self.initialScrolled == false{
+                            self.startAnimation()
+                        }
+                       
+                    }
                     if self.initialScrolled == false {
                         self.cardCollectionView.scrollToItem(at: IndexPath(item: self.pastCards + self.todayCards - 1,
                                                                            section: 0),
                                                              at: .centeredHorizontally,
                                                              animated: false)
+//                        LoadingHUD.hide()
                         self.initialScrolled = true
                         self.currentCardIdx = self.pastCards + self.todayCards - 1
                         self.timeLabel.text = "오늘의 질문"
@@ -787,7 +799,7 @@ extension HomeVC : HomeAnswerButtonDelegate {
         answerVC.answerDataDelegate = self
         answerVC.curCardIdx = index
         answerVC.answerData = answerData
-        answerVC.setLabels()
+//        answerVC.setLabels()
         self.navigationController?.pushViewController(answerVC, animated: true)
         
     }
