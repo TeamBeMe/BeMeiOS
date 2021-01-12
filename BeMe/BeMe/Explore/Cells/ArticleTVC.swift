@@ -72,7 +72,6 @@ class ArticleTVC: UITableViewCell {
     //MARK: - IBAction
     @IBAction func scrapButtonTapped(_ sender: UIButton) {
         
-        print(isScrapped)
         if isScrapped {
             isScrapped = false
             sender.setImage(UIImage.init(named: "btnScrapUnselected"), for: .normal)

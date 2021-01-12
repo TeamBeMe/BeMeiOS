@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--AlarmVC-->
+        <scene sceneID="34S-ut-K6C">
+            <objects>
+                <viewController storyboardIdentifier="AlarmVC" id="pXU-kI-nTs" customClass="AlarmVC" customModule="BeMe" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eSs-ok-3us">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ia1-Km-5r5">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lgs-bT-wWS">
+                                        <rect key="frame" x="14" y="0.0" width="44" height="44"/>
+                                        <state key="normal" image="btnBack"/>
+                                        <connections>
+                                            <action selector="dismissButtonTapped:" destination="pXU-kI-nTs" eventType="touchUpInside" id="QjH-mS-9SA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="lgs-bT-wWS" secondAttribute="bottom" id="Hxy-65-Sek"/>
+                                    <constraint firstItem="lgs-bT-wWS" firstAttribute="leading" secondItem="Ia1-Km-5r5" secondAttribute="leading" constant="14" id="aQ4-hn-C8K"/>
+                                    <constraint firstItem="lgs-bT-wWS" firstAttribute="top" secondItem="Ia1-Km-5r5" secondAttribute="top" id="f2J-jd-Tpx"/>
+                                    <constraint firstAttribute="height" constant="44" id="hFw-Q7-D0e"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eEQ-Vy-dXj">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlarmTitleTVC" id="Vav-PJ-cxP" customClass="AlarmTitleTVC" customModule="BeMe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="72"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vav-PJ-cxP" id="iVm-hi-fTk">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="72"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="최근 활동" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x94-Ej-rTz">
+                                                    <rect key="frame" x="30" y="27" width="74.5" height="24"/>
+                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="x94-Ej-rTz" firstAttribute="top" secondItem="iVm-hi-fTk" secondAttribute="topMargin" constant="16" id="5gM-PL-8fK"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="x94-Ej-rTz" secondAttribute="bottom" constant="10" id="kv7-3H-1ME"/>
+                                                <constraint firstItem="x94-Ej-rTz" firstAttribute="leading" secondItem="iVm-hi-fTk" secondAttribute="leading" constant="30" id="oyS-Vc-zEz"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlarmTVC" id="xyy-hT-hj1" customClass="AlarmTVC" customModule="BeMe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="100" width="414" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xyy-hT-hj1" id="eoQ-ey-LFM">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgProfile" translatesAutoresizingMaskIntoConstraints="NO" id="aCK-ie-abo">
+                                                    <rect key="frame" x="30" y="10" width="36" height="36"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="36" id="2TO-e7-wjn"/>
+                                                        <constraint firstAttribute="height" constant="36" id="uRX-gk-okn"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="genie_self님이 “이번주를 후회없이 보내는 방법”에 대한 나의 글에 댓글을 달았습니다" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JwX-dh-c4G">
+                                                    <rect key="frame" x="82" y="11" width="302" height="34"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" priority="250" constant="36" id="PJd-j6-hrO"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="JwX-dh-c4G" secondAttribute="trailing" constant="30" id="0rv-Bc-vgd"/>
+                                                <constraint firstAttribute="bottom" secondItem="JwX-dh-c4G" secondAttribute="bottom" constant="10" id="Itx-t8-wKy"/>
+                                                <constraint firstItem="JwX-dh-c4G" firstAttribute="leading" secondItem="aCK-ie-abo" secondAttribute="trailing" constant="16" id="Vi1-Vx-SvB"/>
+                                                <constraint firstItem="aCK-ie-abo" firstAttribute="top" secondItem="eoQ-ey-LFM" secondAttribute="top" constant="10" id="WaF-Go-Pvm"/>
+                                                <constraint firstItem="aCK-ie-abo" firstAttribute="leading" secondItem="eoQ-ey-LFM" secondAttribute="leading" constant="30" id="em9-TJ-JBq"/>
+                                                <constraint firstItem="JwX-dh-c4G" firstAttribute="top" secondItem="eoQ-ey-LFM" secondAttribute="top" constant="11" id="gYz-Jd-kVA"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="alarmLabel" destination="JwX-dh-c4G" id="rgc-KC-QTz"/>
+                                            <outlet property="profileImageView" destination="aCK-ie-abo" id="0N0-Zb-PzP"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlarmMoreTVC" id="I5E-1Q-J6N" customClass="AlarmMoreTVC" customModule="BeMe" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="155" width="414" height="157"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I5E-1Q-J6N" id="wUb-u6-acm">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="157"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWC-9t-buw">
+                                                    <rect key="frame" x="30" y="30" width="354" height="56"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="eWC-9t-buw" secondAttribute="height" multiplier="315:50" id="23d-ep-aS3"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="16"/>
+                                                    <state key="normal" title="더보기">
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="moreButtonTapped:" destination="I5E-1Q-J6N" eventType="touchUpInside" id="eVf-zN-1sc"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="eWC-9t-buw" firstAttribute="leading" secondItem="wUb-u6-acm" secondAttribute="leading" constant="30" id="YLP-zZ-cXq"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="eWC-9t-buw" secondAttribute="bottom" constant="60" id="aOW-K2-FzZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="eWC-9t-buw" secondAttribute="trailing" constant="30" id="hyB-LX-GeA"/>
+                                                <constraint firstItem="eWC-9t-buw" firstAttribute="top" secondItem="wUb-u6-acm" secondAttribute="top" constant="30" id="w9f-j8-iIE"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="moreBiutton" destination="eWC-9t-buw" id="Yfc-IO-M2Y"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="pXU-kI-nTs" id="7gZ-31-N7H"/>
+                                    <outlet property="delegate" destination="pXU-kI-nTs" id="rVg-v1-2nA"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bOw-aR-pOz"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="eEQ-Vy-dXj" secondAttribute="bottom" id="AgQ-FI-jGd"/>
+                            <constraint firstItem="eEQ-Vy-dXj" firstAttribute="leading" secondItem="bOw-aR-pOz" secondAttribute="leading" id="KGc-OB-p8v"/>
+                            <constraint firstItem="Ia1-Km-5r5" firstAttribute="leading" secondItem="bOw-aR-pOz" secondAttribute="leading" id="LbF-2p-e2P"/>
+                            <constraint firstItem="eEQ-Vy-dXj" firstAttribute="top" secondItem="Ia1-Km-5r5" secondAttribute="bottom" id="PMj-tp-dTC"/>
+                            <constraint firstItem="bOw-aR-pOz" firstAttribute="trailing" secondItem="eEQ-Vy-dXj" secondAttribute="trailing" id="ogk-zk-hGS"/>
+                            <constraint firstItem="bOw-aR-pOz" firstAttribute="trailing" secondItem="Ia1-Km-5r5" secondAttribute="trailing" id="ufE-Og-UJ9"/>
+                            <constraint firstItem="Ia1-Km-5r5" firstAttribute="top" secondItem="bOw-aR-pOz" secondAttribute="top" id="xrV-iA-ije"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="alarmTableView" destination="eEQ-Vy-dXj" id="N36-fa-OFh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Uv-vD-gwz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="163.768115942029" y="191.51785714285714"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="btnBack" width="44" height="44"/>
+        <image name="imgProfile" width="34" height="34"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

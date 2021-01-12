@@ -38,13 +38,13 @@ class ExploreHomeVC: UIViewController {
     // 서버통신을 통해 받아오는 값
     private var categoryArray: [ExploreCategory] = [] {
         didSet {
-            exploreTableView.reloadData()
+//            exploreTableView.reloadData()
         }
     }
     
     private var exploreThoughtArray: [ExploreThoughtData] = [] {
         didSet {
-            exploreTableView.reloadData()
+//            exploreTableView.reloadData()
         }
     }
     
@@ -322,7 +322,6 @@ extension ExploreHomeVC {
         }
         
         if canGetServerData {
-            print("getServer!")
             ExploreAnswerService.shared.getExploreAnswer(page: page, category: cate, sorting: sorting) { (result) in
                 switch result {
                 case .success(let data):
@@ -500,6 +499,7 @@ extension ExploreHomeVC {
 extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     
     func categoryButtonTapped(_ indexPath: IndexPath, _ categoryId: Int) {
+        isTableViewAnimation = false
         scrollDirection = true
         selectedCategoryId = categoryId
         currentPage = 1
@@ -510,6 +510,7 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     }
     
     func recentOrFavoriteButtonTapped(_ indexPath: Int, _ selected: String) {
+        isTableViewAnimation = false
         scrollDirection = true
         selectedRecentOrFavorite = selected
         selectedCategoryId = 0
@@ -524,6 +525,7 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     }
     
     func exploreAnswerScrapButtonDidTapped(_ answerId: Int) {
+        isTableViewAnimation = false
         scrapAnswer(answerId: answerId)
     }
     
@@ -543,6 +545,17 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
         let nc = UINavigationController(rootViewController: comment)
         nc.modalPresentationStyle = .fullScreen
         self.present(nc, animated: true, completion: nil)
+    }
+    
+    func goToAlarmButtonDidTapped() {
+        guard let alarm = UIStoryboard.init(name: "Alarm", bundle: nil).instantiateViewController(identifier: "AlarmVC") as? AlarmVC else { return }
         
+        self.navigationController?.pushViewController(alarm, animated: true)
+    }
+}
+
+extension ExploreHomeVC: ExploreTabBarDelegate {
+    func exploreTabDidTapped() {
+        self.exploreTableView.scrollToRow(at: IndexPath(row: 0, section: 0), at: .top, animated: true)
     }
 }

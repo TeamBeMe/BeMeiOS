@@ -36,6 +36,7 @@ struct APIConstants{
     static let explorationDetailAnswerURL = baseURL + "/exploration/"
     static let answerDetailURL = baseURL + "/answers/detail"
     static let answerCommentURL = baseURL + "/answers/comments"
+    static let alarmURL = baseURL + "/users/activities"
     
     static let othersPageProfileURL = baseURL + "/profiles/"
     static let othersPageAnswerURL = baseURL + "/profiles/answers/"
