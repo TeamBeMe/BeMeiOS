@@ -8,14 +8,16 @@
 import UIKit
 
 class SignUpPVC: UIPageViewController {
-    let identifiers = ["SignUpVC","SingUpProfileVC"]
+    let identifiers = ["SignUpNoticeVC","SignUpAgreeVC","SignUpVC","SingUpProfileVC"]
 
     
     
     lazy var VCArray : [UIViewController] = {
       
         
-        return [self.VCInstane(storyboardName: "SignUp", vcName: "SignUpVC"),
+        return [self.VCInstane(storyboardName: "SignUp", vcName: "SignUpNoticeVC"),
+                self.VCInstane(storyboardName: "SignUp", vcName: "SignUpAgreeVC"),
+                self.VCInstane(storyboardName: "SignUp", vcName: "SignUpVC"),
                 self.VCInstane(storyboardName: "SignUp", vcName: "SingUpProfileVC")
         ]
         

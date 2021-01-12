@@ -33,7 +33,7 @@ class LogInVC: UIViewController {
         $0.backgroundColor = .black
         
     }
-    
+    let deviceBound = UIScreen.main.bounds.height/812.0
     
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
@@ -142,6 +142,11 @@ extension LogInVC {
         warningImageView.image = UIImage(named: "icInfoRed")
         warningLabel.alpha = 0
         warningImageView.alpha = 0
+        
+//        if deviceBound < 1 {
+            containViewHeight.constant = 282*deviceBound
+//        }
+        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?){
@@ -244,7 +249,7 @@ extension LogInVC: UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        containViewHeight.constant = 282
+        containViewHeight.constant = 282*deviceBound
         //        topConstraint.constant = 108
         bemeLabel.alpha = 1.0
         UIView.animate(withDuration: 0.5, animations: {

@@ -58,11 +58,46 @@ class SignUpVC: UIViewController {
     
     @IBAction func nickNameCheckButtonAction(_ sender: Any) {
         if nickNameTextField.text!.isValidNickName(){
-            warningLabels[1].text = "사용 가능한 닉네임입니다"
-            warningImageViews[1].image = UIImage(named: "icDone")
-            warningLabels[1].textColor = UIColor(red: 10.0/255.0, green: 132.0/255.0
-                                                 , blue: 255.0/255.0, alpha: 1.0)
-            textFieldIsValid[1] = true
+            SignUpDuplicateService.shared.check(nickName: nickNameTextField.text!){(networkResult) -> (Void) in
+                switch networkResult{
+                case .success(let data) :
+                    if let dup = data as? SignUpDuplicateData{
+                        if dup.nicknameExist == false{
+                            self.warningLabels[1].text = "사용 가능한 닉네임입니다"
+                            self.warningImageViews[1].image = UIImage(named: "icDone")
+                            self.warningLabels[1].textColor = UIColor(red: 10.0/255.0, green: 132.0/255.0
+                                                                 , blue: 255.0/255.0, alpha: 1.0)
+                            self.textFieldIsValid[1] = true
+                        }
+                        else{
+                            self.warningImageViews[1].image = UIImage(named: "icInfoRed")
+                            self.warningLabels[1].text = "다른 닉네임을 입력해주세요"
+                            self.warningLabels[1].textColor = .red
+                            self.textFieldIsValid[1] = false
+                        }
+                        
+                    }
+                    
+                    print("success")
+                case .requestErr(let msg):
+                    if let message = msg as? String {
+                        print(message)
+                    }
+                case .pathErr :
+                    print("pathErr")
+                case .serverErr :
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+                    
+                }
+                
+
+            }
+            
+            
+            
+          
         }
         else{
             warningImageViews[1].image = UIImage(named: "icInfoRed")
