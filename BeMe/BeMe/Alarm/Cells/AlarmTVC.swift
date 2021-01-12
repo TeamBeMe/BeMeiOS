@@ -15,7 +15,7 @@ class AlarmTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-     
+        
     }
     
     func setInformations(type: String, profileImg: String, question: String, nickName: String) {
@@ -26,6 +26,7 @@ class AlarmTVC: UITableViewCell {
             profileImageView.kf.setImage(with: url)
         }
         
+
         if type == "comment" {
             alarmLabel.text = "\(nickName)님이 “\(question)”에 대한 나의 글에 댓글을 달았습니다."
         } else if type == "cocomment" {
@@ -34,5 +35,10 @@ class AlarmTVC: UITableViewCell {
             alarmLabel.text = "\(nickName)님이 나를 팔로우했습니다."
         }
         
+        // 닉네임 진하게 만들기
+        let font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 14.0)
+        let attributedStr = NSMutableAttributedString(string: alarmLabel.text!)
+        attributedStr.addAttribute(.font, value: font!, range: (alarmLabel.text! as NSString).range(of: nickName))
+        alarmLabel.attributedText = attributedStr
     }
 }

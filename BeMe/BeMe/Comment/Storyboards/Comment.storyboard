@@ -1885,7 +1885,7 @@
                                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Dzn-p8-yI0">
                                                                                             <rect key="frame" x="0.0" y="59.999999999999986" width="102.33333333333333" height="34"/>
                                                                                             <subviews>
-                                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgProfile" translatesAutoresizingMaskIntoConstraints="NO" id="UIH-dl-d1L">
+                                                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgProfile" translatesAutoresizingMaskIntoConstraints="NO" id="UIH-dl-d1L">
                                                                                                     <rect key="frame" x="0.0" y="0.0" width="34" height="34"/>
                                                                                                     <constraints>
                                                                                                         <constraint firstAttribute="height" constant="34" id="Hhk-xi-GVa"/>

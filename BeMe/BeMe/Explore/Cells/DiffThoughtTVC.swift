@@ -74,7 +74,10 @@ class DiffThoughtTVC: UITableViewCell {
     
     @IBAction func friendButtonTapped(_ sender: Any) {
     }
+    
     @IBAction func alarmButtonTapped(_ sender: Any) {
+        delegate?.goToAlarmButtonDidTapped()
+        
     }
 }
 

@@ -28,6 +28,7 @@ class QuestionAnswerTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         moreAnswerButton.makeRound(to: 4)
+        profileImageView.makeRounded(cornerRadius: profileImageView.bounds.width)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

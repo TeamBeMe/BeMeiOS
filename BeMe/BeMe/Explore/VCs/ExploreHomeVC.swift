@@ -543,6 +543,11 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
         let nc = UINavigationController(rootViewController: comment)
         nc.modalPresentationStyle = .fullScreen
         self.present(nc, animated: true, completion: nil)
+    }
+    
+    func goToAlarmButtonDidTapped() {
+        guard let alarm = UIStoryboard.init(name: "Alarm", bundle: nil).instantiateViewController(identifier: "AlarmVC") as? AlarmVC else { return }
         
+        self.navigationController?.pushViewController(alarm, animated: true)
     }
 }
