@@ -23,14 +23,14 @@ struct CommentService {
         
         if let pi = parentId {
             params = [
-                "answer_id" : 1,
+                "answer_id" : answerId,
                 "content": content,
                 "is_public" : isPublic,
                 "parent_id" : pi
             ]
         } else {
             params = [
-                "answer_id" : 1,
+                "answer_id" : answerId,
                 "content": content,
                 "is_public" : isPublic
             ]
@@ -134,6 +134,7 @@ struct CommentService {
         
         guard let decodedData = try? decoder.decode(GenericResponse<Comment>.self, from : data) else { return .pathErr }
         
+        print(decodedData)
         switch statusCode {
         case 200..<300: return .success(decodedData)
         case 400..<500: return .pathErr

@@ -19,11 +19,12 @@ class FollowingVC: UIViewController {
     @IBOutlet weak var barButton: UIButton!
     var scrollDirection: Bool = true
     var lastContentOffset: CGFloat = 0.0
-    @IBOutlet weak var wholeCollectionView: UICollectionView!
+    @IBOutlet weak var wholeCollectionView: FollowingWholeCV!
+    var isScrolled = true
     
     var answers: [FollowingAnswers] = []
     var answerPage = 1
-    
+    var isLoading = false
     var myQuestion = "요즘 내 삶에서\n가장 만족스러운 것은 무엇인가요?"
     var myText = "저는 며칠 전 퇴사를 했어요. 수많은 고민 끝에 결국 저질렀습니다. 몇 년간 원해왔던 일이라 꿈만 같아요. 제가 스스로의 힘으로 하고 싶은 걸 해볼 수 있는 시간적 여유를 가지게 된 게 정말 만족스러워요. 앞으로 저에게는 정말 다양한 가능성들이 무궁무진하게 열려있어요. 앞으로 어떤 사람들과 만나게 될지, 어떤 프로젝트를 하게 될지 상상하면서 새해를 맞이하고 싶어요. 지금은 시국이 어떻게 풀릴지 확실하지 않지만 제 인생은 앞으로도 계속해서 나아가겠죠?  "
     
@@ -37,17 +38,24 @@ class FollowingVC: UIViewController {
     
     var followers: [FollowingFollows] = []
     var followees: [FollowingFollows] = []
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setItems()
-        
+        let loadingFrame = CGRect(x: 0, y: 155, width: view.frame.width, height: view.frame.height-155)
+        LoadingHUD.show(loadingFrame: loadingFrame,color: .white)
+        isLoading = true
         getAnswerData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getFollowData()
         
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        print("viewwilldisappear")
+        isScrolled = false
     }
     
     
@@ -104,6 +112,8 @@ extension FollowingVC {
     }
     
     func getFollowData(){
+       
+        
         FollowingGetService.shared.getHomeData() {(networkResult) -> (Void) in
             switch networkResult{
             case .success(let data) :
@@ -121,10 +131,15 @@ extension FollowingVC {
                     
                 }
                 self.wholeCollectionView.reloadData()
+              
+
+              
+//                self.wholeCollectionView.reloadData()
                 print(self.followees)
                 print(self.followers)
                 
                 print("success")
+                
             case .requestErr(let msg):
                 if let message = msg as? String {
                     print(message)
@@ -148,6 +163,12 @@ extension FollowingVC {
     
     
     func getAnswerData(){
+        let loadingFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        if isLoading == false{
+            LoadingHUD.show(loadingFrame: loadingFrame,color: .white)
+            isLoading = true
+        }
+        
         FollowingGetAnswersService.shared.getAnswerData(page: answerPage){(networkResult) -> (Void) in
             switch networkResult{
             case .success(let data) :
@@ -157,9 +178,20 @@ extension FollowingVC {
                     }
                     
                 }
-                self.wholeCollectionView.reloadData()
+                self.wholeCollectionView.reloadDataWithCompletion {
+                    LoadingHUD.hide()
+                    
+                }
+//                self.wholeCollectionView.reloadData()
+//                DispatchQueue.main.async {
+//                    let indexPath = NSIndexPath(item: self.wholeCollectionView.numberOfItems(inSection: 3)+200, section: 3)
+//                    LoadingHUD.hide()
+//                    self.isLoading = false
+//
+//                }
                 print(self.answers)
                 print("success")
+                self.answerPage = self.answerPage+1
             case .requestErr(let msg):
                 if let message = msg as? String {
                     print(message)
@@ -251,13 +283,13 @@ extension FollowingVC : UICollectionViewDataSource {
                 let answerUserName = answerTmp.userNickname ?? ""
                 
                 cell.setItems(question: answerTmp.question,
-                            answer: answerText,
-                            category: answerCategory,
-                            answerTime: answerDate,
-                            profileImgUrl: answerProfile,
-                            userName: answerUserName
-                            
-                            )
+                              answer: answerText,
+                              category: answerCategory,
+                              answerTime: answerDate,
+                              profileImgUrl: answerProfile,
+                              userName: answerUserName
+                              
+                )
                 
                 return cell
                 
@@ -405,6 +437,10 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
+        if section > 2{
+            return UIEdgeInsets(top: 0, left: 0, bottom: 20, right:0)
+        }
+        
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right:0)
     }
     
@@ -437,15 +473,22 @@ extension FollowingVC: UICollectionViewDelegate {
                 
                 UIView.animate(withDuration: 0.5, animations: {
                     cell.layer.transform = CATransform3DIdentity
-                    cell.alpha = 1.0
+                   
                 })
             } else {
-                
-                cell.alpha = 0.2
-                UIView.animate(withDuration: 0.8, animations: {
+                if isScrolled == true{
+                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
+                    cell.layer.transform = rotationTransform
+                    UIView.animate(withDuration: 0.5, animations: {
+                        cell.layer.transform = CATransform3DIdentity
                     
-                    cell.alpha = 1.0
-                })
+                    },completion: { finished in
+                        LoadingHUD.hide()
+                        self.isLoading = false
+                    })
+                    isScrolled = false
+                }
+               
             }
             
         }
@@ -456,7 +499,12 @@ extension FollowingVC: UICollectionViewDelegate {
     }
     
     func scrollViewDidScroll (_ scrollView: UIScrollView) {
+        
         let currentContentOffset = scrollView.contentOffset.y
+        if currentContentOffset > 100 {
+            isScrolled = true
+        }
+        
         if (currentContentOffset > lastContentOffset) {
             // scroll up
             scrollDirection = true
@@ -492,7 +540,7 @@ extension FollowingVC : UITextViewDelegate{
 
 extension FollowingVC : FollowingMoreButtonDelegate {
     func moreButtonAction() {
-        totalCell += 10
+        getAnswerData()
         wholeCollectionView.reloadData()
     }
 }
@@ -506,8 +554,11 @@ extension FollowingVC : FollowingBarButtonDelegate{
             
             return
         }
+        vcName.followers = followers
+        vcName.followees = followees
         
         vcName.modalPresentationStyle = .fullScreen
+        
         self.navigationController?.pushViewController(vcName, animated: true)
     }
     

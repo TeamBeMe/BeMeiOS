@@ -181,7 +181,7 @@ class AnswerVC: UIViewController {
         questionInfoLabel.attributedText = mutableAttributedString
         
         
-        answerTextView.text = answer
+        answerTextView.text = answerData?.answer
         textViewDidChange(answerTextView)
         answerTextView.becomeFirstResponder()
         

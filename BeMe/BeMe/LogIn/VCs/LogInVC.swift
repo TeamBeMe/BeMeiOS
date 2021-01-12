@@ -24,6 +24,8 @@ class LogInVC: UIViewController {
     @IBOutlet weak var buttonStackView: UIStackView!
     @IBOutlet weak var logInButton: UIButton!
     @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var warningImageView: UIImageView!
+    @IBOutlet weak var warningLabel: UILabel!
     
     var blackParticles = 0
     var endTimer : Timer?
@@ -31,7 +33,7 @@ class LogInVC: UIViewController {
         $0.backgroundColor = .black
         
     }
-    
+    let deviceBound = UIScreen.main.bounds.height/812.0
     
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     override func viewDidLoad() {
@@ -73,14 +75,25 @@ class LogInVC: UIViewController {
                     UserDefaults.standard.set(self.nickNameTextField.text!,forKey: "nickName")
                     print(UserDefaults.standard.string(forKey: "nickName")!)
                     self.endAnimation2()
-                    
+                    self.warningLabel.alpha = 0
+                    self.warningImageView.alpha = 0
                    
                     
                 }
                 
             case .requestErr(let msg):
                 if let message = msg as? String {
-                    print(message)
+                    if message == "존재하지않는 유저 id 입니다."{
+                        self.warningLabel.text = "해당하는 닉네임으로 된 계정이 없습니다"
+                        self.warningLabel.alpha = 1
+                        self.warningImageView.alpha = 1
+                    }
+                    else {
+                        self.warningLabel.text = message
+                        self.warningLabel.alpha = 1
+                        self.warningImageView.alpha = 1
+                        
+                    }
                 }
             case .pathErr :
                 print("pathErr")
@@ -125,6 +138,14 @@ extension LogInVC {
         
         nickNameTextField.delegate = self
         passwordTextField.delegate = self
+        warningLabel.textColor = .grapefruit
+        warningImageView.image = UIImage(named: "icInfoRed")
+        warningLabel.alpha = 0
+        warningImageView.alpha = 0
+        
+//        if deviceBound < 1 {
+            containViewHeight.constant = 282*deviceBound
+//        }
         
     }
     
@@ -228,7 +249,7 @@ extension LogInVC: UITextFieldDelegate{
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        containViewHeight.constant = 282
+        containViewHeight.constant = 282*deviceBound
         //        topConstraint.constant = 108
         bemeLabel.alpha = 1.0
         UIView.animate(withDuration: 0.5, animations: {

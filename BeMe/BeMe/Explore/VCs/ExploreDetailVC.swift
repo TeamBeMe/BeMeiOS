@@ -31,6 +31,10 @@ class ExploreDetailVC: UIViewController {
     
     lazy var popupBackgroundView: UIView = UIView()
     
+    private var currentPageAlreadyGetContainers: [Int] = []
+
+    private var isTableViewAnimation: Bool = false
+    
     private var exploreAnswerArray: [ExploreAnswer] = [] {
         didSet {
             diffAnswerTableView.reloadData()
@@ -49,7 +53,6 @@ class ExploreDetailVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
-        navigationController?.navigationBar.isHidden = false
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -83,12 +86,16 @@ class ExploreDetailVC: UIViewController {
     
     @IBAction func recentButtonTapped(_ sender: UIButton) {
         moveHighLightBar(to: sender)
+        currentPage = 1
+        currentPageAlreadyGetContainers.removeAll()
         sorting = "최신"
         setAnswerData()
     }
     
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
         moveHighLightBar(to: sender)
+        currentPage = 1
+        currentPageAlreadyGetContainers.removeAll()
         sorting = "흥미"
         setAnswerData()
     }
@@ -97,18 +104,19 @@ class ExploreDetailVC: UIViewController {
 //MARK: - Private Method
 extension ExploreDetailVC {
     
-    private func setAnswerData() {
+    private func scrapAnswer(answerId: Int) {
         
-        print(questionId!)
-        ExploreDetailAnswerService.shared.getExploreDetailAnswer(questionId: questionId!, page: currentPage, sorting: sorting) { (result) in
+        ExploreAnswerScrapService.shared.putExploreAnswerScrap(answerId: answerId) { (result) in
             switch result {
             case .success(let data):
-                guard let dt = data as? GenericResponse<ExploreAnswerData> else { return }
-                if let dat = dt.data {
-                    self.page = dat.pageLen
-                    if let ans = dat.answers {
-                        self.exploreAnswerArray = ans
-                    }
+                guard let dt = data as? GenericResponse<Int> else { return }
+                print(dt.message)
+                if dt.message == "스크랩 성공" || dt.message == "스크랩 취소 성공" {
+                    // 사용자한테 성공했다고 알려주는 동작
+                    // 사용자한테 스크랩 취소 성공했다고 알려주는 동작
+                    self.setAnswerData()
+                } else {
+                    // 사용자한테 실패했다고 알려주는 동작
                 }
                 
             case .requestErr(let message):
@@ -133,9 +141,69 @@ extension ExploreDetailVC {
                 self.present(alertViewController, animated: true, completion: nil)
                 print("networkFail")
             }
-            
-            
-            
+        }
+    }
+    
+    private func setAnswerData() {
+        
+        // 중복으로 같은 데이터값 가져오는 것 막는 해결 코드
+        var canGetServerData: Bool = true
+        if currentPage == 1 {
+            // 서버 통신 이루어져야함
+            canGetServerData = true
+        } else {
+            if currentPageAlreadyGetContainers.contains(currentPage) {
+                // 서버 통신 이루어 지면 안됌
+                canGetServerData = false
+            } else {
+                currentPageAlreadyGetContainers.append(currentPage)
+                canGetServerData = true
+            }
+        }
+        
+        if canGetServerData {
+            ExploreDetailAnswerService.shared.getExploreDetailAnswer(questionId: questionId!, page: currentPage, sorting: sorting) { (result) in
+                switch result {
+                case .success(let data):
+                    guard let dt = data as? GenericResponse<ExploreAnswerData> else { return }
+                    if let dat = dt.data {
+                        self.page = dat.pageLen
+                        if let ans = dat.answers {
+                            if self.currentPage == 1 {
+                                self.exploreAnswerArray = ans
+                            } else {
+                                self.exploreAnswerArray.append(contentsOf: ans)
+                            }
+                        }
+                    } else {
+                        // empty view
+                        self.exploreAnswerArray = []
+                        
+                    }
+                    
+                case .requestErr(let message):
+                    guard let message = message as? String else { return }
+                    let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                    let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                    alertViewController.addAction(action)
+                    self.present(alertViewController, animated: true, completion: nil)
+                    
+                case .pathErr: print("path")
+                case .serverErr:
+                    let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                    alertViewController.addAction(action)
+                    self.present(alertViewController, animated: true, completion: nil)
+                    print("networkFail")
+                    print("serverErr")
+                case .networkFail:
+                    let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                    let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                    alertViewController.addAction(action)
+                    self.present(alertViewController, animated: true, completion: nil)
+                    print("networkFail")
+                }
+            }
         }
     }
     
@@ -160,8 +228,30 @@ extension ExploreDetailVC {
         NotificationCenter.default.addObserver(self, selector: #selector(closePopup), name: .init("closePopupNoti"), object: nil)
     }
     
-    @objc func closePopup() {
+    @objc func closePopup(_ notification: Notification) {
+        print("SecondTapped")
         popupBackgroundView.animatePopupBackground(false)
+        guard let userInfo = notification.userInfo as? [String:Any] else { return }
+        guard let action = userInfo["action"] as? String else { return }
+        
+        if action == "commentPut" {
+            
+        } else if action == "report" {
+            // 메일 띄우기
+        } else if action == "commentDelete" {
+            
+        } else if action == "block" {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.21) {
+                
+                let alertViewController = UIAlertController(title: "업데이트 될 예정입니다.", message: "다음 업데이트를 기다려주세요🥰", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+            }
+            
+        }
+        
+        print(action)
     }
 }
 
@@ -170,7 +260,7 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if currentPage < page {
-            return 10 + 1
+            return exploreAnswerArray.count + 1
         } else {
             return exploreAnswerArray.count
         }
@@ -179,10 +269,11 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if currentPage < page {
-            if indexPath.row == 11 - 1 {
+            if indexPath.row == exploreAnswerArray.count {
                 guard let more = tableView.dequeueReusableCell(withIdentifier: DetailMoreTVC.identifier,
                                                                for: indexPath) as? DetailMoreTVC else {
                     return UITableViewCell() }
+                more.delegate = self
                 return more
             } else {
                 guard let answer = tableView.dequeueReusableCell(withIdentifier: AnswerTVC.identifier,
@@ -208,61 +299,55 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
             return answer
         }
     }
-   
+    
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        if currentPage < page {
-//            if indexPath.row == 11 - 1 {
-//                // animation 2
-//                cell.alpha = 0
-//                UIView.animate(withDuration: 0.75) {
-//                    
-//                    cell.alpha = 1.0
-//                }
-//            } else {
-//                // animation 1
-//                if (scrollDirection) {
-//                    // up
-//                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
-//                    cell.layer.transform = rotationTransform
-//                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
-//                        cell.layer.transform = CATransform3DIdentity
-//                    }) { (_) in
-//                        
-//                    }
-//                } else {
-//                    // down
-//                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
-//                    cell.layer.transform = rotationTransform
-//                    UIView.animate(withDuration: 0.3, animations: {
-//                        cell.layer.transform = CATransform3DIdentity
-//                    })
-//                }
-//            }
-//        } else {
-//            // animation 1
-//            if (scrollDirection) {
-//                // up
-//                let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
-//                cell.layer.transform = rotationTransform
-//                UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
-//                    cell.layer.transform = CATransform3DIdentity
-//                }) { (_) in
-//                    
-//                }
-//            } else {
-//                // down
-//                let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
-//                cell.layer.transform = rotationTransform
-//                UIView.animate(withDuration: 0.3, animations: {
-//                    cell.layer.transform = CATransform3DIdentity
-//                })
-//            }
-//        }
+        
+        if exploreAnswerArray.isEmpty {
+            // no animation
+        } else {
+            print(isTableViewAnimation)
+            if isTableViewAnimation {
+                if scrollDirection {
+                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+                    cell.layer.transform = rotationTransform
+                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+                        cell.layer.transform = CATransform3DIdentity
+                    }) { (_) in
+                    }
+                } else {
+                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
+                    cell.layer.transform = rotationTransform
+                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+                        cell.layer.transform = CATransform3DIdentity
+                    }) { (_) in
+                    }
+                }
+            } else {
+                // no animation
+            }
+        }
+        
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if !decelerate {
+            self.stopScrolling()
+        }
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        self.stopScrolling()
+    }
+    
+    private func stopScrolling() {
+        isTableViewAnimation = false
+        print("STOPPED")
     }
     
     func scrollViewDidScroll (_ scrollView: UIScrollView) {
         let currentContentOffset = scrollView.contentOffset.y
-        
+        isTableViewAnimation = true
+        print("HELLO")
         if (currentContentOffset > lastContentOffset) {
             // scroll up
             scrollDirection = true
@@ -273,26 +358,28 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
         lastContentOffset = currentContentOffset
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
+    
 }
 
 
 //MARK: - UITableViewButtonSelectedDelegate
 extension ExploreDetailVC: UITableViewButtonSelectedDelegate {
     
-    func settingButtonDidTapped(to indexPath: IndexPath) {
-        
+    func exploreAnswerScrapButtonDidTapped(_ answerId: Int) {
+        scrapAnswer(answerId: answerId)
+    }
+    
+    func settingButtonDidTapped(to: IndexPath, isAuthor: Bool, commentId: Int, content: String) {
         popupBackgroundView.animatePopupBackground(true)
+        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetTwoVC.identifier) as?
+                CustomActionSheetTwoVC else { return }
         
-        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetVC.identifier) as?
-                CustomActionSheetVC else { return }
-        
-        settingActionSheet.alertInformations = AlertLabels.article
+        settingActionSheet.alertInformations = AlertLabels.otherCommentNotMyArticle
+        settingActionSheet.color = .grapefruit
         settingActionSheet.modalPresentationStyle = .overCurrentContext
         self.present(settingActionSheet, animated: true, completion: nil)
     }
+    
     func exploreMoreAnswersButtonDidTapped() {
         currentPage += 1
         setAnswerData()
@@ -300,7 +387,7 @@ extension ExploreDetailVC: UITableViewButtonSelectedDelegate {
     
     func goToCommentButtonTapped(_ answerId: Int) {
         guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
-
+        
         comment.answerId = answerId
         comment.isMoreButtonHidden = true
         comment.modalPresentationStyle = .fullScreen

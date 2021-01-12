@@ -83,7 +83,13 @@ class CommentVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.navigationController?.navigationBar.isHidden = true
         getAnswerDetail()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -117,25 +123,18 @@ class CommentVC: UIViewController {
     }
     
     @IBAction func scrapButtonTapped(_ sender: UIButton) {
-        
-        if isScrapped {
-            isScrapped = false
-            scrapButton.setImage(UIImage(named: "btnScrapUnselected"), for: .normal)
-        } else {
-            isScrapped = true
-            scrapButton.setImage(UIImage(named: "btnScrapSelected"), for: .normal)
-        }
+        scrapAnswer(answerId: answerId!)
     }
     
     @IBAction func moreSettngButtonTapped(_ sender: Any) {
         popupBackgroundView.animatePopupBackground(true)
-        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetVC.identifier) as?
-                CustomActionSheetVC else { return }
+        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetTwoVC.identifier) as?
+                CustomActionSheetTwoVC else { return }
         
-        print("moreSetting")
-        settingActionSheet.color = .black
-        settingActionSheet.alertInformations = AlertLabels.article
+        settingActionSheet.alertInformations = AlertLabels.otherCommentNotMyArticle
+        settingActionSheet.color = .grapefruit
         settingActionSheet.modalPresentationStyle = .overCurrentContext
+        
         self.present(settingActionSheet, animated: true, completion: nil)
     }
     
@@ -197,6 +196,48 @@ class CommentVC: UIViewController {
 //MARK: - Private Method
 extension CommentVC {
     
+    private func scrapAnswer(answerId: Int) {
+        
+        ExploreAnswerScrapService.shared.putExploreAnswerScrap(answerId: answerId) { (result) in
+            switch result {
+            case .success(let data):
+                guard let dt = data as? GenericResponse<Int> else { return }
+                print(dt.message)
+                if dt.message == "스크랩 성공" {
+                    // 사용자한테 성공했다고 알려주는 동작
+                    self.scrapButton.setImage(UIImage(named: "btnScrapSelected"), for: .normal)
+                } else if dt.message == "스크랩 취소 성공" {
+                    // 사용자한테 스크랩 취소 성공했다고 알려주는 동작
+                    self.scrapButton.setImage(UIImage(named: "btnScrapUnselected"), for: .normal)
+                } else {
+                    // 사용자한테 실패했다고 알려주는 동작
+                }
+                
+            case .requestErr(let message):
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                
+            case .pathErr: print("path")
+            case .serverErr:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+                print("serverErr")
+            case .networkFail:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+            }
+        }
+    }
+    
     private func showToast(message : String, font: UIFont = UIFont.systemFont(ofSize: 14.0)) {
         let toastLabel = UILabel()
         toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
@@ -244,9 +285,9 @@ extension CommentVC {
                     } else {
                         self.realCommentArray[self.selectedIndex!.section-1].children.append(newComment)
                         self.commentToCommentView.isHidden = true
-//                        self.commentTableView.scrollToRow(at: IndexPath(row: self.realCommentArray[self.selectedIndex!.section-1].children.count - 1, section: self.selectedIndex!.section), at: .middle, animated: true)
+                        
                     }
-                    
+                
                     
                     
                 }
@@ -286,6 +327,20 @@ extension CommentVC {
                 if let ad = dt.data {
                     self.answerDetail = ad
                     self.realCommentArray = ad.comment
+                    
+                    // 댓글 막을지 말지
+                    if ad.commentBlockedFlag {
+                        self.commentTextWrapper.isHidden = true
+                    } else {
+                        self.commentTextWrapper.isHidden = false
+                    }
+                    
+                    // 스크랩 유무
+                    if ad.isScrapped {
+                        self.scrapButton.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
+                    } else {
+                        self.scrapButton.setImage(UIImage.init(named: "btnScrapUnselected"), for: .normal)
+                    }
                 }
                 
                 
@@ -409,7 +464,6 @@ extension CommentVC {
     }
     
     @objc func closePopup(_ notification: Notification) {
-        print("SecondTapped")
         popupBackgroundView.animatePopupBackground(false)
         guard let userInfo = notification.userInfo as? [String:Any] else { return }
         guard let action = userInfo["action"] as? String else { return }
@@ -502,7 +556,9 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
         
         if indexPath.section == 0 {
             
-            guard let header = tableView.dequeueReusableCell(withIdentifier: QuestionAnswerTVC.identifier, for: indexPath) as? QuestionAnswerTVC else { return UITableViewCell() }
+            guard let header = tableView.dequeueReusableCell(withIdentifier: QuestionAnswerTVC.identifier,
+                                                             for: indexPath) as? QuestionAnswerTVC else {
+                return UITableViewCell() }
             
             header.delegate = self
             header.indexPath = indexPath
@@ -510,10 +566,11 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                 header.moreAnswerButton.isHidden = iMBH
             }
             
-            header.profileView.isHidden = isMyAnswer
+            header.profileView.isHidden = answerDetail?.isAuthor ?? true
             if let ad = answerDetail {
                 header.setInformation(question: ad.question, category: ad.category , date: ad.answerDate,
-                                      profileImg: ad.userProfile, nickName: ad.userNickname, content: ad.content)
+                                      profileImg: ad.userProfile, nickName: ad.userNickname,
+                                      content: ad.content, questionId: ad.questionID)
             }
             
             return header
@@ -596,6 +653,15 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension CommentVC: UITableViewButtonSelectedDelegate {
+    
+    func goToMoreAnswerButtonDidTapped(questionId: Int, question: String) {
+        let sb = UIStoryboard.init(name: "Explore", bundle: nil)
+        guard let detail = sb.instantiateViewController(identifier: "ExploreDetailVC") as?
+                ExploreDetailVC else { return }
+        detail.questionId = questionId
+        detail.questionText = question
+        self.navigationController?.pushViewController(detail, animated: true)
+    }
     
     func moreCellButtonDidTapped(to indexPath: IndexPath, isSecret: Int) {
         if isSecret == 0 {

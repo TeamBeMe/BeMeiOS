@@ -159,6 +159,7 @@
                         <outlet property="firstItemLabel" destination="B7x-lt-6kz" id="nBC-k8-dze"/>
                         <outlet property="secondItemImageView" destination="DDr-Cr-1FU" id="16u-Ua-X0M"/>
                         <outlet property="secondItemLabel" destination="jbX-SE-C7h" id="G45-V4-cck"/>
+                        <outlet property="wrapper" destination="32S-JJ-MRy" id="dzx-7U-Naj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qXI-yT-WVz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

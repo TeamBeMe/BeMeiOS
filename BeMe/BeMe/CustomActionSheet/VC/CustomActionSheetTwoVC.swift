@@ -10,6 +10,7 @@ import UIKit
 class CustomActionSheetTwoVC: UIViewController {
     static let identifier: String = "CustomActionSheetTwoVC"
     
+    @IBOutlet weak var wrapper: UIView!
     @IBOutlet weak var firstItemImageView: UIImageView!
     @IBOutlet weak var firstItemLabel: UILabel!
     @IBOutlet weak var secondItemImageView: UIImageView!
@@ -26,6 +27,8 @@ class CustomActionSheetTwoVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        wrapper.roundCorners(cornerRadius: 10.0, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
         
         cancelButton.layer.addBorder([.top], color: .lightGray, width: 1.0)
         if let alertInfo = alertInformations {
@@ -66,8 +69,8 @@ class CustomActionSheetTwoVC: UIViewController {
             
         } else if firstItemLabel.text == AlertLabels.otherCommentNotMyArticle.names[0] {
             NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil, userInfo: ["action": "report"])
-        }
-        
+        } 
+       
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -77,6 +80,8 @@ class CustomActionSheetTwoVC: UIViewController {
             NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil, userInfo: ["action": "commentDelete"])
         } else if secondItemLabel.text == AlertLabels.otherCommentNotMyArticle.names[1] {
             NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil, userInfo: ["action": "block"])
+        } else if secondItemLabel.text == AlertLabels.followerReport.names[1] {
+            NotificationCenter.default.post(name: .init("closePopupNoti"), object: nil,userInfo: ["action":"followerDelete"])
         }
         self.dismiss(animated: true, completion: nil)
     }

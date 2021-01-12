@@ -63,9 +63,9 @@ extension UnderTabBarController {
         }
         followingTabBarDelegate = followingVC
         
-        guard let myPageVC = UIStoryboard(name: "Following",
+        guard let myPageVC = UIStoryboard(name: "Mypage",
                                         bundle: nil).instantiateViewController(
-                                            withIdentifier: "FollowingVC") as? FollowingVC
+                                            withIdentifier: "MypageVC") as? MypageVC
             else{
             
             return

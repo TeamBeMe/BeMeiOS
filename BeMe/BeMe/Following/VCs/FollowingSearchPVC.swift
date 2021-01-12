@@ -10,10 +10,23 @@ import UIKit
 class FollowingSearchPVC: UIPageViewController {
 
     let identifiers = ["FollowingSearchVC","FollowerSearchVC"]
+    var followers: [FollowingFollows] = []
+    var followees: [FollowingFollows] = []
+    
     
     lazy var VCArray : [UIViewController] = {
-        return [self.VCInstane(storyboardName: "FollowSearch", vcName: "FollowingSearchVC"),
-                self.VCInstane(storyboardName: "FollowSearch", vcName: "FollowerSearchVC")
+        
+        let followingSearchVC = UIStoryboard(name: "FollowSearch", bundle: nil)
+            .instantiateViewController(identifier: "FollowingSearchVC") as? FollowingSearchVC
+        
+        followingSearchVC?.followees = followees
+       
+        let followerSearchVC = UIStoryboard(name: "FollowSearch", bundle: nil)
+            .instantiateViewController(identifier: "FollowerSearchVC") as? FollowerSearchVC
+        followerSearchVC?.followers = followers
+        
+        return [followingSearchVC!,
+                followerSearchVC!
         ]
         
     }()

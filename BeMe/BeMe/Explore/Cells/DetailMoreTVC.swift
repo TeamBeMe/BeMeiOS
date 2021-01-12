@@ -11,16 +11,16 @@ class DetailMoreTVC: UITableViewCell {
     static let identifier: String = "DetailMoreTVC"
     
     @IBOutlet weak var moreButton: UIButton!
+    
+    weak var delegate: UITableViewButtonSelectedDelegate?
+        
     override func awakeFromNib() {
         super.awakeFromNib()
         
         moreButton.makeRound(to: 6.0)
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    @IBAction func moreButtonTapped(_ sender: Any) {
+        delegate?.exploreMoreAnswersButtonDidTapped()
     }
-
 }

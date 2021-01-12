@@ -99,4 +99,11 @@ extension UIView {
             self.alpha = alpha
         }
     }
+    
+    // 특정 모서리만 둥글게
+    func roundCorners(cornerRadius: CGFloat, maskedCorners: CACornerMask) {
+           clipsToBounds = true
+           layer.cornerRadius = cornerRadius
+           layer.maskedCorners = CACornerMask(arrayLiteral: maskedCorners)
+       }
 }

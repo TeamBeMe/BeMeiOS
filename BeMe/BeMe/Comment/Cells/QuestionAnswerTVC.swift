@@ -20,7 +20,10 @@ class QuestionAnswerTVC: UITableViewCell {
     @IBOutlet weak var answerTextView: UITextView!
     
     weak var delegate: UITableViewButtonSelectedDelegate?
+    
     var indexPath: IndexPath?
+    
+    var questionId: Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,7 +36,7 @@ class QuestionAnswerTVC: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setInformation(question: String, category: String, date: String, profileImg: String, nickName: String, content: String) {
+    func setInformation(question: String, category: String, date: String, profileImg: String, nickName: String, content: String, questionId: Int) {
         questionLabel.text = question
         categoryLabel.text = "[  \(category)에 관한 질문  ]"
         dateLabel.text = date
@@ -45,12 +48,13 @@ class QuestionAnswerTVC: UITableViewCell {
         }
         nickNameLabel.text = nickName
         answerTextView.text = content
+        self.questionId = questionId
     }
     
     
     @IBAction func moreAnswerButtonTapped(_ sender: UIButton) {
         
-//        delegate?.goToMoreAnswerButtonDidTapped(to: indexPath!)
+        delegate?.goToMoreAnswerButtonDidTapped(questionId: questionId!, question: questionLabel.text!)
         
     }
     

@@ -14,9 +14,9 @@ class SearchVC: UIViewController {
     @IBOutlet weak var underTableView: UITableView!
     
     @IBOutlet weak var backButton: UIButton!
-    
+    let customEmptyView = CustomEmptyView()
     var searched: [FindPeopleSearchData] = []
-    
+    var historyData: [SearchHistoryData] = []
     
     
     override func viewDidLoad() {
@@ -25,7 +25,7 @@ class SearchVC: UIViewController {
         underTableView.delegate = self
         searchTextField.delegate = self
         setItems()
-        
+        getHistory()
         
     }
     
@@ -56,6 +56,39 @@ class SearchVC: UIViewController {
         
         
     }
+    
+    func getHistory(){
+        FindHistoryService.shared.getHistory(){(networkResult) -> (Void) in
+            switch networkResult{
+            case .success(let data) :
+                self.historyData = []
+                if let historyDatas = data as? [SearchHistoryData]{
+                    for hd in historyDatas {
+                        self.historyData.append(hd)
+                    }
+                    
+                }
+                self.underTableView.reloadData()
+                print("success")
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+                
+            }
+            
+            
+        }
+        
+    }
+    
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -67,15 +100,31 @@ class SearchVC: UIViewController {
     
     
     
+    
+    
 }
 
 
 extension SearchVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if searchTextField.text == ""{
-            return 5
+            customEmptyView.removeFromSuperview()
+            return historyData.count
         }
         else{
+            if searched.count == 0{
+                customEmptyView.setItems(text: "검색 결과가 없습니다.")
+                view.addSubview(customEmptyView)
+                customEmptyView.snp.makeConstraints{
+                    $0.leading.trailing.equalToSuperview()
+                    $0.top.equalToSuperview().offset(286)
+                    $0.height.equalTo(80)
+                    
+                }
+            }
+            else{
+                customEmptyView.removeFromSuperview()
+            }
             return searched.count
         }
     }
@@ -86,6 +135,9 @@ extension SearchVC: UITableViewDataSource {
                     .dequeueReusableCell(withIdentifier: SearchRecentTVC.identifier, for: indexPath)
                     as? SearchRecentTVC else { return UITableViewCell() }
             setTableViewHeader()
+            cell.searchxButtonDelegate = self
+            cell.userInfo = historyData[indexPath.item]
+            cell.setItems()
             return cell
             
         }
@@ -178,4 +230,21 @@ extension SearchVC: UITextFieldDelegate{
         
         return true
     }
+}
+
+
+extension SearchVC: SearchxButtonDelegate{
+    func xButtonTapped(){
+        getHistory()
+        underTableView.reloadData()
+        
+    }
+    
+}
+
+
+
+protocol SearchxButtonDelegate{
+    func xButtonTapped()
+    
 }
