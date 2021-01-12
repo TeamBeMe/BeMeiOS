@@ -22,7 +22,7 @@ class OthersPageCVC: UICollectionViewCell {
         super.awakeFromNib()
         // Initialization code
         tableViewSetting()
-        
+        print("--------")
     }
     
     
@@ -56,7 +56,9 @@ extension OthersPageCVC: UITableViewDataSource, UITableViewDelegate {
         
         
         tab.setCardView(question: othersAnswerArray[indexPath.row].question, questionInfo: othersAnswerArray[indexPath.row].category, answerDate: othersAnswerArray[indexPath.row].answerDate, writer: othersAnswerArray[indexPath.row].userNickname, writerImg: "icDeclare", isScrapped: othersAnswerArray[indexPath.row].isScrapped)
-        print(self.othersAnswerArray.count)
+        
+        print("dsfasdfa ")
+        print(othersAnswerArray.count)
         return tab
 
     }

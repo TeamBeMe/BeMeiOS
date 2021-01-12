@@ -102,10 +102,10 @@ extension OthersPageVC : UICollectionViewDataSource {
         
         
         cell.othersAnswerArray = othersAnswerArray
-        
-//        cell.otherspageTableView
-        
-//        setCardView(question: othersAnswerArray[indexPath.row].question, questionInfo: othersAnswerArray[indexPath.row].category, answerDate: othersAnswerArray[indexPath.row].answerDate, writer: othersAnswerArray[indexPath.row].userNickname, writerImg: "icDeclare", isScrapped: othersAnswerArray[indexPath.row].isScrapped)
+        print("=====")
+        print(cell.othersAnswerArray.count)
+        cell.otherspageTableView.reloadData()
+
         return cell
     }
     
@@ -167,6 +167,11 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
             }
             
             headerView.othersProfile = othersProfile
+            if (othersProfile.count != 0) {
+                headerView.setProfile(nickname: othersProfile[0].nickname, img: othersProfile[0].profileImg!, visit: String(othersProfile[0].continuedVisit), answerCount: String(othersProfile[0].answerCount), isFollowed: othersProfile[0].isFollowed)
+            }
+            
+//            headerView.da
             //            othersPageCVLayout.mypageCRVDelegate = headerView
             
             return headerView
@@ -220,7 +225,8 @@ extension OthersPageVC {
                 if let othersProfile = data as? OthersProfile{
                     print(" 성공")
                     
-                    self.othersProfile[0] = othersProfile
+                    self.othersProfile.append(othersProfile)
+                    
                     
                 }
             case .requestErr(let msg):
