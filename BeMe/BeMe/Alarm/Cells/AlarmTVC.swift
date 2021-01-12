@@ -15,7 +15,7 @@ class AlarmTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        profileImageView.makeRounded(cornerRadius: profileImageView.bounds.width / 2)
     }
     
     func setInformations(type: String, profileImg: String, question: String, nickName: String) {

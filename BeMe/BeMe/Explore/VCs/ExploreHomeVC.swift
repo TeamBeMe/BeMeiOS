@@ -38,13 +38,13 @@ class ExploreHomeVC: UIViewController {
     // 서버통신을 통해 받아오는 값
     private var categoryArray: [ExploreCategory] = [] {
         didSet {
-            exploreTableView.reloadData()
+//            exploreTableView.reloadData()
         }
     }
     
     private var exploreThoughtArray: [ExploreThoughtData] = [] {
         didSet {
-            exploreTableView.reloadData()
+//            exploreTableView.reloadData()
         }
     }
     
@@ -500,6 +500,7 @@ extension ExploreHomeVC {
 extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     
     func categoryButtonTapped(_ indexPath: IndexPath, _ categoryId: Int) {
+        isTableViewAnimation = false
         scrollDirection = true
         selectedCategoryId = categoryId
         currentPage = 1
@@ -510,6 +511,7 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     }
     
     func recentOrFavoriteButtonTapped(_ indexPath: Int, _ selected: String) {
+        isTableViewAnimation = false
         scrollDirection = true
         selectedRecentOrFavorite = selected
         selectedCategoryId = 0
@@ -524,6 +526,7 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     }
     
     func exploreAnswerScrapButtonDidTapped(_ answerId: Int) {
+        isTableViewAnimation = false
         scrapAnswer(answerId: answerId)
     }
     
