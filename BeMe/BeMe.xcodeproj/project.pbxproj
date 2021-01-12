@@ -159,6 +159,14 @@
 		ECA1517025AD82350091E5EF /* SignUpDuplicateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA1516F25AD82350091E5EF /* SignUpDuplicateService.swift */; };
 		ECA1517325AD838A0091E5EF /* SignUpDuplicateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA1517225AD838A0091E5EF /* SignUpDuplicateData.swift */; };
 		ECA1517625AD88960091E5EF /* HomeCardCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA1517525AD88960091E5EF /* HomeCardCollectionView.swift */; };
+		ECA1517F25ADEF510091E5EF /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ECA1517E25ADEF510091E5EF /* Onboarding.storyboard */; };
+		ECA1518225ADF4340091E5EF /* OnboardingFirstVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA1518125ADF4340091E5EF /* OnboardingFirstVC.swift */; };
+		ECA1518525ADF4440091E5EF /* OnboardingSecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA1518425ADF4440091E5EF /* OnboardingSecondVC.swift */; };
+		ECA1518825ADF4500091E5EF /* OnboardingThirdVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA1518725ADF4500091E5EF /* OnboardingThirdVC.swift */; };
+		ECA1518B25ADF4690091E5EF /* OnboardingFourthVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA1518A25ADF4690091E5EF /* OnboardingFourthVC.swift */; };
+		ECA1518E25ADF6540091E5EF /* OnboardingPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA1518D25ADF6540091E5EF /* OnboardingPVC.swift */; };
+		ECA1519125ADF6FC0091E5EF /* OnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA1519025ADF6FC0091E5EF /* OnboardingVC.swift */; };
+		ECA1519425AE275E0091E5EF /* FollowNotAnsweredCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECA1519325AE275E0091E5EF /* FollowNotAnsweredCVC.swift */; };
 		ECB44D4425AC739B00F491F2 /* FindHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB44D4325AC739B00F491F2 /* FindHistoryService.swift */; };
 		ECB44D4725AC741400F491F2 /* SearchHistoryData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB44D4625AC741400F491F2 /* SearchHistoryData.swift */; };
 		ECB44D4A25AC76A500F491F2 /* FindDeleteSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ECB44D4925AC76A500F491F2 /* FindDeleteSearchService.swift */; };
@@ -341,6 +349,14 @@
 		ECA1516F25AD82350091E5EF /* SignUpDuplicateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDuplicateService.swift; sourceTree = "<group>"; };
 		ECA1517225AD838A0091E5EF /* SignUpDuplicateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpDuplicateData.swift; sourceTree = "<group>"; };
 		ECA1517525AD88960091E5EF /* HomeCardCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCardCollectionView.swift; sourceTree = "<group>"; };
+		ECA1517E25ADEF510091E5EF /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		ECA1518125ADF4340091E5EF /* OnboardingFirstVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFirstVC.swift; sourceTree = "<group>"; };
+		ECA1518425ADF4440091E5EF /* OnboardingSecondVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingSecondVC.swift; sourceTree = "<group>"; };
+		ECA1518725ADF4500091E5EF /* OnboardingThirdVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingThirdVC.swift; sourceTree = "<group>"; };
+		ECA1518A25ADF4690091E5EF /* OnboardingFourthVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingFourthVC.swift; sourceTree = "<group>"; };
+		ECA1518D25ADF6540091E5EF /* OnboardingPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPVC.swift; sourceTree = "<group>"; };
+		ECA1519025ADF6FC0091E5EF /* OnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingVC.swift; sourceTree = "<group>"; };
+		ECA1519325AE275E0091E5EF /* FollowNotAnsweredCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowNotAnsweredCVC.swift; sourceTree = "<group>"; };
 		ECB44D4325AC739B00F491F2 /* FindHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindHistoryService.swift; sourceTree = "<group>"; };
 		ECB44D4625AC741400F491F2 /* SearchHistoryData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryData.swift; sourceTree = "<group>"; };
 		ECB44D4925AC76A500F491F2 /* FindDeleteSearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindDeleteSearchService.swift; sourceTree = "<group>"; };
@@ -910,6 +926,7 @@
 				EC89E32D259C496C00DBAFE5 /* FollowMoreButtonCVC.swift */,
 				EC737F20259DB2C40035207F /* FollowUpperCVC.swift */,
 				ECB44D5725ACA82C00F491F2 /* FollowingWholeCV.swift */,
+				ECA1519325AE275E0091E5EF /* FollowNotAnsweredCVC.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -971,6 +988,7 @@
 		EC813F222599A15100BBCE25 /* BeMe */ = {
 			isa = PBXGroup;
 			children = (
+				ECA1517B25ADEF1E0091E5EF /* Onboarding */,
 				ECC6312725A9E88B009E4FD4 /* SupportFiles */,
 				D44F6DBF25A5784A002A9761 /* Answer */,
 				D44F6D9B25A575E0002A9761 /* Protocols */,
@@ -1124,6 +1142,36 @@
 			path = VCs;
 			sourceTree = "<group>";
 		};
+		ECA1517B25ADEF1E0091E5EF /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				ECA1517D25ADEF380091E5EF /* VCs */,
+				ECA1517C25ADEF260091E5EF /* Storyboards */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		ECA1517C25ADEF260091E5EF /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				ECA1517E25ADEF510091E5EF /* Onboarding.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		ECA1517D25ADEF380091E5EF /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				ECA1518125ADF4340091E5EF /* OnboardingFirstVC.swift */,
+				ECA1518425ADF4440091E5EF /* OnboardingSecondVC.swift */,
+				ECA1518725ADF4500091E5EF /* OnboardingThirdVC.swift */,
+				ECA1518A25ADF4690091E5EF /* OnboardingFourthVC.swift */,
+				ECA1518D25ADF6540091E5EF /* OnboardingPVC.swift */,
+				ECA1519025ADF6FC0091E5EF /* OnboardingVC.swift */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
 		ECC630F725A96799009E4FD4 /* FindPeople */ = {
 			isa = PBXGroup;
 			children = (
@@ -1237,6 +1285,7 @@
 				ECB44D5225AC968A00F491F2 /* loading.json in Resources */,
 				EC813F2D2599A15200BBCE25 /* Assets.xcassets in Resources */,
 				EC813F2B2599A15100BBCE25 /* Main.storyboard in Resources */,
+				ECA1517F25ADEF510091E5EF /* Onboarding.storyboard in Resources */,
 				D4F198F225A436D0000AF0E7 /* Comment.storyboard in Resources */,
 				EC9C5CD025A41E8D0021AF96 /* SignUp.storyboard in Resources */,
 				EC813F732599F84F00BBCE25 /* Home.storyboard in Resources */,
@@ -1306,6 +1355,7 @@
 				D480732425A8744700DE1DD3 /* ExploreAnswer.swift in Sources */,
 				A50140FA25A39B56001099E8 /* MypageCRV.swift in Sources */,
 				ECB44D4725AC741400F491F2 /* SearchHistoryData.swift in Sources */,
+				ECA1518E25ADF6540091E5EF /* OnboardingPVC.swift in Sources */,
 				A50140FD25A39BFA001099E8 /* MypageCVC.swift in Sources */,
 				EC813F462599A44F00BBCE25 /* GenericResponse.swift in Sources */,
 				EC75A23225A8664200F4E160 /* HomeDeleteAnswerService.swift in Sources */,
@@ -1328,6 +1378,7 @@
 				EC75A24725A8876E00F4E160 /* AnswerRegistService.swift in Sources */,
 				EC7C1601259B469D00A5BA4C /* UIViewController+Extensions.swift in Sources */,
 				D4E07CBD259F22C10075E616 /* CategoryCVC.swift in Sources */,
+				ECA1518B25ADF4690091E5EF /* OnboardingFourthVC.swift in Sources */,
 				ECB44D5825ACA82C00F491F2 /* FollowingWholeCV.swift in Sources */,
 				EC813F432599A42700BBCE25 /* APIConstants.swift in Sources */,
 				EC813F7B2599F88D00BBCE25 /* PastCardCVC.swift in Sources */,
@@ -1345,6 +1396,7 @@
 				D41B6BE025A9BCFA004D2052 /* ExploreAnswerScrapService.swift in Sources */,
 				D480730D25A8324500DE1DD3 /* UIScrollView+Extensions.swift in Sources */,
 				EC737F1C259D8B9E0035207F /* CustomAddCardView.swift in Sources */,
+				ECA1518225ADF4340091E5EF /* OnboardingFirstVC.swift in Sources */,
 				EC7C1631259BACF100A5BA4C /* FollowerPeopleCVC.swift in Sources */,
 				ECA1517325AD838A0091E5EF /* SignUpDuplicateData.swift in Sources */,
 				EC71C84125A5B1BA00F51FEC /* HomeNewQuestionData.swift in Sources */,
@@ -1377,9 +1429,11 @@
 				EC89E30C259C273400DBAFE5 /* FollowingSearchVC.swift in Sources */,
 				EC7C1605259B485D00A5BA4C /* CustomAlertView.swift in Sources */,
 				EC89E316259C280200DBAFE5 /* FollowingListCVC.swift in Sources */,
+				ECA1519125ADF6FC0091E5EF /* OnboardingVC.swift in Sources */,
 				D449CFF825AA390100A07C3C /* AnswerDetail.swift in Sources */,
 				ECC630F925A967B7009E4FD4 /* FindPeopleSearchData.swift in Sources */,
 				ECB44D5525AC9CD800F491F2 /* CustomLoadingView.swift in Sources */,
+				ECA1519425AE275E0091E5EF /* FollowNotAnsweredCVC.swift in Sources */,
 				ECA1517625AD88960091E5EF /* HomeCardCollectionView.swift in Sources */,
 				EC5C201A25A49D7E008EE335 /* SignUpData.swift in Sources */,
 				A501410025A39C18001099E8 /* MypageTabCVC.swift in Sources */,
@@ -1410,6 +1464,7 @@
 				A5A5BE5225A835AF00036431 /* UIScrollView+Extensions.swift in Sources */,
 				EC7F0EA925A057DF008EB88A /* HomeVC+UnderAlert.swift in Sources */,
 				D480731425A849FF00DE1DD3 /* ExploreThoughtService.swift in Sources */,
+				ECA1518825ADF4500091E5EF /* OnboardingThirdVC.swift in Sources */,
 				D480732E25A89E4500DE1DD3 /* DiffArticleTVC.swift in Sources */,
 				EC7C161E259B9B0F00A5BA4C /* FollowingPeopleCVC.swift in Sources */,
 				EC813F612599F3E900BBCE25 /* UIColor+Extensions.swift in Sources */,
@@ -1423,6 +1478,7 @@
 				D4475F0725AA1B6E00426591 /* ExploreDetailAnswerService.swift in Sources */,
 				D492E41A25A0A0DE0088A181 /* ExploreDetailVC.swift in Sources */,
 				EC7F0EA125A05460008EB88A /* CustomHomeActionSheetAlert.swift in Sources */,
+				ECA1518525ADF4440091E5EF /* OnboardingSecondVC.swift in Sources */,
 				A51CA35F25A57D2F0020F26D /* MypageVC.swift in Sources */,
 				A5A5BE6925A9DF2E00036431 /* OthersPageVC.swift in Sources */,
 				EC7FEFAB25A38FE200C61147 /* SearchRecentTVC.swift in Sources */,

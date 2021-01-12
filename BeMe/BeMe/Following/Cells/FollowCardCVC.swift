@@ -23,6 +23,14 @@ class FollowCardCVC: UICollectionViewCell {
     @IBOutlet weak var bookMarkButton: UIButton!
     
     var answerData: FollowingAnswers?
+    var replyButton = UIButton().then {
+        $0.backgroundColor = .black
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        $0.makeRounded(cornerRadius: 5)
+        
+    }
+    
     
     override func awakeFromNib() {
         containView.setBorder(borderColor: .lightGray, borderWidth: 1.0)
@@ -37,20 +45,33 @@ class FollowCardCVC: UICollectionViewCell {
         profileImageView.contentMode = .scaleAspectFill
 //        answerTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 //        questionTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//        
+//
+        
         
         
     }
     
     func setItems(question: String,answer: String,category: String,answerTime: String,
-                  profileImgUrl: String,userName: String){
-        answerTextView.text = answer
+                  profileImgUrl: String,userName: String,isAnswered: Bool){
+        
         questionTextView.text = question
         timeLabel.text = answerTime
         
         profileImageView.imageFromUrl(profileImgUrl, defaultImgPath: "")
         userNameLabel.text = userName
-
+        questionInfoLabel.text = "[  \(category)에 관한 질문  ]  ·"
+        questionInfoLabel.textColor = .slateGrey
+        timeLabel.textColor = .slateGrey
+        answerTextView.text = answer
+//        if isAnswered == false {
+//            answerTextView.text = "아직 송현님이 답하지 않은 질문입니다.\n답변을 하시고 글을 보시겠습니까?"
+//            
+//            
+//        }
+//        else{
+//            answerTextView.text = answer
+//        }
+        
     }
     
 

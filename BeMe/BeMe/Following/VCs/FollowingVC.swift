@@ -38,7 +38,7 @@ class FollowingVC: UIViewController {
     
     var followers: [FollowingFollows] = []
     var followees: [FollowingFollows] = []
-   
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,7 +112,7 @@ extension FollowingVC {
     }
     
     func getFollowData(){
-       
+        
         
         FollowingGetService.shared.getHomeData() {(networkResult) -> (Void) in
             switch networkResult{
@@ -131,10 +131,10 @@ extension FollowingVC {
                     
                 }
                 self.wholeCollectionView.reloadData()
-              
-
-              
-//                self.wholeCollectionView.reloadData()
+                
+                
+                
+                //                self.wholeCollectionView.reloadData()
                 print(self.followees)
                 print(self.followers)
                 
@@ -182,13 +182,13 @@ extension FollowingVC {
                     LoadingHUD.hide()
                     
                 }
-//                self.wholeCollectionView.reloadData()
-//                DispatchQueue.main.async {
-//                    let indexPath = NSIndexPath(item: self.wholeCollectionView.numberOfItems(inSection: 3)+200, section: 3)
-//                    LoadingHUD.hide()
-//                    self.isLoading = false
-//
-//                }
+                //                self.wholeCollectionView.reloadData()
+                //                DispatchQueue.main.async {
+                //                    let indexPath = NSIndexPath(item: self.wholeCollectionView.numberOfItems(inSection: 3)+200, section: 3)
+                //                    LoadingHUD.hide()
+                //                    self.isLoading = false
+                //
+                //                }
                 print(self.answers)
                 print("success")
                 self.answerPage = self.answerPage+1
@@ -272,26 +272,39 @@ extension FollowingVC : UICollectionViewDataSource {
             }
             
             else {
-                guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: FollowCardCVC.identifier,
-                        for: indexPath) as? FollowCardCVC else {return UICollectionViewCell()}
-                let answerTmp = answers[indexPath.item]
-                let answerText = answerTmp.content ?? ""
-                let answerCategory = answerTmp.category ?? ""
-                let answerDate = answerTmp.answerDate ?? ""
-                let answerProfile = answerTmp.userProfile ?? ""
-                let answerUserName = answerTmp.userNickname ?? ""
                 
-                cell.setItems(question: answerTmp.question,
-                              answer: answerText,
-                              category: answerCategory,
-                              answerTime: answerDate,
-                              profileImgUrl: answerProfile,
-                              userName: answerUserName
-                              
-                )
+                if answers[indexPath.item].isAnswered == true{
+                    guard let cell = collectionView.dequeueReusableCell(
+                            withReuseIdentifier: FollowCardCVC.identifier,
+                            for: indexPath) as? FollowCardCVC else {return UICollectionViewCell()}
+                    let answerTmp = answers[indexPath.item]
+                    let answerText = answerTmp.content ?? ""
+                    let answerCategory = answerTmp.category ?? ""
+                    let answerDate = answerTmp.answerDate ?? ""
+                    let answerProfile = answerTmp.userProfile ?? ""
+                    let answerUserName = answerTmp.userNickname ?? ""
+                    let answerIsAnswered = answerTmp.isAnswered ?? false
+                    
+                    cell.setItems(question: answerTmp.question,
+                                  answer: answerText,
+                                  category: answerCategory,
+                                  answerTime: answerDate,
+                                  profileImgUrl: answerProfile,
+                                  userName: answerUserName,
+                                  isAnswered: answerIsAnswered
+                                  
+                    )
+                    
+                    return cell
+                }
                 
-                return cell
+                else {
+                    guard let cell = collectionView.dequeueReusableCell(
+                            withReuseIdentifier: FollowNotAnsweredCVC.identifier,
+                            for: indexPath) as? FollowNotAnsweredCVC else {return UICollectionViewCell()}
+                    cell.setItems(inputAnswer:  answers[indexPath.item])
+                    return cell
+                }
                 
             }
             
@@ -353,76 +366,170 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
                 
             }
             else {
-                let tmpQuestionTextView = UITextView().then{
-                    $0.frame = CGRect(x: 0, y: 0, width: 260, height: 50)
-                    $0.backgroundColor = .lightGray
-                    $0.alpha = 0
-                    let questionText = answers[indexPath.item].question
-                    print(questionText)
-                    $0.text = questionText
-                    
-                    $0.font = UIFont.systemFont(ofSize: 16)
-                }
                 
-                let tmpTextView = UITextView().then{
-                    $0.frame = CGRect(x: 0, y: 0, width: 275, height: 50)
-                    $0.backgroundColor = .lightGray
-                    $0.alpha = 0
-                    let answerText = answers[indexPath.item].content ?? ""
-                    $0.text = answerText
-                    $0.font = UIFont.systemFont(ofSize: 14)
-                }
-                
-                view.addSubview(tmpTextView)
-                view.addSubview(tmpQuestionTextView)
-                tmpTextView.translatesAutoresizingMaskIntoConstraints = false
-                tmpQuestionTextView.translatesAutoresizingMaskIntoConstraints = false
-                
-                tmpTextView.snp.makeConstraints{
-                    $0.leading.equalToSuperview().offset(50)
-                    $0.trailing.equalToSuperview().offset(-50)
-                    $0.height.equalTo(50)
-                    $0.top.equalToSuperview().offset(50)
-                    
-                }
-                tmpQuestionTextView.snp.makeConstraints{
-                    $0.leading.equalToSuperview().offset(50)
-                    $0.trailing.equalToSuperview().offset(-70)
-                    $0.height.equalTo(50)
-                    $0.top.equalToSuperview().offset(50)
-                    
-                }
-                tmpTextView.delegate = self
-                tmpTextView.isScrollEnabled = false
-                textViewDidChange(tmpTextView)
-                
-                tmpQuestionTextView.delegate = self
-                tmpQuestionTextView.isScrollEnabled = false
-                textViewDidChange(tmpQuestionTextView)
-                var dynamicHeight : CGFloat?
-                var dynamicQuestionHeight : CGFloat?
-                tmpTextView.constraints.forEach { constraint in
-                    if constraint.firstAttribute == .height {
-                        dynamicHeight = constraint.constant
+                if answers[indexPath.item].isAnswered == true{
+                    let tmpQuestionTextView = UITextView().then{
+                        $0.frame = CGRect(x: 0, y: 0, width: 260, height: 50)
+                        $0.backgroundColor = .lightGray
+                        $0.alpha = 0
+                        let questionText = answers[indexPath.item].question
+                        
+                        
+                        $0.text = questionText
+                        
+                        $0.font = UIFont.systemFont(ofSize: 16)
                     }
-                }
-                tmpQuestionTextView.constraints.forEach { constraint in
-                    if constraint.firstAttribute == .height {
-                        dynamicQuestionHeight = constraint.constant
+                    
+                    let tmpTextView = UITextView().then{
+                        $0.frame = CGRect(x: 0, y: 0, width: 275, height: 50)
+                        $0.backgroundColor = .lightGray
+                        $0.alpha = 0
+                        let answerText = answers[indexPath.item].content ?? ""
+                        //                    if answers[indexPath.item].isAnswered == true{
+                        //                        $0.text = answerText
+                        //                    }
+                        //                    else{
+                        //                        $0.text = "아직 송현님이 답하지 않은 질문입니다.\n답변을 하시고 글을 보시겠습니까?"
+                        //                    }
+                        
+                        $0.text = answerText
+                        $0.font = UIFont.systemFont(ofSize: 14)
                     }
+                    
+                    view.addSubview(tmpTextView)
+                    view.addSubview(tmpQuestionTextView)
+                    tmpTextView.translatesAutoresizingMaskIntoConstraints = false
+                    tmpQuestionTextView.translatesAutoresizingMaskIntoConstraints = false
+                    
+                    tmpTextView.snp.makeConstraints{
+                        $0.leading.equalToSuperview().offset(50)
+                        $0.trailing.equalToSuperview().offset(-50)
+                        $0.height.equalTo(50)
+                        $0.top.equalToSuperview().offset(50)
+                        
+                    }
+                    tmpQuestionTextView.snp.makeConstraints{
+                        $0.leading.equalToSuperview().offset(50)
+                        $0.trailing.equalToSuperview().offset(-70)
+                        $0.height.equalTo(50)
+                        $0.top.equalToSuperview().offset(50)
+                        
+                    }
+                    tmpTextView.delegate = self
+                    tmpTextView.isScrollEnabled = false
+                    textViewDidChange(tmpTextView)
+                    
+                    tmpQuestionTextView.delegate = self
+                    tmpQuestionTextView.isScrollEnabled = false
+                    textViewDidChange(tmpQuestionTextView)
+                    var dynamicHeight : CGFloat?
+                    var dynamicQuestionHeight : CGFloat?
+                    tmpTextView.constraints.forEach { constraint in
+                        if constraint.firstAttribute == .height {
+                            dynamicHeight = constraint.constant
+                        }
+                    }
+                    tmpQuestionTextView.constraints.forEach { constraint in
+                        if constraint.firstAttribute == .height {
+                            dynamicQuestionHeight = constraint.constant
+                        }
+                    }
+                    tmpTextView.removeFromSuperview()
+                    tmpQuestionTextView.removeFromSuperview()
+                    print("dynamicQuestionHeight")
+                    print(dynamicQuestionHeight)
+                    
+                    print("dynamicHeight")
+                    print(dynamicHeight)
+                    //                if answers[indexPath.item].isAnswered == true{
+                    //                    return CGSize(width: collectionView.frame.width  ,
+                    //                                  height: 109.0+CGFloat(dynamicHeight!)+CGFloat(dynamicQuestionHeight!))
+                    //                }
+                    //                else{
+                    //                    return CGSize(width: collectionView.frame.width  ,
+                    //                                  height: 132.0+CGFloat(dynamicHeight!)+CGFloat(dynamicQuestionHeight!))
+                    //                }
+                    //
+                    return CGSize(width: collectionView.frame.width  ,
+                                  height: 109.0+CGFloat(dynamicHeight!)+CGFloat(dynamicQuestionHeight!))
+                    
                 }
-                tmpTextView.removeFromSuperview()
-                tmpQuestionTextView.removeFromSuperview()
-                print("dynamicQuestionHeight")
-                print(dynamicQuestionHeight)
                 
-                print("dynamicHeight")
-                print(dynamicHeight)
-                
-                
-                
-                return CGSize(width: collectionView.frame.width  ,
-                              height: 109.0+CGFloat(dynamicHeight!)+CGFloat(dynamicQuestionHeight!))
+                else{
+                    let tmpQuestionTextView = UITextView().then{
+                        $0.frame = CGRect(x: 0, y: 0, width: 260, height: 50)
+                        $0.backgroundColor = .lightGray
+                        $0.alpha = 0
+                        let questionText = answers[indexPath.item].question
+                        $0.text = questionText
+                        $0.font = UIFont.systemFont(ofSize: 16)
+                    }
+                    
+                    let tmpTextView = UITextView().then{
+                        $0.frame = CGRect(x: 0, y: 0, width: 275, height: 50)
+                        $0.backgroundColor = .lightGray
+                        $0.alpha = 0
+                        let answerText = answers[indexPath.item].content ?? ""
+                        $0.text = "아직 송현님이 답하지 않은 질문입니다.\n답변을 하시고 글을 보시겠습니까?"
+                        $0.font = UIFont.systemFont(ofSize: 14)
+                    }
+                    
+                    view.addSubview(tmpTextView)
+                    view.addSubview(tmpQuestionTextView)
+                    tmpTextView.translatesAutoresizingMaskIntoConstraints = false
+                    tmpQuestionTextView.translatesAutoresizingMaskIntoConstraints = false
+                    
+                    tmpTextView.snp.makeConstraints{
+                        $0.leading.equalToSuperview().offset(50)
+                        $0.trailing.equalToSuperview().offset(-50)
+                        $0.height.equalTo(50)
+                        $0.top.equalToSuperview().offset(50)
+                        
+                    }
+                    tmpQuestionTextView.snp.makeConstraints{
+                        $0.leading.equalToSuperview().offset(50)
+                        $0.trailing.equalToSuperview().offset(-70)
+                        $0.height.equalTo(50)
+                        $0.top.equalToSuperview().offset(50)
+                        
+                    }
+                    tmpTextView.delegate = self
+                    tmpTextView.isScrollEnabled = false
+                    textViewDidChange(tmpTextView)
+                    
+                    tmpQuestionTextView.delegate = self
+                    tmpQuestionTextView.isScrollEnabled = false
+                    textViewDidChange(tmpQuestionTextView)
+                    var dynamicHeight : CGFloat?
+                    var dynamicQuestionHeight : CGFloat?
+                    tmpTextView.constraints.forEach { constraint in
+                        if constraint.firstAttribute == .height {
+                            dynamicHeight = constraint.constant
+                        }
+                    }
+                    tmpQuestionTextView.constraints.forEach { constraint in
+                        if constraint.firstAttribute == .height {
+                            dynamicQuestionHeight = constraint.constant
+                        }
+                    }
+                    tmpTextView.removeFromSuperview()
+                    tmpQuestionTextView.removeFromSuperview()
+
+                    //                if answers[indexPath.item].isAnswered == true{
+                    //                    return CGSize(width: collectionView.frame.width  ,
+                    //                                  height: 109.0+CGFloat(dynamicHeight!)+CGFloat(dynamicQuestionHeight!))
+                    //                }
+                    //                else{
+                    //                    return CGSize(width: collectionView.frame.width  ,
+                    //                                  height: 132.0+CGFloat(dynamicHeight!)+CGFloat(dynamicQuestionHeight!))
+                    //                }
+                    //
+                    return CGSize(width: collectionView.frame.width  ,
+                                  height: 132.0+CGFloat(dynamicHeight!)+CGFloat(dynamicQuestionHeight!))
+                    
+                    
+                    
+                }
                 
             }
             
@@ -473,7 +580,7 @@ extension FollowingVC: UICollectionViewDelegate {
                 
                 UIView.animate(withDuration: 0.5, animations: {
                     cell.layer.transform = CATransform3DIdentity
-                   
+                    
                 })
             } else {
                 if isScrolled == true{
@@ -481,14 +588,14 @@ extension FollowingVC: UICollectionViewDelegate {
                     cell.layer.transform = rotationTransform
                     UIView.animate(withDuration: 0.5, animations: {
                         cell.layer.transform = CATransform3DIdentity
-                    
+                        
                     },completion: { finished in
                         LoadingHUD.hide()
                         self.isLoading = false
                     })
                     isScrolled = false
                 }
-               
+                
             }
             
         }
