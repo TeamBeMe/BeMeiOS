@@ -32,7 +32,8 @@ struct Answer: Codable {
     let publicFlag: Bool
     let answerDate: String
     let answerIdx, questionID, userID: Int
-    let isAuthor, isScrapped: Bool
+    let isAuthor: Bool
+    let isScrapped: Bool?
     let userProfile: String?
     let userNickname, question, category: String
     let categoryID: Int

@@ -13,7 +13,7 @@ struct OthersProfile: Codable {
     let nickname, email: String
     let profileImg: String?
     let continuedVisit: Int
-    let isFollowed: Bool
+    let isFollowed: Bool?
     let answerCount: Int
     
     enum CodingKeys: String, CodingKey {

@@ -20,7 +20,7 @@ class OthersPageTVC: UITableViewCell {
     @IBOutlet weak var scrapButton: UIButton!
     
     //MARK:**- Variable Part**
-    private var isScrapped = false
+    private var isScrapped = true
     static let identifier = "OthersPageTVC"
     var answerId: Int?
     

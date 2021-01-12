@@ -51,7 +51,7 @@ extension OthersPageCVC: UITableViewDataSource, UITableViewDelegate {
                 .dequeueReusableCell(withIdentifier: OthersPageTVC.identifier, for: indexPath)
                 as? OthersPageTVC else { return UITableViewCell() }
         
-        tab.setCardView(question: othersAnswerArray[indexPath.row].question, questionInfo: othersAnswerArray[indexPath.row].category, answerDate: othersAnswerArray[indexPath.row].answerDate, writer: othersAnswerArray[indexPath.row].userNickname, writerImg: othersAnswerArray[indexPath.row].userProfile ?? "", isScrapped: othersAnswerArray[indexPath.row].isScrapped, answerId: othersAnswerArray[indexPath.row].id, questionId: othersAnswerArray[indexPath.row].questionID)
+        tab.setCardView(question: othersAnswerArray[indexPath.row].question, questionInfo: othersAnswerArray[indexPath.row].category, answerDate: othersAnswerArray[indexPath.row].answerDate, writer: othersAnswerArray[indexPath.row].userNickname, writerImg: othersAnswerArray[indexPath.row].userProfile ?? "", isScrapped: othersAnswerArray[indexPath.row].isScrapped!, answerId: othersAnswerArray[indexPath.row].id, questionId: othersAnswerArray[indexPath.row].questionID)
         tab.delegate = self
         print("$$$$$$$$$")
         print(indexPath.row)

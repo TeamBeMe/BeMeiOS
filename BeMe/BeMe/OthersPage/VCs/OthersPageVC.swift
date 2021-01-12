@@ -43,7 +43,8 @@ class OthersPageVC: UIViewController {
         
         super.viewDidLoad()
         
-        
+//        othersAnswerArray = []
+//        othersProfile = []
         othersPageCollectionView.delegate = self
         othersPageCollectionView.dataSource = self
         
@@ -59,8 +60,8 @@ class OthersPageVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setAnswerData(userId: 3, page: 1)
-        setProfileData(userId: 1)
+        setAnswerData(userId: 2, page: 1)
+        setProfileData(userId: 6)
     }
     //MARK:**- IBAction Part**
     
@@ -108,7 +109,7 @@ extension OthersPageVC : UICollectionViewDataSource {
         print("otehrspage CV ")
         print(othersAnswerArray[0].id)
         print(othersAnswerArray[0].content)
-        print(othersAnswerArray[0].isScrapped)
+        print(othersAnswerArray[0].isScrapped!)
         //        print("=====")
         //        print(cell.othersAnswerArray.count)
         //        tableviewHeight = cell.tableviewHeight
@@ -179,7 +180,7 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
             
             headerView.othersProfile = othersProfile
             if (othersProfile.count != 0) {
-                headerView.setProfile(nickname: othersProfile[0].nickname, img: othersProfile[0].profileImg!, visit: String(othersProfile[0].continuedVisit), answerCount: String(othersProfile[0].answerCount), isFollowed: othersProfile[0].isFollowed)
+                headerView.setProfile(nickname: othersProfile[0].nickname, img: othersProfile[0].profileImg!, visit: String(othersProfile[0].continuedVisit), answerCount: String(othersProfile[0].answerCount), isFollowed: othersProfile[0].isFollowed!)
                 //                print("othersProfile[0].isFollowed")
                 //                print(othersProfile[0].isFollowed)
             }
