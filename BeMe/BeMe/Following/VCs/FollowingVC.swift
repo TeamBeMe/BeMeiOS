@@ -369,7 +369,7 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
                 
                 if answers[indexPath.item].isAnswered == true{
                     let tmpQuestionTextView = UITextView().then{
-                        $0.frame = CGRect(x: 0, y: 0, width: 260, height: 50)
+                        $0.frame = CGRect(x: 0, y: 0, width: 255, height: 50)
                         $0.backgroundColor = .lightGray
                         $0.alpha = 0
                         let questionText = answers[indexPath.item].question
@@ -457,7 +457,7 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
                 
                 else{
                     let tmpQuestionTextView = UITextView().then{
-                        $0.frame = CGRect(x: 0, y: 0, width: 260, height: 50)
+                        $0.frame = CGRect(x: 0, y: 0, width: 255, height: 50)
                         $0.backgroundColor = .lightGray
                         $0.alpha = 0
                         let questionText = answers[indexPath.item].question

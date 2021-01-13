@@ -30,7 +30,8 @@ class FollowNotAnsweredCVC: UICollectionViewCell {
         questionTextView.translatesAutoresizingMaskIntoConstraints = false
         questionTextView.isScrollEnabled = false
        
-        
+        replyButton.makeRounded(cornerRadius: 5)
+        replyButton.backgroundColor = .charcoalGreyTwo
         
         
     }
@@ -44,7 +45,7 @@ class FollowNotAnsweredCVC: UICollectionViewCell {
         categoryLabel.textColor = .slateGrey
         answerDateLabel.textColor = .slateGrey
         answerTextView.text = "아직 송현님이 답하지 않은 질문입니다.\n답변을 하시고 글을 보시겠습니까?"
-
+        
         
         
     }
