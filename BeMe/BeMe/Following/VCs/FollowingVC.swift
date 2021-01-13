@@ -360,6 +360,8 @@ extension FollowingVC : UICollectionViewDataSource {
                     guard let cell = collectionView.dequeueReusableCell(
                             withReuseIdentifier: FollowNotAnsweredCVC.identifier,
                             for: indexPath) as? FollowNotAnsweredCVC else {return UICollectionViewCell()}
+                    cell.followScrapButtonDelegate = self
+                    cell.answerData = answers[indexPath.item]
                     cell.setItems(inputAnswer:  answers[indexPath.item])
                     return cell
                 }
@@ -772,7 +774,22 @@ extension FollowingVC: FollowPlusButtonDelegate{
 }
 
 extension FollowingVC: FollowScrapButtonDelegate {
-    func replyButtonTap() {
+    func replyButtonTap(answerData: FollowingAnswers) {
+        let inputData = AnswerDataForViewController(lock: true, questionCategory: answerData.category, answerDate: answerData.answerDate!, question: answerData.question, answer: "", index: 0, answerIdx: answerData.answerIdx, questionID: answerData.questionID, createdTime: "", categoryID: answerData.categoryID, id: answerData.id)
+        
+        guard let answerVC = UIStoryboard(name: "Answer",
+                                          bundle: nil).instantiateViewController(
+                                            withIdentifier: "AnswerVC") as? AnswerVC
+        else{
+            
+            return
+        }
+        
+        
+        
+        answerVC.answerData = inputData
+//        answerVC.setLabels()
+        self.navigationController?.pushViewController(answerVC, animated: true)
         
     }
     
@@ -838,7 +855,7 @@ protocol FollowScrapButtonDelegate {
     func scrapButtonAction(answerID: Int,wasScrapped: Bool,indexInVC: Int)
     func containViewTap(answerID: Int)
     func moreButtonTap(questionID: Int, question: String)
-    func replyButtonTap()
+    func replyButtonTap(answerData: FollowingAnswers)
     
 }
 

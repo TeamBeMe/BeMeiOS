@@ -19,7 +19,7 @@ class FollowNotAnsweredCVC: UICollectionViewCell {
     
     @IBOutlet weak var replyButton: UIButton!
     var answerData: FollowingAnswers?
-    
+    var followScrapButtonDelegate: FollowScrapButtonDelegate?
     override func awakeFromNib() {
         containView.setBorder(borderColor: .lightGray, borderWidth: 1.0)
         containView.makeRounded(cornerRadius: 6)
@@ -50,7 +50,13 @@ class FollowNotAnsweredCVC: UICollectionViewCell {
         
     }
     
-
+    
+    
+    @IBAction func replyButtonAction(_ sender: Any) {
+        
+        followScrapButtonDelegate?.replyButtonTap(answerData: answerData!)
+    }
+    
     
     
     

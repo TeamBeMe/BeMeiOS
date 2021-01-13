@@ -430,6 +430,9 @@
                                                             <state key="normal" title="답변하고 확인하기">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
+                                                            <connections>
+                                                                <action selector="replyButtonAction:" destination="Z3c-Z8-O6C" eventType="touchUpInside" id="17S-gj-jMK"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
