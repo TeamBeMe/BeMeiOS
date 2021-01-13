@@ -118,7 +118,7 @@ extension FollowingSearchVC : UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.item == 0 {
-            return CGSize(width: collectionView.frame.width - 60, height: 36)
+            return CGSize(width: collectionView.frame.width - 60, height: 40)
             
         }
         else {

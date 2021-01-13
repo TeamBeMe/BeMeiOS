@@ -38,7 +38,7 @@ class FollowingVC: UIViewController {
     
     var followers: [FollowingFollows] = []
     var followees: [FollowingFollows] = []
-   
+    var followingToScrapDelegate: FollowingToScrapDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,7 +112,7 @@ extension FollowingVC {
     }
     
     func getFollowData(){
-       
+        
         
         FollowingGetService.shared.getHomeData() {(networkResult) -> (Void) in
             switch networkResult{
@@ -131,10 +131,10 @@ extension FollowingVC {
                     
                 }
                 self.wholeCollectionView.reloadData()
-              
-
-              
-//                self.wholeCollectionView.reloadData()
+                
+                
+                
+                //                self.wholeCollectionView.reloadData()
                 print(self.followees)
                 print(self.followers)
                 
@@ -182,13 +182,13 @@ extension FollowingVC {
                     LoadingHUD.hide()
                     
                 }
-//                self.wholeCollectionView.reloadData()
-//                DispatchQueue.main.async {
-//                    let indexPath = NSIndexPath(item: self.wholeCollectionView.numberOfItems(inSection: 3)+200, section: 3)
-//                    LoadingHUD.hide()
-//                    self.isLoading = false
-//
-//                }
+                //                self.wholeCollectionView.reloadData()
+                //                DispatchQueue.main.async {
+                //                    let indexPath = NSIndexPath(item: self.wholeCollectionView.numberOfItems(inSection: 3)+200, section: 3)
+                //                    LoadingHUD.hide()
+                //                    self.isLoading = false
+                //
+                //                }
                 print(self.answers)
                 print("success")
                 self.answerPage = self.answerPage+1
@@ -211,8 +211,64 @@ extension FollowingVC {
         
     }
     
+    func goToMoreAnswerButtonDidTapped(questionId: Int, question: String) {
+        guard let detail = UIStoryboard(name: "Explore", bundle: nil).instantiateViewController(identifier: "ExploreDetailVC") as?
+                ExploreDetailVC else { return }
+        detail.questionId = questionId
+        detail.questionText = question
+        self.navigationController?.pushViewController(detail, animated: true)
+    }
     
+    func goToCommentButtonTapped(_ answerId: Int) {
+        guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
+        comment.answerId = answerId
+        comment.isMoreButtonHidden = false
+        comment.modalPresentationStyle = .fullScreen
+        let nc = UINavigationController(rootViewController: comment)
+        nc.modalPresentationStyle = .fullScreen
+        self.present(nc, animated: true, completion: nil)
+    }
     
+    private func scrapAnswer(answerId: Int,wasScrapped: Bool,indexInVC: Int) {
+        
+        ExploreAnswerScrapService.shared.putExploreAnswerScrap(answerId: answerId) { (result) in
+            switch result {
+            case .success(let data):
+                
+                guard let dt = data as? GenericResponse<Int> else { return }
+                print(dt.message)
+                if dt.message == "스크랩 성공" || dt.message == "스크랩 취소 성공" {
+//                    self.followingToScrapDelegate?.setScrap(wasScrapped: wasScrapped)
+                    self.answers[indexInVC].isScrapped = !wasScrapped
+                    self.wholeCollectionView.reloadData()
+                } else {
+                    // 사용자한테 실패했다고 알려주는 동작
+                }
+                
+            case .requestErr(let message):
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                
+            case .pathErr: print("path")
+            case .serverErr:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+                print("serverErr")
+            case .networkFail:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+            }
+        }
+    }
     
     
 }
@@ -272,26 +328,43 @@ extension FollowingVC : UICollectionViewDataSource {
             }
             
             else {
-                guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: FollowCardCVC.identifier,
-                        for: indexPath) as? FollowCardCVC else {return UICollectionViewCell()}
-                let answerTmp = answers[indexPath.item]
-                let answerText = answerTmp.content ?? ""
-                let answerCategory = answerTmp.category ?? ""
-                let answerDate = answerTmp.answerDate ?? ""
-                let answerProfile = answerTmp.userProfile ?? ""
-                let answerUserName = answerTmp.userNickname ?? ""
                 
-                cell.setItems(question: answerTmp.question,
-                              answer: answerText,
-                              category: answerCategory,
-                              answerTime: answerDate,
-                              profileImgUrl: answerProfile,
-                              userName: answerUserName
-                              
-                )
+                if answers[indexPath.item].isAnswered == true{
+                    guard let cell = collectionView.dequeueReusableCell(
+                            withReuseIdentifier: FollowCardCVC.identifier,
+                            for: indexPath) as? FollowCardCVC else {return UICollectionViewCell()}
+                    let answerTmp = answers[indexPath.item]
+                    let answerText = answerTmp.content ?? ""
+                    let answerCategory = answerTmp.category ?? ""
+                    let answerDate = answerTmp.answerDate ?? ""
+                    let answerProfile = answerTmp.userProfile ?? ""
+                    let answerUserName = answerTmp.userNickname ?? ""
+                    let answerIsAnswered = answerTmp.isAnswered ?? false
+                    cell.answerData = answers[indexPath.item]
+                    cell.followScrapButtonDelegate = self
+                    cell.indexInVC = indexPath.item
+                    cell.setItems(question: answerTmp.question,
+                                  answer: answerText,
+                                  category: answerCategory,
+                                  answerTime: answerDate,
+                                  profileImgUrl: answerProfile,
+                                  userName: answerUserName,
+                                  isAnswered: answerIsAnswered
+                                  
+                    )
+                    
+                    return cell
+                }
                 
-                return cell
+                else {
+                    guard let cell = collectionView.dequeueReusableCell(
+                            withReuseIdentifier: FollowNotAnsweredCVC.identifier,
+                            for: indexPath) as? FollowNotAnsweredCVC else {return UICollectionViewCell()}
+                    cell.followScrapButtonDelegate = self
+                    cell.answerData = answers[indexPath.item]
+                    cell.setItems(inputAnswer:  answers[indexPath.item])
+                    return cell
+                }
                 
             }
             
@@ -353,76 +426,170 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
                 
             }
             else {
-                let tmpQuestionTextView = UITextView().then{
-                    $0.frame = CGRect(x: 0, y: 0, width: 260, height: 50)
-                    $0.backgroundColor = .lightGray
-                    $0.alpha = 0
-                    let questionText = answers[indexPath.item].question
-                    print(questionText)
-                    $0.text = questionText
-                    
-                    $0.font = UIFont.systemFont(ofSize: 16)
-                }
                 
-                let tmpTextView = UITextView().then{
-                    $0.frame = CGRect(x: 0, y: 0, width: 275, height: 50)
-                    $0.backgroundColor = .lightGray
-                    $0.alpha = 0
-                    let answerText = answers[indexPath.item].content ?? ""
-                    $0.text = answerText
-                    $0.font = UIFont.systemFont(ofSize: 14)
-                }
-                
-                view.addSubview(tmpTextView)
-                view.addSubview(tmpQuestionTextView)
-                tmpTextView.translatesAutoresizingMaskIntoConstraints = false
-                tmpQuestionTextView.translatesAutoresizingMaskIntoConstraints = false
-                
-                tmpTextView.snp.makeConstraints{
-                    $0.leading.equalToSuperview().offset(50)
-                    $0.trailing.equalToSuperview().offset(-50)
-                    $0.height.equalTo(50)
-                    $0.top.equalToSuperview().offset(50)
-                    
-                }
-                tmpQuestionTextView.snp.makeConstraints{
-                    $0.leading.equalToSuperview().offset(50)
-                    $0.trailing.equalToSuperview().offset(-70)
-                    $0.height.equalTo(50)
-                    $0.top.equalToSuperview().offset(50)
-                    
-                }
-                tmpTextView.delegate = self
-                tmpTextView.isScrollEnabled = false
-                textViewDidChange(tmpTextView)
-                
-                tmpQuestionTextView.delegate = self
-                tmpQuestionTextView.isScrollEnabled = false
-                textViewDidChange(tmpQuestionTextView)
-                var dynamicHeight : CGFloat?
-                var dynamicQuestionHeight : CGFloat?
-                tmpTextView.constraints.forEach { constraint in
-                    if constraint.firstAttribute == .height {
-                        dynamicHeight = constraint.constant
+                if answers[indexPath.item].isAnswered == true{
+                    let tmpQuestionTextView = UITextView().then{
+                        $0.frame = CGRect(x: 0, y: 0, width: 255, height: 50)
+                        $0.backgroundColor = .lightGray
+                        $0.alpha = 0
+                        let questionText = answers[indexPath.item].question
+                        
+                        
+                        $0.text = questionText
+                        
+                        $0.font = UIFont.systemFont(ofSize: 16)
                     }
-                }
-                tmpQuestionTextView.constraints.forEach { constraint in
-                    if constraint.firstAttribute == .height {
-                        dynamicQuestionHeight = constraint.constant
+                    
+                    let tmpTextView = UITextView().then{
+                        $0.frame = CGRect(x: 0, y: 0, width: 275, height: 50)
+                        $0.backgroundColor = .lightGray
+                        $0.alpha = 0
+                        let answerText = answers[indexPath.item].content ?? ""
+                        //                    if answers[indexPath.item].isAnswered == true{
+                        //                        $0.text = answerText
+                        //                    }
+                        //                    else{
+                        //                        $0.text = "아직 송현님이 답하지 않은 질문입니다.\n답변을 하시고 글을 보시겠습니까?"
+                        //                    }
+                        
+                        $0.text = answerText
+                        $0.font = UIFont.systemFont(ofSize: 14)
                     }
+                    
+                    view.addSubview(tmpTextView)
+                    view.addSubview(tmpQuestionTextView)
+                    tmpTextView.translatesAutoresizingMaskIntoConstraints = false
+                    tmpQuestionTextView.translatesAutoresizingMaskIntoConstraints = false
+                    
+                    tmpTextView.snp.makeConstraints{
+                        $0.leading.equalToSuperview().offset(50)
+                        $0.trailing.equalToSuperview().offset(-50)
+                        $0.height.equalTo(50)
+                        $0.top.equalToSuperview().offset(50)
+                        
+                    }
+                    tmpQuestionTextView.snp.makeConstraints{
+                        $0.leading.equalToSuperview().offset(50)
+                        $0.trailing.equalToSuperview().offset(-70)
+                        $0.height.equalTo(50)
+                        $0.top.equalToSuperview().offset(50)
+                        
+                    }
+                    tmpTextView.delegate = self
+                    tmpTextView.isScrollEnabled = false
+                    textViewDidChange(tmpTextView)
+                    
+                    tmpQuestionTextView.delegate = self
+                    tmpQuestionTextView.isScrollEnabled = false
+                    textViewDidChange(tmpQuestionTextView)
+                    var dynamicHeight : CGFloat?
+                    var dynamicQuestionHeight : CGFloat?
+                    tmpTextView.constraints.forEach { constraint in
+                        if constraint.firstAttribute == .height {
+                            dynamicHeight = constraint.constant
+                        }
+                    }
+                    tmpQuestionTextView.constraints.forEach { constraint in
+                        if constraint.firstAttribute == .height {
+                            dynamicQuestionHeight = constraint.constant
+                        }
+                    }
+                    tmpTextView.removeFromSuperview()
+                    tmpQuestionTextView.removeFromSuperview()
+                    print("dynamicQuestionHeight")
+                    print(dynamicQuestionHeight)
+                    
+                    print("dynamicHeight")
+                    print(dynamicHeight)
+                    //                if answers[indexPath.item].isAnswered == true{
+                    //                    return CGSize(width: collectionView.frame.width  ,
+                    //                                  height: 109.0+CGFloat(dynamicHeight!)+CGFloat(dynamicQuestionHeight!))
+                    //                }
+                    //                else{
+                    //                    return CGSize(width: collectionView.frame.width  ,
+                    //                                  height: 132.0+CGFloat(dynamicHeight!)+CGFloat(dynamicQuestionHeight!))
+                    //                }
+                    //
+                    return CGSize(width: collectionView.frame.width  ,
+                                  height: 109.0+CGFloat(dynamicHeight!)+CGFloat(dynamicQuestionHeight!))
+                    
                 }
-                tmpTextView.removeFromSuperview()
-                tmpQuestionTextView.removeFromSuperview()
-                print("dynamicQuestionHeight")
-                print(dynamicQuestionHeight)
                 
-                print("dynamicHeight")
-                print(dynamicHeight)
-                
-                
-                
-                return CGSize(width: collectionView.frame.width  ,
-                              height: 109.0+CGFloat(dynamicHeight!)+CGFloat(dynamicQuestionHeight!))
+                else{
+                    let tmpQuestionTextView = UITextView().then{
+                        $0.frame = CGRect(x: 0, y: 0, width: 255, height: 50)
+                        $0.backgroundColor = .lightGray
+                        $0.alpha = 0
+                        let questionText = answers[indexPath.item].question
+                        $0.text = questionText
+                        $0.font = UIFont.systemFont(ofSize: 16)
+                    }
+                    
+                    let tmpTextView = UITextView().then{
+                        $0.frame = CGRect(x: 0, y: 0, width: 275, height: 50)
+                        $0.backgroundColor = .lightGray
+                        $0.alpha = 0
+                        let answerText = answers[indexPath.item].content ?? ""
+                        $0.text = "아직 송현님이 답하지 않은 질문입니다.\n답변을 하시고 글을 보시겠습니까?"
+                        $0.font = UIFont.systemFont(ofSize: 14)
+                    }
+                    
+                    view.addSubview(tmpTextView)
+                    view.addSubview(tmpQuestionTextView)
+                    tmpTextView.translatesAutoresizingMaskIntoConstraints = false
+                    tmpQuestionTextView.translatesAutoresizingMaskIntoConstraints = false
+                    
+                    tmpTextView.snp.makeConstraints{
+                        $0.leading.equalToSuperview().offset(50)
+                        $0.trailing.equalToSuperview().offset(-50)
+                        $0.height.equalTo(50)
+                        $0.top.equalToSuperview().offset(50)
+                        
+                    }
+                    tmpQuestionTextView.snp.makeConstraints{
+                        $0.leading.equalToSuperview().offset(50)
+                        $0.trailing.equalToSuperview().offset(-70)
+                        $0.height.equalTo(50)
+                        $0.top.equalToSuperview().offset(50)
+                        
+                    }
+                    tmpTextView.delegate = self
+                    tmpTextView.isScrollEnabled = false
+                    textViewDidChange(tmpTextView)
+                    
+                    tmpQuestionTextView.delegate = self
+                    tmpQuestionTextView.isScrollEnabled = false
+                    textViewDidChange(tmpQuestionTextView)
+                    var dynamicHeight : CGFloat?
+                    var dynamicQuestionHeight : CGFloat?
+                    tmpTextView.constraints.forEach { constraint in
+                        if constraint.firstAttribute == .height {
+                            dynamicHeight = constraint.constant
+                        }
+                    }
+                    tmpQuestionTextView.constraints.forEach { constraint in
+                        if constraint.firstAttribute == .height {
+                            dynamicQuestionHeight = constraint.constant
+                        }
+                    }
+                    tmpTextView.removeFromSuperview()
+                    tmpQuestionTextView.removeFromSuperview()
+                    
+                    //                if answers[indexPath.item].isAnswered == true{
+                    //                    return CGSize(width: collectionView.frame.width  ,
+                    //                                  height: 109.0+CGFloat(dynamicHeight!)+CGFloat(dynamicQuestionHeight!))
+                    //                }
+                    //                else{
+                    //                    return CGSize(width: collectionView.frame.width  ,
+                    //                                  height: 132.0+CGFloat(dynamicHeight!)+CGFloat(dynamicQuestionHeight!))
+                    //                }
+                    //
+                    return CGSize(width: collectionView.frame.width  ,
+                                  height: 132.0+CGFloat(dynamicHeight!)+CGFloat(dynamicQuestionHeight!))
+                    
+                    
+                    
+                }
                 
             }
             
@@ -473,7 +640,7 @@ extension FollowingVC: UICollectionViewDelegate {
                 
                 UIView.animate(withDuration: 0.5, animations: {
                     cell.layer.transform = CATransform3DIdentity
-                   
+                    
                 })
             } else {
                 if isScrolled == true{
@@ -481,14 +648,14 @@ extension FollowingVC: UICollectionViewDelegate {
                     cell.layer.transform = rotationTransform
                     UIView.animate(withDuration: 0.5, animations: {
                         cell.layer.transform = CATransform3DIdentity
-                    
+                        
                     },completion: { finished in
                         LoadingHUD.hide()
                         self.isLoading = false
                     })
                     isScrolled = false
                 }
-               
+                
             }
             
         }
@@ -606,6 +773,36 @@ extension FollowingVC: FollowPlusButtonDelegate{
     
 }
 
+extension FollowingVC: FollowScrapButtonDelegate {
+    func replyButtonTap(answerData: FollowingAnswers) {
+        let inputData = AnswerDataForViewController(lock: true, questionCategory: answerData.category, answerDate: answerData.answerDate!, question: answerData.question, answer: "", index: 0, answerIdx: answerData.answerIdx, questionID: answerData.questionID, createdTime: "", categoryID: answerData.categoryID, id: answerData.id)
+        
+        guard let answerVC = UIStoryboard(name: "Answer",
+                                          bundle: nil).instantiateViewController(
+                                            withIdentifier: "AnswerVC") as? AnswerVC
+        else{
+            
+            return
+        }
+        
+        
+        
+        answerVC.answerData = inputData
+//        answerVC.setLabels()
+        self.navigationController?.pushViewController(answerVC, animated: true)
+        
+    }
+    
+    func scrapButtonAction(answerID: Int,wasScrapped: Bool,indexInVC: Int) {
+        scrapAnswer(answerId: answerID,wasScrapped: wasScrapped,indexInVC: indexInVC)
+    }
+    func containViewTap(answerID: Int) {
+        goToCommentButtonTapped(answerID)
+    }
+    func moreButtonTap(questionID: Int, question: String){
+        goToMoreAnswerButtonDidTapped(questionId: questionID, question: question)
+    }
+}
 
 
 protocol FollowingTabBarDelegate{
@@ -653,3 +850,12 @@ protocol FollowPlusButtonDelegate{
     func plusButtonAction()
     
 }
+
+protocol FollowScrapButtonDelegate {
+    func scrapButtonAction(answerID: Int,wasScrapped: Bool,indexInVC: Int)
+    func containViewTap(answerID: Int)
+    func moreButtonTap(questionID: Int, question: String)
+    func replyButtonTap(answerData: FollowingAnswers)
+    
+}
+

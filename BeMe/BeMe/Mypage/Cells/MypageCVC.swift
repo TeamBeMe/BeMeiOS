@@ -17,6 +17,8 @@ class MypageCVC: UICollectionViewCell {
     static let identifier = "MypageCVC"
     private var cellNumber: Int = 2
     
+    var myAnswerArray: [Answer] = []
+    var myScrapArray: [Answer] = []
     
     
     //MARK:**- Life Cycle Part**
@@ -40,7 +42,6 @@ class MypageCVC: UICollectionViewCell {
     //MARK:**- Function Part**
     
     func scrollDirection(by direction: Int) {
-        print(direction)
         if (direction == 0) {
             mypageTabCollectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .right, animated: true)
         } else {
@@ -55,7 +56,6 @@ class MypageCVC: UICollectionViewCell {
 extension MypageCVC : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         
     }
     
@@ -72,7 +72,10 @@ extension MypageCVC : UICollectionViewDataSource {
                 for: indexPath) as? MypageTabCVC else {
             
             return UICollectionViewCell()}
-        
+        cell.myAnswerArray = myAnswerArray
+        cell.myScrapArray = myScrapArray
+        cell.mypageTableView.reloadData()
+        cell.delegate = mypageCVCDelegate
         return cell        
     }
     
@@ -107,5 +110,6 @@ extension MypageCVC : UICollectionViewDelegateFlowLayout {
 protocol MypageCVCDelegate {
     func myAnswerItem()
     func othersAnswerItem()
+    func nowDirection() -> Int
 }
 

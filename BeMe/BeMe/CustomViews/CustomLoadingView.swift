@@ -31,6 +31,7 @@ class LoadingHUD {
         //반복되게
         animationView.loopMode = .loop
         //실행
+        
        
         //view안에 Subview로 넣어준다,
        

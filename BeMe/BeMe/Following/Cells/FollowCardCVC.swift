@@ -17,12 +17,22 @@ class FollowCardCVC: UICollectionViewCell {
     @IBOutlet weak var questionTextView: UITextView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var answerTextView: UITextView!
-    @IBOutlet weak var moreButotn: UIButton!
+    @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var bookMarkButton: UIButton!
-    
+    var indexInVC: Int?
+    var followScrapButtonDelegate: FollowScrapButtonDelegate?
     var answerData: FollowingAnswers?
+    var isScrapped: Bool?
+    var replyButton = UIButton().then {
+        $0.backgroundColor = .black
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        $0.makeRounded(cornerRadius: 5)
+        
+    }
+    
     
     override func awakeFromNib() {
         containView.setBorder(borderColor: .lightGray, borderWidth: 1.0)
@@ -37,23 +47,64 @@ class FollowCardCVC: UICollectionViewCell {
         profileImageView.contentMode = .scaleAspectFill
 //        answerTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 //        questionTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//        
+//
         
+        let containTabGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpContainView))
+        containView.addGestureRecognizer(containTabGesture)
+    
         
     }
     
     func setItems(question: String,answer: String,category: String,answerTime: String,
-                  profileImgUrl: String,userName: String){
-        answerTextView.text = answer
+                  profileImgUrl: String,userName: String,isAnswered: Bool){
+        
         questionTextView.text = question
         timeLabel.text = answerTime
         
         profileImageView.imageFromUrl(profileImgUrl, defaultImgPath: "")
         userNameLabel.text = userName
-
+        questionInfoLabel.text = "[  \(category)에 관한 질문  ]  ·"
+        questionInfoLabel.textColor = .slateGrey
+        timeLabel.textColor = .slateGrey
+        answerTextView.text = answer
+        
+        if answerData?.isScrapped == false{
+            bookMarkButton.setImage(UIImage(named: "btnScrapUnselected"), for: .normal)
+        }
+        else{
+            bookMarkButton.setImage(UIImage(named: "btnScrapSelected"), for: .normal)
+        }
+        
+        
+        
     }
     
 
+    @IBAction func scrapButtonTapped(_ sender: Any) {
+        
+//        if (answerData?.isScrapped)! {
+//            bookMarkButton.setImage(UIImage(named: "btnScrapUnselected"), for: .normal)
+//        }
+//        else{
+//            bookMarkButton.setImage(UIImage(named: "btnScrapSelected"), for: .normal)
+//        }
+        followScrapButtonDelegate?.scrapButtonAction(answerID: (answerData?.id)!,
+                                                     wasScrapped: (answerData?.isScrapped)!,
+                                                     indexInVC: indexInVC!
+                                                     )
+        
+    }
+    
+    @objc func touchUpContainView(){
+        print("called")
+        followScrapButtonDelegate?.containViewTap(answerID: (answerData?.id)!)
+    }
+    
+    
+    @IBAction func moreButtonAction(_ sender: Any) {
+        followScrapButtonDelegate?.moreButtonTap(questionID: (answerData?.questionID)!,
+                                                 question: (answerData?.question)!)
+    }
     
     
     
@@ -77,4 +128,29 @@ extension FollowCardCVC : UITextViewDelegate{
         }
     }
     
+}
+
+
+extension FollowCardCVC: FollowingToScrapDelegate {
+    func setScrap(wasScrapped: Bool) {
+        if wasScrapped{
+            bookMarkButton.setImage(UIImage(named: "btnScrapUnselected"), for: .normal)
+        }
+        else{
+            bookMarkButton.setImage(UIImage(named: "btnScrapSelected"), for: .normal)
+        }
+        
+    }
+}
+
+
+protocol FollowingToScrapDelegate{
+    func setScrap(wasScrapped: Bool)
+    
+}
+
+
+extension FollowingToScrapDelegate {
+    func setScrap(wasScrapped: Bool) {}
+   
 }
