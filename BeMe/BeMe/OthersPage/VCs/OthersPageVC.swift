@@ -11,7 +11,8 @@ class OthersPageVC: UIViewController {
     
     //MARK:**- IBOutlet Part**
     @IBOutlet weak var othersPageCollectionView: UICollectionView!
-    
+    @IBOutlet weak var reportButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
     //MARK:**- Variable Part**
     let othersPageCVLayout = OthersPageCVFlowLayout()
@@ -67,6 +68,9 @@ class OthersPageVC: UIViewController {
     
     @IBAction func backButtonAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
+    }
+    @IBAction func reportButtonTapped(_ sender: Any) {
+        
     }
     
     //MARK:**- default Setting Function Part**

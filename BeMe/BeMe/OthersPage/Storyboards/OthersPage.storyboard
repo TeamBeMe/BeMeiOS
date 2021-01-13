@@ -247,31 +247,12 @@
                                                 <constraint firstAttribute="height" constant="110" id="zM6-M9-BJo"/>
                                             </constraints>
                                         </view>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7s-AV-zjl">
-                                            <rect key="frame" x="352" y="0.0" width="44" height="44"/>
-                                            <state key="normal" image="btnMore"/>
-                                            <connections>
-                                                <action selector="reportButtonTapped:" destination="EZ4-SK-f09" eventType="touchUpInside" id="s8U-P9-Qh6"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nal-8z-zRJ">
-                                            <rect key="frame" x="18" y="0.0" width="44" height="44"/>
-                                            <state key="normal" image="btnArrlowLeft"/>
-                                            <connections>
-                                                <action selector="backButtonAction:" destination="rVd-zB-sT2" eventType="touchUpInside" id="ISI-0A-1ZD"/>
-                                                <action selector="backButtonTapped:" destination="EZ4-SK-f09" eventType="touchUpInside" id="Fpr-LK-cea"/>
-                                            </connections>
-                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstItem="ZAO-d9-0uB" firstAttribute="top" secondItem="EZ4-SK-f09" secondAttribute="top" id="FTr-3W-eBP"/>
-                                        <constraint firstItem="6Ki-BQ-bfM" firstAttribute="top" secondItem="a7s-AV-zjl" secondAttribute="bottom" constant="140" id="Gy8-k6-JC0"/>
                                         <constraint firstAttribute="trailing" secondItem="ZAO-d9-0uB" secondAttribute="trailing" id="JJ7-vH-LNa"/>
                                         <constraint firstItem="6Ki-BQ-bfM" firstAttribute="top" secondItem="ZAO-d9-0uB" secondAttribute="bottom" id="Mbi-JE-gPC"/>
-                                        <constraint firstItem="nal-8z-zRJ" firstAttribute="leading" secondItem="EZ4-SK-f09" secondAttribute="leading" constant="18" id="PVS-KX-jbm"/>
                                         <constraint firstItem="6Ki-BQ-bfM" firstAttribute="leading" secondItem="EZ4-SK-f09" secondAttribute="leading" id="T1F-xD-eax"/>
-                                        <constraint firstAttribute="trailing" secondItem="a7s-AV-zjl" secondAttribute="trailing" constant="18" id="X1L-Kw-U3L"/>
-                                        <constraint firstItem="6Ki-BQ-bfM" firstAttribute="top" secondItem="nal-8z-zRJ" secondAttribute="bottom" constant="140" id="dCR-sn-6Ce"/>
                                         <constraint firstItem="ZAO-d9-0uB" firstAttribute="leading" secondItem="EZ4-SK-f09" secondAttribute="leading" id="hqC-kW-V92"/>
                                         <constraint firstAttribute="bottom" secondItem="6Ki-BQ-bfM" secondAttribute="bottom" id="rbd-w5-XYO"/>
                                         <constraint firstAttribute="trailing" secondItem="6Ki-BQ-bfM" secondAttribute="trailing" id="tch-JQ-0mC"/>
@@ -281,29 +262,47 @@
                                         <outlet property="answerCountLabel" destination="2gg-Kk-0vB" id="MLz-Ie-kxo"/>
                                         <outlet property="attendanceCountInfoLabel" destination="aoD-qf-NV6" id="FJ3-My-WcZ"/>
                                         <outlet property="attendanceCountLabel" destination="Sd9-5d-CjE" id="sxH-fC-N7B"/>
-                                        <outlet property="backButton" destination="nal-8z-zRJ" id="Kfi-Q7-5mf"/>
                                         <outlet property="followButton" destination="ukt-5k-P2p" id="ZS1-oH-g4N"/>
                                         <outlet property="nameLabel" destination="nyi-UQ-97U" id="TST-oG-gCD"/>
                                         <outlet property="profileImage" destination="ZAO-d9-0uB" id="Bxd-m3-IGf"/>
                                         <outlet property="profileImageHeight" destination="2oZ-kk-Ykv" id="AqJ-74-0YI"/>
                                         <outlet property="profileViewHeight" destination="zM6-M9-BJo" id="Lwf-oE-7AG"/>
-                                        <outlet property="reportButton" destination="a7s-AV-zjl" id="f8p-L8-05W"/>
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nal-8z-zRJ">
+                                <rect key="frame" x="14" y="44" width="44" height="44"/>
+                                <state key="normal" image="btnArrlowLeft"/>
+                                <connections>
+                                    <action selector="backButtonAction:" destination="rVd-zB-sT2" eventType="touchUpInside" id="oIJ-Rt-HQh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7s-AV-zjl">
+                                <rect key="frame" x="356" y="44" width="44" height="44"/>
+                                <state key="normal" image="btnMore"/>
+                                <connections>
+                                    <action selector="reportButtonTapped:" destination="rVd-zB-sT2" eventType="touchUpInside" id="I1j-wU-nqz"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="j6A-Ee-aMU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="lpe-WB-ygM" firstAttribute="top" secondItem="Yze-KS-AQR" secondAttribute="top" id="9hp-qS-pwd"/>
                             <constraint firstItem="j6A-Ee-aMU" firstAttribute="bottom" secondItem="lpe-WB-ygM" secondAttribute="bottom" id="JIH-M7-uO2"/>
+                            <constraint firstItem="j6A-Ee-aMU" firstAttribute="trailing" secondItem="a7s-AV-zjl" secondAttribute="trailing" constant="14" id="Kxg-5H-h42"/>
                             <constraint firstItem="lpe-WB-ygM" firstAttribute="leading" secondItem="j6A-Ee-aMU" secondAttribute="leading" id="Q3u-wW-ciu"/>
+                            <constraint firstItem="nal-8z-zRJ" firstAttribute="top" secondItem="j6A-Ee-aMU" secondAttribute="top" id="Wcg-JY-dAk"/>
+                            <constraint firstItem="nal-8z-zRJ" firstAttribute="leading" secondItem="j6A-Ee-aMU" secondAttribute="leading" constant="14" id="kGP-bg-aUp"/>
                             <constraint firstItem="j6A-Ee-aMU" firstAttribute="trailing" secondItem="lpe-WB-ygM" secondAttribute="trailing" id="szy-Bj-V6j"/>
+                            <constraint firstItem="a7s-AV-zjl" firstAttribute="top" secondItem="j6A-Ee-aMU" secondAttribute="top" id="vvG-x1-Bh4"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="6C8-1R-Cv4"/>
                     <connections>
+                        <outlet property="backButton" destination="nal-8z-zRJ" id="SUu-Pq-EuC"/>
                         <outlet property="othersPageCollectionView" destination="lpe-WB-ygM" id="ktY-Tn-1gN"/>
+                        <outlet property="reportButton" destination="a7s-AV-zjl" id="CZ8-hN-T1U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cHD-2e-Lbo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

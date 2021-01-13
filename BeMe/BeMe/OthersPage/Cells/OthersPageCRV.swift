@@ -10,8 +10,6 @@ import UIKit
 class OthersPageCRV: UICollectionReusableView {
     //MARK:**- IBOutlet Part**
     // image
-    @IBOutlet weak var reportButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var followButton: UIButton!
     // profile
@@ -37,11 +35,6 @@ class OthersPageCRV: UICollectionReusableView {
     
     
     //MARK:**- IBAction Part**
-    @IBAction func backButtonTapped(_ sender: Any) {
-    }
-    @IBAction func reportButtonTapped(_ sender: Any) {
-        
-    }
     @IBAction func followButtonTapped(_ sender: Any) {
 //        isFollowed = !isFollowed
 //        setFollowButton(view: followButton, isFollowed: isFollowed)
