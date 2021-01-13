@@ -132,7 +132,9 @@ extension HomeVC {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        LoadingHUD.show(loadingFrame: self.view.frame,color: .black)
+        if !initialScrolled{
+            LoadingHUD.show(loadingFrame: self.view.frame,color: .black)
+        }
         
     }
     

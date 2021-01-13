@@ -262,23 +262,23 @@
                                         <size key="customSize" width="403" height="83"/>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="FollowCardCVC" reuseIdentifier="FollowCardCVC" id="wPo-DT-lpv" customClass="FollowCardCVC" customModule="BeMe" customModuleProvider="target">
-                                        <rect key="frame" x="3.5" y="324" width="407" height="329"/>
+                                        <rect key="frame" x="0.5" y="324" width="413" height="54"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Gek-rj-TTH">
-                                            <rect key="frame" x="0.0" y="0.0" width="407" height="329"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="413" height="54"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q7y-FB-6g4">
-                                                    <rect key="frame" x="30" y="0.0" width="347" height="329"/>
+                                                    <rect key="frame" x="30" y="0.0" width="353" height="54"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="[ 미래에 관한 질문 ]" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4I-LQ-f1f">
-                                                            <rect key="frame" x="20" y="65.5" width="95.5" height="14.5"/>
+                                                            <rect key="frame" x="20" y="-210" width="95.5" height="14.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pr5-ed-7ji">
-                                                            <rect key="frame" x="295" y="33.5" width="32" height="32"/>
+                                                            <rect key="frame" x="301" y="-242" width="32" height="32"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="32" id="lHm-k4-D7d"/>
                                                                 <constraint firstAttribute="width" constant="32" id="tfY-IA-Yot"/>
@@ -287,7 +287,7 @@
                                                             <state key="normal" image="btnArrowNext"/>
                                                         </button>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieB-sx-JeO">
-                                                            <rect key="frame" x="16" y="98.5" width="311" height="166.5"/>
+                                                            <rect key="frame" x="16" y="-176.5" width="317" height="166.5"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <string key="text">저는 며칠 전 퇴사를 했어요. 수많은 고민 끝에 결국 저질렀습니다. 몇 년간 원해왔던 일이라 꿈만 같아요. 제가 스스로의 힘으로 하고 싶은 걸 해볼 수 있는 시간적 여유를 가지게 된 게 정말 만족스러워요. 앞으로 저에게는 정말 다양한 가능성들이 무궁무진하게 열려있어요. 앞으로 어떤 사람들과 만나게 될지, 어떤 프로젝트를 하게 될지 상상하면서 새해를 맞이하고 싶어요. 지금은 시국이 어떻게 풀릴지 확실하지 않지만 제 인생은 앞으로도 계속해서 나아가겠죠?  </string>
                                                             <color key="textColor" systemColor="labelColor"/>
@@ -295,7 +295,7 @@
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgProfile" translatesAutoresizingMaskIntoConstraints="NO" id="1Ig-9P-mhh">
-                                                            <rect key="frame" x="20" y="275" width="34" height="34"/>
+                                                            <rect key="frame" x="20" y="0.0" width="34" height="34"/>
                                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="34" id="5OV-zp-sTG"/>
@@ -303,18 +303,18 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Following" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="utp-bR-MBl">
-                                                            <rect key="frame" x="64" y="283.5" width="61.5" height="17"/>
+                                                            <rect key="frame" x="64" y="8.5" width="61.5" height="17"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="db4-dt-lXa">
-                                                            <rect key="frame" x="295" y="276" width="32" height="32"/>
+                                                            <rect key="frame" x="301" y="1" width="32" height="32"/>
                                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" image="btnScrapUnselected"/>
                                                         </button>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGk-KH-D1v">
-                                                            <rect key="frame" x="16" y="20" width="291" height="45.5"/>
+                                                            <rect key="frame" x="16" y="-210" width="297" height="0.0"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <string key="text">요즘 내 삶에서
 가장 만족스러운 것은 무엇인가요?</string>
@@ -360,7 +360,7 @@
                                                 <constraint firstItem="Q7y-FB-6g4" firstAttribute="top" secondItem="Gek-rj-TTH" secondAttribute="top" id="rvR-lY-2ZA"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <size key="customSize" width="407" height="329"/>
+                                        <size key="customSize" width="413" height="54"/>
                                         <connections>
                                             <outlet property="answerTextView" destination="ieB-sx-JeO" id="rf7-2s-Anf"/>
                                             <outlet property="bookMarkButton" destination="db4-dt-lXa" id="fjR-h1-7no"/>
@@ -373,8 +373,96 @@
                                             <outlet property="userNameLabel" destination="utp-bR-MBl" id="7ML-5l-Y6l"/>
                                         </connections>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="FollowNotAnsweredCVC" id="Z3c-Z8-O6C" customClass="FollowNotAnsweredCVC" customModule="BeMe" customModuleProvider="target">
+                                        <rect key="frame" x="1" y="388" width="412" height="366"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="cJj-CV-2Pq">
+                                            <rect key="frame" x="0.0" y="0.0" width="412" height="366"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p0X-AQ-KH3">
+                                                    <rect key="frame" x="30" y="0.0" width="352" height="366"/>
+                                                    <subviews>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUd-0d-hVv">
+                                                            <rect key="frame" x="20" y="20" width="292" height="181.5"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <string key="text">요즘 내 삶에서
+가장 만족스러운 것은 무엇인가요?</string>
+                                                            <color key="textColor" systemColor="labelColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        </textView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ggQ-aX-a7v">
+                                                            <rect key="frame" x="20" y="209.5" width="31" height="15"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tLc-bp-REy">
+                                                            <rect key="frame" x="59" y="111" width="27" height="12"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9i-kU-yA0">
+                                                            <rect key="frame" x="20" y="246.5" width="292" height="49.5"/>
+                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <string key="text">아직 송현님이 답하지 않은 질문입니다.
+답변을 하시고 글을 보시겠습니까?</string>
+                                                            <color key="textColor" systemColor="labelColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                        </textView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6AC-Q8-kxu">
+                                                            <rect key="frame" x="22" y="316" width="147" height="33"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="33" id="xEW-78-Zdz"/>
+                                                                <constraint firstAttribute="width" constant="147" id="yMM-2p-ZsX"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                            <state key="normal" title="답변하고 확인하기">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            </state>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="VUd-0d-hVv" secondAttribute="trailing" constant="40" id="A86-GD-81Q"/>
+                                                        <constraint firstItem="tLc-bp-REy" firstAttribute="leading" secondItem="ggQ-aX-a7v" secondAttribute="trailing" constant="5" id="H4W-Fm-XzV"/>
+                                                        <constraint firstItem="VUd-0d-hVv" firstAttribute="leading" secondItem="p0X-AQ-KH3" secondAttribute="leading" constant="20" id="Hjv-eI-loU"/>
+                                                        <constraint firstItem="ggQ-aX-a7v" firstAttribute="leading" secondItem="p0X-AQ-KH3" secondAttribute="leading" constant="20" id="JIy-E1-OqK"/>
+                                                        <constraint firstItem="ggQ-aX-a7v" firstAttribute="top" secondItem="VUd-0d-hVv" secondAttribute="bottom" constant="8" id="L7T-v5-Bo5"/>
+                                                        <constraint firstAttribute="trailing" secondItem="E9i-kU-yA0" secondAttribute="trailing" constant="40" id="OAt-7L-O95"/>
+                                                        <constraint firstItem="tLc-bp-REy" firstAttribute="centerY" secondItem="ggQ-aX-a7v" secondAttribute="centerY" id="Pw8-Fe-VHu"/>
+                                                        <constraint firstItem="6AC-Q8-kxu" firstAttribute="top" secondItem="E9i-kU-yA0" secondAttribute="bottom" constant="20" id="fbh-vS-V28"/>
+                                                        <constraint firstItem="E9i-kU-yA0" firstAttribute="leading" secondItem="p0X-AQ-KH3" secondAttribute="leading" constant="20" id="hj0-ZV-s0l"/>
+                                                        <constraint firstAttribute="bottom" secondItem="6AC-Q8-kxu" secondAttribute="bottom" constant="17" id="iqB-iu-3uU"/>
+                                                        <constraint firstItem="E9i-kU-yA0" firstAttribute="top" secondItem="ggQ-aX-a7v" secondAttribute="bottom" constant="22" id="kkM-K4-41b"/>
+                                                        <constraint firstItem="VUd-0d-hVv" firstAttribute="top" secondItem="p0X-AQ-KH3" secondAttribute="top" priority="250" constant="20" id="kwk-hy-Tg2"/>
+                                                        <constraint firstItem="6AC-Q8-kxu" firstAttribute="leading" secondItem="p0X-AQ-KH3" secondAttribute="leading" constant="22" id="z2O-S6-c15"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="p0X-AQ-KH3" firstAttribute="leading" secondItem="cJj-CV-2Pq" secondAttribute="leading" constant="30" id="6Vd-aL-Eyb"/>
+                                                <constraint firstItem="p0X-AQ-KH3" firstAttribute="top" secondItem="cJj-CV-2Pq" secondAttribute="top" id="JmB-At-3Cr"/>
+                                                <constraint firstAttribute="trailing" secondItem="p0X-AQ-KH3" secondAttribute="trailing" constant="30" id="R9t-EL-2We"/>
+                                                <constraint firstAttribute="bottom" secondItem="p0X-AQ-KH3" secondAttribute="bottom" id="w85-ni-5af"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="412" height="366"/>
+                                        <connections>
+                                            <outlet property="answerDateLabel" destination="tLc-bp-REy" id="klh-6H-UXo"/>
+                                            <outlet property="answerTextView" destination="E9i-kU-yA0" id="IQY-g3-s2t"/>
+                                            <outlet property="categoryLabel" destination="ggQ-aX-a7v" id="kij-IQ-Ht0"/>
+                                            <outlet property="containView" destination="p0X-AQ-KH3" id="6AH-og-qwN"/>
+                                            <outlet property="questionTextView" destination="VUd-0d-hVv" id="nI9-84-0jg"/>
+                                            <outlet property="replyButton" destination="6AC-Q8-kxu" id="pa3-6C-WYd"/>
+                                        </connections>
+                                    </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="FollowMoreButtonCVC" reuseIdentifier="FollowMoreButtonCVC" id="gI4-mp-Kk5" customClass="FollowMoreButtonCVC" customModule="BeMe" customModuleProvider="target">
-                                        <rect key="frame" x="4" y="663" width="406" height="76"/>
+                                        <rect key="frame" x="4" y="764" width="406" height="76"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="M94-Ek-FbS">
                                             <rect key="frame" x="0.0" y="0.0" width="406" height="76"/>
