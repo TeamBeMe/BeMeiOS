@@ -123,6 +123,8 @@ extension LogInVC {
     func setItems(){
         titleLabel.text = "매일 질문에 대한 답을 하며\n나를 알아가는 질문 다이어리 BeMe"
         titleLabel.font = UIFont(name: "AppleSDGothicNeo", size: 16)
+        bemeLabel.font = UIFont(name: "GmarketSansTTFLight", size: 50)
+        bemeLabel.addCharacterSpacing(kernValue: 12.0)
         
         showButton.setTitleColor(.lightGray, for: .normal)
         showButton.setTitle("SHOW", for: .normal)
