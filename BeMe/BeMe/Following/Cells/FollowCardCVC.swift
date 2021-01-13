@@ -57,6 +57,10 @@ class FollowCardCVC: UICollectionViewCell {
         profileImageView.addGestureRecognizer(profileTabGesture)
         print("aaaaaaa")
         
+        userNameLabel.isUserInteractionEnabled = true
+        userNameLabel.addGestureRecognizer(profileTabGesture)
+        
+        
     }
     
     func setItems(question: String,answer: String,category: String,answerTime: String,
@@ -112,7 +116,7 @@ class FollowCardCVC: UICollectionViewCell {
     
     @objc func touchUpProfile(){
         print("callllllllllllll")
-        followScrapButtonDelegate?.profileSelectedTap(answerData: answerData!)
+        followScrapButtonDelegate?.profileSelectedTap(userID: (answerData?.userID)!)
         
     }
     

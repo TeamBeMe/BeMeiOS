@@ -12,7 +12,7 @@ class FollowPeopleCVC: UICollectionViewCell {
     var i = 0
     var totalCell = 10
     @IBOutlet weak var peopleCollectionView: UICollectionView!
-    
+    var followScrapButtonDelegate: FollowScrapButtonDelegate?
     var shows: [FollowingFollows] = []
     var followers: [FollowingFollows] = []
     var followees: [FollowingFollows] = []
@@ -71,8 +71,8 @@ extension FollowPeopleCVC : UICollectionViewDataSource {
         
         cell.setProfile(userName: shows[indexPath.item].nickname!,
                         profileImageURL: profileURL)
-        
-        
+        cell.followingFollows = shows[indexPath.item]
+        cell.personToPeopleDelegate = self
         return cell
             
         
@@ -161,5 +161,16 @@ extension FollowPeopleCVC : FollowingFollowingButtonDelegate{
     }
 }
 
+extension FollowPeopleCVC: PersonToPeopleDelegate {
+    func med(userID: Int) {
+        followScrapButtonDelegate?.profileSelectedTap(userID: userID)
+    }
+}
 
 
+
+
+protocol PersonToPeopleDelegate {
+    
+    func med(userID: Int)
+}

@@ -36,6 +36,7 @@ extension UIView {
         layer.shadowRadius = radius
         // 구글링 해보세요!
         layer.masksToBounds = false
+        
     }
     
     // Set UIView's Border

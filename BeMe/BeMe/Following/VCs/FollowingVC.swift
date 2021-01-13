@@ -288,6 +288,7 @@ extension FollowingVC : UICollectionViewDataSource {
             cell.followPeopleCollectionViewDelegate = self
             cell.followingPeopleCollectionViewDelegate = self
             cell.followPlusButtonDelegate = self
+            
             return cell
             
         }
@@ -302,6 +303,7 @@ extension FollowingVC : UICollectionViewDataSource {
             cell.followees = self.followees
             cell.followers = self.followers
             cell.shows = self.followees
+            cell.followScrapButtonDelegate = self
             cell.peopleCollectionView.reloadData()
             
             return cell
@@ -802,7 +804,7 @@ extension FollowingVC: FollowScrapButtonDelegate {
     func moreButtonTap(questionID: Int, question: String){
         goToMoreAnswerButtonDidTapped(questionId: questionID, question: question)
     }
-    func profileSelectedTap(answerData: FollowingAnswers){
+    func profileSelectedTap(userID: Int){
         guard let profileVC = UIStoryboard(name: "OthersPage",
                                           bundle: nil).instantiateViewController(
                                             withIdentifier: "OthersPageVC") as? OthersPageVC
@@ -810,7 +812,7 @@ extension FollowingVC: FollowScrapButtonDelegate {
             
             return
         }
-        profileVC.userID = answerData.userID
+        profileVC.userID = userID
         self.navigationController?.pushViewController(profileVC, animated: true)
         
         
@@ -869,6 +871,6 @@ protocol FollowScrapButtonDelegate {
     func containViewTap(answerID: Int)
     func moreButtonTap(questionID: Int, question: String)
     func replyButtonTap(answerData: FollowingAnswers)
-    func profileSelectedTap(answerData: FollowingAnswers)
+    func profileSelectedTap(userID: Int)
 }
 
