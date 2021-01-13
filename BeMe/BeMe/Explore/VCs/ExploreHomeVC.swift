@@ -7,9 +7,27 @@
 
 import UIKit
 
+class ExploreTableView: UITableView {
+
+    private var reloadDataCompletionBlock: (() -> Void)?
+    
+    func reloadDataWithCompletion(_ complete: @escaping () -> Void) {
+        reloadDataCompletionBlock = complete
+        print("callled")
+        super.reloadData()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if let block = reloadDataCompletionBlock {
+            block()
+        }
+    }
+}
+
 class ExploreHomeVC: UIViewController {
     
-    @IBOutlet weak var exploreTableView: UITableView!
+    @IBOutlet weak var exploreTableView: ExploreTableView!
     @IBOutlet weak var safeAreaView: UIView!
     @IBOutlet weak var headerView: UIView!
     
@@ -50,7 +68,9 @@ class ExploreHomeVC: UIViewController {
     
     private var exploreAnswerArray: [ExploreAnswer] = [] {
         didSet {
-            exploreTableView.reloadData()
+            exploreTableView.reloadDataWithCompletion {
+                LoadingHUD.hide()
+            }
         }
     }
     
@@ -64,6 +84,7 @@ class ExploreHomeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        LoadingHUD.show(loadingFrame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), color: UIColor(named: "background")!)
         setAnswerData(page: currentPage, category: selectedCategoryId, sorting: selectedRecentOrFavorite)
         setThoughtData()
         setCategoryData()
