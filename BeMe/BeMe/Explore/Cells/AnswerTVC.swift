@@ -28,6 +28,7 @@ class AnswerTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        profileImageView.makeRounded(cornerRadius: profileImageView.bounds.width / 2)
         answerView.setBorderWithRadius(borderColor: .lightGray, borderWidth: 1, cornerRadius: 8)
         answerView.makeRounded(cornerRadius: 8.0)
     }

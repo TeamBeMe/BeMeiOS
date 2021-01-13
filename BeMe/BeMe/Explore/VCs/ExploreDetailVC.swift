@@ -85,6 +85,7 @@ class ExploreDetailVC: UIViewController {
     
     
     @IBAction func recentButtonTapped(_ sender: UIButton) {
+        isTableViewAnimation = false
         moveHighLightBar(to: sender)
         currentPage = 1
         currentPageAlreadyGetContainers.removeAll()
@@ -93,6 +94,7 @@ class ExploreDetailVC: UIViewController {
     }
     
     @IBAction func favoriteButtonTapped(_ sender: UIButton) {
+        isTableViewAnimation = false
         moveHighLightBar(to: sender)
         currentPage = 1
         currentPageAlreadyGetContainers.removeAll()
@@ -308,16 +310,16 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
             print(isTableViewAnimation)
             if isTableViewAnimation {
                 if scrollDirection {
-                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
+                    let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 150, 0)
                     cell.layer.transform = rotationTransform
-                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+                    UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut], animations: {
                         cell.layer.transform = CATransform3DIdentity
                     }) { (_) in
                     }
                 } else {
                     let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
                     cell.layer.transform = rotationTransform
-                    UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+                    UIView.animate(withDuration: 0.5, delay: 0, options: [.curveEaseInOut], animations: {
                         cell.layer.transform = CATransform3DIdentity
                     }) { (_) in
                     }
@@ -366,6 +368,7 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
 extension ExploreDetailVC: UITableViewButtonSelectedDelegate {
     
     func exploreAnswerScrapButtonDidTapped(_ answerId: Int) {
+        isTableViewAnimation = false
         scrapAnswer(answerId: answerId)
     }
     

@@ -9,7 +9,7 @@ import UIKit
 
 class QuestionAnswerTVC: UITableViewCell {
     static let identifier: String = "QuestionAnswerTVC"
-   
+    
     @IBOutlet weak var moreAnswerButton: UIButton!
     @IBOutlet weak var profileView: UIStackView!
     @IBOutlet weak var questionLabel: UILabel!
@@ -28,11 +28,12 @@ class QuestionAnswerTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         moreAnswerButton.makeRound(to: 4)
+        profileImageView.makeRounded(cornerRadius: profileImageView.bounds.width / 2)
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
