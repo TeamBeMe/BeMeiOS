@@ -63,7 +63,7 @@ class MypageVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         getProfileData()
-        getAnswerData(availability: "", category: nil, page: -1, query: "")
+        getAnswerData(availability: "", category: 2, page: 1, query: "")
     }
     
     //MARK:**- IBAction Part**
