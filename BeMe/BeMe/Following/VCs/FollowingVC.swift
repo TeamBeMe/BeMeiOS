@@ -38,7 +38,7 @@ class FollowingVC: UIViewController {
     
     var followers: [FollowingFollows] = []
     var followees: [FollowingFollows] = []
-    
+    var followingToScrapDelegate: FollowingToScrapDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -211,8 +211,64 @@ extension FollowingVC {
         
     }
     
+    func goToMoreAnswerButtonDidTapped(questionId: Int, question: String) {
+        guard let detail = UIStoryboard(name: "Explore", bundle: nil).instantiateViewController(identifier: "ExploreDetailVC") as?
+                ExploreDetailVC else { return }
+        detail.questionId = questionId
+        detail.questionText = question
+        self.navigationController?.pushViewController(detail, animated: true)
+    }
     
+    func goToCommentButtonTapped(_ answerId: Int) {
+        guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
+        comment.answerId = answerId
+        comment.isMoreButtonHidden = false
+        comment.modalPresentationStyle = .fullScreen
+        let nc = UINavigationController(rootViewController: comment)
+        nc.modalPresentationStyle = .fullScreen
+        self.present(nc, animated: true, completion: nil)
+    }
     
+    private func scrapAnswer(answerId: Int,wasScrapped: Bool,indexInVC: Int) {
+        
+        ExploreAnswerScrapService.shared.putExploreAnswerScrap(answerId: answerId) { (result) in
+            switch result {
+            case .success(let data):
+                
+                guard let dt = data as? GenericResponse<Int> else { return }
+                print(dt.message)
+                if dt.message == "스크랩 성공" || dt.message == "스크랩 취소 성공" {
+//                    self.followingToScrapDelegate?.setScrap(wasScrapped: wasScrapped)
+                    self.answers[indexInVC].isScrapped = !wasScrapped
+                    self.wholeCollectionView.reloadData()
+                } else {
+                    // 사용자한테 실패했다고 알려주는 동작
+                }
+                
+            case .requestErr(let message):
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                
+            case .pathErr: print("path")
+            case .serverErr:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+                print("serverErr")
+            case .networkFail:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+            }
+        }
+    }
     
     
 }
@@ -284,7 +340,9 @@ extension FollowingVC : UICollectionViewDataSource {
                     let answerProfile = answerTmp.userProfile ?? ""
                     let answerUserName = answerTmp.userNickname ?? ""
                     let answerIsAnswered = answerTmp.isAnswered ?? false
-                    
+                    cell.answerData = answers[indexPath.item]
+                    cell.followScrapButtonDelegate = self
+                    cell.indexInVC = indexPath.item
                     cell.setItems(question: answerTmp.question,
                                   answer: answerText,
                                   category: answerCategory,
@@ -514,7 +572,7 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
                     }
                     tmpTextView.removeFromSuperview()
                     tmpQuestionTextView.removeFromSuperview()
-
+                    
                     //                if answers[indexPath.item].isAnswered == true{
                     //                    return CGSize(width: collectionView.frame.width  ,
                     //                                  height: 109.0+CGFloat(dynamicHeight!)+CGFloat(dynamicQuestionHeight!))
@@ -713,6 +771,21 @@ extension FollowingVC: FollowPlusButtonDelegate{
     
 }
 
+extension FollowingVC: FollowScrapButtonDelegate {
+    func replyButtonTap() {
+        
+    }
+    
+    func scrapButtonAction(answerID: Int,wasScrapped: Bool,indexInVC: Int) {
+        scrapAnswer(answerId: answerID,wasScrapped: wasScrapped,indexInVC: indexInVC)
+    }
+    func containViewTap(answerID: Int) {
+        goToCommentButtonTapped(answerID)
+    }
+    func moreButtonTap(questionID: Int, question: String){
+        goToMoreAnswerButtonDidTapped(questionId: questionID, question: question)
+    }
+}
 
 
 protocol FollowingTabBarDelegate{
@@ -760,3 +833,12 @@ protocol FollowPlusButtonDelegate{
     func plusButtonAction()
     
 }
+
+protocol FollowScrapButtonDelegate {
+    func scrapButtonAction(answerID: Int,wasScrapped: Bool,indexInVC: Int)
+    func containViewTap(answerID: Int)
+    func moreButtonTap(questionID: Int, question: String)
+    func replyButtonTap()
+    
+}
+

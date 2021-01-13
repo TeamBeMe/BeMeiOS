@@ -91,6 +91,8 @@ class HomeVC: UIViewController {
     var changePublicAnswerID = 0
     var deleteAnswerID = 0
     var deleteIdx = 0
+    
+    var isInit = false
    
 }
 
@@ -123,10 +125,10 @@ extension HomeVC {
         requestNotificationAuthorization()
         sendNotification()
         
-        
-      
+//        LoadingHUD.show(loadingFrame: self.view.frame,color: .black)
         answerDataList = []
-        pageGetFromServer()
+//        pageGetFromServer()
+       
        
         
     }
@@ -134,6 +136,13 @@ extension HomeVC {
     override func viewWillAppear(_ animated: Bool) {
         if !initialScrolled{
             LoadingHUD.show(loadingFrame: self.view.frame,color: .black)
+            
+           
+           
+        }
+        if isInit == false{
+            pageGetFromServer()
+            isInit = true
         }
         
     }
@@ -260,6 +269,7 @@ extension HomeVC {
     
     
     func pageGetFromServer(){
+        LoadingHUD.show(loadingFrame: self.view.frame,color: .black)
         HomePageDataService.shared.getHomeData(page: pageForServer){(networkResult) -> (Void) in
             switch networkResult {
             case .success(let data) :

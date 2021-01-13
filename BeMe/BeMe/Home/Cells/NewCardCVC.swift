@@ -258,6 +258,7 @@ extension NewCardCVC {
                         self.questionLabel.alpha = 1
                         self.replyButton.alpha = 1
                         self.changeButton.alpha = 1
+                        self.animationView.removeFromSuperview()
                     })
                     
                 })

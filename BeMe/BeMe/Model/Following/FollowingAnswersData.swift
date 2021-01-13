@@ -24,7 +24,7 @@ struct FollowingAnswers: Codable {
     let publicFlag: Bool
     let answerDate: String?
     let answerIdx, questionID, userID: Int
-    let isAuthor, isScrapped: Bool
+    var isAuthor, isScrapped: Bool
     let userProfile: String?
     let userNickname: String?
     let question, category: String

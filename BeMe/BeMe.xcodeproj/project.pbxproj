@@ -122,6 +122,10 @@
 		EC7C1634259BAD0600A5BA4C /* FollowerPersonCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1633259BAD0600A5BA4C /* FollowerPersonCVC.swift */; };
 		EC7C1637259BAD1A00A5BA4C /* FollowerHeaderCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1636259BAD1A00A5BA4C /* FollowerHeaderCVC.swift */; };
 		EC7C163A259BAD2D00A5BA4C /* FollowerCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C1639259BAD2D00A5BA4C /* FollowerCardCVC.swift */; };
+		EC7C88DE25AF659E000C71D9 /* GmarketSansTTFBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC7C88DC25AF6571000C71D9 /* GmarketSansTTFBold.ttf */; };
+		EC7C88E025AF65A1000C71D9 /* GmarketSansTTFLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC7C88DD25AF6571000C71D9 /* GmarketSansTTFLight.ttf */; };
+		EC7C88E225AF65A4000C71D9 /* GmarketSansTTFMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC7C88DB25AF6571000C71D9 /* GmarketSansTTFMedium.ttf */; };
+		EC7C88E525AF6989000C71D9 /* UILabel+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C88E425AF6989000C71D9 /* UILabel+extensions.swift */; };
 		EC7F0EA125A05460008EB88A /* CustomHomeActionSheetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0EA025A05460008EB88A /* CustomHomeActionSheetAlert.swift */; };
 		EC7F0EA925A057DF008EB88A /* HomeVC+UnderAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0EA825A057DF008EB88A /* HomeVC+UnderAlert.swift */; };
 		EC7F0EAC25A059AA008EB88A /* HomeVC+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0EAB25A059AA008EB88A /* HomeVC+Protocols.swift */; };
@@ -322,6 +326,10 @@
 		EC7C1633259BAD0600A5BA4C /* FollowerPersonCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerPersonCVC.swift; sourceTree = "<group>"; };
 		EC7C1636259BAD1A00A5BA4C /* FollowerHeaderCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerHeaderCVC.swift; sourceTree = "<group>"; };
 		EC7C1639259BAD2D00A5BA4C /* FollowerCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowerCardCVC.swift; sourceTree = "<group>"; };
+		EC7C88DB25AF6571000C71D9 /* GmarketSansTTFMedium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFMedium.ttf; sourceTree = "<group>"; };
+		EC7C88DC25AF6571000C71D9 /* GmarketSansTTFBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFBold.ttf; sourceTree = "<group>"; };
+		EC7C88DD25AF6571000C71D9 /* GmarketSansTTFLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFLight.ttf; sourceTree = "<group>"; };
+		EC7C88E425AF6989000C71D9 /* UILabel+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+extensions.swift"; sourceTree = "<group>"; };
 		EC7F0EA025A05460008EB88A /* CustomHomeActionSheetAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHomeActionSheetAlert.swift; sourceTree = "<group>"; };
 		EC7F0EA825A057DF008EB88A /* HomeVC+UnderAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeVC+UnderAlert.swift"; sourceTree = "<group>"; };
 		EC7F0EAB25A059AA008EB88A /* HomeVC+Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeVC+Protocols.swift"; sourceTree = "<group>"; };
@@ -1030,6 +1038,16 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		EC7C88DA25AF655D000C71D9 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				EC7C88DC25AF6571000C71D9 /* GmarketSansTTFBold.ttf */,
+				EC7C88DD25AF6571000C71D9 /* GmarketSansTTFLight.ttf */,
+				EC7C88DB25AF6571000C71D9 /* GmarketSansTTFMedium.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		EC7FEFA025A38A7F00C61147 /* Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -1131,6 +1149,7 @@
 				EC7FEFB025A39B7000C61147 /* UITextField+Extensions.swift */,
 				EC5C1FF525A433EE008EE335 /* String+Extensions.swift */,
 				EC75A25D25A8B28000F4E160 /* UIImageView+Extensions.swift */,
+				EC7C88E425AF6989000C71D9 /* UILabel+extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1302,6 +1321,7 @@
 		ECC6312725A9E88B009E4FD4 /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
+				EC7C88DA25AF655D000C71D9 /* Fonts */,
 				ECB44D5125AC968A00F491F2 /* loading.json */,
 				ECC6312B25A9E98E009E4FD4 /* data1.json */,
 				ECC6312825A9E8A0009E4FD4 /* animation_test.json */,
@@ -1377,10 +1397,12 @@
 				ECC6312C25A9E98E009E4FD4 /* data1.json in Resources */,
 				D4E07CB9259F22C10075E616 /* Explore.storyboard in Resources */,
 				EC5C200A25A47208008EE335 /* LogIn.storyboard in Resources */,
+				EC7C88DE25AF659E000C71D9 /* GmarketSansTTFBold.ttf in Resources */,
 				A5A5BE6625A9DC4E00036431 /* OthersPage.storyboard in Resources */,
 				ECC6312925A9E8A0009E4FD4 /* animation_test.json in Resources */,
 				EC7C1618259B933F00A5BA4C /* FollowInfo.storyboard in Resources */,
 				A51CA36325A57D430020F26D /* Mypage.storyboard in Resources */,
+				EC7C88E025AF65A1000C71D9 /* GmarketSansTTFLight.ttf in Resources */,
 				EC813F302599A15200BBCE25 /* LaunchScreen.storyboard in Resources */,
 				D405E8A125ADBDFA004CC60F /* Alarm.storyboard in Resources */,
 				ECB44D5225AC968A00F491F2 /* loading.json in Resources */,
@@ -1391,6 +1413,7 @@
 				EC9C5CD025A41E8D0021AF96 /* SignUp.storyboard in Resources */,
 				EC813F732599F84F00BBCE25 /* Home.storyboard in Resources */,
 				EC89E336259C4E7400DBAFE5 /* UnderTab.storyboard in Resources */,
+				EC7C88E225AF65A4000C71D9 /* GmarketSansTTFMedium.ttf in Resources */,
 				ECC6311525A9E69A009E4FD4 /* HomeLottietest.storyboard in Resources */,
 				D44F6DC425A5784A002A9761 /* Answer.storyboard in Resources */,
 				EC7FEFA525A38AE200C61147 /* Search.storyboard in Resources */,
@@ -1496,6 +1519,7 @@
 				D480734325A8DF6F00DE1DD3 /* ExploreCategoryService.swift in Sources */,
 				D4F1991D25A4782F000AF0E7 /* CommentTVC.swift in Sources */,
 				D492E44025A0E6A80088A181 /* UITableView+Extensions.swift in Sources */,
+				EC7C88E525AF6989000C71D9 /* UILabel+extensions.swift in Sources */,
 				D480732825A8918D00DE1DD3 /* ExploreHomeVC.swift in Sources */,
 				EC5C200325A43FD0008EE335 /* SignUpProfileVC.swift in Sources */,
 				D41B6BE025A9BCFA004D2052 /* ExploreAnswerScrapService.swift in Sources */,

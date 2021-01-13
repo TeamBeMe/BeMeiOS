@@ -17,12 +17,14 @@ class FollowCardCVC: UICollectionViewCell {
     @IBOutlet weak var questionTextView: UITextView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var answerTextView: UITextView!
-    @IBOutlet weak var moreButotn: UIButton!
+    @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var bookMarkButton: UIButton!
-    
+    var indexInVC: Int?
+    var followScrapButtonDelegate: FollowScrapButtonDelegate?
     var answerData: FollowingAnswers?
+    var isScrapped: Bool?
     var replyButton = UIButton().then {
         $0.backgroundColor = .black
         $0.setTitleColor(.white, for: .normal)
@@ -47,7 +49,9 @@ class FollowCardCVC: UICollectionViewCell {
 //        questionTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
 //
         
-        
+        let containTabGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpContainView))
+        containView.addGestureRecognizer(containTabGesture)
+    
         
     }
     
@@ -63,18 +67,44 @@ class FollowCardCVC: UICollectionViewCell {
         questionInfoLabel.textColor = .slateGrey
         timeLabel.textColor = .slateGrey
         answerTextView.text = answer
-//        if isAnswered == false {
-//            answerTextView.text = "아직 송현님이 답하지 않은 질문입니다.\n답변을 하시고 글을 보시겠습니까?"
-//            
-//            
-//        }
-//        else{
-//            answerTextView.text = answer
-//        }
+        
+        if answerData?.isScrapped == false{
+            bookMarkButton.setImage(UIImage(named: "btnScrapUnselected"), for: .normal)
+        }
+        else{
+            bookMarkButton.setImage(UIImage(named: "btnScrapSelected"), for: .normal)
+        }
+        
+        
         
     }
     
 
+    @IBAction func scrapButtonTapped(_ sender: Any) {
+        
+//        if (answerData?.isScrapped)! {
+//            bookMarkButton.setImage(UIImage(named: "btnScrapUnselected"), for: .normal)
+//        }
+//        else{
+//            bookMarkButton.setImage(UIImage(named: "btnScrapSelected"), for: .normal)
+//        }
+        followScrapButtonDelegate?.scrapButtonAction(answerID: (answerData?.id)!,
+                                                     wasScrapped: (answerData?.isScrapped)!,
+                                                     indexInVC: indexInVC!
+                                                     )
+        
+    }
+    
+    @objc func touchUpContainView(){
+        print("called")
+        followScrapButtonDelegate?.containViewTap(answerID: (answerData?.id)!)
+    }
+    
+    
+    @IBAction func moreButtonAction(_ sender: Any) {
+        followScrapButtonDelegate?.moreButtonTap(questionID: (answerData?.questionID)!,
+                                                 question: (answerData?.question)!)
+    }
     
     
     
@@ -98,4 +128,29 @@ extension FollowCardCVC : UITextViewDelegate{
         }
     }
     
+}
+
+
+extension FollowCardCVC: FollowingToScrapDelegate {
+    func setScrap(wasScrapped: Bool) {
+        if wasScrapped{
+            bookMarkButton.setImage(UIImage(named: "btnScrapUnselected"), for: .normal)
+        }
+        else{
+            bookMarkButton.setImage(UIImage(named: "btnScrapSelected"), for: .normal)
+        }
+        
+    }
+}
+
+
+protocol FollowingToScrapDelegate{
+    func setScrap(wasScrapped: Bool)
+    
+}
+
+
+extension FollowingToScrapDelegate {
+    func setScrap(wasScrapped: Bool) {}
+   
 }

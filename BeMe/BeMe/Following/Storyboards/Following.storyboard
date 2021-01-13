@@ -39,7 +39,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="410" height="141"/>
                                                     <subviews>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J5h-pu-Vh7">
-                                                            <rect key="frame" x="351" y="11" width="44" height="44"/>
+                                                            <rect key="frame" x="345" y="0.0" width="44" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="44" id="LlW-52-kZK"/>
                                                                 <constraint firstAttribute="width" constant="44" id="c85-Rs-igQ"/>
@@ -50,7 +50,7 @@
                                                             </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3id-Ar-Yvj">
-                                                            <rect key="frame" x="307" y="11" width="44" height="44"/>
+                                                            <rect key="frame" x="301" y="0.0" width="44" height="44"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="44" id="7WM-NH-ijx"/>
                                                                 <constraint firstAttribute="height" constant="44" id="V5e-v9-RuV"/>
@@ -133,10 +133,10 @@
                                                         <constraint firstAttribute="trailing" secondItem="wWM-9a-3Aa" secondAttribute="trailing" constant="36" id="JRV-GG-DTp"/>
                                                         <constraint firstItem="wWM-9a-3Aa" firstAttribute="centerY" secondItem="01i-no-rKN" secondAttribute="centerY" id="RUu-CM-Izb"/>
                                                         <constraint firstItem="J5h-pu-Vh7" firstAttribute="leading" secondItem="3id-Ar-Yvj" secondAttribute="trailing" id="ZHK-j7-PeX"/>
-                                                        <constraint firstAttribute="trailing" secondItem="J5h-pu-Vh7" secondAttribute="trailing" constant="15" id="a3s-CP-Qkq"/>
+                                                        <constraint firstAttribute="trailing" secondItem="J5h-pu-Vh7" secondAttribute="trailing" constant="21" id="a3s-CP-Qkq"/>
                                                         <constraint firstItem="aHV-ss-ky9" firstAttribute="leading" secondItem="HYt-M6-5GT" secondAttribute="leading" id="ep3-ek-HY4"/>
                                                         <constraint firstAttribute="bottom" secondItem="v63-FV-6tX" secondAttribute="bottom" id="fHA-1c-DiR"/>
-                                                        <constraint firstItem="J5h-pu-Vh7" firstAttribute="top" secondItem="HYt-M6-5GT" secondAttribute="top" constant="11" id="fJG-Bd-hJR"/>
+                                                        <constraint firstItem="J5h-pu-Vh7" firstAttribute="top" secondItem="HYt-M6-5GT" secondAttribute="top" id="fJG-Bd-hJR"/>
                                                         <constraint firstItem="01i-no-rKN" firstAttribute="leading" secondItem="9Bx-k8-WNQ" secondAttribute="trailing" id="gW7-O1-If8"/>
                                                         <constraint firstAttribute="bottom" secondItem="9Bx-k8-WNQ" secondAttribute="bottom" id="sXn-HG-7mE"/>
                                                         <constraint firstAttribute="height" constant="155" id="tmv-6O-F2S"/>
@@ -285,6 +285,9 @@
                                                             </constraints>
                                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" image="btnArrowNext"/>
+                                                            <connections>
+                                                                <action selector="moreButtonAction:" destination="wPo-DT-lpv" eventType="touchUpInside" id="T9K-RD-NQe"/>
+                                                            </connections>
                                                         </button>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ieB-sx-JeO">
                                                             <rect key="frame" x="16" y="-176.5" width="317" height="166.5"/>
@@ -312,6 +315,9 @@
                                                             <rect key="frame" x="301" y="1" width="32" height="32"/>
                                                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" image="btnScrapUnselected"/>
+                                                            <connections>
+                                                                <action selector="scrapButtonTapped:" destination="wPo-DT-lpv" eventType="touchUpInside" id="TpD-aG-56Z"/>
+                                                            </connections>
                                                         </button>
                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YGk-KH-D1v">
                                                             <rect key="frame" x="16" y="-210" width="297" height="0.0"/>
@@ -365,7 +371,7 @@
                                             <outlet property="answerTextView" destination="ieB-sx-JeO" id="rf7-2s-Anf"/>
                                             <outlet property="bookMarkButton" destination="db4-dt-lXa" id="fjR-h1-7no"/>
                                             <outlet property="containView" destination="Q7y-FB-6g4" id="exv-Se-BsT"/>
-                                            <outlet property="moreButotn" destination="Pr5-ed-7ji" id="Ons-Vq-jeX"/>
+                                            <outlet property="moreButton" destination="Pr5-ed-7ji" id="fSh-Z3-UUo"/>
                                             <outlet property="profileImageView" destination="1Ig-9P-mhh" id="TCZ-9T-b2z"/>
                                             <outlet property="questionInfoLabel" destination="t4I-LQ-f1f" id="sDS-xi-fA4"/>
                                             <outlet property="questionTextView" destination="YGk-KH-D1v" id="DIt-MT-znT"/>
