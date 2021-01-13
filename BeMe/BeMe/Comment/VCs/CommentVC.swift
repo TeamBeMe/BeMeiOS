@@ -128,11 +128,9 @@ class CommentVC: UIViewController {
     
     @IBAction func moreSettngButtonTapped(_ sender: Any) {
         popupBackgroundView.animatePopupBackground(true)
-        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetTwoVC.identifier) as?
-                CustomActionSheetTwoVC else { return }
+        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetOneVC.identifier) as?
+                CustomActionSheetOneVC else { return }
         
-        settingActionSheet.alertInformations = AlertLabels.otherCommentNotMyArticle
-        settingActionSheet.color = .grapefruit
         settingActionSheet.modalPresentationStyle = .overCurrentContext
         
         self.present(settingActionSheet, animated: true, completion: nil)
@@ -742,10 +740,10 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
             self.present(settingActionSheet, animated: true, completion: nil)
         } else {
             if answerDetail!.isAuthor {
-                guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: nil).instantiateViewController(withIdentifier: CustomActionSheetVC.identifier) as?
-                        CustomActionSheetVC else { return }
+                guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: nil).instantiateViewController(withIdentifier: CustomActionSheetTwoVC.identifier) as?
+                        CustomActionSheetTwoVC else { return }
             
-                settingActionSheet.alertInformations = AlertLabels.otherCommentMyArticle
+                settingActionSheet.alertInformations = AlertLabels.otherCommentMyArticleNoBlock
                 settingActionSheet.color = .grapefruit
                 settingActionSheet.modalPresentationStyle = .overCurrentContext
             
@@ -755,11 +753,11 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
                 
                 self.present(settingActionSheet, animated: true, completion: nil)
             } else {
-                guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: nil).instantiateViewController(withIdentifier: CustomActionSheetTwoVC.identifier) as?
-                        CustomActionSheetTwoVC else { return }
-            
-                settingActionSheet.alertInformations = AlertLabels.otherCommentNotMyArticle
-                settingActionSheet.color = .grapefruit
+                guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: nil).instantiateViewController(withIdentifier: CustomActionSheetOneVC.identifier) as?
+                        CustomActionSheetOneVC else { return }
+                
+//                settingActionSheet.alertInformations = AlertLabels.otherCommentNotMyArticle
+//                settingActionSheet.color = .grapefruit
                 settingActionSheet.modalPresentationStyle = .overCurrentContext
             
                 selectedIndexPath = indexPath

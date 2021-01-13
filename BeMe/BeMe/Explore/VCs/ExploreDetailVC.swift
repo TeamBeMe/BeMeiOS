@@ -374,11 +374,9 @@ extension ExploreDetailVC: UITableViewButtonSelectedDelegate {
     
     func settingButtonDidTapped(to: IndexPath, isAuthor: Bool, commentId: Int, content: String) {
         popupBackgroundView.animatePopupBackground(true)
-        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetTwoVC.identifier) as?
-                CustomActionSheetTwoVC else { return }
+        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: CustomActionSheetOneVC.identifier) as?
+                CustomActionSheetOneVC else { return }
         
-        settingActionSheet.alertInformations = AlertLabels.otherCommentNotMyArticle
-        settingActionSheet.color = .grapefruit
         settingActionSheet.modalPresentationStyle = .overCurrentContext
         self.present(settingActionSheet, animated: true, completion: nil)
     }
