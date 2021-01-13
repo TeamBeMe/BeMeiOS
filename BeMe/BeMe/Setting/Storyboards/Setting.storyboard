@@ -23,6 +23,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sda-Iq-50E">
                                         <rect key="frame" x="14" y="0.0" width="44" height="44"/>
                                         <state key="normal" image="btnBack"/>
+                                        <connections>
+                                            <action selector="dissmissButtonTapped:" destination="7iS-px-vGc" eventType="touchUpInside" id="YRU-Cb-9lE"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -39,19 +42,19 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UKR-gA-dPf">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UKR-gA-dPf">
                                 <rect key="frame" x="0.0" y="144" width="414" height="518"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingTVC" id="8ao-Q0-ur9" customClass="SettingTVC" customModule="BeMe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="64"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="63.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8ao-Q0-ur9" id="vty-rR-3kD">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="64"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="63.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="문의하기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q1p-wQ-QkJ">
-                                                    <rect key="frame" x="28" y="22" width="55.5" height="20"/>
+                                                    <rect key="frame" x="28" y="22" width="55.5" height="19.5"/>
                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -76,6 +79,16 @@
                                     <outlet property="delegate" destination="7iS-px-vGc" id="IaF-2e-cfg"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FaO-vY-065">
+                                <rect key="frame" x="28" y="674" width="56" height="32"/>
+                                <fontDescription key="fontDescription" name="AppleSDGothicNeo-SemiBold" family="Apple SD Gothic Neo" pointSize="16"/>
+                                <state key="normal" title="로그아웃">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="logOutButtonTapped:" destination="7iS-px-vGc" eventType="touchUpInside" id="5Fc-kd-WXC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="diI-Ey-kw4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -83,10 +96,12 @@
                             <constraint firstItem="diI-Ey-kw4" firstAttribute="trailing" secondItem="J22-hj-q0S" secondAttribute="trailing" id="8BO-QF-YLl"/>
                             <constraint firstItem="diI-Ey-kw4" firstAttribute="bottom" secondItem="UKR-gA-dPf" secondAttribute="bottom" constant="200" id="9LY-jm-ufh"/>
                             <constraint firstItem="UKR-gA-dPf" firstAttribute="top" secondItem="kwC-as-jue" secondAttribute="bottom" constant="16" id="Cg9-qO-DUG"/>
+                            <constraint firstItem="FaO-vY-065" firstAttribute="leading" secondItem="diI-Ey-kw4" secondAttribute="leading" constant="28" id="EFY-iD-aG4"/>
                             <constraint firstItem="kwC-as-jue" firstAttribute="top" secondItem="J22-hj-q0S" secondAttribute="bottom" constant="16" id="HNo-Lf-JUu"/>
                             <constraint firstItem="J22-hj-q0S" firstAttribute="top" secondItem="diI-Ey-kw4" secondAttribute="top" id="OFZ-5T-mFp"/>
                             <constraint firstItem="diI-Ey-kw4" firstAttribute="trailing" secondItem="UKR-gA-dPf" secondAttribute="trailing" id="XDi-pz-HEX"/>
                             <constraint firstItem="J22-hj-q0S" firstAttribute="leading" secondItem="diI-Ey-kw4" secondAttribute="leading" id="cBh-BY-yqe"/>
+                            <constraint firstItem="diI-Ey-kw4" firstAttribute="bottom" secondItem="FaO-vY-065" secondAttribute="bottom" constant="156" id="d2U-lc-knE"/>
                             <constraint firstItem="kwC-as-jue" firstAttribute="leading" secondItem="diI-Ey-kw4" secondAttribute="leading" constant="30" id="iNq-od-bzR"/>
                             <constraint firstItem="UKR-gA-dPf" firstAttribute="leading" secondItem="diI-Ey-kw4" secondAttribute="leading" id="jkQ-tO-h7G"/>
                         </constraints>

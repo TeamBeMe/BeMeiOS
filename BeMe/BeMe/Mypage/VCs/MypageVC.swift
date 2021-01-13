@@ -69,6 +69,10 @@ class MypageVC: UIViewController {
     //MARK:**- IBAction Part**
     
     @IBAction func settingButtonTapped(_ sender: Any) {
+        
+        guard let setting = UIStoryboard.init(name: "Setting", bundle: nil).instantiateViewController(identifier: "SettingVC") as? SettingVC else { return }
+        
+        self.navigationController?.pushViewController(setting, animated: true)
     }
     
     //MARK:**- default Setting Function Part**
@@ -338,8 +342,22 @@ extension MypageVC {
                 print("networkFail")
             default :
                 print("?")
+                break
             }
         }
         
     }
+}
+
+extension MypageVC: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        if offset < 91.0 {
+            settingButton.isHidden = false
+        } else {
+            settingButton.isHidden = true
+        }
+    }
+
 }

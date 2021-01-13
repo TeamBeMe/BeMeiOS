@@ -232,7 +232,6 @@ extension ExploreDetailVC {
     }
     
     @objc func closePopup(_ notification: Notification) {
-        print("SecondTapped")
         popupBackgroundView.animatePopupBackground(false)
         guard let userInfo = notification.userInfo as? [String:Any] else { return }
         guard let action = userInfo["action"] as? String else { return }

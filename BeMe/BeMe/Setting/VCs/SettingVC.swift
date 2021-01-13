@@ -17,6 +17,15 @@ class SettingVC: UIViewController, MFMailComposeViewControllerDelegate {
 
     }
 
+    @IBAction func dissmissButtonTapped(_ sender: Any) {
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func logOutButtonTapped(_ sender: UIButton) {
+        
+    }
+    
 }
 
 extension SettingVC: UITableViewDataSource {
@@ -26,7 +35,7 @@ extension SettingVC: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SettingTVC", for: indexPath) as? SettingTVC else { return UITableViewCell() }
-        
+        cell.selectionStyle = .none
         return cell
     }
 }
