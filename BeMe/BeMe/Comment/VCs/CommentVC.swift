@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import MessageUI
 //MARK: - Comment 모델
 
 struct CommentA {
@@ -14,7 +14,7 @@ struct CommentA {
     var children: [CommentA]?
     var open: Bool
 }
-class CommentVC: UIViewController {
+class CommentVC: UIViewController, MFMailComposeViewControllerDelegate {
     
     @IBOutlet weak var commentTableView: UITableView!
     @IBOutlet weak var scrapButton: UIButton!
@@ -160,7 +160,7 @@ class CommentVC: UIViewController {
             }
             
         }
-
+        
         commentTextView.text = ""
         
         
@@ -185,9 +185,9 @@ class CommentVC: UIViewController {
                 isPublic = true
                 lockButton.setImage(UIImage.init(named: "btnUnlock"), for: .normal)
             }
-
+            
         }
-                
+        
     }
 }
 
@@ -257,12 +257,12 @@ extension CommentVC {
         toastLabel.heightAnchor.constraint(equalToConstant: 52.0).isActive = true
         
         UIView.animate(withDuration: 2.0, delay: 0.1, options: .curveEaseOut, animations: {
-                        toastLabel.alpha = 0.0
+            toastLabel.alpha = 0.0
             
         }, completion: {
-                            (isCompleted) in toastLabel.removeFromSuperview()
-                            
-                        })
+            (isCompleted) in toastLabel.removeFromSuperview()
+            
+        })
     }
     
     private func sendComment(content: String, parentId: Int?) {
@@ -285,7 +285,7 @@ extension CommentVC {
                         self.commentToCommentView.isHidden = true
                         
                     }
-                
+                    
                     
                     
                 }
@@ -366,14 +366,14 @@ extension CommentVC {
             }
         }
     }
-
+    
     private func editComment() {
         CommentService.shared.putComment(commentId: selectedCommentId!, content: commentTextView.text!) {
             (result) in
             switch result {
             case .success(let data):
                 guard let _ = data as? GenericResponse<Comment> else { return }
-
+                
                 self.commentTableView.scrollToRow(at: self.selectedIndexPath!, at: .middle, animated: true)
                 self.getAnswerDetail()
                 
@@ -407,7 +407,7 @@ extension CommentVC {
             switch result {
             case .success(let data):
                 guard let _ = data as? GenericResponse<Comment> else { return }
-
+                
                 self.getAnswerDetail()
                 self.showToast(message: "댓글이 삭제되었습니다.", font: UIFont(name: "AppleSDGothicNeo-Medium", size: 14.0) ?? UIFont.systemFont(ofSize: 14.0))
             case .requestErr(let message):
@@ -476,6 +476,16 @@ extension CommentVC {
             
         } else if action == "report" {
             // 메일 띄우기
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.21) {
+                let mailComposeViewController = self.configuredMailComposeViewController()
+                if MFMailComposeViewController.canSendMail() {
+                    self.present(mailComposeViewController, animated: true, completion: nil)
+                    print("can send mail")
+                } else {
+                    self.showSendMailErrorAlert()
+                }
+            }
+            
         } else if action == "commentDelete" {
             
             deleteComment()
@@ -488,13 +498,37 @@ extension CommentVC {
                 alertViewController.addAction(action)
                 self.present(alertViewController, animated: true, completion: nil)
             }
-
+            
         }
-        
         print(action)
     }
     
-//    private func
+    
+    private func configuredMailComposeViewController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self
+        mailComposerVC.setSubject("BeMe iOS 문의 메일")
+        mailComposerVC.setToRecipients(["BeMe@naver.com"])
+        mailComposerVC.setMessageBody("BeMe팀이 빠르게 처리할 수 있게 메일 제목에 간단하게 어떤 문의인지 적어주세요!\n\n1. 문의 유형(문의/신고/버그제보/기타) : \n 2. 회원 아이디 (필요시 기입) : \n 3. 문의 내용 :", isHTML: false)
+        return mailComposerVC
+    }
+    
+    private func showSendMailErrorAlert() {
+        
+        let sendMailErrorAlert = UIAlertController(title: "메일을 전송 실패", message: "아이폰 이메일 설정을 확인하고 다시 시도해주세요.", preferredStyle: .alert)
+        
+        let cancelButton = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+        
+        sendMailErrorAlert.addAction(cancelButton)
+        self.present(sendMailErrorAlert, animated: true, completion: nil)
+    }
+    
+    internal func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    //    private func
     @objc func keyboardWillShow(_ sender: Notification) {
         handleKeyboardIssue(sender, isAppearing: true)
     }
@@ -574,7 +608,7 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
             return header
         } else {
             if indexPath.row == 0 {
-               
+                
                 if realCommentArray[indexPath.section-1].isVisible {
                     
                     guard let comment = tableView.dequeueReusableCell(withIdentifier: CommentTVC.identifier,
@@ -598,14 +632,14 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                         }
                     }
                     
-//                    print(realCommentArray[indexPath.section-1].publicFlag)
+                    //                    print(realCommentArray[indexPath.section-1].publicFlag)
                     comment.setInformations(profileImage: realCommentArray[indexPath.section-1].profileImg, nickName: realCommentArray[indexPath.section-1].userNickname, publicFlag: realCommentArray[indexPath.section-1].publicFlag, isVisible: realCommentArray[indexPath.section-1].isVisible, content: realCommentArray[indexPath.section-1].content, date: realCommentArray[indexPath.section-1].createdAt, commentId: realCommentArray[indexPath.section-1].id, isAuthor: realCommentArray[indexPath.section-1].isAuthor)
                     
                     return comment
                 } else {
                     guard let secret = tableView.dequeueReusableCell(withIdentifier: SecretTVC.identifier, for: indexPath) as? SecretTVC else { return UITableViewCell() }
                     
-
+                    
                     secret.delegate = self
                     secret.indexPath = indexPath
                     if realCommentArray[indexPath.section-1].children.count == 0{
@@ -627,15 +661,15 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
             } else {
                 
                 guard let secondComment = tableView.dequeueReusableCell(withIdentifier: SecondCommentTVC.identifier, for: indexPath) as? SecondCommentTVC else { return UITableViewCell() }
- 
+                
                 secondComment.delegate = self
                 secondComment.indexPath = indexPath
-
+                
                 secondComment.setInformation(profileImage: realCommentArray[indexPath.section-1].children[indexPath.row-1].profileImg, nickName: realCommentArray[indexPath.section-1].children[indexPath.row-1].userNickname, content: realCommentArray[indexPath.section-1].children[indexPath.row-1].content, date: realCommentArray[indexPath.section-1].children[indexPath.row-1].createdAt, isVisible: realCommentArray[indexPath.section-1].children[indexPath.row-1].isVisible, publicFlag: realCommentArray[indexPath.section-1].children[indexPath.row-1].publicFlag, isAuthor: realCommentArray[indexPath.section-1].children[indexPath.row-1].isAuthor, commentId: realCommentArray[indexPath.section-1].children[indexPath.row-1].id)
                 
                 
                 return secondComment
- 
+                
             }
         }
         
@@ -677,8 +711,8 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
                             realCommentArray[index.section-1].open = true
                         }
                         // 애니메이션 삭제
-    //                    let section = IndexSet.init(integer: indexPath.section)
-    //                    commentTableView.reloadSections(section, with: .fade)
+                        //                    let section = IndexSet.init(integer: indexPath.section)
+                        //                    commentTableView.reloadSections(section, with: .fade)
                     }
                 }
             }
@@ -698,8 +732,8 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
                             realCommentArray[index.section-1].open = true
                         }
                         // 애니메이션 삭제
-    //                    let section = IndexSet.init(integer: indexPath.section)
-    //                    commentTableView.reloadSections(section, with: .fade)
+                        //                    let section = IndexSet.init(integer: indexPath.section)
+                        //                    commentTableView.reloadSections(section, with: .fade)
                     }
                 }
             }
@@ -728,12 +762,12 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
         if isAuthor {
             guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: nil).instantiateViewController(withIdentifier: CustomActionSheetTwoVC.identifier) as?
                     CustomActionSheetTwoVC else { return }
-        
+            
             settingActionSheet.alertInformations = AlertLabels.myComment
             settingActionSheet.isOnlySecondTextColored = true
             settingActionSheet.secondColor = UIColor.init(named: "grapefruit")
             settingActionSheet.modalPresentationStyle = .overCurrentContext
-        
+            
             selectedIndexPath = indexPath
             selectedCommentId = commentId
             selectedCommentContent = content
@@ -742,11 +776,11 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
             if answerDetail!.isAuthor {
                 guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: nil).instantiateViewController(withIdentifier: CustomActionSheetTwoVC.identifier) as?
                         CustomActionSheetTwoVC else { return }
-            
+                
                 settingActionSheet.alertInformations = AlertLabels.otherCommentMyArticleNoBlock
                 settingActionSheet.color = .grapefruit
                 settingActionSheet.modalPresentationStyle = .overCurrentContext
-            
+                
                 selectedIndexPath = indexPath
                 selectedCommentId = commentId
                 selectedCommentContent = content
@@ -756,10 +790,10 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
                 guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: nil).instantiateViewController(withIdentifier: CustomActionSheetOneVC.identifier) as?
                         CustomActionSheetOneVC else { return }
                 
-//                settingActionSheet.alertInformations = AlertLabels.otherCommentNotMyArticle
-//                settingActionSheet.color = .grapefruit
+                //                settingActionSheet.alertInformations = AlertLabels.otherCommentNotMyArticle
+                //                settingActionSheet.color = .grapefruit
                 settingActionSheet.modalPresentationStyle = .overCurrentContext
-            
+                
                 selectedIndexPath = indexPath
                 selectedCommentId = commentId
                 selectedCommentContent = content
@@ -782,14 +816,14 @@ extension CommentVC: UITextViewDelegate {
             commentSendButton.isHidden = text.isEmpty
             
             // max 5줄 설정
-//            let line = Int(textView.contentSize.height / textView.font!.lineHeight )
-//
-//
-//            if line <= 5 {
-//                textView.isScrollEnabled = false
-//            } else {
-//                textView.isScrollEnabled = true
-//            }
+            //            let line = Int(textView.contentSize.height / textView.font!.lineHeight )
+            //
+            //
+            //            if line <= 5 {
+            //                textView.isScrollEnabled = false
+            //            } else {
+            //                textView.isScrollEnabled = true
+            //            }
             
         }
     }

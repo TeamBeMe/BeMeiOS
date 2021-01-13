@@ -70,6 +70,7 @@
 		D4996BFC25AB8F9800E3987B /* OthersPageCVFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4996BFB25AB8F9800E3987B /* OthersPageCVFlowLayout.swift */; };
 		D4BE323525AB99D8001F5014 /* EmptyArticleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BE323425AB99D8001F5014 /* EmptyArticleTVC.swift */; };
 		D4C5870525AF60FD0089BD18 /* CustomActionSheetOneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5870425AF60FC0089BD18 /* CustomActionSheetOneVC.swift */; };
+		D4C5872925AF77970089BD18 /* CustomMailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5872825AF77970089BD18 /* CustomMailView.swift */; };
 		D4E07CB9259F22C10075E616 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4E07CB2259F22C10075E616 /* Explore.storyboard */; };
 		D4E07CBA259F22C10075E616 /* MoreTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E07CB4259F22C10075E616 /* MoreTVC.swift */; };
 		D4E07CBC259F22C10075E616 /* DiffThoughtCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E07CB6259F22C10075E616 /* DiffThoughtCVC.swift */; };
@@ -262,6 +263,7 @@
 		D4996BFB25AB8F9800E3987B /* OthersPageCVFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OthersPageCVFlowLayout.swift; sourceTree = "<group>"; };
 		D4BE323425AB99D8001F5014 /* EmptyArticleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyArticleTVC.swift; sourceTree = "<group>"; };
 		D4C5870425AF60FC0089BD18 /* CustomActionSheetOneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionSheetOneVC.swift; sourceTree = "<group>"; };
+		D4C5872825AF77970089BD18 /* CustomMailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMailView.swift; sourceTree = "<group>"; };
 		D4E07CB2259F22C10075E616 /* Explore.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Explore.storyboard; sourceTree = "<group>"; };
 		D4E07CB4259F22C10075E616 /* MoreTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTVC.swift; sourceTree = "<group>"; };
 		D4E07CB6259F22C10075E616 /* DiffThoughtCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiffThoughtCVC.swift; sourceTree = "<group>"; };
@@ -938,6 +940,7 @@
 				EC7F0EA025A05460008EB88A /* CustomHomeActionSheetAlert.swift */,
 				ECB44D5425AC9CD800F491F2 /* CustomLoadingView.swift */,
 				ECB44D6625ACCB4500F491F2 /* CustomEmtpyView.swift */,
+				D4C5872825AF77970089BD18 /* CustomMailView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -1429,6 +1432,7 @@
 				EC813F432599A42700BBCE25 /* APIConstants.swift in Sources */,
 				EC813F7B2599F88D00BBCE25 /* PastCardCVC.swift in Sources */,
 				EC7F0EAF25A09F24008EB88A /* AnswerDataForViewController.swift in Sources */,
+				D4C5872925AF77970089BD18 /* CustomMailView.swift in Sources */,
 				EC7C1612259B8BA100A5BA4C /* FollowingVC.swift in Sources */,
 				D480730525A81DF400DE1DD3 /* MypageCVFlowLayout.swift in Sources */,
 				EC71C84C25A7769B00F51FEC /* ShittyImageCropVC.swift in Sources */,
