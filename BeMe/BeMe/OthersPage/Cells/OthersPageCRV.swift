@@ -26,17 +26,13 @@ class OthersPageCRV: UICollectionReusableView {
     
     //MARK:**- Variable Part**
     static let identifier = "OthersPageCRV"
-    private var isFollowed = false
-    
+//    private var isFollowed = false
+    var othersProfile: [OthersProfile] = [] 
     //MARK:**- Life Cycle Part**
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        setFollowButton(view: followButton, isFollowed: isFollowed)
-        setInfoLabel()
-        setLabel(view: answerCountLabel, text: "4")
-        setLabel(view: attendanceCountLabel, text: "4123124")
-        setLabel(view: nameLabel, text: "재용아 개소리 좀 그만해")
+        
     }
     
     
@@ -44,39 +40,115 @@ class OthersPageCRV: UICollectionReusableView {
     @IBAction func backButtonTapped(_ sender: Any) {
     }
     @IBAction func reportButtonTapped(_ sender: Any) {
+        
     }
     @IBAction func followButtonTapped(_ sender: Any) {
-        isFollowed = !isFollowed
-        setFollowButton(view: followButton, isFollowed: isFollowed)
+//        isFollowed = !isFollowed
+//        setFollowButton(view: followButton, isFollowed: isFollowed)
+        
+        
+        if followButton.titleLabel?.text == "팔로잉"{
+            FollowingFollowService.shared.follow(id: othersProfile[0].id){(networkResult) -> (Void) in
+                switch networkResult{
+                case .success(let data) :
+                    print("success")
+//                    self.followButton.setTitle("팔로우", for: .normal)
+//                    self.followButton.backgroundColor = .black
+//                    self.followButton.setTitleColor(.white, for: .normal)
+                    self.setFollowButton(view: self.followButton, isFollowed: false)
+                    
+                    
+                    
+                case .requestErr(let msg):
+                    if let message = msg as? String {
+                        print(message)
+                    }
+                case .pathErr :
+                    print("pathErr")
+                case .serverErr :
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+                    
+                }
+                
+                
+            }
+            
+            
+            
+        }
+        else {
+            FollowingFollowService.shared.follow(id: othersProfile[0].id){(networkResult) -> (Void) in
+                switch networkResult{
+                case .success(let data) :
+                    print("success")
+//                    self.followButton.setTitle("팔로잉", for: .normal)
+//                    self.followButton.backgroundColor = .white
+//                    self.followButton.setTitleColor(.black, for: .normal)
+                    
+                    self.setFollowButton(view: self.followButton, isFollowed: true)
+                    
+                    
+                    
+                    
+                case .requestErr(let msg):
+                    if let message = msg as? String {
+                        print(message)
+                    }
+                case .pathErr :
+                    print("pathErr")
+                case .serverErr :
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+                    
+                }
+                
+                
+            }
+            
+            
+        }
+        
+        
+        
+        
     }
     
     //MARK:**- default Setting Function Part**
+    
+    func setProfile(nickname: String, img: String, visit: String, answerCount: String, isFollowed: Bool){
+        nameLabel.text = nickname
+        profileImage.imageFromUrl(img, defaultImgPath: "imgMypage")
+        attendanceCountInfoLabel.text = visit
+        answerCountInfoLabel.text = answerCount
+        setInfoLabel()
+        setFollowButton(view: followButton, isFollowed: isFollowed)
+        print("setP{riofile")
+        print(isFollowed)
+    }
     func setFollowButton(view: UIButton, isFollowed: Bool) {
         if isFollowed {
+            view.setTitle("팔로잉", for: .normal)
             view.setBorderWithRadius(borderColor: .veryLightPinkTwo, borderWidth: 1, cornerRadius: 3)
             view.backgroundColor = UIColor.white
             view.setTitleColor(.black, for: .normal)
         } else {
+            view.setTitle("팔로우", for: .normal)
             view.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 3)
             view.backgroundColor = UIColor.black
             view.setTitleColor(.white, for: .normal)
         }
         
     }
-
+    
     func setInfoLabel(){
         attendanceCountInfoLabel.textColor = .slateGrey
         answerCountInfoLabel.textColor = .slateGrey
     }
     
-    func setLabel(view: UILabel, text: String){
-        view.text = text
-    }
-    
-    func setImgae(view: UIImageView, text: String){
-        view.image = UIImage(contentsOfFile: text)
-    }
-    
     //MARK:**- Function Part**
-        
+    
 }
+

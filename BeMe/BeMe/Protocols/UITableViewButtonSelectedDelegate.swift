@@ -35,6 +35,9 @@ protocol UITableViewButtonSelectedDelegate: class {
     
     // 댓글 화면으로 넘어갈 때
     func goToCommentButtonTapped(_ answerId: Int)
+    
+    // 알람 화면으로 넘어가는 버튼 눌렀을 때
+    func goToAlarmButtonDidTapped()
 }
 
 extension UITableViewButtonSelectedDelegate {
@@ -55,4 +58,6 @@ extension UITableViewButtonSelectedDelegate {
     func exploreAnswerScrapButtonDidTapped(_ answerId: Int) {}
     
     func goToCommentButtonTapped(_ answerId: Int) {}
+    
+    func goToAlarmButtonDidTapped() {}
 }

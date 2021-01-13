@@ -13,6 +13,10 @@
 		A501410025A39C18001099E8 /* MypageTabCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A50140FF25A39C18001099E8 /* MypageTabCVC.swift */; };
 		A51CA35F25A57D2F0020F26D /* MypageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51CA35E25A57D2E0020F26D /* MypageVC.swift */; };
 		A51CA36325A57D430020F26D /* Mypage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A51CA36225A57D430020F26D /* Mypage.storyboard */; };
+		A54CE7C725AC5BF000914FCB /* OthersPageProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54CE7C625AC5BF000914FCB /* OthersPageProfileService.swift */; };
+		A54CE7CA25AC5C0000914FCB /* OthersPageAnswerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54CE7C925AC5C0000914FCB /* OthersPageAnswerService.swift */; };
+		A54CE7CE25AC60D100914FCB /* OthersProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54CE7CD25AC60D100914FCB /* OthersProfile.swift */; };
+		A54CE7D225AC678A00914FCB /* OthersAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54CE7D125AC678A00914FCB /* OthersAnswer.swift */; };
 		A57F708C25A1ACB100152E89 /* MypageResultTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57F708B25A1ACB100152E89 /* MypageResultTVC.swift */; };
 		A5A5BE5225A835AF00036431 /* UIScrollView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5BE5125A835AF00036431 /* UIScrollView+Extensions.swift */; };
 		A5A5BE6625A9DC4E00036431 /* OthersPage.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A5A5BE6525A9DC4E00036431 /* OthersPage.storyboard */; };
@@ -22,6 +26,14 @@
 		A5A5BE7825A9E38D00036431 /* OthersPageTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5A5BE7725A9E38D00036431 /* OthersPageTVC.swift */; };
 		A5CCCD9E25A334EA008A3125 /* MypageMyScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */; };
 		A5CCCDA125A33512008A3125 /* MypageOthersScrapTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */; };
+		D405E8A125ADBDFA004CC60F /* Alarm.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D405E8A025ADBDFA004CC60F /* Alarm.storyboard */; };
+		D405E8A425ADBE1C004CC60F /* AlarmVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D405E8A325ADBE1C004CC60F /* AlarmVC.swift */; };
+		D405E8B025ADD277004CC60F /* AlarmTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D405E8AF25ADD277004CC60F /* AlarmTVC.swift */; };
+		D405E8B325ADD290004CC60F /* AlarmTitleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D405E8B225ADD290004CC60F /* AlarmTitleTVC.swift */; };
+		D405E8B725ADD7CB004CC60F /* AlarmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D405E8B625ADD7CB004CC60F /* AlarmData.swift */; };
+		D405E8BC25ADD7ED004CC60F /* Alarm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D405E8BB25ADD7ED004CC60F /* Alarm.swift */; };
+		D405E8C025ADD80E004CC60F /* AlarmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D405E8BF25ADD80E004CC60F /* AlarmService.swift */; };
+		D405E8C425ADDAAF004CC60F /* AlarmMoreTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D405E8C325ADDAAF004CC60F /* AlarmMoreTVC.swift */; };
 		D41196B825A64E82009C674A /* CustomActionSheetTwoVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41196B725A64E82009C674A /* CustomActionSheetTwoVC.swift */; };
 		D41B6BDD25A97E70004D2052 /* EmptyThoughtCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41B6BDC25A97E70004D2052 /* EmptyThoughtCVC.swift */; };
 		D41B6BE025A9BCFA004D2052 /* ExploreAnswerScrapService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41B6BDF25A9BCFA004D2052 /* ExploreAnswerScrapService.swift */; };
@@ -198,6 +210,10 @@
 		A51CA36225A57D430020F26D /* Mypage.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Mypage.storyboard; sourceTree = "<group>"; };
 		A51CA36525A57DBA0020F26D /* Answer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Answer.storyboard; sourceTree = "<group>"; };
 		A51CA36825A57DBE0020F26D /* AnswerVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerVC.swift; sourceTree = "<group>"; };
+		A54CE7C625AC5BF000914FCB /* OthersPageProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersPageProfileService.swift; sourceTree = "<group>"; };
+		A54CE7C925AC5C0000914FCB /* OthersPageAnswerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersPageAnswerService.swift; sourceTree = "<group>"; };
+		A54CE7CD25AC60D100914FCB /* OthersProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersProfile.swift; sourceTree = "<group>"; };
+		A54CE7D125AC678A00914FCB /* OthersAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersAnswer.swift; sourceTree = "<group>"; };
 		A578D4E0259E727C00F69908 /* Answer.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Answer.storyboard; path = BeMe/Answer/s/Answer.storyboard; sourceTree = SOURCE_ROOT; };
 		A578D4EF25A0C4E600F69908 /* Mypage.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Mypage.storyboard; sourceTree = SOURCE_ROOT; };
 		A57F708B25A1ACB100152E89 /* MypageResultTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageResultTVC.swift; sourceTree = "<group>"; };
@@ -210,6 +226,14 @@
 		A5CCCD9D25A334EA008A3125 /* MypageMyScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageMyScrapTVC.swift; sourceTree = "<group>"; };
 		A5CCCDA025A33512008A3125 /* MypageOthersScrapTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageOthersScrapTVC.swift; sourceTree = "<group>"; };
 		B2F0C2D2FD99AEF5B492AAB9 /* Pods-BeMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.release.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.release.xcconfig"; sourceTree = "<group>"; };
+		D405E8A025ADBDFA004CC60F /* Alarm.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Alarm.storyboard; sourceTree = "<group>"; };
+		D405E8A325ADBE1C004CC60F /* AlarmVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmVC.swift; sourceTree = "<group>"; };
+		D405E8AF25ADD277004CC60F /* AlarmTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTVC.swift; sourceTree = "<group>"; };
+		D405E8B225ADD290004CC60F /* AlarmTitleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmTitleTVC.swift; sourceTree = "<group>"; };
+		D405E8B625ADD7CB004CC60F /* AlarmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmData.swift; sourceTree = "<group>"; };
+		D405E8BB25ADD7ED004CC60F /* Alarm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alarm.swift; sourceTree = "<group>"; };
+		D405E8BF25ADD80E004CC60F /* AlarmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmService.swift; sourceTree = "<group>"; };
+		D405E8C325ADDAAF004CC60F /* AlarmMoreTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmMoreTVC.swift; sourceTree = "<group>"; };
 		D41196B725A64E82009C674A /* CustomActionSheetTwoVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionSheetTwoVC.swift; sourceTree = "<group>"; };
 		D41B6BDC25A97E70004D2052 /* EmptyThoughtCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyThoughtCVC.swift; sourceTree = "<group>"; };
 		D41B6BDF25A9BCFA004D2052 /* ExploreAnswerScrapService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreAnswerScrapService.swift; sourceTree = "<group>"; };
@@ -425,6 +449,24 @@
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
+		A54CE7C425AC52F400914FCB /* OthersPage */ = {
+			isa = PBXGroup;
+			children = (
+				A54CE7C625AC5BF000914FCB /* OthersPageProfileService.swift */,
+				A54CE7C925AC5C0000914FCB /* OthersPageAnswerService.swift */,
+			);
+			path = OthersPage;
+			sourceTree = "<group>";
+		};
+		A54CE7CC25AC609900914FCB /* OthersPage */ = {
+			isa = PBXGroup;
+			children = (
+				A54CE7CD25AC60D100914FCB /* OthersProfile.swift */,
+				A54CE7D125AC678A00914FCB /* OthersAnswer.swift */,
+			);
+			path = OthersPage;
+			sourceTree = "<group>";
+		};
 		A578D4E725A0BF8F00F69908 /* Mypage */ = {
 			isa = PBXGroup;
 			children = (
@@ -484,6 +526,59 @@
 				A5A5BE7725A9E38D00036431 /* OthersPageTVC.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		D405E89C25ADBDD2004CC60F /* Alarm */ = {
+			isa = PBXGroup;
+			children = (
+				D405E89F25ADBDDD004CC60F /* Cells */,
+				D405E89E25ADBDD6004CC60F /* VCs */,
+				D405E89D25ADBDD2004CC60F /* Storyboard */,
+			);
+			path = Alarm;
+			sourceTree = "<group>";
+		};
+		D405E89D25ADBDD2004CC60F /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				D405E8A025ADBDFA004CC60F /* Alarm.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		D405E89E25ADBDD6004CC60F /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				D405E8A325ADBE1C004CC60F /* AlarmVC.swift */,
+			);
+			path = VCs;
+			sourceTree = "<group>";
+		};
+		D405E89F25ADBDDD004CC60F /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				D405E8AF25ADD277004CC60F /* AlarmTVC.swift */,
+				D405E8B225ADD290004CC60F /* AlarmTitleTVC.swift */,
+				D405E8C325ADDAAF004CC60F /* AlarmMoreTVC.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		D405E8B525ADD7C0004CC60F /* Alarm */ = {
+			isa = PBXGroup;
+			children = (
+				D405E8B625ADD7CB004CC60F /* AlarmData.swift */,
+				D405E8BB25ADD7ED004CC60F /* Alarm.swift */,
+			);
+			path = Alarm;
+			sourceTree = "<group>";
+		};
+		D405E8BE25ADD804004CC60F /* Alarm */ = {
+			isa = PBXGroup;
+			children = (
+				D405E8BF25ADD80E004CC60F /* AlarmService.swift */,
+			);
+			path = Alarm;
 			sourceTree = "<group>";
 		};
 		D4344B3425AAF0F6002858CF /* Comment */ = {
@@ -741,6 +836,8 @@
 		EC5C201125A49C8A008EE335 /* APIService */ = {
 			isa = PBXGroup;
 			children = (
+				D405E8BE25ADD804004CC60F /* Alarm */,
+				A54CE7C425AC52F400914FCB /* OthersPage */,
 				D4344B3425AAF0F6002858CF /* Comment */,
 				ECC630FD25A967E4009E4FD4 /* FindPeople */,
 				D480731225A849E700DE1DD3 /* Explore */,
@@ -758,6 +855,8 @@
 		EC5C201225A49C98008EE335 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D405E8B525ADD7C0004CC60F /* Alarm */,
+				A54CE7CC25AC609900914FCB /* OthersPage */,
 				D449CFF625AA38FA00A07C3C /* Answer */,
 				ECC630F725A96799009E4FD4 /* FindPeople */,
 				D480730725A82B3200DE1DD3 /* Explore */,
@@ -989,6 +1088,7 @@
 			isa = PBXGroup;
 			children = (
 				ECA1517B25ADEF1E0091E5EF /* Onboarding */,
+				D405E89C25ADBDD2004CC60F /* Alarm */,
 				ECC6312725A9E88B009E4FD4 /* SupportFiles */,
 				D44F6DBF25A5784A002A9761 /* Answer */,
 				D44F6D9B25A575E0002A9761 /* Protocols */,
@@ -1282,6 +1382,7 @@
 				EC7C1618259B933F00A5BA4C /* FollowInfo.storyboard in Resources */,
 				A51CA36325A57D430020F26D /* Mypage.storyboard in Resources */,
 				EC813F302599A15200BBCE25 /* LaunchScreen.storyboard in Resources */,
+				D405E8A125ADBDFA004CC60F /* Alarm.storyboard in Resources */,
 				ECB44D5225AC968A00F491F2 /* loading.json in Resources */,
 				EC813F2D2599A15200BBCE25 /* Assets.xcassets in Resources */,
 				EC813F2B2599A15100BBCE25 /* Main.storyboard in Resources */,
@@ -1358,8 +1459,10 @@
 				ECA1518E25ADF6540091E5EF /* OnboardingPVC.swift in Sources */,
 				A50140FD25A39BFA001099E8 /* MypageCVC.swift in Sources */,
 				EC813F462599A44F00BBCE25 /* GenericResponse.swift in Sources */,
+				A54CE7D225AC678A00914FCB /* OthersAnswer.swift in Sources */,
 				EC75A23225A8664200F4E160 /* HomeDeleteAnswerService.swift in Sources */,
 				EC75A25425A8A71800F4E160 /* FollowingGetData.swift in Sources */,
+				D405E8B025ADD277004CC60F /* AlarmTVC.swift in Sources */,
 				EC7C1624259B9CA500A5BA4C /* FollowingHeaderCVC.swift in Sources */,
 				D41B6BDD25A97E70004D2052 /* EmptyThoughtCVC.swift in Sources */,
 				EC71C83025A5A2E300F51FEC /* HomePageData.swift in Sources */,
@@ -1370,10 +1473,12 @@
 				EC89E31C259C281F00DBAFE5 /* FollowerListCVC.swift in Sources */,
 				ECC6310925A999DB009E4FD4 /* FollowingGetAnswersService.swift in Sources */,
 				D480733425A8B39E00DE1DD3 /* ExploreCustomCollectionViewFlowLayout.swift in Sources */,
+				D405E8B325ADD290004CC60F /* AlarmTitleTVC.swift in Sources */,
 				EC7FEFB125A39B7000C61147 /* UITextField+Extensions.swift in Sources */,
 				EC5C1FF625A433EE008EE335 /* String+Extensions.swift in Sources */,
 				EC7C163A259BAD2D00A5BA4C /* FollowerCardCVC.swift in Sources */,
 				EC813F7E2599F89A00BBCE25 /* NewCardCVC.swift in Sources */,
+				D405E8A425ADBE1C004CC60F /* AlarmVC.swift in Sources */,
 				ECC6310625A9987A009E4FD4 /* FollowingAnswersData.swift in Sources */,
 				EC75A24725A8876E00F4E160 /* AnswerRegistService.swift in Sources */,
 				EC7C1601259B469D00A5BA4C /* UIViewController+Extensions.swift in Sources */,
@@ -1412,6 +1517,7 @@
 				EC7C1615259B925A00A5BA4C /* FollowingPVC.swift in Sources */,
 				D4996BF725AB8F4500E3987B /* AlertLabels.swift in Sources */,
 				A5A5BE7225A9E35A00036431 /* OthersPageCRV.swift in Sources */,
+				A54CE7CE25AC60D100914FCB /* OthersProfile.swift in Sources */,
 				ECB44D4D25AC886800F491F2 /* FollowerDeleteService.swift in Sources */,
 				EC813F772599F86900BBCE25 /* HomeVC.swift in Sources */,
 				ECA1516A25AD6F330091E5EF /* SignUpNoticeVC.swift in Sources */,
@@ -1427,6 +1533,7 @@
 				EC5C202325A4C818008EE335 /* LogInData.swift in Sources */,
 				EC71C83525A5A41800F51FEC /* HomePageDataService.swift in Sources */,
 				EC89E30C259C273400DBAFE5 /* FollowingSearchVC.swift in Sources */,
+				D405E8C425ADDAAF004CC60F /* AlarmMoreTVC.swift in Sources */,
 				EC7C1605259B485D00A5BA4C /* CustomAlertView.swift in Sources */,
 				EC89E316259C280200DBAFE5 /* FollowingListCVC.swift in Sources */,
 				ECA1519125ADF6FC0091E5EF /* OnboardingVC.swift in Sources */,
@@ -1449,19 +1556,23 @@
 				EC7C162A259BA01200A5BA4C /* FollowerInfoVC.swift in Sources */,
 				D4E5FD37259E710200C57950 /* UIButton+Extensions.swift in Sources */,
 				EC5C200D25A4721E008EE335 /* LogInVC.swift in Sources */,
+				A54CE7CA25AC5C0000914FCB /* OthersPageAnswerService.swift in Sources */,
 				ECB44D4425AC739B00F491F2 /* FindHistoryService.swift in Sources */,
 				EC89E322259C376500DBAFE5 /* FollowPeopleCVC.swift in Sources */,
 				ECC6311825A9E6AA009E4FD4 /* HomeLottietestVC.swift in Sources */,
 				EC7C161B259B9A9200A5BA4C /* FollowingInfoVC.swift in Sources */,
 				EC5C201525A49CD5008EE335 /* SignUpService.swift in Sources */,
 				EC75A25E25A8B28000F4E160 /* UIImageView+Extensions.swift in Sources */,
+				D405E8B725ADD7CB004CC60F /* AlarmData.swift in Sources */,
 				D44F6D9D25A575E0002A9761 /* UITableViewButtonSelectedDelegate.swift in Sources */,
 				A5CCCDA125A33512008A3125 /* MypageOthersScrapTVC.swift in Sources */,
+				D405E8BC25ADD7ED004CC60F /* Alarm.swift in Sources */,
 				EC89E325259C377400DBAFE5 /* FollowPersonCVC.swift in Sources */,
 				EC813F492599A59500BBCE25 /* NetworkResult.swift in Sources */,
 				EC75A22C25A81AB100F4E160 /* HomeChangeQuestionService.swift in Sources */,
 				A5CCCD9E25A334EA008A3125 /* MypageMyScrapTVC.swift in Sources */,
 				A5A5BE5225A835AF00036431 /* UIScrollView+Extensions.swift in Sources */,
+				A54CE7C725AC5BF000914FCB /* OthersPageProfileService.swift in Sources */,
 				EC7F0EA925A057DF008EB88A /* HomeVC+UnderAlert.swift in Sources */,
 				D480731425A849FF00DE1DD3 /* ExploreThoughtService.swift in Sources */,
 				ECA1518825ADF4500091E5EF /* OnboardingThirdVC.swift in Sources */,
@@ -1499,6 +1610,7 @@
 				EC813F262599A15100BBCE25 /* SceneDelegate.swift in Sources */,
 				EC89E30F259C274200DBAFE5 /* FollowerSearchVC.swift in Sources */,
 				EC7C1634259BAD0600A5BA4C /* FollowerPersonCVC.swift in Sources */,
+				D405E8C025ADD80E004CC60F /* AlarmService.swift in Sources */,
 				D44F6DFC25A5BDAD002A9761 /* QuestionAnswerTVC.swift in Sources */,
 				D44F6DC525A5784A002A9761 /* AnswerVC.swift in Sources */,
 			);
@@ -1649,7 +1761,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TZVHD77BLL;
+				DEVELOPMENT_TEAM = 6ZTQ76LJPZ;
 				INFOPLIST_FILE = BeMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1669,7 +1781,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = TZVHD77BLL;
+				DEVELOPMENT_TEAM = 6ZTQ76LJPZ;
 				INFOPLIST_FILE = BeMe/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

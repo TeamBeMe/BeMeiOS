@@ -7,6 +7,15 @@
 
 import UIKit
 
+protocol ExploreTabBarDelegate {
+    func exploreTabDidTapped()
+}
+
+
+extension ExploreTabBarDelegate {
+    func exploreTabDidTapped() {}
+}
+
 class UnderTabBarController: UITabBarController {
 
     override func viewDidLoad() {
@@ -23,8 +32,11 @@ class UnderTabBarController: UITabBarController {
         tabBar.frame.origin.y = view.frame.height - 83
     }
     
+    private var pastIndex: Int = 0
+    
     var homeTabBarDelegate: HomeTabBarDelegate?
     var followingTabBarDelegate: FollowingTabBarDelegate?
+    var exploreTabBarDelegate: ExploreTabBarDelegate?
 }
 
 
@@ -52,7 +64,7 @@ extension UnderTabBarController {
             return
             
         }
-        
+        exploreTabBarDelegate = exploreVC
         
         guard let followingVC = UIStoryboard(name: "Following",
                                         bundle: nil).instantiateViewController(
@@ -110,18 +122,22 @@ extension UnderTabBarController {
 extension UnderTabBarController : UITabBarControllerDelegate {
     // UITabBarDelegate
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        
     }
 
 
     // UITabBarControllerDelegate
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let isInExploreTab =  pastIndex == selectedIndex
         if viewController == self.viewControllers![0] {
             homeTabBarDelegate?.homeButtonTapped()
-        }
-        else if viewController == self.viewControllers![2]{
+        } else if viewController == self.viewControllers![1] {
+            if isInExploreTab {
+                exploreTabBarDelegate?.exploreTabDidTapped()
+            }
+        } else if viewController == self.viewControllers![2]{
             followingTabBarDelegate?.followButtonTapped()
         }
+        pastIndex = selectedIndex
     }
     
     
