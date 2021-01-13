@@ -72,10 +72,11 @@
 		D492E43825A0E16D0088A181 /* CustomActionSheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492E43725A0E16D0088A181 /* CustomActionSheetVC.swift */; };
 		D492E43B25A0E6250088A181 /* DetailMoreTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492E43A25A0E6250088A181 /* DetailMoreTVC.swift */; };
 		D492E44025A0E6A80088A181 /* UITableView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D492E43F25A0E6A80088A181 /* UITableView+Extensions.swift */; };
-		D4996BF325AB8F3B00E3987B /* AlertLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4996BF225AB8F3B00E3987B /* AlertLabels.swift */; };
 		D4996BF725AB8F4500E3987B /* AlertLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4996BF625AB8F4500E3987B /* AlertLabels.swift */; };
 		D4996BFC25AB8F9800E3987B /* OthersPageCVFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4996BFB25AB8F9800E3987B /* OthersPageCVFlowLayout.swift */; };
 		D4BE323525AB99D8001F5014 /* EmptyArticleTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4BE323425AB99D8001F5014 /* EmptyArticleTVC.swift */; };
+		D4C5870525AF60FD0089BD18 /* CustomActionSheetOneVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5870425AF60FC0089BD18 /* CustomActionSheetOneVC.swift */; };
+		D4C5872925AF77970089BD18 /* CustomMailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5872825AF77970089BD18 /* CustomMailView.swift */; };
 		D4E07CB9259F22C10075E616 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4E07CB2259F22C10075E616 /* Explore.storyboard */; };
 		D4E07CBA259F22C10075E616 /* MoreTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E07CB4259F22C10075E616 /* MoreTVC.swift */; };
 		D4E07CBC259F22C10075E616 /* DiffThoughtCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E07CB6259F22C10075E616 /* DiffThoughtCVC.swift */; };
@@ -282,10 +283,11 @@
 		D492E43725A0E16D0088A181 /* CustomActionSheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionSheetVC.swift; sourceTree = "<group>"; };
 		D492E43A25A0E6250088A181 /* DetailMoreTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailMoreTVC.swift; sourceTree = "<group>"; };
 		D492E43F25A0E6A80088A181 /* UITableView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extensions.swift"; sourceTree = "<group>"; };
-		D4996BF225AB8F3B00E3987B /* AlertLabels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertLabels.swift; sourceTree = "<group>"; };
 		D4996BF625AB8F4500E3987B /* AlertLabels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertLabels.swift; sourceTree = "<group>"; };
 		D4996BFB25AB8F9800E3987B /* OthersPageCVFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OthersPageCVFlowLayout.swift; sourceTree = "<group>"; };
 		D4BE323425AB99D8001F5014 /* EmptyArticleTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyArticleTVC.swift; sourceTree = "<group>"; };
+		D4C5870425AF60FC0089BD18 /* CustomActionSheetOneVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionSheetOneVC.swift; sourceTree = "<group>"; };
+		D4C5872825AF77970089BD18 /* CustomMailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMailView.swift; sourceTree = "<group>"; };
 		D4E07CB2259F22C10075E616 /* Explore.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Explore.storyboard; sourceTree = "<group>"; };
 		D4E07CB4259F22C10075E616 /* MoreTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTVC.swift; sourceTree = "<group>"; };
 		D4E07CB6259F22C10075E616 /* DiffThoughtCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiffThoughtCVC.swift; sourceTree = "<group>"; };
@@ -726,8 +728,8 @@
 		D492E43225A0E1090088A181 /* VC */ = {
 			isa = PBXGroup;
 			children = (
-				D4996BF125AB8F3B00E3987B /* Model */,
 				D492E43725A0E16D0088A181 /* CustomActionSheetVC.swift */,
+				D4C5870425AF60FC0089BD18 /* CustomActionSheetOneVC.swift */,
 				D41196B725A64E82009C674A /* CustomActionSheetTwoVC.swift */,
 			);
 			path = VC;
@@ -740,15 +742,6 @@
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
-		};
-		D4996BF125AB8F3B00E3987B /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				D4996BF225AB8F3B00E3987B /* AlertLabels.swift */,
-			);
-			name = Model;
-			path = BeMe/CustomActionSheet/Model;
-			sourceTree = SOURCE_ROOT;
 		};
 		D4996BF525AB8F4500E3987B /* Model */ = {
 			isa = PBXGroup;
@@ -1005,6 +998,7 @@
 				EC7F0EA025A05460008EB88A /* CustomHomeActionSheetAlert.swift */,
 				ECB44D5425AC9CD800F491F2 /* CustomLoadingView.swift */,
 				ECB44D6625ACCB4500F491F2 /* CustomEmtpyView.swift */,
+				D4C5872825AF77970089BD18 /* CustomMailView.swift */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -1530,6 +1524,7 @@
 				EC89E31C259C281F00DBAFE5 /* FollowerListCVC.swift in Sources */,
 				ECC6310925A999DB009E4FD4 /* FollowingGetAnswersService.swift in Sources */,
 				D480733425A8B39E00DE1DD3 /* ExploreCustomCollectionViewFlowLayout.swift in Sources */,
+				D4C5870525AF60FD0089BD18 /* CustomActionSheetOneVC.swift in Sources */,
 				D405E8B325ADD290004CC60F /* AlarmTitleTVC.swift in Sources */,
 				EC7FEFB125A39B7000C61147 /* UITextField+Extensions.swift in Sources */,
 				EC5C1FF625A433EE008EE335 /* String+Extensions.swift in Sources */,
@@ -1546,6 +1541,7 @@
 				EC813F432599A42700BBCE25 /* APIConstants.swift in Sources */,
 				EC813F7B2599F88D00BBCE25 /* PastCardCVC.swift in Sources */,
 				EC7F0EAF25A09F24008EB88A /* AnswerDataForViewController.swift in Sources */,
+				D4C5872925AF77970089BD18 /* CustomMailView.swift in Sources */,
 				EC7C1612259B8BA100A5BA4C /* FollowingVC.swift in Sources */,
 				A53C289D25AE103D0054DA7E /* MyProfile.swift in Sources */,
 				D480730525A81DF400DE1DD3 /* MypageCVFlowLayout.swift in Sources */,
@@ -1589,7 +1585,6 @@
 				EC89E319259C281100DBAFE5 /* FollowerSearchCVC.swift in Sources */,
 				EC75A25825A8A78400F4E160 /* FollowingGetService.swift in Sources */,
 				EC7C1627259B9CE200A5BA4C /* FollowingCardCVC.swift in Sources */,
-				D4996BF325AB8F3B00E3987B /* AlertLabels.swift in Sources */,
 				D480731025A8492800DE1DD3 /* ExploreThoughtData.swift in Sources */,
 				EC5C202325A4C818008EE335 /* LogInData.swift in Sources */,
 				EC71C83525A5A41800F51FEC /* HomePageDataService.swift in Sources */,
@@ -1831,7 +1826,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = YunaeKim.BeMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teamBeMe.BeMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1851,7 +1846,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = YunaeKim.BeMe;
+				PRODUCT_BUNDLE_IDENTIFIER = com.teamBeMe.BeMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

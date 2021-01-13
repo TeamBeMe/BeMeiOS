@@ -31,6 +31,7 @@ class CustomActionSheetTwoVC: UIViewController {
         wrapper.roundCorners(cornerRadius: 10.0, maskedCorners: [.layerMaxXMinYCorner, .layerMinXMinYCorner])
         
         cancelButton.layer.addBorder([.top], color: .lightGray, width: 1.0)
+        
         if let alertInfo = alertInformations {
             setSettings(by: alertInfo, color: color)
             

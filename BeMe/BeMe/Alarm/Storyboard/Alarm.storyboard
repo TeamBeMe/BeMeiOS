@@ -62,36 +62,39 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlarmTVC" id="xyy-hT-hj1" customClass="AlarmTVC" customModule="BeMe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="100" width="414" height="55"/>
+                                        <rect key="frame" x="0.0" y="100" width="414" height="56"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xyy-hT-hj1" id="eoQ-ey-LFM">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="55"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgProfile" translatesAutoresizingMaskIntoConstraints="NO" id="aCK-ie-abo">
-                                                    <rect key="frame" x="30" y="10" width="36" height="36"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="36" id="2TO-e7-wjn"/>
-                                                        <constraint firstAttribute="height" constant="36" id="uRX-gk-okn"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="genie_self님이 “이번주를 후회없이 보내는 방법”에 대한 나의 글에 댓글을 달았습니다" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JwX-dh-c4G">
-                                                    <rect key="frame" x="82" y="11" width="302" height="34"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" priority="250" constant="36" id="PJd-j6-hrO"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="zae-QN-nH9">
+                                                    <rect key="frame" x="30" y="10" width="354" height="36"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imgProfile" translatesAutoresizingMaskIntoConstraints="NO" id="aCK-ie-abo">
+                                                            <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="36" id="2TO-e7-wjn"/>
+                                                                <constraint firstAttribute="height" constant="36" id="uRX-gk-okn"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="genie_self님이 “이번주를 후회없이 보내는 방법”에 대한 나의 글에 댓글을 달았습니다" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JwX-dh-c4G">
+                                                            <rect key="frame" x="52" y="1" width="302" height="34"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" priority="250" constant="36" id="PJd-j6-hrO"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="14"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="JwX-dh-c4G" secondAttribute="trailing" constant="30" id="0rv-Bc-vgd"/>
-                                                <constraint firstAttribute="bottom" secondItem="JwX-dh-c4G" secondAttribute="bottom" constant="10" id="Itx-t8-wKy"/>
-                                                <constraint firstItem="JwX-dh-c4G" firstAttribute="leading" secondItem="aCK-ie-abo" secondAttribute="trailing" constant="16" id="Vi1-Vx-SvB"/>
-                                                <constraint firstItem="aCK-ie-abo" firstAttribute="top" secondItem="eoQ-ey-LFM" secondAttribute="top" constant="10" id="WaF-Go-Pvm"/>
-                                                <constraint firstItem="aCK-ie-abo" firstAttribute="leading" secondItem="eoQ-ey-LFM" secondAttribute="leading" constant="30" id="em9-TJ-JBq"/>
-                                                <constraint firstItem="JwX-dh-c4G" firstAttribute="top" secondItem="eoQ-ey-LFM" secondAttribute="top" constant="11" id="gYz-Jd-kVA"/>
+                                                <constraint firstAttribute="trailing" secondItem="zae-QN-nH9" secondAttribute="trailing" constant="30" id="2uw-43-v8E"/>
+                                                <constraint firstItem="zae-QN-nH9" firstAttribute="leading" secondItem="eoQ-ey-LFM" secondAttribute="leading" constant="30" id="GnP-ZX-ZXK"/>
+                                                <constraint firstItem="zae-QN-nH9" firstAttribute="top" secondItem="eoQ-ey-LFM" secondAttribute="top" constant="10" id="Hzt-7F-BTR"/>
+                                                <constraint firstAttribute="bottom" secondItem="zae-QN-nH9" secondAttribute="bottom" constant="10" id="ty7-gc-0X1"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -100,7 +103,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlarmMoreTVC" id="I5E-1Q-J6N" customClass="AlarmMoreTVC" customModule="BeMe" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="155" width="414" height="157"/>
+                                        <rect key="frame" x="0.0" y="156" width="414" height="157"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I5E-1Q-J6N" id="wUb-u6-acm">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="157"/>

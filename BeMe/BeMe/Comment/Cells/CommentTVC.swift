@@ -30,7 +30,8 @@ class CommentTVC: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
+        profileImageView.makeRounded(cornerRadius: profileImageView.bounds.width / 2)
     }
     
     func setInformations(profileImage: String, nickName: String, publicFlag: Bool, isVisible: Bool ,content: String, date: String, commentId: Int, isAuthor: Bool) {

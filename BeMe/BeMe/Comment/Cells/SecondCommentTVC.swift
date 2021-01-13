@@ -26,7 +26,7 @@ class SecondCommentTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-//        contentTextViewHeight.constant = contentTextView.contentSize.height
+        profileImageView.makeRounded(cornerRadius: profileImageView.bounds.width / 2)
     }
 
     func setInformation(profileImage: String, nickName: String, content: String, date: String, isVisible: Bool, publicFlag: Bool, isAuthor: Bool, commentId: Int) {
