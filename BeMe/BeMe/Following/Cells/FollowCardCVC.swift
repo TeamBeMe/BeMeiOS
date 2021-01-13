@@ -51,7 +51,11 @@ class FollowCardCVC: UICollectionViewCell {
         
         let containTabGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpContainView))
         containView.addGestureRecognizer(containTabGesture)
-    
+        profileImageView.isUserInteractionEnabled = true
+        
+        let profileTabGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpProfile))
+        profileImageView.addGestureRecognizer(profileTabGesture)
+        print("aaaaaaa")
         
     }
     
@@ -96,7 +100,7 @@ class FollowCardCVC: UICollectionViewCell {
     }
     
     @objc func touchUpContainView(){
-        print("called")
+        
         followScrapButtonDelegate?.containViewTap(answerID: (answerData?.id)!)
     }
     
@@ -104,6 +108,12 @@ class FollowCardCVC: UICollectionViewCell {
     @IBAction func moreButtonAction(_ sender: Any) {
         followScrapButtonDelegate?.moreButtonTap(questionID: (answerData?.questionID)!,
                                                  question: (answerData?.question)!)
+    }
+    
+    @objc func touchUpProfile(){
+        print("callllllllllllll")
+        followScrapButtonDelegate?.profileSelectedTap(answerData: answerData!)
+        
     }
     
     

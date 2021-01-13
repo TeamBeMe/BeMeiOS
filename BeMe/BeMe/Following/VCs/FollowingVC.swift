@@ -802,6 +802,19 @@ extension FollowingVC: FollowScrapButtonDelegate {
     func moreButtonTap(questionID: Int, question: String){
         goToMoreAnswerButtonDidTapped(questionId: questionID, question: question)
     }
+    func profileSelectedTap(answerData: FollowingAnswers){
+        guard let profileVC = UIStoryboard(name: "OthersPage",
+                                          bundle: nil).instantiateViewController(
+                                            withIdentifier: "OthersPageVC") as? OthersPageVC
+        else{
+            
+            return
+        }
+        profileVC.userID = answerData.userID
+        self.navigationController?.pushViewController(profileVC, animated: true)
+        
+        
+    }
 }
 
 
@@ -856,6 +869,6 @@ protocol FollowScrapButtonDelegate {
     func containViewTap(answerID: Int)
     func moreButtonTap(questionID: Int, question: String)
     func replyButtonTap(answerData: FollowingAnswers)
-    
+    func profileSelectedTap(answerData: FollowingAnswers)
 }
 

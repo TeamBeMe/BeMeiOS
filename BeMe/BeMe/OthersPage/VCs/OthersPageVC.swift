@@ -18,8 +18,8 @@ class OthersPageVC: UIViewController {
     
     let othersPageCVC = OthersPageCVC()
     
-    var tableviewHeight: CGFloat = 0.0
-    
+    var tableviewHeight: CGFloat = 735.0
+    var userID: Int?
     
     private var othersAnswerArray: [Answer] = [] {
         didSet {
@@ -60,11 +60,14 @@ class OthersPageVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        getAnswerData(userId: 2, page: 1)
-        getProfileData(userId: 6)
+        getAnswerData(userId: userID!, page: 1)
+        getProfileData(userId: userID!)
     }
     //MARK:**- IBAction Part**
     
+    @IBAction func backButtonAction(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
+    }
     
     //MARK:**- default Setting Function Part**
     
@@ -108,9 +111,9 @@ extension OthersPageVC : UICollectionViewDataSource {
         
         cell.othersAnswerArray = othersAnswerArray
         print("otehrspage CV ")
-        print(othersAnswerArray[0].id)
-        print(othersAnswerArray[0].content)
-        print(othersAnswerArray[0].isScrapped!)
+//        print(othersAnswerArray[0].id)
+//        print(othersAnswerArray[0].content)
+//        print(othersAnswerArray[0].isScrapped!)
         //        print("=====")
         //        print(cell.othersAnswerArray.count)
         //        tableviewHeight = cell.tableviewHeight
@@ -132,7 +135,9 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+        
         tableviewHeight = CGFloat(othersAnswerArray.count) * 135.0
+        tableviewHeight = (tableviewHeight < 588.0) ? 588 : tableviewHeight
         
         //        print("=====")
         //        print(tableviewHeight)
