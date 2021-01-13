@@ -115,7 +115,7 @@ struct MyPageProfileService {
     }
     private func judgeSetProfile(status : Int, data : Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(GenericResponse<Int>.self, from : data) else{
+        guard let decodedData = try? decoder.decode(GenericResponse<ProfileResult>.self, from : data) else{
             return .pathErr
         }
         
@@ -137,7 +137,27 @@ struct MyPageProfileService {
         
     }
     
-    
-    
 }
+
+
+struct ProfileResult: Codable {
+    let id: Int
+    let profileImg: String?
+  
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "user_id"
+        case profileImg = "image"
+      
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = (try? values.decode(Int.self, forKey: .id)) ?? -1
+        profileImg = (try? values.decode(String.self, forKey: .profileImg)) ?? ""
+       
+        
+    }
+}
+
 

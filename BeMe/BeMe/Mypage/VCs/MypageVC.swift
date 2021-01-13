@@ -11,14 +11,27 @@ class MypageVC: UIViewController {
     
     //MARK:**- IBOutlet Part**
     @IBOutlet weak var mypageCollectionView: UICollectionView!
-
-
+    
+    
     private var directionMenu: Int = 0
     
     //MARK:**- Variable Part**
     let mypageCVLayout = MypageCVFlowLayout()
     
     let mypageCVC = MypageCVC()
+    
+    private var myAnswerArray: [Answer] = [] {
+        didSet {
+            mypageCollectionView.reloadData()
+        }
+    }
+    
+    private var myProfile: [MyProfile] = [] {
+        didSet {
+            mypageCollectionView.reloadData()
+        }
+    }
+    
     
     //MARK:**- Constraint Part**
     
@@ -27,8 +40,8 @@ class MypageVC: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-//        setSearhButton(view: searchButton)
-//        setKeywordLabel(label: keywordLabel)
+        //        setSearhButton(view: searchButton)
+        //        setKeywordLabel(label: keywordLabel)
         
         mypageCollectionView.delegate = self
         mypageCollectionView.dataSource = self
@@ -41,7 +54,12 @@ class MypageVC: UIViewController {
         
         mypageCollectionView.collectionViewLayout = mypageCVLayout
         
-        print("********************\(mypageCollectionView.adjustedContentInset)")
+        
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        getProfileData()
     }
     
     //MARK:**- IBAction Part**
@@ -74,7 +92,7 @@ class MypageVC: UIViewController {
     //MARK:**- Function Part**
     
     
-
+    
     
     
 }
@@ -99,7 +117,7 @@ extension MypageVC : UICollectionViewDataSource {
                 for: indexPath) as? MypageCVC else {
             return UICollectionViewCell()}
         
-
+        
         cell.scrollDirection(by: directionMenu)
         return cell
     }
@@ -113,9 +131,9 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-//            layout.sectionHeadersPinToVisibleBounds = true
-//        }
+        //        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+        //            layout.sectionHeadersPinToVisibleBounds = true
+        //        }
         
         if indexPath.item <= 1 {
             return CGSize(width: collectionView.frame.width  , height: 748)
@@ -131,7 +149,7 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
         if (section == 0) {
             return CGSize(width: collectionView.frame.width, height: 393)
         } else {
-             //refact
+            //refact
             return CGSize.zero
         }
     }
@@ -163,10 +181,13 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MypageCRV.identifier, for: indexPath) as? MypageCRV else {
                 assert(false, "응 아니야")
             }
-         
             headerView.delegate = self
-//            mypageCVLayout.mypageCRVDelegate = headerView
+            headerView.myProfile = myProfile
+            if (myProfile.count != 0) {
+                headerView.setProfile(nickname: myProfile[0].nickname, img: myProfile[0].profileImg!, visit: String(myProfile[0].continuedVisit), answerCount: String(myProfile[0].answerCount))
+            }
             
+            //            mypageCVLayout.mypageCRVDelegate = headerView
             return headerView
         default:
             assert(false, "응 아니야")
@@ -190,4 +211,65 @@ extension MypageVC: MypageCVCDelegate {
     
     
     
+}
+
+extension MypageVC {
+    private func getProfileData() {
+        MyPageProfileService.shared.getMyProfile() { (result) in
+            switch result {
+            case .success(let data):
+                if let othersProfile = data as? MyProfile{
+                    print("MypageVC getProfileData 성공")
+                    
+                    self.myProfile.append(othersProfile)
+                    
+                    
+                }
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                    print("MypageVC getProfileData 실패")
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverERr")
+            case .networkFail :
+                print("networkFail")
+            default :
+                print("?")
+            }
+        }
+        
+    }
+    
+    private func setProfileData(image: UIImage) {
+        MyPageProfileService.shared.setMyProfile(image: image) { (result) in
+            switch result {
+            case .success(let data):
+                if let othersProfile = data as? MyProfile{
+                    print("MypageVC setProfileData 성공")
+                    
+                    self.myProfile.append(othersProfile)
+                    
+                    
+                    
+                }
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                    print("MypageVC setProfileData 실패")
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverERr")
+            case .networkFail :
+                print("networkFail")
+            default :
+                print("?")
+            }
+        }
+        
+    }
 }

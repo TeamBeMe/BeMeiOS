@@ -11,13 +11,13 @@ import Alamofire
 struct MyPageAnswerService {
     static let shared = MyPageAnswerService()
     
-    // getMyAnswer - overLoading Method : 쿼리 개수에 따라서 매개변수 개수가 바뀜 
+    // getMyAnswer - overLoading Method : 쿼리 개수에 따라서 매개변수 개수가 바뀜
     func getMyAnswer(availability: String?, category: Int?, query: String?, page: Int, completion : @escaping (NetworkResult<Any>) -> (Void) ){
         
-        var availability = availability == nil ? "all" : availability
+//        var availability = availability == nil ? "all" : availability
 //        var category = availability == nil ? "all" : availability
 //        var query = availability == nil ? "all" : availability
-        var page = availability == nil ? -1 : page
+//        var page = availability == nil ? -1 : page
         
         // page deault -> 0
         let url = APIConstants.myPageAnswerURL+"?page="+String(page)
