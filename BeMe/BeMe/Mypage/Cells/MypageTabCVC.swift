@@ -14,7 +14,9 @@ class MypageTabCVC: UICollectionViewCell {
     @IBOutlet weak var myPageTVHeight: NSLayoutConstraint!
     //MARK:**- Variable Part**
     static let identifier = "MypageTabCVC"
-    private var cellNumber: Int = 8
+    var myAnswerArray: [Answer] = []
+    var myScrapArray: [Answer] = []
+    var delegate: MypageCVCDelegate?
     
     
     //MARK:**- Life Cycle Part**
@@ -42,7 +44,12 @@ class MypageTabCVC: UICollectionViewCell {
 extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellNumber
+        if (self.delegate?.nowDirection() == 0){
+            return myAnswerArray.count
+        } else {
+            return myScrapArray.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -50,8 +57,21 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
         guard let tab = tableView
                 .dequeueReusableCell(withIdentifier: MypageResultTVC.identifier, for: indexPath)
                 as? MypageResultTVC else { return UITableViewCell() }
-        tab.setCardView(question: "cell.layer.cornerRadius = cell.bounds.width / cell.bounds.height * 10cell.layer.cornerRadius = cell.bounds.width / cell.bounds.height * 10cell.layer.cornerRadius = cell.bounds.width / cell.bounds.height * 10", questionInfo: "아요 1000번째 경험", answerDate: "아요 1번째 경험", isLocked: true)
+        if (self.delegate?.nowDirection() == 0){
+            if (myAnswerArray.count != 0){
+    //            print(indexPath.row)
+                print("tableView myAnswerArray")
+                tab.setCardView(question: myAnswerArray[indexPath.row].question, questionInfo: myAnswerArray[indexPath.row].category, answerDate: myAnswerArray[indexPath.row].answerDate, isLocked: myAnswerArray[indexPath.row].publicFlag)
+            }
+        } else {
+            if (myScrapArray.count != 0){
+    //            print(indexPath.row)
+                print("tableView myScrapArray")
+                tab.setCardView(question: myScrapArray[indexPath.row].question, questionInfo: myScrapArray[indexPath.row].category, answerDate: myScrapArray[indexPath.row].answerDate, isLocked: myScrapArray[indexPath.row].publicFlag)
+            }
+        }
         
+//        tab.delegate = self
 
         return tab
 

@@ -100,7 +100,7 @@
                                                                                                 </stackView>
                                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtG-jt-FUe">
                                                                                                     <rect key="frame" x="305" y="62" width="36" height="36"/>
-                                                                                                    <state key="normal" image="btnLickBlack"/>
+                                                                                                    <state key="normal" image="btnLockBlack"/>
                                                                                                     <connections>
                                                                                                         <action selector="lockButtonTapped:" destination="fyg-8D-Vz2" eventType="touchUpInside" id="5Ga-RD-jPK"/>
                                                                                                     </connections>
@@ -185,7 +185,7 @@
                                                                                                 </button>
                                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x2h-pb-sAu">
                                                                                                     <rect key="frame" x="273" y="62" width="36" height="36"/>
-                                                                                                    <state key="normal" image="btnLickBlack"/>
+                                                                                                    <state key="normal" image="btnLockBlack"/>
                                                                                                     <connections>
                                                                                                         <action selector="lockButtonTapped:" destination="5DJ-XR-Fhn" eventType="touchUpInside" id="CeT-W7-BnE"/>
                                                                                                     </connections>
@@ -749,7 +749,7 @@
         <image name="btnDelete36" width="36" height="36"/>
         <image name="btnDeleteMypage" width="36" height="36"/>
         <image name="btnFilter" width="38" height="38"/>
-        <image name="btnLickBlack" width="36" height="36"/>
+        <image name="btnLockBlack" width="36" height="36"/>
         <image name="btnScrapSelected" width="32" height="32"/>
         <image name="btnSettings" width="44" height="44"/>
         <image name="icSearch" width="17" height="17"/>

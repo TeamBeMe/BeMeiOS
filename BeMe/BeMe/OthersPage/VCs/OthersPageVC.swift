@@ -105,6 +105,7 @@ extension OthersPageVC : UICollectionViewDataSource {
         
         
         
+        
         cell.othersAnswerArray = othersAnswerArray
         print("otehrspage CV ")
         print(othersAnswerArray[0].id)
@@ -192,6 +193,7 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
         }
         
         
+        
     }
 }
 
@@ -206,8 +208,8 @@ extension OthersPageVC {
                     
                     
                     self.othersAnswerArray = response.answers
-                    print("setAnswerData 안에ㅐ서")
-                    print(response)
+//                    print("setAnswerData 안에ㅐ서")
+//                    print(response)
                     self.othersPageCollectionView.reloadData()
                 }
             case .requestErr(let msg):

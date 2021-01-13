@@ -25,6 +25,11 @@ class MypageVC: UIViewController {
             mypageCollectionView.reloadData()
         }
     }
+    private var myScrapArray: [Answer] = [] {
+        didSet {
+            mypageCollectionView.reloadData()
+        }
+    }
     
     private var myProfile: [MyProfile] = [] {
         didSet {
@@ -40,8 +45,6 @@ class MypageVC: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        //        setSearhButton(view: searchButton)
-        //        setKeywordLabel(label: keywordLabel)
         
         mypageCollectionView.delegate = self
         mypageCollectionView.dataSource = self
@@ -60,6 +63,7 @@ class MypageVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         getProfileData()
+        getAnswerData(availability: "", category: nil, page: -1, query: "")
     }
     
     //MARK:**- IBAction Part**
@@ -92,9 +96,6 @@ class MypageVC: UIViewController {
     //MARK:**- Function Part**
     
     
-    
-    
-    
 }
 //MARK:**- extension 부분**
 extension MypageVC : UICollectionViewDelegate {
@@ -117,8 +118,13 @@ extension MypageVC : UICollectionViewDataSource {
                 for: indexPath) as? MypageCVC else {
             return UICollectionViewCell()}
         
-        
         cell.scrollDirection(by: directionMenu)
+        
+        cell.myAnswerArray = myAnswerArray
+        cell.myScrapArray = myScrapArray
+
+        cell.mypageTabCollectionView.reloadData()
+        cell.mypageCVCDelegate = self
         return cell
     }
     
@@ -187,7 +193,6 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
                 headerView.setProfile(nickname: myProfile[0].nickname, img: myProfile[0].profileImg!, visit: String(myProfile[0].continuedVisit), answerCount: String(myProfile[0].answerCount))
             }
             
-            //            mypageCVLayout.mypageCRVDelegate = headerView
             return headerView
         default:
             assert(false, "응 아니야")
@@ -199,14 +204,23 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
 }
 
 extension MypageVC: MypageCVCDelegate {
+    
     func myAnswerItem() {
         directionMenu = 0
+        getAnswerData(availability: "", category: 2, page: 1, query: "")
         mypageCollectionView.reloadData()
     }
     
     func othersAnswerItem() {
         directionMenu = 1
+        getScrapData(availability: "", category: 1, page: 1, query: "")
         mypageCollectionView.reloadData()
+    }
+    
+    func nowDirection() -> Int {
+        print("directionMenu")
+        print(directionMenu)
+        return directionMenu
     }
     
     
@@ -214,6 +228,60 @@ extension MypageVC: MypageCVCDelegate {
 }
 
 extension MypageVC {
+    private func getAnswerData(availability: String?, category: Int?, page: Int, query: String?) {
+        MyPageAnswerService.shared.getMyAnswer(availability: availability, category: category, page: page, query: query) { (result) in
+            switch result {
+            case .success(let data):
+                if let response = data as? MyAnswer{
+                    print("getAnswerData 성공")
+                    self.myAnswerArray = response.answers
+//                    print("getAnswerData 안에서")
+//                    print(response)
+                    self.mypageCollectionView.reloadData()
+                }
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                    print("getAnswerData 실패")
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverERr")
+            case .networkFail :
+                print("networkFail")
+            default :
+                print("?")
+            }
+        }
+    }
+    private func getScrapData(availability: String?, category: Int?, page: Int, query: String?) {
+        MyPageScrapService.shared.getMyScrap(availability: availability, category: category, query: query, page: page) { (result) in
+            switch result {
+            case .success(let data):
+                if let response = data as? MyScrap{
+                    print("getScrapData 성공")
+                    self.myScrapArray = response.answers
+//                    print("getScrapData 안에서")
+//                    print(response)
+                    self.mypageCollectionView.reloadData()
+                }
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                    print("getScrapData 실패")
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverERr")
+            case .networkFail :
+                print("networkFail")
+            default :
+                print("?")
+            }
+        }
+    }
     private func getProfileData() {
         MyPageProfileService.shared.getMyProfile() { (result) in
             switch result {

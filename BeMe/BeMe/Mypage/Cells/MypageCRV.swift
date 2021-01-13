@@ -70,12 +70,14 @@ class MypageCRV: UICollectionReusableView {
         myAnswerButton.setTitleColor(.black, for: .normal)
         scrappedAnswerButton.setTitleColor(.rgb8E8E93, for: .normal)
         delegate?.myAnswerItem()
+        print("myAswerButtonTapped")
         moveHighLightBar(to: sender)
     }
     @IBAction func scrappedAswerButtonTapped(_ sender: UIButton) {
         myAnswerButton.setTitleColor(.rgb8E8E93, for: .normal)
         scrappedAnswerButton.setTitleColor(.black, for: .normal)
         delegate?.othersAnswerItem()
+        print("scrappedAswerButtonTapped")
         moveHighLightBar(to: sender)
     }
     
