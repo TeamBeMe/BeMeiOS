@@ -11,7 +11,7 @@ class MypageVC: UIViewController {
     
     //MARK:**- IBOutlet Part**
     @IBOutlet weak var mypageCollectionView: UICollectionView!
-    
+    @IBOutlet weak var settingButton: UIButton!
     
     private var directionMenu: Int = 0
     
@@ -63,11 +63,13 @@ class MypageVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         getProfileData()
-        getAnswerData(availability: "", category: nil, page: -1, query: "")
+        getAnswerData(availability: "", category: 2, page: 1, query: "")
     }
     
     //MARK:**- IBAction Part**
     
+    @IBAction func settingButtonTapped(_ sender: Any) {
+    }
     
     //MARK:**- default Setting Function Part**
     
