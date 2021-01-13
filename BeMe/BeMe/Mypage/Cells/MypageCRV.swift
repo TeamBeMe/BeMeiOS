@@ -40,6 +40,9 @@ class MypageCRV: UICollectionReusableView {
     
     var delegate: MypageCVCDelegate?
     
+    
+    var myProfile: [MyProfile] = [] 
+    
     //MARK:**- Life Cycle Part**
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -67,21 +70,34 @@ class MypageCRV: UICollectionReusableView {
         myAnswerButton.setTitleColor(.black, for: .normal)
         scrappedAnswerButton.setTitleColor(.rgb8E8E93, for: .normal)
         delegate?.myAnswerItem()
+        print("myAswerButtonTapped")
         moveHighLightBar(to: sender)
     }
     @IBAction func scrappedAswerButtonTapped(_ sender: UIButton) {
         myAnswerButton.setTitleColor(.rgb8E8E93, for: .normal)
         scrappedAnswerButton.setTitleColor(.black, for: .normal)
         delegate?.othersAnswerItem()
+        print("scrappedAswerButtonTapped")
         moveHighLightBar(to: sender)
     }
     
     //MARK:**- default Setting Function Part**
+    
+    func setProfile(nickname: String, img: String, visit: String, answerCount: String){
+        setProfileEditButton(view: profileEditButton)
+        setInfoLabel()
+        nameLabel.text = nickname
+        profileImage.imageFromUrl(img, defaultImgPath: "imgMypage")
+        attendanceCountLabel.text = visit
+        answerCountLabel.text = answerCount
+        setSearhButton(view: searchView)
+    }
+    
     func setProfileEditButton(view: UIButton) {
         view.setBorderWithRadius(borderColor: .veryLightPinkTwo, borderWidth: 1, cornerRadius: 3)
         view.backgroundColor = UIColor.white
     }
-
+    
     func setInfoLabel(){
         attendanceCountInfoLabel.textColor = .slateGrey
         answerCountInfoLabel.textColor = .slateGrey
@@ -127,21 +143,3 @@ class MypageCRV: UICollectionReusableView {
         }
     }
 }
-
-//extension MypageCRV : MypageCRVDelegate {
-//    func headerFix() {
-//        profileImageHeight.constant = 0
-//        profileViewHeight.constant = 0
-//        settingButton.alpha = 0
-//    }
-//    func headerOrigin() {
-//        profileImageHeight.constant = 180
-//        profileViewHeight.constant = 110
-//        settingButton.alpha = 1
-//    }
-//}
-//
-//protocol MypageCRVDelegate {
-//    func headerFix()
-//    func headerOrigin()
-//}

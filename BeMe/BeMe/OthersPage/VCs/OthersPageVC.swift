@@ -60,8 +60,8 @@ class OthersPageVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setAnswerData(userId: 2, page: 1)
-        setProfileData(userId: 6)
+        getAnswerData(userId: 2, page: 1)
+        getProfileData(userId: 6)
     }
     //MARK:**- IBAction Part**
     
@@ -102,6 +102,7 @@ extension OthersPageVC : UICollectionViewDataSource {
                 withReuseIdentifier: OthersPageCVC.identifier,
                 for: indexPath) as? OthersPageCVC else {
             return UICollectionViewCell()}
+        
         
         
         
@@ -192,12 +193,13 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
         }
         
         
+        
     }
 }
 
 
 extension OthersPageVC {
-    private func setAnswerData(userId: Int, page: Int) {
+    private func getAnswerData(userId: Int, page: Int) {
         OthersPageAnswerService.shared.getOthersAnswer(userId: userId, page: page) { (result) in
             switch result {
             case .success(let data):
@@ -206,8 +208,8 @@ extension OthersPageVC {
                     
                     
                     self.othersAnswerArray = response.answers
-                    print("setAnswerData 안에ㅐ서")
-                    print(response.answers[0].isScrapped)
+//                    print("setAnswerData 안에ㅐ서")
+//                    print(response)
                     self.othersPageCollectionView.reloadData()
                 }
             case .requestErr(let msg):
@@ -230,7 +232,7 @@ extension OthersPageVC {
     }
     
     
-    private func setProfileData(userId: Int) {
+    private func getProfileData(userId: Int) {
         OthersPageProfileService.shared.getOthersProfile(userId: userId) { (result) in
             switch result {
             case .success(let data):
