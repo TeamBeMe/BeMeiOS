@@ -11,7 +11,7 @@ class MypageVC: UIViewController {
     
     //MARK:**- IBOutlet Part**
     @IBOutlet weak var mypageCollectionView: UICollectionView!
-    
+    @IBOutlet weak var settingButton: UIButton!
     
     private var directionMenu: Int = 0
     
@@ -68,6 +68,8 @@ class MypageVC: UIViewController {
     
     //MARK:**- IBAction Part**
     
+    @IBAction func settingButtonTapped(_ sender: Any) {
+    }
     
     //MARK:**- default Setting Function Part**
     
