@@ -13,7 +13,6 @@ class ExploreTableView: UITableView {
     
     func reloadDataWithCompletion(_ complete: @escaping () -> Void) {
         reloadDataCompletionBlock = complete
-        print("callled")
         super.reloadData()
     }
     
@@ -30,6 +29,8 @@ class ExploreHomeVC: UIViewController {
     @IBOutlet weak var exploreTableView: ExploreTableView!
     @IBOutlet weak var safeAreaView: UIView!
     @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var headerCategoryCollectionView: UICollectionView!
     
     private var lastContentOffset: CGFloat = 0
     
@@ -88,6 +89,7 @@ class ExploreHomeVC: UIViewController {
         setAnswerData(page: currentPage, category: selectedCategoryId, sorting: selectedRecentOrFavorite)
         setThoughtData()
         setCategoryData()
+        setHeaderView()
         
         self.navigationController?.navigationBar.isHidden = true
     }
@@ -103,6 +105,11 @@ class ExploreHomeVC: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
     }
 }
+
+//MARK: - CollectionView
+//extension ExploreHomeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+//}
 
 //MARK: - UITableView
 extension ExploreHomeVC: UITableViewDataSource {
@@ -245,6 +252,7 @@ extension ExploreHomeVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffset = exploreTableView.contentOffset.y
         // iphone safe area 문제 해결 코드
+        print(currentOffset)
         isTableViewAnimation = true
         view.backgroundColor = currentOffset > 394.0 ? .white : UIColor.init(named: "background")
         exploreTableView.backgroundColor = currentOffset >= 0.0 ? .white : UIColor.init(named: "background")
@@ -258,20 +266,20 @@ extension ExploreHomeVC: UIScrollViewDelegate {
         }
         
         // 상단 view
-        //        if (currentOffset > 542.333) {
-        //            if (lastContentOffset < currentOffset) {
-        //                //scroll up
-        //
-        //                hideTabBarWhenScrollingUp()
-        //            } else {
-        //                //scroll down
-        //
-        //                showTabBarWhenScrollingDown()
-        //
-        //            }
-        //        } else {
-        //            //hideTabBarWhenScrollingUp()
-        //        }
+        if (currentOffset > 610.0) {
+            if (lastContentOffset < currentOffset) {
+                //scroll up
+                
+                hideTabBarWhenScrollingUp()
+            } else {
+                //scroll down
+                
+                showTabBarWhenScrollingDown()
+                
+            }
+        } else {
+            hideTabBarWhenScrollingUp()
+        }
         
         lastContentOffset = currentOffset
     }
@@ -468,6 +476,11 @@ extension ExploreHomeVC {
         }
     }
     
+    private func setHeaderView() {
+        headerViewHeight.constant = 0
+//        headerView.alpha = 0
+    }
+    
     private func setTableView() {
         exploreTableView.delegate = self
         exploreTableView.dataSource = self
@@ -495,10 +508,11 @@ extension ExploreHomeVC {
     }
     
     private func hideTabBarWhenScrollingUp() {
-        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.curveLinear], animations: {
-            //            self.headerView.center.y =  self.headerFrameOriginY - self.headerView.frame.height
+        self.headerViewHeight.constant = 0
+        UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveLinear], animations: {
             
-            //            print(self.headerView.center.y)
+//            self.headerView.alpha = 0
+            self.headerView.layoutIfNeeded()
         }) { _ in
             
             
@@ -506,10 +520,11 @@ extension ExploreHomeVC {
     }
     
     private func showTabBarWhenScrollingDown() {
-        UIView.animate(withDuration: 0.3, delay: 0.3, options: [.curveLinear], animations: {
-            //            self.headerView.center.y = self.headerFrameOriginY + self.headerView.frame.height
+        self.headerViewHeight.constant = 94
+        UIView.animate(withDuration: 0.33, delay: 0.3, options: [.curveLinear], animations: {
             
-            //            print(self.headerView.center.y)
+//            self.headerView.alpha = 1
+            self.headerView.layoutIfNeeded()
         }) { _ in
             
         }
