@@ -11,6 +11,7 @@ class ExploreTableView: UITableView {
 
     private var reloadDataCompletionBlock: (() -> Void)?
     
+    
     func reloadDataWithCompletion(_ complete: @escaping () -> Void) {
         reloadDataCompletionBlock = complete
         super.reloadData()
@@ -31,7 +32,7 @@ class ExploreHomeVC: UIViewController {
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
     @IBOutlet weak var headerCategoryCollectionView: UICollectionView!
-    
+    @IBOutlet weak var headerHighLightBar: UIView!
     private var lastContentOffset: CGFloat = 0
     
     private let maxHeight: CGFloat = 32.0
@@ -103,6 +104,31 @@ class ExploreHomeVC: UIViewController {
         super.viewWillDisappear(animated)
         
         self.navigationController?.navigationBar.isHidden = false
+    }
+    
+    
+    
+    
+    
+    
+    
+    @IBAction func recentButtonTapped(_ sender: Any) {
+        moveHighLightBar(to: sender as! UIButton)
+        
+    }
+    
+    @IBAction func favoriteButtonTapped(_ sender: Any) {
+        moveHighLightBar(to: sender as! UIButton)
+    }
+    
+    private func moveHighLightBar(to button: UIButton) {
+        
+        UIView.animate(withDuration: 0.1, delay: 0, options: [.curveLinear], animations: {
+            // Slide Animation
+            self.headerHighLightBar.frame.origin.x = 30 + button.frame.minX
+        
+        }) { _ in
+        }
     }
 }
 
@@ -478,7 +504,7 @@ extension ExploreHomeVC {
     
     private func setHeaderView() {
         headerViewHeight.constant = 0
-//        headerView.alpha = 0
+        headerView.alpha = 0
     }
     
     private func setTableView() {
@@ -509,9 +535,10 @@ extension ExploreHomeVC {
     
     private func hideTabBarWhenScrollingUp() {
         self.headerViewHeight.constant = 0
+        self.headerView.alpha = 0
         UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveLinear], animations: {
             
-//            self.headerView.alpha = 0
+            
             self.headerView.layoutIfNeeded()
         }) { _ in
             
@@ -520,10 +547,11 @@ extension ExploreHomeVC {
     }
     
     private func showTabBarWhenScrollingDown() {
-        self.headerViewHeight.constant = 94
-        UIView.animate(withDuration: 0.33, delay: 0.3, options: [.curveLinear], animations: {
+        self.headerViewHeight.constant = 32
+        self.headerView.alpha = 1
+        UIView.animate(withDuration: 0.5, delay: 0.3, options: [.curveLinear], animations: {
             
-//            self.headerView.alpha = 1
+            
             self.headerView.layoutIfNeeded()
         }) { _ in
             
