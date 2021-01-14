@@ -16,32 +16,41 @@ class CustomActionSheetFilterVC: UIViewController {
     
     @IBOutlet weak var availablityLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
-    
     // 서버통신을 통해 받아오는 값
     var categoryArray: [ExploreCategory] = []
     // all, public, unpublic
     var availablityArray: [Bool] = [false, false, false]
     private var filterCVCDelegate: FilterCVCDelegate?
-//    var selecetedCategry: [Bool] = []
-    
+    var fromServer = true
+    var categorySelected: Int = 0
+    private var selectedAvailablity: String = "all"
     override func viewDidLoad() {
         super.viewDidLoad()
         setLabel()
         setButton(view: allButton, isSelected: false)
-        setButton(view: publicButton, isSelected: true)
+        setButton(view: publicButton, isSelected: false)
         setButton(view: unpublicButton, isSelected: false)
+        
         
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
         
         
+        selectedAvailablity = "all"
+        allButton.backgroundColor = .black
+        allButton.setTitleColor(.white, for: .normal)
+        
+        publicButton.backgroundColor = .white
+        publicButton.setTitleColor(.black, for: .normal)
+        
+        unpublicButton.backgroundColor = .white
+        unpublicButton.setTitleColor(.black,  for: .normal)
         // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         setCategoryData()
-//        print(categoryArray[0].name)
     }
     
     @IBAction func dismissButtonTapped(_ sender: UIButton) {
@@ -50,11 +59,52 @@ class CustomActionSheetFilterVC: UIViewController {
     }
     
     @IBAction func allButtonTapped(_ sender: UIButton) {
+        selectedAvailablity = "all"
+        allButton.backgroundColor = .black
+        allButton.setTitleColor(.white, for: .normal)
+        
+        publicButton.backgroundColor = .white
+        publicButton.setTitleColor(.black, for: .normal)
+        
+        unpublicButton.backgroundColor = .white
+        unpublicButton.setTitleColor(.black,  for: .normal)
     }
     
     @IBAction func publicButtonTapped(_ sender: UIButton) {
+        selectedAvailablity = "public"
+        allButton.backgroundColor = .white
+        allButton.setTitleColor(.black, for: .normal)
+        
+        publicButton.backgroundColor = .black
+        publicButton.setTitleColor(.white, for: .normal)
+        
+        
+        unpublicButton.backgroundColor = .white
+        unpublicButton.setTitleColor(.black,  for: .normal)
+        
     }
     @IBAction func unpublicButtonTapped(_ sender: UIButton) {
+        
+        selectedAvailablity = "unpublic"
+        allButton.backgroundColor = .white
+        allButton.setTitleColor(.black, for: .normal)
+        publicButton.backgroundColor = .white
+        publicButton.setTitleColor(.black, for: .normal)
+        
+        
+        unpublicButton.backgroundColor = .black
+        unpublicButton.setTitleColor(.white,  for: .normal)
+        
+    }
+    
+    private func selectPrivate(_ sender: UIButton) {
+        
+        
+    }
+    @IBAction func applyButtonTapped(_ sender: Any) {
+        
+        NotificationCenter.default.post(name: .init("categoryClose"), object: nil, userInfo: ["categoryId": categorySelected+1, "selectedAv": selectedAvailablity])
+        self.dismiss(animated: true, completion: nil)
     }
     
     func setLabel() {
@@ -81,14 +131,14 @@ class CustomActionSheetFilterVC: UIViewController {
 
 extension CustomActionSheetFilterVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        
+        categorySelected = indexPath.item
+
     }
 }
 
 extension CustomActionSheetFilterVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(categoryArray.count)
+
         return categoryArray.count
     }
     
@@ -98,20 +148,31 @@ extension CustomActionSheetFilterVC: UICollectionViewDataSource {
                 for: indexPath) as? FilterCVC else {
             return UICollectionViewCell()}
         cell.indexPath = indexPath.row
-        cell.categoryArray = self.categoryArray
-        cell.setButton(isSelected: categoryArray[indexPath.row].selected!)
-        cell.setButton(text: categoryArray[indexPath.row].name)
-        print(indexPath.row)
-        print(categoryArray[indexPath.row].name)
-        
-        
-//        categoryCollectionView.reloadData()
-        
+        cell.category = self.categoryArray[indexPath.item]
+        cell.filterCVCDelegate = self
+        cell.setButton(text: categoryArray[indexPath.item].name)
+
         return cell
-        
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? FilterCVC else {
+            return true
+        }
+
+        if cell.isSelected {
+            categorySelected = 0
+            collectionView.deselectItem(at: indexPath, animated: false)
+            return false
+        } else {
+            return true
+        }
+    }
     
 }
 
@@ -122,18 +183,16 @@ extension CustomActionSheetFilterVC: UICollectionViewDelegateFlowLayout {
 extension CustomActionSheetFilterVC {
     
     private func setCategoryData() {
+        fromServer = true
         ExploreCategoryService.shared.getExploreCategory { (result) in
             switch result {
             case .success(let data):
                 guard let dt = data as? GenericResponse<[ExploreCategory]> else { return }
                 if let categories = dt.data {
                     self.categoryArray = categories
-                    
-                    for var category in self.categoryArray {
-                        category.selected = false
-                    }
                 }
                 self.categoryCollectionView.reloadData()
+   
             case .requestErr(let message):
                 guard let message = message as? String else { return }
                 let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
@@ -162,39 +221,7 @@ extension CustomActionSheetFilterVC {
 
 extension CustomActionSheetFilterVC: FilterCVCDelegate {
     func setSelectedCategory(index: Int) {
-        
-        for var category in self.categoryArray {
-            category.selected = false
-        }
-        
-        categoryArray[index].selected = true
-        categoryCollectionView.reloadData()
-    }
- 
-}
 
-extension CustomActionSheetFilterVC: FilterVCDelegate {
-    func getSeletedCategory() -> Int? {
-        for var category in self.categoryArray {
-            
-            if (category.selected!){
-                return category.id
-            }
-        }
-        return nil
     }
-    
-    func getSeletedAvailabity() -> String {
-        if availablityArray[0] {
-            return "all"
-        } else if availablityArray[1] {
-            return "public"
-        } else if availablityArray[2] {
-            return "unpublic"
-        } else {
-            return "all"
-        }
-    }
-    
     
 }
