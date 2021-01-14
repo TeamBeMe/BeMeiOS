@@ -58,9 +58,7 @@ class OthersPageCRV: UICollectionReusableView {
                 case .success(let data) :
                     print("success")
                     self.setFollowButton(view: self.followButton, isFollowed: false)
-                    
-                    
-                    
+        
                 case .requestErr(let msg):
                     if let message = msg as? String {
                         print(message)
@@ -106,8 +104,7 @@ class OthersPageCRV: UICollectionReusableView {
                     print("networkFail")
                     
                 }
-                
-                
+
             }
             
             
