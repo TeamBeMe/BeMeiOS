@@ -122,7 +122,7 @@ class OthersPageCRV: UICollectionReusableView {
     
     func setProfile(nickname: String, img: String, visit: String, answerCount: String, isFollowed: Bool){
         nameLabel.text = nickname
-        profileImage.imageFromUrl(img, defaultImgPath: "imgMypage")
+        profileImage.imageFromUrl(img, defaultImgPath: "mypageDefault")
         attendanceCountInfoLabel.text = visit
         answerCountInfoLabel.text = answerCount
         setInfoLabel()
