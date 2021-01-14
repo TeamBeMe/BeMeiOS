@@ -29,7 +29,7 @@ struct FollowingAnswers: Codable {
     let userNickname: String?
     let question, category: String
     let categoryID: Int
-    let isAnswered: Bool
+    var isAnswered: Bool
 
     enum CodingKeys: String, CodingKey {
         case id

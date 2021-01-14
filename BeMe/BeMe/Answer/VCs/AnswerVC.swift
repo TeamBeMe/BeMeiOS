@@ -40,7 +40,7 @@ class AnswerVC: UIViewController {
     
     //
     var answerData: AnswerDataForViewController?
-    
+    var followScrapButtonDelegate: FollowScrapButtonDelegate?
     // AnswerVC 에서 init
     var answer: String?
     var isAnswerPublic: Bool = true
@@ -52,7 +52,8 @@ class AnswerVC: UIViewController {
     var answerDataDelegate: HomeGetDataFromAnswerDelegate?
     var curCardIdx : Int?
     var isRegister: Bool?
-    
+    var isFromFollowingTab = false
+    var indexInFollowingVC: Int?
     //MARK:**- Constraint Part**
     
     /// 스토리보드에 있는 layout 에 대한 @IBOutlet 을 선언합니다. (Height, Leading, Trailing 등등..)  // 변수명 lowerCamelCase 사용
@@ -186,6 +187,7 @@ class AnswerVC: UIViewController {
         textViewDidChange(answerTextView)
         answerTextView.becomeFirstResponder()
         
+        
         answerSwitch.isOn = !answerData!.lock!
         
         
@@ -222,10 +224,17 @@ class AnswerVC: UIViewController {
     @IBAction func finishButtonAction(_ sender: Any) {
         answerData!.answer = answerTextView.text
         if isRegister! == true{
+            print("글쓰기 시도")
             AnswerRegistService.shared.regist(answerID: answerData!.id!, content: answerData!.answer!, commentBlocked: commentSwitch.isOn, isPublic: answerSwitch.isOn) {(networkResult) -> (Void) in
                 switch networkResult{
                 case .success(let data) :
-                    print("success")
+                    print("글쓰기 성공")
+                    print("bbbbbbbbb")
+                    print(self.isFromFollowingTab)
+                    if self.isFromFollowingTab {
+                        print("yyyyy")
+                        self.followScrapButtonDelegate?.fromAnswerVC(indexInVC: self.indexInFollowingVC!)
+                    }
                 case .requestErr(let msg):
                     if let message = msg as? String {
                         print(message)

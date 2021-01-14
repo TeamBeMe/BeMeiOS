@@ -8,21 +8,19 @@
 import Foundation
 import Alamofire
 
-struct LogInService{
-    static let shared = LogInService()
+struct FollowingNewAnswerService{
+    static let shared = FollowingNewAnswerService()
     
-
-    
-    func login(nickName: String, password: String, completion : @escaping (NetworkResult<Any>) -> (Void) ){
-        let url = APIConstants.loginURL
+    func getNewData(questionID: Int, completion : @escaping (NetworkResult<Any>) -> (Void) ){
+        let url = APIConstants.followingNewAnswerURL
         
         let header : HTTPHeaders = [
-            "Content-Type":"application/json"
+            "Content-Type":"application/json",
+            "token":UserDefaults.standard.string(forKey: "token")!
         ]
         
         let body : Parameters = [
-            "nickname" : nickName,
-            "password": password,
+            "question_id": questionID
         ]
         
         let dataRequest = AF.request(url,
@@ -42,9 +40,8 @@ struct LogInService{
                     return
                     
                 }
-                UserDefaults.standard.setValue(nickName, forKey: "nickName")
-                UserDefaults.standard.setValue(password, forKey: "password")
-                completion(judgeLogInData(status: statusCode, data: data))
+               
+                completion(judge(status: statusCode, data: data))
                 
                 
                 
@@ -61,9 +58,9 @@ struct LogInService{
         
     }
     
-    private func judgeLogInData(status : Int, data : Data) -> NetworkResult<Any> {
+    private func judge(status : Int, data : Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(GenericResponse<LogInData>.self, from : data) else{
+        guard let decodedData = try? decoder.decode(GenericResponse<FollowingNewAnswerData>.self, from : data) else{
             
             
             return .pathErr
@@ -72,9 +69,8 @@ struct LogInService{
         
         switch status{
         case 200..<300:
-            print(decodedData.data?.token)
-            
-            UserDefaults.standard.setValue(decodedData.data?.token, forKey: "token")
+           
+            print("성공성공")
             
             return .success(decodedData.data)
         case 400..<500 :

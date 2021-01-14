@@ -16,7 +16,7 @@ class FollowingListCVC: UICollectionViewCell {
     @IBOutlet weak var followButton: UIButton!
     var followingPerson: FollowingFollows?
     var findPeopleSearchData: FindPeopleSearchData?
-    
+    var followSearchProfileDelegate: FollowSearchProfileDelegate?
     override func awakeFromNib() {
         profileImageView.imageFromUrl(followingPerson?.profileImg, defaultImgPath: "")
         profileImageView.makeRounded(cornerRadius: 18)
@@ -26,7 +26,10 @@ class FollowingListCVC: UICollectionViewCell {
         followButton.makeRounded(cornerRadius: 3)
         followButton.setBorder(borderColor: .lightGray, borderWidth: 1.0)
         profileImageView.contentMode = .scaleAspectFill
-    
+        profileImageView.isUserInteractionEnabled = true
+        let profileTabGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpProfile))
+        profileImageView.addGestureRecognizer(profileTabGesture)
+        
         
     }
     
@@ -103,6 +106,11 @@ class FollowingListCVC: UICollectionViewCell {
         userNameLabel.text = findPeopleSearchData?.nickname
     }
     
-    
+    @objc func touchUpProfile(){
+        print("tttttt")
+        followSearchProfileDelegate?.profileSelectedTap(userID: (followingPerson?.id)!)
+        
+    }
+        
     
 }

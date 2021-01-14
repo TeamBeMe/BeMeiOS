@@ -14,6 +14,7 @@ class SearchNewTVC: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var userNameLabel: UILabel!
     var findPeopleSearchData: FindPeopleSearchData?
+    var followSearchProfileDelegate: FollowSearchProfileDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,6 +24,10 @@ class SearchNewTVC: UITableViewCell {
         followButton.setBorder(borderColor: .lightGray, borderWidth: 1.0)
         profileImageView.makeRounded(cornerRadius: 18)
         profileImageView.contentMode = .scaleAspectFill
+        
+        profileImageView.isUserInteractionEnabled = true
+        let profileTabGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpProfile))
+        profileImageView.addGestureRecognizer(profileTabGesture)
         // Initialization code
     }
 
@@ -106,6 +111,10 @@ class SearchNewTVC: UITableViewCell {
             followButton.backgroundColor = .black
             followButton.setTitleColor(.white, for: .normal)
         }
+        
+    }
+    @objc func touchUpProfile(){
+        followSearchProfileDelegate?.profileSelectedTap(userID: (findPeopleSearchData?.id)!)
         
     }
     

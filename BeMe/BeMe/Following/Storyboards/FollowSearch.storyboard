@@ -310,10 +310,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Snf-vQ-vi2">
-                                                    <rect key="frame" x="337" y="6.5" width="56" height="27"/>
+                                                    <rect key="frame" x="369" y="8" width="24" height="24"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="27" id="GtN-WA-jnb"/>
-                                                        <constraint firstAttribute="width" constant="56" id="ok4-Rg-Dxc"/>
+                                                        <constraint firstAttribute="height" constant="24" id="GtN-WA-jnb"/>
+                                                        <constraint firstAttribute="width" constant="24" id="ok4-Rg-Dxc"/>
                                                     </constraints>
                                                     <state key="normal" image="btnMore"/>
                                                     <connections>

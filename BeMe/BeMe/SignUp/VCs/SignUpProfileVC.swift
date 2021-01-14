@@ -40,7 +40,7 @@ class SignUpProfileVC: UIViewController {
     }
     
     @IBAction func finishButtonAction(_ sender: Any) {
-        LoadingHUD.show(loadingFrame: self.view.frame,color: .white)
+        LoadingHUD.show(loadingFrame: UIScreen.main.bounds,color: .white)
         SignUpService.shared.signUp(email: myEmail!,nickName: myName!, password: myPassword!,
                                     image: profileImageView.image!,completion: { networkResult -> Void in
                                         switch networkResult {
