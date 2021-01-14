@@ -11,7 +11,7 @@ class MypageVC: UIViewController {
     
     //MARK:**- IBOutlet Part**
     @IBOutlet weak var mypageCollectionView: UICollectionView!
-    
+    @IBOutlet weak var settingButton: UIButton!
     
     private var directionMenu: Int = 0
     
@@ -63,11 +63,17 @@ class MypageVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         getProfileData()
-        getAnswerData(availability: "", category: nil, page: -1, query: "")
+        getAnswerData(availability: "", category: 2, page: 1, query: "")
     }
     
     //MARK:**- IBAction Part**
     
+    @IBAction func settingButtonTapped(_ sender: Any) {
+        
+        guard let setting = UIStoryboard.init(name: "Setting", bundle: nil).instantiateViewController(identifier: "SettingVC") as? SettingVC else { return }
+        
+        self.navigationController?.pushViewController(setting, animated: true)
+    }
     
     //MARK:**- default Setting Function Part**
     
@@ -336,8 +342,22 @@ extension MypageVC {
                 print("networkFail")
             default :
                 print("?")
+                break
             }
         }
         
     }
+}
+
+extension MypageVC: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        if offset < 91.0 {
+            settingButton.isHidden = false
+        } else {
+            settingButton.isHidden = true
+        }
+    }
+
 }

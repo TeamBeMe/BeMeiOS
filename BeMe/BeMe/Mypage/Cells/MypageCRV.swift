@@ -11,7 +11,6 @@ class MypageCRV: UICollectionReusableView {
     //MARK:**- IBOutlet Part**
     
     // image
-    @IBOutlet weak var settingButton: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
     // profile
     @IBOutlet weak var nameLabel: UILabel!

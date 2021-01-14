@@ -1,19 +1,19 @@
 {
   "images" : [
     {
-      "scale" : "1x",
       "filename" : "btnCheckBoxBlank.png",
+      "scale" : "1x",
       "idiom" : "universal"
     },
     {
-      "idiom" : "universal",
       "filename" : "btnCheckBoxBlank@2x.png",
+      "idiom" : "universal",
       "scale" : "2x"
     },
     {
       "filename" : "btnCheckBoxBlank@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "idiom" : "universal"
     }
   ],
   "info" : {

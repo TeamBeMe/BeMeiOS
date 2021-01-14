@@ -6,14 +6,14 @@
       "idiom" : "universal"
     },
     {
-      "filename" : "icArrowDown@2x.png",
       "scale" : "2x",
+      "filename" : "icArrowDown@2x.png",
       "idiom" : "universal"
     },
     {
       "filename" : "icArrowDown@3x.png",
-      "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "3x",
+      "idiom" : "universal"
     }
   ],
   "info" : {

@@ -442,10 +442,6 @@
                                                 <constraint firstAttribute="height" constant="110" id="kbP-BS-As5"/>
                                             </constraints>
                                         </view>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Uk-kR-ZKH">
-                                            <rect key="frame" x="352" y="-4" width="44" height="44"/>
-                                            <state key="normal" image="btnSettings"/>
-                                        </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F9q-UY-90u" userLabel="Header">
                                             <rect key="frame" x="0.0" y="290" width="414" height="110"/>
                                             <subviews>
@@ -579,8 +575,6 @@
                                         <constraint firstItem="F9q-UY-90u" firstAttribute="leading" secondItem="WRi-g6-kzK" secondAttribute="leading" id="dOg-ys-Drj"/>
                                         <constraint firstAttribute="trailing" secondItem="F9q-UY-90u" secondAttribute="trailing" id="h8j-sX-e4U"/>
                                         <constraint firstItem="he0-mZ-5vy" firstAttribute="leading" secondItem="WRi-g6-kzK" secondAttribute="leading" id="p6e-eP-saf"/>
-                                        <constraint firstItem="Eqe-1U-nIQ" firstAttribute="top" secondItem="9Uk-kR-ZKH" secondAttribute="bottom" constant="140" id="sxb-v6-Fcj"/>
-                                        <constraint firstAttribute="trailing" secondItem="9Uk-kR-ZKH" secondAttribute="trailing" constant="18" id="vuq-N5-PFu"/>
                                     </constraints>
                                     <connections>
                                         <outlet property="answerCountInfoLabel" destination="gZf-fS-Dlx" id="V4N-3T-xv7"/>
@@ -598,23 +592,32 @@
                                         <outlet property="searchButton" destination="GbA-U9-TX5" id="A5I-iP-5p2"/>
                                         <outlet property="searchTextField" destination="lys-Gt-Mss" id="xcC-aa-Lps"/>
                                         <outlet property="searchView" destination="Tt5-gX-DD2" id="jQf-Rv-jTj"/>
-                                        <outlet property="settingButton" destination="9Uk-kR-ZKH" id="njA-of-UVI"/>
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Uk-kR-ZKH">
+                                <rect key="frame" x="356" y="44" width="44" height="44"/>
+                                <state key="normal" image="btnSettings"/>
+                                <connections>
+                                    <action selector="settingButtonTapped:" destination="DxR-MW-uq5" eventType="touchUpInside" id="ZEQ-DA-bf2"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JRG-h0-aOq"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="9Uk-kR-ZKH" firstAttribute="top" secondItem="JRG-h0-aOq" secondAttribute="top" id="1cX-fd-2BT"/>
                             <constraint firstItem="xh3-JJ-lUX" firstAttribute="top" secondItem="cwK-bA-RnC" secondAttribute="top" id="FMy-s2-fU8"/>
                             <constraint firstItem="JRG-h0-aOq" firstAttribute="trailing" secondItem="xh3-JJ-lUX" secondAttribute="trailing" id="JT9-Ls-kFC"/>
                             <constraint firstItem="xh3-JJ-lUX" firstAttribute="leading" secondItem="JRG-h0-aOq" secondAttribute="leading" id="dWY-nN-mxC"/>
                             <constraint firstItem="JRG-h0-aOq" firstAttribute="bottom" secondItem="xh3-JJ-lUX" secondAttribute="bottom" id="vRi-kk-eKV"/>
+                            <constraint firstItem="JRG-h0-aOq" firstAttribute="trailing" secondItem="9Uk-kR-ZKH" secondAttribute="trailing" constant="14" id="xAQ-wl-Vmi"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="KI7-5q-Jxp"/>
                     <connections>
                         <outlet property="mypageCollectionView" destination="xh3-JJ-lUX" id="P3G-h5-dFR"/>
+                        <outlet property="settingButton" destination="9Uk-kR-ZKH" id="Kz9-Q8-8Mc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hdS-Wv-3Oa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
