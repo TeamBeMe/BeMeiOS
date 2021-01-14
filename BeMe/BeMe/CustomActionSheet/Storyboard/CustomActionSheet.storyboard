@@ -492,7 +492,7 @@
         <!--Custom Action Sheet FilterVC-->
         <scene sceneID="aId-br-Dhh">
             <objects>
-                <viewController id="mwi-Gd-tSl" customClass="CustomActionSheetFilterVC" customModule="BeMe" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CustomActionSheetFilterVC" id="mwi-Gd-tSl" customClass="CustomActionSheetFilterVC" customModule="BeMe" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="19o-Cc-0N3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -675,6 +675,9 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZa-eD-jec">
                                 <rect key="frame" x="0.0" y="44" width="414" height="449"/>
+                                <connections>
+                                    <action selector="dismissButtonTapped:" destination="mwi-Gd-tSl" eventType="touchUpInside" id="847-Wa-iFA"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Zzx-k8-QNF"/>

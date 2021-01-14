@@ -44,6 +44,11 @@ class CustomActionSheetFilterVC: UIViewController {
 //        print(categoryArray[0].name)
     }
     
+    @IBAction func dismissButtonTapped(_ sender: UIButton) {
+        NotificationCenter.default.post(name: .init("categoryClose"), object: nil)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBAction func allButtonTapped(_ sender: UIButton) {
     }
     

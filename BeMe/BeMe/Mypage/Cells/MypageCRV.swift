@@ -7,6 +7,13 @@
 
 import UIKit
 
+protocol CategorySelectedProtocol {
+    func categoryButtonDidTapped()
+}
+
+extension CategorySelectedProtocol {
+    func categoryButtonDidTapped() {}
+}
 class MypageCRV: UICollectionReusableView {
     //MARK:**- IBOutlet Part**
     
@@ -39,6 +46,8 @@ class MypageCRV: UICollectionReusableView {
     
     var delegate: MypageCVCDelegate?
     
+    var categoryDelegte: CategorySelectedProtocol?
+    
     
     var myProfile: [MyProfile] = [] 
     
@@ -59,6 +68,7 @@ class MypageCRV: UICollectionReusableView {
     //MARK:**- IBAction Part**
     
     @IBAction func filterButtonTapped(_ sender: UIButton) {
+        categoryDelegte?.categoryButtonDidTapped()
     }
     
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
