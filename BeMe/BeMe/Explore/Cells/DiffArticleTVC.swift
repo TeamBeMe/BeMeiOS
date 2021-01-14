@@ -73,7 +73,7 @@ extension DiffArticleTVC {
     }
     private func moveHighLightBar(to button: UIButton) {
         
-        UIView.animate(withDuration: 0.1, delay: 0, options: [.curveLinear], animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveLinear], animations: {
             // Slide Animation
             self.highLightBar.frame.origin.x = 30 + button.frame.minX
         
@@ -91,16 +91,11 @@ extension DiffArticleTVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let category = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCVC.identifier, for: indexPath) as? CategoryCVC else { return UICollectionViewCell() }
                 
-        
-        if selectedCategoryId != 0 {
-            if indexPath.item == selectedCategoryId - 1 {
-                category.isSelected = true
-            } else {
-                category.isSelected = false
-            }
-        } else {
-//            category.isSelected = false
+        if indexPath.item == selectedCategoryId - 1  {
+            category.isSelected = true
+            collectionView.selectItem(at: indexPath, animated: false, scrollPosition: .init())
         }
+        
         category.name.text = categoryArray[indexPath.item].name
         category.name.sizeToFit()
         category.makeRounded(cornerRadius: 4.0)
@@ -110,14 +105,13 @@ extension DiffArticleTVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        //        categoryCollectionView.scrollToItem(at: indexPath, at: .left, animated: true)
-        
+        print("Selected")
         selectedCategoryId = indexPath.item + 1
         delegate?.categoryButtonTapped(indexPath, selectedCategoryId)
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        
+        print("DeSelected")
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {

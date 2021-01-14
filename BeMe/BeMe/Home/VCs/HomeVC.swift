@@ -91,6 +91,7 @@ class HomeVC: UIViewController {
     var changePublicAnswerID = 0
     var deleteAnswerID = 0
     var deleteIdx = 0
+    var initialAnimated = false
     
     var isInit = false
    
@@ -332,12 +333,14 @@ extension HomeVC {
                     
                     self.cardCollectionView.reloadDataWithCompletion {
                         LoadingHUD.hide()
+                       
                         if self.initialScrolled == false{
-                            self.startAnimation()
+                            
                         }
                        
                     }
                     if self.initialScrolled == false {
+                        self.startAnimation()
                         self.cardCollectionView.scrollToItem(at: IndexPath(item: self.pastCards + self.todayCards - 1,
                                                                            section: 0),
                                                              at: .centeredHorizontally,
@@ -400,8 +403,12 @@ extension HomeVC : UICollectionViewDataSource {
             cell.answerData = answerDataList[indexPath.item]
             if indexPath.item == self.pastCards + self.todayCards - 1{
                 if answerDataList[indexPath.item].answer == ""{
-                    cell.isInitial = true
-                    cell.initialAnimation()
+                    if initialAnimated == false{
+                        cell.isInitial = true
+                        cell.initialAnimation()
+                        initialAnimated = true
+                    }
+                   
                 }
             }
             

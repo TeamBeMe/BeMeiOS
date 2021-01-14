@@ -21,7 +21,7 @@ class UnderTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTabBar()
-       
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = self
         // Do any additional setup after loading the view.
     }
     
@@ -127,15 +127,20 @@ extension UnderTabBarController : UITabBarControllerDelegate {
 
     // UITabBarControllerDelegate
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        let isInExploreTab =  pastIndex == selectedIndex
+        let isTabbed =  pastIndex == selectedIndex
         if viewController == self.viewControllers![0] {
-            homeTabBarDelegate?.homeButtonTapped()
+            if isTabbed{
+                homeTabBarDelegate?.homeButtonTapped()
+            }
         } else if viewController == self.viewControllers![1] {
-            if isInExploreTab {
+            if isTabbed {
                 exploreTabBarDelegate?.exploreTabDidTapped()
             }
         } else if viewController == self.viewControllers![2]{
-            followingTabBarDelegate?.followButtonTapped()
+            if isTabbed{
+                followingTabBarDelegate?.followButtonTapped()
+            }
+            
         }
         pastIndex = selectedIndex
     }
@@ -158,4 +163,14 @@ extension UITabBar{
     }
     
     
+}
+
+extension UnderTabBarController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestrueRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+//        if (touch.view?.isDescendant(of: self.searchTextField))! || (touch.view?.isDescendant(of: self.recentSearchCV))! || (touch.view?.isDescendant(of: self.recommendSearchCV))!{
+//
+//            return false
+//        }
+        return true
+    }
 }

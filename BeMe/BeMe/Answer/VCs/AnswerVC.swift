@@ -72,7 +72,7 @@ class AnswerVC: UIViewController {
         //        answerTextView.becomeFirstResponder()
         registerForKeyboardNotifications()
         
-        
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
     override func viewDidLoad() {
@@ -151,7 +151,7 @@ class AnswerVC: UIViewController {
             
             let position = textView.beginningOfDocument
             textView.selectedTextRange = textView.textRange(from:position, to:position)
-            textView.beginFloatingCursor(at: CGPoint(x: 0, y: 0))
+//            textView.beginFloatingCursor(at: CGPoint(x: 0, y: 0))
             
         } else {
             textView.text = savedAnswer
@@ -159,7 +159,7 @@ class AnswerVC: UIViewController {
             //
             let position = textView.endOfDocument
             textView.selectedTextRange = textView.textRange(from:position, to:position)
-            textView.endFloatingCursor()
+//            textView.endFloatingCursor()
             //
             isInitial = false
         }
@@ -170,8 +170,9 @@ class AnswerVC: UIViewController {
         
         questionLabel.text = answerData?.question
         //        questionInfoLabel.text = "[ \((answerData?.questionCategory)!)에 관한 \((answerData?.answerIdx)!)번째 질문 ]"
-        answerDateLabel.text = answerData?.answerDate
-        
+        answerDateLabel.text = answerData?.createdTime
+        answerDateLabel.textColor = .slateGrey
+        questionInfoLabel.textColor = .slateGrey
         let mainString = "[ \((answerData?.questionCategory)!)에 관한 \((answerData?.answerIdx)!)번째 질문 ]"
         
         let range = (mainString as! NSString).range(of: String((answerData?.answerIdx)!)+"번째")
@@ -180,7 +181,7 @@ class AnswerVC: UIViewController {
         
         questionInfoLabel.attributedText = mutableAttributedString
         
-        
+        finishButton.setTitleColor(.veryLightPink, for: .normal)
         answerTextView.text = answerData?.answer
         textViewDidChange(answerTextView)
         answerTextView.becomeFirstResponder()

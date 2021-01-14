@@ -73,6 +73,7 @@ class SignUpProfileVC: UIViewController {
                                                     case .requestErr(let msg):
                                                         if let message = msg as? String {
                                                             print(message)
+                                                            LoadingHUD.hide()
                                                         }
                                                     case .pathErr :
                                                         print("pathErr")
