@@ -55,18 +55,20 @@ class SignUpProfileVC: UIViewController {
                                                     case .success(let data) :
                                                         if let loginData = data as? LogInData{
                                                             print("회원가입 후 로그인 성공")
+                                                            guard let vcName = UIStoryboard(name: "UnderTab", bundle: nil).instantiateViewController(identifier: "UnderTabBarController") as? UINavigationController else {return}
                                                             UserDefaults.standard.set(loginData.token, forKey: "token")
                                                             print(UserDefaults.standard.string(forKey: "nickName")!)
-                                                            self.dismiss(animated: false, completion: {
-                                                                guard let vcName = UIStoryboard(name: "UnderTab", bundle: nil).instantiateViewController(identifier: "UnderTabBarController") as? UINavigationController else {return}
-                                                                vcName.modalPresentationStyle = .fullScreen
-                                                                self.present(vcName, animated: false, completion: {
-                                                                    
-                                                                })
-
+                                                            vcName.modalPresentationStyle = .fullScreen
+                                                            self.present(vcName, animated: false, completion: {
                                                                 
                                                             })
-                                                            
+//                                                            self.dismiss(animated: false, completion: {
+//
+//
+//
+//                                                                
+//                                                            })
+//
                                                             
                                                         }
                                                         

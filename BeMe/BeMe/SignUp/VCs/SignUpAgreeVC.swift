@@ -39,7 +39,7 @@ class SignUpAgreeVC: UIViewController {
         checkBoxes[1].addGestureRecognizer(secondTabGesture)
         okayButton.backgroundColor = .veryLightPink
        
-
+        okayButton.makeRounded(cornerRadius: 6)
         
     }
     
