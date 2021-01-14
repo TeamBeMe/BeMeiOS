@@ -131,11 +131,19 @@ class MypageVC: UIViewController {
         label.textColor = UIColor.darkGray
         
     }
-    
+
     
     //MARK:**- Function Part**
     
-    
+    func goToCommentButtonTapped(_ answerId: Int) {
+        guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
+        comment.answerId = answerId
+        comment.isMoreButtonHidden = false
+        comment.modalPresentationStyle = .fullScreen
+        let nc = UINavigationController(rootViewController: comment)
+        nc.modalPresentationStyle = .fullScreen
+        self.present(nc, animated: true, completion: nil)
+    }
 }
 //MARK:**- extension 부분**
 
@@ -169,7 +177,7 @@ extension MypageVC : UICollectionViewDataSource {
         
         cell.myAnswerArray = myAnswerArray
         cell.myScrapArray = myScrapArray
-        
+        cell.profileEditDelegate = self
         cell.mypageTabCollectionView.reloadData()
         cell.mypageCVCDelegate = self
         return cell
@@ -430,6 +438,11 @@ extension MypageVC: ProfileEditDelegate{
         self.present(self.imagePickerController, animated: true, completion: nil)
         
     }
+    func cardTapped(answerID: Int){
+        goToCommentButtonTapped(answerID)
+        
+        
+    }
 }
 
 
@@ -487,5 +500,6 @@ protocol FilterVCDelegate {
 
 protocol ProfileEditDelegate{
     func profileEdit()
+    func cardTapped(answerID: Int)
     
 }

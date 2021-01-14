@@ -11,7 +11,7 @@ class MypageCVC: UICollectionViewCell {
     //MARK:**- IBOutlet Part**
     @IBOutlet weak var mypageTabCollectionView: UICollectionView!
     var mypageCVCDelegate: MypageCVCDelegate?
-    
+    var profileEditDelegate: ProfileEditDelegate?
     
     //MARK:**- Variable Part**
     static let identifier = "MypageCVC"
@@ -76,6 +76,7 @@ extension MypageCVC : UICollectionViewDataSource {
         cell.myScrapArray = myScrapArray
         cell.mypageTableView.reloadData()
         cell.delegate = mypageCVCDelegate
+        cell.profileEditDelegate = self
         return cell        
     }
     
@@ -115,6 +116,18 @@ extension MypageCVC : UICollectionViewDelegateFlowLayout {
     }
     
 }
+
+extension MypageCVC: ProfileEditDelegate{
+    
+    func profileEdit(){
+        
+        
+    }
+    func cardTapped(answerID: Int){
+        profileEditDelegate?.cardTapped(answerID: answerID)
+    }
+}
+
 
 protocol MypageCVCDelegate {
 

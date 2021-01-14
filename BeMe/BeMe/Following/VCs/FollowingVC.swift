@@ -267,9 +267,7 @@ extension FollowingVC {
                         print("pagepage")
                         self.wholeCollectionView.reloadData()
 //                        self.wholeCollectionView.reloadDataWithCompletion {
-                            
-                            print("kakakaka")
-                            
+
                             
                             if self.answers.count == 0{
                                

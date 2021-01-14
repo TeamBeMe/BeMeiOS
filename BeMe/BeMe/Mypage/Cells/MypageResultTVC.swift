@@ -16,7 +16,8 @@ class MypageResultTVC: UITableViewCell {
     @IBOutlet weak var questionInfoLabel: UILabel!
     @IBOutlet weak var answerDateLabel: UILabel!
     @IBOutlet weak var lockButton: UIButton!
-    
+    var answerID: Int?
+    var profileEditDelegate: ProfileEditDelegate?
     //MARK:**- Variable Part**
     var indexpath = 0
     var isLocked = false
@@ -30,6 +31,10 @@ class MypageResultTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        cardView.isUserInteractionEnabled = true
+        let profileTabGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpCard))
+        cardView.addGestureRecognizer(profileTabGesture)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -108,7 +113,10 @@ class MypageResultTVC: UITableViewCell {
     }
     
     //MARK:**- Function Part**
-    
+    @objc func touchUpCard(){
+        profileEditDelegate?.cardTapped(answerID: answerID!)
+        
+    }
     
 }
 
