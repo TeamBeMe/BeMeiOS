@@ -57,9 +57,6 @@ class OthersPageCRV: UICollectionReusableView {
                 switch networkResult{
                 case .success(let data) :
                     print("success")
-//                    self.followButton.setTitle("팔로우", for: .normal)
-//                    self.followButton.backgroundColor = .black
-//                    self.followButton.setTitleColor(.white, for: .normal)
                     self.setFollowButton(view: self.followButton, isFollowed: false)
                     
                     

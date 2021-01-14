@@ -19,6 +19,8 @@
 		A53C289D25AE103D0054DA7E /* MyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C289C25AE103D0054DA7E /* MyProfile.swift */; };
 		A53C28A025AE11E10054DA7E /* MyAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C289F25AE11E10054DA7E /* MyAnswer.swift */; };
 		A53C28A325AE11F30054DA7E /* MyScrap.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C28A225AE11F30054DA7E /* MyScrap.swift */; };
+		A53C28B625B00EB50054DA7E /* CustomActionSheetFilterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C28B525B00EB50054DA7E /* CustomActionSheetFilterVC.swift */; };
+		A53C28C625B0168E0054DA7E /* FilterCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A53C28C525B0168E0054DA7E /* FilterCVC.swift */; };
 		A54CE7C725AC5BF000914FCB /* OthersPageProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54CE7C625AC5BF000914FCB /* OthersPageProfileService.swift */; };
 		A54CE7CA25AC5C0000914FCB /* OthersPageAnswerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54CE7C925AC5C0000914FCB /* OthersPageAnswerService.swift */; };
 		A54CE7CE25AC60D100914FCB /* OthersProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54CE7CD25AC60D100914FCB /* OthersProfile.swift */; };
@@ -232,6 +234,8 @@
 		A53C289C25AE103D0054DA7E /* MyProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfile.swift; sourceTree = "<group>"; };
 		A53C289F25AE11E10054DA7E /* MyAnswer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnswer.swift; sourceTree = "<group>"; };
 		A53C28A225AE11F30054DA7E /* MyScrap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyScrap.swift; sourceTree = "<group>"; };
+		A53C28B525B00EB50054DA7E /* CustomActionSheetFilterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActionSheetFilterVC.swift; sourceTree = "<group>"; };
+		A53C28C525B0168E0054DA7E /* FilterCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterCVC.swift; sourceTree = "<group>"; };
 		A54CE7C625AC5BF000914FCB /* OthersPageProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersPageProfileService.swift; sourceTree = "<group>"; };
 		A54CE7C925AC5C0000914FCB /* OthersPageAnswerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersPageAnswerService.swift; sourceTree = "<group>"; };
 		A54CE7CD25AC60D100914FCB /* OthersProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OthersProfile.swift; sourceTree = "<group>"; };
@@ -501,6 +505,14 @@
 			path = MyPage;
 			sourceTree = "<group>";
 		};
+		A53C28B325AFFC240054DA7E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A53C28C525B0168E0054DA7E /* FilterCVC.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		A54CE7C425AC52F400914FCB /* OthersPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -730,6 +742,7 @@
 		D492E43125A0E0F20088A181 /* CustomActionSheet */ = {
 			isa = PBXGroup;
 			children = (
+				A53C28B325AFFC240054DA7E /* Cell */,
 				D4996BF525AB8F4500E3987B /* Model */,
 				D492E43325A0E1110088A181 /* Storyboard */,
 				D492E43225A0E1090088A181 /* VC */,
@@ -743,6 +756,7 @@
 				D492E43725A0E16D0088A181 /* CustomActionSheetVC.swift */,
 				D4C5870425AF60FC0089BD18 /* CustomActionSheetOneVC.swift */,
 				D41196B725A64E82009C674A /* CustomActionSheetTwoVC.swift */,
+				A53C28B525B00EB50054DA7E /* CustomActionSheetFilterVC.swift */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -1590,6 +1604,7 @@
 				EC813F432599A42700BBCE25 /* APIConstants.swift in Sources */,
 				EC813F7B2599F88D00BBCE25 /* PastCardCVC.swift in Sources */,
 				EC7F0EAF25A09F24008EB88A /* AnswerDataForViewController.swift in Sources */,
+				A53C28C625B0168E0054DA7E /* FilterCVC.swift in Sources */,
 				D4C5872925AF77970089BD18 /* CustomMailView.swift in Sources */,
 				EC7C1612259B8BA100A5BA4C /* FollowingVC.swift in Sources */,
 				A53C289D25AE103D0054DA7E /* MyProfile.swift in Sources */,
@@ -1717,6 +1732,7 @@
 				EC813F652599F40800BBCE25 /* UIView+Extensions.swift in Sources */,
 				ECC6310D25A9B27E009E4FD4 /* AnswerDataForFollowing.swift in Sources */,
 				EC89E309259C1CC700DBAFE5 /* FollowSearchVC.swift in Sources */,
+				A53C28B625B00EB50054DA7E /* CustomActionSheetFilterVC.swift in Sources */,
 				EC89E328259C378300DBAFE5 /* FollowHeaderCVC.swift in Sources */,
 				EC813F262599A15100BBCE25 /* SceneDelegate.swift in Sources */,
 				EC89E30F259C274200DBAFE5 /* FollowerSearchVC.swift in Sources */,
