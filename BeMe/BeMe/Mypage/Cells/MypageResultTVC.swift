@@ -38,6 +38,24 @@ class MypageResultTVC: UITableViewCell {
     //MARK:**- IBAction Part**
     
     @IBAction func lockButtonTapped(_ sender: UIButton) {
+//        HomeChangePublicService.shared.changePublic(id: changePublicAnswerID,publicFlag: input) {(networkResult) -> (Void) in
+//            switch networkResult{
+//            case .success(let data) :
+//                self.answerDataList[self.changePublicIdx].lock! = !self.answerDataList[self.changePublicIdx].lock!
+//                self.cardCollectionView.reloadData()
+//                print("success")
+//            case .requestErr(let msg):
+//                if let message = msg as? String {
+//                    print(message)
+//                }
+//            case .pathErr :
+//                print("pathErr")
+//            case .serverErr :
+//                print("serverErr")
+//            case .networkFail:
+//                print("networkFail")
+//            
+//            }
         if isLocked {
             isLocked = false
             sender.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
