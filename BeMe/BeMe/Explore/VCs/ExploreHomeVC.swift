@@ -295,7 +295,6 @@ extension ExploreHomeVC: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffset = exploreTableView.contentOffset.y
         // iphone safe area 문제 해결 코드
-        print(currentOffset)
         isTableViewAnimation = true
         view.backgroundColor = currentOffset > 394.0 ? .white : UIColor.init(named: "background")
         exploreTableView.backgroundColor = currentOffset >= 0.0 ? .white : UIColor.init(named: "background")
@@ -310,7 +309,7 @@ extension ExploreHomeVC: UIScrollViewDelegate {
             scrollDirection = false
         }
         
-        print(scrollDirection)
+
         if (currentOffset < 610.0) {
             hideTabBarWhenScrollingUp()
         } else {
