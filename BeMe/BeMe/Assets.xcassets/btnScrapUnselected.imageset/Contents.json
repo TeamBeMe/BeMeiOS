@@ -1,9 +1,9 @@
 {
   "images" : [
     {
+      "filename" : "btnScrapUnselected.png",
       "scale" : "1x",
-      "idiom" : "universal",
-      "filename" : "btnScrapUnselected.png"
+      "idiom" : "universal"
     },
     {
       "idiom" : "universal",
@@ -11,9 +11,9 @@
       "scale" : "2x"
     },
     {
+      "filename" : "btnScrapUnselected@3x.png",
       "scale" : "3x",
-      "idiom" : "universal",
-      "filename" : "btnScrapUnselected@3x.png"
+      "idiom" : "universal"
     }
   ],
   "info" : {

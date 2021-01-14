@@ -6,9 +6,9 @@
       "filename" : "icInfo32.png"
     },
     {
+      "idiom" : "universal",
       "filename" : "icInfo32@2x.png",
-      "scale" : "2x",
-      "idiom" : "universal"
+      "scale" : "2x"
     },
     {
       "filename" : "icInfo32@3x.png",
