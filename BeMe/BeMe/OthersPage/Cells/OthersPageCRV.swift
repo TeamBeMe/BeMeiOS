@@ -25,11 +25,23 @@ class OthersPageCRV: UICollectionReusableView {
     //MARK:**- Variable Part**
     static let identifier = "OthersPageCRV"
 //    private var isFollowed = false
-    var othersProfile: [OthersProfile] = [] 
+    var othersProfile: [OthersProfile] = []
+    
+    var isMyProfile: Bool?
+    
     //MARK:**- Life Cycle Part**
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        
+        print("CRV:::::: \(isMyProfile)")
+        if let iMP = isMyProfile {
+            print(iMP)
+            followButton.isHidden = iMP
+        } else {
+            print(isMyProfile)
+            followButton.isHidden = false
+        }
         
     }
     
@@ -45,9 +57,6 @@ class OthersPageCRV: UICollectionReusableView {
                 switch networkResult{
                 case .success(let data) :
                     print("success")
-//                    self.followButton.setTitle("팔로우", for: .normal)
-//                    self.followButton.backgroundColor = .black
-//                    self.followButton.setTitleColor(.white, for: .normal)
                     self.setFollowButton(view: self.followButton, isFollowed: false)
                     
                     

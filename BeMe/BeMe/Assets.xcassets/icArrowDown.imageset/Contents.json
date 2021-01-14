@@ -1,19 +1,19 @@
 {
   "images" : [
     {
-      "scale" : "1x",
       "filename" : "icArrowDown.png",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "scale" : "1x"
     },
     {
-      "scale" : "2x",
       "filename" : "icArrowDown@2x.png",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "scale" : "2x"
     },
     {
-      "filename" : "icArrowDown@3x.png",
       "scale" : "3x",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "filename" : "icArrowDown@3x.png"
     }
   ],
   "info" : {

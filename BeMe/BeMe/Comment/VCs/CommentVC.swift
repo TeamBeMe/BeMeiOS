@@ -633,7 +633,7 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                     }
                     
                     //                    print(realCommentArray[indexPath.section-1].publicFlag)
-                    comment.setInformations(profileImage: realCommentArray[indexPath.section-1].profileImg, nickName: realCommentArray[indexPath.section-1].userNickname, publicFlag: realCommentArray[indexPath.section-1].publicFlag, isVisible: realCommentArray[indexPath.section-1].isVisible, content: realCommentArray[indexPath.section-1].content, date: realCommentArray[indexPath.section-1].createdAt, commentId: realCommentArray[indexPath.section-1].id, isAuthor: realCommentArray[indexPath.section-1].isAuthor)
+                    comment.setInformations(profileImage: realCommentArray[indexPath.section-1].profileImg, nickName: realCommentArray[indexPath.section-1].userNickname, publicFlag: realCommentArray[indexPath.section-1].publicFlag, isVisible: realCommentArray[indexPath.section-1].isVisible, content: realCommentArray[indexPath.section-1].content, date: realCommentArray[indexPath.section-1].createdAt, commentId: realCommentArray[indexPath.section-1].id, isAuthor: realCommentArray[indexPath.section-1].isAuthor, userId: realCommentArray[indexPath.section-1].userID)
                     
                     return comment
                 } else {
@@ -665,7 +665,7 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                 secondComment.delegate = self
                 secondComment.indexPath = indexPath
                 
-                secondComment.setInformation(profileImage: realCommentArray[indexPath.section-1].children[indexPath.row-1].profileImg, nickName: realCommentArray[indexPath.section-1].children[indexPath.row-1].userNickname, content: realCommentArray[indexPath.section-1].children[indexPath.row-1].content, date: realCommentArray[indexPath.section-1].children[indexPath.row-1].createdAt, isVisible: realCommentArray[indexPath.section-1].children[indexPath.row-1].isVisible, publicFlag: realCommentArray[indexPath.section-1].children[indexPath.row-1].publicFlag, isAuthor: realCommentArray[indexPath.section-1].children[indexPath.row-1].isAuthor, commentId: realCommentArray[indexPath.section-1].children[indexPath.row-1].id)
+                secondComment.setInformation(profileImage: realCommentArray[indexPath.section-1].children[indexPath.row-1].profileImg, nickName: realCommentArray[indexPath.section-1].children[indexPath.row-1].userNickname, content: realCommentArray[indexPath.section-1].children[indexPath.row-1].content, date: realCommentArray[indexPath.section-1].children[indexPath.row-1].createdAt, isVisible: realCommentArray[indexPath.section-1].children[indexPath.row-1].isVisible, publicFlag: realCommentArray[indexPath.section-1].children[indexPath.row-1].publicFlag, isAuthor: realCommentArray[indexPath.section-1].children[indexPath.row-1].isAuthor, commentId: realCommentArray[indexPath.section-1].children[indexPath.row-1].id,userId: realCommentArray[indexPath.section-1].children[indexPath.row-1].userID)
                 
                 
                 return secondComment
@@ -754,6 +754,20 @@ extension CommentVC: UITableViewButtonSelectedDelegate {
         
     }
     
+    
+    func goToOthersProfileButtonDidTapped(_ userId: Int) {
+        
+        guard let profileVC = UIStoryboard(name: "OthersPage",
+                                           bundle: nil).instantiateViewController(
+                                            withIdentifier: "OthersPageVC") as? OthersPageVC
+        else{
+            
+            return
+        }
+        profileVC.userID = userId
+        self.navigationController?.pushViewController(profileVC, animated: true)
+        
+    }
     
     func settingButtonDidTapped(to indexPath: IndexPath, isAuthor: Bool, commentId: Int, content: String) {
         

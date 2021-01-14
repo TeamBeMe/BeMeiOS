@@ -8,7 +8,7 @@
 import UIKit
 
 class AlarmVC: UIViewController {
-
+    
     @IBOutlet weak var alarmTableView: UITableView!
     
     private var page: Int = 1
@@ -22,7 +22,7 @@ class AlarmVC: UIViewController {
     }
     
     //MARK: - Life Cycle
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
@@ -31,9 +31,9 @@ class AlarmVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
     }
-
+    
     @IBAction func dismissButtonTapped(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -117,14 +117,15 @@ extension AlarmVC: UITableViewDataSource {
                 } else {
                     guard let alarm = tableView.dequeueReusableCell(withIdentifier: AlarmTVC.identifier, for: indexPath) as? AlarmTVC else { return UITableViewCell() }
                     alarm.selectionStyle = .none
-                    alarm.setInformations(type: alarmArray[indexPath.row].type, profileImg: alarmArray[indexPath.row].profileImg, question: alarmArray[indexPath.row].questionTitle, nickName: alarmArray[indexPath.row].userNickname)
+                    alarm.delegate = self
+                    alarm.setInformations(type: alarmArray[indexPath.row].type, profileImg: alarmArray[indexPath.row].profileImg, question: alarmArray[indexPath.row].questionTitle, nickName: alarmArray[indexPath.row].userNickname, userId: alarmArray[indexPath.row].userID)
                     return alarm
                 }
             } else {
                 guard let alarm = tableView.dequeueReusableCell(withIdentifier: AlarmTVC.identifier, for: indexPath) as? AlarmTVC else { return UITableViewCell() }
-
                 alarm.selectionStyle = .none
-                alarm.setInformations(type: alarmArray[indexPath.row].type, profileImg: alarmArray[indexPath.row].profileImg, question: alarmArray[indexPath.row].questionTitle, nickName: alarmArray[indexPath.row].userNickname)
+                alarm.delegate = self
+                alarm.setInformations(type: alarmArray[indexPath.row].type, profileImg: alarmArray[indexPath.row].profileImg, question: alarmArray[indexPath.row].questionTitle, nickName: alarmArray[indexPath.row].userNickname, userId: alarmArray[indexPath.row].userID)
                 return alarm
             }
         }
@@ -144,6 +145,16 @@ extension AlarmVC: UITableViewDelegate {
             self.present(comment, animated: true, completion: nil)
         }  else {
             // 타인 프로필로 이동
+            guard let profileVC = UIStoryboard(name: "OthersPage",
+                                               bundle: nil).instantiateViewController(
+                                                withIdentifier: "OthersPageVC") as? OthersPageVC
+            else{
+                
+                return
+            }
+            profileVC.userID = alarmArray[indexPath.row].userID
+            self.navigationController?.pushViewController(profileVC, animated: true)
+            
         }
     }
     
@@ -155,5 +166,19 @@ extension AlarmVC: UITableViewButtonSelectedDelegate {
     func exploreMoreAnswersButtonDidTapped() {
         currentPage += 1
         getAlarms()
+    }
+    
+    func goToOthersProfileButtonDidTapped(_ userId: Int) {
+        guard let profileVC = UIStoryboard(name: "OthersPage",
+                                           bundle: nil).instantiateViewController(
+                                            withIdentifier: "OthersPageVC") as? OthersPageVC
+        else{
+            
+            return
+        }
+        profileVC.userID = userId
+        self.navigationController?.pushViewController(profileVC, animated: true)
+        
+        
     }
 }

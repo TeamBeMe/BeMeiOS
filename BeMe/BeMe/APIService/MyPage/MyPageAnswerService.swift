@@ -15,13 +15,15 @@ struct MyPageAnswerService {
     func getMyAnswer(availability: String?, category: Int?, page: Int, query: String?, completion : @escaping (NetworkResult<Any>) -> (Void) ){
         
         let category = category == nil ? "" : String(category!)
+        let availability = availability == nil ? "" : String(availability!)
+        let query = query == nil ? "" : String(query!)
         
-        let url = APIConstants.myPageAnswerURL+"public="+availability!+"&category="+category+"&page="+String(page)+"&query="+query!
+        let url = APIConstants.myPageAnswerURL+"public="+availability+"&category="+category+"&page="+String(page)+"&query="+query
         
         let header : HTTPHeaders = [
             "Content-Type":"application/json",
-            //            "token":UserDefaults.standard.string(forKey: "token")!
-            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjEwMDk5MjQwLCJleHAiOjE2MzYwMTkyNDAsImlzcyI6ImJlbWUifQ.JeYfzJsg-kdatqhIOqfJ4oXUvUdsiLUaGHwLl1mJRvQ"
+            "token":UserDefaults.standard.string(forKey: "token")!
+            //            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjEwMDk5MjQwLCJleHAiOjE2MzYwMTkyNDAsImlzcyI6ImJlbWUifQ.JeYfzJsg-kdatqhIOqfJ4oXUvUdsiLUaGHwLl1mJRvQ"
         ]
         
         
@@ -62,6 +64,7 @@ struct MyPageAnswerService {
             return .pathErr
         }
         
+        print(decodedData.data)
         switch status{
         case 200..<300:
             print("통신 성공")

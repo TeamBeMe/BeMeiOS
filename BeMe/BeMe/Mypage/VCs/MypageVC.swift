@@ -13,12 +13,20 @@ class MypageVC: UIViewController {
     @IBOutlet weak var mypageCollectionView: UICollectionView!
     @IBOutlet weak var settingButton: UIButton!
     
+    lazy var popupBackgroundView: UIView = UIView()
+    
     private var directionMenu: Int = 0
     
     //MARK:**- Variable Part**
     let mypageCVLayout = MypageCVFlowLayout()
-    
+    private var filterVCDelegate: FilterVCDelegate?
     let mypageCVC = MypageCVC()
+    
+    private var selectedCategoryId: Int?
+    
+    private var selectedAv: String?
+    
+    private var keyword: String?
     
     private var myAnswerArray: [Answer] = [] {
         didSet {
@@ -45,9 +53,12 @@ class MypageVC: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        popupBackgroundView.setPopupBackgroundView(to: view)
         mypageCollectionView.delegate = self
         mypageCollectionView.dataSource = self
+       
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissCategory), name: .init("categoryClose"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getKeyword), name: .init("keyword"), object: nil)
         
         if #available(iOS 11.0, *) {
             mypageCollectionView.automaticallyAdjustsScrollIndicatorInsets = false
@@ -57,9 +68,34 @@ class MypageVC: UIViewController {
         
         mypageCollectionView.collectionViewLayout = mypageCVLayout
         
+    }
+    
+    @objc func getKeyword(_ notification: Notification) {
+        guard let userInfo = notification.userInfo as? [String: Any] else { return }
+        guard let keyword = userInfo["keyword"] as? String else { return }
+    
+        print("Hello")
+        print(keyword)
         
     }
     
+    @objc func dismissCategory(_ notification: Notification) {
+        popupBackgroundView.animatePopupBackground(false)
+        guard let userInfo = notification.userInfo as? [String: Any] else { return }
+        guard let categoryId = userInfo["categoryId"] as? Int else { return }
+        guard let selectedAv = userInfo["selectedAv"] as? String else { return }
+        print(categoryId)
+        print(selectedAv)
+        self.selectedAv = selectedAv
+        self.selectedCategoryId = categoryId
+        getAnswerData(availability: selectedAv, category: selectedCategoryId, page: 1, query: keyword)
+    }
+    
+    @objc func applyfilter() {
+        //availability,category 알아오기
+//        getAnswerData(availability: <#String?#>, category: <#Int?#>, page: 1, query: <#String?#>)
+//        getScrapData(availability: <#String?#>, category: <#Int?#>, page: 1, query: <#String?#>)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         getProfileData()
@@ -104,6 +140,13 @@ class MypageVC: UIViewController {
     
 }
 //MARK:**- extension 부분**
+
+extension MypageVC : UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+    }
+}
+
 extension MypageVC : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -193,6 +236,7 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MypageCRV.identifier, for: indexPath) as? MypageCRV else {
                 assert(false, "응 아니야")
             }
+            headerView.categoryDelegte = self
             headerView.delegate = self
             headerView.myProfile = myProfile
             if (myProfile.count != 0) {
@@ -206,6 +250,17 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
         }
         
         
+    }
+}
+
+extension MypageVC: CategorySelectedProtocol {
+    func categoryButtonDidTapped() {
+        popupBackgroundView.animatePopupBackground(true)
+        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: "CustomActionSheetFilterVC") as?
+                CustomActionSheetFilterVC else { return }
+        
+        settingActionSheet.modalPresentationStyle = .overCurrentContext
+        self.present(settingActionSheet, animated: true, completion: nil)
     }
 }
 
@@ -234,7 +289,9 @@ extension MypageVC: MypageCVCDelegate {
 }
 
 extension MypageVC {
+    
     private func getAnswerData(availability: String?, category: Int?, page: Int, query: String?) {
+        
         MyPageAnswerService.shared.getMyAnswer(availability: availability, category: category, page: page, query: query) { (result) in
             switch result {
             case .success(let data):
@@ -360,4 +417,10 @@ extension MypageVC: UIScrollViewDelegate {
         }
     }
 
+}
+
+
+protocol FilterVCDelegate {
+    func getSeletedCategory() -> Int?
+    func getSeletedAvailabity() -> String
 }

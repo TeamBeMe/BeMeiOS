@@ -7,6 +7,13 @@
 
 import UIKit
 
+protocol CategorySelectedProtocol {
+    func categoryButtonDidTapped()
+}
+
+extension CategorySelectedProtocol {
+    func categoryButtonDidTapped() {}
+}
 class MypageCRV: UICollectionReusableView {
     //MARK:**- IBOutlet Part**
     
@@ -39,6 +46,8 @@ class MypageCRV: UICollectionReusableView {
     
     var delegate: MypageCVCDelegate?
     
+    var categoryDelegte: CategorySelectedProtocol?
+    
     
     var myProfile: [MyProfile] = [] 
     
@@ -52,13 +61,14 @@ class MypageCRV: UICollectionReusableView {
         setLabel(view: attendanceCountLabel, text: "4123124")
         setLabel(view: nameLabel, text: "재용아 개소리 좀 그만해")
         setSearhButton(view: searchView)
-        
+        searchTextField.delegate = self
     }
     
     
     //MARK:**- IBAction Part**
     
     @IBAction func filterButtonTapped(_ sender: UIButton) {
+        categoryDelegte?.categoryButtonDidTapped()
     }
     
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
@@ -140,5 +150,17 @@ class MypageCRV: UICollectionReusableView {
         }) { _ in
             
         }
+    }
+}
+
+extension MypageCRV: UITextFieldDelegate {
+
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("HEELvdsvsdv")
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("TextFieldDId")
+        NotificationCenter.default.post(name: .init("keword"), object: nil, userInfo: ["keyword": textField.text])
     }
 }
