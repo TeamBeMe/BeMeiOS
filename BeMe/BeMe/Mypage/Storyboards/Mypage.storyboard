@@ -427,6 +427,9 @@
                                                     <state key="normal" title="프로필 편집">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="profileEditButtonTapped:" destination="WRi-g6-kzK" eventType="touchUpInside" id="qBZ-LI-Vv4"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
