@@ -79,7 +79,6 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
                             as? MypageMyScrapTVC else { return UITableViewCell() }
                     
                     tab.setCardView(question: myScrapArray[indexPath.row].question, questionInfo: myScrapArray[indexPath.row].category, answerDate: myScrapArray[indexPath.row].answerDate, isLocked: myScrapArray[indexPath.row].publicFlag, isScrapped: myScrapArray[indexPath.row].isScrapped!)
-//                    tab.delegate = self
                     tab.selectionStyle = .none
                     return tab
                     
@@ -89,7 +88,6 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
                             as? MypageOthersScrapTVC else { return UITableViewCell() }
                     
                     tab.setCardView(question: myScrapArray[indexPath.row].question, questionInfo: myScrapArray[indexPath.row].category, answerDate: myScrapArray[indexPath.row].answerDate, writer: myScrapArray[indexPath.row].userNickname, writerImg: myScrapArray[indexPath.row].userProfile!, isScrapped: myScrapArray[indexPath.row].isScrapped!)
-//                    tab.delegate = self
                     tab.selectionStyle = .none
                     return tab
                     

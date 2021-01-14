@@ -40,28 +40,28 @@ class MypageMyScrapTVC: UITableViewCell {
     
     //MARK:**- IBAction Part**
     @IBAction func scrappedButtonTapped(_ sender: UIButton) {
-        if isScrapped {
-            isScrapped = false
-            sender.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
-            
-        } else {
-            isScrapped = true
-            sender.setImage(UIImage.init(named: "btnScrapUnselected"), for: .normal)
-            
-        }
+//        if isScrapped {
+//            isScrapped = false
+//            sender.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
+//            
+//        } else {
+//            isScrapped = true
+//            sender.setImage(UIImage.init(named: "btnScrapUnselected"), for: .normal)
+//            
+//        }
     }
     
     
     @IBAction func lockButtonTapped(_ sender: UIButton) {
-        if isLocked {
-            isLocked = false
-            sender.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
-            
-        } else {
-            isLocked = true
-            sender.setImage(UIImage.init(named: "btnUnlockExploreBlack"), for: .normal)
-            
-        }
+//        if isLocked {
+//            isLocked = false
+//            sender.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
+//            
+//        } else {
+//            isLocked = true
+//            sender.setImage(UIImage.init(named: "btnUnlockExploreBlack"), for: .normal)
+//            
+//        }
     }
     
     //MARK:**- default Setting Function Part**
