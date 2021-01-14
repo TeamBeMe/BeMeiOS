@@ -136,7 +136,7 @@ extension MypageCVC: ProfileEditDelegate{
 protocol MypageCVCDelegate {
 
     func myAnswerItem()
-    func othersAnswerItem()
+    func myScrapItem()
     func nowDirection() -> Int
 }
 

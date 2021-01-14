@@ -246,6 +246,7 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
             headerView.delegate = self
             headerView.profileEditDelegate = self
             headerView.myProfile = myProfile
+            headerView.MypageCRVDelegate = self
             print("박세란")
         
          
@@ -289,7 +290,7 @@ extension MypageVC: MypageCVCDelegate {
         mypageCollectionView.reloadData()
     }
     
-    func othersAnswerItem() {
+    func myScrapItem() {
         directionMenu = 1
         getScrapData(availability: selectedAv, category: selectedCategoryId, page: 1, query: keyword)
         mypageCollectionView.reloadData()
@@ -507,4 +508,24 @@ protocol ProfileEditDelegate{
     func profileEdit()
     func cardTapped(answerID: Int)
     func showToast(showBool: Bool)
+}
+
+extension MypageVC: MypageCRVDelegate{
+    func searchButtonSearch() {
+        if directionMenu == 0 {
+            myAnswerItem()
+        } else {
+            myScrapItem()
+        }
+    }
+    
+    func deleteButtonSearch() {
+        if directionMenu == 0 {
+            myAnswerItem()
+        } else {
+            myScrapItem()
+        }
+    }
+    
+    
 }
