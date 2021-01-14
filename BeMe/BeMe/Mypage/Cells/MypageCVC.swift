@@ -108,6 +108,7 @@ extension MypageCVC : UICollectionViewDelegateFlowLayout {
 }
 
 protocol MypageCVCDelegate {
+
     func myAnswerItem()
     func othersAnswerItem()
     func nowDirection() -> Int

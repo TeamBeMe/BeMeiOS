@@ -13,6 +13,8 @@ class MypageVC: UIViewController {
     @IBOutlet weak var mypageCollectionView: UICollectionView!
     @IBOutlet weak var settingButton: UIButton!
     
+    lazy var popupBackgroundView: UIView = UIView()
+    
     private var directionMenu: Int = 0
     
     //MARK:**- Variable Part**
@@ -45,10 +47,10 @@ class MypageVC: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        popupBackgroundView.setPopupBackgroundView(to: view)
         mypageCollectionView.delegate = self
         mypageCollectionView.dataSource = self
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(dismissCategory), name: .init("categoryClose"), object: nil)
         if #available(iOS 11.0, *) {
             mypageCollectionView.automaticallyAdjustsScrollIndicatorInsets = false
         } else {
@@ -57,9 +59,12 @@ class MypageVC: UIViewController {
         
         mypageCollectionView.collectionViewLayout = mypageCVLayout
         
-        
     }
     
+    @objc func dismissCategory() {
+        
+        popupBackgroundView.animatePopupBackground(false)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         getProfileData()
@@ -193,6 +198,7 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MypageCRV.identifier, for: indexPath) as? MypageCRV else {
                 assert(false, "응 아니야")
             }
+            headerView.categoryDelegte = self
             headerView.delegate = self
             headerView.myProfile = myProfile
             if (myProfile.count != 0) {
@@ -206,6 +212,17 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
         }
         
         
+    }
+}
+
+extension MypageVC: CategorySelectedProtocol {
+    func categoryButtonDidTapped() {
+        popupBackgroundView.animatePopupBackground(true)
+        guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: "CustomActionSheetFilterVC") as?
+                CustomActionSheetFilterVC else { return }
+        
+        settingActionSheet.modalPresentationStyle = .overCurrentContext
+        self.present(settingActionSheet, animated: true, completion: nil)
     }
 }
 
