@@ -500,6 +500,9 @@
                                                     </constraints>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" image="icSearch"/>
+                                                    <connections>
+                                                        <action selector="searchButtonTapped:" destination="WRi-g6-kzK" eventType="touchUpInside" id="ZxW-je-x9p"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KhK-uO-oVX">
                                                     <rect key="frame" x="313" y="62.5" width="38" height="38"/>

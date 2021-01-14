@@ -89,6 +89,9 @@ class MypageCRV: UICollectionReusableView {
         print("scrappedAswerButtonTapped")
         moveHighLightBar(to: sender)
     }
+    @IBAction func searchButtonTapped(_ sender: UIButton) {
+        
+    }
     
     //MARK:**- default Setting Function Part**
     

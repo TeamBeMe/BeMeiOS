@@ -24,6 +24,7 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
     let othersPageCVC = OthersPageCVC()
     
     var tableviewHeight: CGFloat = 735.0
+    
     var userID: Int?
     
     var isMyProfile: Bool?
@@ -224,10 +225,6 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
         
         tableviewHeight = CGFloat(othersAnswerArray.count) * 135.0
         tableviewHeight = (tableviewHeight < 588.0) ? 588 : tableviewHeight
-        
-        //        print("=====")
-        //        print(tableviewHeight)
-        //        collectionView.cellForItem(at: indexPath)
         return CGSize(width: collectionView.frame.width  , height: tableviewHeight)
     }
     
@@ -271,7 +268,7 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
             }
             
             print("IsMyProfile: \(isMyProfile)")
-            headerView.isMyProfile = isMyProfile
+//            headerView.isMyProfile = isMyProfile
             headerView.othersProfile = othersProfile
             if (othersProfile.count != 0) {
                 headerView.setProfile(nickname: othersProfile[0].nickname, img: othersProfile[0].profileImg!, visit: String(othersProfile[0].continuedVisit), answerCount: String(othersProfile[0].answerCount), isFollowed: othersProfile[0].isFollowed!)

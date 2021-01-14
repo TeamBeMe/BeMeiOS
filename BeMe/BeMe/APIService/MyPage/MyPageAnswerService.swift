@@ -20,6 +20,9 @@ struct MyPageAnswerService {
         
         let url = APIConstants.myPageAnswerURL+"public="+availability+"&category="+category+"&page="+String(page)+"&query="+query
         
+        print("getMyAnswer URll")
+        print(url)
+        
         let header : HTTPHeaders = [
             "Content-Type":"application/json",
             "token":UserDefaults.standard.string(forKey: "token")!
@@ -63,13 +66,9 @@ struct MyPageAnswerService {
             print("디코딩 실패")
             return .pathErr
         }
-        
-        print(decodedData.data)
         switch status{
         case 200..<300:
             print("통신 성공")
-            //            print(decodedData.message)
-            //            print(decodedData.data?.answers[0].isScrapped)
             return .success(decodedData.data)
         case 400..<500 :
             return .requestErr(decodedData.message)
