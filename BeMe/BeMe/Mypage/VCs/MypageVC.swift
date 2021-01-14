@@ -17,7 +17,7 @@ class MypageVC: UIViewController {
     
     //MARK:**- Variable Part**
     let mypageCVLayout = MypageCVFlowLayout()
-    
+    private var filterVCDelegate: FilterVCDelegate?
     let mypageCVC = MypageCVC()
     
     private var myAnswerArray: [Answer] = [] {
@@ -37,7 +37,6 @@ class MypageVC: UIViewController {
         }
     }
     
-    private var filterVCDelegate: FilterVCDelegate?
     
     //MARK:**- Constraint Part**
     
