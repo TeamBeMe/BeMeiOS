@@ -1,29 +1,31 @@
 //
-//  OthersPageAnswerService.swift
+//  LogInService.swift
 //  BeMe
 //
-//  Created by 박세란 on 2021/01/11.
+//  Created by Yunjae Kim on 2021/01/06.
 //
 
 import Foundation
 import Alamofire
 
-struct OthersPageAnswerService {
-    static let shared = OthersPageAnswerService()
+struct FollowingNewAnswerService{
+    static let shared = FollowingNewAnswerService()
     
-    func getOthersAnswer(userId: Int, page: Int, completion : @escaping (NetworkResult<Any>) -> (Void) ){
-        // page deault -> 0
-        let url = APIConstants.othersPageAnswerURL+String(userId)+"?page="+String(page)
+    func getNewData(questionID: Int, completion : @escaping (NetworkResult<Any>) -> (Void) ){
+        let url = APIConstants.followingNewAnswerURL
         
         let header : HTTPHeaders = [
             "Content-Type":"application/json",
-//            "token":UserDefaults.standard.string(forKey: "token")!
-            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjEwMDk5MjQwLCJleHAiOjE2MzYwMTkyNDAsImlzcyI6ImJlbWUifQ.JeYfzJsg-kdatqhIOqfJ4oXUvUdsiLUaGHwLl1mJRvQ"
+            "token":UserDefaults.standard.string(forKey: "token")!
         ]
-
+        
+        let body : Parameters = [
+            "question_id": questionID
+        ]
         
         let dataRequest = AF.request(url,
-                                     method: .get,
+                                     method: .post,
+                                     parameters: body,
                                      encoding: JSONEncoding.default,
                                      headers: header)
         
@@ -40,7 +42,11 @@ struct OthersPageAnswerService {
                 }
                
                 completion(judge(status: statusCode, data: data))
-
+                
+                
+                
+                
+                
             case .failure(let err):
                 print(err)
                 completion(.networkFail)
@@ -54,16 +60,18 @@ struct OthersPageAnswerService {
     
     private func judge(status : Int, data : Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(GenericResponse<OthersAnswer>.self, from : data) else{
-            print("디코딩 실패")
+        guard let decodedData = try? decoder.decode(GenericResponse<FollowingNewAnswerData>.self, from : data) else{
+            
+            
             return .pathErr
+            
         }
         
         switch status{
         case 200..<300:
-            print("통신 성공")
-//            print(decodedData.message)
-//            print(decodedData.data?.answers[0].isScrapped)
+           
+            print("성공성공")
+            
             return .success(decodedData.data)
         case 400..<500 :
             return .requestErr(decodedData.message)
@@ -78,8 +86,5 @@ struct OthersPageAnswerService {
         
         
     }
-    
-    
-    
-}
 
+}

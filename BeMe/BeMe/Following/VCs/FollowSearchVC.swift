@@ -39,8 +39,10 @@ class FollowSearchVC: UIViewController, MFMailComposeViewControllerDelegate {
             pageInstance = segue.destination as? FollowingSearchPVC
             pageInstance?.followees = followees
             pageInstance?.followers = followers
+            guard let firstPage =  pageInstance?.VCArray[0] as? FollowingSearchVC else {return}
             guard let secondPage = pageInstance?.VCArray[1] as? FollowerSearchVC else {return}
-            
+            firstPage.followSearchProfileDelegate = self
+            secondPage.followSearchProfileDelegate = self
             secondPage.followAlertDelegate = self
         }
         
@@ -212,8 +214,30 @@ extension FollowSearchVC: FollowAlertDelegate {
     }
 }
 
+extension FollowSearchVC: FollowSearchProfileDelegate{
+    func profileSelectedTap(userID: Int){
+        guard let profileVC = UIStoryboard(name: "OthersPage",
+                                           bundle: nil).instantiateViewController(
+                                            withIdentifier: "OthersPageVC") as? OthersPageVC
+        else{
+            
+            return
+        }
+        profileVC.userID = userID
+        self.navigationController?.pushViewController(profileVC, animated: true)
+        
+        
+    }
+}
+
 
 protocol FollowAlertDelegate{
     
     func showAlert(id: Int)
+}
+
+
+protocol FollowSearchProfileDelegate{
+    func profileSelectedTap(userID: Int)
+    
 }

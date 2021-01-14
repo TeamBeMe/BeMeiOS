@@ -17,7 +17,7 @@ class FollowingSearchVC: UIViewController {
     var followees: [FollowingFollows] = []
     var searched: [FindPeopleSearchData] = []
     var isSearching: Bool = false
-
+    var followSearchProfileDelegate: FollowSearchProfileDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         wholeCollectionView.delegate = self
@@ -51,6 +51,7 @@ extension FollowingSearchVC : UICollectionViewDataSource {
             
             cell.followingPerson = followees[indexPath.item]
             cell.setItems()
+            cell.followSearchProfileDelegate = self
             return cell
             
         }
@@ -61,6 +62,7 @@ extension FollowingSearchVC : UICollectionViewDataSource {
             
             cell.findPeopleSearchData = searched[indexPath.item]
             cell.setSearchedItem()
+            cell.followSearchProfileDelegate = self
             return cell
             
         }
@@ -205,3 +207,10 @@ extension FollowingSearchVC : UITextFieldDelegate{
     
 }
 
+
+extension FollowingSearchVC: FollowSearchProfileDelegate{
+    func profileSelectedTap(userID: Int){
+        followSearchProfileDelegate?.profileSelectedTap(userID: userID)
+        
+    }
+}

@@ -639,11 +639,34 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     }
     
     func goToTodayAnswerButtonDidTapped() {
-        
+
         ExploreWriteService.shared.getExploreWrite { (result) in
             switch result {
             case .success(let data):
                 guard let dt = data as? GenericResponse<ExploreWrite> else { return }
+                if let answerData = dt.data as? ExploreWrite {
+                    var createdAt = answerData.createdAt ?? ""
+                    if createdAt != "" {
+                        let index = createdAt.index(createdAt.startIndex, offsetBy: 10)
+                        createdAt = createdAt.substring(to: index)
+                    }
+                    let inputData = AnswerDataForViewController(lock: true, questionCategory: answerData.questionCategoryName, answerDate: "", question: answerData.questionTitle, answer: "", index: 0, answerIdx: answerData.answerIdx, questionID: answerData.questionID, createdTime: createdAt, categoryID: answerData.questionCategoryID, id: answerData.id)
+                    
+                    guard let answerVC = UIStoryboard(name: "Answer",
+                                                      bundle: nil).instantiateViewController(
+                                                        withIdentifier: "AnswerVC") as? AnswerVC
+                    else{
+                        
+                        return
+                    }
+                    
+                    
+                    
+                    answerVC.answerData = inputData
+
+                    self.navigationController?.pushViewController(answerVC, animated: true)
+                    
+                }
                 
                 print(dt)
                 

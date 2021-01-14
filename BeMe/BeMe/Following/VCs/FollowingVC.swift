@@ -19,9 +19,9 @@ class FollowingVC: UIViewController {
     @IBOutlet weak var barButton: UIButton!
     var scrollDirection: Bool = true
     var lastContentOffset: CGFloat = 0.0
+    var lastIndexpath = IndexPath(item: 0, section: 0)
     @IBOutlet weak var wholeCollectionView: FollowingWholeCV!
     var isScrolled = true
-    
     var answers: [FollowingAnswers] = []
     var answerPage = 1
     var isLoading = false
@@ -36,12 +36,16 @@ class FollowingVC: UIViewController {
     var followingFollowButtonDelegate : FollowingFollowButtonDelegate?
     var followingFollowingButtonDelegate : FollowingFollowingButtonDelegate?
     
+    var lastInset = CGPoint(x: 0, y: 0)
+    
     var followers: [FollowingFollows] = []
     var followees: [FollowingFollows] = []
     var followingToScrapDelegate: FollowingToScrapDelegate?
     
     var customEmptyView = CustomEmptyView()
+    var pageLen = 0
     
+    var savedAnswers: [FollowingAnswers] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,11 +53,14 @@ class FollowingVC: UIViewController {
         let loadingFrame = CGRect(x: 0, y: 155, width: view.frame.width, height: view.frame.height-155)
         LoadingHUD.show(loadingFrame: loadingFrame,color: .white)
         isLoading = true
-        getAnswerData()
+        //        getAnswerData()
+        //        getFirstPageAnswerData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getFollowData()
+        getUpdateAnswers()
+        
         
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -166,16 +173,19 @@ extension FollowingVC {
     
     
     func getAnswerData(){
+        
+        answerPage += 1
         let loadingFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         if isLoading == false{
             LoadingHUD.show(loadingFrame: loadingFrame,color: .white)
             isLoading = true
         }
-        
+        let pastSize = answers.count
         FollowingGetAnswersService.shared.getAnswerData(page: answerPage){(networkResult) -> (Void) in
             switch networkResult{
             case .success(let data) :
                 if let answerDatas = data as? FollowingAnswersData {
+                    self.pageLen = answerDatas.pageLen
                     for answerData in answerDatas.answers{
                         self.answers.append(answerData)
                     }
@@ -191,8 +201,8 @@ extension FollowingVC {
                             $0.centerX.equalToSuperview()
                             $0.top.equalToSuperview().offset(362)
                             $0.height.equalTo(80)
-                    }
-                    
+                        }
+                        
                     }
                     else{
                         self.customEmptyView.removeFromSuperview()
@@ -208,7 +218,13 @@ extension FollowingVC {
                 //                }
                 print(self.answers)
                 print("success")
-                self.answerPage = self.answerPage+1
+            //                if self.answers.count > pastSize{
+            //                    self.answerPage = self.answerPage+1
+            //                }
+            //                else{
+            //
+            //                }
+            
             case .requestErr(let msg):
                 if let message = msg as? String {
                     print(message)
@@ -221,6 +237,92 @@ extension FollowingVC {
                 print("networkFail")
                 
             }
+            
+            
+        }
+        
+        
+    }
+    
+    func getUpdateAnswers(){
+        let loadingFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        //        if isLoading == false{
+        LoadingHUD.show(loadingFrame: loadingFrame,color: .white)
+        //            isLoading = true
+        //        }
+        
+        answers = []
+        for i in 1...answerPage{
+            FollowingGetAnswersService.shared.getAnswerData(page: i){(networkResult) -> (Void) in
+                switch networkResult{
+                case .success(let data) :
+                    if let answerDatas = data as? FollowingAnswersData {
+                        self.pageLen = answerDatas.pageLen
+                        for answerData in answerDatas.answers{
+                            self.answers.append(answerData)
+                        }
+                    }
+                    
+                    if i >= self.answerPage{
+                        print("pagepage")
+                        self.wholeCollectionView.reloadData()
+//                        self.wholeCollectionView.reloadDataWithCompletion {
+                            
+                            print("kakakaka")
+                            
+                            
+                            if self.answers.count == 0{
+                               
+                                self.customEmptyView.setItems(text: "아이쿠..! 아직 팔로우하는 사람이 없군요\n팔로잉을 하고 다른 사람들의 글을 둘러보세요")
+                                self.wholeCollectionView.addSubview(self.customEmptyView)
+                                print(self.customEmptyView.superview?.bounds.minX)
+                                self.customEmptyView.snp.makeConstraints{
+                                    $0.centerX.equalToSuperview()
+                                    $0.top.equalToSuperview().offset(362)
+                                    $0.height.equalTo(80)
+                                }
+                                
+                            }
+                            else{
+                                self.customEmptyView.removeFromSuperview()
+                            }
+                            
+//                            LoadingHUD.hide()
+//                        }
+                        
+                        UIView.animate(withDuration: 0.1, animations: {
+                            self.wholeCollectionView.scrollToItem(at: self.lastIndexpath, at: .centeredVertically, animated: false)
+                        },completion: { f in
+                            LoadingHUD.hide()
+                        })
+                        
+                       
+                        
+                        
+                    }
+                    
+                    print(self.answers)
+                    print("success")
+                    
+                case .requestErr(let msg):
+                    if let message = msg as? String {
+                        print(message)
+                    }
+                case .pathErr :
+                    print("pathErr")
+                case .serverErr :
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+                    
+                }
+                
+                
+            }
+            
+            
+            
+            
             
             
         }
@@ -255,7 +357,7 @@ extension FollowingVC {
                 guard let dt = data as? GenericResponse<Int> else { return }
                 print(dt.message)
                 if dt.message == "스크랩 성공" || dt.message == "스크랩 취소 성공" {
-//                    self.followingToScrapDelegate?.setScrap(wasScrapped: wasScrapped)
+                    //                    self.followingToScrapDelegate?.setScrap(wasScrapped: wasScrapped)
                     self.answers[indexInVC].isScrapped = !wasScrapped
                     self.wholeCollectionView.reloadData()
                 } else {
@@ -336,7 +438,7 @@ extension FollowingVC : UICollectionViewDataSource {
             
         }
         else{
-            if indexPath.item == answers.count-1 {
+            if indexPath.item == answers.count && pageLen > answerPage{
                 guard let cell = collectionView.dequeueReusableCell(
                         withReuseIdentifier: FollowMoreButtonCVC.identifier,
                         for: indexPath) as? FollowMoreButtonCVC else {return UICollectionViewCell()}
@@ -382,6 +484,7 @@ extension FollowingVC : UICollectionViewDataSource {
                     cell.followScrapButtonDelegate = self
                     cell.answerData = answers[indexPath.item]
                     cell.setItems(inputAnswer:  answers[indexPath.item])
+                    cell.indexInVC = indexPath.item
                     return cell
                 }
                 
@@ -410,7 +513,7 @@ extension FollowingVC : UICollectionViewDataSource {
         }
         else{
             
-            return answers.count
+            return pageLen > answerPage ? answers.count + 1  : answers.count
         }
         
         
@@ -440,7 +543,7 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
             return CGSize(width: collectionView.frame.width , height: 80)
         }
         else{
-            if indexPath.item == answers.count-1 {
+            if indexPath.item == answers.count && pageLen > answerPage {
                 return CGSize(width: collectionView.frame.width , height: 70)
                 
             }
@@ -685,7 +788,7 @@ extension FollowingVC: UICollectionViewDelegate {
     }
     
     func scrollViewDidScroll (_ scrollView: UIScrollView) {
-        
+        lastInset = scrollView.contentOffset
         let currentContentOffset = scrollView.contentOffset.y
         if currentContentOffset > 100 {
             isScrolled = true
@@ -699,7 +802,17 @@ extension FollowingVC: UICollectionViewDelegate {
             scrollDirection = false
         }
         lastContentOffset = currentContentOffset
+        
+        for cell in wholeCollectionView.visibleCells {
+            lastIndexpath = wholeCollectionView.indexPath(for: cell)!
+            print(lastIndexpath)
+        }
     }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    }
+    
+    
     
 }
 
@@ -793,22 +906,55 @@ extension FollowingVC: FollowPlusButtonDelegate{
 }
 
 extension FollowingVC: FollowScrapButtonDelegate {
-    func replyButtonTap(answerData: FollowingAnswers) {
-        let inputData = AnswerDataForViewController(lock: true, questionCategory: answerData.category, answerDate: answerData.answerDate!, question: answerData.question, answer: "", index: 0, answerIdx: answerData.answerIdx, questionID: answerData.questionID, createdTime: "", categoryID: answerData.categoryID, id: answerData.id)
+    func replyButtonTap(answerData: FollowingAnswers,indexInVC: Int) {
         
-        guard let answerVC = UIStoryboard(name: "Answer",
-                                          bundle: nil).instantiateViewController(
-                                            withIdentifier: "AnswerVC") as? AnswerVC
-        else{
+        
+        FollowingNewAnswerService.shared.getNewData(questionID: answerData.questionID)  {(networkResult) -> (Void) in
+            switch networkResult{
+            case .success(let data) :
+                if let newData = data as? FollowingNewAnswerData {
+                    var inputData = AnswerDataForViewController(lock: true, questionCategory: newData.category, answerDate: answerData.answerDate!, question: newData.question, answer: "", index: 0, answerIdx: answerData.answerIdx, questionID: newData.questionID, createdTime: "", categoryID: newData.categoryID, id: newData.id)
+                    guard let answerVC = UIStoryboard(name: "Answer",
+                                                      bundle: nil).instantiateViewController(
+                                                        withIdentifier: "AnswerVC") as? AnswerVC
+                    else{
+                        
+                        return
+                    }
+                    
+                    
+                    
+                    answerVC.isFromFollowingTab = true
+                    answerVC.followScrapButtonDelegate = self
+                    answerVC.answerData = inputData
+                    answerVC.indexInFollowingVC = indexInVC
+                    //        answerVC.setLabels()
+                    self.navigationController?.pushViewController(answerVC, animated: true)
+                    
+                    
+                    
+                    
+                }
+                print("success")
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+                
+            }
             
-            return
+            
         }
         
         
         
-        answerVC.answerData = inputData
-//        answerVC.setLabels()
-        self.navigationController?.pushViewController(answerVC, animated: true)
+        
         
     }
     
@@ -823,7 +969,7 @@ extension FollowingVC: FollowScrapButtonDelegate {
     }
     func profileSelectedTap(userID: Int){
         guard let profileVC = UIStoryboard(name: "OthersPage",
-                                          bundle: nil).instantiateViewController(
+                                           bundle: nil).instantiateViewController(
                                             withIdentifier: "OthersPageVC") as? OthersPageVC
         else{
             
@@ -839,7 +985,13 @@ extension FollowingVC: FollowScrapButtonDelegate {
         
         self.navigationController?.pushViewController(alarm, animated: true)
     }
+    func fromAnswerVC(indexInVC: Int){
+        //        answers[indexInVC].isAnswered = true
+        wholeCollectionView.reloadData()
+        
+    }
 }
+
 
 
 protocol FollowingTabBarDelegate{
@@ -892,8 +1044,9 @@ protocol FollowScrapButtonDelegate {
     func scrapButtonAction(answerID: Int,wasScrapped: Bool,indexInVC: Int)
     func containViewTap(answerID: Int)
     func moreButtonTap(questionID: Int, question: String)
-    func replyButtonTap(answerData: FollowingAnswers)
+    func replyButtonTap(answerData: FollowingAnswers,indexInVC: Int)
     func profileSelectedTap(userID: Int)
     func alarmButtonTap()
+    func fromAnswerVC(indexInVC: Int)
 }
 

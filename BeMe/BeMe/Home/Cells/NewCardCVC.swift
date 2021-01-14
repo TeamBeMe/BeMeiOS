@@ -92,6 +92,8 @@ class NewCardCVC: UICollectionViewCell {
     let deviceBound = UIScreen.main.bounds.height/812.0
     var homeChangeQuestionDelegate: HomeChangeQuestionDelegate?
     let animationView = AnimationView()
+    
+   
 }
 
 
@@ -234,7 +236,16 @@ extension NewCardCVC {
             
             
             //어떤 jsonv파일을 쓸지
-            animationView.animation = Animation.named("animation_love_final")
+            if (answerData?.questionCategory)! == "관계" || (answerData?.questionCategory)! == "이야기" {
+                animationView.animation = Animation.named("animation_relation_final")
+            }
+            else if (answerData?.questionCategory)! == "일상" || (answerData?.questionCategory)! == "나" {
+                animationView.animation = Animation.named("dailyblue")
+            }
+            else{
+                animationView.animation = Animation.named("animation_love_final")
+            }
+            
             //화면에 적합하게
             animationView.contentMode = .scaleAspectFit
             //반복되게
@@ -244,7 +255,8 @@ extension NewCardCVC {
             //view안에 Subview로 넣어준다,
             self.addSubview(animationView)
             animationView.snp.makeConstraints{
-                $0.leading.trailing.bottom.equalToSuperview()
+                $0.leading.trailing.equalToSuperview()
+                $0.centerY.equalToSuperview()
                 $0.height.equalTo(219)
             }
             animationView.play(completion: { finished in
@@ -254,13 +266,14 @@ extension NewCardCVC {
                     self.dateLabel.alpha = 1
                 }, completion: { finished in
                     UIView.animate(withDuration: 0.5, animations: {
+                        self.questionLabel.alpha = 1
                         
-                        self.replyButton.alpha = 1
-                        self.changeButton.alpha = 1
                         self.animationView.removeFromSuperview()
                     },completion: { f in
                         UIView.animate(withDuration: 0.5, animations: {
-                            self.questionLabel.alpha = 1
+                            
+                            self.replyButton.alpha = 1
+                            self.changeButton.alpha = 1
                         })
                         
                         

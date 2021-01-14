@@ -13,7 +13,6 @@ class FollowingWholeCV: UICollectionView {
     
     func reloadDataWithCompletion(_ complete: @escaping () -> Void) {
         reloadDataCompletionBlock = complete
-        print("callled")
         super.reloadData()
     }
     

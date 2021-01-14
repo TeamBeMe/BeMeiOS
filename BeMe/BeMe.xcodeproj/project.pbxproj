@@ -163,6 +163,9 @@
 		EC813F7B2599F88D00BBCE25 /* PastCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F7A2599F88D00BBCE25 /* PastCardCVC.swift */; };
 		EC813F7E2599F89A00BBCE25 /* NewCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F7D2599F89A00BBCE25 /* NewCardCVC.swift */; };
 		EC813F812599F8A800BBCE25 /* AddCardCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC813F802599F8A800BBCE25 /* AddCardCVC.swift */; };
+		EC85D4F125B02DAD00185E4A /* dailyblue.json in Resources */ = {isa = PBXBuildFile; fileRef = EC85D4F025B02DAD00185E4A /* dailyblue.json */; };
+		EC85D4F525B07B9A00185E4A /* FollowingNewAnswerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC85D4F425B07B9A00185E4A /* FollowingNewAnswerData.swift */; };
+		EC85D4F825B07CA300185E4A /* FollowingNewAnswerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC85D4F725B07CA300185E4A /* FollowingNewAnswerService.swift */; };
 		EC89E306259C1CA600DBAFE5 /* FollowSearch.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EC89E305259C1CA600DBAFE5 /* FollowSearch.storyboard */; };
 		EC89E309259C1CC700DBAFE5 /* FollowSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E308259C1CC700DBAFE5 /* FollowSearchVC.swift */; };
 		EC89E30C259C273400DBAFE5 /* FollowingSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC89E30B259C273400DBAFE5 /* FollowingSearchVC.swift */; };
@@ -381,6 +384,9 @@
 		EC813F7A2599F88D00BBCE25 /* PastCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastCardCVC.swift; sourceTree = "<group>"; };
 		EC813F7D2599F89A00BBCE25 /* NewCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewCardCVC.swift; sourceTree = "<group>"; };
 		EC813F802599F8A800BBCE25 /* AddCardCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardCVC.swift; sourceTree = "<group>"; };
+		EC85D4F025B02DAD00185E4A /* dailyblue.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = dailyblue.json; sourceTree = "<group>"; };
+		EC85D4F425B07B9A00185E4A /* FollowingNewAnswerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingNewAnswerData.swift; sourceTree = "<group>"; };
+		EC85D4F725B07CA300185E4A /* FollowingNewAnswerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingNewAnswerService.swift; sourceTree = "<group>"; };
 		EC89E305259C1CA600DBAFE5 /* FollowSearch.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = FollowSearch.storyboard; sourceTree = "<group>"; };
 		EC89E308259C1CC700DBAFE5 /* FollowSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowSearchVC.swift; sourceTree = "<group>"; };
 		EC89E30B259C273400DBAFE5 /* FollowingSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingSearchVC.swift; sourceTree = "<group>"; };
@@ -1020,6 +1026,7 @@
 			children = (
 				EC75A25325A8A71800F4E160 /* FollowingGetData.swift */,
 				ECC6310525A9987A009E4FD4 /* FollowingAnswersData.swift */,
+				EC85D4F425B07B9A00185E4A /* FollowingNewAnswerData.swift */,
 			);
 			path = Following;
 			sourceTree = "<group>";
@@ -1031,6 +1038,7 @@
 				ECC6310225A99404009E4FD4 /* FollowingFollowService.swift */,
 				ECC6310825A999DB009E4FD4 /* FollowingGetAnswersService.swift */,
 				ECB44D4C25AC886800F491F2 /* FollowerDeleteService.swift */,
+				EC85D4F725B07CA300185E4A /* FollowingNewAnswerService.swift */,
 			);
 			path = Following;
 			sourceTree = "<group>";
@@ -1400,6 +1408,7 @@
 				ECB44D5125AC968A00F491F2 /* loading.json */,
 				ECC6312B25A9E98E009E4FD4 /* data1.json */,
 				ECC6312825A9E8A0009E4FD4 /* animation_test.json */,
+				EC85D4F025B02DAD00185E4A /* dailyblue.json */,
 				ECB44D6025ACAF4A00F491F2 /* animation_love_final.json */,
 				ECB44D5F25ACAF4A00F491F2 /* animation_relation_final.json */,
 			);
@@ -1492,6 +1501,7 @@
 				ECC6311525A9E69A009E4FD4 /* HomeLottietest.storyboard in Resources */,
 				D44F6DC425A5784A002A9761 /* Answer.storyboard in Resources */,
 				D4C5873B25AF84170089BD18 /* Setting.storyboard in Resources */,
+				EC85D4F125B02DAD00185E4A /* dailyblue.json in Resources */,
 				EC7FEFA525A38AE200C61147 /* Search.storyboard in Resources */,
 				ECB44D6225ACAF4A00F491F2 /* animation_love_final.json in Resources */,
 			);
@@ -1692,6 +1702,7 @@
 				A53C28A025AE11E10054DA7E /* MyAnswer.swift in Sources */,
 				A57F708C25A1ACB100152E89 /* MypageResultTVC.swift in Sources */,
 				D4F1992925A4E804000AF0E7 /* SecretTVC.swift in Sources */,
+				EC85D4F825B07CA300185E4A /* FollowingNewAnswerService.swift in Sources */,
 				D4C5875F25B0165A0089BD18 /* ExploreWrite.swift in Sources */,
 				ECB44D6725ACCB4500F491F2 /* CustomEmtpyView.swift in Sources */,
 				D4E07CBA259F22C10075E616 /* MoreTVC.swift in Sources */,
@@ -1721,6 +1732,7 @@
 				EC813F262599A15100BBCE25 /* SceneDelegate.swift in Sources */,
 				EC89E30F259C274200DBAFE5 /* FollowerSearchVC.swift in Sources */,
 				EC7C1634259BAD0600A5BA4C /* FollowerPersonCVC.swift in Sources */,
+				EC85D4F525B07B9A00185E4A /* FollowingNewAnswerData.swift in Sources */,
 				D405E8C025ADD80E004CC60F /* AlarmService.swift in Sources */,
 				D44F6DFC25A5BDAD002A9761 /* QuestionAnswerTVC.swift in Sources */,
 				D44F6DC525A5784A002A9761 /* AnswerVC.swift in Sources */,
