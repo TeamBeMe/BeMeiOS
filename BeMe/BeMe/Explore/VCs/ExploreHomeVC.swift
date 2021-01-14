@@ -296,7 +296,7 @@ extension ExploreHomeVC: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffset = exploreTableView.contentOffset.y
-        print(currentOffset)
+        print(currentOffset, scrollView.frame)
         // iphone safe area 문제 해결 코드
         isTableViewAnimation = true
         view.backgroundColor = currentOffset > 394.0 ? .white : UIColor.init(named: "background")

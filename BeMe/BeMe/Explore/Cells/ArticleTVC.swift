@@ -39,7 +39,6 @@ class ArticleTVC: UITableViewCell {
         let stackViewGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpProfile))
                 
         otherProfileStackView.addGestureRecognizer(stackViewGesture)
-        print("aaaaaaa")
         otherProfileStackView.isUserInteractionEnabled = true
     }
     

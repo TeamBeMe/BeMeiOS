@@ -14,6 +14,7 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var othersPageCollectionView: UICollectionView!
     @IBOutlet weak var reportButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var followButton: UIButton!
     
     lazy var popupBackgroundView: UIView = UIView()
     
@@ -24,6 +25,8 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
     
     var tableviewHeight: CGFloat = 735.0
     var userID: Int?
+    
+    var isMyProfile: Bool?
     
     private var othersAnswerArray: [Answer] = [] {
         didSet {
@@ -69,6 +72,7 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        self.navigationController?.navigationBar.isHidden = true
         getAnswerData(userId: userID!, page: 1)
         getProfileData(userId: userID!)
     }
@@ -274,6 +278,8 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
                 assert(false, "응 아니야")
             }
             
+            print("IsMyProfile: \(isMyProfile)")
+            headerView.isMyProfile = isMyProfile
             headerView.othersProfile = othersProfile
             if (othersProfile.count != 0) {
                 headerView.setProfile(nickname: othersProfile[0].nickname, img: othersProfile[0].profileImg!, visit: String(othersProfile[0].continuedVisit), answerCount: String(othersProfile[0].answerCount), isFollowed: othersProfile[0].isFollowed!)
@@ -305,6 +311,11 @@ extension OthersPageVC {
                     self.othersAnswerArray = response.answers
                     //                    print("setAnswerData 안에ㅐ서")
                     //                    print(response)
+                    if self.othersAnswerArray[0].userID == self.userID {
+                        self.isMyProfile = true
+                    } else {
+                        self.isMyProfile = false
+                    }
                     self.othersPageCollectionView.reloadData()
                 }
             case .requestErr(let msg):
