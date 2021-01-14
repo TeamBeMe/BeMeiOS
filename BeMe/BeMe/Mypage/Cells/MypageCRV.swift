@@ -61,7 +61,7 @@ class MypageCRV: UICollectionReusableView {
         setLabel(view: attendanceCountLabel, text: "4123124")
         setLabel(view: nameLabel, text: "재용아 개소리 좀 그만해")
         setSearhButton(view: searchView)
-        
+        searchTextField.delegate = self
     }
     
     
@@ -150,5 +150,17 @@ class MypageCRV: UICollectionReusableView {
         }) { _ in
             
         }
+    }
+}
+
+extension MypageCRV: UITextFieldDelegate {
+
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("HEELvdsvsdv")
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("TextFieldDId")
+        NotificationCenter.default.post(name: .init("keword"), object: nil, userInfo: ["keyword": textField.text])
     }
 }

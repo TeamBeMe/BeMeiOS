@@ -19,8 +19,14 @@ class MypageVC: UIViewController {
     
     //MARK:**- Variable Part**
     let mypageCVLayout = MypageCVFlowLayout()
-    
+    private var filterVCDelegate: FilterVCDelegate?
     let mypageCVC = MypageCVC()
+    
+    private var selectedCategoryId: Int?
+    
+    private var selectedAv: String?
+    
+    private var keyword: String?
     
     private var myAnswerArray: [Answer] = [] {
         didSet {
@@ -50,7 +56,10 @@ class MypageVC: UIViewController {
         popupBackgroundView.setPopupBackgroundView(to: view)
         mypageCollectionView.delegate = self
         mypageCollectionView.dataSource = self
+       
         NotificationCenter.default.addObserver(self, selector: #selector(dismissCategory), name: .init("categoryClose"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getKeyword), name: .init("keyword"), object: nil)
+        
         if #available(iOS 11.0, *) {
             mypageCollectionView.automaticallyAdjustsScrollIndicatorInsets = false
         } else {
@@ -61,9 +70,31 @@ class MypageVC: UIViewController {
         
     }
     
-    @objc func dismissCategory() {
+    @objc func getKeyword(_ notification: Notification) {
+        guard let userInfo = notification.userInfo as? [String: Any] else { return }
+        guard let keyword = userInfo["keyword"] as? String else { return }
+    
+        print("Hello")
+        print(keyword)
         
+    }
+    
+    @objc func dismissCategory(_ notification: Notification) {
         popupBackgroundView.animatePopupBackground(false)
+        guard let userInfo = notification.userInfo as? [String: Any] else { return }
+        guard let categoryId = userInfo["categoryId"] as? Int else { return }
+        guard let selectedAv = userInfo["selectedAv"] as? String else { return }
+        print(categoryId)
+        print(selectedAv)
+        self.selectedAv = selectedAv
+        self.selectedCategoryId = categoryId
+        getAnswerData(availability: selectedAv, category: selectedCategoryId, page: 1, query: keyword)
+    }
+    
+    @objc func applyfilter() {
+        //availability,category 알아오기
+//        getAnswerData(availability: <#String?#>, category: <#Int?#>, page: 1, query: <#String?#>)
+//        getScrapData(availability: <#String?#>, category: <#Int?#>, page: 1, query: <#String?#>)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -109,6 +140,13 @@ class MypageVC: UIViewController {
     
 }
 //MARK:**- extension 부분**
+
+extension MypageVC : UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+    }
+}
+
 extension MypageVC : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -251,7 +289,9 @@ extension MypageVC: MypageCVCDelegate {
 }
 
 extension MypageVC {
+    
     private func getAnswerData(availability: String?, category: Int?, page: Int, query: String?) {
+        
         MyPageAnswerService.shared.getMyAnswer(availability: availability, category: category, page: page, query: query) { (result) in
             switch result {
             case .success(let data):
@@ -377,4 +417,10 @@ extension MypageVC: UIScrollViewDelegate {
         }
     }
 
+}
+
+
+protocol FilterVCDelegate {
+    func getSeletedCategory() -> Int?
+    func getSeletedAvailabity() -> String
 }
