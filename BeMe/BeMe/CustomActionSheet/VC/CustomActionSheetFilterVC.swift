@@ -18,8 +18,9 @@ class CustomActionSheetFilterVC: UIViewController {
     @IBOutlet weak var categoryLabel: UILabel!
     
     // 서버통신을 통해 받아오는 값
-    private var categoryArray: [ExploreCategory] = []
-    var selecetedAvailablity: [Bool] = [false, false, false]
+    var categoryArray: [ExploreCategory] = []
+    // all, public, unpublic
+    var availablityArray: [Bool] = [false, false, false]
     private var filterCVCDelegate: FilterCVCDelegate?
 //    var selecetedCategry: [Bool] = []
     
@@ -163,6 +164,31 @@ extension CustomActionSheetFilterVC: FilterCVCDelegate {
         
         categoryArray[index].selected = true
         categoryCollectionView.reloadData()
+    }
+ 
+}
+
+extension CustomActionSheetFilterVC: FilterVCDelegate {
+    func getSeletedCategory() -> Int? {
+        for var category in self.categoryArray {
+            
+            if (category.selected!){
+                return category.id
+            }
+        }
+        return nil
+    }
+    
+    func getSeletedAvailabity() -> String {
+        if availablityArray[0] {
+            return "all"
+        } else if availablityArray[1] {
+            return "public"
+        } else if availablityArray[2] {
+            return "unpublic"
+        } else {
+            return "all"
+        }
     }
     
     

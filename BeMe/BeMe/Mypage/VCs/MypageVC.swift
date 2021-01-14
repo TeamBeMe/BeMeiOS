@@ -37,6 +37,7 @@ class MypageVC: UIViewController {
         }
     }
     
+    private var filterVCDelegate: FilterVCDelegate?
     
     //MARK:**- Constraint Part**
     
@@ -360,4 +361,10 @@ extension MypageVC: UIScrollViewDelegate {
         }
     }
 
+}
+
+
+protocol FilterVCDelegate {
+    func getSeletedCategory() -> Int?
+    func getSeletedAvailabity() -> String
 }
