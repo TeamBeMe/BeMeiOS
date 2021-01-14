@@ -85,11 +85,11 @@ extension MypageCVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if mypageCVCDelegate?.nowDirection() == 0 {
-            tableviewHeight = CGFloat(myAnswerArray.count) * 135.0
-        } else {
-            tableviewHeight = CGFloat(myScrapArray.count) * 135.0
-        }
+//        if mypageCVCDelegate?.nowDirection() == 0 {
+//            tableviewHeight = CGFloat(myAnswerArray.count) * 135.0
+//        } else {
+//            tableviewHeight = CGFloat(myScrapArray.count) * 135.0
+//        }
         
         tableviewHeight = (tableviewHeight < 588.0) ? 588 : tableviewHeight
         

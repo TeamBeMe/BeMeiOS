@@ -14,11 +14,16 @@ class SearchRecentTVC: UITableViewCell {
     @IBOutlet weak var nickNameLabel: UILabel!
     var userInfo: SearchHistoryData?
     var searchxButtonDelegate: SearchxButtonDelegate?
+    var followSearchProfileDelegate: FollowSearchProfileDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         profileImageView.makeRounded(cornerRadius: 18)
         profileImageView.contentMode = .scaleAspectFill
+        
+        profileImageView.isUserInteractionEnabled = true
+        let profileTabGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpProfile))
+        profileImageView.addGestureRecognizer(profileTabGesture)
         // Initialization code
     }
 
@@ -57,4 +62,8 @@ class SearchRecentTVC: UITableViewCell {
         nickNameLabel.text = userInfo?.nickname
     }
     
+    @objc func touchUpProfile(){
+        followSearchProfileDelegate?.profileSelectedTap(userID: (userInfo?.id)!)
+        
+    }
 }

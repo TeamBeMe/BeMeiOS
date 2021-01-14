@@ -15,7 +15,7 @@ class FollowerSearchVC: UIViewController {
     @IBOutlet weak var searchTextField: UITextField!
     var followAlertDelegate: FollowAlertDelegate?
     let customEmptyView = CustomEmptyView()
-    
+    var followSearchProfileDelegate: FollowSearchProfileDelegate?
     override func viewDidLoad() {
         super.viewDidLoad()
         wholeCollectionView.delegate = self
@@ -40,8 +40,10 @@ extension FollowerSearchVC : UICollectionViewDataSource {
                     withReuseIdentifier: FollowerListCVC.identifier,
                     for: indexPath) as? FollowerListCVC else {return UICollectionViewCell()}
             cell.tableViewDelegate = self
+            cell.followSearchProfileDelegate = self
             cell.followerPerson = followers[indexPath.item]
             cell.setItems()
+            
             return cell
             
         }
@@ -50,6 +52,7 @@ extension FollowerSearchVC : UICollectionViewDataSource {
                     withReuseIdentifier: FollowerListCVC.identifier,
                     for: indexPath) as? FollowerListCVC else {return UICollectionViewCell()}
             cell.tableViewDelegate = self
+            cell.followSearchProfileDelegate = self
             cell.findPeopleSearchData = searched[indexPath.item]
             cell.setSearchedItem()
             return cell
@@ -210,4 +213,11 @@ extension FollowerSearchVC: FollowMoreButtonMidDelegate {
 
 protocol FollowMoreButtonMidDelegate{
     func settingButtonDidTapped(id: Int)
+}
+
+extension FollowerSearchVC: FollowSearchProfileDelegate{
+    func profileSelectedTap(userID: Int){
+        followSearchProfileDelegate?.profileSelectedTap(userID: userID)
+        
+    }
 }
