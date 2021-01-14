@@ -13,11 +13,14 @@ struct MyPageScrapService {
     
     // getMyAnswer - overLoading Method : 쿼리 개수에 따라서 매개변수 개수가 바뀜
     func getMyScrap(availability: String?, category: Int?, query: String?, page: Int, completion : @escaping (NetworkResult<Any>) -> (Void)){
-        
         let category = category == nil ? "" : String(category!)
+        let availability = availability == nil ? "" : String(availability!)
+        let query = query == nil ? "" : String(query!)
         
-        let url = APIConstants.myPageScrapURL+"public="+availability!+"&category="+category+"&page="+String(page)+"&query="+query!
-        print("getMyScrap nURll")
+        let url = APIConstants.myPageScrapURL+"public="+availability+"&category="+category+"&page="+String(page)+"&query="+query
+        
+        
+        print("getMyScrap URll")
         print(url)
 
         let header : HTTPHeaders = [
@@ -67,8 +70,6 @@ struct MyPageScrapService {
         switch status{
         case 200..<300:
             print("통신 성공")
-//            print(decodedData.message)
-//            print(decodedData.data?.answers[0].isScrapped)
             return .success(decodedData.data)
         case 400..<500 :
             return .requestErr(decodedData.message)

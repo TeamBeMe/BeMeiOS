@@ -19,7 +19,7 @@ class MypageCVC: UICollectionViewCell {
     
     var myAnswerArray: [Answer] = []
     var myScrapArray: [Answer] = []
-    
+    var tableviewHeight: CGFloat = 735.0
     
     //MARK:**- Life Cycle Part**
     override func awakeFromNib() {
@@ -85,7 +85,16 @@ extension MypageCVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 748)
+        if mypageCVCDelegate?.nowDirection() == 0 {
+            tableviewHeight = CGFloat(myAnswerArray.count) * 135.0
+        } else {
+            tableviewHeight = CGFloat(myScrapArray.count) * 135.0
+        }
+        
+        tableviewHeight = (tableviewHeight < 588.0) ? 588 : tableviewHeight
+        
+        
+        return CGSize(width: collectionView.frame.width  , height: tableviewHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

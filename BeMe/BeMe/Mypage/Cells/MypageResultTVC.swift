@@ -44,7 +44,7 @@ class MypageResultTVC: UITableViewCell {
             
         } else {
             isLocked = true
-            sender.setImage(UIImage.init(named: "btnUnlockExplore"), for: .normal)
+            sender.setImage(UIImage.init(named: "btnUnlockExploreBlack"), for: .normal)
             
         }
     }
@@ -63,7 +63,7 @@ class MypageResultTVC: UITableViewCell {
             lockButton.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
             
         } else {
-            lockButton.setImage(UIImage.init(named: "btnUnlockExplore"), for: .normal)
+            lockButton.setImage(UIImage.init(named: "btnUnlockExploreBlack"), for: .normal)
             
         }
         

@@ -53,15 +53,8 @@ extension OthersPageCVC: UITableViewDataSource, UITableViewDelegate {
         
         tab.setCardView(question: othersAnswerArray[indexPath.row].question, questionInfo: othersAnswerArray[indexPath.row].category, answerDate: othersAnswerArray[indexPath.row].answerDate, writer: othersAnswerArray[indexPath.row].userNickname, writerImg: othersAnswerArray[indexPath.row].userProfile ?? "", isScrapped: othersAnswerArray[indexPath.row].isScrapped!, answerId: othersAnswerArray[indexPath.row].id, questionId: othersAnswerArray[indexPath.row].questionID)
         tab.delegate = self
-        print("$$$$$$$$$")
-        print(indexPath.row)
-        print(othersAnswerArray[indexPath.row].isScrapped)
-        
-        
-        //        tableviewHeight += tableView.estimatedRowHeight
-//            
-//        print("dsfasdfa ")
-//        print(tableviewHeight)
+        tab.selectionStyle = .none
+
         return tab
 
     }

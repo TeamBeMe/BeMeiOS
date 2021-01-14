@@ -56,7 +56,7 @@ class MypageVC: UIViewController {
         popupBackgroundView.setPopupBackgroundView(to: view)
         mypageCollectionView.delegate = self
         mypageCollectionView.dataSource = self
-       
+        
         NotificationCenter.default.addObserver(self, selector: #selector(dismissCategory), name: .init("categoryClose"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(getKeyword), name: .init("keyword"), object: nil)
         
@@ -73,9 +73,8 @@ class MypageVC: UIViewController {
     @objc func getKeyword(_ notification: Notification) {
         guard let userInfo = notification.userInfo as? [String: Any] else { return }
         guard let keyword = userInfo["keyword"] as? String else { return }
-    
-        print("Hello")
-        print(keyword)
+        
+        self.keyword = keyword
         
     }
     
@@ -84,22 +83,15 @@ class MypageVC: UIViewController {
         guard let userInfo = notification.userInfo as? [String: Any] else { return }
         guard let categoryId = userInfo["categoryId"] as? Int else { return }
         guard let selectedAv = userInfo["selectedAv"] as? String else { return }
-        print(categoryId)
-        print(selectedAv)
         self.selectedAv = selectedAv
         self.selectedCategoryId = categoryId
         getAnswerData(availability: selectedAv, category: selectedCategoryId, page: 1, query: keyword)
-    }
-    
-    @objc func applyfilter() {
-        //availability,category 알아오기
-//        getAnswerData(availability: <#String?#>, category: <#Int?#>, page: 1, query: <#String?#>)
-//        getScrapData(availability: <#String?#>, category: <#Int?#>, page: 1, query: <#String?#>)
+        getScrapData(availability: selectedAv, category: selectedCategoryId, page: 1, query: keyword)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getProfileData()
-        getAnswerData(availability: "", category: 2, page: 1, query: "")
+        getAnswerData(availability: "all", category: nil, page: 1, query: "")
     }
     
     //MARK:**- IBAction Part**
@@ -171,7 +163,7 @@ extension MypageVC : UICollectionViewDataSource {
         
         cell.myAnswerArray = myAnswerArray
         cell.myScrapArray = myScrapArray
-
+        
         cell.mypageTabCollectionView.reloadData()
         cell.mypageCVCDelegate = self
         return cell
@@ -186,10 +178,6 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-        //            layout.sectionHeadersPinToVisibleBounds = true
-        //        }
-        
         if indexPath.item <= 1 {
             return CGSize(width: collectionView.frame.width  , height: 748)
         }
@@ -268,19 +256,17 @@ extension MypageVC: MypageCVCDelegate {
     
     func myAnswerItem() {
         directionMenu = 0
-        getAnswerData(availability: "", category: 2, page: 1, query: "")
+        getAnswerData(availability: selectedAv, category: selectedCategoryId, page: 1, query: keyword)
         mypageCollectionView.reloadData()
     }
     
     func othersAnswerItem() {
         directionMenu = 1
-        getScrapData(availability: "", category: 1, page: 1, query: "")
+        getScrapData(availability: selectedAv, category: selectedCategoryId, page: 1, query: keyword)
         mypageCollectionView.reloadData()
     }
     
     func nowDirection() -> Int {
-        print("directionMenu")
-        print(directionMenu)
         return directionMenu
     }
     
@@ -296,10 +282,8 @@ extension MypageVC {
             switch result {
             case .success(let data):
                 if let response = data as? MyAnswer{
-                    print("getAnswerData 성공")
+                    print("MypageVC getAnswerData 성공")
                     self.myAnswerArray = response.answers
-//                    print("getAnswerData 안에서")
-//                    print(response)
                     self.mypageCollectionView.reloadData()
                 }
             case .requestErr(let msg):
@@ -323,10 +307,10 @@ extension MypageVC {
             switch result {
             case .success(let data):
                 if let response = data as? MyScrap{
-                    print("getScrapData 성공")
+                    print("MypageVC getScrapData 성공")
                     self.myScrapArray = response.answers
-//                    print("getScrapData 안에서")
-//                    print(response)
+                    //                    print("getScrapData 안에서")
+                    //                    print(response)
                     self.mypageCollectionView.reloadData()
                 }
             case .requestErr(let msg):
@@ -416,7 +400,7 @@ extension MypageVC: UIScrollViewDelegate {
             settingButton.isHidden = true
         }
     }
-
+    
 }
 
 
