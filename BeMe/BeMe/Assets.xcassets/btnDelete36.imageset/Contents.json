@@ -1,19 +1,19 @@
 {
   "images" : [
     {
-      "filename" : "btnDelete36.png",
-      "scale" : "1x",
-      "idiom" : "universal"
-    },
-    {
-      "scale" : "2x",
-      "filename" : "btnDelete36@2x.png",
-      "idiom" : "universal"
-    },
-    {
-      "filename" : "btnDelete36@3x.png",
       "idiom" : "universal",
-      "scale" : "3x"
+      "scale" : "1x",
+      "filename" : "btnDelete36.png"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "btnDelete36@2x.png",
+      "scale" : "2x"
+    },
+    {
+      "scale" : "3x",
+      "idiom" : "universal",
+      "filename" : "btnDelete36@3x.png"
     }
   ],
   "info" : {
