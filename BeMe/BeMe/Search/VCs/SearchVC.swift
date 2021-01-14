@@ -26,7 +26,7 @@ class SearchVC: UIViewController {
         searchTextField.delegate = self
         setItems()
         getHistory()
-        
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
     func setItems(){

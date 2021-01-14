@@ -244,9 +244,8 @@ extension NewCardCVC {
             //view안에 Subview로 넣어준다,
             self.addSubview(animationView)
             animationView.snp.makeConstraints{
-                $0.center.equalToSuperview()
-                $0.width.height.equalTo(300)
-                
+                $0.leading.trailing.bottom.equalToSuperview()
+                $0.height.equalTo(219)
             }
             animationView.play(completion: { finished in
                 UIView.animate(withDuration: 0.5, animations: {
@@ -255,10 +254,16 @@ extension NewCardCVC {
                     self.dateLabel.alpha = 1
                 }, completion: { finished in
                     UIView.animate(withDuration: 0.5, animations: {
-                        self.questionLabel.alpha = 1
+                        
                         self.replyButton.alpha = 1
                         self.changeButton.alpha = 1
                         self.animationView.removeFromSuperview()
+                    },completion: { f in
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self.questionLabel.alpha = 1
+                        })
+                        
+                        
                     })
                     
                 })

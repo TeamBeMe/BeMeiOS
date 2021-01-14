@@ -56,6 +56,9 @@
                                                                 <constraint firstAttribute="height" constant="44" id="V5e-v9-RuV"/>
                                                             </constraints>
                                                             <state key="normal" title="Button" image="btnAlram"/>
+                                                            <connections>
+                                                                <action selector="alarmButtonAction:" destination="vYJ-2M-xda" eventType="touchUpInside" id="dlQ-a4-4he"/>
+                                                            </connections>
                                                         </button>
                                                         <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Bx-k8-WNQ">
                                                             <rect key="frame" x="29" y="115" width="71" height="40"/>

@@ -309,7 +309,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Snf-vQ-vi2">
+                                                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Snf-vQ-vi2">
                                                     <rect key="frame" x="337" y="6.5" width="56" height="27"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="27" id="GtN-WA-jnb"/>

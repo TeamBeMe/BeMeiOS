@@ -57,6 +57,8 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
         } else {
             automaticallyAdjustsScrollViewInsets = false
         }
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        othersPageCollectionView.collectionViewLayout = othersPageCVLayout
         setNotificationCenter()
         othersPageCollectionView.collectionViewLayout
             = othersPageCVLayout
