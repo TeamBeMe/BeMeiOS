@@ -337,6 +337,7 @@
                                                                     <constraint firstAttribute="bottom" secondItem="E1B-PY-Rwo" secondAttribute="bottom" id="rwG-pL-Rvz"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
+                                                            <size key="customSize" width="414" height="748"/>
                                                             <connections>
                                                                 <outlet property="mypageTableView" destination="E1B-PY-Rwo" id="g5u-gb-m2V"/>
                                                             </connections>

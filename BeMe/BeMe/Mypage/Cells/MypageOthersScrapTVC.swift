@@ -41,15 +41,15 @@ class MypageOthersScrapTVC: UITableViewCell {
     
     //MARK:**- IBAction Part**
     @IBAction func scrappedButtonTapped(_ sender: UIButton) {
-        if isScrapped {
-            isScrapped = false
-            sender.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
-            
-        } else {
-            isScrapped = true
-            sender.setImage(UIImage.init(named: "btnScrapUnselected"), for: .normal)
-            
-        }
+//        if isScrapped {
+//            isScrapped = false
+//            sender.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
+//            
+//        } else {
+//            isScrapped = true
+//            sender.setImage(UIImage.init(named: "btnScrapUnselected"), for: .normal)
+//            
+//        }
     }
     
     
