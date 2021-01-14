@@ -35,16 +35,20 @@ class CustomActionSheetFilterVC: UIViewController {
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
         
-        
         selectedAvailablity = "all"
         allButton.backgroundColor = .black
         allButton.setTitleColor(.white, for: .normal)
+        allButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
         
         publicButton.backgroundColor = .white
-        publicButton.setTitleColor(.black, for: .normal)
+        publicButton.setTitleColor(.slateGrey, for: .normal)
+        publicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
         
         unpublicButton.backgroundColor = .white
-        unpublicButton.setTitleColor(.black,  for: .normal)
+        unpublicButton.setTitleColor(.slateGrey,  for: .normal)
+        unpublicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+ 
+        
         // Do any additional setup after loading the view.
     }
     
@@ -62,38 +66,49 @@ class CustomActionSheetFilterVC: UIViewController {
         selectedAvailablity = "all"
         allButton.backgroundColor = .black
         allButton.setTitleColor(.white, for: .normal)
+        allButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
         
         publicButton.backgroundColor = .white
-        publicButton.setTitleColor(.black, for: .normal)
+        publicButton.setTitleColor(.slateGrey, for: .normal)
+        publicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
         
         unpublicButton.backgroundColor = .white
-        unpublicButton.setTitleColor(.black,  for: .normal)
+        unpublicButton.setTitleColor(.slateGrey,  for: .normal)
+        unpublicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
     }
     
     @IBAction func publicButtonTapped(_ sender: UIButton) {
         selectedAvailablity = "public"
         allButton.backgroundColor = .white
-        allButton.setTitleColor(.black, for: .normal)
+        allButton.setTitleColor(.slateGrey, for: .normal)
+        allButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
         
         publicButton.backgroundColor = .black
         publicButton.setTitleColor(.white, for: .normal)
+        publicButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
+        
         
         
         unpublicButton.backgroundColor = .white
-        unpublicButton.setTitleColor(.black,  for: .normal)
+        unpublicButton.setTitleColor(.slateGrey,  for: .normal)
+        unpublicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
         
     }
     @IBAction func unpublicButtonTapped(_ sender: UIButton) {
         
         selectedAvailablity = "unpublic"
         allButton.backgroundColor = .white
-        allButton.setTitleColor(.black, for: .normal)
+        allButton.setTitleColor(.slateGrey, for: .normal)
+        allButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+        
         publicButton.backgroundColor = .white
-        publicButton.setTitleColor(.black, for: .normal)
+        publicButton.setTitleColor(.slateGrey, for: .normal)
+        publicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
         
         
         unpublicButton.backgroundColor = .black
         unpublicButton.setTitleColor(.white,  for: .normal)
+        unpublicButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
         
     }
     
