@@ -46,8 +46,12 @@ class MypageVC: UIViewController {
             mypageCollectionView.reloadData()
         }
     }
-    
-    
+    var chosenImage: UIImage?
+    lazy var imagePickerController = UIImagePickerController().then {
+        $0.sourceType = .photoLibrary
+        //        $0.allowsEditing = true
+        $0.delegate = self
+    }
     //MARK:**- Constraint Part**
     
     //MARK:**- Life Cycle Part**
@@ -232,10 +236,21 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
             }
             headerView.categoryDelegte = self
             headerView.delegate = self
+            headerView.profileEditDelegate = self
             headerView.myProfile = myProfile
+            print("박세란")
+        
+         
             if (myProfile.count != 0) {
+               
                 headerView.setProfile(nickname: myProfile[0].nickname, img: myProfile[0].profileImg!, visit: String(myProfile[0].continuedVisit), answerCount: String(myProfile[0].answerCount))
             }
+            if chosenImage != nil{
+                print("바보")
+                print(chosenImage)
+                headerView.setProfileImage(img: chosenImage!)
+            }
+            
             
             return headerView
         default:
@@ -343,7 +358,7 @@ extension MypageVC {
                     print("MypageVC getProfileData 성공")
                     
                     self.myProfile.append(othersProfile)
-                    
+                    self.mypageCollectionView.reloadData()
                     
                 }
             case .requestErr(let msg):
@@ -409,8 +424,68 @@ extension MypageVC: UIScrollViewDelegate {
     
 }
 
+extension MypageVC: ProfileEditDelegate{
+    
+    func profileEdit(){
+        self.present(self.imagePickerController, animated: true, completion: nil)
+        
+    }
+}
 
+
+extension MypageVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        chosenImage = info[.originalImage] as? UIImage
+        let shittyVC = ShittyImageCropVC(frame: (self.navigationController?.view.frame)!, image: chosenImage!, aspectWidth: 315, aspectHeight: 152)
+        shittyVC.signUpProfileImageSetDelegate = self
+        self.dismiss(animated: true, completion: {
+            self.navigationController?.present(shittyVC, animated: true, completion: nil)
+        })
+       
+    }
+    
+    
+    
+}
+
+extension MypageVC: SignUpProfileImageSetDelegate{
+    func setImage(img: UIImage) {
+        chosenImage  = img
+        MyPageProfileService.shared.setMyProfile(image: chosenImage!) {(networkResult) -> (Void) in
+            switch networkResult{
+            case .success(let data) :
+                print("프로필 수정 성공")
+                self.getProfileData()
+                print("success")
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+                
+            }
+            
+
+        }
+    }
+}
 protocol FilterVCDelegate {
     func getSeletedCategory() -> Int?
     func getSeletedAvailabity() -> String
+}
+
+
+protocol ProfileEditDelegate{
+    func profileEdit()
+    
 }
