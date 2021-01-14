@@ -61,6 +61,11 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
                     as? MypageResultTVC else { return UITableViewCell() }
             if (myAnswerArray.count != 0){
                 tab.setCardView(question: myAnswerArray[indexPath.row].question, questionInfo: myAnswerArray[indexPath.row].category, answerDate: myAnswerArray[indexPath.row].answerDate, isLocked: myAnswerArray[indexPath.row].publicFlag)
+                
+                tab.isLocked = myAnswerArray[indexPath.row].publicFlag
+                tab.answerIdx = myAnswerArray[indexPath.row].id
+                tab.delegate = self
+                tab.indexpath = indexPath.row
                 tab.selectionStyle = .none
             }
             
@@ -74,6 +79,7 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
                             as? MypageMyScrapTVC else { return UITableViewCell() }
                     
                     tab.setCardView(question: myScrapArray[indexPath.row].question, questionInfo: myScrapArray[indexPath.row].category, answerDate: myScrapArray[indexPath.row].answerDate, isLocked: myScrapArray[indexPath.row].publicFlag, isScrapped: myScrapArray[indexPath.row].isScrapped!)
+//                    tab.delegate = self
                     tab.selectionStyle = .none
                     return tab
                     
@@ -83,6 +89,7 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
                             as? MypageOthersScrapTVC else { return UITableViewCell() }
                     
                     tab.setCardView(question: myScrapArray[indexPath.row].question, questionInfo: myScrapArray[indexPath.row].category, answerDate: myScrapArray[indexPath.row].answerDate, writer: myScrapArray[indexPath.row].userNickname, writerImg: myScrapArray[indexPath.row].userProfile!, isScrapped: myScrapArray[indexPath.row].isScrapped!)
+//                    tab.delegate = self
                     tab.selectionStyle = .none
                     return tab
                     
@@ -100,4 +107,12 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
     
 }
 
+extension MypageTabCVC: MypageResultTVCDelegate {
+    func reload(indexpath: Int) {
+        myAnswerArray[indexpath].publicFlag = !myAnswerArray[indexpath].publicFlag
+        mypageTableView.reloadData()
+        
+    }
+
+}
 

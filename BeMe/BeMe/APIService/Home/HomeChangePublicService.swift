@@ -23,6 +23,9 @@ struct HomeChangePublicService{
             "public_flag": publicFlag,
         ]
         
+        print("HomeChangePublicService")
+        print(url)
+        print(body)
         let dataRequest = AF.request(url,
                                      method: .put,
                                      parameters: body,

@@ -18,8 +18,11 @@ class MypageResultTVC: UITableViewCell {
     @IBOutlet weak var lockButton: UIButton!
     
     //MARK:**- Variable Part**
-    private var isLocked = false
+    var indexpath = 0
+    var isLocked = false
+    var answerIdx = 0
     static let identifier = "MypageResultTVC"
+    var delegate: MypageResultTVCDelegate?
     
     
     //MARK:**- Life Cycle Part**
@@ -38,35 +41,36 @@ class MypageResultTVC: UITableViewCell {
     //MARK:**- IBAction Part**
     
     @IBAction func lockButtonTapped(_ sender: UIButton) {
-//        HomeChangePublicService.shared.changePublic(id: changePublicAnswerID,publicFlag: input) {(networkResult) -> (Void) in
-//            switch networkResult{
-//            case .success(let data) :
-//                self.answerDataList[self.changePublicIdx].lock! = !self.answerDataList[self.changePublicIdx].lock!
-//                self.cardCollectionView.reloadData()
-//                print("success")
-//            case .requestErr(let msg):
-//                if let message = msg as? String {
-//                    print(message)
-//                }
-//            case .pathErr :
-//                print("pathErr")
-//            case .serverErr :
-//                print("serverErr")
-//            case .networkFail:
-//                print("networkFail")
-//            
-//            }
-        if isLocked {
-            isLocked = false
-            sender.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
+        
+        
+        HomeChangePublicService.shared.changePublic(id: answerIdx ,publicFlag: isLocked ? 0 : 1) {(networkResult) -> (Void) in
+            switch networkResult{
+            case .success(let data) :
+                print("success")
+                self.delegate?.reload(indexpath: self.indexpath)
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+                
+            }
+            if !self.isLocked {
+                
+                sender.setImage(UIImage.init(named: "btnUnlockExploreBlack"), for: .normal)
+                
+            } else {
             
-        } else {
-            isLocked = true
-            sender.setImage(UIImage.init(named: "btnUnlockExploreBlack"), for: .normal)
-            
+                sender.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
+                
+            }
         }
     }
-    
     //MARK:**- default Setting Function Part**
     
     func setCardView(question: String, questionInfo: String, answerDate: String, isLocked: Bool){
@@ -107,3 +111,8 @@ class MypageResultTVC: UITableViewCell {
     
     
 }
+
+protocol MypageResultTVCDelegate {
+    func reload(indexpath: Int)
+}
+
