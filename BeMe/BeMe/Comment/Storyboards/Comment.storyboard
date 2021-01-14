@@ -1949,7 +1949,7 @@
                                                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Medium" family="Apple SD Gothic Neo" pointSize="14"/>
                                                                                             <inset key="contentEdgeInsets" minX="70" minY="17" maxX="70" maxY="17"/>
-                                                                                            <state key="normal" title="같은 질문에 더 많은 답변 보기">
+                                                                                            <state key="normal" title="같은 질문의 답변 모아보기">
                                                                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                                             </state>
                                                                                             <connections>
@@ -2219,7 +2219,7 @@
                                             <outlet property="moreImageView" destination="4xG-Zb-yzu" id="zut-9u-NvC"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentTVC" id="B5h-Uh-Bz5" customClass="CommentTVC" customModule="BeMe" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="CommentTVC" id="B5h-Uh-Bz5" customClass="CommentTVC" customModule="BeMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="1156.0000228881836" width="375" height="171.33332824707031"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="B5h-Uh-Bz5" id="2EP-Ai-HGP">
@@ -2373,6 +2373,7 @@
                                             <outlet property="moreImageView" destination="Wkf-b6-Kpm" id="hVa-eX-u8C"/>
                                             <outlet property="nickNameLabel" destination="1Is-9G-wV4" id="Fin-mJ-TK9"/>
                                             <outlet property="profileImageView" destination="tj5-TR-LLI" id="DiD-u6-WeN"/>
+                                            <outlet property="profileStackView" destination="X1u-GS-7dL" id="7mW-If-8AI"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

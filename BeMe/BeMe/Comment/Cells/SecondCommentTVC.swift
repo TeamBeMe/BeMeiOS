@@ -24,12 +24,27 @@ class SecondCommentTVC: UITableViewCell {
     
     var commentId: Int?
     
+    var userId: Int?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         profileImageView.makeRounded(cornerRadius: profileImageView.bounds.width / 2)
+        profileImageView.isUserInteractionEnabled = true
+        nickNameLabel.isUserInteractionEnabled = true
+        let profileTapped = UIGestureRecognizer(target: self, action: #selector(touchUpProfile))
+        profileImageView.addGestureRecognizer(profileTapped)
+        
+        let nickNameTapped = UIGestureRecognizer(target: self, action: #selector(touchUpProfile))
+        nickNameLabel.addGestureRecognizer(nickNameTapped)
+        nickNameLabel.isUserInteractionEnabled = true
     }
-
-    func setInformation(profileImage: String, nickName: String, content: String, date: String, isVisible: Bool, publicFlag: Bool, isAuthor: Bool, commentId: Int) {
+    
+    @objc func touchUpProfile() {
+        print("aaaaaaaaaa")
+        delegate?.goToOthersProfileButtonDidTapped(userId!)
+    }
+    
+    func setInformation(profileImage: String, nickName: String, content: String, date: String, isVisible: Bool, publicFlag: Bool, isAuthor: Bool, commentId: Int, userId: Int) {
         if isVisible {
             if profileImage == "" {
                 profileImageView.image = UIImage.init(named: "imgProfile")
@@ -50,7 +65,7 @@ class SecondCommentTVC: UITableViewCell {
             lockImageView.isHidden = true
             settingButton.isHidden = true
         }
-        
+        self.userId = userId
         self.isAuthor = isAuthor
         self.commentId = commentId
     }
