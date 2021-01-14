@@ -40,6 +40,9 @@ class FollowingVC: UIViewController {
     var followees: [FollowingFollows] = []
     var followingToScrapDelegate: FollowingToScrapDelegate?
     
+    var customEmptyView = CustomEmptyView()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setItems()
@@ -180,6 +183,20 @@ extension FollowingVC {
                 }
                 self.wholeCollectionView.reloadDataWithCompletion {
                     LoadingHUD.hide()
+                    if self.answers.count == 0{
+                        self.customEmptyView.setItems(text: "아이쿠..! 아직 팔로우하는 사람이 없군요\n팔로잉을 하고 다른 사람들의 글을 둘러보세요")
+                        self.wholeCollectionView.addSubview(self.customEmptyView)
+                        print(self.customEmptyView.superview?.bounds.minX)
+                        self.customEmptyView.snp.makeConstraints{
+                            $0.centerX.equalToSuperview()
+                            $0.top.equalToSuperview().offset(362)
+                            $0.height.equalTo(80)
+                    }
+                    
+                    }
+                    else{
+                        self.customEmptyView.removeFromSuperview()
+                    }
                     
                 }
                 //                self.wholeCollectionView.reloadData()
@@ -288,7 +305,7 @@ extension FollowingVC : UICollectionViewDataSource {
             cell.followPeopleCollectionViewDelegate = self
             cell.followingPeopleCollectionViewDelegate = self
             cell.followPlusButtonDelegate = self
-            
+            cell.followScrapButtonDelegate = self
             return cell
             
         }
@@ -817,6 +834,11 @@ extension FollowingVC: FollowScrapButtonDelegate {
         
         
     }
+    func alarmButtonTap() {
+        guard let alarm = UIStoryboard.init(name: "Alarm", bundle: nil).instantiateViewController(identifier: "AlarmVC") as? AlarmVC else { return }
+        
+        self.navigationController?.pushViewController(alarm, animated: true)
+    }
 }
 
 
@@ -872,5 +894,6 @@ protocol FollowScrapButtonDelegate {
     func moreButtonTap(questionID: Int, question: String)
     func replyButtonTap(answerData: FollowingAnswers)
     func profileSelectedTap(userID: Int)
+    func alarmButtonTap()
 }
 

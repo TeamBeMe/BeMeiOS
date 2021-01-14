@@ -53,7 +53,7 @@ class OthersPageVC: UIViewController {
         } else {
             automaticallyAdjustsScrollViewInsets = false
         }
-        
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         othersPageCollectionView.collectionViewLayout = othersPageCVLayout
         
     }

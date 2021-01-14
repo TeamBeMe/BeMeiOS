@@ -151,3 +151,9 @@ protocol SignUpNextButtonDelegate {
     func nextButtonTapped(email: String,nickName: String,password: String)
     
 }
+
+extension SignUpVC: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+          return true
+      }
+}

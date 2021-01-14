@@ -26,6 +26,7 @@ class FollowingListCVC: UICollectionViewCell {
         followButton.makeRounded(cornerRadius: 3)
         followButton.setBorder(borderColor: .lightGray, borderWidth: 1.0)
         profileImageView.contentMode = .scaleAspectFill
+    
         
     }
     

@@ -16,6 +16,7 @@ class CustomEmptyView: UIView {
         $0.font = UIFont.systemFont(ofSize: 14)
         $0.textColor = .charcoalGrey
         $0.textAlignment = .center
+        $0.numberOfLines = 0
     }
     var emptyImageView = UIImageView().then{
         $0.image = UIImage(named: "icInfo32")
@@ -49,6 +50,21 @@ class CustomEmptyView: UIView {
             
         }
         
+    }
+    
+    func setImage(image: UIImage) {
+        emptyImageView.image = image
+        emptyImageView.snp.remakeConstraints{
+            $0.centerX.equalToSuperview()
+            $0.width.height.equalTo(44)
+            $0.top.equalToSuperview()
+        }
+        emptyLabel.snp.remakeConstraints{
+            $0.centerX.equalToSuperview()
+            $0.top.equalTo(emptyImageView.snp.bottomMargin).offset(10)
+            
+        }
+        emptyLabel.font = UIFont.systemFont(ofSize: 12)
     }
    
     

@@ -57,8 +57,9 @@ class FollowCardCVC: UICollectionViewCell {
         profileImageView.addGestureRecognizer(profileTabGesture)
         print("aaaaaaa")
         
+        let labelTabGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpProfile))
         userNameLabel.isUserInteractionEnabled = true
-        userNameLabel.addGestureRecognizer(profileTabGesture)
+        userNameLabel.addGestureRecognizer(labelTabGesture)
         
         
     }
