@@ -224,7 +224,7 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         
-        tableviewHeight = CGFloat(othersAnswerArray.count) * 135.0
+        tableviewHeight = CGFloat(othersAnswerArray.count) * 105.0
         tableviewHeight = (tableviewHeight < 588.0) ? 588 : tableviewHeight
         return CGSize(width: collectionView.frame.width  , height: tableviewHeight)
     }

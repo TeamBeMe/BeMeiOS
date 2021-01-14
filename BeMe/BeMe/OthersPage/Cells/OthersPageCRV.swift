@@ -58,9 +58,7 @@ class OthersPageCRV: UICollectionReusableView {
                 case .success(let data) :
                     print("success")
                     self.setFollowButton(view: self.followButton, isFollowed: false)
-                    
-                    
-                    
+        
                 case .requestErr(let msg):
                     if let message = msg as? String {
                         print(message)
@@ -106,8 +104,7 @@ class OthersPageCRV: UICollectionReusableView {
                     print("networkFail")
                     
                 }
-                
-                
+
             }
             
             
@@ -122,7 +119,7 @@ class OthersPageCRV: UICollectionReusableView {
     
     func setProfile(nickname: String, img: String, visit: String, answerCount: String, isFollowed: Bool){
         nameLabel.text = nickname
-        profileImage.imageFromUrl(img, defaultImgPath: "imgMypage")
+        profileImage.imageFromUrl(img, defaultImgPath: "mypageDefault")
         attendanceCountInfoLabel.text = visit
         answerCountInfoLabel.text = answerCount
         setInfoLabel()

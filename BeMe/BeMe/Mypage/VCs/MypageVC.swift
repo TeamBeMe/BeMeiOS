@@ -28,6 +28,8 @@ class MypageVC: UIViewController {
     
     private var keyword: String?
     
+    var tableviewHeight: CGFloat = 735.0
+    
     private var myAnswerArray: [Answer] = [] {
         didSet {
             mypageCollectionView.reloadData()
@@ -190,12 +192,16 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.item <= 1 {
-            return CGSize(width: collectionView.frame.width  , height: 748)
+        if directionMenu == 0 {
+            tableviewHeight = (CGFloat(myAnswerArray.count) * 105.0 > 0) ? CGFloat(myAnswerArray.count) * 105.0 : 735
+        } else {
+            tableviewHeight = (CGFloat(myScrapArray.count) * 105.0 > 0) ? CGFloat(myScrapArray.count) * 105.0 : 735
         }
-        else{
-            return CGSize(width: collectionView.frame.width  , height: 748)
-        }
+        
+        tableviewHeight = (tableviewHeight < 588.0) ? 588 : tableviewHeight
+        
+        
+        return CGSize(width: collectionView.frame.width  , height: tableviewHeight)
     }
     
     

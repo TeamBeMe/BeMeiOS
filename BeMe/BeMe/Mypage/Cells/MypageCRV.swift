@@ -57,9 +57,6 @@ class MypageCRV: UICollectionReusableView {
         // Initialization code
         setProfileEditButton(view: profileEditButton)
         setInfoLabel()
-        setLabel(view: answerCountLabel, text: "4")
-        setLabel(view: attendanceCountLabel, text: "4123124")
-        setLabel(view: nameLabel, text: "재용아 개소리 좀 그만해")
         setSearhButton(view: searchView)
         searchTextField.delegate = self
         
@@ -106,7 +103,7 @@ class MypageCRV: UICollectionReusableView {
         setProfileEditButton(view: profileEditButton)
         setInfoLabel()
         nameLabel.text = nickname
-        profileImage.imageFromUrl(img, defaultImgPath: "imgMypage")
+        profileImage.imageFromUrl(img, defaultImgPath: "mypageDefault")
         attendanceCountLabel.text = visit
         answerCountLabel.text = answerCount
         setSearhButton(view: searchView)
