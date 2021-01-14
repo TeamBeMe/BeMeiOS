@@ -37,8 +37,7 @@ class MypageCRV: UICollectionReusableView {
     // height
     @IBOutlet weak var profileImageHeight: NSLayoutConstraint!
     @IBOutlet weak var profileViewHeight: NSLayoutConstraint!
-    var profileEditDelegate: ProfileEditDelegate?
-    
+
     //MARK:**- Variable Part**
     static let identifier = "MypageCRV"
     
@@ -48,7 +47,10 @@ class MypageCRV: UICollectionReusableView {
     
     var categoryDelegte: CategorySelectedProtocol?
     
+    var profileEditDelegate: ProfileEditDelegate?
     
+    var MypageCRVDelegate: MypageCRVDelegate?
+
     var myProfile: [MyProfile] = [] 
     
     //MARK:**- Life Cycle Part**
@@ -71,6 +73,7 @@ class MypageCRV: UICollectionReusableView {
     
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
         setKeywordLabel(label: searchTextField, keyword: "")
+        MypageCRVDelegate?.deleteButtonSearch()
     }
     
     @IBAction func myAswerButtonTapped(_ sender: UIButton) {
@@ -83,12 +86,12 @@ class MypageCRV: UICollectionReusableView {
     @IBAction func scrappedAswerButtonTapped(_ sender: UIButton) {
         myAnswerButton.setTitleColor(.rgb8E8E93, for: .normal)
         scrappedAnswerButton.setTitleColor(.black, for: .normal)
-        delegate?.othersAnswerItem()
+        delegate?.myScrapItem()
         print("scrappedAswerButtonTapped")
         moveHighLightBar(to: sender)
     }
     @IBAction func searchButtonTapped(_ sender: UIButton) {
-        
+        MypageCRVDelegate?.searchButtonSearch()
     }
     
     @IBAction func profileEditButtonTapped(_ sender: Any) {
@@ -175,12 +178,19 @@ extension MypageCRV: UITextFieldDelegate {
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("TextFieldDId")
-        NotificationCenter.default.post(name: .init("keword"), object: nil, userInfo: ["keyword": textField.text])
+        print(textField.text!)
+        NotificationCenter.default.post(name: .init("keyword"), object: nil, userInfo: ["keyword": textField.text!])
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         self.endEditing(true)
-        
+        MypageCRVDelegate?.searchButtonSearch()
         return true
     }
 }
+
+protocol MypageCRVDelegate {
+    func searchButtonSearch()
+    func deleteButtonSearch()
+}
+

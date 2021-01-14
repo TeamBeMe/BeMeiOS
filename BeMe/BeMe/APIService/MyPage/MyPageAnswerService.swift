@@ -14,11 +14,19 @@ struct MyPageAnswerService {
     // getMyAnswer - overLoading Method : 쿼리 개수에 따라서 매개변수 개수가 바뀜
     func getMyAnswer(availability: String?, category: Int?, page: Int, query: String?, completion : @escaping (NetworkResult<Any>) -> (Void) ){
         
-        let category = category == nil ? "" : String(category!)
+        _ = category == nil ? "" : String(category!)
         let availability = availability == nil ? "" : String(availability!)
         let query = query == nil ? "" : String(query!)
         
-        let url = APIConstants.myPageAnswerURL+"public="+availability+"&category="+category+"&page="+String(page)+"&query="+query
+        
+        let url = APIConstants.myPageAnswerURL
+        
+        let params: Parameters = [
+            "public": "\(availability)",
+            "availability": "\(availability)",
+            "page": "\(page)",
+            "query": "\(query)"
+        ]
         
         print("getMyAnswer URll")
         print(url)
@@ -26,14 +34,9 @@ struct MyPageAnswerService {
         let header : HTTPHeaders = [
             "Content-Type":"application/json",
             "token":UserDefaults.standard.string(forKey: "token")!
-            //            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjEwMDk5MjQwLCJleHAiOjE2MzYwMTkyNDAsImlzcyI6ImJlbWUifQ.JeYfzJsg-kdatqhIOqfJ4oXUvUdsiLUaGHwLl1mJRvQ"
         ]
         
-        
-        let dataRequest = AF.request(url,
-                                     method: .get,
-                                     encoding: JSONEncoding.default,
-                                     headers: header)
+        let dataRequest = AF.request(url, method: .get, parameters: params, headers: header)
         
         
         dataRequest.responseData{ response in
