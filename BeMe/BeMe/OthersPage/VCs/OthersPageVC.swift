@@ -76,6 +76,7 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
         self.navigationController?.navigationBar.isHidden = true
         getAnswerData(userId: userID!, page: 1)
         getProfileData(userId: userID!)
+
     }
     
     deinit {

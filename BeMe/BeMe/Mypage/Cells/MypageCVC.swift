@@ -126,6 +126,10 @@ extension MypageCVC: ProfileEditDelegate{
     func cardTapped(answerID: Int){
         profileEditDelegate?.cardTapped(answerID: answerID)
     }
+    func showToast(showBool: Bool){
+        profileEditDelegate?.showToast(showBool: showBool)
+        
+    }
 }
 
 

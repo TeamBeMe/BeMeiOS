@@ -38,6 +38,7 @@ class MypageTabCVC: UICollectionViewCell {
         mypageTableView.separatorStyle = .none
     }
     //MARK:**- Function Part**
+   
     
 }
 
@@ -116,6 +117,7 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
 extension MypageTabCVC: MypageResultTVCDelegate {
     func reload(indexpath: Int) {
         myAnswerArray[indexpath].publicFlag = !myAnswerArray[indexpath].publicFlag
+        profileEditDelegate?.showToast(showBool: !myAnswerArray[indexpath].publicFlag)
         mypageTableView.reloadData()
         
     }
@@ -130,5 +132,9 @@ extension MypageTabCVC: ProfileEditDelegate{
     }
     func cardTapped(answerID: Int){
         profileEditDelegate?.cardTapped(answerID: answerID)
+    }
+    func showToast(showBool: Bool){
+        profileEditDelegate?.showToast(showBool: showBool)
+        
     }
 }

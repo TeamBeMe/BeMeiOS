@@ -443,6 +443,11 @@ extension MypageVC: ProfileEditDelegate{
         
         
     }
+    func showToast(showBool: Bool){
+        let showText = showBool == true ? "공개 답변으로 변경되었습니다" : "비공개 답변으로 변경되었습니다"
+        print("왜?")
+        self.showToast(text: showText)
+    }
 }
 
 
@@ -501,5 +506,5 @@ protocol FilterVCDelegate {
 protocol ProfileEditDelegate{
     func profileEdit()
     func cardTapped(answerID: Int)
-    
+    func showToast(showBool: Bool)
 }
