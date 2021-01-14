@@ -18,17 +18,19 @@ class MypageOthersScrapTVC: UITableViewCell {
     @IBOutlet weak var writerLabel: UILabel!
     @IBOutlet weak var writerImageView: UIImageView!
     @IBOutlet weak var scrapButton: UIButton!
-    
+    var profileEditDelegate: ProfileEditDelegate?
     //MARK:**- Variable Part**
     private var isScrapped = false
     static let identifier = "MypageOthersScrapTVC"
-    
+    var answerID: Int?
     //MARK:**- Life Cycle Part**
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
+        cardView.isUserInteractionEnabled = true
+        let profileTabGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpCard))
+        cardView.addGestureRecognizer(profileTabGesture)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -90,5 +92,8 @@ class MypageOthersScrapTVC: UITableViewCell {
         
     }
     //MARK:**- Function Part**
-    
+    @objc func touchUpCard(){
+        profileEditDelegate?.cardTapped(answerID: answerID!)
+        
+    }
 }

@@ -12,6 +12,7 @@ class MypageTabCVC: UICollectionViewCell {
     @IBOutlet weak var mypageTableView: UITableView!
     
     @IBOutlet weak var myPageTVHeight: NSLayoutConstraint!
+    var profileEditDelegate: ProfileEditDelegate?
     //MARK:**- Variable Part**
     static let identifier = "MypageTabCVC"
     var myAnswerArray: [Answer] = []
@@ -63,7 +64,8 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
                 tab.setCardView(question: myAnswerArray[indexPath.row].question, questionInfo: myAnswerArray[indexPath.row].category, answerDate: myAnswerArray[indexPath.row].answerDate, isLocked: myAnswerArray[indexPath.row].publicFlag)
                 tab.selectionStyle = .none
             }
-            
+            tab.answerID = myAnswerArray[indexPath.row].id
+            tab.profileEditDelegate = self
             return tab
         } else {
             
@@ -75,6 +77,8 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
                     
                     tab.setCardView(question: myScrapArray[indexPath.row].question, questionInfo: myScrapArray[indexPath.row].category, answerDate: myScrapArray[indexPath.row].answerDate, isLocked: myScrapArray[indexPath.row].publicFlag, isScrapped: myScrapArray[indexPath.row].isScrapped!)
                     tab.selectionStyle = .none
+                    tab.profileEditDelegate = self
+                    tab.answerID = myScrapArray[indexPath.item].id
                     return tab
                     
                 }else {
@@ -84,6 +88,8 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
                     
                     tab.setCardView(question: myScrapArray[indexPath.row].question, questionInfo: myScrapArray[indexPath.row].category, answerDate: myScrapArray[indexPath.row].answerDate, writer: myScrapArray[indexPath.row].userNickname, writerImg: myScrapArray[indexPath.row].userProfile!, isScrapped: myScrapArray[indexPath.row].isScrapped!)
                     tab.selectionStyle = .none
+                    tab.answerID = myScrapArray[indexPath.row].id
+                    tab.profileEditDelegate = self
                     return tab
                     
                 }
@@ -91,6 +97,8 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
                 guard let tab = tableView
                         .dequeueReusableCell(withIdentifier: MypageMyScrapTVC.identifier, for: indexPath)
                         as? MypageMyScrapTVC else { return UITableViewCell() }
+                tab.answerID = myScrapArray[indexPath.row].id
+                tab.profileEditDelegate = self
                 return tab
             }
         }
@@ -101,3 +109,13 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
 }
 
 
+extension MypageTabCVC: ProfileEditDelegate{
+    
+    func profileEdit(){
+        
+        
+    }
+    func cardTapped(answerID: Int){
+        profileEditDelegate?.cardTapped(answerID: answerID)
+    }
+}

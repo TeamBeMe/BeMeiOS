@@ -165,6 +165,9 @@ class MypageCRV: UICollectionReusableView {
             
         }
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.endEditing(true)
+    }
 }
 
 extension MypageCRV: UITextFieldDelegate {
@@ -176,5 +179,11 @@ extension MypageCRV: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("TextFieldDId")
         NotificationCenter.default.post(name: .init("keword"), object: nil, userInfo: ["keyword": textField.text])
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
+        self.endEditing(true)
+        
+        return true
     }
 }
