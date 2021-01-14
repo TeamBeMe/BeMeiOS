@@ -12,11 +12,11 @@ class FollowPeopleCVC: UICollectionViewCell {
     var i = 0
     var totalCell = 10
     @IBOutlet weak var peopleCollectionView: UICollectionView!
-    
+    var followScrapButtonDelegate: FollowScrapButtonDelegate?
     var shows: [FollowingFollows] = []
     var followers: [FollowingFollows] = []
     var followees: [FollowingFollows] = []
-    
+    var followerCustomEmptyView = CustomEmptyView()
     
     var isFollowing = true
     var mTimer : Timer?
@@ -71,8 +71,8 @@ extension FollowPeopleCVC : UICollectionViewDataSource {
         
         cell.setProfile(userName: shows[indexPath.item].nickname!,
                         profileImageURL: profileURL)
-        
-        
+        cell.followingFollows = shows[indexPath.item]
+        cell.personToPeopleDelegate = self
         return cell
             
         
@@ -82,6 +82,30 @@ extension FollowPeopleCVC : UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         numberOfItemsInSection section: Int) -> Int {
+        
+        if shows.count == 0{
+            self.addSubview(followerCustomEmptyView)
+            
+            
+            followerCustomEmptyView.snp.makeConstraints{
+                $0.centerX.equalToSuperview()
+                $0.top.equalToSuperview().offset(20)
+                $0.height.equalTo(100)
+                
+                
+            }
+            if isFollowing{
+                followerCustomEmptyView.setItems(text: "회원님이 팔로우 하는 사람들이 여기에 표시됩니다")
+            }
+            else{
+                followerCustomEmptyView.setItems(text: "회원님을 팔로우 하는 사람들이 여기에 표시됩니다")
+            }
+            followerCustomEmptyView.setImage(image: UIImage(named: "icIdsearch")!)
+            
+        }
+        else{
+            followerCustomEmptyView.removeFromSuperview()
+        }
 
         return shows.count
     }
@@ -161,5 +185,16 @@ extension FollowPeopleCVC : FollowingFollowingButtonDelegate{
     }
 }
 
+extension FollowPeopleCVC: PersonToPeopleDelegate {
+    func med(userID: Int) {
+        followScrapButtonDelegate?.profileSelectedTap(userID: userID)
+    }
+}
 
 
+
+
+protocol PersonToPeopleDelegate {
+    
+    func med(userID: Int)
+}

@@ -81,6 +81,7 @@ class ExploreHomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTableView()
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
     override func viewWillAppear(_ animated: Bool) {

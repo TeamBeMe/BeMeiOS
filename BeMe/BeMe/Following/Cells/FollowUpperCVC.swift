@@ -21,7 +21,7 @@ class FollowUpperCVC: UICollectionViewCell {
     
     var followingBarButtonDelegate : FollowingBarButtonDelegate?
     var buttonAble = true
-
+    var followScrapButtonDelegate: FollowScrapButtonDelegate?
     
     var followingPeopleCollectionViewDelegate : FollowingPeopleCollectionViewDelegate?
     var followPeopleCollectionViewDelegate : FollowPeopleCollectionViewDelegate?
@@ -70,6 +70,9 @@ class FollowUpperCVC: UICollectionViewCell {
         
     }
     
+    @IBAction func alarmButtonAction(_ sender: Any) {
+        followScrapButtonDelegate?.alarmButtonTap()
+    }
     
     
 }
