@@ -59,8 +59,8 @@ struct MyPageProfileService {
         let header : HTTPHeaders = [
             //            "Content-Type":"application/json",
             "Content-Type":"multipart/form-data",
-            //            "token":UserDefaults.standard.string(forKey: "token")!
-            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA5Nzc3ODg2LCJleHAiOjE2MzU2OTc4ODYsImlzcyI6ImJlbWUifQ.34mc263uDc9vYq9N8BVzfqVdsgKzL51Ld03kB0afcSQ"
+                        "token":UserDefaults.standard.string(forKey: "token")!
+//            "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA5Nzc3ODg2LCJleHAiOjE2MzU2OTc4ODYsImlzcyI6ImJlbWUifQ.34mc263uDc9vYq9N8BVzfqVdsgKzL51Ld03kB0afcSQ"
         ]
         AF.upload(multipartFormData: { multiPartFormData in
             let imageData = image.jpegData(compressionQuality: 1.0)!
@@ -100,6 +100,7 @@ struct MyPageProfileService {
         case 200..<300:
             //            print(decodedData.message)
             //            print(decodedData.data)
+            print("profile editing")
             return .success(decodedData.data)
         case 400..<500 :
             return .requestErr(decodedData.message)

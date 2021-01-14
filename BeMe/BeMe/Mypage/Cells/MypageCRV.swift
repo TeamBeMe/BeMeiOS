@@ -37,7 +37,7 @@ class MypageCRV: UICollectionReusableView {
     // height
     @IBOutlet weak var profileImageHeight: NSLayoutConstraint!
     @IBOutlet weak var profileViewHeight: NSLayoutConstraint!
-    
+    var profileEditDelegate: ProfileEditDelegate?
     
     //MARK:**- Variable Part**
     static let identifier = "MypageCRV"
@@ -62,6 +62,7 @@ class MypageCRV: UICollectionReusableView {
         setLabel(view: nameLabel, text: "재용아 개소리 좀 그만해")
         setSearhButton(view: searchView)
         searchTextField.delegate = self
+        
     }
     
     
@@ -93,6 +94,12 @@ class MypageCRV: UICollectionReusableView {
         
     }
     
+    @IBAction func profileEditButtonTapped(_ sender: Any) {
+        profileEditDelegate?.profileEdit()
+        
+    }
+    
+    
     //MARK:**- default Setting Function Part**
     
     func setProfile(nickname: String, img: String, visit: String, answerCount: String){
@@ -105,6 +112,10 @@ class MypageCRV: UICollectionReusableView {
         setSearhButton(view: searchView)
     }
     
+    func setProfileImage(img: UIImage){
+        profileImage.image = img
+
+    }
     func setProfileEditButton(view: UIButton) {
         view.setBorderWithRadius(borderColor: .veryLightPinkTwo, borderWidth: 1, cornerRadius: 3)
         view.backgroundColor = UIColor.white
