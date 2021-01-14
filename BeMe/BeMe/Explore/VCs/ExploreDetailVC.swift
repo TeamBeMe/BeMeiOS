@@ -319,7 +319,7 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
                 
                 answer.delegate = self
                 answer.indexPath = indexPath
-                answer.setCardDatas(date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped!, answerId: exploreAnswerArray[indexPath.row].id, questionId: exploreAnswerArray[indexPath.row].questionID)
+                answer.setCardDatas(date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped!, answerId: exploreAnswerArray[indexPath.row].id, questionId: exploreAnswerArray[indexPath.row].questionID, userId: exploreAnswerArray[indexPath.row].userID)
                 
                 return answer
             }
@@ -330,7 +330,7 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
             
             answer.delegate = self
             answer.indexPath = indexPath
-            answer.setCardDatas(date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped!, answerId: exploreAnswerArray[indexPath.row].id, questionId: exploreAnswerArray[indexPath.row].questionID)
+            answer.setCardDatas(date: exploreAnswerArray[indexPath.row].answerDate, cate: exploreAnswerArray[indexPath.row].category, content: exploreAnswerArray[indexPath.row].content, profileImage: exploreAnswerArray[indexPath.row].userProfile, nick: exploreAnswerArray[indexPath.row].userNickname, isScrap: exploreAnswerArray[indexPath.row].isScrapped!, answerId: exploreAnswerArray[indexPath.row].id, questionId: exploreAnswerArray[indexPath.row].questionID, userId: exploreAnswerArray[indexPath.row].userID)
             
             
             return answer
@@ -428,5 +428,18 @@ extension ExploreDetailVC: UITableViewButtonSelectedDelegate {
         comment.isMoreButtonHidden = true
         comment.modalPresentationStyle = .fullScreen
         self.present(comment, animated: true, completion: nil)
+    }
+    
+    func goToOthersProfileButtonDidTapped(_ userId: Int) {
+        guard let profileVC = UIStoryboard(name: "OthersPage",
+                                                bundle: nil).instantiateViewController(
+                                                  withIdentifier: "OthersPageVC") as? OthersPageVC
+              else{
+                  
+                  return
+              }
+              profileVC.userID = userId
+              self.navigationController?.pushViewController(profileVC, animated: true)
+           
     }
 }

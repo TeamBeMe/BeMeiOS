@@ -465,6 +465,12 @@
                                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6m-ki-VFZ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="330" height="348.66666666666669"/>
+                                                            <connections>
+                                                                <action selector="goToAnswerDetailButtonTapped:" destination="gmT-TG-Alj" eventType="touchUpInside" id="eHZ-oJ-Wbd"/>
+                                                            </connections>
+                                                        </button>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="3RU-zA-1vT">
                                                             <rect key="frame" x="20.000000000000007" y="296.66666666666669" width="112.66666666666669" height="34"/>
                                                             <subviews>
@@ -483,12 +489,6 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6m-ki-VFZ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="330" height="348.66666666666669"/>
-                                                            <connections>
-                                                                <action selector="goToAnswerDetailButtonTapped:" destination="gmT-TG-Alj" eventType="touchUpInside" id="eHZ-oJ-Wbd"/>
-                                                            </connections>
-                                                        </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sex-P0-Tug">
                                                             <rect key="frame" x="285" y="51.666666666666657" width="32" height="32"/>
                                                             <state key="normal" image="btnArrowNext"/>
@@ -540,6 +540,7 @@
                                             <outlet property="answerCardView" destination="yth-8F-KdI" id="h3t-ns-XRQ"/>
                                             <outlet property="answerTextView" destination="Jz1-do-HC8" id="bKw-Pt-Xbf"/>
                                             <outlet property="nickNameLabel" destination="YcG-D2-HI5" id="T6O-dz-wzX"/>
+                                            <outlet property="otherProfileStackView" destination="3RU-zA-1vT" id="rim-un-vvq"/>
                                             <outlet property="profileImageView" destination="6DN-FU-ttj" id="waB-Me-U9L"/>
                                             <outlet property="question" destination="oBt-VM-5S3" id="qh4-lx-jmw"/>
                                             <outlet property="scrapButton" destination="LSz-oK-Xis" id="s7a-jV-mtL"/>
@@ -849,6 +850,12 @@
                                                             <fontDescription key="fontDescription" name="AppleSDGothicNeo-Light" family="Apple SD Gothic Neo" pointSize="14"/>
                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                         </textView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVU-Vx-UCn">
+                                                            <rect key="frame" x="0.0" y="0.0" width="330" height="182.33333333333334"/>
+                                                            <connections>
+                                                                <action selector="goToCommentButtonTapped:" destination="Iei-1C-rFT" eventType="touchUpInside" id="Mvr-N8-fnS"/>
+                                                            </connections>
+                                                        </button>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="wVR-zX-X63">
                                                             <rect key="frame" x="20.000000000000007" y="130.33333333333334" width="112.66666666666669" height="34"/>
                                                             <subviews>
@@ -867,12 +874,6 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVU-Vx-UCn">
-                                                            <rect key="frame" x="0.0" y="0.0" width="330" height="182.33333333333334"/>
-                                                            <connections>
-                                                                <action selector="goToCommentButtonTapped:" destination="Iei-1C-rFT" eventType="touchUpInside" id="Mvr-N8-fnS"/>
-                                                            </connections>
-                                                        </button>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cra-ah-TPP" userLabel="Scrap Button">
                                                             <rect key="frame" x="286" y="131.33333333333334" width="32" height="32"/>
                                                             <state key="normal" image="btnScrapUnselected"/>
@@ -921,6 +922,7 @@
                                             <outlet property="answerTextView" destination="bMI-RQ-2CI" id="ZjK-Gg-gZs"/>
                                             <outlet property="answerView" destination="mgJ-CR-Lml" id="quD-jm-59r"/>
                                             <outlet property="nickNameLabel" destination="wrL-3Y-82c" id="fVu-h7-KYs"/>
+                                            <outlet property="otherProfileStackView" destination="wVR-zX-X63" id="P4g-V7-iA7"/>
                                             <outlet property="profileImageView" destination="kQI-7H-M5Y" id="Gkr-T3-Y8h"/>
                                             <outlet property="scrapButton" destination="Cra-ah-TPP" id="nEm-Cx-msa"/>
                                             <outlet property="subTitleLabel" destination="Yc9-ha-nhM" id="vA4-zf-ndn"/>

@@ -63,7 +63,7 @@ struct OthersPageAnswerService {
         case 200..<300:
             print("통신 성공")
 //            print(decodedData.message)
-            print(decodedData.data?.answers[0].isScrapped)
+//            print(decodedData.data?.answers[0].isScrapped)
             return .success(decodedData.data)
         case 400..<500 :
             return .requestErr(decodedData.message)

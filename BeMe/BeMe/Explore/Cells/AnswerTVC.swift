@@ -17,6 +17,7 @@ class AnswerTVC: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nickNameLabel: UILabel!
     @IBOutlet weak var scrapButton: UIButton!
+    @IBOutlet weak var otherProfileStackView: UIStackView!
     
     private var isScrapped: Bool = false
     
@@ -26,15 +27,27 @@ class AnswerTVC: UITableViewCell {
     
     var answerId: Int?
     
+    var userId: Int?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         profileImageView.makeRounded(cornerRadius: profileImageView.bounds.width / 2)
         answerView.setBorderWithRadius(borderColor: .lightGray, borderWidth: 1, cornerRadius: 8)
         answerView.makeRounded(cornerRadius: 8.0)
-    }
-
-    func setCardDatas(date: String, cate: String, content: String, profileImage: String?, nick: String, isScrap: Bool, answerId: Int, questionId: Int) {
         
+        let stackViewGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpProfile))
+                
+        otherProfileStackView.addGestureRecognizer(stackViewGesture)
+        otherProfileStackView.isUserInteractionEnabled = true
+    }
+    
+    @objc func touchUpProfile() {
+        print("HEllo")
+        delegate?.goToOthersProfileButtonDidTapped(userId!)
+    }
+    
+    func setCardDatas(date: String, cate: String, content: String, profileImage: String?, nick: String, isScrap: Bool, answerId: Int, questionId: Int, userId: Int) {
+        self.userId = userId
         subTitleLabel.text = "[  \(cate)에 관한 질문  ]  ·  \(date)"
         answerTextView.text = content
         nickNameLabel.text = nick
