@@ -19,7 +19,9 @@ class CustomActionSheetFilterVC: UIViewController {
     
     // 서버통신을 통해 받아오는 값
     private var categoryArray: [ExploreCategory] = []
-    private var categorySelectedArray: [Bool] = [false, false, false]
+    var selecetedAvailablity: [Bool] = [false, false, false]
+    private var filterCVCDelegate: FilterCVCDelegate?
+//    var selecetedCategry: [Bool] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,14 +91,14 @@ extension CustomActionSheetFilterVC: UICollectionViewDataSource {
                 withReuseIdentifier: FilterCVC.identifier,
                 for: indexPath) as? FilterCVC else {
             return UICollectionViewCell()}
-        
-        
-        //        category.delegate = self
-//        cell.categoryArray = self.categoryArray
-//        setButton(text: categoryArray[indexPath.item])
+        cell.indexPath = indexPath.row
+        cell.categoryArray = self.categoryArray
+        cell.setButton(isSelected: categoryArray[indexPath.row].selected!)
         cell.setButton(text: categoryArray[indexPath.row].name)
         print(indexPath.row)
         print(categoryArray[indexPath.row].name)
+        
+        
 //        categoryCollectionView.reloadData()
         
         return cell
@@ -150,4 +152,18 @@ extension CustomActionSheetFilterVC {
             }
         }
     }
+}
+
+extension CustomActionSheetFilterVC: FilterCVCDelegate {
+    func setSelectedCategory(index: Int) {
+        
+        for var category in self.categoryArray {
+            category.selected = false
+        }
+        
+        categoryArray[index].selected = true
+        categoryCollectionView.reloadData()
+    }
+    
+    
 }

@@ -12,9 +12,13 @@ class FilterCVC: UICollectionViewCell {
     @IBOutlet weak var categoryButton: UIButton!
     @IBAction func categoryButtonTapped(_ sender: UIButton) {
         setButton(isSelected: true)
+        filterCVCDelegate?.setSelectedCategory(index: indexPath)
     }
     
     static let identifier: String = "FilterCVC"
+    var categoryArray: [ExploreCategory] = []
+    var indexPath = -1
+    private var filterCVCDelegate: FilterCVCDelegate?
    
     override class func awakeFromNib() {
         
@@ -40,4 +44,8 @@ class FilterCVC: UICollectionViewCell {
         categoryButton.backgroundColor = UIColor.white
         categoryButton.setTitleColor(.slateGrey, for: .normal)
     }
+}
+
+protocol FilterCVCDelegate {
+    func setSelectedCategory(index: Int)
 }
