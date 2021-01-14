@@ -199,14 +199,6 @@ extension OthersPageVC : UICollectionViewDataSource {
         
         cell.othersAnswerArray = othersAnswerArray
         print("otehrspage CV ")
-        //        print(othersAnswerArray[0].id)
-        //        print(othersAnswerArray[0].content)
-        //        print(othersAnswerArray[0].isScrapped!)
-        //        print("=====")
-        //        print(cell.othersAnswerArray.count)
-        //        tableviewHeight = cell.tableviewHeight
-        //        print("=====")
-        //        print(tableviewHeight)
         cell.otherspageTableView.reloadData()
         
         
