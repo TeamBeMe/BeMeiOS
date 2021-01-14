@@ -131,6 +131,7 @@ extension HomeVC {
 //        pageGetFromServer()
        
        
+       
         
     }
     
@@ -145,6 +146,8 @@ extension HomeVC {
             pageGetFromServer()
             isInit = true
         }
+       
+
         
     }
     
