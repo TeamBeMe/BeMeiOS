@@ -80,6 +80,8 @@
 		D4C5873B25AF84170089BD18 /* Setting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4C5873A25AF84170089BD18 /* Setting.storyboard */; };
 		D4C5873F25AF84360089BD18 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5873E25AF84360089BD18 /* SettingVC.swift */; };
 		D4C5874425AF86900089BD18 /* SettingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5874325AF86900089BD18 /* SettingTVC.swift */; };
+		D4C5875F25B0165A0089BD18 /* ExploreWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5875E25B0165A0089BD18 /* ExploreWrite.swift */; };
+		D4C5876225B016DE0089BD18 /* ExploreWriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5876125B016DE0089BD18 /* ExploreWriteService.swift */; };
 		D4E07CB9259F22C10075E616 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4E07CB2259F22C10075E616 /* Explore.storyboard */; };
 		D4E07CBA259F22C10075E616 /* MoreTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E07CB4259F22C10075E616 /* MoreTVC.swift */; };
 		D4E07CBC259F22C10075E616 /* DiffThoughtCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E07CB6259F22C10075E616 /* DiffThoughtCVC.swift */; };
@@ -294,6 +296,8 @@
 		D4C5873A25AF84170089BD18 /* Setting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Setting.storyboard; sourceTree = "<group>"; };
 		D4C5873E25AF84360089BD18 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		D4C5874325AF86900089BD18 /* SettingTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTVC.swift; sourceTree = "<group>"; };
+		D4C5875E25B0165A0089BD18 /* ExploreWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreWrite.swift; sourceTree = "<group>"; };
+		D4C5876125B016DE0089BD18 /* ExploreWriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreWriteService.swift; sourceTree = "<group>"; };
 		D4E07CB2259F22C10075E616 /* Explore.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Explore.storyboard; sourceTree = "<group>"; };
 		D4E07CB4259F22C10075E616 /* MoreTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTVC.swift; sourceTree = "<group>"; };
 		D4E07CB6259F22C10075E616 /* DiffThoughtCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiffThoughtCVC.swift; sourceTree = "<group>"; };
@@ -705,6 +709,7 @@
 				D480732325A8744700DE1DD3 /* ExploreAnswer.swift */,
 				D480733E25A8DF0400DE1DD3 /* ExploreCategory.swift */,
 				D480730F25A8492800DE1DD3 /* ExploreThoughtData.swift */,
+				D4C5875E25B0165A0089BD18 /* ExploreWrite.swift */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -717,6 +722,7 @@
 				D41B6BDF25A9BCFA004D2052 /* ExploreAnswerScrapService.swift */,
 				D4475F0625AA1B6E00426591 /* ExploreDetailAnswerService.swift */,
 				D480733B25A8DAE500DE1DD3 /* ExploreAnswerService.swift */,
+				D4C5876125B016DE0089BD18 /* ExploreWriteService.swift */,
 			);
 			path = Explore;
 			sourceTree = "<group>";
@@ -1643,6 +1649,7 @@
 				ECA1519425AE275E0091E5EF /* FollowNotAnsweredCVC.swift in Sources */,
 				ECA1517625AD88960091E5EF /* HomeCardCollectionView.swift in Sources */,
 				EC5C201A25A49D7E008EE335 /* SignUpData.swift in Sources */,
+				D4C5876225B016DE0089BD18 /* ExploreWriteService.swift in Sources */,
 				A501410025A39C18001099E8 /* MypageTabCVC.swift in Sources */,
 				EC7C1637259BAD1A00A5BA4C /* FollowerHeaderCVC.swift in Sources */,
 				D480733925A8DA7500DE1DD3 /* ExploreAnswerData.swift in Sources */,
@@ -1685,6 +1692,7 @@
 				A53C28A025AE11E10054DA7E /* MyAnswer.swift in Sources */,
 				A57F708C25A1ACB100152E89 /* MypageResultTVC.swift in Sources */,
 				D4F1992925A4E804000AF0E7 /* SecretTVC.swift in Sources */,
+				D4C5875F25B0165A0089BD18 /* ExploreWrite.swift in Sources */,
 				ECB44D6725ACCB4500F491F2 /* CustomEmtpyView.swift in Sources */,
 				D4E07CBA259F22C10075E616 /* MoreTVC.swift in Sources */,
 				EC75A24E25A88AC400F4E160 /* AnswerModifyService.swift in Sources */,

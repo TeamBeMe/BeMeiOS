@@ -134,6 +134,9 @@
                                                                         <state key="normal" title="오늘의 질문 답변하기">
                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="goToTodayAnswerButtonTapped:" destination="Yfm-XF-MBV" eventType="touchUpInside" id="C5f-3d-i7z"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <constraints>

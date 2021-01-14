@@ -73,6 +73,7 @@ class DiffThoughtTVC: UITableViewCell {
     
     
     @IBAction func friendButtonTapped(_ sender: Any) {
+        delegate?.goToFriendButtonDidTapped()
     }
     
     @IBAction func alarmButtonTapped(_ sender: Any) {
@@ -96,6 +97,7 @@ extension DiffThoughtTVC: UICollectionViewDataSource, UICollectionViewDelegateFl
         if isEmpty {
             guard let empty = collectionView.dequeueReusableCell(withReuseIdentifier: EmptyThoughtCVC.identifier, for: indexPath) as? EmptyThoughtCVC else { return UICollectionViewCell() }
 
+            empty.delegate = self
             empty.todayButton.makeRound(to: 6.0)
             return empty
         } else {
@@ -120,6 +122,10 @@ extension DiffThoughtTVC: UICollectionViewButtonDelegate {
         delegate?.goToCommentButtonTapped(answerId)
     }
     
+    func goToTodayAnswerButtonDidTapped() {
+        print("second")
+        delegate?.goToTodayAnswerButtonDidTapped()
+    }
 }
 
 extension DiffThoughtTVC: UIScrollViewDelegate {
@@ -164,10 +170,14 @@ protocol UICollectionViewButtonDelegate: class {
     func goToOneQuestionMoreAnswerButtonDidTapped(_ questionId: Int, question: String)
     
     func goToAnswerDetailButtonDidTapped(_ answerId: Int)
+    
+    func goToTodayAnswerButtonDidTapped()
 }
 
 extension UICollectionViewButtonDelegate {
     func goToOneQuestionMoreAnswerButtonDidTapped(_ questionId: Int, question: String) {}
     
     func goToAnswerDetailButtonDidTapped(_ answerId: Int) {}
+    
+    func goToTodayAnswerButtonDidTapped() {}
 }

@@ -38,6 +38,12 @@ protocol UITableViewButtonSelectedDelegate: class {
     
     // 알람 화면으로 넘어가는 버튼 눌렀을 때
     func goToAlarmButtonDidTapped()
+    
+    // friend 화면으로 넘어가는 버튼 눌렀을 때
+    func goToFriendButtonDidTapped()
+    
+    // 탐색에서 오늘 질문 답변하기 버튼 눌렀을 때
+    func goToTodayAnswerButtonDidTapped()
 }
 
 extension UITableViewButtonSelectedDelegate {
@@ -60,4 +66,8 @@ extension UITableViewButtonSelectedDelegate {
     func goToCommentButtonTapped(_ answerId: Int) {}
     
     func goToAlarmButtonDidTapped() {}
+    
+    func goToFriendButtonDidTapped() {}
+    
+    func goToTodayAnswerButtonDidTapped() {}
 }

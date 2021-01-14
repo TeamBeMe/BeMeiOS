@@ -12,4 +12,9 @@ class EmptyThoughtCVC: UICollectionViewCell {
     
     @IBOutlet weak var todayButton: UIButton!
     
+    weak var delegate: UICollectionViewButtonDelegate?
+    
+    @IBAction func goToTodayAnswerButtonTapped(_ sender: Any) {
+        delegate?.goToTodayAnswerButtonDidTapped()
+    }
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 class ExploreTableView: UITableView {
-
+    
     private var reloadDataCompletionBlock: (() -> Void)?
     
     
@@ -58,13 +58,13 @@ class ExploreHomeVC: UIViewController {
     // 서버통신을 통해 받아오는 값
     private var categoryArray: [ExploreCategory] = [] {
         didSet {
-//            exploreTableView.reloadData()
+            //            exploreTableView.reloadData()
         }
     }
     
     private var exploreThoughtArray: [ExploreThoughtData] = [] {
         didSet {
-//            exploreTableView.reloadData()
+            //            exploreTableView.reloadData()
         }
     }
     
@@ -92,6 +92,8 @@ class ExploreHomeVC: UIViewController {
         setCategoryData()
         setHeaderView()
         
+        
+        view.backgroundColor = lastContentOffset > 394.0 ? .white : UIColor.init(named: "background")
         self.navigationController?.navigationBar.isHidden = true
     }
     
@@ -115,18 +117,33 @@ class ExploreHomeVC: UIViewController {
     @IBAction func recentButtonTapped(_ sender: Any) {
         moveHighLightBar(to: sender as! UIButton)
         
+        isTableViewAnimation = false
+        scrollDirection = true
+        selectedRecentOrFavorite = "최신"
+        selectedCategoryId = 0
+        currentPage = 1
+        currentPageAlreadyGetContainers.removeAll()
+        setAnswerData(page: currentPage, category: selectedCategoryId , sorting: selectedRecentOrFavorite)
     }
     
     @IBAction func favoriteButtonTapped(_ sender: Any) {
         moveHighLightBar(to: sender as! UIButton)
+        
+        isTableViewAnimation = false
+        scrollDirection = true
+        selectedRecentOrFavorite = "흥미"
+        selectedCategoryId = 0
+        currentPage = 1
+        currentPageAlreadyGetContainers.removeAll()
+        setAnswerData(page: currentPage, category: selectedCategoryId , sorting: selectedRecentOrFavorite)
     }
     
     private func moveHighLightBar(to button: UIButton) {
         
-        UIView.animate(withDuration: 0.1, delay: 0, options: [.curveLinear], animations: {
+        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveLinear], animations: {
             // Slide Animation
             self.headerHighLightBar.frame.origin.x = 30 + button.frame.minX
-        
+            
         }) { _ in
         }
     }
@@ -134,7 +151,7 @@ class ExploreHomeVC: UIViewController {
 
 //MARK: - CollectionView
 //extension ExploreHomeVC: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
+
 //}
 
 //MARK: - UITableView
@@ -282,29 +299,22 @@ extension ExploreHomeVC: UIScrollViewDelegate {
         isTableViewAnimation = true
         view.backgroundColor = currentOffset > 394.0 ? .white : UIColor.init(named: "background")
         exploreTableView.backgroundColor = currentOffset >= 0.0 ? .white : UIColor.init(named: "background")
+        
         // animation 문제 해결 코드
         if (lastContentOffset < currentOffset) {
             //scroll up
             scrollDirection = true
+            
         } else {
             //scroll down
             scrollDirection = false
         }
         
-        // 상단 view
-        if (currentOffset > 610.0) {
-            if (lastContentOffset < currentOffset) {
-                //scroll up
-                
-                hideTabBarWhenScrollingUp()
-            } else {
-                //scroll down
-                
-                showTabBarWhenScrollingDown()
-                
-            }
-        } else {
+        print(scrollDirection)
+        if (currentOffset < 610.0) {
             hideTabBarWhenScrollingUp()
+        } else {
+            showTabBarWhenScrollingDown()
         }
         
         lastContentOffset = currentOffset
@@ -615,6 +625,51 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
         guard let alarm = UIStoryboard.init(name: "Alarm", bundle: nil).instantiateViewController(identifier: "AlarmVC") as? AlarmVC else { return }
         
         self.navigationController?.pushViewController(alarm, animated: true)
+    }
+    
+    func goToFriendButtonDidTapped() {
+        guard let vcName = UIStoryboard(name: "Search",
+                                        bundle: nil).instantiateViewController(       withIdentifier: "SearchVC") as? SearchVC
+        else{
+            return
+        }
+        
+        vcName.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(vcName, animated: true)
+    }
+    
+    func goToTodayAnswerButtonDidTapped() {
+        
+        ExploreWriteService.shared.getExploreWrite { (result) in
+            switch result {
+            case .success(let data):
+                guard let dt = data as? GenericResponse<ExploreWrite> else { return }
+                
+                print(dt)
+                
+            case .requestErr(let message):
+                guard let message = message as? String else { return }
+                let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                
+            case .pathErr: print("path")
+            case .serverErr:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "서버 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+                print("serverErr")
+            case .networkFail:
+                let alertViewController = UIAlertController(title: "통신 실패", message: "네트워크 오류", preferredStyle: .alert)
+                let action = UIAlertAction(title: "확인", style: .cancel, handler: nil)
+                alertViewController.addAction(action)
+                self.present(alertViewController, animated: true, completion: nil)
+                print("networkFail")
+            }
+        }
     }
 }
 
