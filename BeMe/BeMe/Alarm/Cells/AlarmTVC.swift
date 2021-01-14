@@ -15,12 +15,28 @@ class AlarmTVC: UITableViewCell {
     
     @IBOutlet weak var stackView: UIStackView!
     
+    
+    weak var delegate: UITableViewButtonSelectedDelegate?
+    
+    var userId: Int?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         profileImageView.makeRounded(cornerRadius: profileImageView.bounds.width / 2)
+        
+        let profileTapGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpProfile))
+        
+        
+        profileImageView.addGestureRecognizer(profileTapGesture)
+        
+        profileImageView.isUserInteractionEnabled = true
     }
     
-    func setInformations(type: String, profileImg: String, question: String, nickName: String) {
+    @objc func touchUpProfile() {
+        delegate?.goToOthersProfileButtonDidTapped(userId!)
+    }
+    
+    func setInformations(type: String, profileImg: String, question: String, nickName: String, userId: Int) {
         if profileImg == "" {
             profileImageView.image = UIImage.init(named: "imgProfile")
         } else {
@@ -28,6 +44,7 @@ class AlarmTVC: UITableViewCell {
             profileImageView.kf.setImage(with: url)
         }
         
+        self.userId = userId
 
         if type == "comment" {
             alarmLabel.text = "\(nickName)님이 “\(question)”에 대한 나의 글에 댓글을 달았습니다."

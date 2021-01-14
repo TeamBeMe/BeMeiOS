@@ -44,6 +44,9 @@ protocol UITableViewButtonSelectedDelegate: class {
     
     // 탐색에서 오늘 질문 답변하기 버튼 눌렀을 때
     func goToTodayAnswerButtonDidTapped()
+    
+    // 다른 프로필로 넘어가는 버튼 눌렀을 때
+    func goToOthersProfileButtonDidTapped(_ userId: Int)
 }
 
 extension UITableViewButtonSelectedDelegate {
@@ -70,4 +73,6 @@ extension UITableViewButtonSelectedDelegate {
     func goToFriendButtonDidTapped() {}
     
     func goToTodayAnswerButtonDidTapped() {}
+    
+    func goToOthersProfileButtonDidTapped(_ userId: Int) {}
 }

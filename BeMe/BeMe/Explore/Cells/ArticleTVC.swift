@@ -18,12 +18,15 @@ class ArticleTVC: UITableViewCell {
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var nickNameLabel: UILabel!
     @IBOutlet weak var scrapButton: UIButton!
+    @IBOutlet weak var otherProfileStackView: UIStackView!
     
     lazy var isScrapped: Bool = false
     
     var answerId: Int?
     
     var questionId: Int?
+    
+    var userId: Int?
     
     weak var delegate: UITableViewButtonSelectedDelegate?
     
@@ -33,7 +36,15 @@ class ArticleTVC: UITableViewCell {
         profileImageView.makeRounded(cornerRadius: profileImageView.bounds.width / 2)
         answerCardView.setBorderWithRadius(borderColor: .lightGray, borderWidth: 1, cornerRadius: 8)
         answerTextView.font = UIFont(name: "AppleSDGothicNeo-Light", size: 14.0)
-        
+        let stackViewGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpProfile))
+                
+        otherProfileStackView.addGestureRecognizer(stackViewGesture)
+        print("aaaaaaa")
+        otherProfileStackView.isUserInteractionEnabled = true
+    }
+    
+    @objc func touchUpProfile() {
+        delegate?.goToOthersProfileButtonDidTapped(userId!)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -41,7 +52,7 @@ class ArticleTVC: UITableViewCell {
         
     }
     
-    func setCardDatas(que: String, date: String, cate: String, content: String, profileImage: String?, nick: String, isScrap: Bool, answerId: Int, questionId: Int) {
+    func setCardDatas(que: String, date: String, cate: String, content: String, profileImage: String?, nick: String, isScrap: Bool, answerId: Int, questionId: Int, userId: Int) {
         
         question.text = que
         subTitle.text = "[  \(cate)에 관한 질문  ]  ·  \(date)"
@@ -50,7 +61,7 @@ class ArticleTVC: UITableViewCell {
         isScrapped = isScrap
         self.answerId = answerId
         self.questionId = questionId
-        
+        self.userId = userId
         if isScrapped {
             scrapButton.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
             
