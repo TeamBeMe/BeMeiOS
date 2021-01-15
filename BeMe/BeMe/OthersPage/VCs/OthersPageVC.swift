@@ -266,6 +266,7 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
         case UICollectionView.elementKindSectionHeader:
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: OthersPageCRV.identifier, for: indexPath) as? OthersPageCRV else {
                 assert(false, "응 아니야")
+                return UICollectionReusableView()
             }
             
             print("IsMyProfile: \(isMyProfile)")
@@ -283,7 +284,7 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
             
         }
         
-        
+        return UICollectionReusableView()
         
     }
 }

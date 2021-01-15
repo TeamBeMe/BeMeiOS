@@ -241,6 +241,7 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
         case UICollectionView.elementKindSectionHeader:
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MypageCRV.identifier, for: indexPath) as? MypageCRV else {
                 assert(false, "응 아니야")
+                return UICollectionReusableView()
             }
             headerView.categoryDelegte = self
             headerView.delegate = self
@@ -266,7 +267,7 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
             assert(false, "응 아니야")
             
         }
-        
+        return UICollectionReusableView()
         
     }
 }
