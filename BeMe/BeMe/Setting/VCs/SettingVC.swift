@@ -24,6 +24,16 @@ class SettingVC: UIViewController, MFMailComposeViewControllerDelegate {
     
     @IBAction func logOutButtonTapped(_ sender: UIButton) {
         
+        print("First")
+        UserDefaults.standard.set("guest", forKey: "token")
+        
+        guard let loginvc = UIStoryboard(name: "LogIn", bundle: nil).instantiateViewController(identifier: "LogInVC") as? UINavigationController else { return }
+        
+        print("Second")
+        loginvc.modalPresentationStyle = .fullScreen
+        self.present(loginvc, animated: true) {
+            self.navigationController?.popToRootViewController(animated: true)
+        }
     }
     
 }
@@ -59,9 +69,9 @@ extension SettingVC: UITableViewDelegate {
     private func configuredMailComposeViewController() -> MFMailComposeViewController {
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
-        mailComposerVC.setSubject("BeMe iOS 문의 메일")
-        mailComposerVC.setToRecipients(["BeMe@naver.com"])
-        mailComposerVC.setMessageBody("BeMe팀이 빠르게 처리할 수 있게 메일 제목에 간단하게 어떤 문의인지 적어주세요!\n\n1. 문의 유형(문의/신고/버그제보/기타) : \n 2. 회원 아이디 (필요시 기입) : \n 3. 문의 내용 :", isHTML: false)
+        mailComposerVC.setSubject("BeMe 문의")
+        mailComposerVC.setToRecipients(["teambeme@naver.com"])
+        mailComposerVC.setMessageBody("1. 문의 유형 ( 문의, 버그 제보, 탈퇴하기, 기타) : \n2. 회원 닉네임 (필요시 기입) : \n3. 문의 내용 : \n\n문의하신 사항은 BeMe팀이 신속하게 처리하겠습니다. 감사합니다 :)", isHTML: false)
         return mailComposerVC
     }
     
