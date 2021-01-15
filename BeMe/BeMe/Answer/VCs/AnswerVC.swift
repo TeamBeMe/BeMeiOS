@@ -228,11 +228,8 @@ class AnswerVC: UIViewController {
             AnswerRegistService.shared.regist(answerID: answerData!.id!, content: answerData!.answer!, commentBlocked: commentSwitch.isOn, isPublic: answerSwitch.isOn) {(networkResult) -> (Void) in
                 switch networkResult{
                 case .success(let data) :
-                    print("글쓰기 성공")
-                    print("bbbbbbbbb")
                     print(self.isFromFollowingTab)
                     if self.isFromFollowingTab {
-                        print("yyyyy")
                         self.followScrapButtonDelegate?.fromAnswerVC(indexInVC: self.indexInFollowingVC!)
                     }
                 case .requestErr(let msg):

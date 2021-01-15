@@ -285,10 +285,6 @@ extension FollowingVC {
         
         curPage += 1
         let loadingFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-//        if isLoading == false{
-//            LoadingHUD.show(loadingFrame: loadingFrame,color: .white)
-//            isLoading = true
-//        }
         FollowingGetAnswersService.shared.getAnswerData(page: curPage){(networkResult) -> (Void) in
             switch networkResult{
             case .success(let data) :
@@ -305,16 +301,10 @@ extension FollowingVC {
                 else{
                     DispatchQueue.global(qos: .background).sync {
                         self.wholeCollectionView.reloadData()
-                        
-//                        self.wholeCollectionView.scrollToItem(at: self.lastIndexpath, at: .bottom, animated: false)
-                        print("라스트인셋")
-                        print(self.lastY)
                         self.wholeCollectionView.setContentOffset(CGPoint(x: 0, y: self.lastY), animated: false)
                     }
                     
-                    
                     LoadingHUD.hide()
-                    
                     if self.answers.count == 0{
                         self.customEmptyView.setItems(text: "아이쿠..! 아직 팔로우하는 사람이 없군요\n팔로잉을 하고 다른 사람들의 글을 둘러보세요")
                         self.wholeCollectionView.addSubview(self.customEmptyView)
@@ -333,8 +323,7 @@ extension FollowingVC {
         
                   
                 }
-           
-                print(self.answers)
+
                 print("success")
 
             case .requestErr(let msg):
@@ -358,16 +347,10 @@ extension FollowingVC {
     
     func getUpdateAnswers(){
         let loadingFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        //        if isLoading == false{
         LoadingHUD.show(loadingFrame: loadingFrame,color: .white)
-        //            isLoading = true
-        //        }
-        
         curPage = 0
         answers = []
         updateDataOnePage()
-
-        
     }
     
     func goToMoreAnswerButtonDidTapped(questionId: Int, question: String) {
@@ -461,7 +444,13 @@ extension FollowingVC : UICollectionViewDataSource {
             followingFollowingButtonDelegate = cell
             cell.followees = self.followees
             cell.followers = self.followers
-            cell.shows = self.followees
+            if isFollowing{
+                cell.shows = self.followees
+            }
+            else {
+                cell.shows = self.followers
+            }
+            
             cell.followScrapButtonDelegate = self
             cell.peopleCollectionView.reloadData()
             
