@@ -53,9 +53,9 @@ class FollowingVC: UIViewController {
         super.viewDidLoad()
         print("viewdidload")
         setItems()
-        let loadingFrame = CGRect(x: 0, y: 155, width: view.frame.width, height: view.frame.height-155)
-        LoadingHUD.show(loadingFrame: loadingFrame,color: .white)
-        isLoading = true
+//        let loadingFrame = CGRect(x: 0, y: 155, width: view.frame.width, height: view.frame.height-155)
+//        LoadingHUD.show(loadingFrame: loadingFrame,color: .white)
+//        isLoading = true
         //        getAnswerData()
         //        getFirstPageAnswerData()
     }
@@ -67,6 +67,7 @@ class FollowingVC: UIViewController {
         
         switch FollowingVC.fromWhichView{
         case 0:
+            print("upupupup")
             getUpdateAnswers()
         case 1:
             wholeCollectionView.reloadData()
