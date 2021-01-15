@@ -35,9 +35,9 @@ class FollowingVC: UIViewController {
     var totalCell = 11
     var followingFollowButtonDelegate : FollowingFollowButtonDelegate?
     var followingFollowingButtonDelegate : FollowingFollowingButtonDelegate?
-    
+    var curPage = 0
     var lastInset = CGPoint(x: 0, y: 0)
-    
+    var lastY: CGFloat = 0.0
     var followers: [FollowingFollows] = []
     var followees: [FollowingFollows] = []
     var followingToScrapDelegate: FollowingToScrapDelegate?
@@ -47,8 +47,11 @@ class FollowingVC: UIViewController {
     
     var savedAnswers: [FollowingAnswers] = []
     
+    static var fromWhichView = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewdidload")
         setItems()
         let loadingFrame = CGRect(x: 0, y: 155, width: view.frame.width, height: view.frame.height-155)
         LoadingHUD.show(loadingFrame: loadingFrame,color: .white)
@@ -59,7 +62,24 @@ class FollowingVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         getFollowData()
-        getUpdateAnswers()
+        print("zz")
+        print(FollowingVC.fromWhichView)
+        
+        switch FollowingVC.fromWhichView{
+        case 0:
+            getUpdateAnswers()
+        case 1:
+            wholeCollectionView.reloadData()
+            FollowingVC.fromWhichView = 0
+            
+        default:
+            
+            
+            print("1")
+        }
+        
+        
+        
         
         
     }
@@ -176,10 +196,10 @@ extension FollowingVC {
         
         answerPage += 1
         let loadingFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        if isLoading == false{
+//        if isLoading == false{
             LoadingHUD.show(loadingFrame: loadingFrame,color: .white)
-            isLoading = true
-        }
+//            isLoading = true
+//        }
         let pastSize = answers.count
         FollowingGetAnswersService.shared.getAnswerData(page: answerPage){(networkResult) -> (Void) in
             switch networkResult{
@@ -191,24 +211,41 @@ extension FollowingVC {
                     }
                     
                 }
-                self.wholeCollectionView.reloadDataWithCompletion {
-                    LoadingHUD.hide()
-                    if self.answers.count == 0{
-                        self.customEmptyView.setItems(text: "아이쿠..! 아직 팔로우하는 사람이 없군요\n팔로잉을 하고 다른 사람들의 글을 둘러보세요")
-                        self.wholeCollectionView.addSubview(self.customEmptyView)
-                        print(self.customEmptyView.superview?.bounds.minX)
-                        self.customEmptyView.snp.makeConstraints{
-                            $0.centerX.equalToSuperview()
-                            $0.top.equalToSuperview().offset(362)
-                            $0.height.equalTo(80)
-                        }
-                        
-                    }
-                    else{
-                        self.customEmptyView.removeFromSuperview()
+                self.wholeCollectionView.reloadData()
+                LoadingHUD.hide()
+                if self.answers.count == 0{
+                    self.customEmptyView.setItems(text: "아이쿠..! 아직 팔로우하는 사람이 없군요\n팔로잉을 하고 다른 사람들의 글을 둘러보세요")
+                    self.wholeCollectionView.addSubview(self.customEmptyView)
+                    print(self.customEmptyView.superview?.bounds.minX)
+                    self.customEmptyView.snp.makeConstraints{
+                        $0.centerX.equalToSuperview()
+                        $0.top.equalToSuperview().offset(362)
+                        $0.height.equalTo(80)
                     }
                     
                 }
+                else{
+                    self.customEmptyView.removeFromSuperview()
+                }
+                
+//                self.wholeCollectionView.reloadDataWithCompletion {
+//                    LoadingHUD.hide()
+//                    if self.answers.count == 0{
+//                        self.customEmptyView.setItems(text: "아이쿠..! 아직 팔로우하는 사람이 없군요\n팔로잉을 하고 다른 사람들의 글을 둘러보세요")
+//                        self.wholeCollectionView.addSubview(self.customEmptyView)
+//                        print(self.customEmptyView.superview?.bounds.minX)
+//                        self.customEmptyView.snp.makeConstraints{
+//                            $0.centerX.equalToSuperview()
+//                            $0.top.equalToSuperview().offset(362)
+//                            $0.height.equalTo(80)
+//                        }
+//
+//                    }
+//                    else{
+//                        self.customEmptyView.removeFromSuperview()
+//                    }
+//
+//                }
                 //                self.wholeCollectionView.reloadData()
                 //                DispatchQueue.main.async {
                 //                    let indexPath = NSIndexPath(item: self.wholeCollectionView.numberOfItems(inSection: 3)+200, section: 3)
@@ -244,6 +281,81 @@ extension FollowingVC {
         
     }
     
+    func updateDataOnePage(){
+        
+        curPage += 1
+        let loadingFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+//        if isLoading == false{
+//            LoadingHUD.show(loadingFrame: loadingFrame,color: .white)
+//            isLoading = true
+//        }
+        FollowingGetAnswersService.shared.getAnswerData(page: curPage){(networkResult) -> (Void) in
+            switch networkResult{
+            case .success(let data) :
+                if let answerDatas = data as? FollowingAnswersData {
+                    self.pageLen = answerDatas.pageLen
+                    for answerData in answerDatas.answers{
+                        self.answers.append(answerData)
+                    }
+                    
+                }
+                if self.curPage < self.answerPage {
+                    self.updateDataOnePage()
+                }
+                else{
+                    DispatchQueue.global(qos: .background).sync {
+                        self.wholeCollectionView.reloadData()
+                        
+//                        self.wholeCollectionView.scrollToItem(at: self.lastIndexpath, at: .bottom, animated: false)
+                        print("라스트인셋")
+                        print(self.lastY)
+                        self.wholeCollectionView.setContentOffset(CGPoint(x: 0, y: self.lastY), animated: false)
+                    }
+                    
+                    
+                    LoadingHUD.hide()
+                    
+                    if self.answers.count == 0{
+                        self.customEmptyView.setItems(text: "아이쿠..! 아직 팔로우하는 사람이 없군요\n팔로잉을 하고 다른 사람들의 글을 둘러보세요")
+                        self.wholeCollectionView.addSubview(self.customEmptyView)
+                        print(self.customEmptyView.superview?.bounds.minX)
+                        self.customEmptyView.snp.makeConstraints{
+                            $0.centerX.equalToSuperview()
+                            $0.top.equalToSuperview().offset(362)
+                            $0.height.equalTo(80)
+                        }
+                       
+        
+                    }
+                    else{
+                        self.customEmptyView.removeFromSuperview()
+                    }
+        
+                  
+                }
+           
+                print(self.answers)
+                print("success")
+
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+                
+            }
+            
+            
+        }
+        
+        
+    }
+    
     func getUpdateAnswers(){
         let loadingFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         //        if isLoading == false{
@@ -251,80 +363,10 @@ extension FollowingVC {
         //            isLoading = true
         //        }
         
+        curPage = 0
         answers = []
-        for i in 1...answerPage{
-            FollowingGetAnswersService.shared.getAnswerData(page: i){(networkResult) -> (Void) in
-                switch networkResult{
-                case .success(let data) :
-                    if let answerDatas = data as? FollowingAnswersData {
-                        self.pageLen = answerDatas.pageLen
-                        for answerData in answerDatas.answers{
-                            self.answers.append(answerData)
-                        }
-                    }
-                    
-                    if i >= self.answerPage{
-                        print("pagepage")
-                        self.wholeCollectionView.reloadData()
-//                        self.wholeCollectionView.reloadDataWithCompletion {
+        updateDataOnePage()
 
-                            
-                            if self.answers.count == 0{
-                               
-                                self.customEmptyView.setItems(text: "아이쿠..! 아직 팔로우하는 사람이 없군요\n팔로잉을 하고 다른 사람들의 글을 둘러보세요")
-                                self.wholeCollectionView.addSubview(self.customEmptyView)
-                                print(self.customEmptyView.superview?.bounds.minX)
-                                self.customEmptyView.snp.makeConstraints{
-                                    $0.centerX.equalToSuperview()
-                                    $0.top.equalToSuperview().offset(362)
-                                    $0.height.equalTo(80)
-                                }
-                                
-                            }
-                            else{
-                                self.customEmptyView.removeFromSuperview()
-                            }
-                            
-//                            LoadingHUD.hide()
-//                        }
-                        
-                        UIView.animate(withDuration: 0.1, animations: {
-                            self.wholeCollectionView.scrollToItem(at: self.lastIndexpath, at: .centeredVertically, animated: false)
-                        },completion: { f in
-                            LoadingHUD.hide()
-                        })
-                        
-                       
-                        
-                        
-                    }
-                    
-                    print(self.answers)
-                    print("success")
-                    
-                case .requestErr(let msg):
-                    if let message = msg as? String {
-                        print(message)
-                    }
-                case .pathErr :
-                    print("pathErr")
-                case .serverErr :
-                    print("serverErr")
-                case .networkFail:
-                    print("networkFail")
-                    
-                }
-                
-                
-            }
-            
-            
-            
-            
-            
-            
-        }
-        
         
     }
     
@@ -725,7 +767,7 @@ extension FollowingVC : UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
         if section > 2{
-            return UIEdgeInsets(top: 0, left: 0, bottom: 20, right:0)
+            return UIEdgeInsets(top: 0, left: 0, bottom: 50, right:0)
         }
         
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right:0)
@@ -770,7 +812,7 @@ extension FollowingVC: UICollectionViewDelegate {
                         cell.layer.transform = CATransform3DIdentity
                         
                     },completion: { finished in
-                        LoadingHUD.hide()
+//                        LoadingHUD.hide()
                         self.isLoading = false
                     })
                     isScrolled = false
@@ -786,7 +828,14 @@ extension FollowingVC: UICollectionViewDelegate {
     }
     
     func scrollViewDidScroll (_ scrollView: UIScrollView) {
+        
         lastInset = scrollView.contentOffset
+        if scrollView.contentOffset.y != 0{
+            lastY = scrollView.contentOffset.y
+        }
+        
+        print(lastInset)
+        print(lastY)
         let currentContentOffset = scrollView.contentOffset.y
         if currentContentOffset > 100 {
             isScrolled = true
@@ -984,7 +1033,11 @@ extension FollowingVC: FollowScrapButtonDelegate {
         self.navigationController?.pushViewController(alarm, animated: true)
     }
     func fromAnswerVC(indexInVC: Int){
-        //        answers[indexInVC].isAnswered = true
+        print("읭")
+        print(indexInVC)
+        print(FollowingVC.fromWhichView)
+        print(answers)
+        answers[indexInVC].isAnswered = true
         wholeCollectionView.reloadData()
         
     }

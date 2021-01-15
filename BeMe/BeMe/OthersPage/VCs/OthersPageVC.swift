@@ -50,7 +50,7 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         //        othersAnswerArray = []
         //        othersProfile = []
         othersPageCollectionView.delegate = self
@@ -266,6 +266,7 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
         case UICollectionView.elementKindSectionHeader:
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: OthersPageCRV.identifier, for: indexPath) as? OthersPageCRV else {
                 assert(false, "응 아니야")
+                return UICollectionReusableView()
             }
             
             print("IsMyProfile: \(isMyProfile)")
@@ -283,7 +284,7 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
             
         }
         
-        
+        return UICollectionReusableView()
         
     }
 }
@@ -301,11 +302,14 @@ extension OthersPageVC {
                     self.othersAnswerArray = response.answers
                     //                    print("setAnswerData 안에ㅐ서")
                     //                    print(response)
-                    if self.othersAnswerArray[0].userID == self.userID {
-                        self.isMyProfile = true
-                    } else {
-                        self.isMyProfile = false
+                    if self.othersAnswerArray.count != 0{
+                        if self.othersAnswerArray[0].userID == self.userID {
+                            self.isMyProfile = true
+                        } else {
+                            self.isMyProfile = false
+                        }
                     }
+                 
                     self.othersPageCollectionView.reloadData()
                 }
             case .requestErr(let msg):

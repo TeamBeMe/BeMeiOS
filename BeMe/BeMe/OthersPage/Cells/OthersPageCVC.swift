@@ -15,7 +15,7 @@ class OthersPageCVC: UICollectionViewCell {
     static let identifier = "OthersPageCVC"
     var othersAnswerArray: [Answer] = []
     var tableviewHeight: CGFloat = 0.0
-
+    var customEmptyView = CustomEmptyView()
     //MARK:**- Life Cycle Part**
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -42,6 +42,21 @@ class OthersPageCVC: UICollectionViewCell {
 extension OthersPageCVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if othersAnswerArray.count == 0{
+           
+                self.customEmptyView.setItems(text: "아직 등록된 글이 없습니다")
+                self.otherspageTableView.addSubview(self.customEmptyView)
+                print(self.customEmptyView.superview?.bounds.minX)
+                self.customEmptyView.snp.makeConstraints{
+                    $0.centerX.equalToSuperview()
+                    $0.top.equalToSuperview().offset(70)
+                    $0.height.equalTo(80)
+                }
+        }
+        
+        else{
+            self.customEmptyView.removeFromSuperview()
+        }
         return othersAnswerArray.count
     }
     

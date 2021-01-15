@@ -72,7 +72,7 @@ class AnswerVC: UIViewController {
         //        answerTextView.text = ""
         //        answerTextView.becomeFirstResponder()
         registerForKeyboardNotifications()
-        
+        FollowingVC.fromWhichView = 1
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
@@ -185,7 +185,7 @@ class AnswerVC: UIViewController {
         finishButton.setTitleColor(.veryLightPink, for: .normal)
         answerTextView.text = answerData?.answer
         textViewDidChange(answerTextView)
-        answerTextView.becomeFirstResponder()
+//        answerTextView.becomeFirstResponder()
         
         
         answerSwitch.isOn = !answerData!.lock!
@@ -352,6 +352,12 @@ extension AnswerVC: UITextViewDelegate {
         if isInitial {
             textView.text = initialText
             textView.textColor = .black
+        }
+        if textView.text != "" {
+            finishButton.setTitleColor(.black, for: .normal)
+        }
+        else{
+            finishButton.setTitleColor(.veryLightPink, for: .normal)
         }
         
         inputText = textView.text
