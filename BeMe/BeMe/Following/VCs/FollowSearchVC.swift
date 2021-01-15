@@ -106,9 +106,9 @@ class FollowSearchVC: UIViewController, MFMailComposeViewControllerDelegate {
     private func configuredMailComposeViewController() -> MFMailComposeViewController {
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
-        mailComposerVC.setSubject("BeMe iOS 문의 메일")
-        mailComposerVC.setToRecipients(["BeMe@naver.com"])
-        mailComposerVC.setMessageBody("BeMe팀이 빠르게 처리할 수 있게 메일 제목에 간단하게 어떤 문의인지 적어주세요!\n\n1. 문의 유형(문의/신고/버그제보/기타) : \n 2. 회원 아이디 (필요시 기입) : \n 3. 문의 내용 :", isHTML: false)
+        mailComposerVC.setSubject("BeMe 유저 신고 ")
+        mailComposerVC.setToRecipients(["teambeme@naver.com"])
+        mailComposerVC.setMessageBody("1. 신고 유형  사유 (상업적 광고 및 판매, 음란물/불건전한 대화, 욕설 및 비하, 도배, 부적절한 프로필 이미지, 기타 사유) : \n 2. 신고할 유저의 닉네임 : \n\n 신고하신 사항은 BeMe팀이 신속하게 처리하겠습니다. 감사합니다 :)", isHTML: false)
         return mailComposerVC
     }
     
