@@ -7,13 +7,7 @@
 
 import UIKit
 import MessageUI
-//MARK: - Comment 모델
 
-struct CommentA {
-    let comment: String
-    var children: [CommentA]?
-    var open: Bool
-}
 class CommentVC: UIViewController, MFMailComposeViewControllerDelegate {
     
     @IBOutlet weak var commentTableView: UITableView!
@@ -142,6 +136,7 @@ class CommentVC: UIViewController, MFMailComposeViewControllerDelegate {
         if let comment = commentTextView.text {
             if isEditingComment {
                 editComment()
+                commentToCommentView.isHidden = true
                 isEditingComment = false
             } else {
                 if isCommentToComment {
@@ -149,11 +144,12 @@ class CommentVC: UIViewController, MFMailComposeViewControllerDelegate {
                     if let selectedIndex = selectedIndex {
                         sendComment(content: comment, parentId: parentId)
                         
-                        
                         commentTableView.reloadData()
-                        commentTableView.scrollToRow(at: selectedIndex, at: .bottom, animated: true)
+//                        commentTableView.scrollToRow(at: selectedIndex, at: .bottom, animated: true)
                     }
+                    
                     isCommentToComment = false
+                    
                 } else {
                     sendComment(content: comment, parentId: nil)
                 }
@@ -167,9 +163,13 @@ class CommentVC: UIViewController, MFMailComposeViewControllerDelegate {
     }
     
     @IBAction func cancelCoCButtonTapped(_ sender: UIButton) {
+        if isCommentToComment {
+            commentToCommentView.isHidden = true
+            isCommentToComment = false
+        } else {
+            
+        }
         
-        commentToCommentView.isHidden = true
-        isCommentToComment = false
     }
     
     
@@ -282,9 +282,13 @@ extension CommentVC {
                         
                     } else {
                         self.realCommentArray[self.selectedIndex!.section-1].children.append(newComment)
+                        self.realCommentArray[self.selectedIndex!.section-1].open = true
+                        self.commentTableView.scrollToRow(at: IndexPath.init(row: self.realCommentArray[self.selectedIndex!.section-1].children.count, section: self.selectedIndex!.section), at: .middle, animated: true)
                         self.commentToCommentView.isHidden = true
                         
                     }
+                    
+                    self.commentSendButton.isHidden = true
                     
                     
                     
@@ -375,6 +379,7 @@ extension CommentVC {
                 guard let _ = data as? GenericResponse<Comment> else { return }
                 
                 self.commentTableView.scrollToRow(at: self.selectedIndexPath!, at: .middle, animated: true)
+                self.commentSendButton.isHidden = true
                 self.getAnswerDetail()
                 
             case .requestErr(let message):
@@ -473,7 +478,8 @@ extension CommentVC {
             commentTextView.text = selectedCommentContent
             commentTextView.becomeFirstResponder()
             commentTableView.scrollToRow(at: selectedIndexPath!, at: .middle, animated: true)
-            
+            commentToCommentView.isHidden = false
+            commentToCommentLabel.text = "댓글 수정중"
         } else if action == "report" {
             // 메일 띄우기
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.21) {
