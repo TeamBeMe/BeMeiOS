@@ -12,13 +12,13 @@ class FilterCVC: UICollectionViewCell {
     @IBOutlet weak var categoryButton: UIButton!
     @IBAction func categoryButtonTapped(_ sender: UIButton) {
         print(category)
-        filterCVCDelegate?.setSelectedCategory(index: indexPath)
+//        filterCVCDelegate?.setSelectedCategory(index: indexPath)
     }
     
     static let identifier: String = "FilterCVC"
     var category: ExploreCategory?
     var indexPath = -1
-    var filterCVCDelegate: FilterCVCDelegate?
+//    var filterCVCDelegate: FilterCVCDelegate?
    
     
     override var isSelected: Bool {
@@ -65,6 +65,6 @@ class FilterCVC: UICollectionViewCell {
     }
 }
 
-protocol FilterCVCDelegate {
-    func setSelectedCategory(index: Int)
-}
+//protocol FilterCVCDelegate {
+//    func setSelectedCategory(index: Int)
+//}

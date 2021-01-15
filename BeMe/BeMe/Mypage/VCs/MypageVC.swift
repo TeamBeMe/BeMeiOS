@@ -19,8 +19,14 @@ class MypageVC: UIViewController {
     
     //MARK:**- Variable Part**
     let mypageCVLayout = MypageCVFlowLayout()
+    
     private var filterVCDelegate: FilterVCDelegate?
+    
     let mypageCVC = MypageCVC()
+    
+    static var selectedAvailablity: String?
+    
+    static var selectedCategory: Int?
     
     private var selectedCategoryId: Int?
     
@@ -65,7 +71,7 @@ class MypageVC: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(dismissCategory), name: .init("categoryClose"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(getKeyword), name: .init("keyword"), object: nil)
-        
+
         if #available(iOS 11.0, *) {
             mypageCollectionView.automaticallyAdjustsScrollIndicatorInsets = false
         } else {
@@ -83,6 +89,7 @@ class MypageVC: UIViewController {
         self.keyword = keyword
         
     }
+
     
     @objc func dismissCategory(_ notification: Notification) {
         popupBackgroundView.animatePopupBackground(false)
@@ -93,10 +100,11 @@ class MypageVC: UIViewController {
         guard let selectedAv = userInfo["selectedAv"] as? String else { return }
         print("Second")
         self.selectedAv = selectedAv
-
-            
+        self.selectedCategoryId = categoryId == 0 ? nil : categoryId
         
-        self.selectedCategoryId = categoryId == 0 ? nil : categoryId 
+        MypageVC.selectedAvailablity = selectedAv
+        MypageVC.selectedCategory = selectedCategoryId
+        
         getAnswerData(availability: selectedAv, category: selectedCategoryId, page: 1, query: keyword)
         getScrapData(availability: selectedAv, category: selectedCategoryId, page: 1, query: keyword)
     }
@@ -261,8 +269,6 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
                 headerView.setProfile(nickname: myProfile[0].nickname, img: myProfile[0].profileImg!, visit: String(myProfile[0].continuedVisit), answerCount: String(myProfile[0].answerCount))
             }
             if chosenImage != nil{
-                print("바보")
-                print(chosenImage)
                 headerView.setProfileImage(img: chosenImage!)
             }
             
