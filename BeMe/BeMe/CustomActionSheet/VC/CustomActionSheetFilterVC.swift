@@ -38,6 +38,8 @@ class CustomActionSheetFilterVC: UIViewController {
         categoryCollectionView.dataSource = self
 
         availablityButtonSet(availablity: selectedAvailablity)
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,7 +47,7 @@ class CustomActionSheetFilterVC: UIViewController {
 //        getSelectedFilterInfo()
         setCategoryData()
         selectedAvailablity = MypageVC.selectedAvailablity
-        selectedCategory = MypageVC.selectedCategory
+//        selectedCategory = MypageVC.selectedCategory
         availablityButtonSet(availablity: selectedAvailablity)
     }
     
@@ -72,8 +74,14 @@ class CustomActionSheetFilterVC: UIViewController {
 
     @IBAction func applyButtonTapped(_ sender: Any) {
         
-        NotificationCenter.default.post(name: .init("categoryClose"), object: nil, userInfo: ["categoryId": selectedCategory , "selectedAv": selectedAvailablity ?? "all"])
-        self.dismiss(animated: true, completion: nil)
+
+        if let category = selectedCategory {
+            NotificationCenter.default.post(name: .init("categoryClose"), object: nil, userInfo: ["categoryId": category , "selectedAv": selectedAvailablity ?? "all"])
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            // 토스트팝업
+            self.showToast(text: "카테고리를 선택해주세요.")
+        }
         
     }
     
