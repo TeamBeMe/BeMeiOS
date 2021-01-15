@@ -45,7 +45,9 @@ class FollowNotAnsweredCVC: UICollectionViewCell {
         categoryLabel.text = "[  \(inputAnswer.category)에 관한 질문  ]  ·"
         categoryLabel.textColor = .slateGrey
         answerDateLabel.textColor = .slateGrey
-        answerTextView.text = "아직 송현님이 답하지 않은 질문입니다.\n답변을 하시고 글을 보시겠습니까?"
+        let myName = UserDefaults.standard.string(forKey: "nickName")
+        
+        answerTextView.text = "아직 \(myName!)님이 답하지 않은 질문입니다.\n답변을 하시고 글을 보시겠습니까?"
         
         
         
@@ -54,7 +56,8 @@ class FollowNotAnsweredCVC: UICollectionViewCell {
     
     
     @IBAction func replyButtonAction(_ sender: Any) {
-        
+        print("엥")
+        print(indexInVC!)
         followScrapButtonDelegate?.replyButtonTap(answerData: answerData!,indexInVC: indexInVC!)
     }
     

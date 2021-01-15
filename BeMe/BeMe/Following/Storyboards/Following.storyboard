@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="jha-QA-2zS" customClass="FollowingWholeCV" customModule="BeMe" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Rzg-bm-n02">
                                     <size key="itemSize" width="410" height="141"/>
@@ -511,7 +511,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="35p-Go-XH5" firstAttribute="trailing" secondItem="jha-QA-2zS" secondAttribute="trailing" id="AQu-uV-W7w"/>
-                            <constraint firstAttribute="bottom" secondItem="jha-QA-2zS" secondAttribute="bottom" id="P5Y-yI-yr5"/>
+                            <constraint firstItem="35p-Go-XH5" firstAttribute="bottom" secondItem="jha-QA-2zS" secondAttribute="bottom" id="P5Y-yI-yr5"/>
                             <constraint firstItem="jha-QA-2zS" firstAttribute="top" secondItem="35p-Go-XH5" secondAttribute="top" id="aPz-EK-Fga"/>
                             <constraint firstItem="jha-QA-2zS" firstAttribute="leading" secondItem="35p-Go-XH5" secondAttribute="leading" id="d9T-iv-fmf"/>
                         </constraints>

@@ -281,8 +281,12 @@ extension HomeVC {
                 self.pageForServer = self.pageForServer + 1
                 var i = 0
                 print(data)
+                
                 if let homePageDatas = data as? [HomePageData]{
+                    
                     print(homePageDatas.count)
+                    
+                    
                     for homePageData in homePageDatas{
                         
                         
@@ -363,9 +367,11 @@ extension HomeVC {
                     }
                     
                 }
+              
                 
             case .requestErr(let msg):
                 if let message = msg as? String {
+                    LoadingHUD.hide()
                     print(message)
                 }
             case .pathErr :
