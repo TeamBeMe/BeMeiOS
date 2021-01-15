@@ -21,7 +21,7 @@ extension String {
     }
     
     func isValidNickName() -> Bool {
-        let regEx = "[A-Za-z0-9]*.{1,20}"
+        let regEx = "[A-Za-z0-9]*"
         let pred = NSPredicate(format:"SELF MATCHES %@", regEx)
         
         return pred.evaluate(with: self)
