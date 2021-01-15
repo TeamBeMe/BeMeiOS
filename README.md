@@ -13,6 +13,8 @@
 > 자신의 글을 전체 공개하여 사람들과 소통할 수 있습니다.
 > 마지막으로 마이페이지에서 내가 지금까지 답한 질문을 쉽게 볼 수 있으며, 내 생각이 어떻게 변했는지 확인할 수 있습니다.
 
+
+
 ## 📌 개발 환경 및 라이브러리
 
 ### 개발 환경
@@ -31,24 +33,15 @@
 | Firebase/Messaging  | Firebase Cloud Messaging | ![Kingfisher](https://img.shields.io/badge/Firebase/Messaging-yellow) |
 | SwiftLint           | 깔끔한 코딩 컨벤션       | ![Kingfisher](https://img.shields.io/badge/SwiftLint-red)    |
 
+### AutoLayout 적용 여부
+
+  **1. iPhone 12 Pro 적용** 
+
+  **2. iPhone 12 mini 적용**
+
+  **3. iPhone SE2 적용**
 
 
-
-
-### **I-2 README 작성 (모든 항목이 포함되어야 인정)**
-
-- [ ]  **1. 개발환경 및 사용한 라이브러리**
-- [ ]  **2. 서비스 workflow**
-- [ ]  **3. 기능별 개발여부 + 담당자 (ex. IA 명세서 기능)**
-- [ ]  **4. 핵심 기능 구현 방법 (코드 포함)**
-- [ ]  **5. Extension을 통해 작성한 메소드 설명**
-- [ ]  **6. 팀원 역할 및 소개**
-
-### **i-3 AutoLayout 적용 여부**
-
-- [ ]  **1. iPhone 12 Pro 적용**
-- [ ]  **2. iPhone 12 mini 적용**
-- [ ]  **3. iPhone SE2 적용**
 
 ## 📌 서비스 workflow
 
@@ -56,7 +49,16 @@
 
 
 
-## 📌 기능별 개발 여부 
+## 📌 협업 방식
+
+- [Coding-Convention](https://www.notion.so/Naming-Rule-d1ad0ee6a8754d3d98d48a605139b4b2)
+- [Git-Management](/GitManage.md)
+- [Kanban Board](https://github.com/TeamBeMe/BeMeiOS/projects/1)
+- [Foldering](https://github.com/TeamBeMe/BeMeiOS/wiki/Foldering)
+
+
+
+## 📌 기능별 개발 여부
 
 | Category         | 기능                                               | 개발 | 담당자   |
 | ---------------- | -------------------------------------------------- | ---- | -------- |
@@ -103,37 +105,138 @@
 
 ## 📌 핵심 기능 구현 방법
 
-- 
+- 글쓰기
+
+```swift
+
+```
+
+- 타인이 쓴 글 보기
+
+```swift
+
+```
 
 
+
+## 📌 Extension을 통한 메소드 설명
+
+<img src="https://user-images.githubusercontent.com/56102421/104726128-6b20c800-5776-11eb-9f2b-a9191bcce21d.png" width="30%"/> 
+
+- UIView Extension
+
+  ```swift
+  extension UIView {
+      // Set Rounded View
+      func makeRounded(cornerRadius : CGFloat?){
+          
+          // UIView 의 모서리가 둥근 정도를 설정
+          if let cornerRadius_ = cornerRadius {
+              self.layer.cornerRadius = cornerRadius_
+          }  else {
+              // cornerRadius 가 nil 일 경우의 default
+              self.layer.cornerRadius = self.layer.frame.height / 2
+          }
+          
+          self.layer.masksToBounds = true
+      }
+      
+      // Set UIView's Shadow
+      func dropShadow(color: UIColor, offSet: CGSize, opacity: Float, radius: CGFloat) {
+          
+          // 그림자 색상 설정
+          layer.shadowColor = color.cgColor
+          // 그림자 크기 설정
+          layer.shadowOffset = offSet
+          // 그림자 투명도 설정
+          layer.shadowOpacity = opacity
+          // 그림자의 blur 설정
+          layer.shadowRadius = radius
+          // 구글링 해보세요!
+          layer.masksToBounds = false
+          
+      }
+      
+      // Set UIView's Border
+      func setBorder(borderColor : UIColor?, borderWidth : CGFloat?) {
+          
+          // UIView 의 테두리 색상 설정
+          if let borderColor_ = borderColor {
+              self.layer.borderColor = borderColor_.cgColor
+          } else {
+              // borderColor 변수가 nil 일 경우의 default
+              self.layer.borderColor = UIColor(red: 205/255, green: 209/255, blue: 208/255, alpha: 1.0).cgColor
+          }
+          
+          // UIView 의 테두리 두께 설정
+          if let borderWidth_ = borderWidth {
+              self.layer.borderWidth = borderWidth_
+          } else {
+              // borderWidth 변수가 nil 일 경우의 default
+              self.layer.borderWidth = 1.0
+          }
+      }
+  }
+  ```
+
+- UIViewController
+
+  ```swift
+  extension UIViewController {
+      // 토스트 메세지
+      func showToast(text: String, completion: @escaping ()->()) {
+          let toast = ToastView(frame: CGRect(x: 0, y: 0, width: 343, height: 84))
+          toast.setLabel(text: text)
+          toast.alpha = 0
+          self.view.addSubview(toast)
+          toast.snp.makeConstraints {
+              $0.leading.equalToSuperview().offset(16)
+              $0.trailing.equalToSuperview().offset(-16)
+              $0.bottom.equalToSuperview().offset(-101)
+          }
+          UIView.animate(withDuration: 0.3, animations: {
+              toast.alpha = 1
+              
+          },completion: { finish in
+              UIView.animate(withDuration: 0.3, delay: 0.7, animations: {
+                  toast.alpha = 0
+  
+              }, completion: { finish in
+                  if finish {
+                      toast.removeFromSuperview()
+                      completion()
+                  }
+              })
+          })
+      }
+  }
+  ```
+
+- UIImageView
+
+  ```swift
+  // Kingfisher를 이용하여 url로부터 이미지를 가져오는 extension
+  extension UIImageView {
+      
+      public func imageFromUrl(_ urlString: String?) {
+          if let url = urlString {
+              self.kf.setImage(with: URL(string: url), options: [.transition(ImageTransition.fade(0.5))])
+          }
+      }
+  }
+  ```
+
+  
+
+  
 
 ## 📌 팀원 소개
 
-
-
-### Notion Link
-
-- [Notion](https://www.notion.so/iOS-688f11e27af9495faac336794ccac4fa)
+|                           **윤재**                           |          **세란**          |                           **재용**                           |
+| :----------------------------------------------------------: | :------------------------: | :----------------------------------------------------------: |
+| <img src="https://user-images.githubusercontent.com/56102421/104729189-6f031900-577b-11eb-84f6-fa082870caf6.jpeg" width="60%"/> | <img src="" width="50% "/> | <img src="https://user-images.githubusercontent.com/56102421/104729197-70ccdc80-577b-11eb-98fc-aa5902113cd6.jpeg" width="60%"/> |
+|                            네이스                            |                            |                                                              |
 
 
 ### 목차
 
-- [Coding-Convention](https://www.notion.so/Naming-Rule-d1ad0ee6a8754d3d98d48a605139b4b2)
-  
-- [Git-Management](/GitManage.md)
-
-- [Kanban Board](https://github.com/TeamBeMe/BeMeiOS/projects/1)
-- [Foldering](https://github.com/TeamBeMe/BeMeiOS/wiki/Foldering)
-
-### 현재 진행사항
-
-#### 윤재 
-- 홈,팔로잉,아이디 검색 후 팔로잉, 회원가입, 로그인 뷰 완성
-- 회원가입, 로그인 서버완료
-
-#### 재용
-- 탐색 뷰 구현 완료, 댓글 뷰 구현중
-
-#### 세란
-- 글쓰기 뷰 구현 완료
-- 마이페이지 뷰 구현중
