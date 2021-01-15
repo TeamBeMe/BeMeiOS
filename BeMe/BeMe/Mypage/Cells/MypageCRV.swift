@@ -73,6 +73,7 @@ class MypageCRV: UICollectionReusableView {
     
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
         setKeywordLabel(label: searchTextField, keyword: "")
+        NotificationCenter.default.post(name: .init("keyword"), object: nil, userInfo: ["keyword": ""])
         MypageCRVDelegate?.deleteButtonSearch()
     }
     
@@ -91,6 +92,7 @@ class MypageCRV: UICollectionReusableView {
         moveHighLightBar(to: sender)
     }
     @IBAction func searchButtonTapped(_ sender: UIButton) {
+        NotificationCenter.default.post(name: .init("keyword"), object: nil, userInfo: ["keyword": searchTextField.text! ])
         MypageCRVDelegate?.searchButtonSearch()
     }
     
@@ -179,11 +181,13 @@ extension MypageCRV: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         print("TextFieldDId")
         print(textField.text!)
-        NotificationCenter.default.post(name: .init("keyword"), object: nil, userInfo: ["keyword": textField.text!])
+        
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        NotificationCenter.default.post(name: .init("keyword"), object: nil, userInfo: ["keyword": textField.text!])
         
         self.endEditing(true)
+        
         MypageCRVDelegate?.searchButtonSearch()
         return true
     }

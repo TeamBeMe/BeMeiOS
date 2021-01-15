@@ -18,8 +18,6 @@ class CustomActionSheetFilterVC: UIViewController {
     @IBOutlet weak var categoryLabel: UILabel!
     // 서버통신을 통해 받아오는 값
     var categoryArray: [ExploreCategory] = []
-    // all, public, unpublic
-    var availablityArray: [Bool] = [false, false, false]
     private var filterCVCDelegate: FilterCVCDelegate?
     var fromServer = true
     var categorySelected: Int = 0
@@ -118,7 +116,7 @@ class CustomActionSheetFilterVC: UIViewController {
     }
     @IBAction func applyButtonTapped(_ sender: Any) {
         
-        NotificationCenter.default.post(name: .init("categoryClose"), object: nil, userInfo: ["categoryId": categorySelected+1, "selectedAv": selectedAvailablity])
+        NotificationCenter.default.post(name: .init("categoryClose"), object: nil, userInfo: ["categoryId": categorySelected , "selectedAv": selectedAvailablity])
         self.dismiss(animated: true, completion: nil)
     }
     

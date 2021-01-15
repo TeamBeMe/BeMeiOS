@@ -62,9 +62,9 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
                     .dequeueReusableCell(withIdentifier: MypageResultTVC.identifier, for: indexPath)
                     as? MypageResultTVC else { return UITableViewCell() }
             if (myAnswerArray.count != 0){
-                tab.setCardView(question: myAnswerArray[indexPath.row].question, questionInfo: myAnswerArray[indexPath.row].category, answerDate: myAnswerArray[indexPath.row].answerDate, isLocked: myAnswerArray[indexPath.row].publicFlag)
+                tab.setCardView(question: myAnswerArray[indexPath.row].question, questionInfo: myAnswerArray[indexPath.row].category, answerDate: myAnswerArray[indexPath.row].answerDate, isLocked: !myAnswerArray[indexPath.row].publicFlag)
                 
-                tab.isLocked = myAnswerArray[indexPath.row].publicFlag
+                tab.isLocked = !myAnswerArray[indexPath.row].publicFlag
                 tab.answerIdx = myAnswerArray[indexPath.row].id
                 tab.delegate = self
                 tab.indexpath = indexPath.row
@@ -81,7 +81,7 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
                             .dequeueReusableCell(withIdentifier: MypageMyScrapTVC.identifier, for: indexPath)
                             as? MypageMyScrapTVC else { return UITableViewCell() }
                     
-                    tab.setCardView(question: myScrapArray[indexPath.row].question, questionInfo: myScrapArray[indexPath.row].category, answerDate: myScrapArray[indexPath.row].answerDate, isLocked: myScrapArray[indexPath.row].publicFlag, isScrapped: myScrapArray[indexPath.row].isScrapped!)
+                    tab.setCardView(question: myScrapArray[indexPath.row].question, questionInfo: myScrapArray[indexPath.row].category, answerDate: myScrapArray[indexPath.row].answerDate, isLocked: !myScrapArray[indexPath.row].publicFlag, isScrapped: myScrapArray[indexPath.row].isScrapped!)
                     tab.selectionStyle = .none
                     tab.profileEditDelegate = self
                     tab.answerID = myScrapArray[indexPath.item].id

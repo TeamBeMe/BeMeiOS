@@ -14,7 +14,7 @@ struct MyPageScrapService {
     // getMyAnswer - overLoading Method : 쿼리 개수에 따라서 매개변수 개수가 바뀜
     func getMyScrap(availability: String?, category: Int?, query: String?, page: Int, completion : @escaping (NetworkResult<Any>) -> (Void)){
      
-        _ = category == nil ? "" : String(category!)
+        let category = category == nil ? "" : String(category!)
         let availability = availability == nil ? "" : String(availability!)
         let query = query == nil ? "" : String(query!)
         
@@ -23,7 +23,7 @@ struct MyPageScrapService {
         
         let params: Parameters = [
             "public": "\(availability)",
-            "availability": "\(availability)",
+            "category": "\(category)",
             "page": "\(page)",
             "query": "\(query)"
         ]

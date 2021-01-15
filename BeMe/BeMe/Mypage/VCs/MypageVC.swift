@@ -87,10 +87,16 @@ class MypageVC: UIViewController {
     @objc func dismissCategory(_ notification: Notification) {
         popupBackgroundView.animatePopupBackground(false)
         guard let userInfo = notification.userInfo as? [String: Any] else { return }
-        guard let categoryId = userInfo["categoryId"] as? Int else { return }
+        
+        guard let categoryId = userInfo["categoryId"] as? Int else { return  }
+        print("First")
         guard let selectedAv = userInfo["selectedAv"] as? String else { return }
+        print("Second")
         self.selectedAv = selectedAv
-        self.selectedCategoryId = categoryId
+
+            
+        
+        self.selectedCategoryId = categoryId == 0 ? nil : categoryId 
         getAnswerData(availability: selectedAv, category: selectedCategoryId, page: 1, query: keyword)
         getScrapData(availability: selectedAv, category: selectedCategoryId, page: 1, query: keyword)
     }
@@ -312,9 +318,16 @@ extension MypageVC {
             switch result {
             case .success(let data):
                 if let response = data as? MyAnswer{
-                    print("MypageVC getAnswerData 성공")
                     self.myAnswerArray = response.answers
                     self.mypageCollectionView.reloadData()
+                    print("MypageVC getAnswerData 성공")
+                    print(self.myAnswerArray)
+                    print(response.answers.count)
+                    print(availability)
+                    print(category)
+                    print(page)
+                    print(query)
+                    
                 }
             case .requestErr(let msg):
                 if let message = msg as? String {
@@ -337,11 +350,16 @@ extension MypageVC {
             switch result {
             case .success(let data):
                 if let response = data as? MyScrap{
-                    print("MypageVC getScrapData 성공")
                     self.myScrapArray = response.answers
-                    //                    print("getScrapData 안에서")
-                    //                    print(response)
                     self.mypageCollectionView.reloadData()
+                    print("MypageVC getScrapData 성공")
+                    print(self.myScrapArray)
+                    print(response.answers.count)
+                    print(availability)
+                    print(category)
+                    print(page)
+                    print(query)
+                    
                 }
             case .requestErr(let msg):
                 if let message = msg as? String {
