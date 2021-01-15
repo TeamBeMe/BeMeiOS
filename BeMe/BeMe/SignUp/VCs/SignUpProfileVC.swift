@@ -62,13 +62,7 @@ class SignUpProfileVC: UIViewController {
                                                             self.present(vcName, animated: false, completion: {
                                                                 
                                                             })
-//                                                            self.dismiss(animated: false, completion: {
-//
-//
-//
-//                                                                
-//                                                            })
-//
+
                                                             
                                                         }
                                                         
@@ -114,7 +108,67 @@ class SignUpProfileVC: UIViewController {
     
     
     @IBAction func jumpButtonAction(_ sender: Any) {
-        
+        LoadingHUD.show(loadingFrame: UIScreen.main.bounds,color: .white)
+        SignUpService.shared.signUp(email: myEmail!,nickName: myName!, password: myPassword!,
+                                    image: UIImage(named: "mypageDefault")! ,completion: { networkResult -> Void in
+                                        switch networkResult {
+                                        case .success(let data):
+                                            if let signupData = data as? SignUpData{
+                                                UserDefaults.standard.set(signupData.nickname, forKey: "nickName")
+                                                LogInService.shared.login(nickName: self.myName!,
+                                                                          password: self.myPassword!) {(networkResult) -> (Void) in
+                                                    switch networkResult {
+                                                    case .success(let data) :
+                                                        if let loginData = data as? LogInData{
+                                                            print("회원가입 후 로그인 성공")
+                                                            guard let vcName = UIStoryboard(name: "UnderTab", bundle: nil).instantiateViewController(identifier: "UnderTabBarController") as? UINavigationController else {return}
+                                                            UserDefaults.standard.set(loginData.token, forKey: "token")
+                                                            print(UserDefaults.standard.string(forKey: "nickName")!)
+                                                            vcName.modalPresentationStyle = .fullScreen
+                                                            self.present(vcName, animated: false, completion: {
+                                                                
+                                                            })
+
+                                                            
+                                                        }
+                                                        
+                                                    case .requestErr(let msg):
+                                                        if let message = msg as? String {
+                                                            print(message)
+                                                            LoadingHUD.hide()
+                                                        }
+                                                    case .pathErr :
+                                                        print("pathErr")
+                                                    case .serverErr :
+                                                        print("serverErr")
+                                                    case .networkFail:
+                                                        print("networkFail")
+                                                        
+                                                        
+                                                        
+                                                    }
+                                                }
+                                            }
+                                        case .requestErr(let msg):
+                                            if let message = msg as? String {
+                                                print(message)
+                                                print("회원가입 실패")
+                                            }
+                                        case .pathErr :
+                                            print("pathErr")
+                                        case .serverErr :
+                                            print("serverERr")
+                                        case .networkFail :
+                                            print("networkFail")
+                                        default :
+                                            print("머지?")
+                                        }
+                                        
+                                        
+                                        
+                                        
+                                        
+                                    })
         
         
         
