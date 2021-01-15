@@ -95,12 +95,12 @@ class MypageVC: UIViewController {
         popupBackgroundView.animatePopupBackground(false)
         guard let userInfo = notification.userInfo as? [String: Any] else { return }
         
-        guard let categoryId = userInfo["categoryId"] as? Int else { return  }
+        guard let categoryId = userInfo["categoryId"] as? Int? else { return  }
         print("First")
         guard let selectedAv = userInfo["selectedAv"] as? String else { return }
         print("Second")
         self.selectedAv = selectedAv
-        self.selectedCategoryId = categoryId == 0 ? nil : categoryId
+        self.selectedCategoryId = categoryId == nil ? 1 : categoryId! + 1
         
         MypageVC.selectedAvailablity = selectedAv
         MypageVC.selectedCategory = selectedCategoryId

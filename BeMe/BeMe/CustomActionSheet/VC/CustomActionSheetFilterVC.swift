@@ -22,7 +22,7 @@ class CustomActionSheetFilterVC: UIViewController {
     var fromServer = true
     
     private var selectedCategory: Int?
-        = 0
+        = nil
     
     private var selectedAvailablity: String? = nil
     
@@ -71,6 +71,8 @@ class CustomActionSheetFilterVC: UIViewController {
     
 
     @IBAction func applyButtonTapped(_ sender: Any) {
+        
+        
         NotificationCenter.default.post(name: .init("categoryClose"), object: nil, userInfo: ["categoryId": selectedCategory , "selectedAv": selectedAvailablity ?? "all"])
         self.dismiss(animated: true, completion: nil)
     }
@@ -186,9 +188,22 @@ extension CustomActionSheetFilterVC: UICollectionViewDataSource {
                 for: indexPath) as? FilterCVC else {
             return UICollectionViewCell()}
         cell.indexPath = indexPath.row
+
         cell.category = self.categoryArray[indexPath.item]
-//        cell.filterCVCDelegate = self
+
         cell.setButton(text: categoryArray[indexPath.item].name)
+        
+//        if selectedCategory != nil {
+//            if self.categoryArray[indexPath.item].id == selectedCategory!+1 {
+//                cell.setButton(selected: true)
+//            }
+//        } else {
+//            
+//        }
+        
+        
+//        cell.filterCVCDelegate = self
+
 
         return cell
         

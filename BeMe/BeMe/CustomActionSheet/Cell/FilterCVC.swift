@@ -57,6 +57,22 @@ class FilterCVC: UICollectionViewCell {
         }
         
     }
+    
+    func setButton(selected: Bool) {
+        if !selected {
+            print(category)
+             
+            categoryButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+            categoryButton.backgroundColor = UIColor.white
+            categoryButton.setTitleColor(.slateGrey, for: .normal)
+        } else {
+            categoryButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
+            categoryButton.backgroundColor = UIColor.black
+            categoryButton.setTitleColor(.white, for: .normal)
+        }
+        
+    }
+    
     func setButton(text: String) {
         categoryButton.setTitle(text, for: .normal)
         categoryButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
