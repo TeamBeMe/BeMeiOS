@@ -167,7 +167,9 @@ class CommentVC: UIViewController, MFMailComposeViewControllerDelegate {
             commentToCommentView.isHidden = true
             isCommentToComment = false
         } else {
-            
+            commentToCommentView.isHidden = true
+            isEditingComment = false
+            commentSendButton.isHidden = false
         }
         
     }
