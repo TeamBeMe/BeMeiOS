@@ -321,6 +321,8 @@ extension MypageVC {
     
     private func getAnswerData(availability: String?, category: Int?, page: Int, query: String?) {
         
+        print("GETANSWERDATA")
+        print(category)
         MyPageAnswerService.shared.getMyAnswer(availability: availability, category: category, page: page, query: query) { (result) in
             switch result {
             case .success(let data):
@@ -470,7 +472,7 @@ extension MypageVC: ProfileEditDelegate{
         
     }
     func showToast(showBool: Bool){
-        let showText = showBool == true ? "공개 답변으로 변경되었습니다" : "비공개 답변으로 변경되었습니다"
+        let showText = showBool == true ? "비공개 답변으로 변경되었습니다" : "공개 답변으로 변경되었습니다"
         print("왜?")
         self.showToast(text: showText)
     }
