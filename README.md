@@ -107,13 +107,112 @@
 
 - 글쓰기
 
+answer data를 넣어서 글을 등록하는 코드
+
 ```swift
+
+AnswerRegistService.shared.regist(answerID: answerData!.id!, content: answerData!.answer!, commentBlocked: commentSwitch.isOn, isPublic: answerSwitch.isOn) {(networkResult) -> (Void) in
+    switch networkResult{
+    case .success(let data) :
+        print(self.isFromFollowingTab)
+        if self.isFromFollowingTab {
+            self.followScrapButtonDelegate?.fromAnswerVC(indexInVC: self.indexInFollowingVC!)
+        }
+    case .requestErr(let msg):
+        if let message = msg as? String {
+            print(message)
+        }
+    case .pathErr :
+        print("pathErr")
+    case .serverErr :
+        print("serverErr")
+    case .networkFail:
+        print("networkFail")
+        
+    }
+}
 
 ```
 
 - 타인이 쓴 글 보기
 
+다른 페이지를 다녀와서 다른 사람의 글에 변동이 생길 경우 새로 통신을 해서 Reload해줘야함
+페이징 해서 정보를 받기 때문에 1페이지부터 원래의 페이지까지 다시 받아와야 함
+이 과정에서 처음에는 for문을 이용해서 어려움을 겪었으나, 통신에서의 재귀함수 호출을 통해 해결
+
 ```swift
+func getUpdateAnswers(){
+    let loadingFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+    LoadingHUD.show(loadingFrame: loadingFrame,color: .white)
+    curPage = 0
+    answers = []
+    updateDataOnePage()
+}
+
+func updateDataOnePage(){
+    
+    curPage += 1
+    let loadingFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+    FollowingGetAnswersService.shared.getAnswerData(page: curPage){(networkResult) -> (Void) in
+        switch networkResult{
+        case .success(let data) :
+            if let answerDatas = data as? FollowingAnswersData {
+                self.pageLen = answerDatas.pageLen
+                for answerData in answerDatas.answers{
+                    self.answers.append(answerData)
+                }
+                
+            }
+            if self.curPage < self.answerPage {
+                self.updateDataOnePage()
+            }
+            else{
+                DispatchQueue.global(qos: .background).sync {
+                    self.wholeCollectionView.reloadData()
+                    self.wholeCollectionView.setContentOffset(CGPoint(x: 0, y: self.lastY), animated: false)
+                }
+                
+                LoadingHUD.hide()
+                if self.answers.count == 0{
+                    self.customEmptyView.setItems(text: "아이쿠..! 아직 팔로우하는 사람이 없군요\n팔로잉을 하고 다른 사람들의 글을 둘러보세요")
+                    self.wholeCollectionView.addSubview(self.customEmptyView)
+                    print(self.customEmptyView.superview?.bounds.minX)
+                    self.customEmptyView.snp.makeConstraints{
+                        $0.centerX.equalToSuperview()
+                        $0.top.equalToSuperview().offset(362)
+                        $0.height.equalTo(80)
+                    }
+                   
+    
+                }
+                else{
+                    self.customEmptyView.removeFromSuperview()
+                }
+    
+              
+            }
+
+            print("success")
+
+        case .requestErr(let msg):
+            if let message = msg as? String {
+                print(message)
+            }
+        case .pathErr :
+            print("pathErr")
+        case .serverErr :
+            print("serverErr")
+        case .networkFail:
+            print("networkFail")
+            
+        }
+        
+        
+    }
+    
+    
+}
+
 
 ```
 
