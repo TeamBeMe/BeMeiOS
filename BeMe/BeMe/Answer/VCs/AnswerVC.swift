@@ -326,6 +326,7 @@ class AnswerVC: UIViewController {
 extension AnswerVC: UITextViewDelegate {
     
     
+    
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         
         if isInitial {
@@ -336,11 +337,6 @@ extension AnswerVC: UITextViewDelegate {
         
         answer = textView.text
         
-        // 리턴키로 키보드 내림
-        if (text as NSString).rangeOfCharacter(from: CharacterSet.newlines).location == NSNotFound {
-            return true
-        }
-        textView.resignFirstResponder()
         return true
     }
     
