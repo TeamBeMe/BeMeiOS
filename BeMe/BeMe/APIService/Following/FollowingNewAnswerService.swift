@@ -1,33 +1,30 @@
 //
-//  HomeChangePublicService.swift
+//  LogInService.swift
 //  BeMe
 //
-//  Created by Yunjae Kim on 2021/01/08.
+//  Created by Yunjae Kim on 2021/01/06.
 //
 
 import Foundation
 import Alamofire
 
-struct HomeChangePublicService{
-    static let shared = HomeChangePublicService()
+struct FollowingNewAnswerService{
+    static let shared = FollowingNewAnswerService()
     
-    func changePublic(id: Int, publicFlag: Int, completion : @escaping (NetworkResult<Any>) -> (Void)) {
-        let url = APIConstants.homeChangePublicURL
+    func getNewData(questionID: Int, completion : @escaping (NetworkResult<Any>) -> (Void) ){
+        let url = APIConstants.followingNewAnswerURL
+        
         let header : HTTPHeaders = [
             "Content-Type":"application/json",
             "token":UserDefaults.standard.string(forKey: "token")!
         ]
         
         let body : Parameters = [
-            "answer_id" : id,
-            "public_flag": publicFlag,
+            "question_id": questionID
         ]
         
-        print("HomeChangePublicService")
-        print(url)
-        print(body)
         let dataRequest = AF.request(url,
-                                     method: .put,
+                                     method: .post,
                                      parameters: body,
                                      encoding: JSONEncoding.default,
                                      headers: header)
@@ -39,15 +36,16 @@ struct HomeChangePublicService{
                 guard let statusCode = response.response?.statusCode else{
                     return
                 }
-                
                 guard let data = response.value else{
                     return
                     
                 }
+               
+                completion(judge(status: statusCode, data: data))
                 
                 
                 
-                completion(judge(status: statusCode,data: data))
+                
                 
             case .failure(let err):
                 print(err)
@@ -60,15 +58,20 @@ struct HomeChangePublicService{
         
     }
     
-    private func judge(status : Int,data: Data) -> NetworkResult<Any> {
+    private func judge(status : Int, data : Data) -> NetworkResult<Any> {
         let decoder = JSONDecoder()
-        guard let decodedData = try? decoder.decode(GenericResponse<Int>.self, from : data) else{
+        guard let decodedData = try? decoder.decode(GenericResponse<FollowingNewAnswerData>.self, from : data) else{
+            
+            
             return .pathErr
+            
         }
         
         switch status{
         case 200..<300:
-            print("공개여부 수정 성공")
+           
+            print("성공성공")
+            
             return .success(decodedData.data)
         case 400..<500 :
             return .requestErr(decodedData.message)
@@ -83,14 +86,5 @@ struct HomeChangePublicService{
         
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 }

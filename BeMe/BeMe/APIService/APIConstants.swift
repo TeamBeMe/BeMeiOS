@@ -27,7 +27,7 @@ struct APIConstants{
     static let searchHistoryURL = baseURL+"/users/search/history"
     static let searchDeleteURL = baseURL+"/users/search/"
     static let followerDeleteURL = baseURL+"/follow/"
-    
+    static let followingNewAnswerURL = baseURL+"/answers/question"
     
     static let explorationCategoryURL = baseURL + "/exploration/category"
     static let explorationDiffThoughtURL = baseURL + "/exploration/another"
@@ -43,8 +43,8 @@ struct APIConstants{
     static let othersPageAnswerURL = baseURL + "/profiles/answers/"
     
     static let myPageProfileURL = baseURL + "/profiles"
-    static let myPageAnswerURL = baseURL + "/profiles/answers?"
-    static let myPageScrapURL = baseURL + "/profiles/scraps?"
+    static let myPageAnswerURL = baseURL + "/profiles/answers"
+    static let myPageScrapURL = baseURL + "/profiles/scraps"
 //    static let settingMyPageProfileURL = baseURL + "/profiles"
     
     

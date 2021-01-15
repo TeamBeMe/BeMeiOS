@@ -17,8 +17,8 @@ class MypageMyScrapTVC: UITableViewCell {
     @IBOutlet weak var answerDateLabel: UILabel!
     @IBOutlet weak var lockButton: UIButton!
     @IBOutlet weak var scrapButton: UIButton!
-    
-    
+    var profileEditDelegate: ProfileEditDelegate?
+    var answerID: Int?
     //MARK:**- Variable Part**
     private var isScrapped = false
     private var isLocked = false
@@ -29,6 +29,9 @@ class MypageMyScrapTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        cardView.isUserInteractionEnabled = true
+        let profileTabGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpCard))
+        cardView.addGestureRecognizer(profileTabGesture)
  
     }
     
@@ -40,28 +43,28 @@ class MypageMyScrapTVC: UITableViewCell {
     
     //MARK:**- IBAction Part**
     @IBAction func scrappedButtonTapped(_ sender: UIButton) {
-        if isScrapped {
-            isScrapped = false
-            sender.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
-            
-        } else {
-            isScrapped = true
-            sender.setImage(UIImage.init(named: "btnScrapUnselected"), for: .normal)
-            
-        }
+//        if isScrapped {
+//            isScrapped = false
+//            sender.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)
+//            
+//        } else {
+//            isScrapped = true
+//            sender.setImage(UIImage.init(named: "btnScrapUnselected"), for: .normal)
+//            
+//        }
     }
     
     
     @IBAction func lockButtonTapped(_ sender: UIButton) {
-        if isLocked {
-            isLocked = false
-            sender.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
-            
-        } else {
-            isLocked = true
-            sender.setImage(UIImage.init(named: "btnUnlockExplore"), for: .normal)
-            
-        }
+//        if isLocked {
+//            isLocked = false
+//            sender.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
+//            
+//        } else {
+//            isLocked = true
+//            sender.setImage(UIImage.init(named: "btnUnlockExploreBlack"), for: .normal)
+//            
+//        }
     }
     
     //MARK:**- default Setting Function Part**
@@ -85,7 +88,7 @@ class MypageMyScrapTVC: UITableViewCell {
             lockButton.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
             
         } else {
-            lockButton.setImage(UIImage.init(named: "btnUnlockExplore"), for: .normal)
+            lockButton.setImage(UIImage.init(named: "btnUnlockExploreBlack"), for: .normal)
             
         }
 
@@ -106,5 +109,9 @@ class MypageMyScrapTVC: UITableViewCell {
         
     }
     //MARK:**- Function Part**
-    
+    @objc func touchUpCard(){
+        print("aaaa")
+        profileEditDelegate?.cardTapped(answerID: answerID!)
+        
+    }
 }

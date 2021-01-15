@@ -20,7 +20,21 @@ class MypageVC: UIViewController {
     //MARK:**- Variable Part**
     let mypageCVLayout = MypageCVFlowLayout()
     
+    private var filterVCDelegate: FilterVCDelegate?
+    
     let mypageCVC = MypageCVC()
+    
+    static var selectedAvailablity: String?
+    
+    static var selectedCategory: Int?
+    
+    private var selectedCategoryId: Int?
+    
+    private var selectedAv: String?
+    
+    private var keyword: String?
+    
+    var tableviewHeight: CGFloat = 735.0
     
     private var myAnswerArray: [Answer] = [] {
         didSet {
@@ -38,8 +52,12 @@ class MypageVC: UIViewController {
             mypageCollectionView.reloadData()
         }
     }
-    
-    
+    var chosenImage: UIImage?
+    lazy var imagePickerController = UIImagePickerController().then {
+        $0.sourceType = .photoLibrary
+        //        $0.allowsEditing = true
+        $0.delegate = self
+    }
     //MARK:**- Constraint Part**
     
     //MARK:**- Life Cycle Part**
@@ -50,7 +68,10 @@ class MypageVC: UIViewController {
         popupBackgroundView.setPopupBackgroundView(to: view)
         mypageCollectionView.delegate = self
         mypageCollectionView.dataSource = self
+        
         NotificationCenter.default.addObserver(self, selector: #selector(dismissCategory), name: .init("categoryClose"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(getKeyword), name: .init("keyword"), object: nil)
+
         if #available(iOS 11.0, *) {
             mypageCollectionView.automaticallyAdjustsScrollIndicatorInsets = false
         } else {
@@ -61,14 +82,36 @@ class MypageVC: UIViewController {
         
     }
     
-    @objc func dismissCategory() {
+    @objc func getKeyword(_ notification: Notification) {
+        guard let userInfo = notification.userInfo as? [String: Any] else { return }
+        guard let keyword = userInfo["keyword"] as? String else { return }
         
+        self.keyword = keyword
+        
+    }
+
+    
+    @objc func dismissCategory(_ notification: Notification) {
         popupBackgroundView.animatePopupBackground(false)
+        guard let userInfo = notification.userInfo as? [String: Any] else { return }
+        
+        guard let categoryId = userInfo["categoryId"] as? Int? else { return  }
+        print("First")
+        guard let selectedAv = userInfo["selectedAv"] as? String else { return }
+        print("Second")
+        self.selectedAv = selectedAv
+        self.selectedCategoryId = categoryId == nil ? 1 : categoryId! + 1
+        
+        MypageVC.selectedAvailablity = selectedAv
+        MypageVC.selectedCategory = selectedCategoryId
+        
+        getAnswerData(availability: selectedAv, category: selectedCategoryId, page: 1, query: keyword)
+        getScrapData(availability: selectedAv, category: selectedCategoryId, page: 1, query: keyword)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         getProfileData()
-        getAnswerData(availability: "", category: 2, page: 1, query: "")
+        getAnswerData(availability: "all", category: nil, page: 1, query: "")
     }
     
     //MARK:**- IBAction Part**
@@ -102,13 +145,28 @@ class MypageVC: UIViewController {
         label.textColor = UIColor.darkGray
         
     }
-    
+
     
     //MARK:**- Function Part**
     
-    
+    func goToCommentButtonTapped(_ answerId: Int) {
+        guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
+        comment.answerId = answerId
+        comment.isMoreButtonHidden = false
+        comment.modalPresentationStyle = .fullScreen
+        let nc = UINavigationController(rootViewController: comment)
+        nc.modalPresentationStyle = .fullScreen
+        self.present(nc, animated: true, completion: nil)
+    }
 }
 //MARK:**- extension 부분**
+
+extension MypageVC : UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        
+    }
+}
+
 extension MypageVC : UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -133,7 +191,7 @@ extension MypageVC : UICollectionViewDataSource {
         
         cell.myAnswerArray = myAnswerArray
         cell.myScrapArray = myScrapArray
-
+        cell.profileEditDelegate = self
         cell.mypageTabCollectionView.reloadData()
         cell.mypageCVCDelegate = self
         return cell
@@ -148,16 +206,16 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //        if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-        //            layout.sectionHeadersPinToVisibleBounds = true
-        //        }
+        if directionMenu == 0 {
+            tableviewHeight = (CGFloat(myAnswerArray.count) * 105.0 > 0) ? CGFloat(myAnswerArray.count) * 105.0 : 735
+        } else {
+            tableviewHeight = (CGFloat(myScrapArray.count) * 105.0 > 0) ? CGFloat(myScrapArray.count) * 105.0 : 735
+        }
         
-        if indexPath.item <= 1 {
-            return CGSize(width: collectionView.frame.width  , height: 748)
-        }
-        else{
-            return CGSize(width: collectionView.frame.width  , height: 748)
-        }
+        tableviewHeight = (tableviewHeight < 588.0) ? 588 : tableviewHeight
+        
+        
+        return CGSize(width: collectionView.frame.width  , height: tableviewHeight)
     }
     
     
@@ -197,20 +255,31 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
         case UICollectionView.elementKindSectionHeader:
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: MypageCRV.identifier, for: indexPath) as? MypageCRV else {
                 assert(false, "응 아니야")
+                return UICollectionReusableView()
             }
             headerView.categoryDelegte = self
             headerView.delegate = self
+            headerView.profileEditDelegate = self
             headerView.myProfile = myProfile
+            headerView.MypageCRVDelegate = self
+            print("박세란")
+        
+         
             if (myProfile.count != 0) {
+               
                 headerView.setProfile(nickname: myProfile[0].nickname, img: myProfile[0].profileImg!, visit: String(myProfile[0].continuedVisit), answerCount: String(myProfile[0].answerCount))
             }
+            if chosenImage != nil{
+                headerView.setProfileImage(img: chosenImage!)
+            }
+            
             
             return headerView
         default:
             assert(false, "응 아니야")
             
         }
-        
+        return UICollectionReusableView()
         
     }
 }
@@ -230,19 +299,17 @@ extension MypageVC: MypageCVCDelegate {
     
     func myAnswerItem() {
         directionMenu = 0
-        getAnswerData(availability: "", category: 2, page: 1, query: "")
+        getAnswerData(availability: selectedAv, category: selectedCategoryId, page: 1, query: keyword)
         mypageCollectionView.reloadData()
     }
     
-    func othersAnswerItem() {
+    func myScrapItem() {
         directionMenu = 1
-        getScrapData(availability: "", category: 1, page: 1, query: "")
+        getScrapData(availability: selectedAv, category: selectedCategoryId, page: 1, query: keyword)
         mypageCollectionView.reloadData()
     }
     
     func nowDirection() -> Int {
-        print("directionMenu")
-        print(directionMenu)
         return directionMenu
     }
     
@@ -251,16 +318,23 @@ extension MypageVC: MypageCVCDelegate {
 }
 
 extension MypageVC {
+    
     private func getAnswerData(availability: String?, category: Int?, page: Int, query: String?) {
+        
         MyPageAnswerService.shared.getMyAnswer(availability: availability, category: category, page: page, query: query) { (result) in
             switch result {
             case .success(let data):
                 if let response = data as? MyAnswer{
-                    print("getAnswerData 성공")
                     self.myAnswerArray = response.answers
-//                    print("getAnswerData 안에서")
-//                    print(response)
                     self.mypageCollectionView.reloadData()
+                    print("MypageVC getAnswerData 성공")
+                    print(self.myAnswerArray)
+                    print(response.answers.count)
+                    print(availability)
+                    print(category)
+                    print(page)
+                    print(query)
+                    
                 }
             case .requestErr(let msg):
                 if let message = msg as? String {
@@ -283,11 +357,16 @@ extension MypageVC {
             switch result {
             case .success(let data):
                 if let response = data as? MyScrap{
-                    print("getScrapData 성공")
                     self.myScrapArray = response.answers
-//                    print("getScrapData 안에서")
-//                    print(response)
                     self.mypageCollectionView.reloadData()
+                    print("MypageVC getScrapData 성공")
+                    print(self.myScrapArray)
+                    print(response.answers.count)
+                    print(availability)
+                    print(category)
+                    print(page)
+                    print(query)
+                    
                 }
             case .requestErr(let msg):
                 if let message = msg as? String {
@@ -313,7 +392,7 @@ extension MypageVC {
                     print("MypageVC getProfileData 성공")
                     
                     self.myProfile.append(othersProfile)
-                    
+                    self.mypageCollectionView.reloadData()
                     
                 }
             case .requestErr(let msg):
@@ -376,5 +455,102 @@ extension MypageVC: UIScrollViewDelegate {
             settingButton.isHidden = true
         }
     }
+    
+}
 
+extension MypageVC: ProfileEditDelegate{
+    
+    func profileEdit(){
+        self.present(self.imagePickerController, animated: true, completion: nil)
+        
+    }
+    func cardTapped(answerID: Int){
+        goToCommentButtonTapped(answerID)
+        
+        
+    }
+    func showToast(showBool: Bool){
+        let showText = showBool == true ? "공개 답변으로 변경되었습니다" : "비공개 답변으로 변경되었습니다"
+        print("왜?")
+        self.showToast(text: showText)
+    }
+}
+
+
+extension MypageVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        chosenImage = info[.originalImage] as? UIImage
+        let shittyVC = ShittyImageCropVC(frame: (self.navigationController?.view.frame)!, image: chosenImage!, aspectWidth: 315, aspectHeight: 152)
+        shittyVC.signUpProfileImageSetDelegate = self
+        self.dismiss(animated: true, completion: {
+            self.navigationController?.present(shittyVC, animated: true, completion: nil)
+        })
+       
+    }
+    
+    
+    
+}
+
+extension MypageVC: SignUpProfileImageSetDelegate{
+    func setImage(img: UIImage) {
+        chosenImage  = img
+        MyPageProfileService.shared.setMyProfile(image: chosenImage!) {(networkResult) -> (Void) in
+            switch networkResult{
+            case .success(let data) :
+                print("프로필 수정 성공")
+                self.getProfileData()
+                print("success")
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+                
+            }
+            
+
+        }
+    }
+}
+protocol FilterVCDelegate {
+    func getSeletedCategory() -> Int?
+    func getSeletedAvailabity() -> String
+}
+
+
+protocol ProfileEditDelegate{
+    func profileEdit()
+    func cardTapped(answerID: Int)
+    func showToast(showBool: Bool)
+}
+
+extension MypageVC: MypageCRVDelegate{
+    func searchButtonSearch() {
+        if directionMenu == 0 {
+            myAnswerItem()
+        } else {
+            myScrapItem()
+        }
+    }
+    
+    func deleteButtonSearch() {
+        if directionMenu == 0 {
+            myAnswerItem()
+        } else {
+            myScrapItem()
+        }
+    }
+    
+    
 }

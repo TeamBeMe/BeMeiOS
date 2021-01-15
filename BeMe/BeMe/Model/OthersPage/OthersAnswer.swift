@@ -29,7 +29,7 @@ struct Answer: Codable {
     let id: Int
     let commentBlockedFlag: Bool
     let content: String
-    let publicFlag: Bool
+    var publicFlag: Bool
     let answerDate: String
     let answerIdx, questionID, userID: Int
     let isAuthor: Bool

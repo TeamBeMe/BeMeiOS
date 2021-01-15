@@ -20,6 +20,7 @@ class FollowNotAnsweredCVC: UICollectionViewCell {
     @IBOutlet weak var replyButton: UIButton!
     var answerData: FollowingAnswers?
     var followScrapButtonDelegate: FollowScrapButtonDelegate?
+    var indexInVC: Int?
     override func awakeFromNib() {
         containView.setBorder(borderColor: .lightGray, borderWidth: 1.0)
         containView.makeRounded(cornerRadius: 6)
@@ -44,7 +45,9 @@ class FollowNotAnsweredCVC: UICollectionViewCell {
         categoryLabel.text = "[  \(inputAnswer.category)에 관한 질문  ]  ·"
         categoryLabel.textColor = .slateGrey
         answerDateLabel.textColor = .slateGrey
-        answerTextView.text = "아직 송현님이 답하지 않은 질문입니다.\n답변을 하시고 글을 보시겠습니까?"
+        let myName = UserDefaults.standard.string(forKey: "nickName")
+        
+        answerTextView.text = "아직 \(myName!)님이 답하지 않은 질문입니다.\n답변을 하시고 글을 보시겠습니까?"
         
         
         
@@ -53,8 +56,9 @@ class FollowNotAnsweredCVC: UICollectionViewCell {
     
     
     @IBAction func replyButtonAction(_ sender: Any) {
-        
-        followScrapButtonDelegate?.replyButtonTap(answerData: answerData!)
+        print("엥")
+        print(indexInVC!)
+        followScrapButtonDelegate?.replyButtonTap(answerData: answerData!,indexInVC: indexInVC!)
     }
     
     

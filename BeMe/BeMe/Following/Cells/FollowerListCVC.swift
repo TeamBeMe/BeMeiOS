@@ -15,14 +15,16 @@ class FollowerListCVC: UICollectionViewCell {
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var moreButton: UIButton!
     var tableViewDelegate: FollowMoreButtonMidDelegate?
-    
+    var followSearchProfileDelegate: FollowSearchProfileDelegate?
     override func awakeFromNib() {
         userNameLabel.text = followerPerson?.nickname
         profileImageView.imageFromUrl(followerPerson?.profileImg, defaultImgPath: "")
         moreButton.tintColor = .black
         profileImageView.makeRounded(cornerRadius: 18)
         profileImageView.contentMode = .scaleAspectFill
-        
+        profileImageView.isUserInteractionEnabled = true
+        let profileTabGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpProfile))
+        profileImageView.addGestureRecognizer(profileTabGesture)
     }
     
     func setItems(){
@@ -38,5 +40,11 @@ class FollowerListCVC: UICollectionViewCell {
     @IBAction func moreButtonTapped(_ sender: Any) {
         print("callll")
         tableViewDelegate?.settingButtonDidTapped(id: (followerPerson?.id)!)
+    }
+    
+    @objc func touchUpProfile(){
+        print("tttttt")
+        followSearchProfileDelegate?.profileSelectedTap(userID: (followerPerson?.id)!)
+        
     }
 }

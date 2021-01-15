@@ -267,7 +267,7 @@
                                                                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9hK-Vz-EUf">
                                                                                                     <rect key="frame" x="20" y="109" width="94" height="20"/>
                                                                                                     <subviews>
-                                                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sn8-Dd-TYt">
+                                                                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sn8-Dd-TYt">
                                                                                                             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
                                                                                                             <constraints>
                                                                                                                 <constraint firstAttribute="height" constant="20" id="dgQ-eI-F9w"/>
@@ -337,6 +337,7 @@
                                                                     <constraint firstAttribute="bottom" secondItem="E1B-PY-Rwo" secondAttribute="bottom" id="rwG-pL-Rvz"/>
                                                                 </constraints>
                                                             </collectionViewCellContentView>
+                                                            <size key="customSize" width="414" height="748"/>
                                                             <connections>
                                                                 <outlet property="mypageTableView" destination="E1B-PY-Rwo" id="g5u-gb-m2V"/>
                                                             </connections>
@@ -427,6 +428,9 @@
                                                     <state key="normal" title="프로필 편집">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="profileEditButtonTapped:" destination="WRi-g6-kzK" eventType="touchUpInside" id="qBZ-LI-Vv4"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -500,6 +504,9 @@
                                                     </constraints>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="1" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" image="icSearch"/>
+                                                    <connections>
+                                                        <action selector="searchButtonTapped:" destination="WRi-g6-kzK" eventType="touchUpInside" id="ZxW-je-x9p"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KhK-uO-oVX">
                                                     <rect key="frame" x="313" y="62.5" width="38" height="38"/>
@@ -532,7 +539,7 @@
                                                         <constraint firstAttribute="height" constant="38" id="0Kx-iU-lSa"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
+                                                    <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                                 </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

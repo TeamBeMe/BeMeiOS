@@ -16,10 +16,14 @@ class MypageResultTVC: UITableViewCell {
     @IBOutlet weak var questionInfoLabel: UILabel!
     @IBOutlet weak var answerDateLabel: UILabel!
     @IBOutlet weak var lockButton: UIButton!
-    
+    var answerID: Int?
+    var profileEditDelegate: ProfileEditDelegate?
     //MARK:**- Variable Part**
-    private var isLocked = false
+    var indexpath = 0
+    var isLocked = false
+    var answerIdx = 0
     static let identifier = "MypageResultTVC"
+    var delegate: MypageResultTVCDelegate?
     
     
     //MARK:**- Life Cycle Part**
@@ -27,6 +31,10 @@ class MypageResultTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        cardView.isUserInteractionEnabled = true
+        let profileTabGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpCard))
+        cardView.addGestureRecognizer(profileTabGesture)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -38,17 +46,36 @@ class MypageResultTVC: UITableViewCell {
     //MARK:**- IBAction Part**
     
     @IBAction func lockButtonTapped(_ sender: UIButton) {
-        if isLocked {
-            isLocked = false
-            sender.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
+        
+        
+        HomeChangePublicService.shared.changePublic(id: answerIdx ,publicFlag: isLocked ? 0 : 1) {(networkResult) -> (Void) in
+            switch networkResult{
+            case .success(let data) :
+                print("success")
+                self.delegate?.reload(indexpath: self.indexpath)
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    print(message)
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+                
+            }
+            if !self.isLocked {
+                
+                sender.setImage(UIImage.init(named: "btnUnlockExploreBlack"), for: .normal)
+                
+            } else {
             
-        } else {
-            isLocked = true
-            sender.setImage(UIImage.init(named: "btnUnlockExplore"), for: .normal)
-            
+                sender.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
+                
+            }
         }
     }
-    
     //MARK:**- default Setting Function Part**
     
     func setCardView(question: String, questionInfo: String, answerDate: String, isLocked: Bool){
@@ -63,7 +90,7 @@ class MypageResultTVC: UITableViewCell {
             lockButton.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
             
         } else {
-            lockButton.setImage(UIImage.init(named: "btnUnlockExplore"), for: .normal)
+            lockButton.setImage(UIImage.init(named: "btnUnlockExploreBlack"), for: .normal)
             
         }
         
@@ -86,6 +113,14 @@ class MypageResultTVC: UITableViewCell {
     }
     
     //MARK:**- Function Part**
-    
+    @objc func touchUpCard(){
+        profileEditDelegate?.cardTapped(answerID: answerID!)
+        
+    }
     
 }
+
+protocol MypageResultTVCDelegate {
+    func reload(indexpath: Int)
+}
+

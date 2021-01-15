@@ -138,6 +138,7 @@ extension SearchVC: UITableViewDataSource {
             cell.searchxButtonDelegate = self
             cell.userInfo = historyData[indexPath.item]
             cell.setItems()
+            cell.followSearchProfileDelegate = self
             return cell
             
         }
@@ -149,7 +150,7 @@ extension SearchVC: UITableViewDataSource {
             
             let data = searched[indexPath.item]
             let profileImgurl = data.profileImg ?? ""
-            
+            cell.followSearchProfileDelegate = self
             cell.setItems(profileImg: profileImgurl, userName: data.nickname, isFollowed: data.isFollowed)
             cell.findPeopleSearchData = searched[indexPath.item]
             return cell
@@ -248,3 +249,23 @@ protocol SearchxButtonDelegate{
     func xButtonTapped()
     
 }
+
+
+
+extension SearchVC: FollowSearchProfileDelegate{
+    func profileSelectedTap(userID: Int){
+        guard let profileVC = UIStoryboard(name: "OthersPage",
+                                           bundle: nil).instantiateViewController(
+                                            withIdentifier: "OthersPageVC") as? OthersPageVC
+        else{
+            
+            return
+        }
+        profileVC.userID = userID
+        self.navigationController?.pushViewController(profileVC, animated: true)
+        
+        
+    }
+}
+
+

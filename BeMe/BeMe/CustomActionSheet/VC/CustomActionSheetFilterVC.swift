@@ -16,32 +16,39 @@ class CustomActionSheetFilterVC: UIViewController {
     
     @IBOutlet weak var availablityLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
-    
     // 서버통신을 통해 받아오는 값
-    private var categoryArray: [ExploreCategory] = []
-    var selecetedAvailablity: [Bool] = [false, false, false]
-    private var filterCVCDelegate: FilterCVCDelegate?
-//    var selecetedCategry: [Bool] = []
+    var categoryArray: [ExploreCategory] = []
+//    private var filterCVCDelegate: FilterCVCDelegate?
+    var fromServer = true
+    
+    private var selectedCategory: Int?
+        = nil
+    
+    private var selectedAvailablity: String? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setLabel()
         setButton(view: allButton, isSelected: false)
-        setButton(view: publicButton, isSelected: true)
+        setButton(view: publicButton, isSelected: false)
         setButton(view: unpublicButton, isSelected: false)
         
+        categoryCollectionView.showsHorizontalScrollIndicator = false
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
-        
-        
-        // Do any additional setup after loading the view.
+
+        availablityButtonSet(availablity: selectedAvailablity)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
+//        getSelectedFilterInfo()
         setCategoryData()
-//        print(categoryArray[0].name)
+        selectedAvailablity = MypageVC.selectedAvailablity
+        selectedCategory = MypageVC.selectedCategory
+        availablityButtonSet(availablity: selectedAvailablity)
     }
+    
     
     @IBAction func dismissButtonTapped(_ sender: UIButton) {
         NotificationCenter.default.post(name: .init("categoryClose"), object: nil)
@@ -49,11 +56,95 @@ class CustomActionSheetFilterVC: UIViewController {
     }
     
     @IBAction func allButtonTapped(_ sender: UIButton) {
+        selectedAvailablity = "all"
+        availablityButtonSet(availablity: selectedAvailablity)
     }
     
     @IBAction func publicButtonTapped(_ sender: UIButton) {
+        selectedAvailablity = "public"
+        availablityButtonSet(availablity: selectedAvailablity)
     }
     @IBAction func unpublicButtonTapped(_ sender: UIButton) {
+        selectedAvailablity = "unpublic"
+        availablityButtonSet(availablity: selectedAvailablity)
+    }
+    
+
+    @IBAction func applyButtonTapped(_ sender: Any) {
+        
+        NotificationCenter.default.post(name: .init("categoryClose"), object: nil, userInfo: ["categoryId": selectedCategory , "selectedAv": selectedAvailablity ?? "all"])
+        self.dismiss(animated: true, completion: nil)
+        
+    }
+    
+//    @objc func getSelectedFilterInfo(_ notification: Notification) {
+//        guard let userInfo = notification.userInfo as? [String: Any] else { return }
+//        guard let categoryId = userInfo["categoryId"] as? Int else { return  }
+//        guard let selectedAv = userInfo["selectedAv"] as? String else { return }
+//
+//        self.selectedAvailablity = selectedAv
+//        self.selectedCategory = categoryId
+//
+//    }
+//    func categoryButtonSet(category: Int){
+//        <#function body#>
+//    }
+    func availablityButtonSet(availablity: String?){
+        switch availablity {
+        case "all":
+            allButton.backgroundColor = .black
+            allButton.setTitleColor(.white, for: .normal)
+            allButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
+            
+            publicButton.backgroundColor = .white
+            publicButton.setTitleColor(.slateGrey, for: .normal)
+            publicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+            
+            unpublicButton.backgroundColor = .white
+            unpublicButton.setTitleColor(.slateGrey,  for: .normal)
+            unpublicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+            
+        case "public":
+            allButton.backgroundColor = .white
+            allButton.setTitleColor(.slateGrey, for: .normal)
+            allButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+            
+            publicButton.backgroundColor = .black
+            publicButton.setTitleColor(.white, for: .normal)
+            publicButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
+            
+            
+            
+            unpublicButton.backgroundColor = .white
+            unpublicButton.setTitleColor(.slateGrey,  for: .normal)
+            unpublicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+        case "unpublic":
+            allButton.backgroundColor = .white
+            allButton.setTitleColor(.slateGrey, for: .normal)
+            allButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+            
+            publicButton.backgroundColor = .white
+            publicButton.setTitleColor(.slateGrey, for: .normal)
+            publicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+            
+            
+            unpublicButton.backgroundColor = .black
+            unpublicButton.setTitleColor(.white,  for: .normal)
+            unpublicButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
+            
+        default:
+            allButton.backgroundColor = .black
+            allButton.setTitleColor(.white, for: .normal)
+            allButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
+            
+            publicButton.backgroundColor = .white
+            publicButton.setTitleColor(.slateGrey, for: .normal)
+            publicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+            
+            unpublicButton.backgroundColor = .white
+            unpublicButton.setTitleColor(.slateGrey,  for: .normal)
+            unpublicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+        }
     }
     
     func setLabel() {
@@ -80,14 +171,14 @@ class CustomActionSheetFilterVC: UIViewController {
 
 extension CustomActionSheetFilterVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        
+        selectedCategory = indexPath.item
+
     }
 }
 
 extension CustomActionSheetFilterVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(categoryArray.count)
+
         return categoryArray.count
     }
     
@@ -97,20 +188,44 @@ extension CustomActionSheetFilterVC: UICollectionViewDataSource {
                 for: indexPath) as? FilterCVC else {
             return UICollectionViewCell()}
         cell.indexPath = indexPath.row
-        cell.categoryArray = self.categoryArray
-        cell.setButton(isSelected: categoryArray[indexPath.row].selected!)
-        cell.setButton(text: categoryArray[indexPath.row].name)
-        print(indexPath.row)
-        print(categoryArray[indexPath.row].name)
+
+        cell.category = self.categoryArray[indexPath.item]
+
+        cell.setButton(text: categoryArray[indexPath.item].name)
+        
+//        if selectedCategory != nil {
+//            if self.categoryArray[indexPath.item].id == selectedCategory!+1 {
+//                cell.setButton(selected: true)
+//            }
+//        } else {
+//            
+//        }
         
         
-//        categoryCollectionView.reloadData()
-        
+//        cell.filterCVCDelegate = self
+
+
         return cell
-        
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        guard let cell = collectionView.cellForItem(at: indexPath) as? FilterCVC else {
+            return true
+        }
+
+        if cell.isSelected {
+            selectedCategory = 0
+            collectionView.deselectItem(at: indexPath, animated: false)
+            return false
+        } else {
+            return true
+        }
+    }
     
 }
 
@@ -121,18 +236,16 @@ extension CustomActionSheetFilterVC: UICollectionViewDelegateFlowLayout {
 extension CustomActionSheetFilterVC {
     
     private func setCategoryData() {
+        fromServer = true
         ExploreCategoryService.shared.getExploreCategory { (result) in
             switch result {
             case .success(let data):
                 guard let dt = data as? GenericResponse<[ExploreCategory]> else { return }
                 if let categories = dt.data {
                     self.categoryArray = categories
-                    
-                    for var category in self.categoryArray {
-                        category.selected = false
-                    }
                 }
                 self.categoryCollectionView.reloadData()
+   
             case .requestErr(let message):
                 guard let message = message as? String else { return }
                 let alertViewController = UIAlertController(title: "통신 실패", message: message, preferredStyle: .alert)
@@ -158,17 +271,10 @@ extension CustomActionSheetFilterVC {
         }
     }
 }
-
-extension CustomActionSheetFilterVC: FilterCVCDelegate {
-    func setSelectedCategory(index: Int) {
-        
-        for var category in self.categoryArray {
-            category.selected = false
-        }
-        
-        categoryArray[index].selected = true
-        categoryCollectionView.reloadData()
-    }
-    
-    
-}
+//
+//extension CustomActionSheetFilterVC: FilterCVCDelegate {
+//    func setSelectedCategory(index: Int) {
+//
+//    }
+//    
+//}

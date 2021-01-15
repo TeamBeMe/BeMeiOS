@@ -37,8 +37,7 @@ class MypageCRV: UICollectionReusableView {
     // height
     @IBOutlet weak var profileImageHeight: NSLayoutConstraint!
     @IBOutlet weak var profileViewHeight: NSLayoutConstraint!
-    
-    
+
     //MARK:**- Variable Part**
     static let identifier = "MypageCRV"
     
@@ -48,7 +47,10 @@ class MypageCRV: UICollectionReusableView {
     
     var categoryDelegte: CategorySelectedProtocol?
     
+    var profileEditDelegate: ProfileEditDelegate?
     
+    var MypageCRVDelegate: MypageCRVDelegate?
+
     var myProfile: [MyProfile] = [] 
     
     //MARK:**- Life Cycle Part**
@@ -57,10 +59,8 @@ class MypageCRV: UICollectionReusableView {
         // Initialization code
         setProfileEditButton(view: profileEditButton)
         setInfoLabel()
-        setLabel(view: answerCountLabel, text: "4")
-        setLabel(view: attendanceCountLabel, text: "4123124")
-        setLabel(view: nameLabel, text: "재용아 개소리 좀 그만해")
         setSearhButton(view: searchView)
+        searchTextField.delegate = self
         
     }
     
@@ -73,6 +73,8 @@ class MypageCRV: UICollectionReusableView {
     
     @IBAction func deleteButtonTapped(_ sender: UIButton) {
         setKeywordLabel(label: searchTextField, keyword: "")
+        NotificationCenter.default.post(name: .init("keyword"), object: nil, userInfo: ["keyword": ""])
+        MypageCRVDelegate?.deleteButtonSearch()
     }
     
     @IBAction func myAswerButtonTapped(_ sender: UIButton) {
@@ -85,10 +87,20 @@ class MypageCRV: UICollectionReusableView {
     @IBAction func scrappedAswerButtonTapped(_ sender: UIButton) {
         myAnswerButton.setTitleColor(.rgb8E8E93, for: .normal)
         scrappedAnswerButton.setTitleColor(.black, for: .normal)
-        delegate?.othersAnswerItem()
+        delegate?.myScrapItem()
         print("scrappedAswerButtonTapped")
         moveHighLightBar(to: sender)
     }
+    @IBAction func searchButtonTapped(_ sender: UIButton) {
+        NotificationCenter.default.post(name: .init("keyword"), object: nil, userInfo: ["keyword": searchTextField.text! ])
+        MypageCRVDelegate?.searchButtonSearch()
+    }
+    
+    @IBAction func profileEditButtonTapped(_ sender: Any) {
+        profileEditDelegate?.profileEdit()
+        
+    }
+    
     
     //MARK:**- default Setting Function Part**
     
@@ -96,12 +108,16 @@ class MypageCRV: UICollectionReusableView {
         setProfileEditButton(view: profileEditButton)
         setInfoLabel()
         nameLabel.text = nickname
-        profileImage.imageFromUrl(img, defaultImgPath: "imgMypage")
+        profileImage.imageFromUrl(img, defaultImgPath: "mypageDefault")
         attendanceCountLabel.text = visit
         answerCountLabel.text = answerCount
         setSearhButton(view: searchView)
     }
     
+    func setProfileImage(img: UIImage){
+        profileImage.image = img
+
+    }
     func setProfileEditButton(view: UIButton) {
         view.setBorderWithRadius(borderColor: .veryLightPinkTwo, borderWidth: 1, cornerRadius: 3)
         view.backgroundColor = UIColor.white
@@ -151,4 +167,34 @@ class MypageCRV: UICollectionReusableView {
             
         }
     }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.endEditing(true)
+    }
 }
+
+extension MypageCRV: UITextFieldDelegate {
+
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        print("HEELvdsvsdv")
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        print("TextFieldDId")
+        print(textField.text!)
+        
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        NotificationCenter.default.post(name: .init("keyword"), object: nil, userInfo: ["keyword": textField.text!])
+        
+        self.endEditing(true)
+        
+        MypageCRVDelegate?.searchButtonSearch()
+        return true
+    }
+}
+
+protocol MypageCRVDelegate {
+    func searchButtonSearch()
+    func deleteButtonSearch()
+}
+

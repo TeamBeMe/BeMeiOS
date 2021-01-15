@@ -11,6 +11,8 @@ import Alamofire
 struct LogInService{
     static let shared = LogInService()
     
+
+    
     func login(nickName: String, password: String, completion : @escaping (NetworkResult<Any>) -> (Void) ){
         let url = APIConstants.loginURL
         
@@ -40,7 +42,8 @@ struct LogInService{
                     return
                     
                 }
-               
+                UserDefaults.standard.setValue(nickName, forKey: "nickName")
+                UserDefaults.standard.setValue(password, forKey: "password")
                 completion(judgeLogInData(status: statusCode, data: data))
                 
                 
@@ -70,6 +73,7 @@ struct LogInService{
         switch status{
         case 200..<300:
             print(decodedData.data?.token)
+            
             UserDefaults.standard.setValue(decodedData.data?.token, forKey: "token")
             
             return .success(decodedData.data)

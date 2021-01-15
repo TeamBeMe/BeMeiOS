@@ -12,6 +12,7 @@ class MypageTabCVC: UICollectionViewCell {
     @IBOutlet weak var mypageTableView: UITableView!
     
     @IBOutlet weak var myPageTVHeight: NSLayoutConstraint!
+    var profileEditDelegate: ProfileEditDelegate?
     //MARK:**- Variable Part**
     static let identifier = "MypageTabCVC"
     var myAnswerArray: [Answer] = []
@@ -37,6 +38,7 @@ class MypageTabCVC: UICollectionViewCell {
         mypageTableView.separatorStyle = .none
     }
     //MARK:**- Function Part**
+   
     
 }
 
@@ -54,30 +56,85 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let tab = tableView
-                .dequeueReusableCell(withIdentifier: MypageResultTVC.identifier, for: indexPath)
-                as? MypageResultTVC else { return UITableViewCell() }
+        
         if (self.delegate?.nowDirection() == 0){
+            guard let tab = tableView
+                    .dequeueReusableCell(withIdentifier: MypageResultTVC.identifier, for: indexPath)
+                    as? MypageResultTVC else { return UITableViewCell() }
             if (myAnswerArray.count != 0){
-    //            print(indexPath.row)
-                print("tableView myAnswerArray")
-                tab.setCardView(question: myAnswerArray[indexPath.row].question, questionInfo: myAnswerArray[indexPath.row].category, answerDate: myAnswerArray[indexPath.row].answerDate, isLocked: myAnswerArray[indexPath.row].publicFlag)
+                tab.setCardView(question: myAnswerArray[indexPath.row].question, questionInfo: myAnswerArray[indexPath.row].category, answerDate: myAnswerArray[indexPath.row].answerDate, isLocked: !myAnswerArray[indexPath.row].publicFlag)
+                
+                tab.isLocked = !myAnswerArray[indexPath.row].publicFlag
+                tab.answerIdx = myAnswerArray[indexPath.row].id
+                tab.delegate = self
+                tab.indexpath = indexPath.row
+                tab.selectionStyle = .none
             }
+            tab.answerID = myAnswerArray[indexPath.row].id
+            tab.profileEditDelegate = self
+            return tab
         } else {
+            
             if (myScrapArray.count != 0){
-    //            print(indexPath.row)
-                print("tableView myScrapArray")
-                tab.setCardView(question: myScrapArray[indexPath.row].question, questionInfo: myScrapArray[indexPath.row].category, answerDate: myScrapArray[indexPath.row].answerDate, isLocked: myScrapArray[indexPath.row].publicFlag)
+                if (myScrapArray[indexPath.item].isAuthor){
+                    guard let tab = tableView
+                            .dequeueReusableCell(withIdentifier: MypageMyScrapTVC.identifier, for: indexPath)
+                            as? MypageMyScrapTVC else { return UITableViewCell() }
+                    
+                    tab.setCardView(question: myScrapArray[indexPath.row].question, questionInfo: myScrapArray[indexPath.row].category, answerDate: myScrapArray[indexPath.row].answerDate, isLocked: !myScrapArray[indexPath.row].publicFlag, isScrapped: myScrapArray[indexPath.row].isScrapped!)
+                    tab.selectionStyle = .none
+                    tab.profileEditDelegate = self
+                    tab.answerID = myScrapArray[indexPath.item].id
+                    return tab
+                    
+                }else {
+                    guard let tab = tableView
+                            .dequeueReusableCell(withIdentifier: MypageOthersScrapTVC.identifier, for: indexPath)
+                            as? MypageOthersScrapTVC else { return UITableViewCell() }
+                    
+                    tab.setCardView(question: myScrapArray[indexPath.row].question, questionInfo: myScrapArray[indexPath.row].category, answerDate: myScrapArray[indexPath.row].answerDate, writer: myScrapArray[indexPath.row].userNickname, writerImg: myScrapArray[indexPath.row].userProfile!, isScrapped: myScrapArray[indexPath.row].isScrapped!)
+                    tab.selectionStyle = .none
+                    tab.answerID = myScrapArray[indexPath.row].id
+                    tab.profileEditDelegate = self
+                    return tab
+                    
+                }
+            } else {
+                guard let tab = tableView
+                        .dequeueReusableCell(withIdentifier: MypageMyScrapTVC.identifier, for: indexPath)
+                        as? MypageMyScrapTVC else { return UITableViewCell() }
+                tab.answerID = myScrapArray[indexPath.row].id
+                tab.profileEditDelegate = self
+                return tab
             }
         }
         
-//        tab.delegate = self
-
-        return tab
-
     }
     
-   
+    
 }
 
+extension MypageTabCVC: MypageResultTVCDelegate {
+    func reload(indexpath: Int) {
+        myAnswerArray[indexpath].publicFlag = !myAnswerArray[indexpath].publicFlag
+        profileEditDelegate?.showToast(showBool: !myAnswerArray[indexpath].publicFlag)
+        mypageTableView.reloadData()
+        
+    }
 
+}
+
+extension MypageTabCVC: ProfileEditDelegate{
+    
+    func profileEdit(){
+        
+        
+    }
+    func cardTapped(answerID: Int){
+        profileEditDelegate?.cardTapped(answerID: answerID)
+    }
+    func showToast(showBool: Bool){
+        profileEditDelegate?.showToast(showBool: showBool)
+        
+    }
+}

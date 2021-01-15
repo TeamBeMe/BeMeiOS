@@ -11,7 +11,7 @@ class MypageCVC: UICollectionViewCell {
     //MARK:**- IBOutlet Part**
     @IBOutlet weak var mypageTabCollectionView: UICollectionView!
     var mypageCVCDelegate: MypageCVCDelegate?
-    
+    var profileEditDelegate: ProfileEditDelegate?
     
     //MARK:**- Variable Part**
     static let identifier = "MypageCVC"
@@ -19,7 +19,7 @@ class MypageCVC: UICollectionViewCell {
     
     var myAnswerArray: [Answer] = []
     var myScrapArray: [Answer] = []
-    
+    var tableviewHeight: CGFloat = 735.0
     
     //MARK:**- Life Cycle Part**
     override func awakeFromNib() {
@@ -76,6 +76,7 @@ extension MypageCVC : UICollectionViewDataSource {
         cell.myScrapArray = myScrapArray
         cell.mypageTableView.reloadData()
         cell.delegate = mypageCVCDelegate
+        cell.profileEditDelegate = self
         return cell        
     }
     
@@ -85,7 +86,16 @@ extension MypageCVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 748)
+        if mypageCVCDelegate?.nowDirection() == 0 {
+            tableviewHeight = (CGFloat(myAnswerArray.count) * 105.0 > 0) ? CGFloat(myAnswerArray.count) * 105.0 : 735
+        } else {
+            tableviewHeight = (CGFloat(myScrapArray.count) * 105.0 > 0) ? CGFloat(myScrapArray.count) * 105.0 : 735
+        }
+        
+        tableviewHeight = (tableviewHeight < 588.0) ? 588 : tableviewHeight
+        
+        
+        return CGSize(width: collectionView.frame.width  , height: tableviewHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -107,10 +117,26 @@ extension MypageCVC : UICollectionViewDelegateFlowLayout {
     
 }
 
+extension MypageCVC: ProfileEditDelegate{
+    
+    func profileEdit(){
+        
+        
+    }
+    func cardTapped(answerID: Int){
+        profileEditDelegate?.cardTapped(answerID: answerID)
+    }
+    func showToast(showBool: Bool){
+        profileEditDelegate?.showToast(showBool: showBool)
+        
+    }
+}
+
+
 protocol MypageCVCDelegate {
 
     func myAnswerItem()
-    func othersAnswerItem()
+    func myScrapItem()
     func nowDirection() -> Int
 }
 
