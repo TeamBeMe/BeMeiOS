@@ -50,7 +50,7 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         //        othersAnswerArray = []
         //        othersProfile = []
         othersPageCollectionView.delegate = self
@@ -302,11 +302,14 @@ extension OthersPageVC {
                     self.othersAnswerArray = response.answers
                     //                    print("setAnswerData 안에ㅐ서")
                     //                    print(response)
-                    if self.othersAnswerArray[0].userID == self.userID {
-                        self.isMyProfile = true
-                    } else {
-                        self.isMyProfile = false
+                    if self.othersAnswerArray.count != 0{
+                        if self.othersAnswerArray[0].userID == self.userID {
+                            self.isMyProfile = true
+                        } else {
+                            self.isMyProfile = false
+                        }
                     }
+                 
                     self.othersPageCollectionView.reloadData()
                 }
             case .requestErr(let msg):

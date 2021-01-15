@@ -156,6 +156,14 @@ extension HomeVC {
     }
     
     @objc func deleteButtonAction() {
+        blurView.removeFromSuperview()
+        alertContainView.removeFromSuperview()
+        self.tabBarController?.tabBar.isHidden = false
+        if todayCards + pastCards < 2{
+            self.showToast(text: "마지막 남은 질문은 삭제할 수 없어요")
+            return
+        }
+        
         
         HomeDeleteAnswerService.shared.deleteAnswer(id: deleteAnswerID) { (networkResult) -> (Void) in
           
