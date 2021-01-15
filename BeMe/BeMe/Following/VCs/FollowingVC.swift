@@ -444,11 +444,16 @@ extension FollowingVC : UICollectionViewDataSource {
             followingFollowingButtonDelegate = cell
             cell.followees = self.followees
             cell.followers = self.followers
+            print("마지막")
+            print(isFollowing)
             if isFollowing{
+                
                 cell.shows = self.followees
+                cell.isFollowing = isFollowing
             }
             else {
                 cell.shows = self.followers
+                cell.isFollowing = isFollowing
             }
             
             cell.followScrapButtonDelegate = self
@@ -900,12 +905,14 @@ extension FollowingVC : FollowingBarButtonDelegate{
 }
 extension FollowingVC : FollowingPeopleCollectionViewDelegate{
     func followingPeopleUpdate() {
+        isFollowing = true
         followingFollowingButtonDelegate?.followingButtonAction()
     }
     
 }
 extension FollowingVC : FollowPeopleCollectionViewDelegate{
     func followPeopleUpdate() {
+        isFollowing = false
         followingFollowButtonDelegate?.followButtonAction()
         
     }

@@ -74,8 +74,8 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내가 최근에 답한 질문들의 다른 답변이에요:)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ejy-uN-l9p">
-                                                            <rect key="frame" x="30.000000000000014" y="50" width="227.33333333333337" height="15.666666666666671"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="내가 최근에 답한 질문들의 다른 답변이에요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ejy-uN-l9p">
+                                                            <rect key="frame" x="29.999999999999986" y="50" width="219.66666666666663" height="15.666666666666671"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" priority="250" constant="15.666666666666671" id="QEd-hf-vQ4"/>
                                                             </constraints>

@@ -19,48 +19,53 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if #available(iOS 13.0, *){
             window?.overrideUserInterfaceStyle = .light
         }
-       
+        
         guard let scene = (scene as? UIWindowScene) else { return }
         let defaults = UserDefaults.standard
         var storyBoard = UIStoryboard(name: "UnderTab", bundle: nil)
         var rootVc = storyBoard.instantiateViewController(identifier: "UnderTabBarController")
-//        var storyBoard = UIStoryboard(name: "Onboarding", bundle: nil)
-//        var rootVc = storyBoard.instantiateViewController(identifier: "OnboardingVC")
+        //        var storyBoard = UIStoryboard(name: "Onboarding", bundle: nil)
+        //        var rootVc = storyBoard.instantiateViewController(identifier: "OnboardingVC")
         if let token = defaults.string(forKey: "token"){
             // 자동로그인 -> 메인뷰
-            guard let nickName = defaults.string(forKey: "nickName") else { return }
-            guard let password = defaults.string(forKey: "password") else {return}
-            print(nickName)
-            LogInService.shared.login(nickName: nickName,
-                                        password: password)  { networkResult in
+            
+            if token == "guest" {
+                storyBoard = UIStoryboard(name: "LogIn", bundle: nil)
+                rootVc = storyBoard.instantiateViewController(identifier: "LogInVC")
                 
-                switch networkResult {
-                case .success(let token) :
-                    guard let token = token as? String else { return }
-                    print(token)
-                    defaults.set(token, forKey: "token")
-                    print("autoLogin")
+            }
+            else{
+                guard let nickName = defaults.string(forKey: "nickName") else { return }
+                guard let password = defaults.string(forKey: "password") else {return}
+                print(nickName)
+                LogInService.shared.login(nickName: nickName,
+                                          password: password)  { networkResult in
                     
+                    switch networkResult {
+                    case .success(let token) :
+                        guard let token = token as? String else { return }
+                        print(token)
+                        defaults.set(token, forKey: "token")
+                        print("autoLogin")
+                        
+                        
+                        
+                    case .requestErr(let message):
+                        print("reqERR")
+                        
+                    case .pathErr:
+                        print("pathERR")
+                    case .serverErr:
+                        print("serverERR")
+                    case .networkFail:
+                        print("network")
+                        
+                    }
                     
-                    
-                case .requestErr(let message):
-                    print("reqERR")
-                    
-                case .pathErr:
-                    print("pathERR")
-                case .serverErr:
-                    print("serverERR")
-                case .networkFail:
-                    print("network")
                     
                 }
                 
-                
             }
-            
-            
-            
-            
             
             
             
@@ -81,7 +86,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.makeKeyAndVisible()
         
         
-
+        
         
     }
     

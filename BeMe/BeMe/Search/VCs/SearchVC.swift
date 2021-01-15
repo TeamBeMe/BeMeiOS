@@ -182,7 +182,7 @@ extension SearchVC: UITextFieldDelegate{
         
         
         
-        
+        searched = []
         underTableView.reloadData()
         
     }

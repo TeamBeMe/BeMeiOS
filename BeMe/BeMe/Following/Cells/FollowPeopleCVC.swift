@@ -24,7 +24,7 @@ class FollowPeopleCVC: UICollectionViewCell {
         peopleCollectionView.delegate = self
         peopleCollectionView.dataSource = self
         totalCell = followees.count
-        shows = followees
+  
         
     }
     func changeFollow(){
