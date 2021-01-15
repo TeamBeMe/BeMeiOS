@@ -33,7 +33,7 @@ class CustomActionSheetFilterVC: UIViewController {
         setButton(view: publicButton, isSelected: false)
         setButton(view: unpublicButton, isSelected: false)
         
-        
+        categoryCollectionView.showsHorizontalScrollIndicator = false
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
 
@@ -72,9 +72,9 @@ class CustomActionSheetFilterVC: UIViewController {
 
     @IBAction func applyButtonTapped(_ sender: Any) {
         
-        
         NotificationCenter.default.post(name: .init("categoryClose"), object: nil, userInfo: ["categoryId": selectedCategory , "selectedAv": selectedAvailablity ?? "all"])
         self.dismiss(animated: true, completion: nil)
+        
     }
     
 //    @objc func getSelectedFilterInfo(_ notification: Notification) {
