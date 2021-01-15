@@ -84,6 +84,7 @@
 		D4C5874425AF86900089BD18 /* SettingTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5874325AF86900089BD18 /* SettingTVC.swift */; };
 		D4C5875F25B0165A0089BD18 /* ExploreWrite.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5875E25B0165A0089BD18 /* ExploreWrite.swift */; };
 		D4C5876225B016DE0089BD18 /* ExploreWriteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C5876125B016DE0089BD18 /* ExploreWriteService.swift */; };
+		D4D94CEF25B1BDF300202506 /* CALayer+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D94CEE25B1BDF300202506 /* CALayer+Extensions.swift */; };
 		D4E07CB9259F22C10075E616 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D4E07CB2259F22C10075E616 /* Explore.storyboard */; };
 		D4E07CBA259F22C10075E616 /* MoreTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E07CB4259F22C10075E616 /* MoreTVC.swift */; };
 		D4E07CBC259F22C10075E616 /* DiffThoughtCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E07CB6259F22C10075E616 /* DiffThoughtCVC.swift */; };
@@ -306,6 +307,7 @@
 		D4C5874325AF86900089BD18 /* SettingTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTVC.swift; sourceTree = "<group>"; };
 		D4C5875E25B0165A0089BD18 /* ExploreWrite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreWrite.swift; sourceTree = "<group>"; };
 		D4C5876125B016DE0089BD18 /* ExploreWriteService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreWriteService.swift; sourceTree = "<group>"; };
+		D4D94CEE25B1BDF300202506 /* CALayer+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Extensions.swift"; sourceTree = "<group>"; };
 		D4E07CB2259F22C10075E616 /* Explore.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Explore.storyboard; sourceTree = "<group>"; };
 		D4E07CB4259F22C10075E616 /* MoreTVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTVC.swift; sourceTree = "<group>"; };
 		D4E07CB6259F22C10075E616 /* DiffThoughtCVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiffThoughtCVC.swift; sourceTree = "<group>"; };
@@ -1250,6 +1252,7 @@
 				EC5C1FF525A433EE008EE335 /* String+Extensions.swift */,
 				EC75A25D25A8B28000F4E160 /* UIImageView+Extensions.swift */,
 				EC7C88E425AF6989000C71D9 /* UILabel+extensions.swift */,
+				D4D94CEE25B1BDF300202506 /* CALayer+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1748,6 +1751,7 @@
 				ECC6310D25A9B27E009E4FD4 /* AnswerDataForFollowing.swift in Sources */,
 				EC89E309259C1CC700DBAFE5 /* FollowSearchVC.swift in Sources */,
 				A53C28B625B00EB50054DA7E /* CustomActionSheetFilterVC.swift in Sources */,
+				D4D94CEF25B1BDF300202506 /* CALayer+Extensions.swift in Sources */,
 				EC89E328259C378300DBAFE5 /* FollowHeaderCVC.swift in Sources */,
 				EC813F262599A15100BBCE25 /* SceneDelegate.swift in Sources */,
 				EC89E30F259C274200DBAFE5 /* FollowerSearchVC.swift in Sources */,

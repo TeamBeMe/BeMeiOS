@@ -9,8 +9,7 @@ import UIKit
 
 
 extension UIViewController {
-    
-
+    // 토스트 메세지
     func showToast(text: String, completion: @escaping ()->()) {
         let toast = ToastView(frame: CGRect(x: 0, y: 0, width: 343, height: 84))
         toast.setLabel(text: text)
