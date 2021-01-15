@@ -31,7 +31,8 @@ class MypageResultTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
+        print("start")
+        print(isLocked)
         cardView.isUserInteractionEnabled = true
         let profileTabGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpCard))
         cardView.addGestureRecognizer(profileTabGesture)
@@ -47,7 +48,9 @@ class MypageResultTVC: UITableViewCell {
     
     @IBAction func lockButtonTapped(_ sender: UIButton) {
         
-        
+        print("tapped")
+        print(isLocked)
+        self.isLocked = !self.isLocked
         HomeChangePublicService.shared.changePublic(id: answerIdx ,publicFlag: isLocked ? 0 : 1) {(networkResult) -> (Void) in
             switch networkResult{
             case .success(let data) :
@@ -70,7 +73,7 @@ class MypageResultTVC: UITableViewCell {
                 sender.setImage(UIImage.init(named: "btnUnlockExploreBlack"), for: .normal)
                 
             } else {
-            
+                
                 sender.setImage(UIImage.init(named: "btnLockBlack"), for: .normal)
                 
             }
