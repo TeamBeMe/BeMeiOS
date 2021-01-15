@@ -196,10 +196,12 @@ extension FollowingSearchVC : UITextFieldDelegate{
     @objc func textFieldDidChange(){
         if searchTextField.text != ""{
             isSearching = true
+            searched = []
             wholeCollectionView.reloadData()
         }
         else{
             isSearching = false
+            searched = []
             wholeCollectionView.reloadData()
         }
 
