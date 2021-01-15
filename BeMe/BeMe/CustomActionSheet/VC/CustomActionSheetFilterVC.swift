@@ -18,12 +18,14 @@ class CustomActionSheetFilterVC: UIViewController {
     @IBOutlet weak var categoryLabel: UILabel!
     // 서버통신을 통해 받아오는 값
     var categoryArray: [ExploreCategory] = []
-    // all, public, unpublic
-    var availablityArray: [Bool] = [false, false, false]
-    private var filterCVCDelegate: FilterCVCDelegate?
+//    private var filterCVCDelegate: FilterCVCDelegate?
     var fromServer = true
-    var categorySelected: Int = 0
-    private var selectedAvailablity: String = "all"
+    
+    private var selectedCategory: Int?
+        = nil
+    
+    private var selectedAvailablity: String? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setLabel()
@@ -31,31 +33,22 @@ class CustomActionSheetFilterVC: UIViewController {
         setButton(view: publicButton, isSelected: false)
         setButton(view: unpublicButton, isSelected: false)
         
-        
+        categoryCollectionView.showsHorizontalScrollIndicator = false
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
-        
-        selectedAvailablity = "all"
-        allButton.backgroundColor = .black
-        allButton.setTitleColor(.white, for: .normal)
-        allButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
-        
-        publicButton.backgroundColor = .white
-        publicButton.setTitleColor(.slateGrey, for: .normal)
-        publicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
-        
-        unpublicButton.backgroundColor = .white
-        unpublicButton.setTitleColor(.slateGrey,  for: .normal)
-        unpublicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
- 
-        
-        // Do any additional setup after loading the view.
+
+        availablityButtonSet(availablity: selectedAvailablity)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
+//        getSelectedFilterInfo()
         setCategoryData()
+        selectedAvailablity = MypageVC.selectedAvailablity
+        selectedCategory = MypageVC.selectedCategory
+        availablityButtonSet(availablity: selectedAvailablity)
     }
+    
     
     @IBAction func dismissButtonTapped(_ sender: UIButton) {
         NotificationCenter.default.post(name: .init("categoryClose"), object: nil)
@@ -64,62 +57,94 @@ class CustomActionSheetFilterVC: UIViewController {
     
     @IBAction func allButtonTapped(_ sender: UIButton) {
         selectedAvailablity = "all"
-        allButton.backgroundColor = .black
-        allButton.setTitleColor(.white, for: .normal)
-        allButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
-        
-        publicButton.backgroundColor = .white
-        publicButton.setTitleColor(.slateGrey, for: .normal)
-        publicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
-        
-        unpublicButton.backgroundColor = .white
-        unpublicButton.setTitleColor(.slateGrey,  for: .normal)
-        unpublicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+        availablityButtonSet(availablity: selectedAvailablity)
     }
     
     @IBAction func publicButtonTapped(_ sender: UIButton) {
         selectedAvailablity = "public"
-        allButton.backgroundColor = .white
-        allButton.setTitleColor(.slateGrey, for: .normal)
-        allButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
-        
-        publicButton.backgroundColor = .black
-        publicButton.setTitleColor(.white, for: .normal)
-        publicButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
-        
-        
-        
-        unpublicButton.backgroundColor = .white
-        unpublicButton.setTitleColor(.slateGrey,  for: .normal)
-        unpublicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
-        
+        availablityButtonSet(availablity: selectedAvailablity)
     }
     @IBAction func unpublicButtonTapped(_ sender: UIButton) {
-        
         selectedAvailablity = "unpublic"
-        allButton.backgroundColor = .white
-        allButton.setTitleColor(.slateGrey, for: .normal)
-        allButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+        availablityButtonSet(availablity: selectedAvailablity)
+    }
+    
+
+    @IBAction func applyButtonTapped(_ sender: Any) {
         
-        publicButton.backgroundColor = .white
-        publicButton.setTitleColor(.slateGrey, for: .normal)
-        publicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
-        
-        
-        unpublicButton.backgroundColor = .black
-        unpublicButton.setTitleColor(.white,  for: .normal)
-        unpublicButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
+        NotificationCenter.default.post(name: .init("categoryClose"), object: nil, userInfo: ["categoryId": selectedCategory , "selectedAv": selectedAvailablity ?? "all"])
+        self.dismiss(animated: true, completion: nil)
         
     }
     
-    private func selectPrivate(_ sender: UIButton) {
-        
-        
-    }
-    @IBAction func applyButtonTapped(_ sender: Any) {
-        
-        NotificationCenter.default.post(name: .init("categoryClose"), object: nil, userInfo: ["categoryId": categorySelected+1, "selectedAv": selectedAvailablity])
-        self.dismiss(animated: true, completion: nil)
+//    @objc func getSelectedFilterInfo(_ notification: Notification) {
+//        guard let userInfo = notification.userInfo as? [String: Any] else { return }
+//        guard let categoryId = userInfo["categoryId"] as? Int else { return  }
+//        guard let selectedAv = userInfo["selectedAv"] as? String else { return }
+//
+//        self.selectedAvailablity = selectedAv
+//        self.selectedCategory = categoryId
+//
+//    }
+//    func categoryButtonSet(category: Int){
+//        <#function body#>
+//    }
+    func availablityButtonSet(availablity: String?){
+        switch availablity {
+        case "all":
+            allButton.backgroundColor = .black
+            allButton.setTitleColor(.white, for: .normal)
+            allButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
+            
+            publicButton.backgroundColor = .white
+            publicButton.setTitleColor(.slateGrey, for: .normal)
+            publicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+            
+            unpublicButton.backgroundColor = .white
+            unpublicButton.setTitleColor(.slateGrey,  for: .normal)
+            unpublicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+            
+        case "public":
+            allButton.backgroundColor = .white
+            allButton.setTitleColor(.slateGrey, for: .normal)
+            allButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+            
+            publicButton.backgroundColor = .black
+            publicButton.setTitleColor(.white, for: .normal)
+            publicButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
+            
+            
+            
+            unpublicButton.backgroundColor = .white
+            unpublicButton.setTitleColor(.slateGrey,  for: .normal)
+            unpublicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+        case "unpublic":
+            allButton.backgroundColor = .white
+            allButton.setTitleColor(.slateGrey, for: .normal)
+            allButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+            
+            publicButton.backgroundColor = .white
+            publicButton.setTitleColor(.slateGrey, for: .normal)
+            publicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+            
+            
+            unpublicButton.backgroundColor = .black
+            unpublicButton.setTitleColor(.white,  for: .normal)
+            unpublicButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
+            
+        default:
+            allButton.backgroundColor = .black
+            allButton.setTitleColor(.white, for: .normal)
+            allButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
+            
+            publicButton.backgroundColor = .white
+            publicButton.setTitleColor(.slateGrey, for: .normal)
+            publicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+            
+            unpublicButton.backgroundColor = .white
+            unpublicButton.setTitleColor(.slateGrey,  for: .normal)
+            unpublicButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+        }
     }
     
     func setLabel() {
@@ -146,7 +171,7 @@ class CustomActionSheetFilterVC: UIViewController {
 
 extension CustomActionSheetFilterVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        categorySelected = indexPath.item
+        selectedCategory = indexPath.item
 
     }
 }
@@ -163,9 +188,22 @@ extension CustomActionSheetFilterVC: UICollectionViewDataSource {
                 for: indexPath) as? FilterCVC else {
             return UICollectionViewCell()}
         cell.indexPath = indexPath.row
+
         cell.category = self.categoryArray[indexPath.item]
-        cell.filterCVCDelegate = self
+
         cell.setButton(text: categoryArray[indexPath.item].name)
+        
+//        if selectedCategory != nil {
+//            if self.categoryArray[indexPath.item].id == selectedCategory!+1 {
+//                cell.setButton(selected: true)
+//            }
+//        } else {
+//            
+//        }
+        
+        
+//        cell.filterCVCDelegate = self
+
 
         return cell
         
@@ -181,7 +219,7 @@ extension CustomActionSheetFilterVC: UICollectionViewDataSource {
         }
 
         if cell.isSelected {
-            categorySelected = 0
+            selectedCategory = 0
             collectionView.deselectItem(at: indexPath, animated: false)
             return false
         } else {
@@ -233,10 +271,10 @@ extension CustomActionSheetFilterVC {
         }
     }
 }
-
-extension CustomActionSheetFilterVC: FilterCVCDelegate {
-    func setSelectedCategory(index: Int) {
-
-    }
-    
-}
+//
+//extension CustomActionSheetFilterVC: FilterCVCDelegate {
+//    func setSelectedCategory(index: Int) {
+//
+//    }
+//    
+//}

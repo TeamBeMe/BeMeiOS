@@ -73,8 +73,9 @@ class MypageOthersScrapTVC: UITableViewCell {
         }
         
         // writer profile image init
-        writerImageView.image = UIImage(named: writerImg)
-        
+        writerImageView.imageFromUrl(writerImg, defaultImgPath: "img")
+        writerImageView.makeRounded(cornerRadius: 10)
+        writerImageView.contentMode = .scaleAspectFill
         
         // color
         questionLabel.textColor = .black

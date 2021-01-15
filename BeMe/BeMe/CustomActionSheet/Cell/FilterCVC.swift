@@ -12,13 +12,13 @@ class FilterCVC: UICollectionViewCell {
     @IBOutlet weak var categoryButton: UIButton!
     @IBAction func categoryButtonTapped(_ sender: UIButton) {
         print(category)
-        filterCVCDelegate?.setSelectedCategory(index: indexPath)
+//        filterCVCDelegate?.setSelectedCategory(index: indexPath)
     }
     
     static let identifier: String = "FilterCVC"
     var category: ExploreCategory?
     var indexPath = -1
-    var filterCVCDelegate: FilterCVCDelegate?
+//    var filterCVCDelegate: FilterCVCDelegate?
    
     
     override var isSelected: Bool {
@@ -57,6 +57,22 @@ class FilterCVC: UICollectionViewCell {
         }
         
     }
+    
+    func setButton(selected: Bool) {
+        if !selected {
+            print(category)
+             
+            categoryButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
+            categoryButton.backgroundColor = UIColor.white
+            categoryButton.setTitleColor(.slateGrey, for: .normal)
+        } else {
+            categoryButton.setBorderWithRadius(borderColor: .black, borderWidth: 1, cornerRadius: 4)
+            categoryButton.backgroundColor = UIColor.black
+            categoryButton.setTitleColor(.white, for: .normal)
+        }
+        
+    }
+    
     func setButton(text: String) {
         categoryButton.setTitle(text, for: .normal)
         categoryButton.setBorderWithRadius(borderColor: .veryLightPink, borderWidth: 1, cornerRadius: 4)
@@ -65,6 +81,6 @@ class FilterCVC: UICollectionViewCell {
     }
 }
 
-protocol FilterCVCDelegate {
-    func setSelectedCategory(index: Int)
-}
+//protocol FilterCVCDelegate {
+//    func setSelectedCategory(index: Int)
+//}
