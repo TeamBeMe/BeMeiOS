@@ -124,7 +124,8 @@ class OthersPageCRV: UICollectionReusableView {
         answerCountInfoLabel.text = answerCount
         setInfoLabel()
         setFollowButton(view: followButton, isFollowed: isFollowed)
-        print("setP{riofile")
+        print("setP{riofileriofileriofileriofileriofileriofileriofileriofileriofileriofile")
+        print(img)
         print(isFollowed)
     }
     func setFollowButton(view: UIButton, isFollowed: Bool) {

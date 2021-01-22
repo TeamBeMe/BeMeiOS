@@ -42,7 +42,7 @@ class SignUpProfileVC: UIViewController {
     @IBAction func finishButtonAction(_ sender: Any) {
         LoadingHUD.show(loadingFrame: UIScreen.main.bounds,color: .white)
         SignUpService.shared.signUp(email: myEmail!,nickName: myName!, password: myPassword!,
-                                    image: profileImageView.image!,completion: { networkResult -> Void in
+                                    image: profileImageView.image!, isChosen: true ,completion: { networkResult -> Void in
                                         switch networkResult {
                                         case .success(let data):
                                             if let signupData = data as? SignUpData{
@@ -110,7 +110,7 @@ class SignUpProfileVC: UIViewController {
     @IBAction func jumpButtonAction(_ sender: Any) {
         LoadingHUD.show(loadingFrame: UIScreen.main.bounds,color: .white)
         SignUpService.shared.signUp(email: myEmail!,nickName: myName!, password: myPassword!,
-                                    image: UIImage(named: "mypageDefault")! ,completion: { networkResult -> Void in
+                                    image: UIImage(named: "mypageDefault")! , isChosen: false,completion: { networkResult -> Void in
                                         switch networkResult {
                                         case .success(let data):
                                             if let signupData = data as? SignUpData{
