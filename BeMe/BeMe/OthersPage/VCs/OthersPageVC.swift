@@ -272,7 +272,11 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
             print("IsMyProfile: \(isMyProfile)")
 //            headerView.isMyProfile = isMyProfile
             headerView.othersProfile = othersProfile
+            
+            
             if (othersProfile.count != 0) {
+                print("headerView.othersProfile = othersProfileheaderView.othersProfile = othersProfile")
+                print(othersProfile[0].profileImg!)
                 headerView.setProfile(nickname: othersProfile[0].nickname, img: othersProfile[0].profileImg!, visit: String(othersProfile[0].continuedVisit), answerCount: String(othersProfile[0].answerCount), isFollowed: othersProfile[0].isFollowed!)
                 //                print("othersProfile[0].isFollowed")
                 //                print(othersProfile[0].isFollowed)
