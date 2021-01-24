@@ -8,7 +8,7 @@
 import Foundation
 
 struct APIConstants{
-    static let baseURL = "http://15.164.67.58:3000"
+    static let baseURL = "http://52.79.42.85:3000"
     
     static let signupURL = baseURL+"/users/signup"
     static let signupDuplicateURL = baseURL+"/users?nickname="
