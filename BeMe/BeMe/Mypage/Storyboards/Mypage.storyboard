@@ -18,6 +18,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhy-7d-78n">
+                                <rect key="frame" x="79.5" y="443" width="255" height="20.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="255" id="fkL-w4-9Mq"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="xh3-JJ-lUX" userLabel="MypageCV">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -35,6 +44,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="588"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7d4-st-e4p">
+                                                    <rect key="frame" x="79.5" y="284" width="255" height="20.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="255" id="Yqv-wN-cgC"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="0.99998790029999995" blue="0.99999219179999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9J8-av-cvT" userLabel="MypageTabCV">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="588"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -347,6 +365,8 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="9J8-av-cvT" firstAttribute="top" secondItem="YeC-J8-sZc" secondAttribute="top" id="C7p-pZ-iNE"/>
+                                                <constraint firstItem="7d4-st-e4p" firstAttribute="centerX" secondItem="YeC-J8-sZc" secondAttribute="centerX" id="YPS-4k-woY"/>
+                                                <constraint firstItem="7d4-st-e4p" firstAttribute="centerY" secondItem="YeC-J8-sZc" secondAttribute="centerY" id="dsQ-Xq-YJw"/>
                                                 <constraint firstAttribute="trailing" secondItem="9J8-av-cvT" secondAttribute="trailing" id="hC7-0K-Muu"/>
                                                 <constraint firstItem="9J8-av-cvT" firstAttribute="leading" secondItem="YeC-J8-sZc" secondAttribute="leading" id="iVL-bx-BzF"/>
                                                 <constraint firstAttribute="bottom" secondItem="9J8-av-cvT" secondAttribute="bottom" id="xqR-n6-GeR"/>
@@ -355,6 +375,7 @@
                                         <size key="customSize" width="414" height="588"/>
                                         <connections>
                                             <outlet property="mypageTabCollectionView" destination="9J8-av-cvT" id="l9S-6H-iLW"/>
+                                            <outlet property="tmpLabel" destination="7d4-st-e4p" id="p5J-hO-2fk"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -615,15 +636,18 @@
                             <constraint firstItem="9Uk-kR-ZKH" firstAttribute="top" secondItem="JRG-h0-aOq" secondAttribute="top" id="1cX-fd-2BT"/>
                             <constraint firstItem="xh3-JJ-lUX" firstAttribute="top" secondItem="cwK-bA-RnC" secondAttribute="top" id="FMy-s2-fU8"/>
                             <constraint firstItem="JRG-h0-aOq" firstAttribute="trailing" secondItem="xh3-JJ-lUX" secondAttribute="trailing" id="JT9-Ls-kFC"/>
+                            <constraint firstItem="yhy-7d-78n" firstAttribute="centerX" secondItem="JRG-h0-aOq" secondAttribute="centerX" id="cYH-kx-55M"/>
                             <constraint firstItem="xh3-JJ-lUX" firstAttribute="leading" secondItem="JRG-h0-aOq" secondAttribute="leading" id="dWY-nN-mxC"/>
                             <constraint firstItem="JRG-h0-aOq" firstAttribute="bottom" secondItem="xh3-JJ-lUX" secondAttribute="bottom" id="vRi-kk-eKV"/>
                             <constraint firstItem="JRG-h0-aOq" firstAttribute="trailing" secondItem="9Uk-kR-ZKH" secondAttribute="trailing" constant="14" id="xAQ-wl-Vmi"/>
+                            <constraint firstItem="yhy-7d-78n" firstAttribute="centerY" secondItem="JRG-h0-aOq" secondAttribute="centerY" id="xeL-n7-cP7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" leftItemsSupplementBackButton="YES" id="KI7-5q-Jxp"/>
                     <connections>
                         <outlet property="mypageCollectionView" destination="xh3-JJ-lUX" id="P3G-h5-dFR"/>
                         <outlet property="settingButton" destination="9Uk-kR-ZKH" id="Kz9-Q8-8Mc"/>
+                        <outlet property="tmpLabel" destination="yhy-7d-78n" id="t6K-d0-D2Q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hdS-Wv-3Oa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

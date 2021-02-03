@@ -10,6 +10,7 @@ import UIKit
 class MypageCVC: UICollectionViewCell {
     //MARK:**- IBOutlet Part**
     @IBOutlet weak var mypageTabCollectionView: UICollectionView!
+    @IBOutlet weak var tmpLabel: UILabel!
     var mypageCVCDelegate: MypageCVCDelegate?
     var profileEditDelegate: ProfileEditDelegate?
     
@@ -24,6 +25,7 @@ class MypageCVC: UICollectionViewCell {
     //MARK:**- Life Cycle Part**
     override func awakeFromNib() {
         super.awakeFromNib()
+        tmpLabel.alpha = 0
         // Initialization code
         collectionViewSetting()
     }
@@ -86,16 +88,8 @@ extension MypageCVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if mypageCVCDelegate?.nowDirection() == 0 {
-            tableviewHeight = (CGFloat(myAnswerArray.count) * 105.0 > 0) ? CGFloat(myAnswerArray.count) * 105.0 : 735
-        } else {
-            tableviewHeight = (CGFloat(myScrapArray.count) * 105.0 > 0) ? CGFloat(myScrapArray.count) * 105.0 : 735
-        }
-        
-        tableviewHeight = (tableviewHeight < 588.0) ? 588 : tableviewHeight
-        
-        
-        return CGSize(width: collectionView.frame.width  , height: tableviewHeight)
+    
+        return CGSize(width: collectionView.frame.width  , height: collectionView.frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

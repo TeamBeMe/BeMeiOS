@@ -15,6 +15,7 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var reportButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var followButton: UIButton!
+    @IBOutlet weak var tmpLabel: UILabel!
     
     lazy var popupBackgroundView: UIView = UIView()
     
@@ -28,7 +29,7 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
     var userID: Int?
     
     var isMyProfile: Bool?
-    
+    var othersPageCVCDelegate: OthersPageCVCDelegate?
     private var othersAnswerArray: [Answer] = [] {
         didSet {
             othersPageCollectionView.reloadData()
@@ -48,7 +49,7 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
     //MARK:**- Life Cycle Part**
     
     override func viewDidLoad() {
-        
+        tmpLabel.alpha = 0
         super.viewDidLoad()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         //        othersAnswerArray = []
@@ -147,6 +148,15 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
         print(action)
     }
  
+    func goToCommentButtonTapped(_ answerId: Int) {
+        guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
+        comment.answerId = answerId
+        comment.isMoreButtonHidden = false
+        comment.modalPresentationStyle = .fullScreen
+        let nc = UINavigationController(rootViewController: comment)
+        nc.modalPresentationStyle = .fullScreen
+        self.present(nc, animated: true, completion: nil)
+    }
     
     private func configuredMailComposeViewController() -> MFMailComposeViewController {
         let mailComposerVC = MFMailComposeViewController()
@@ -204,8 +214,9 @@ extension OthersPageVC : UICollectionViewDataSource {
         
         
         
-        
+        self.othersPageCVCDelegate = cell
         cell.othersAnswerArray = othersAnswerArray
+        cell.profileEditDelegate = self
         print("otehrspage CV ")
         cell.otherspageTableView.reloadData()
         
@@ -222,10 +233,22 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
+        tableviewHeight = 0
+        if othersAnswerArray.count > 0 {
+            for i in 0...othersAnswerArray.count-1 {
+                tmpLabel.text = othersAnswerArray[i].question
+
+                tableviewHeight += CGFloat(tmpLabel.calculateMaxLabelLines())*18.0 + 99.0
+                
+                
+                
+            }
+            
+        }
         
-        
-        tableviewHeight = CGFloat(othersAnswerArray.count) * 105.0
-        tableviewHeight = (tableviewHeight < 588.0) ? 588 : tableviewHeight
+//
+//        tableviewHeight = CGFloat(othersAnswerArray.count) * 130.0
+//        tableviewHeight = (tableviewHeight < 588.0) ? 588 : tableviewHeight
         return CGSize(width: collectionView.frame.width  , height: tableviewHeight)
     }
     
@@ -377,5 +400,24 @@ extension OthersPageVC: UIScrollViewDelegate {
             backButton.isHidden = true
             reportButton.isHidden = true
         }
+        print(offset)
+
+    }
+}
+
+
+extension OthersPageVC: ProfileEditDelegate{
+    
+    func profileEdit(){
+        
+        
+    }
+    func cardTapped(answerID: Int){
+        goToCommentButtonTapped(answerID)
+        
+        
+    }
+    func showToast(showBool: Bool){
+      
     }
 }

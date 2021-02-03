@@ -18,6 +18,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZL-Qo-Z7k">
+                                <rect key="frame" x="79.5" y="444.5" width="255" height="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="255" id="Tbm-7R-9EA"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="lpe-WB-ygM" userLabel="MypageCV">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -287,12 +296,14 @@
                         <viewLayoutGuide key="safeArea" id="j6A-Ee-aMU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="bZL-Qo-Z7k" firstAttribute="centerY" secondItem="j6A-Ee-aMU" secondAttribute="centerY" id="0Ce-Th-Uao"/>
                             <constraint firstItem="lpe-WB-ygM" firstAttribute="top" secondItem="Yze-KS-AQR" secondAttribute="top" id="9hp-qS-pwd"/>
                             <constraint firstItem="j6A-Ee-aMU" firstAttribute="bottom" secondItem="lpe-WB-ygM" secondAttribute="bottom" id="JIH-M7-uO2"/>
                             <constraint firstItem="j6A-Ee-aMU" firstAttribute="trailing" secondItem="a7s-AV-zjl" secondAttribute="trailing" constant="14" id="Kxg-5H-h42"/>
                             <constraint firstItem="lpe-WB-ygM" firstAttribute="leading" secondItem="j6A-Ee-aMU" secondAttribute="leading" id="Q3u-wW-ciu"/>
                             <constraint firstItem="nal-8z-zRJ" firstAttribute="top" secondItem="j6A-Ee-aMU" secondAttribute="top" id="Wcg-JY-dAk"/>
                             <constraint firstItem="nal-8z-zRJ" firstAttribute="leading" secondItem="j6A-Ee-aMU" secondAttribute="leading" constant="14" id="kGP-bg-aUp"/>
+                            <constraint firstItem="bZL-Qo-Z7k" firstAttribute="centerX" secondItem="j6A-Ee-aMU" secondAttribute="centerX" id="rjh-7R-Fem"/>
                             <constraint firstItem="j6A-Ee-aMU" firstAttribute="trailing" secondItem="lpe-WB-ygM" secondAttribute="trailing" id="szy-Bj-V6j"/>
                             <constraint firstItem="a7s-AV-zjl" firstAttribute="top" secondItem="j6A-Ee-aMU" secondAttribute="top" id="vvG-x1-Bh4"/>
                         </constraints>
@@ -302,6 +313,7 @@
                         <outlet property="backButton" destination="nal-8z-zRJ" id="SUu-Pq-EuC"/>
                         <outlet property="othersPageCollectionView" destination="lpe-WB-ygM" id="ktY-Tn-1gN"/>
                         <outlet property="reportButton" destination="a7s-AV-zjl" id="CZ8-hN-T1U"/>
+                        <outlet property="tmpLabel" destination="bZL-Qo-Z7k" id="9t7-AH-wjP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cHD-2e-Lbo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
