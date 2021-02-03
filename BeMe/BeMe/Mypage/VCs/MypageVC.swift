@@ -12,6 +12,8 @@ class MypageVC: UIViewController {
     //MARK:**- IBOutlet Part**
     @IBOutlet weak var mypageCollectionView: UICollectionView!
     @IBOutlet weak var settingButton: UIButton!
+    @IBOutlet weak var tmpLabel: UILabel!
+    
     
     lazy var popupBackgroundView: UIView = UIView()
     
@@ -207,14 +209,30 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         if directionMenu == 0 {
-            tableviewHeight = (CGFloat(myAnswerArray.count) * 105.0 > 0) ? CGFloat(myAnswerArray.count) * 105.0 : 735
+//            tableviewHeight = (CGFloat(myAnswerArray.count) * 105.0 > 0) ? CGFloat(myAnswerArray.count) * 105.0 : 735
+            tableviewHeight = 0
+            if myAnswerArray.count > 0 {
+                for i in 0...myAnswerArray.count-1 {
+                    tmpLabel.text = myAnswerArray[i].question
+                    tableviewHeight += CGFloat(tmpLabel.calculateMaxLabelLines())*18.0 + 69.0
+                }
+            }
         } else {
-            tableviewHeight = (CGFloat(myScrapArray.count) * 105.0 > 0) ? CGFloat(myScrapArray.count) * 105.0 : 735
+//            tableviewHeight = (CGFloat(myScrapArray.count) * 105.0 > 0) ? CGFloat(myScrapArray.count) * 105.0 : 735
+            tableviewHeight = 0
+            if myScrapArray.count > 0 {
+                for i in 0...myScrapArray.count-1 {
+                    tmpLabel.text = myScrapArray[i].question
+                    tableviewHeight += CGFloat(tmpLabel.calculateMaxLabelLines())*18.0 + 99.0
+                }
+            }
         }
-        
-        tableviewHeight = (tableviewHeight < 588.0) ? 588 : tableviewHeight
-        
-        
+
+       
+
+       print("하이트")
+        print(tableviewHeight)
+//        tableviewHeight = (tableviewHeight < 588.0) ? 588 : tableviewHeight
         return CGSize(width: collectionView.frame.width  , height: tableviewHeight)
     }
     

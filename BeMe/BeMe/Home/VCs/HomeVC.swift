@@ -76,6 +76,7 @@ class HomeVC: UIViewController {
     private var cardWidth : CGFloat = 0.0
     var pastCards = 0
     var todayCards = 0
+    var todayCardsForLabel = 0
     var currentCardIdx = 0
     private var initialScrolled = false
     private var cardHeight = 0.0
@@ -311,8 +312,13 @@ extension HomeVC {
                         }
 
                         
-                        if homePageData.isToday! {
-                            self.todayCards = self.todayCards + 1
+                        if homePageData.isToday!  {
+                            self.todayCards += 1
+        
+                        }
+                        else if content == ""{
+                            self.todayCards += 1
+                            self.todayCardsForLabel += 1
                         }
                         else{
                             self.pastCards = self.pastCards + 1
@@ -502,15 +508,7 @@ extension HomeVC : UICollectionViewDelegateFlowLayout {
 extension HomeVC : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let curPos = scrollView.contentOffset
-        //        if Int(curPos.x) < (pastCards-1)*collectionViewWidth {
-        //            timeLabel.text = "과거의 질문"
-        //        }
-        //        else{
-        //            timeLabel.text = "오늘의 질문"
-        //
-        //        }
-        
-        
+
         
         if flexible {
             if Int(curPos.x) > Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) - 200
@@ -546,7 +544,7 @@ extension HomeVC : UIScrollViewDelegate {
             }
             
         }
-        if currentCardIdx < pastCards{
+        if currentCardIdx < pastCards+todayCardsForLabel{
             timeLabel.text = "과거의 질문"
         }
         else{
@@ -651,42 +649,7 @@ extension HomeVC : AddQuestionDelegate {
         
         
         
-        //        answerDataList.append(tmpNowData)
-        //        let customCard = CustomTodayCardView(frame: .zero)
-        //        let customAddCard = CustomAddCardView(frame: .zero)
-        //
-        //        self.view.addSubview(customCard)
-        //        self.view.addSubview(customAddCard)
-        //        customCard.snp.makeConstraints{
-        //            $0.width.equalTo(cardWidth)
-        //            $0.height.equalTo(cardHeight)
-        //            $0.top.equalToSuperview().offset(150*deviceBound)
-        //            $0.leading.equalToSuperview().offset(40)
-        //
-        //        }
-        //        customAddCard.snp.makeConstraints{
-        //            $0.width.equalTo(cardWidth)
-        //            $0.height.equalTo(cardHeight)
-        //            $0.top.equalToSuperview().offset(150*deviceBound)
-        //            $0.leading.equalToSuperview().offset(40)
-        //
-        //        }
-        //        UIView.transition(from: customAddCard,
-        //                          to: customCard,
-        //                          duration: 1.5,
-        //                          options: .transitionCurlUp,
-        //                          completion: { f in
-        //                            customCard.removeFromSuperview()
-        //                            self.todayCards = self.todayCards+1
-        //                            self.cardCollectionView.reloadData()
-        //                            self.cardCollectionView.scrollToItem(at: IndexPath(
-        //                                                                    item: self.currentCardIdx,
-        //                                                                    section: 0),
-        //                                                                 at: .centeredHorizontally,
-        //                                                                 animated: true)
-        //
-        //                          })
-        //
+   
         
         
     }
@@ -848,6 +811,23 @@ extension HomeVC : HomeGetDataFromAnswerDelegate {
 extension HomeVC: HomeChangeQuestionDelegate{
     func getNewQuestion(idx: Int,answerID: Int) {
         print("called")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd"
+        let date = Date()
+        let dateString = dateFormatter.string(from: date)
+        if let changedDate = UserDefaults.standard.string(forKey: "rerollDate"){
+            if changedDate == dateString{
+                self.showToast(text: "질문 변경하기는 하루 1회만 가능합니다")
+                return
+            }
+        }
+        else{
+            UserDefaults.standard.setValue(dateString, forKey: "rerollDate")
+            
+        }
+        
+        
+        
         HomeChangeQuestionService.shared.getNewQuestion(answerID: answerID){ (networkResult) -> (Void) in
             switch networkResult{
             case .success(let data) :

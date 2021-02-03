@@ -8,6 +8,7 @@
 import UIKit
 import UserNotifications
 import Firebase
+import FirebaseRemoteConfig
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,9 +17,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
         UNUserNotificationCenter.current().delegate = self
         FirebaseApp.configure()
+        let remoteConfig = RemoteConfig.remoteConfig()
         
+        remoteConfig.fetch(withExpirationDuration: TimeInterval(3600), completionHandler: { (status,error)-> Void in
+            if status == .success {
+                print("Config Fetched!")
+                remoteConfig.activate(completion: nil)
+                
+            }
+            else{
+                print("errrrrrr")
+            }
+            
+            
+        })
        
         return true
     }

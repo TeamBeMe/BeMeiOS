@@ -102,7 +102,7 @@ class SignUpVC: UIViewController {
         else{
             print("called")
             warningImageViews[1].image = UIImage(named: "icInfoRed")
-            warningLabels[1].text = "다른 닉네임을 입력해주세요"
+            warningLabels[1].text = "영문,숫자 20자 이내로 입력해주세요"
             warningLabels[1].textColor = .red
             textFieldIsValid[1] = false
         }

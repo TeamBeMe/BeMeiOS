@@ -100,10 +100,11 @@ class AnswerVC: UIViewController {
         
         if self.answerSwitch.isOn {
             isAnswerPublic = true
+            
         } else {
             isAnswerPublic = false
         }
-        
+        answerData!.lock = !answerData!.lock!
         print(isAnswerPublic)
         
     }

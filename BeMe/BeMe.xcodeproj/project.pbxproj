@@ -590,6 +590,7 @@
 			isa = PBXGroup;
 			children = (
 				A5A5BE6825A9DF2E00036431 /* OthersPageVC.swift */,
+				EC89E332259C4E2800DBAFE5 /* UnderTab */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -1223,7 +1224,6 @@
 				EC7FEFA025A38A7F00C61147 /* Search */,
 				A578D4E725A0BF8F00F69908 /* Mypage */,
 				A5A5BE6025A9D9B200036431 /* OthersPage */,
-				EC89E332259C4E2800DBAFE5 /* UnderTab */,
 				EC7C160A259B8B1700A5BA4C /* Following */,
 				D492E43125A0E0F20088A181 /* CustomActionSheet */,
 				EC7C1603259B483F00A5BA4C /* CustomViews */,
@@ -1919,7 +1919,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.05;
+				MARKETING_VERSION = 1.08;
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamBeMe.BeMe1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -1941,7 +1941,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.05;
+				MARKETING_VERSION = 1.08;
 				PRODUCT_BUNDLE_IDENTIFIER = com.teamBeMe.BeMe1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

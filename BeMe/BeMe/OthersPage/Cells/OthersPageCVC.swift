@@ -16,6 +16,7 @@ class OthersPageCVC: UICollectionViewCell {
     var othersAnswerArray: [Answer] = []
     var tableviewHeight: CGFloat = 0.0
     var customEmptyView = CustomEmptyView()
+    var profileEditDelegate: ProfileEditDelegate?
     //MARK:**- Life Cycle Part**
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -68,6 +69,7 @@ extension OthersPageCVC: UITableViewDataSource, UITableViewDelegate {
         
         tab.setCardView(question: othersAnswerArray[indexPath.row].question, questionInfo: othersAnswerArray[indexPath.row].category, answerDate: othersAnswerArray[indexPath.row].answerDate, writer: othersAnswerArray[indexPath.row].userNickname, writerImg: othersAnswerArray[indexPath.row].userProfile ?? "", isScrapped: othersAnswerArray[indexPath.row].isScrapped!, answerId: othersAnswerArray[indexPath.row].id, questionId: othersAnswerArray[indexPath.row].questionID)
         tab.delegate = self
+        tab.profileEditDelegate = self
         tab.selectionStyle = .none
 
         return tab
@@ -128,4 +130,35 @@ extension OthersPageCVC: UITableViewButtonSelectedDelegate {
 
     }
     
+}
+
+extension OthersPageCVC: OthersPageCVCDelegate {
+    func tableViewDisable(){
+        otherspageTableView.isScrollEnabled = false
+    }
+    func tableViewAble(){
+        otherspageTableView.isScrollEnabled = true
+    }
+    
+}
+
+protocol OthersPageCVCDelegate {
+    func tableViewDisable()
+    func tableViewAble()
+    
+}
+
+extension OthersPageCVC: ProfileEditDelegate{
+    
+    func profileEdit(){
+        
+        
+    }
+    func cardTapped(answerID: Int){
+        profileEditDelegate?.cardTapped(answerID: answerID)
+    }
+    func showToast(showBool: Bool){
+        
+        
+    }
 }

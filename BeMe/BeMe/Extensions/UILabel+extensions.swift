@@ -16,4 +16,21 @@ extension UILabel {
       attributedText = attributedString
     }
   }
+    func calculateMaxLabelLines() -> Int {
+        let maxSize = CGSize(width: frame.size.width, height: CGFloat(Float.infinity))
+        let charSize = font.lineHeight
+
+        let attributes: [NSAttributedString.Key: Any] = [
+            .kern: -1,
+            .font: self.font,
+            .foregroundColor: UIColor.blue,
+            .paragraphStyle: NSMutableParagraphStyle()
+                
+        ]
+        let text3 = NSAttributedString(string: self.text ?? "",attributes: attributes)
+    
+        let textSize = text3.boundingRect(with: maxSize, options: .usesLineFragmentOrigin, context: nil)
+        let linesRoundedUp = Int(ceil(textSize.height/charSize))
+        return linesRoundedUp
+    }
 }

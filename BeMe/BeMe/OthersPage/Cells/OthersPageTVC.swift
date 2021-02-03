@@ -18,7 +18,7 @@ class OthersPageTVC: UITableViewCell {
     @IBOutlet weak var writerLabel: UILabel!
     @IBOutlet weak var writerImageView: UIImageView!
     @IBOutlet weak var scrapButton: UIButton!
-    
+    var profileEditDelegate: ProfileEditDelegate?
     //MARK:**- Variable Part**
     private var isScrapped = true
     static let identifier = "OthersPageTVC"
@@ -32,6 +32,9 @@ class OthersPageTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        cardView.isUserInteractionEnabled = true
+        let profileTabGesture = UITapGestureRecognizer(target: self, action: #selector(touchUpCard))
+        cardView.addGestureRecognizer(profileTabGesture)
         // Initialization code
         
     }
@@ -103,7 +106,11 @@ class OthersPageTVC: UITableViewCell {
         cardView.backgroundColor = .white
         cardView.setBorderWithRadius(borderColor: .rgbededed, borderWidth: 1, cornerRadius: 6)
         
+        
     }
     //MARK:**- Function Part**
-    
+    @objc func touchUpCard(){
+        profileEditDelegate?.cardTapped(answerID: answerId!)
+        
+    }
 }
