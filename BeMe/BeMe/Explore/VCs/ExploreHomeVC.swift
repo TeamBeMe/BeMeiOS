@@ -169,17 +169,11 @@ extension ExploreHomeVC: UITableViewDataSource {
         } else if section == 1 {
             return 1
         } else {
-            
             if exploreAnswerArray.count == 0 {
                 return 1
             } else {
-                if currentPage < page {
-                    return exploreAnswerArray.count + 1
-                } else {
-                    return exploreAnswerArray.count
-                }
+                return exploreAnswerArray.count
             }
-            
         }
     }
     
@@ -250,7 +244,7 @@ extension ExploreHomeVC: UITableViewDelegate {
                     if scrollDirection {
                         let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
                         cell.layer.transform = rotationTransform
-                        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+                        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut, .allowUserInteraction], animations: {
                             cell.layer.transform = CATransform3DIdentity
                         }) { (_) in
                             
@@ -258,7 +252,7 @@ extension ExploreHomeVC: UITableViewDelegate {
                     } else {
                         let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
                         cell.layer.transform = rotationTransform
-                        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut], animations: {
+                        UIView.animate(withDuration: 0.3, delay: 0, options: [.curveEaseInOut, .allowUserInteraction], animations: {
                             cell.layer.transform = CATransform3DIdentity
                         }) { (_) in
                             
@@ -320,11 +314,38 @@ extension ExploreHomeVC: UIScrollViewDelegate {
         }
         
         lastContentOffset = currentOffset
+        
+        for cell in exploreTableView.visibleCells {
+            if let indexPath = exploreTableView.indexPath(for: cell) {
+                if indexPath.row > 5 && indexPath.row >= exploreAnswerArray.count - 3 {
+                    if page > currentPage {
+                        moreButtonAction()
+                    }
+                }
+            }
+        }
+
+//        for cell in exploreTableView.visibleCells {
+//            if let indexPath = wholeCollectionView.indexPath(for: cell){
+//                if indexPath.item > 5 && indexPath.item >= answers.count-3{
+//                    if pageLen > answerPage{
+//                        moreButtonAction()
+//                    }
+//                }
+//
+//            }
+//        }
+
     }
 }
 
 //MARK: - Private Method
 extension ExploreHomeVC {
+    
+    private func moreButtonAction() {
+        currentPage += 1
+        setAnswerData(page: currentPage, category: selectedCategoryId, sorting: selectedRecentOrFavorite)
+    }
     
     private func setThoughtData() {
         
@@ -641,7 +662,7 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     }
     
     func goToTodayAnswerButtonDidTapped() {
-
+        
         ExploreWriteService.shared.getExploreWrite { (result) in
             switch result {
             case .success(let data):
@@ -665,7 +686,7 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
                     
                     
                     answerVC.answerData = inputData
-
+                    
                     self.navigationController?.pushViewController(answerVC, animated: true)
                     
                 }
