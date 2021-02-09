@@ -96,6 +96,13 @@
 		D4F1991D25A4782F000AF0E7 /* CommentTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F1991C25A4782F000AF0E7 /* CommentTVC.swift */; };
 		D4F1992525A4A9E9000AF0E7 /* SecondCommentTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F1992425A4A9E9000AF0E7 /* SecondCommentTVC.swift */; };
 		D4F1992925A4E804000AF0E7 /* SecretTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4F1992825A4E804000AF0E7 /* SecretTVC.swift */; };
+		EC5BADA025D3030F00F142CB /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC5BAD9F25D3030F00F142CB /* WidgetKit.framework */; };
+		EC5BADA225D3030F00F142CB /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EC5BADA125D3030F00F142CB /* SwiftUI.framework */; };
+		EC5BADA525D3030F00F142CB /* BeMeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5BADA425D3030F00F142CB /* BeMeWidget.swift */; };
+		EC5BADA825D3031100F142CB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EC5BADA725D3031100F142CB /* Assets.xcassets */; };
+		EC5BADAA25D3031100F142CB /* BeMeWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EC5BADA625D3030F00F142CB /* BeMeWidget.intentdefinition */; };
+		EC5BADAB25D3031100F142CB /* BeMeWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = EC5BADA625D3030F00F142CB /* BeMeWidget.intentdefinition */; };
+		EC5BADAE25D3031100F142CB /* BeMeWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = EC5BAD9E25D3030F00F142CB /* BeMeWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		EC5C1FF625A433EE008EE335 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5C1FF525A433EE008EE335 /* String+Extensions.swift */; };
 		EC5C1FFC25A43E1A008EE335 /* SignUpControlVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5C1FFB25A43E1A008EE335 /* SignUpControlVC.swift */; };
 		EC5C200025A43FA5008EE335 /* SignUpPVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC5C1FFF25A43FA5008EE335 /* SignUpPVC.swift */; };
@@ -226,6 +233,30 @@
 		ECC6312C25A9E98E009E4FD4 /* data1.json in Resources */ = {isa = PBXBuildFile; fileRef = ECC6312B25A9E98E009E4FD4 /* data1.json */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		EC5BADAC25D3031100F142CB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EC813F182599A15100BBCE25 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EC5BAD9D25D3030F00F142CB;
+			remoteInfo = BeMeWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EC5BADAF25D3031100F142CB /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				EC5BADAE25D3031100F142CB /* BeMeWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		3B6D13159E429438682B4544 /* Pods-BeMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BeMe.debug.xcconfig"; path = "Target Support Files/Pods-BeMe/Pods-BeMe.debug.xcconfig"; sourceTree = "<group>"; };
 		A50140F925A39B56001099E8 /* MypageCRV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageCRV.swift; sourceTree = "<group>"; };
@@ -321,6 +352,15 @@
 		D4F1991C25A4782F000AF0E7 /* CommentTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentTVC.swift; sourceTree = "<group>"; };
 		D4F1992425A4A9E9000AF0E7 /* SecondCommentTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCommentTVC.swift; sourceTree = "<group>"; };
 		D4F1992825A4E804000AF0E7 /* SecretTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretTVC.swift; sourceTree = "<group>"; };
+		EC5BAD9E25D3030F00F142CB /* BeMeWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = BeMeWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC5BAD9F25D3030F00F142CB /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		EC5BADA125D3030F00F142CB /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		EC5BADA425D3030F00F142CB /* BeMeWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeMeWidget.swift; sourceTree = "<group>"; };
+		EC5BADA625D3030F00F142CB /* BeMeWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = BeMeWidget.intentdefinition; sourceTree = "<group>"; };
+		EC5BADA725D3031100F142CB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EC5BADA925D3031100F142CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EC5BADB525D303E600F142CB /* BeMe.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeMe.entitlements; sourceTree = "<group>"; };
+		EC5BADB825D303F300F142CB /* BeMeWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BeMeWidgetExtension.entitlements; sourceTree = "<group>"; };
 		EC5C1FF525A433EE008EE335 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		EC5C1FFB25A43E1A008EE335 /* SignUpControlVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpControlVC.swift; sourceTree = "<group>"; };
 		EC5C1FFF25A43FA5008EE335 /* SignUpPVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpPVC.swift; sourceTree = "<group>"; };
@@ -455,6 +495,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EC5BAD9B25D3030F00F142CB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC5BADA225D3030F00F142CB /* SwiftUI.framework in Frameworks */,
+				EC5BADA025D3030F00F142CB /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EC813F1D2599A15100BBCE25 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -470,6 +519,8 @@
 			isa = PBXGroup;
 			children = (
 				F395802B4D6B242442819A14 /* Pods_BeMe.framework */,
+				EC5BAD9F25D3030F00F142CB /* WidgetKit.framework */,
+				EC5BADA125D3030F00F142CB /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -916,6 +967,17 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		EC5BADA325D3030F00F142CB /* BeMeWidget */ = {
+			isa = PBXGroup;
+			children = (
+				EC5BADA425D3030F00F142CB /* BeMeWidget.swift */,
+				EC5BADA625D3030F00F142CB /* BeMeWidget.intentdefinition */,
+				EC5BADA725D3031100F142CB /* Assets.xcassets */,
+				EC5BADA925D3031100F142CB /* Info.plist */,
+			);
+			path = BeMeWidget;
+			sourceTree = "<group>";
+		};
 		EC5C200625A471E5008EE335 /* LogIn */ = {
 			isa = PBXGroup;
 			children = (
@@ -1192,7 +1254,9 @@
 		EC813F172599A15100BBCE25 = {
 			isa = PBXGroup;
 			children = (
+				EC5BADB825D303F300F142CB /* BeMeWidgetExtension.entitlements */,
 				EC813F222599A15100BBCE25 /* BeMe */,
+				EC5BADA325D3030F00F142CB /* BeMeWidget */,
 				EC813F212599A15100BBCE25 /* Products */,
 				6CFABAAD0D52A376662BF022 /* Pods */,
 				D44F6D9125A574DB002A9761 /* Recovered References */,
@@ -1204,6 +1268,7 @@
 			isa = PBXGroup;
 			children = (
 				EC813F202599A15100BBCE25 /* BeMe.app */,
+				EC5BAD9E25D3030F00F142CB /* BeMeWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1211,6 +1276,7 @@
 		EC813F222599A15100BBCE25 /* BeMe */ = {
 			isa = PBXGroup;
 			children = (
+				EC5BADB525D303E600F142CB /* BeMe.entitlements */,
 				D4C5873725AF83F60089BD18 /* Setting */,
 				ECA1517B25ADEF1E0091E5EF /* Onboarding */,
 				D405E89C25ADBDD2004CC60F /* Alarm */,
@@ -1444,6 +1510,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		EC5BAD9D25D3030F00F142CB /* BeMeWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EC5BADB225D3031100F142CB /* Build configuration list for PBXNativeTarget "BeMeWidgetExtension" */;
+			buildPhases = (
+				EC5BAD9A25D3030F00F142CB /* Sources */,
+				EC5BAD9B25D3030F00F142CB /* Frameworks */,
+				EC5BAD9C25D3030F00F142CB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BeMeWidgetExtension;
+			productName = BeMeWidgetExtension;
+			productReference = EC5BAD9E25D3030F00F142CB /* BeMeWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		EC813F1F2599A15100BBCE25 /* BeMe */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EC813F342599A15200BBCE25 /* Build configuration list for PBXNativeTarget "BeMe" */;
@@ -1453,10 +1536,12 @@
 				EC813F1D2599A15100BBCE25 /* Frameworks */,
 				EC813F1E2599A15100BBCE25 /* Resources */,
 				19D6FB0A8D195BF90316170F /* [CP] Embed Pods Frameworks */,
+				EC5BADAF25D3031100F142CB /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				EC5BADAD25D3031100F142CB /* PBXTargetDependency */,
 			);
 			name = BeMe;
 			productName = BeMe;
@@ -1469,9 +1554,12 @@
 		EC813F182599A15100BBCE25 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1230;
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1230;
 				TargetAttributes = {
+					EC5BAD9D25D3030F00F142CB = {
+						CreatedOnToolsVersion = 12.4;
+					};
 					EC813F1F2599A15100BBCE25 = {
 						CreatedOnToolsVersion = 12.3;
 					};
@@ -1491,11 +1579,20 @@
 			projectRoot = "";
 			targets = (
 				EC813F1F2599A15100BBCE25 /* BeMe */,
+				EC5BAD9D25D3030F00F142CB /* BeMeWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EC5BAD9C25D3030F00F142CB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC5BADA825D3031100F142CB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EC813F1E2599A15100BBCE25 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1579,6 +1676,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EC5BAD9A25D3030F00F142CB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EC5BADA525D3030F00F142CB /* BeMeWidget.swift in Sources */,
+				EC5BADAA25D3031100F142CB /* BeMeWidget.intentdefinition in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EC813F1C2599A15100BBCE25 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1606,6 +1712,7 @@
 				D4996BFC25AB8F9800E3987B /* OthersPageCVFlowLayout.swift in Sources */,
 				D44F6DE725A58A1F002A9761 /* CommentVC.swift in Sources */,
 				D4C5874425AF86900089BD18 /* SettingTVC.swift in Sources */,
+				EC5BADAB25D3031100F142CB /* BeMeWidget.intentdefinition in Sources */,
 				D480732B25A89DDD00DE1DD3 /* DiffThoughtTVC.swift in Sources */,
 				EC89E31C259C281F00DBAFE5 /* FollowerListCVC.swift in Sources */,
 				ECC6310925A999DB009E4FD4 /* FollowingGetAnswersService.swift in Sources */,
@@ -1773,6 +1880,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		EC5BADAD25D3031100F142CB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EC5BAD9D25D3030F00F142CB /* BeMeWidgetExtension */;
+			targetProxy = EC5BADAC25D3031100F142CB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		EC813F292599A15100BBCE25 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -1793,6 +1908,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		EC5BADB025D3031100F142CB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = BeMeWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6ZTQ76LJPZ;
+				INFOPLIST_FILE = BeMeWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.teamBeMe.BeMe1.BeMeWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EC5BADB125D3031100F142CB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = BeMeWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 6ZTQ76LJPZ;
+				INFOPLIST_FILE = BeMeWidget/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.teamBeMe.BeMe1.BeMeWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		EC813F322599A15200BBCE25 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1913,8 +2074,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B6D13159E429438682B4544 /* Pods-BeMe.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BeMe/BeMe.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6ZTQ76LJPZ;
@@ -1935,8 +2098,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B2F0C2D2FD99AEF5B492AAB9 /* Pods-BeMe.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = BeMe/BeMe.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 6ZTQ76LJPZ;
@@ -1956,6 +2121,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EC5BADB225D3031100F142CB /* Build configuration list for PBXNativeTarget "BeMeWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EC5BADB025D3031100F142CB /* Debug */,
+				EC5BADB125D3031100F142CB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EC813F1B2599A15100BBCE25 /* Build configuration list for PBXProject "BeMe" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

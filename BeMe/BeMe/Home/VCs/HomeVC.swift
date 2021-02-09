@@ -500,7 +500,14 @@ extension HomeVC {
                         self.answerDataList.insert(newData, at: 0)
                         i = i + 1
                     }
-                    
+                    if self.answerDataList.count > 0 {
+                        print("위젯")
+                        UserDefaults.standard.setValue(self.answerDataList[self.answerDataList.count-1].question!, forKey: "widget")
+                        let widgetDefault = UserDefaults.init(suiteName: "group.com.teamBeMe.BeMe1")
+                        let widgetInput = UserDefaults.standard.string(forKey: "widget")
+                        widgetDefault!.setValue(widgetInput, forKey: "question")
+                        
+                    }
                     self.cardCollectionView.reloadDataWithCompletion {
                         LoadingHUD.hide()
                        
@@ -550,6 +557,7 @@ extension HomeVC {
             
             
         }
+        
         print(answerDataList)
         
         
