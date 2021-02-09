@@ -15,5 +15,6 @@ pod 'lottie-ios'
 pod 'SwiftyGif'
 pod 'SwiftLint'
 pod 'Firebase/RemoteConfig'
+pod 'Firebase/Analytics'
 
 end
