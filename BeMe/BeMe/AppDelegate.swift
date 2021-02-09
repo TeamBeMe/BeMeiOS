@@ -24,15 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         remoteConfig.fetch(withExpirationDuration: TimeInterval(3600), completionHandler: { (status,error)-> Void in
             if status == .success {
-                print("Config Fetched!")
                 remoteConfig.activate(completion: nil)
-                
             }
             else{
                 print("errrrrrr")
             }
-            
-            
         })
        
         return true
