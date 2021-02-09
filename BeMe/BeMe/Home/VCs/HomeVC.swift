@@ -27,6 +27,8 @@ class HomeVC: UIViewController {
     
     @IBOutlet weak var collectionViewTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
+    
+    var lastIdx = -1
     var firstImage = UIImageView().then {
         $0.image = UIImage(named: "icEdit")
         
@@ -149,7 +151,7 @@ extension HomeVC {
             isInit = true
         }
         else{
-//            pageUpdate()
+            pageUpdate()
         }
        
 
@@ -282,6 +284,8 @@ extension HomeVC {
         print(self.todayCards)
         print(self.pastCards)
         pageForUpdate = 0
+        self.todayCards = 0
+        self.pastCards = 0
         answerDataList = []
         
         onePageUpdate()
@@ -296,6 +300,7 @@ extension HomeVC {
                 
                 var i = 0
                 print(data)
+                
                 
                 if let homePageDatas = data as? [HomePageData]{
                     
@@ -315,6 +320,7 @@ extension HomeVC {
                         var questionID = homePageData.questionID ?? 0
                         var questionCategoryID = homePageData.questionCategoryID ?? 0
                         var dataId = homePageData.id ?? 0
+                        var commentPublicFlag = homePageData.commentBlockedFlag ?? 1
                         
                         if answerDate != ""{
                             let index = answerDate.index(answerDate.startIndex, offsetBy: 10)
@@ -351,7 +357,8 @@ extension HomeVC {
                                                                   questionID: questionID,
                                                                   createdTime: createdAt,
                                                                   categoryID: questionCategoryID,
-                                                                  id: dataId)
+                                                                  id: dataId,
+                                                                  commentPublicFlag: commentPublicFlag)
                         print("")
                         print(newData)
                         self.answerDataList.insert(newData, at: 0)
@@ -366,10 +373,25 @@ extension HomeVC {
                         self.onePageUpdate()
                     }
                     else{
-                        self.cardCollectionView.reloadDataWithCompletion {
-                            LoadingHUD.hide()
-                           
+                        self.cardCollectionView.reloadData()
+                        
+                        if self.answerDataList.count > 0 {
+                            for i in 0...self.answerDataList.count-1 {
+                                if self.answerDataList[i].id! == self.lastIdx {
+                                    self.cardCollectionView.scrollToItem(at: IndexPath(item: i,
+                                                                                       section: 0),
+                                                                         at: .centeredHorizontally,
+                                                                         animated: false)
+                                }
+                                
+                            }
+                            
                         }
+                       
+                        
+                        
+                        
+                        
                         
                     }
                     
@@ -435,7 +457,7 @@ extension HomeVC {
                         var questionID = homePageData.questionID ?? 0
                         var questionCategoryID = homePageData.questionCategoryID ?? 0
                         var dataId = homePageData.id ?? 0
-                        
+                        var commentPublicFlag = homePageData.commentBlockedFlag ?? 1
                         if answerDate != ""{
                             let index = answerDate.index(answerDate.startIndex, offsetBy: 10)
                             answerDate = answerDate.substring(to: index)
@@ -471,7 +493,8 @@ extension HomeVC {
                                                                   questionID: questionID,
                                                                   createdTime: createdAt,
                                                                   categoryID: questionCategoryID,
-                                                                  id: dataId)
+                                                                  id: dataId,
+                                                                  commentPublicFlag: commentPublicFlag)
                         print("")
                         print(newData)
                         self.answerDataList.insert(newData, at: 0)
@@ -657,6 +680,7 @@ extension HomeVC : UIScrollViewDelegate {
                 cardCollectionView.scrollToItem(at: IndexPath(item: currentCardIdx-1, section: 0),
                                                 at: .centeredHorizontally,
                                                 animated: true)
+                
                 currentCardIdx = currentCardIdx-1
                 print("curr")
                 print(currentCardIdx)
@@ -683,6 +707,10 @@ extension HomeVC : UIScrollViewDelegate {
         }
         else{
             timeLabel.text = "오늘의 질문"
+        }
+        
+        if currentCardIdx < answerDataList.count {
+            lastIdx = answerDataList[currentCardIdx].id!
         }
         
         
@@ -723,7 +751,7 @@ extension HomeVC : AddQuestionDelegate {
                     var questionCategoryID = newQuestionData.questionCategoryID ?? 0
                     var dataID = newQuestionData.id ?? 0
                     
-                    
+                    var commentPublicFlag = newQuestionData.commentBlockedFlag ?? 1
                     if answerDate != ""{
                         let index = answerDate.index(answerDate.startIndex, offsetBy: 10)
                         answerDate = answerDate.substring(to: index)
@@ -750,7 +778,8 @@ extension HomeVC : AddQuestionDelegate {
                                                               questionID: questionID,
                                                               createdTime: createdAt,
                                                               categoryID: questionCategoryID,
-                                                              id: dataID)
+                                                              id: dataID,
+                                                              commentPublicFlag: commentPublicFlag)
                     
                     
                     self.answerDataList.append(newData)
@@ -932,10 +961,11 @@ extension HomeVC : HomeAnswerButtonDelegate {
 
 extension HomeVC : HomeGetDataFromAnswerDelegate {
     func setNewAnswer(answerData: AnswerDataForViewController) {
-        print("setNewAnswer")
-        answerDataList[currentCardIdx] = answerData
-        print(answerDataList[currentCardIdx])
-        cardCollectionView.reloadData()
+        if let id = answerData.id {
+            lastIdx = id
+        }
+        
+     
     }
     
     
@@ -990,7 +1020,7 @@ extension HomeVC: HomeChangeQuestionDelegate{
                     
                     
                     
-                    
+                    var commentPublicFlag = newQuestionData.commentBlockedFlag ?? 1
                     
                     
                     var newData = AnswerDataForViewController(lock: newQuestionData.publicFlag != 1,
@@ -1003,7 +1033,8 @@ extension HomeVC: HomeChangeQuestionDelegate{
                                                               questionID: questionID,
                                                               createdTime: createdAt,
                                                               categoryID: questionCategoryID,
-                                                              id: dataID)
+                                                              id: dataID,
+                                                              commentPublicFlag: commentPublicFlag)
                     print(newData)
                     
                     

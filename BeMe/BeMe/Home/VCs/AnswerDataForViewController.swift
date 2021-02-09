@@ -20,11 +20,11 @@ struct AnswerDataForViewController {
     var createdTime: String?
     var categoryID: Int?
     var id: Int?
-    
+    var commentPublicFlag: Int?
     
     init(lock: Bool, questionCategory: String, answerDate: String,
          question: String, answer: String, index: Int, answerIdx: Int,
-         questionID: Int, createdTime: String,categoryID: Int?,id: Int) {
+         questionID: Int, createdTime: String,categoryID: Int?,id: Int,commentPublicFlag: Int) {
         self.lock = lock
         self.questionCategory = questionCategory
         self.answerDate = answerDate
@@ -36,6 +36,7 @@ struct AnswerDataForViewController {
         self.createdTime = createdTime
         self.categoryID = categoryID
         self.id = id
+        self.commentPublicFlag = commentPublicFlag
     }
     
 }

@@ -384,7 +384,7 @@ extension OthersPageVC {
     
 
     @objc func scrapToast(_ notification: Notification) {
-        self.showToast(text: "스크랩 하기 전 답변을 작성해주세요.")
+        self.showToast(text: "먼저 답변을 작성해주세요.")
     }
     
     

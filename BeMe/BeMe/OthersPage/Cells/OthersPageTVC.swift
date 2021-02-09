@@ -117,7 +117,15 @@ class OthersPageTVC: UITableViewCell {
     }
     //MARK:**- Function Part**
     @objc func touchUpCard(){
+        if otherAnswer!.isAnswered == false {
+            NotificationCenter.default.post(name: .scrapToast, object: nil)
+            return
+        }
+        
         profileEditDelegate?.cardTapped(answerID: answerId!)
+        
+        
+        
         
     }
 }
