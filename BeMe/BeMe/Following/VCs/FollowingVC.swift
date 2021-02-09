@@ -196,9 +196,9 @@ extension FollowingVC {
     func getAnswerData(){
         
         answerPage += 1
-        let loadingFrame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+//        let loadingFrame = CGRect(x: 0, y: view.frame.height-87, width: view.frame.width, height: 87)
 //        if isLoading == false{
-            LoadingHUD.show(loadingFrame: loadingFrame,color: .white)
+//            LoadingHUD.show(loadingFrame: loadingFrame,color: .white)
 //            isLoading = true
 //        }
         let pastSize = answers.count
@@ -473,17 +473,17 @@ extension FollowingVC : UICollectionViewDataSource {
             
         }
         else{
-            if indexPath.item == answers.count && pageLen > answerPage{
-                guard let cell = collectionView.dequeueReusableCell(
-                        withReuseIdentifier: FollowMoreButtonCVC.identifier,
-                        for: indexPath) as? FollowMoreButtonCVC else {return UICollectionViewCell()}
-                cell.followingMoreButtonDelegate = self
-                
-                return cell
-                
-            }
+//            if indexPath.item == answers.count && pageLen > answerPage{
+//                guard let cell = collectionView.dequeueReusableCell(
+//                        withReuseIdentifier: FollowMoreButtonCVC.identifier,
+//                        for: indexPath) as? FollowMoreButtonCVC else {return UICollectionViewCell()}
+//                cell.followingMoreButtonDelegate = self
+//
+//                return cell
+//
+//            }
             
-            else {
+//            else {
                 
                 if answers[indexPath.item].isAnswered == true{
                     guard let cell = collectionView.dequeueReusableCell(
@@ -523,7 +523,7 @@ extension FollowingVC : UICollectionViewDataSource {
                     return cell
                 }
                 
-            }
+//            }
             
             
         }
@@ -548,7 +548,7 @@ extension FollowingVC : UICollectionViewDataSource {
         }
         else{
             
-            return pageLen > answerPage ? answers.count + 1  : answers.count
+            return answers.count
         }
         
         
@@ -829,8 +829,22 @@ extension FollowingVC: UICollectionViewDelegate {
             lastY = scrollView.contentOffset.y
         }
         
-        print(lastInset)
-        print(lastY)
+        for cell in wholeCollectionView.visibleCells {
+            if let indexPath = wholeCollectionView.indexPath(for: cell){
+                if indexPath.item > 5 && indexPath.item >= answers.count-3{
+                    if pageLen > answerPage{
+                        moreButtonAction()
+                    }
+                    
+                }
+                
+            }
+
+           
+            
+        }
+        
+        
         let currentContentOffset = scrollView.contentOffset.y
         if currentContentOffset > 100 {
             isScrolled = true
@@ -849,6 +863,11 @@ extension FollowingVC: UICollectionViewDelegate {
             lastIndexpath = wholeCollectionView.indexPath(for: cell)!
             print(lastIndexpath)
         }
+        
+        
+        
+        
+        
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -957,7 +976,7 @@ extension FollowingVC: FollowScrapButtonDelegate {
             switch networkResult{
             case .success(let data) :
                 if let newData = data as? FollowingNewAnswerData {
-                    var inputData = AnswerDataForViewController(lock: true, questionCategory: newData.category, answerDate: answerData.answerDate!, question: newData.question, answer: "", index: 0, answerIdx: answerData.answerIdx, questionID: newData.questionID, createdTime: "", categoryID: newData.categoryID, id: newData.id)
+                    var inputData = AnswerDataForViewController(lock: true, questionCategory: newData.category, answerDate: answerData.answerDate!, question: newData.question, answer: "", index: 0, answerIdx: answerData.answerIdx, questionID: newData.questionID, createdTime: "", categoryID: newData.categoryID, id: newData.id, commentPublicFlag: 1)
                     guard let answerVC = UIStoryboard(name: "Answer",
                                                       bundle: nil).instantiateViewController(
                                                         withIdentifier: "AnswerVC") as? AnswerVC

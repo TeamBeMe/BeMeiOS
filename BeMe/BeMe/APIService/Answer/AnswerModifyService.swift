@@ -75,7 +75,7 @@ struct AnswerModifyService {
         switch status{
         case 200..<300:
             print("답변 수정 성공")
-            
+            NotificationCenter.default.post(name: .answerPop, object: nil)
             return .success(decodedData.data)
         case 400..<500 :
             return .requestErr(decodedData.message)

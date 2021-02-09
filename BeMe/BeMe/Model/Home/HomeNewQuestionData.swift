@@ -14,7 +14,7 @@ struct HomeNewQuestionData: Codable {
     let answerIdx: Int?
     let content: String?
     let publicFlag: Int?
-    let commentBlockedFlag: Bool?
+    let commentBlockedFlag: Int?
     let createdAt: String?
     let answerDate: String?
     let questionID: Int?

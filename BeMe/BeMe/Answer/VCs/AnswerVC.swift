@@ -74,6 +74,7 @@ class AnswerVC: UIViewController {
         registerForKeyboardNotifications()
         FollowingVC.fromWhichView = 1
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        NotificationCenter.default.addObserver(self, selector: #selector(shouldPop), name: .answerPop, object: nil)
     }
     
     override func viewDidLoad() {
@@ -83,6 +84,7 @@ class AnswerVC: UIViewController {
         setLabels()
         clarifyRegister()
         commentSwitch.isOn = !isCommentPublic
+        
     }
     
     
@@ -173,6 +175,13 @@ class AnswerVC: UIViewController {
         questionLabel.text = answerData?.question
         //        questionInfoLabel.text = "[ \((answerData?.questionCategory)!)에 관한 \((answerData?.answerIdx)!)번째 질문 ]"
         answerDateLabel.text = answerData?.createdTime
+        if answerData?.commentPublicFlag == 0 {
+            commentSwitch.isOn = true
+        }
+        else {
+            commentSwitch.isOn = false
+        }
+        
         answerDateLabel.textColor = .slateGrey
         questionInfoLabel.textColor = .slateGrey
         let mainString = "[ \((answerData?.questionCategory)!)에 관한 \((answerData?.answerIdx)!)번째 질문 ]"
@@ -216,7 +225,11 @@ class AnswerVC: UIViewController {
     ///         myTableView.datasource = self
     
     ///    }
-    
+    @objc func shouldPop(_notification: Notification){
+        self.navigationController?.popViewController(animated: true)
+        
+        
+    }
     
     @IBAction func backButtonAction(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
@@ -278,7 +291,6 @@ class AnswerVC: UIViewController {
         
         
         answerDataDelegate?.setNewAnswer(answerData: answerData!)
-        self.navigationController?.popViewController(animated: true)
         
     }
     

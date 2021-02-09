@@ -652,7 +652,7 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
                         let index = createdAt.index(createdAt.startIndex, offsetBy: 10)
                         createdAt = createdAt.substring(to: index)
                     }
-                    let inputData = AnswerDataForViewController(lock: true, questionCategory: answerData.questionCategoryName, answerDate: "", question: answerData.questionTitle, answer: "", index: 0, answerIdx: answerData.answerIdx, questionID: answerData.questionID, createdTime: createdAt, categoryID: answerData.questionCategoryID, id: answerData.id)
+                    let inputData = AnswerDataForViewController(lock: true, questionCategory: answerData.questionCategoryName, answerDate: "", question: answerData.questionTitle, answer: "", index: 0, answerIdx: answerData.answerIdx, questionID: answerData.questionID, createdTime: createdAt, categoryID: answerData.questionCategoryID, id: answerData.id,commentPublicFlag: 1)
                     
                     guard let answerVC = UIStoryboard(name: "Answer",
                                                       bundle: nil).instantiateViewController(
