@@ -36,8 +36,16 @@ class MypageVC: UIViewController {
     
     private var keyword: String?
     
-    var tableviewHeight: CGFloat = 735.0
     
+    var tableviewHeight: CGFloat = 393.0
+    var pastTableViewHeight: CGFloat = 393.0
+    
+    var scraptableviewHeight: CGFloat = 393.0
+    var scrappastTableViewHeight: CGFloat = 393.0
+    var myPageForServer = 1
+    var otherPageForServer = 1
+    var myPageLen = 1
+    var otherPageLen = 1
     private var myAnswerArray: [Answer] = [] {
         didSet {
             mypageCollectionView.reloadData()
@@ -73,7 +81,7 @@ class MypageVC: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(dismissCategory), name: .init("categoryClose"), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(getKeyword), name: .init("keyword"), object: nil)
-
+        
         if #available(iOS 11.0, *) {
             mypageCollectionView.automaticallyAdjustsScrollIndicatorInsets = false
         } else {
@@ -91,7 +99,7 @@ class MypageVC: UIViewController {
         self.keyword = keyword
         
     }
-
+    
     
     @objc func dismissCategory(_ notification: Notification) {
         popupBackgroundView.animatePopupBackground(false)
@@ -107,11 +115,12 @@ class MypageVC: UIViewController {
         MypageVC.selectedAvailablity = selectedAv
         MypageVC.selectedCategory = selectedCategoryId
         
-        getAnswerData(availability: selectedAv, category: selectedCategoryId, page: 1, query: keyword)
-        getScrapData(availability: selectedAv, category: selectedCategoryId, page: 1, query: keyword)
+        getAnswerData(availability: selectedAv, category: selectedCategoryId, page: myPageForServer, query: keyword)
+        getScrapData(availability: selectedAv, category: selectedCategoryId, page: otherPageForServer, query: keyword)
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        NotificationCenter.default.addObserver(self, selector: #selector(myPageUpdate), name: .myPageUpdate, object: nil)
         getProfileData()
         getAnswerData(availability: "all", category: nil, page: 1, query: "")
     }
@@ -147,7 +156,7 @@ class MypageVC: UIViewController {
         label.textColor = UIColor.darkGray
         
     }
-
+    
     
     //MARK:**- Function Part**
     
@@ -160,6 +169,29 @@ class MypageVC: UIViewController {
         nc.modalPresentationStyle = .fullScreen
         self.present(nc, animated: true, completion: nil)
     }
+    
+    @objc func myPageUpdate(){
+        
+        if myPageForServer < myPageLen {
+            print("마이페이지업데이트")
+            myPageForServer += 1
+            getAnswerData(availability: selectedAv, category: selectedCategoryId, page: myPageForServer, query: keyword)
+        }
+        
+        
+    }
+    @objc func scrapUpdate(){
+        
+        if otherPageForServer < otherPageLen {
+            print("스크랩업데이트")
+            otherPageForServer += 1
+            getScrapData(availability: selectedAv, category: selectedCategoryId, page: otherPageForServer, query: keyword)
+            
+        }
+        
+        
+    }
+    
 }
 //MARK:**- extension 부분**
 
@@ -208,8 +240,18 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if tableviewHeight != 0 {
+            pastTableViewHeight = tableviewHeight
+            
+        }
+        
+        if scraptableviewHeight != 0 {
+            scrappastTableViewHeight = scraptableviewHeight
+        }
+        
         if directionMenu == 0 {
-//            tableviewHeight = (CGFloat(myAnswerArray.count) * 105.0 > 0) ? CGFloat(myAnswerArray.count) * 105.0 : 735
+            //            tableviewHeight = (CGFloat(myAnswerArray.count) * 105.0 > 0) ? CGFloat(myAnswerArray.count) * 105.0 : 735
             tableviewHeight = 0
             if myAnswerArray.count > 0 {
                 for i in 0...myAnswerArray.count-1 {
@@ -217,23 +259,21 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
                     tableviewHeight += CGFloat(tmpLabel.calculateMaxLabelLines())*18.0 + 69.0
                 }
             }
+            return CGSize(width: collectionView.frame.width  , height: tableviewHeight+100.0)
         } else {
-//            tableviewHeight = (CGFloat(myScrapArray.count) * 105.0 > 0) ? CGFloat(myScrapArray.count) * 105.0 : 735
-            tableviewHeight = 0
+            
+            scraptableviewHeight = 0
             if myScrapArray.count > 0 {
                 for i in 0...myScrapArray.count-1 {
                     tmpLabel.text = myScrapArray[i].question
-                    tableviewHeight += CGFloat(tmpLabel.calculateMaxLabelLines())*18.0 + 99.0
+                    scraptableviewHeight += CGFloat(tmpLabel.calculateMaxLabelLines())*18.0 + 99.0
                 }
             }
+            return CGSize(width: collectionView.frame.width  , height: scraptableviewHeight+100.0)
         }
-
+        
+        
        
-
-       print("하이트")
-        print(tableviewHeight)
-//        tableviewHeight = (tableviewHeight < 588.0) ? 588 : tableviewHeight
-        return CGSize(width: collectionView.frame.width  , height: tableviewHeight)
     }
     
     
@@ -281,10 +321,10 @@ extension MypageVC : UICollectionViewDelegateFlowLayout {
             headerView.myProfile = myProfile
             headerView.MypageCRVDelegate = self
             print("박세란")
-        
-         
+            
+            
             if (myProfile.count != 0) {
-               
+                
                 headerView.setProfile(nickname: myProfile[0].nickname, img: myProfile[0].profileImg!, visit: String(myProfile[0].continuedVisit), answerCount: String(myProfile[0].answerCount))
             }
             if chosenImage != nil{
@@ -345,7 +385,17 @@ extension MypageVC {
             switch result {
             case .success(let data):
                 if let response = data as? MyAnswer{
-                    self.myAnswerArray = response.answers
+                    if page == 1 {
+                        self.myAnswerArray = response.answers
+                    }
+                    else {
+                        for ans in response.answers {
+                            self.myAnswerArray.append(ans)
+                        }
+                        
+                        
+                    }
+                    self.myPageLen = response.pageLen
                     self.mypageCollectionView.reloadData()
                     print("MypageVC getAnswerData 성공")
                     print(self.myAnswerArray)
@@ -377,7 +427,15 @@ extension MypageVC {
             switch result {
             case .success(let data):
                 if let response = data as? MyScrap{
-                    self.myScrapArray = response.answers
+                    if page == 1 {
+                        self.myScrapArray = response.answers
+                    }
+                    else {
+                        for ans in response.answers {
+                            self.myScrapArray.append(ans)
+                        }
+                    }
+                    self.otherPageLen = response.pageLen
                     self.mypageCollectionView.reloadData()
                     print("MypageVC getScrapData 성공")
                     print(self.myScrapArray)
@@ -386,6 +444,7 @@ extension MypageVC {
                     print(category)
                     print(page)
                     print(query)
+                    
                     
                 }
             case .requestErr(let msg):
@@ -469,11 +528,34 @@ extension MypageVC: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
+        
         if offset < 91.0 {
             settingButton.isHidden = false
         } else {
             settingButton.isHidden = true
         }
+        print(offset)
+        
+        
+        
+        if directionMenu == 0 {
+            print(tableviewHeight)
+            print(pastTableViewHeight)
+            if offset > tableviewHeight - pastTableViewHeight - 100 {
+                myPageUpdate()
+            }
+        }
+        else {
+            print(scraptableviewHeight)
+            print(scrappastTableViewHeight)
+            
+            if offset > scraptableviewHeight - scrappastTableViewHeight - 100 {
+                scrapUpdate()
+            }
+        }
+        
+        
+        
     }
     
 }
@@ -510,7 +592,7 @@ extension MypageVC: UIImagePickerControllerDelegate, UINavigationControllerDeleg
         self.dismiss(animated: true, completion: {
             self.navigationController?.present(shittyVC, animated: true, completion: nil)
         })
-       
+        
     }
     
     
@@ -539,7 +621,7 @@ extension MypageVC: SignUpProfileImageSetDelegate{
                 
             }
             
-
+            
         }
     }
 }
@@ -574,3 +656,4 @@ extension MypageVC: MypageCRVDelegate{
     
     
 }
+

@@ -94,6 +94,7 @@ class HomeVC: UIViewController {
     var deleteIdx = 0
     var initialAnimated = false
     
+    var pageForUpdate = 0
     var isInit = false
    
 }
@@ -146,6 +147,9 @@ extension HomeVC {
         if isInit == false{
             pageGetFromServer()
             isInit = true
+        }
+        else{
+//            pageUpdate()
         }
        
 
@@ -272,10 +276,140 @@ extension HomeVC {
         }
     }
     
+    func pageUpdate(){
+        LoadingHUD.show(loadingFrame: self.view.frame,color: .black)
+        print("바뀌기전")
+        print(self.todayCards)
+        print(self.pastCards)
+        pageForUpdate = 0
+        answerDataList = []
+        
+        onePageUpdate()
+        
+    }
+    
+    func onePageUpdate(){
+        pageForUpdate += 1
+        HomePageDataService.shared.getHomeData(page: pageForUpdate){(networkResult) -> (Void) in
+            switch networkResult {
+            case .success(let data) :
+                
+                var i = 0
+                print(data)
+                
+                if let homePageDatas = data as? [HomePageData]{
+                    
+                    print(homePageDatas.count)
+                    
+                    
+                    for homePageData in homePageDatas{
+                        
+                        
+                        var answerDate = homePageData.answerDate ?? ""
+                        var answerIdx = homePageData.answerIdx ?? 0
+                        var content = homePageData.content ?? ""
+                        var createdAt = homePageData.createdAt ?? ""
+                        var categoryName = homePageData.questionCategoryName ?? ""
+                        var questionCategoryName = homePageData.questionCategoryName ?? ""
+                        var questionTitle = homePageData.questionTitle ?? ""
+                        var questionID = homePageData.questionID ?? 0
+                        var questionCategoryID = homePageData.questionCategoryID ?? 0
+                        var dataId = homePageData.id ?? 0
+                        
+                        if answerDate != ""{
+                            let index = answerDate.index(answerDate.startIndex, offsetBy: 10)
+                            answerDate = answerDate.substring(to: index)
+                        }
+                        if createdAt != "" {
+                            let index = createdAt.index(createdAt.startIndex, offsetBy: 10)
+                            createdAt = createdAt.substring(to: index)
+                        }
+
+                        
+                        if homePageData.isToday!  {
+                            self.todayCards += 1
+        
+                        }
+                        else if content == ""{
+                            self.todayCards += 1
+                            self.todayCardsForLabel += 1
+                        }
+                        else{
+                            self.pastCards = self.pastCards + 1
+                        }
+                        
+                        
+                        
+                        
+                        var newData = AnswerDataForViewController(lock: homePageData.publicFlag != 1,
+                                                                  questionCategory: questionCategoryName,
+                                                                  answerDate: answerDate,
+                                                                  question: questionTitle,
+                                                                  answer: content,
+                                                                  index: self.currentCardIdx,
+                                                                  answerIdx: answerIdx,
+                                                                  questionID: questionID,
+                                                                  createdTime: createdAt,
+                                                                  categoryID: questionCategoryID,
+                                                                  id: dataId)
+                        print("")
+                        print(newData)
+                        self.answerDataList.insert(newData, at: 0)
+                        i = i + 1
+                    }
+                    
+                    print("바뀐 후")
+                    print(self.todayCards)
+                    print(self.pastCards)
+                    print(self.answerDataList)
+                    if self.pageForUpdate < self.pageForServer-1 {
+                        self.onePageUpdate()
+                    }
+                    else{
+                        self.cardCollectionView.reloadDataWithCompletion {
+                            LoadingHUD.hide()
+                           
+                        }
+                        
+                    }
+                    
+                    
+                   
+                    
+                }
+              
+                
+            case .requestErr(let msg):
+                if let message = msg as? String {
+                    LoadingHUD.hide()
+                    print(message)
+                }
+            case .pathErr :
+                print("pathErr")
+            case .serverErr :
+                print("serverErr")
+            case .networkFail:
+                print("networkFail")
+                
+                
+                
+            }
+            
+            
+        }
+        
+        
+        
+    }
+        
+        
+        
+        
+    
     
     func pageGetFromServer(){
         LoadingHUD.show(loadingFrame: self.view.frame,color: .black)
-        HomePageDataService.shared.getHomeData(page: pageForServer){(networkResult) -> (Void) in
+        HomePageDataService.shared.getHomeData(page: self.pageForServer){(networkResult) -> (Void) in
             switch networkResult {
             case .success(let data) :
                 

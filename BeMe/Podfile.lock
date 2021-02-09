@@ -41,6 +41,7 @@ PODS:
     - FirebaseInstallations (~> 7.0)
     - GoogleUtilities/Environment (~> 7.0)
     - "GoogleUtilities/NSData+zlib (~> 7.0)"
+  - GoogleAnalytics (3.17.0)
   - GoogleAppMeasurement (7.5.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
     - GoogleUtilities/MethodSwizzler (~> 7.0)
@@ -85,6 +86,7 @@ DEPENDENCIES:
   - Alamofire
   - Firebase/Analytics
   - Firebase/RemoteConfig
+  - GoogleAnalytics
   - Kingfisher
   - lottie-ios
   - SnapKit
@@ -102,6 +104,7 @@ SPEC REPOS:
     - FirebaseCoreDiagnostics
     - FirebaseInstallations
     - FirebaseRemoteConfig
+    - GoogleAnalytics
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleUtilities
@@ -123,6 +126,7 @@ SPEC CHECKSUMS:
   FirebaseCoreDiagnostics: 35685db68b11fe7d19d2d8b557fd7e3a56ac81cc
   FirebaseInstallations: a46ae59915f0931e18814164849cd0354bea24ed
   FirebaseRemoteConfig: 98dac0952e07858dbd70ad0f26d470eb7fa37ee4
+  GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   GoogleAppMeasurement: 65a1071e5f52f63ab03d0a4d814a54fd762d885a
   GoogleDataTransport: 1024b1a4dfbd7a0e92cb20d7e0a6f1fb66b449a4
   GoogleUtilities: d866834472f1324d080496bc67ab3ce5d0d46027
@@ -135,6 +139,6 @@ SPEC CHECKSUMS:
   SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: 5178b704a460c411996a02c7504102b97f349239
+PODFILE CHECKSUM: 3fe7054b504654d7ca560626bf9e4dc15531fc68
 
 COCOAPODS: 1.10.0

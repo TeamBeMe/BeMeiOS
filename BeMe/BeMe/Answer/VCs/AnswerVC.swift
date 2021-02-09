@@ -82,7 +82,7 @@ class AnswerVC: UIViewController {
         setTextView(answerTextView)
         setLabels()
         clarifyRegister()
-        
+        commentSwitch.isOn = !isCommentPublic
     }
     
     
@@ -112,9 +112,9 @@ class AnswerVC: UIViewController {
     
     @IBAction func commentSwitchValueCanged(_ sender: Any) {
         if self.commentSwitch.isOn {
-            isCommentPublic = true
-        } else {
             isCommentPublic = false
+        } else {
+            isCommentPublic = true
         }
         print(isCommentPublic)
         

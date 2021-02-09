@@ -142,6 +142,7 @@
 		EC7C88E025AF65A1000C71D9 /* GmarketSansTTFLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC7C88DD25AF6571000C71D9 /* GmarketSansTTFLight.ttf */; };
 		EC7C88E225AF65A4000C71D9 /* GmarketSansTTFMedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EC7C88DB25AF6571000C71D9 /* GmarketSansTTFMedium.ttf */; };
 		EC7C88E525AF6989000C71D9 /* UILabel+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C88E425AF6989000C71D9 /* UILabel+extensions.swift */; };
+		EC7CB69F25D27CC200F4629D /* NotificationCenter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7CB69E25D27CC200F4629D /* NotificationCenter+Extensions.swift */; };
 		EC7F0EA125A05460008EB88A /* CustomHomeActionSheetAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0EA025A05460008EB88A /* CustomHomeActionSheetAlert.swift */; };
 		EC7F0EA925A057DF008EB88A /* HomeVC+UnderAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0EA825A057DF008EB88A /* HomeVC+UnderAlert.swift */; };
 		EC7F0EAC25A059AA008EB88A /* HomeVC+Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7F0EAB25A059AA008EB88A /* HomeVC+Protocols.swift */; };
@@ -366,6 +367,7 @@
 		EC7C88DC25AF6571000C71D9 /* GmarketSansTTFBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFBold.ttf; sourceTree = "<group>"; };
 		EC7C88DD25AF6571000C71D9 /* GmarketSansTTFLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = GmarketSansTTFLight.ttf; sourceTree = "<group>"; };
 		EC7C88E425AF6989000C71D9 /* UILabel+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+extensions.swift"; sourceTree = "<group>"; };
+		EC7CB69E25D27CC200F4629D /* NotificationCenter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationCenter+Extensions.swift"; sourceTree = "<group>"; };
 		EC7F0EA025A05460008EB88A /* CustomHomeActionSheetAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHomeActionSheetAlert.swift; sourceTree = "<group>"; };
 		EC7F0EA825A057DF008EB88A /* HomeVC+UnderAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeVC+UnderAlert.swift"; sourceTree = "<group>"; };
 		EC7F0EAB25A059AA008EB88A /* HomeVC+Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeVC+Protocols.swift"; sourceTree = "<group>"; };
@@ -590,7 +592,6 @@
 			isa = PBXGroup;
 			children = (
 				A5A5BE6825A9DF2E00036431 /* OthersPageVC.swift */,
-				EC89E332259C4E2800DBAFE5 /* UnderTab */,
 			);
 			path = VCs;
 			sourceTree = "<group>";
@@ -618,6 +619,7 @@
 		D405E89D25ADBDD2004CC60F /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
+				ECC6312725A9E88B009E4FD4 /* SupportFiles */,
 				D405E8A025ADBDFA004CC60F /* Alarm.storyboard */,
 			);
 			path = Storyboard;
@@ -1212,7 +1214,6 @@
 				D4C5873725AF83F60089BD18 /* Setting */,
 				ECA1517B25ADEF1E0091E5EF /* Onboarding */,
 				D405E89C25ADBDD2004CC60F /* Alarm */,
-				ECC6312725A9E88B009E4FD4 /* SupportFiles */,
 				D44F6DBF25A5784A002A9761 /* Answer */,
 				D44F6D9B25A575E0002A9761 /* Protocols */,
 				D4F198EA25A4359E000AF0E7 /* Comment */,
@@ -1224,6 +1225,7 @@
 				EC7FEFA025A38A7F00C61147 /* Search */,
 				A578D4E725A0BF8F00F69908 /* Mypage */,
 				A5A5BE6025A9D9B200036431 /* OthersPage */,
+				EC89E332259C4E2800DBAFE5 /* UnderTab */,
 				EC7C160A259B8B1700A5BA4C /* Following */,
 				D492E43125A0E0F20088A181 /* CustomActionSheet */,
 				EC7C1603259B483F00A5BA4C /* CustomViews */,
@@ -1256,6 +1258,7 @@
 				EC75A25D25A8B28000F4E160 /* UIImageView+Extensions.swift */,
 				EC7C88E425AF6989000C71D9 /* UILabel+extensions.swift */,
 				D4D94CEE25B1BDF300202506 /* CALayer+Extensions.swift */,
+				EC7CB69E25D27CC200F4629D /* NotificationCenter+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1657,6 +1660,7 @@
 				D41196B825A64E82009C674A /* CustomActionSheetTwoVC.swift in Sources */,
 				EC7C1615259B925A00A5BA4C /* FollowingPVC.swift in Sources */,
 				D4996BF725AB8F4500E3987B /* AlertLabels.swift in Sources */,
+				EC7CB69F25D27CC200F4629D /* NotificationCenter+Extensions.swift in Sources */,
 				A5A5BE7225A9E35A00036431 /* OthersPageCRV.swift in Sources */,
 				A54CE7CE25AC60D100914FCB /* OthersProfile.swift in Sources */,
 				ECB44D4D25AC886800F491F2 /* FollowerDeleteService.swift in Sources */,

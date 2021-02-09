@@ -38,7 +38,7 @@ class MypageTabCVC: UICollectionViewCell {
         mypageTableView.separatorStyle = .none
     }
     //MARK:**- Function Part**
-   
+    
     
 }
 
@@ -55,8 +55,10 @@ extension MypageTabCVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+        print(indexPath)
         
-        
+//        NotificationCenter.default.post(name: .myPageUpdate, object: nil)
         if (self.delegate?.nowDirection() == 0){
             guard let tab = tableView
                     .dequeueReusableCell(withIdentifier: MypageResultTVC.identifier, for: indexPath)
@@ -121,7 +123,25 @@ extension MypageTabCVC: MypageResultTVCDelegate {
         mypageTableView.reloadData()
         
     }
+    
+}
 
+extension MypageTabCVC {
+    
+    func checkShouldUpdate()-> Bool{
+        for cell in mypageTableView.visibleCells {
+            if let myindexPath = mypageTableView.indexPath(for: cell){
+                print(myindexPath)
+                if myindexPath.row >= myAnswerArray.count - 1 {
+                    return true
+                }
+                
+            }
+            
+        }
+        
+        return false
+    }
 }
 
 extension MypageTabCVC: ProfileEditDelegate{
