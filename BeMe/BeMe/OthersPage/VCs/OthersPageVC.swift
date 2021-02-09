@@ -17,6 +17,9 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
     @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var tmpLabel: UILabel!
     
+    var pageForServer = 1
+    var pageLen = 1
+    
     lazy var popupBackgroundView: UIView = UIView()
     
     //MARK:**- Variable Part**
@@ -24,7 +27,8 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
     
     let othersPageCVC = OthersPageCVC()
     
-    var tableviewHeight: CGFloat = 735.0
+    var tableviewHeight: CGFloat = 294.0
+    var pastTableViewHeiht: CGFloat = 294.0
     
     var userID: Int?
     
@@ -49,6 +53,7 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
     //MARK:**- Life Cycle Part**
     
     override func viewDidLoad() {
+        NotificationCenter.default.addObserver(self, selector: #selector(scrapToast(_:)), name: .scrapToast, object: nil)
         tmpLabel.alpha = 0
         super.viewDidLoad()
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
@@ -67,7 +72,7 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
         setNotificationCenter()
         othersPageCollectionView.collectionViewLayout
             = othersPageCVLayout
-        
+        getAnswerData(userId: userID!, page: pageForServer)
         setPopupBackgroundView()
         
     }
@@ -75,7 +80,7 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
         super.viewWillAppear(animated)
         
         self.navigationController?.navigationBar.isHidden = true
-        getAnswerData(userId: userID!, page: 1)
+        
         getProfileData(userId: userID!)
 
     }
@@ -148,6 +153,18 @@ class OthersPageVC: UIViewController, MFMailComposeViewControllerDelegate {
         print(action)
     }
  
+    
+    func getNewPage(){
+        if pageForServer < pageLen {
+            print("타페업데이트")
+            pageForServer += 1
+            getAnswerData(userId: userID!, page: pageForServer)
+            
+        }
+        
+    }
+    
+    
     func goToCommentButtonTapped(_ answerId: Int) {
         guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
         comment.answerId = answerId
@@ -233,6 +250,10 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if tableviewHeight != 0 {
+            pastTableViewHeiht = tableviewHeight
+        }
         tableviewHeight = 0
         if othersAnswerArray.count > 0 {
             for i in 0...othersAnswerArray.count-1 {
@@ -246,10 +267,7 @@ extension OthersPageVC : UICollectionViewDelegateFlowLayout {
             
         }
         
-//
-//        tableviewHeight = CGFloat(othersAnswerArray.count) * 130.0
-//        tableviewHeight = (tableviewHeight < 588.0) ? 588 : tableviewHeight
-        return CGSize(width: collectionView.frame.width  , height: tableviewHeight)
+        return CGSize(width: collectionView.frame.width  , height: tableviewHeight+100)
     }
     
     
@@ -324,11 +342,17 @@ extension OthersPageVC {
             case .success(let data):
                 if let response = data as? OthersAnswer{
                     print("setAnswerData 성공")
-                    
-                    
-                    self.othersAnswerArray = response.answers
-                    //                    print("setAnswerData 안에ㅐ서")
-                    //                    print(response)
+                    self.pageLen = response.pageLen
+                    if page == 1 {
+                        self.othersAnswerArray = response.answers
+                    }
+                    else {
+                        for ans in response.answers {
+                            self.othersAnswerArray.append(ans)
+                        }
+                        
+                    }
+  
                     if self.othersAnswerArray.count != 0{
                         if self.othersAnswerArray[0].userID == self.userID {
                             self.isMyProfile = true
@@ -356,6 +380,11 @@ extension OthersPageVC {
         }
         
         
+    }
+    
+
+    @objc func scrapToast(_ notification: Notification) {
+        self.showToast(text: "스크랩 하기 전 답변을 작성해주세요.")
     }
     
     
@@ -400,7 +429,15 @@ extension OthersPageVC: UIScrollViewDelegate {
             backButton.isHidden = true
             reportButton.isHidden = true
         }
-        print(offset)
+        
+        if offset > tableviewHeight - pastTableViewHeiht - 100 {
+            print(offset)
+            print(tableviewHeight)
+            print(pastTableViewHeiht)
+            getNewPage()
+        }
+        
+        
 
     }
 }

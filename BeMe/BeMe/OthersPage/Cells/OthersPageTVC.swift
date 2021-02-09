@@ -23,7 +23,7 @@ class OthersPageTVC: UITableViewCell {
     private var isScrapped = true
     static let identifier = "OthersPageTVC"
     var answerId: Int?
-    
+    var otherAnswer: Answer?
     var questionId: Int?
     
     weak var delegate: UITableViewButtonSelectedDelegate?
@@ -47,6 +47,13 @@ class OthersPageTVC: UITableViewCell {
     
     //MARK:**- IBAction Part**
     @IBAction func scrappedButtonTapped(_ sender: UIButton) {
+        
+        
+        if otherAnswer!.isAnswered == false {
+            NotificationCenter.default.post(name: .scrapToast, object: nil)
+            return
+        }
+        
         if isScrapped {
             isScrapped = false
             sender.setImage(UIImage.init(named: "btnScrapSelected"), for: .normal)

@@ -68,6 +68,8 @@ extension OthersPageCVC: UITableViewDataSource, UITableViewDelegate {
                 as? OthersPageTVC else { return UITableViewCell() }
         
         tab.setCardView(question: othersAnswerArray[indexPath.row].question, questionInfo: othersAnswerArray[indexPath.row].category, answerDate: othersAnswerArray[indexPath.row].answerDate, writer: othersAnswerArray[indexPath.row].userNickname, writerImg: othersAnswerArray[indexPath.row].userProfile ?? "", isScrapped: othersAnswerArray[indexPath.row].isScrapped!, answerId: othersAnswerArray[indexPath.row].id, questionId: othersAnswerArray[indexPath.row].questionID)
+        tab.otherAnswer = othersAnswerArray[indexPath.row]
+        
         tab.delegate = self
         tab.profileEditDelegate = self
         tab.selectionStyle = .none
@@ -129,6 +131,8 @@ extension OthersPageCVC: UITableViewButtonSelectedDelegate {
         scrapAnswer(answerId: answerId)
 
     }
+    
+    
     
 }
 

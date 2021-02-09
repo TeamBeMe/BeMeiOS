@@ -789,13 +789,13 @@ extension FollowingVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.section > 2{
             if (scrollDirection) {
-                let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 150, 0)
+                let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, 50, 0)
                 //                cell.layer.transform = rotate
                 cell.layer.transform = rotationTransform
                 
                 //                cell.alpha = 0.5
                 
-                UIView.animate(withDuration: 0.5, animations: {
+                UIView.animate(withDuration: 0.3, animations: {
                     cell.layer.transform = CATransform3DIdentity
                     
                 })
@@ -803,7 +803,7 @@ extension FollowingVC: UICollectionViewDelegate {
                 if isScrolled == true{
                     let rotationTransform = CATransform3DTranslate(CATransform3DIdentity, 0, -50, 0)
                     cell.layer.transform = rotationTransform
-                    UIView.animate(withDuration: 0.5, animations: {
+                    UIView.animate(withDuration: 0.3, animations: {
                         cell.layer.transform = CATransform3DIdentity
                         
                     },completion: { finished in

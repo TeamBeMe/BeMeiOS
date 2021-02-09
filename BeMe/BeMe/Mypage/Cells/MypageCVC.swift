@@ -134,3 +134,5 @@ protocol MypageCVCDelegate {
     func nowDirection() -> Int
 }
 
+
+
