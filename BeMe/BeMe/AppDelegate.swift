@@ -13,6 +13,27 @@ import FirebaseRemoteConfig
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    func appUpdate() {
+
+       // id뒤에 값은 앱정보에 Apple ID에 써있는 숫자
+
+       if let url = URL(string: "itms-apps://itunes.apple.com/app/id1548760434"), UIApplication.shared.canOpenURL(url) {
+
+          // 앱스토어로 이동
+
+          if #available(iOS 10.0, *) {
+
+             UIApplication.shared.open(url, options: [:], completionHandler: nil)
+
+          } else {
+
+              UIApplication.shared.openURL(url)
+
+          }
+
+       }
+
+    }
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -34,6 +55,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             
         })
+        
+        _ = try? AppStoreCheck.isUpdateAvailable { (update, error) in
+
+           if let error = error {
+
+              print(error)
+
+           } else if let update = update {
+            
+              if update {
+
+                 self.appUpdate()
+
+                 return
+
+              }
+
+           }
+
+        }
        
         return true
     }

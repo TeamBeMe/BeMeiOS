@@ -110,6 +110,7 @@
 		EC71C83525A5A41800F51FEC /* HomePageDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC71C83425A5A41800F51FEC /* HomePageDataService.swift */; };
 		EC71C84125A5B1BA00F51FEC /* HomeNewQuestionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC71C84025A5B1BA00F51FEC /* HomeNewQuestionData.swift */; };
 		EC71C84C25A7769B00F51FEC /* ShittyImageCropVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC71C84B25A7769B00F51FEC /* ShittyImageCropVC.swift */; };
+		EC730F7D25D4DECF003E09CC /* AppstoreCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC730F7C25D4DECF003E09CC /* AppstoreCheck.swift */; };
 		EC737F19259D867A0035207F /* CustomTodayCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F18259D867A0035207F /* CustomTodayCardView.swift */; };
 		EC737F1C259D8B9E0035207F /* CustomAddCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */; };
 		EC737F21259DB2C40035207F /* FollowUpperCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC737F20259DB2C40035207F /* FollowUpperCVC.swift */; };
@@ -335,6 +336,7 @@
 		EC71C83425A5A41800F51FEC /* HomePageDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageDataService.swift; sourceTree = "<group>"; };
 		EC71C84025A5B1BA00F51FEC /* HomeNewQuestionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNewQuestionData.swift; sourceTree = "<group>"; };
 		EC71C84B25A7769B00F51FEC /* ShittyImageCropVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShittyImageCropVC.swift; sourceTree = "<group>"; };
+		EC730F7C25D4DECF003E09CC /* AppstoreCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppstoreCheck.swift; sourceTree = "<group>"; };
 		EC737F18259D867A0035207F /* CustomTodayCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTodayCardView.swift; sourceTree = "<group>"; };
 		EC737F1B259D8B9E0035207F /* CustomAddCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAddCardView.swift; sourceTree = "<group>"; };
 		EC737F20259DB2C40035207F /* FollowUpperCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowUpperCVC.swift; sourceTree = "<group>"; };
@@ -1239,6 +1241,7 @@
 				EC813F2E2599A15200BBCE25 /* LaunchScreen.storyboard */,
 				EC813F312599A15200BBCE25 /* Info.plist */,
 				D41B2D4725C2B7DE007CD08B /* GoogleService-Info.plist */,
+				EC730F7C25D4DECF003E09CC /* AppstoreCheck.swift */,
 			);
 			path = BeMe;
 			sourceTree = "<group>";
@@ -1651,6 +1654,7 @@
 				EC71C84125A5B1BA00F51FEC /* HomeNewQuestionData.swift in Sources */,
 				EC89E32E259C496C00DBAFE5 /* FollowMoreButtonCVC.swift in Sources */,
 				EC89E339259C507300DBAFE5 /* UnderTabBarController.swift in Sources */,
+				EC730F7D25D4DECF003E09CC /* AppstoreCheck.swift in Sources */,
 				D4E07CBC259F22C10075E616 /* DiffThoughtCVC.swift in Sources */,
 				EC89E33F259C5EBB00DBAFE5 /* HomeCardCustomFlowLayout.swift in Sources */,
 				D4344B2925AAC21E002858CF /* Comment.swift in Sources */,
