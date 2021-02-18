@@ -47,7 +47,8 @@ class AppStoreCheck {
                 let verFloat = NSString.init(string: version).floatValue
 
                 let currentVerFloat = NSString.init(string: currentVersion).floatValue
-
+                print("앱스토어")
+                print(verFloat)
                 completion(verFloat > currentVerFloat, nil) // 현재 버전이 앱스토어 버전보다 큰지를 Bool값으로 반환
 
             } catch {
