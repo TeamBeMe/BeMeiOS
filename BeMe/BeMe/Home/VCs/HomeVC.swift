@@ -127,8 +127,8 @@ extension HomeVC {
             cardWidth = 315*deviceBound
         }
         //        userNotificationCenter.delegate = self
-        requestNotificationAuthorization()
-        sendNotification()
+//        requestNotificationAuthorization()
+//        sendNotification()
         
 //        LoadingHUD.show(loadingFrame: self.view.frame,color: .black)
         answerDataList = []
@@ -666,21 +666,21 @@ extension HomeVC : UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let curPos = scrollView.contentOffset
 
-        
+
         if flexible {
             if Int(curPos.x) > Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) - 200
                 && Int(curPos.x) < Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) + 200{
                 flexible = !flexible
             }
         }
-        
+
         if initialScrolled == true && !flexible{
-            
+
             if Int(curPos.x) < Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) - 200 {
                 cardCollectionView.scrollToItem(at: IndexPath(item: currentCardIdx-1, section: 0),
                                                 at: .centeredHorizontally,
                                                 animated: true)
-                
+
                 currentCardIdx = currentCardIdx-1
                 print("curr")
                 print(currentCardIdx)
@@ -688,19 +688,19 @@ extension HomeVC : UIScrollViewDelegate {
                     print("curr")
                     print(currentCardIdx)
                     pageGetFromServer()
-                    
+
                 }
-                
+
             }
             else if Int(curPos.x) > Int(cardWidth+10) + Int(cardWidth+20)*(currentCardIdx-1) + 200{
                 cardCollectionView.scrollToItem(at: IndexPath(item: currentCardIdx+1, section: 0),
                                                 at: .centeredHorizontally,
                                                 animated: true)
                 currentCardIdx = currentCardIdx+1
-                
-                
+
+
             }
-            
+
         }
         if currentCardIdx < pastCards+todayCardsForLabel{
             timeLabel.text = "과거의 질문"
@@ -708,7 +708,7 @@ extension HomeVC : UIScrollViewDelegate {
         else{
             timeLabel.text = "오늘의 질문"
         }
-        
+
         if currentCardIdx < answerDataList.count {
             lastIdx = answerDataList[currentCardIdx].id!
         }

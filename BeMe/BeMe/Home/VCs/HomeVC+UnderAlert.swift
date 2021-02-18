@@ -142,9 +142,10 @@ extension HomeVC {
                   return
           }
         answerVC.answerDataDelegate = self
-        answerVC.answerData = answerDataList[currentCardIdx]
-        answerVC.curCardIdx = currentCardIdx
-//        answerVC.setLabels()
+        answerVC.answerData = answerDataList[deleteIdx]
+        answerVC.curCardIdx = deleteIdx
+        
+        
         
         blurView.removeFromSuperview()
         alertContainView.removeFromSuperview()

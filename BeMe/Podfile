@@ -16,5 +16,7 @@ pod 'SwiftyGif'
 pod 'SwiftLint'
 pod 'Firebase/RemoteConfig'
 pod 'Firebase/Analytics'
+pod 'Firebase/Messaging'
+
 
 end
