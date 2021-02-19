@@ -19,7 +19,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if #available(iOS 13.0, *){
             window?.overrideUserInterfaceStyle = .light
         }
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(showAlert(_:)), name: .fromPushAlert, object: nil)
         guard let scene = (scene as? UIWindowScene) else { return }
         let defaults = UserDefaults.standard
         var storyBoard = UIStoryboard(name: "UnderTab", bundle: nil)
@@ -100,6 +100,23 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+            
+
+                
+    }
+    
+    @objc func showAlert(_ notification: Notification){
+        guard let rootVC = self.window?.rootViewController as? UINavigationController else { return}
+        if let should = UserDefaults.standard.string(forKey: "shouldShowAlert"){
+            if should == "yes" {
+                guard let alarm = UIStoryboard.init(name: "Alarm", bundle: nil).instantiateViewController(identifier: "AlarmVC") as? AlarmVC else { return }
+                
+                rootVC.pushViewController(alarm, animated: true)
+                UserDefaults.standard.setValue("no", forKey: "shouldShowAlert")
+            }
+            
+        }
+        
     }
     
     func sceneWillResignActive(_ scene: UIScene) {

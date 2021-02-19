@@ -7,6 +7,9 @@ PODS:
     - FirebaseAnalytics (= 7.6.0)
   - Firebase/CoreOnly (7.6.0):
     - FirebaseCore (= 7.6.0)
+  - Firebase/Messaging (7.6.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (~> 7.6.0)
   - Firebase/RemoteConfig (7.6.0):
     - Firebase/CoreOnly
     - FirebaseRemoteConfig (~> 7.6.0)
@@ -35,6 +38,18 @@ PODS:
     - GoogleUtilities/Environment (~> 7.0)
     - GoogleUtilities/UserDefaults (~> 7.0)
     - PromisesObjC (~> 1.2)
+  - FirebaseInstanceID (7.6.0):
+    - FirebaseCore (~> 7.0)
+    - FirebaseInstallations (~> 7.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GoogleUtilities/UserDefaults (~> 7.0)
+  - FirebaseMessaging (7.6.0):
+    - FirebaseCore (~> 7.0)
+    - FirebaseInstanceID (~> 7.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.0)
+    - GoogleUtilities/Environment (~> 7.0)
+    - GoogleUtilities/Reachability (~> 7.0)
+    - GoogleUtilities/UserDefaults (~> 7.0)
   - FirebaseRemoteConfig (7.6.0):
     - FirebaseABTesting (~> 7.0)
     - FirebaseCore (~> 7.0)
@@ -68,7 +83,7 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (7.2.2):
     - GoogleUtilities/Logger
-  - Kingfisher (6.1.0)
+  - Kingfisher (6.1.1)
   - lottie-ios (3.2.1)
   - nanopb (2.30907.0):
     - nanopb/decode (= 2.30907.0)
@@ -84,6 +99,7 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Firebase/Analytics
+  - Firebase/Messaging
   - Firebase/RemoteConfig
   - Kingfisher
   - lottie-ios
@@ -101,6 +117,8 @@ SPEC REPOS:
     - FirebaseCore
     - FirebaseCoreDiagnostics
     - FirebaseInstallations
+    - FirebaseInstanceID
+    - FirebaseMessaging
     - FirebaseRemoteConfig
     - GoogleAppMeasurement
     - GoogleDataTransport
@@ -122,11 +140,13 @@ SPEC CHECKSUMS:
   FirebaseCore: 0a43b7f1c5b36f3358cd703011ca4c7e0df55870
   FirebaseCoreDiagnostics: ee1184d51da3293335b83355aad20f537acc24cf
   FirebaseInstallations: 6e4e77396559bc2ae0504823837ed737b1c7e47f
+  FirebaseInstanceID: cf243611700eddc916b093353adbd4da822cfa63
+  FirebaseMessaging: 4b9b2850fcfcaac2820097ee3703ba6cfff3df84
   FirebaseRemoteConfig: f805089c5c383c17d68bcc0799d8a3622f9ae28f
   GoogleAppMeasurement: c542a2feaac9ab98fd074e8f1a02c3585bbfbd47
   GoogleDataTransport: 1024b1a4dfbd7a0e92cb20d7e0a6f1fb66b449a4
   GoogleUtilities: 31c5b01f978a70c6cff2afc6272b3f1921614b43
-  Kingfisher: f5d8d60a0ef3edd642fd781bae60918599901aff
+  Kingfisher: 676d63307fbef6ed5d5ed400bff36983480d7500
   lottie-ios: 106e92eaf11fbed0a76590b4cdb9b5ec26123ff7
   nanopb: 59221d7f958fb711001e6a449489542d92ae113e
   PromisesObjC: 3113f7f76903778cf4a0586bd1ab89329a0b7b97
@@ -135,6 +155,6 @@ SPEC CHECKSUMS:
   SwiftyGif: 5d4af95df24caf1c570dbbcb32a3b8a0763bc6d7
   Then: acfe0be7e98221c6204e12f8161459606d5d822d
 
-PODFILE CHECKSUM: bbd394ecfdbab2e5befc59f8524778a9e7d660ae
+PODFILE CHECKSUM: f97e607b15288838f1bfd68b810b9b94e5808e67
 
 COCOAPODS: 1.10.0
