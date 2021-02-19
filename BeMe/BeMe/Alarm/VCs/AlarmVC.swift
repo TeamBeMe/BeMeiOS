@@ -27,6 +27,7 @@ class AlarmVC: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         getAlarms()
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
     override func viewDidLoad() {
