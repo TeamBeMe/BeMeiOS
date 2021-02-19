@@ -78,7 +78,7 @@ class FollowingVC: UIViewController {
             
             print("1")
         }
-        
+        print("캐리?")
         
         
         

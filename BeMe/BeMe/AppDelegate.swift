@@ -13,7 +13,7 @@ import FirebaseMessaging
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
-    let gcmMessageIDKey = "gcm.Message_ID"
+    let gcmMessageIDKey = "gcm.message_id"
     
     
     func appUpdate() {
@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         
         application.registerForRemoteNotifications()
         Messaging.messaging().delegate = self
-        
+        UIApplication.shared.applicationIconBadgeNumber = 0
         
         return true
     }
@@ -115,11 +115,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
 extension AppDelegate : UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,willPresent notification: UNNotification,withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("왜 안돼")
+        UIApplication.shared.applicationIconBadgeNumber += 1
+        
+        
         completionHandler([.alert, .badge, .sound])
     }
     
     func userNotificationCenter(_ center: UNUserNotificationCenter,didReceive response: UNNotificationResponse,withCompletionHandler completionHandler: @escaping () -> Void) {
-        print("왜 안돼")
+        
+        print("응 돼")
+        
+        UserDefaults.standard.setValue("yes", forKey: "shouldShowAlert")
+//        guard let navC = UIApplication.shared.delegate!.window!!.rootViewController! as? UINavigationController else {return}
+        NotificationCenter.default.post(name: .fromPushAlert, object: nil)
         completionHandler()
     }
 }
@@ -127,48 +135,65 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
 
 extension AppDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        print("Firebase registration token: \(String(describing: fcmToken!))")
-        print(fcmToken ?? "")
-        FCMTokenService.shared.regist(token: fcmToken ?? "") {(networkResult) -> (Void) in
-            switch networkResult{
-            case .success(let data) :
-                print("success")
-            case .requestErr(let msg):
-                if let message = msg as? String {
-                    print(message)
+       
+        if let token = UserDefaults.standard.string(forKey: "token"){
+            print("Firebase registration token: \(String(describing: fcmToken!))")
+            print(fcmToken ?? "")
+            
+            FCMTokenService.shared.regist(token: fcmToken ?? "") {(networkResult) -> (Void) in
+                switch networkResult{
+                case .success(let data) :
+                    print("success")
+                case .requestErr(let msg):
+                    if let message = msg as? String {
+                        print(message)
+                    }
+                case .pathErr :
+                    print("pathErr")
+                case .serverErr :
+                    print("serverErr")
+                case .networkFail:
+                    print("networkFail")
+                    
                 }
-            case .pathErr :
-                print("pathErr")
-            case .serverErr :
-                print("serverErr")
-            case .networkFail:
-                print("networkFail")
-                
             }
+            
+            let dataDict:[String: String] = ["token": fcmToken ?? ""]
+            NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+            
+            
         }
-        
-        let dataDict:[String: String] = ["token": fcmToken ?? ""]
-        NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+
+
+
+       
         
     }
     
-    
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        // If you are receiving a notification message while your app is in the background,
-        // this callback will not be fired till the user taps on the notification launching the application.
-        // TODO: Handle data of notification
-        
-        // With swizzling disabled you must let Messaging know about the message, for Analytics
-        // Messaging.messaging().appDidReceiveMessage(userInfo)
-        
-        // Print message ID.
-        if let messageID = userInfo[gcmMessageIDKey] {
-            print("Message ID: \(messageID)")
-        }
-        
-        // Print full message.
-        print(userInfo)
+//
+//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+//        // If you are receiving a notification message while your app is in the background,
+//        // this callback will not be fired till the user taps on the notification launching the application.
+//        // TODO: Handle data of notification
+//
+//        // With swizzling disabled you must let Messaging know about the message, for Analytics
+//        // Messaging.messaging().appDidReceiveMessage(userInfo)
+//        print("gd")
+//        // Print message ID.
+//        if let messageID = userInfo[gcmMessageIDKey] {
+//            print("Message ID: \(messageID)")
+//        }
+//
+//
+//
+//        // Print full message.
+//        print(userInfo)
+//    }
+//
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("APNs regist err")
     }
+    
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
                      fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -180,6 +205,7 @@ extension AppDelegate {
         // Messaging.messaging().appDidReceiveMessage(userInfo)
         
         // Print message ID.
+        print("HHHHHHHH")
         if let messageID = userInfo[gcmMessageIDKey] {
             print("Message ID: \(messageID)")
         }
@@ -190,17 +216,19 @@ extension AppDelegate {
         completionHandler(UIBackgroundFetchResult.newData)
     }
     // 성공시
-//    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-//        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-//
-//        // Print it to console(토큰 값을 콘솔창에 보여줍니다. 이 토큰값으로 푸시를 전송할 대상을 정합니다.)
-//        print("APNs device token: \(deviceTokenString)")
-//
-//        Messaging.messaging().apnsToken = deviceToken
-//
-//
-//
-//    }
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+
+        // Print it to console(토큰 값을 콘솔창에 보여줍니다. 이 토큰값으로 푸시를 전송할 대상을 정합니다.)
+        print("APNs device token: \(deviceTokenString)")
+
+        Messaging.messaging().apnsToken = deviceToken
+
+
+
+    }
+    
+    
     
     
     

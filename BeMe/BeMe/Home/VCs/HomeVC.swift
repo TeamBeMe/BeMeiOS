@@ -14,7 +14,7 @@ class HomeVC: UIViewController {
     //MARK:- IBOutlets
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var cardCollectionView: HomeCardCollectionView!
-    
+    static var shouldShowAlarm = false
     
     let alertHorizontalSeperator = UIView().then{
         $0.backgroundColor = .gray
@@ -133,13 +133,17 @@ extension HomeVC {
 //        LoadingHUD.show(loadingFrame: self.view.frame,color: .black)
         answerDataList = []
 //        pageGetFromServer()
-       
+        
        
        
         
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
+       
+        
+        
         if !initialScrolled{
             LoadingHUD.show(loadingFrame: self.view.frame,color: .black)
             
