@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         
         application.registerForRemoteNotifications()
         Messaging.messaging().delegate = self
-        UIApplication.shared.applicationIconBadgeNumber = 0
+        
         
         return true
     }
@@ -124,7 +124,7 @@ extension AppDelegate : UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,didReceive response: UNNotificationResponse,withCompletionHandler completionHandler: @escaping () -> Void) {
         
         print("응 돼")
-        UIApplication.shared.applicationIconBadgeNumber = 0
+        
         UserDefaults.standard.setValue("yes", forKey: "shouldShowAlert")
 //        guard let navC = UIApplication.shared.delegate!.window!!.rootViewController! as? UINavigationController else {return}
         NotificationCenter.default.post(name: .fromPushAlert, object: nil)
