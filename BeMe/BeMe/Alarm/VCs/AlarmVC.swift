@@ -18,6 +18,7 @@ class AlarmVC: UIViewController {
     private var alarmArray: [Alarm] = [] {
         didSet {
             self.alarmTableView.reloadData()
+            LoadingHUD.hide()
         }
     }
     
@@ -27,6 +28,10 @@ class AlarmVC: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         getAlarms()
+        
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        UIApplication.shared.applicationIconBadgeNumber = 0
     }
     
     override func viewDidLoad() {
@@ -57,6 +62,7 @@ extension AlarmVC {
                         self.alarmArray.append(contentsOf: ad.activities)
                     }
                     
+                   
                 }
                 
             case .requestErr(let message):

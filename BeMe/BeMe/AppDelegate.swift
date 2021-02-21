@@ -88,7 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
         
         application.registerForRemoteNotifications()
         Messaging.messaging().delegate = self
-        UIApplication.shared.applicationIconBadgeNumber = 0
+        
         
         return true
     }
