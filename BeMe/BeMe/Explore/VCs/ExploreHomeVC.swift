@@ -409,7 +409,6 @@ extension ExploreHomeVC {
         }
         
         if canGetServerData {
-            LoadingHUD.show(loadingFrame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), color: UIColor(named: "background")!)
             ExploreAnswerService.shared.getExploreAnswer(page: page, category: cate, sorting: sorting) { (result) in
                 switch result {
                 case .success(let data):
