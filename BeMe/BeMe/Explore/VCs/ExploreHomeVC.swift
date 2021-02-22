@@ -33,6 +33,9 @@ class ExploreHomeVC: UIViewController {
     @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
     @IBOutlet weak var headerCategoryCollectionView: UICollectionView!
     @IBOutlet weak var headerHighLightBar: UIView!
+    
+    private var inifiniteScroll: Bool = true
+    
     private var lastContentOffset: CGFloat = 0
     
     private let maxHeight: CGFloat = 32.0
@@ -171,12 +174,12 @@ extension ExploreHomeVC: UITableViewDataSource {
             if exploreAnswerArray.count == 0 {
                 return 1
             } else {
-                if currentPage < page {
-                    return exploreAnswerArray.count + 1
-                } else {
-                    return exploreAnswerArray.count
-                }
-//                return exploreAnswerArray.count
+//                if currentPage < page {
+//                    return exploreAnswerArray.count + 1
+//                } else {
+//                    return exploreAnswerArray.count
+//                }
+                return exploreAnswerArray.count
             }
         }
     }
@@ -318,16 +321,19 @@ extension ExploreHomeVC: UIScrollViewDelegate {
         
         lastContentOffset = currentOffset
         
-//        for cell in exploreTableView.visibleCells {
-//            if let indexPath = exploreTableView.indexPath(for: cell) {
-//                if indexPath.row > 5 && indexPath.row >= exploreAnswerArray.count - 3 {
-//                    if page > currentPage {
-//                        moreButtonAction()
-//                        print("moreButtonAction called")
-//                    }
-//                }
-//            }
-//        }
+        if inifiniteScroll {
+            for cell in exploreTableView.visibleCells {
+                if let indexPath = exploreTableView.indexPath(for: cell) {
+                    if indexPath.row > 5 && indexPath.row >= exploreAnswerArray.count - 3 {
+                        if page > currentPage {
+                            inifiniteScroll = false
+                            moreButtonAction()
+                            print("moreButtonAction called")
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -403,6 +409,7 @@ extension ExploreHomeVC {
         }
         
         if canGetServerData {
+            LoadingHUD.show(loadingFrame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), color: UIColor(named: "background")!)
             ExploreAnswerService.shared.getExploreAnswer(page: page, category: cate, sorting: sorting) { (result) in
                 switch result {
                 case .success(let data):
@@ -416,7 +423,7 @@ extension ExploreHomeVC {
                             } else {
                                 self.exploreAnswerArray.append(contentsOf: ans)
                             }
-                            
+                            self.inifiniteScroll = true
                         }
                     } else {
                         // empty view
