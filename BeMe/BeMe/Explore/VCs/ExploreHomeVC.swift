@@ -87,7 +87,6 @@ class ExploreHomeVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        print(isTableViewAnimation)
         LoadingHUD.show(loadingFrame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height), color: UIColor(named: "background")!)
         setAnswerData(page: currentPage, category: selectedCategoryId, sorting: selectedRecentOrFavorite)
         setThoughtData()
@@ -172,7 +171,12 @@ extension ExploreHomeVC: UITableViewDataSource {
             if exploreAnswerArray.count == 0 {
                 return 1
             } else {
-                return exploreAnswerArray.count
+                if currentPage < page {
+                    return exploreAnswerArray.count + 1
+                } else {
+                    return exploreAnswerArray.count
+                }
+//                return exploreAnswerArray.count
             }
         }
     }
@@ -290,7 +294,6 @@ extension ExploreHomeVC: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let currentOffset = exploreTableView.contentOffset.y
-        print(currentOffset, scrollView.frame)
         // iphone safe area 문제 해결 코드
         isTableViewAnimation = true
         view.backgroundColor = currentOffset > 394.0 ? .white : UIColor.init(named: "background")
@@ -315,27 +318,16 @@ extension ExploreHomeVC: UIScrollViewDelegate {
         
         lastContentOffset = currentOffset
         
-        for cell in exploreTableView.visibleCells {
-            if let indexPath = exploreTableView.indexPath(for: cell) {
-                if indexPath.row > 5 && indexPath.row >= exploreAnswerArray.count - 3 {
-                    if page > currentPage {
-                        moreButtonAction()
-                    }
-                }
-            }
-        }
-
 //        for cell in exploreTableView.visibleCells {
-//            if let indexPath = wholeCollectionView.indexPath(for: cell){
-//                if indexPath.item > 5 && indexPath.item >= answers.count-3{
-//                    if pageLen > answerPage{
+//            if let indexPath = exploreTableView.indexPath(for: cell) {
+//                if indexPath.row > 5 && indexPath.row >= exploreAnswerArray.count - 3 {
+//                    if page > currentPage {
 //                        moreButtonAction()
+//                        print("moreButtonAction called")
 //                    }
 //                }
-//
 //            }
 //        }
-
     }
 }
 
@@ -345,6 +337,7 @@ extension ExploreHomeVC {
     private func moreButtonAction() {
         currentPage += 1
         setAnswerData(page: currentPage, category: selectedCategoryId, sorting: selectedRecentOrFavorite)
+        print("called")
     }
     
     private func setThoughtData() {
@@ -503,7 +496,6 @@ extension ExploreHomeVC {
             case .success(let data):
                 
                 guard let dt = data as? GenericResponse<Int> else { return }
-                print(dt.message)
                 if dt.message == "스크랩 성공" || dt.message == "스크랩 취소 성공" {
                     self.setAnswerData(page: self.currentPage, category: self.selectedCategoryId, sorting: self.selectedRecentOrFavorite)
                 } else {
