@@ -48,5 +48,5 @@ struct APIConstants{
 //    static let settingMyPageProfileURL = baseURL + "/profiles"
     
     
-    
+    static let FCMURL = baseURL+"/users/fb-token"
 }

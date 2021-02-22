@@ -19,13 +19,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if #available(iOS 13.0, *){
             window?.overrideUserInterfaceStyle = .light
         }
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(showAlert(_:)), name: .fromPushAlert, object: nil)
         guard let scene = (scene as? UIWindowScene) else { return }
         let defaults = UserDefaults.standard
         var storyBoard = UIStoryboard(name: "UnderTab", bundle: nil)
         var rootVc = storyBoard.instantiateViewController(identifier: "UnderTabBarController")
         //        var storyBoard = UIStoryboard(name: "Onboarding", bundle: nil)
         //        var rootVc = storyBoard.instantiateViewController(identifier: "OnboardingVC")
+    
         if let token = defaults.string(forKey: "token"){
             // 자동로그인 -> 메인뷰
             
@@ -95,27 +96,48 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This occurs shortly after the scene enters the background, or when its session is discarded.
         // Release any resources associated with this scene that can be re-created the next time the scene connects.
         // The scene may re-connect later, as its session was not necessarily discarded (see `application:didDiscardSceneSessions` instead).
+        NotificationCenter.default.addObserver(self, selector: #selector(showAlert(_:)), name: .fromPushAlert, object: nil)
     }
     
     func sceneDidBecomeActive(_ scene: UIScene) {
         // Called when the scene has moved from an inactive state to an active state.
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+            
+        NotificationCenter.default.addObserver(self, selector: #selector(showAlert(_:)), name: .fromPushAlert, object: nil)
+                
+    }
+    
+    @objc func showAlert(_ notification: Notification){
+        guard let rootVC = self.window?.rootViewController as? UINavigationController else { return}
+        if let should = UserDefaults.standard.string(forKey: "shouldShowAlert"){
+            if should == "yes" {
+                guard let alarm = UIStoryboard.init(name: "Alarm", bundle: nil).instantiateViewController(identifier: "AlarmVC") as? AlarmVC else { return }
+                
+                rootVC.pushViewController(alarm, animated: true)
+                UserDefaults.standard.setValue("no", forKey: "shouldShowAlert")
+            }
+            
+        }
+        
     }
     
     func sceneWillResignActive(_ scene: UIScene) {
         // Called when the scene will move from an active state to an inactive state.
         // This may occur due to temporary interruptions (ex. an incoming phone call).
+        NotificationCenter.default.addObserver(self, selector: #selector(showAlert(_:)), name: .fromPushAlert, object: nil)
     }
     
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        NotificationCenter.default.addObserver(self, selector: #selector(showAlert(_:)), name: .fromPushAlert, object: nil)
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+        NotificationCenter.default.addObserver(self, selector: #selector(showAlert(_:)), name: .fromPushAlert, object: nil)
     }
     
     
