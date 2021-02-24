@@ -347,7 +347,6 @@ extension MypageVC: CategorySelectedProtocol {
         popupBackgroundView.animatePopupBackground(true)
         guard let settingActionSheet = UIStoryboard.init(name: "CustomActionSheet", bundle: .main).instantiateViewController(withIdentifier: "CustomActionSheetFilterVC") as?
                 CustomActionSheetFilterVC else { return }
-        
         settingActionSheet.modalPresentationStyle = .overCurrentContext
         self.present(settingActionSheet, animated: true, completion: nil)
     }

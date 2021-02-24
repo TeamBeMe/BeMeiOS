@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CustomActionSheetFilterVC: UIViewController {
     
@@ -38,16 +39,12 @@ class CustomActionSheetFilterVC: UIViewController {
         categoryCollectionView.dataSource = self
 
         availablityButtonSet(availablity: selectedAvailablity)
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
-//        getSelectedFilterInfo()
         setCategoryData()
         selectedAvailablity = MypageVC.selectedAvailablity
-//        selectedCategory = MypageVC.selectedCategory
         availablityButtonSet(availablity: selectedAvailablity)
     }
     
@@ -63,10 +60,17 @@ class CustomActionSheetFilterVC: UIViewController {
     }
     
     @IBAction func publicButtonTapped(_ sender: UIButton) {
+        FirebaseAnalytics.Analytics.logEvent("CLICK_OPEN_MPFILTER", parameters: [
+            AnalyticsParameterScreenName: "MPFILTER"
+        ])
         selectedAvailablity = "public"
         availablityButtonSet(availablity: selectedAvailablity)
     }
+    
     @IBAction func unpublicButtonTapped(_ sender: UIButton) {
+        FirebaseAnalytics.Analytics.logEvent("CLICK_PRIVATE_MPFILTER", parameters: [
+            AnalyticsParameterScreenName: "MPFILTER"
+        ])
         selectedAvailablity = "unpublic"
         availablityButtonSet(availablity: selectedAvailablity)
     }
@@ -74,7 +78,6 @@ class CustomActionSheetFilterVC: UIViewController {
 
     @IBAction func applyButtonTapped(_ sender: Any) {
         
-
         if let category = selectedCategory {
             NotificationCenter.default.post(name: .init("categoryClose"), object: nil, userInfo: ["categoryId": category , "selectedAv": selectedAvailablity ?? "all"])
             self.dismiss(animated: true, completion: nil)
@@ -84,19 +87,7 @@ class CustomActionSheetFilterVC: UIViewController {
         }
         
     }
-    
-//    @objc func getSelectedFilterInfo(_ notification: Notification) {
-//        guard let userInfo = notification.userInfo as? [String: Any] else { return }
-//        guard let categoryId = userInfo["categoryId"] as? Int else { return  }
-//        guard let selectedAv = userInfo["selectedAv"] as? String else { return }
-//
-//        self.selectedAvailablity = selectedAv
-//        self.selectedCategory = categoryId
-//
-//    }
-//    func categoryButtonSet(category: Int){
-//        <#function body#>
-//    }
+
     func availablityButtonSet(availablity: String?){
         switch availablity {
         case "all":
@@ -180,7 +171,52 @@ class CustomActionSheetFilterVC: UIViewController {
 extension CustomActionSheetFilterVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         selectedCategory = indexPath.item
-
+        switch selectedCategory {
+        case 1:
+            
+            FirebaseAnalytics.Analytics.logEvent("CLICK_VALUES_MPFILTER", parameters: [
+                AnalyticsParameterScreenName: "MPFILTER"
+            ])
+            
+            break
+        case 2:
+            
+            FirebaseAnalytics.Analytics.logEvent("CLICK_RELATIONSHIP_MPFILTER", parameters: [
+                AnalyticsParameterScreenName: "MPFILTER"
+            ])
+            
+            break
+        case 3:
+            
+            FirebaseAnalytics.Analytics.logEvent("CLICK_LOVE_MPFILTER", parameters: [
+                AnalyticsParameterScreenName: "MPFILTER"
+            ])
+            
+            break
+        case 4:
+            
+            FirebaseAnalytics.Analytics.logEvent("CLICK_DAILYLIFE_MPFILTER", parameters: [
+                AnalyticsParameterScreenName: "MPFILTER"
+            ])
+            
+            break
+        case 5:
+            
+            FirebaseAnalytics.Analytics.logEvent("CLICK_ABOUTME_MPFILTER", parameters: [
+                AnalyticsParameterScreenName: "MPFILTER"
+            ])
+            
+            break
+        case 6:
+            
+            FirebaseAnalytics.Analytics.logEvent("CLICK_STORY_MPFILTER", parameters: [
+                AnalyticsParameterScreenName: "MPFILTER"
+            ])
+            
+            break
+        default:
+            break
+        }
     }
 }
 
@@ -201,18 +237,6 @@ extension CustomActionSheetFilterVC: UICollectionViewDataSource {
 
         cell.setButton(text: categoryArray[indexPath.item].name)
         
-//        if selectedCategory != nil {
-//            if self.categoryArray[indexPath.item].id == selectedCategory!+1 {
-//                cell.setButton(selected: true)
-//            }
-//        } else {
-//            
-//        }
-        
-        
-//        cell.filterCVCDelegate = self
-
-
         return cell
         
     }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class DiffArticleTVC: UITableViewCell {
     static let identifier: String = "DiffArticleTVC"
@@ -107,6 +108,52 @@ extension DiffArticleTVC: UICollectionViewDataSource {
         
         print("Selected")
         selectedCategoryId = indexPath.item + 1
+        switch selectedCategoryId {
+        case 1:
+            
+            FirebaseAnalytics.Analytics.logEvent("CLICK_VALUES_SEARCH", parameters: [
+                AnalyticsParameterScreenName: "SEARCH"
+            ])
+            
+            break
+        case 2:
+            
+            FirebaseAnalytics.Analytics.logEvent("CLICK_RELATIONSHIP_SEARCH", parameters: [
+                AnalyticsParameterScreenName: "SEARCH"
+            ])
+            
+            break
+        case 3:
+            
+            FirebaseAnalytics.Analytics.logEvent("CLICK_LOVE_SEARCH", parameters: [
+                AnalyticsParameterScreenName: "SEARCH"
+            ])
+            
+            break
+        case 4:
+            
+            FirebaseAnalytics.Analytics.logEvent("CLICK_DAILYLIFE_SEARCH", parameters: [
+                AnalyticsParameterScreenName: "SEARCH"
+            ])
+            
+            break
+        case 5:
+            
+            FirebaseAnalytics.Analytics.logEvent("CLICK_ABOUTME_SEARCH", parameters: [
+                AnalyticsParameterScreenName: "SEARCH"
+            ])
+            
+            break
+        case 6:
+            
+            FirebaseAnalytics.Analytics.logEvent("CLICK_STORY_SEARCH", parameters: [
+                AnalyticsParameterScreenName: "SEARCH"
+            ])
+            
+            break
+        default:
+            break
+        }
         delegate?.categoryButtonTapped(indexPath, selectedCategoryId)
     }
     

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 protocol CategorySelectedProtocol {
     func categoryButtonDidTapped()
@@ -68,6 +69,9 @@ class MypageCRV: UICollectionReusableView {
     //MARK:**- IBAction Part**
     
     @IBAction func filterButtonTapped(_ sender: UIButton) {
+        FirebaseAnalytics.Analytics.logEvent("CLICK_FILTER_MYPAGE", parameters: [
+            AnalyticsParameterScreenName: "MYPAGE"
+        ])
         categoryDelegte?.categoryButtonDidTapped()
     }
     

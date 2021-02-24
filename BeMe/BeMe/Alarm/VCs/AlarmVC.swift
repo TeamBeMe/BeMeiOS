@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class AlarmVC: UIViewController {
     
@@ -28,6 +29,10 @@ class AlarmVC: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
         getAlarms()
+        
+        FirebaseAnalytics.Analytics.logEvent("CLCIK_ALARM", parameters: [
+            AnalyticsParameterScreenName: "ALARM"
+        ])
         
     }
     override func viewWillDisappear(_ animated: Bool) {
@@ -144,6 +149,9 @@ extension AlarmVC: UITableViewDelegate {
         
         if alarmArray[indexPath.row].type == "comment" || alarmArray[indexPath.row].type == "cocomment"  {
             guard let comment = UIStoryboard.init(name: "Comment", bundle: nil).instantiateViewController(identifier: "CommentVC") as? CommentVC else { return }
+            FirebaseAnalytics.Analytics.logEvent("COUNT_FOLLOW_ALARM", parameters: [
+                AnalyticsParameterScreenName: "ALARM"
+            ])
             
             comment.answerId = alarmArray[indexPath.row].answerId
             comment.isMoreButtonHidden = false
@@ -158,6 +166,9 @@ extension AlarmVC: UITableViewDelegate {
                 
                 return
             }
+            FirebaseAnalytics.Analytics.logEvent("COUNT_COMMENT_ALARM", parameters: [
+                AnalyticsParameterScreenName: "ALARM"
+            ])
             profileVC.userID = alarmArray[indexPath.row].userID
             self.navigationController?.pushViewController(profileVC, animated: true)
             
