@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ExploreTableView: UITableView {
     
@@ -649,11 +650,14 @@ extension ExploreHomeVC: UITableViewButtonSelectedDelegate {
     }
     
     func goToFriendButtonDidTapped() {
+        
+        FirebaseAnalytics.Analytics.logEvent("CLICK_SEARCHID_SEARCH", parameters: [
+            AnalyticsParameterScreenName: "SEARCH"
+        ])
+        
         guard let vcName = UIStoryboard(name: "Search",
                                         bundle: nil).instantiateViewController(       withIdentifier: "SearchVC") as? SearchVC
-        else{
-            return
-        }
+        else { return }
         
         vcName.modalPresentationStyle = .fullScreen
         self.navigationController?.pushViewController(vcName, animated: true)

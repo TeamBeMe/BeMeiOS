@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class FollowUpperCVC: UICollectionViewCell {
     static let identifier : String = "FollowUpperCVC"
@@ -66,6 +67,10 @@ class FollowUpperCVC: UICollectionViewCell {
     
     
     @IBAction func plusButtonAction(_ sender: Any) {
+        
+        FirebaseAnalytics.Analytics.logEvent("CLICK_SEARCHID_FOLLOWING", parameters: [
+            AnalyticsParameterScreenName: "FOLLOWING"
+        ])
         followPlusButtonDelegate?.plusButtonAction()
         
     }

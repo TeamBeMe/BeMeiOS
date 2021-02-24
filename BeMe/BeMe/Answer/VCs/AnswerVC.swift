@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class AnswerVC: UIViewController {
     
@@ -200,9 +201,8 @@ class AnswerVC: UIViewController {
         
         answerSwitch.isOn = !answerData!.lock!
         
-        
-        
     }
+    
     func clarifyRegister(){
         if answerData?.answer == "" || answerData?.answer == ""{
             isRegister = true
@@ -237,6 +237,27 @@ class AnswerVC: UIViewController {
     
     @IBAction func finishButtonAction(_ sender: Any) {
         answerData!.answer = answerTextView.text
+        
+        if commentSwitch.isOn {
+            FirebaseAnalytics.Analytics.logEvent("OPEN_COMMENT_ANSWERVIEW", parameters: [
+                AnalyticsParameterScreenName: "ANSWERVIEW"
+            ])
+        } else {
+            FirebaseAnalytics.Analytics.logEvent("PRIVATE_COMMENT_ANSWERVIEW", parameters: [
+                AnalyticsParameterScreenName: "ANSWERVIEW"
+            ])
+        }
+        
+        if answerSwitch.isOn {
+            FirebaseAnalytics.Analytics.logEvent("OPEN_ANSWER_ANSWERVIEW", parameters: [
+                AnalyticsParameterScreenName: "ANSWERVIEW"
+            ])
+        } else {
+            FirebaseAnalytics.Analytics.logEvent("PRIVATE_ANSWER_ANSWERVIEW", parameters: [
+                AnalyticsParameterScreenName: "ANSWERVIEW"
+            ])
+        }
+        
         if isRegister! == true{
             print("글쓰기 시도")
             AnswerRegistService.shared.regist(answerID: answerData!.id!, content: answerData!.answer!, commentBlocked: commentSwitch.isOn, isPublic: answerSwitch.isOn) {(networkResult) -> (Void) in
@@ -260,8 +281,7 @@ class AnswerVC: UIViewController {
                 }
             }
 
-        }
-        else{
+        } else {
             AnswerModifyService.shared.modify(answerID: answerData!.id!, content: answerData!.answer!, commentBlocked: commentSwitch.isOn, isPublic: answerSwitch.isOn) {(networkResult) -> (Void) in
                 switch networkResult{
                 case .success(let data) :
@@ -301,6 +321,7 @@ class AnswerVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name:
                                                 UIResponder.keyboardWillHideNotification, object: nil)
     }
+    
     @objc func keyboardWillShow(_ notification: NSNotification) {
         
         
@@ -308,8 +329,6 @@ class AnswerVC: UIViewController {
                                 as? NSValue)?.cgRectValue {
             
             textViewBottomConstraint.constant = 30 + keyboardSize.height - (view.frame.height-answerTextView.frame.maxY)
-            
-            
         }
     }
     

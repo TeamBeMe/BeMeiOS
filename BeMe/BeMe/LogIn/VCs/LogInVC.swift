@@ -8,6 +8,7 @@
 import UIKit
 import Then
 import SnapKit
+import Firebase
 
 class LogInVC: UIViewController {
     
@@ -55,6 +56,11 @@ class LogInVC: UIViewController {
     }
     
     @IBAction func signUpButton(_ sender: Any) {
+        
+        FirebaseAnalytics.Analytics.logEvent("CLICK_SIGN_SIGN", parameters: [
+            AnalyticsParameterScreenName: "LOGIN"
+        ])
+        
         guard let vcName = UIStoryboard(name: "SignUp", bundle: nil).instantiateViewController(identifier: "SignUpControlVC") as? SignUpControlVC else {return}
         
         self.navigationController?.pushViewController(vcName, animated: true)
@@ -63,6 +69,10 @@ class LogInVC: UIViewController {
     }
     
     @IBAction func logInButtonAction(_ sender: Any) {
+        
+        FirebaseAnalytics.Analytics.logEvent("CLICK_SEARCHID_LOGIM", parameters: [
+            AnalyticsParameterScreenName: "LOGIN"
+        ])
         
         self.view.endEditing(true)
         LogInService.shared.login(nickName: nickNameTextField.text!,

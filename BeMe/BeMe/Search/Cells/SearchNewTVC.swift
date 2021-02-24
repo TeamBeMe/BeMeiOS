@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Firebase
 class SearchNewTVC: UITableViewCell {
 
     static let identifier = "SearchNewTVC"
@@ -39,7 +39,12 @@ class SearchNewTVC: UITableViewCell {
 
     
     @IBAction func followButtonAction(_ sender: Any) {
+        
+        
         if followButton.titleLabel?.text == "팔로잉"{
+            FirebaseAnalytics.Analytics.logEvent("FOLLOW_SEARCHID_TRUE", parameters: [
+                AnalyticsParameterScreenName: "SEARCH"
+            ])
             FollowingFollowService.shared.follow(id: findPeopleSearchData!.id){(networkResult) -> (Void) in
                 switch networkResult{
                 case .success(let data) :

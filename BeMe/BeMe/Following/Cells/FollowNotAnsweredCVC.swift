@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class FollowNotAnsweredCVC: UICollectionViewCell {
     static let identifier : String = "FollowNotAnsweredCVC"
@@ -56,6 +57,11 @@ class FollowNotAnsweredCVC: UICollectionViewCell {
     
     
     @IBAction func replyButtonAction(_ sender: Any) {
+        
+        FirebaseAnalytics.Analytics.logEvent("CLICK_ANSWERCHECK_FOLLOWING", parameters: [
+            AnalyticsParameterScreenName: "FOLLOWING"
+        ])
+        
         print("엥")
         print(indexInVC!)
         followScrapButtonDelegate?.replyButtonTap(answerData: answerData!,indexInVC: indexInVC!)
