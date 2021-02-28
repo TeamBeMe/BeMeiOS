@@ -22,19 +22,37 @@ class QuestionAnswerTVC: UITableViewCell {
     weak var delegate: UITableViewButtonSelectedDelegate?
     
     var indexPath: IndexPath?
-    
+    var userID: Int?
     var questionId: Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         moreAnswerButton.makeRound(to: 4)
         profileImageView.makeRounded(cornerRadius: profileImageView.bounds.width / 2)
+        
+        let profileGesutre = UITapGestureRecognizer(target: self, action: #selector(touchUpProfile))
+        let profileGesutre2 = UITapGestureRecognizer(target: self, action: #selector(touchUpProfile))
+                
+        profileImageView.addGestureRecognizer(profileGesutre)
+        profileImageView.isUserInteractionEnabled = true
+        nickNameLabel.addGestureRecognizer(profileGesutre2)
+        nickNameLabel.isUserInteractionEnabled = true
+        
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Configure the view for the selected state
+    }
+    
+
+    @objc func touchUpProfile(){
+        print("aa")
+        if userID != nil {
+            delegate?.goToOthersProfileButtonDidTapped(userID!)
+        }
+        
     }
     
     func setInformation(question: String, category: String, date: String, profileImg: String, nickName: String, content: String, questionId: Int) {

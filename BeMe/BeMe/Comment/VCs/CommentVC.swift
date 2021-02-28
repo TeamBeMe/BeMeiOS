@@ -611,6 +611,7 @@ extension CommentVC: UITableViewDelegate, UITableViewDataSource {
                 header.setInformation(question: ad.question, category: ad.category , date: ad.answerDate,
                                       profileImg: ad.userProfile, nickName: ad.userNickname,
                                       content: ad.content, questionId: ad.questionID)
+                header.userID = ad.userID
             }
             
             return header
