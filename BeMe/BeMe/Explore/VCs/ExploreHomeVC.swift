@@ -30,8 +30,7 @@ class ExploreHomeVC: UIViewController {
     
     @IBOutlet weak var exploreTableView: ExploreTableView!
     @IBOutlet weak var safeAreaView: UIView!
-    @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
+
     @IBOutlet weak var headerCategoryCollectionView: UICollectionView!
     @IBOutlet weak var headerHighLightBar: UIView!
     
@@ -95,10 +94,10 @@ class ExploreHomeVC: UIViewController {
         setAnswerData(page: currentPage, category: selectedCategoryId, sorting: selectedRecentOrFavorite)
         setThoughtData()
         setCategoryData()
-        setHeaderView()
+//        setHeaderView()
         
         
-        view.backgroundColor = lastContentOffset > 394.0 ? .white : UIColor.init(named: "background")
+//        view.backgroundColor = lastContentOffset > 394.0 ? .white : UIColor.init(named: "background")
         self.navigationController?.navigationBar.isHidden = true
     }
     
@@ -188,15 +187,9 @@ extension ExploreHomeVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             guard let diffThought = tableView.dequeueReusableCell(withIdentifier: DiffThoughtTVC.identifier, for: indexPath) as? DiffThoughtTVC else { return UITableViewCell() }
-            
-            if exploreThoughtArray.count == 0 {
-                diffThought.isEmpty = true
-            } else {
-                diffThought.isEmpty = false
-            }
-            
+         
             diffThought.delegate = self
-            diffThought.exploreThoughtArray = self.exploreThoughtArray
+//            diffThought.exploreThoughtArray = self.exploreThoughtArray
             return diffThought
         } else if indexPath.section == 1 {
             guard let diffAnswer = tableView.dequeueReusableCell(withIdentifier: DiffArticleTVC.identifier, for: indexPath) as? DiffArticleTVC else { return UITableViewCell() }
@@ -300,8 +293,8 @@ extension ExploreHomeVC: UIScrollViewDelegate {
         let currentOffset = exploreTableView.contentOffset.y
         // iphone safe area 문제 해결 코드
         isTableViewAnimation = true
-        view.backgroundColor = currentOffset > 394.0 ? .white : UIColor.init(named: "background")
-        exploreTableView.backgroundColor = currentOffset >= 0.0 ? .white : UIColor.init(named: "background")
+//        view.backgroundColor = currentOffset > 394.0 ? .white : UIColor.init(named: "background")
+//        exploreTableView.backgroundColor = currentOffset >= 0.0 ? .white : UIColor.init(named: "background")
         
         // animation 문제 해결 코드
         if (lastContentOffset < currentOffset) {
@@ -314,12 +307,12 @@ extension ExploreHomeVC: UIScrollViewDelegate {
         }
         
         
-        if (currentOffset < 610.0) {
-            hideTabBarWhenScrollingUp()
-        } else {
-            showTabBarWhenScrollingDown()
-        }
-        
+//        if (currentOffset < 610.0) {
+//            hideTabBarWhenScrollingUp()
+//        } else {
+//            showTabBarWhenScrollingDown()
+//        }
+//
         lastContentOffset = currentOffset
         
         if inifiniteScroll {
@@ -534,11 +527,11 @@ extension ExploreHomeVC {
         }
     }
     
-    private func setHeaderView() {
-        headerViewHeight.constant = 0
-        headerView.alpha = 0
-    }
-    
+//    private func setHeaderView() {
+//        headerViewHeight.constant = 0
+//        headerView.alpha = 0
+//    }
+//
     private func setTableView() {
         exploreTableView.delegate = self
         exploreTableView.dataSource = self
@@ -565,30 +558,30 @@ extension ExploreHomeVC {
         
     }
     
-    private func hideTabBarWhenScrollingUp() {
-        self.headerViewHeight.constant = 0
-        self.headerView.alpha = 0
-        UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveLinear], animations: {
-            
-            
-            self.headerView.layoutIfNeeded()
-        }) { _ in
-            
-            
-        }
-    }
-    
-    private func showTabBarWhenScrollingDown() {
-        self.headerViewHeight.constant = 32
-        self.headerView.alpha = 1
-        UIView.animate(withDuration: 0.5, delay: 0.3, options: [.curveLinear], animations: {
-            
-            
-            self.headerView.layoutIfNeeded()
-        }) { _ in
-            
-        }
-    }
+//    private func hideTabBarWhenScrollingUp() {
+//        self.headerViewHeight.constant = 0
+//        self.headerView.alpha = 0
+//        UIView.animate(withDuration: 0.2, delay: 0.0, options: [.curveLinear], animations: {
+//
+//
+//            self.headerView.layoutIfNeeded()
+//        }) { _ in
+//
+//
+//        }
+//    }
+//
+//    private func showTabBarWhenScrollingDown() {
+//        self.headerViewHeight.constant = 32
+//        self.headerView.alpha = 1
+//        UIView.animate(withDuration: 0.5, delay: 0.3, options: [.curveLinear], animations: {
+//
+//
+//            self.headerView.layoutIfNeeded()
+//        }) { _ in
+//
+//        }
+//    }
 }
 
 
