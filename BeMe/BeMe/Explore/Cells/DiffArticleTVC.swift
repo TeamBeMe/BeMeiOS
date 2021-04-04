@@ -35,7 +35,7 @@ class DiffArticleTVC: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setLabel()
+//        setLabel()
         setCategoryCollectionView()
     }
     

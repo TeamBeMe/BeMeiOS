@@ -90,7 +90,7 @@ extension UnderTabBarController {
         myPageVC.title = ""
         
         
-        self.viewControllers = [homeVC,exploreVC,followingVC,myPageVC]
+        self.viewControllers = [exploreVC,followingVC,homeVC,myPageVC]
         let myTabBarItem1 = (self.tabBar.items?[0])! as UITabBarItem
         let myTabBarItem2 = (self.tabBar.items?[1])! as UITabBarItem
         let myTabBarItem3 = (self.tabBar.items?[2])! as UITabBarItem
@@ -128,15 +128,15 @@ extension UnderTabBarController : UITabBarControllerDelegate {
     // UITabBarControllerDelegate
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         let isTabbed =  pastIndex == selectedIndex
-        if viewController == self.viewControllers![0] {
+        if viewController == self.viewControllers![2] {
             if isTabbed{
                 homeTabBarDelegate?.homeButtonTapped()
             }
-        } else if viewController == self.viewControllers![1] {
+        } else if viewController == self.viewControllers![0] {
             if isTabbed {
                 exploreTabBarDelegate?.exploreTabDidTapped()
             }
-        } else if viewController == self.viewControllers![2]{
+        } else if viewController == self.viewControllers![1]{
             if isTabbed{
                 followingTabBarDelegate?.followButtonTapped()
             }

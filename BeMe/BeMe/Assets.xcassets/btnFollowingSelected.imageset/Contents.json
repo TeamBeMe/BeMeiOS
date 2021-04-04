@@ -1,13 +1,13 @@
 {
   "images" : [
     {
-      "filename" : "btnFollowingSelected.png",
       "scale" : "1x",
+      "filename" : "btnFollowingSelected.png",
       "idiom" : "universal"
     },
     {
-      "scale" : "2x",
       "idiom" : "universal",
+      "scale" : "2x",
       "filename" : "btnFollowingSelected@2x.png"
     },
     {
