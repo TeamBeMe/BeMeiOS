@@ -22,12 +22,12 @@ struct ExploreAnswerService {
          params = [
             "page": "\(page)",
             "category": "\(c)",
-            "sorting": "\(sorting)"
+//            "sorting": "\(sorting)"
          ]
       } else {
          params = [
             "page": "\(page)",
-            "sorting": "\(sorting)"
+//            "sorting": "\(sorting)"
          ]
       }
       let url = APIConstants.explorationDiffArticleURL
@@ -52,7 +52,8 @@ struct ExploreAnswerService {
    private func judge(by statusCode: Int, _ data: Data) -> NetworkResult<Any> {
       let decoder = JSONDecoder()
       guard let decodedData = try? decoder.decode(GenericResponse<ExploreAnswerData>.self, from : data) else { return .pathErr }
-   
+      print("우욱")
+      print(decodedData)
       switch statusCode {
       case 200..<300: return .success(decodedData)
       case 400..<500: return .pathErr

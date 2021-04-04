@@ -31,9 +31,9 @@ struct APIConstants{
     
     static let explorationCategoryURL = baseURL + "/exploration/category"
     static let explorationDiffThoughtURL = baseURL + "/exploration/another"
-    static let explorationDiffArticleURL = baseURL + "/exploration"
+    static let explorationDiffArticleURL = baseURL + "/exploration/all"
     static let explorationAnswerScapURL = baseURL + "/exploration/"
-    static let explorationDetailAnswerURL = baseURL + "/exploration/"
+    static let explorationDetailAnswerURL = baseURL + "/exploration/all"
     static let answerDetailURL = baseURL + "/answers/detail"
     static let answerCommentURL = baseURL + "/answers/comments"
     static let alarmURL = baseURL + "/users/activities"

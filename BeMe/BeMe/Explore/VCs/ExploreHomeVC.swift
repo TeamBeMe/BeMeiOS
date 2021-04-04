@@ -46,7 +46,7 @@ class ExploreHomeVC: UIViewController {
     
     private var scrollDirection: Bool = true
     
-    private var page: Int = 1
+    private var page: Int = 100000
     
     private var currentPage: Int = 1
     
@@ -408,7 +408,7 @@ extension ExploreHomeVC {
                 case .success(let data):
                     guard let dt = data as? GenericResponse<ExploreAnswerData> else { return }
                     if let dat = dt.data {
-                        self.page = dat.pageLen
+//                        self.page = dat.pageLen
                         if let ans = dat.answers {
                             
                             if self.currentPage == 1 {

@@ -20,7 +20,7 @@ struct ExploreDetailAnswerService {
         
         let params: Parameters = [
             "page": page,
-            "sorting": sorting
+//            "sorting": sorting
         ]
         
         let dataRequest = AF.request(url, method: .get, parameters: params ,headers: header)

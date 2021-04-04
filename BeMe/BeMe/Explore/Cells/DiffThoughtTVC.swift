@@ -12,6 +12,7 @@ class DiffThoughtTVC: UITableViewCell {
     
     weak var delegate: UITableViewButtonSelectedDelegate?
     
+    @IBOutlet weak var bemeLabel: UILabel!
     
     private var currentIndex: CGFloat = 0
     
@@ -30,6 +31,8 @@ class DiffThoughtTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = .white
+        bemeLabel.font = UIFont(name: "GmarketSansTTFLight", size: 26.0)
+        bemeLabel.addCharacterSpacing(kernValue: 8.0)
 
     }
     

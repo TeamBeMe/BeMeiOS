@@ -49,10 +49,10 @@ class OthersPageTVC: UITableViewCell {
     @IBAction func scrappedButtonTapped(_ sender: UIButton) {
         
         
-        if otherAnswer!.isAnswered == false {
-            NotificationCenter.default.post(name: .scrapToast, object: nil)
-            return
-        }
+//        if otherAnswer!.isAnswered == false {
+//            NotificationCenter.default.post(name: .scrapToast, object: nil)
+//            return
+//        }
         
         if isScrapped {
             isScrapped = false
@@ -117,10 +117,10 @@ class OthersPageTVC: UITableViewCell {
     }
     //MARK:**- Function Part**
     @objc func touchUpCard(){
-        if otherAnswer!.isAnswered == false {
-            NotificationCenter.default.post(name: .scrapToast, object: nil)
-            return
-        }
+//        if otherAnswer!.isAnswered == false {
+//            NotificationCenter.default.post(name: .scrapToast, object: nil)
+//            return
+//        }
         
         profileEditDelegate?.cardTapped(answerID: answerId!)
         

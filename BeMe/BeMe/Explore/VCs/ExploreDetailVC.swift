@@ -21,7 +21,7 @@ class ExploreDetailVC: UIViewController, MFMailComposeViewControllerDelegate {
     private var scrollDirection: Bool = false
     
     private var currentPage: Int = 1
-    
+    private var newDataCount = 10
     private var page: Int = 1
     
     private var sorting: String = "최신"
@@ -171,7 +171,9 @@ extension ExploreDetailVC {
                     guard let dt = data as? GenericResponse<ExploreAnswerData> else { return }
                     if let dat = dt.data {
                         self.page = dat.pageLen
+                        
                         if let ans = dat.answers {
+                            self.newDataCount = ans.count
                             if self.currentPage == 1 {
                                 self.exploreAnswerArray = ans
                             } else {
@@ -296,7 +298,7 @@ extension ExploreDetailVC {
 extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if currentPage < page {
+        if newDataCount == 10 {
             return exploreAnswerArray.count + 1
         } else {
             return exploreAnswerArray.count
@@ -305,7 +307,7 @@ extension ExploreDetailVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if currentPage < page {
+        if newDataCount == 10 {
             if indexPath.row == exploreAnswerArray.count {
                 guard let more = tableView.dequeueReusableCell(withIdentifier: DetailMoreTVC.identifier,
                                                                for: indexPath) as? DetailMoreTVC else {

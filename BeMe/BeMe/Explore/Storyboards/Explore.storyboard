@@ -53,6 +53,12 @@
                                                                 <action selector="alarmButtonTapped:" destination="b61-FY-5F7" eventType="touchUpInside" id="vko-Px-WcA"/>
                                                             </connections>
                                                         </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t0w-pH-pUC">
+                                                            <rect key="frame" x="30" y="6.3333333333333339" width="67.666666666666671" height="31.333333333333329"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
@@ -62,6 +68,8 @@
                                                         <constraint firstItem="bdH-N1-mXm" firstAttribute="top" secondItem="zFt-Of-6Ta" secondAttribute="top" id="JT1-1P-tUY"/>
                                                         <constraint firstItem="Kwy-yE-uWt" firstAttribute="top" secondItem="zFt-Of-6Ta" secondAttribute="top" id="MRN-0B-pNn"/>
                                                         <constraint firstAttribute="height" constant="44" id="keP-FF-EGD"/>
+                                                        <constraint firstItem="t0w-pH-pUC" firstAttribute="leading" secondItem="zFt-Of-6Ta" secondAttribute="leading" constant="30" id="pel-to-OgR"/>
+                                                        <constraint firstItem="t0w-pH-pUC" firstAttribute="centerY" secondItem="Kwy-yE-uWt" secondAttribute="centerY" id="sqU-LI-GM0"/>
                                                         <constraint firstAttribute="bottom" secondItem="bdH-N1-mXm" secondAttribute="bottom" id="t08-8l-0pg"/>
                                                     </constraints>
                                                 </view>
@@ -74,6 +82,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <connections>
+                                            <outlet property="bemeLabel" destination="t0w-pH-pUC" id="V2D-1V-ure"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="DiffArticleTVC" id="UEb-O2-8F0" userLabel="DiffAnswerTVC" customClass="DiffArticleTVC" customModule="BeMe" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="390" height="64"/>
