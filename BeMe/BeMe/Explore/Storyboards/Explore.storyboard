@@ -54,8 +54,8 @@
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t0w-pH-pUC">
-                                                            <rect key="frame" x="30" y="6.3333333333333339" width="67.666666666666671" height="31.333333333333329"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                                            <rect key="frame" x="30.000000000000004" y="9.6666666666666661" width="62.333333333333343" height="28.666666666666671"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -69,7 +69,7 @@
                                                         <constraint firstItem="Kwy-yE-uWt" firstAttribute="top" secondItem="zFt-Of-6Ta" secondAttribute="top" id="MRN-0B-pNn"/>
                                                         <constraint firstAttribute="height" constant="44" id="keP-FF-EGD"/>
                                                         <constraint firstItem="t0w-pH-pUC" firstAttribute="leading" secondItem="zFt-Of-6Ta" secondAttribute="leading" constant="30" id="pel-to-OgR"/>
-                                                        <constraint firstItem="t0w-pH-pUC" firstAttribute="centerY" secondItem="Kwy-yE-uWt" secondAttribute="centerY" id="sqU-LI-GM0"/>
+                                                        <constraint firstItem="t0w-pH-pUC" firstAttribute="centerY" secondItem="Kwy-yE-uWt" secondAttribute="centerY" constant="2" id="sqU-LI-GM0"/>
                                                         <constraint firstAttribute="bottom" secondItem="bdH-N1-mXm" secondAttribute="bottom" id="t08-8l-0pg"/>
                                                     </constraints>
                                                 </view>
