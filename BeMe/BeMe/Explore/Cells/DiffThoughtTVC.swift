@@ -31,7 +31,7 @@ class DiffThoughtTVC: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = .white
-        bemeLabel.font = UIFont(name: "GmarketSansTTFLight", size: 26.0)
+        bemeLabel.font = UIFont(name: "GmarketSansTTFLight", size: 24.0)
         bemeLabel.addCharacterSpacing(kernValue: 8.0)
 
     }
