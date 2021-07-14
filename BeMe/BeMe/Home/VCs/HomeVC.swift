@@ -987,6 +987,8 @@ extension HomeVC: HomeChangeQuestionDelegate{
             if changedDate == dateString{
                 self.showToast(text: "질문 변경하기는 하루 1회만 가능합니다")
                 return
+            } else {
+                UserDefaults.standard.setValue(dateString, forKey: "rerollDate")
             }
         }
         else{
